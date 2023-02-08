@@ -253,7 +253,7 @@ informative:
                            |                     (PEP)                |
                            +------------------------------------------+
 ~~~~
-{: #arc title="An Architecture for Group-based Policy Management" artwork-align="center"}
+{: #arch title="An Architecture for Group-based Policy Management" artwork-align="center"}
 
    In reference to {{arch}}, the following typical flow is experienced:
 
