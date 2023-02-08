@@ -270,11 +270,9 @@ informative:
       using RADIUS {{!RFC2865}}.  It is assumed that the AAA server has
       been appropriately configured to store user credentials, e.g.,
       user name, password, group information and other user attributes.
-
       If the authentication request succeeds, the user is placed in a
       user-group which is returned to the network access server as the
-      authentication result (see Section 6).
-
+      authentication result (see {{sec-radius}}).
       If the authentication fails, the user is not assigned a user-
       group, which also means that the user has no or limited access
       permissions for the network (as a fucntion of the local policy).
