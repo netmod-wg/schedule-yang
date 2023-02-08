@@ -131,7 +131,7 @@ informative:
 
    Last, the document defines a RADIUS attribute that is used to
    communicate the user group identifier as part of identification and
-   authorization information ({{radius}}).
+   authorization information ({{sec-radius}}).
 
    As the ACL notion has been generalized, not to be device-specific,
    but also be defined at network/administrative domain
@@ -145,7 +145,7 @@ informative:
 {::boilerplate bcp14-tagged}
 
    The meanings of the symbols in tree diagrams are defined in
-   [RFC8340].
+   {{?RFC8340}}.
 
    The document uses the terms defined in {{!RFC8519}}.
 
@@ -209,7 +209,7 @@ informative:
       (RADIUS) {{!RFC2865}}.  When access is granted, the AAA server
       provides the group identifier (group ID) to which the user belongs
       when the user first logs onto the network.  A new attribute is
-      defined in {{radius}}.
+      defined in {{sec-radius}}.
 
    *  The Policy Enforcement Point (PEP) {{?RFC3198}} is the central entity
       which is responsible for enforcing appropriate access control
@@ -504,7 +504,7 @@ file="ietf-ucl-acl@2023-01-19.yang"
 <CODE ENDS>
 ~~~~
 
-# User Access Control Group ID RADIUS Attribute {#radius}
+# User Access Control Group ID RADIUS Attribute {#sec-radius}
 
    The User-Access-Group-ID RADIUS attribute and its embedded TLVs are
    defined with globally unique names.  The definition of the attribute
