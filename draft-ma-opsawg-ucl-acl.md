@@ -556,7 +556,7 @@ file="ietf-ucl-acl@2023-01-19.yang"
    The User-Access-Group-ID Attribute is associated with the following
    identifier: 241.TBA1.
 
-#  Table of RADIUS Attributes
+#  RADIUS Attributes
 
    The following table provides a guide as what type of RADIUS packets
    that may contain User-Access-Group-ID Attribute, and in what
