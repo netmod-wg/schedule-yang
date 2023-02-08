@@ -57,7 +57,7 @@ informative:
      target: https://www.iana.org/assignments/media-types
      date: January 2014
 
-  IANA-MediaTypes:
+  Radius-Types:
      title: RADIUS Types
      author:
        -
