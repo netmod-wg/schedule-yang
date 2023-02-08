@@ -225,7 +225,7 @@ informative:
 
       A PEP exposes a NETCONF interface to the SDN Controller.
 
-   {{figure-1}} provides the overall architecture and procedure for policy-
+   {{arch}} provides the overall architecture and procedure for policy-
    based access control management.
 
 ~~~~
@@ -253,9 +253,9 @@ informative:
                            |                     (PEP)                |
                            +------------------------------------------+
 ~~~~
-{: #figure-1 title="An Architecture for Group-based Policy Management" artwork-align="center"}
+{: #arc title="An Architecture for Group-based Policy Management" artwork-align="center"}
 
-   In reference to {{figure-1}}, the following typical flow is experienced:
+   In reference to {{arch}}, the following typical flow is experienced:
 
    Step 1:  Administrators (or the Orchestrator) configure an SDN
       controller with network-level ACLs using the YANG module defined
@@ -375,7 +375,7 @@ informative:
 
 ###  Module Overview
 
-   {{figure-3}} provides an overview of the tree structure of the "ietf-
+   {{schedule-tree}} provides an overview of the tree structure of the "ietf-
    schedule" module.
 
 ~~~~
@@ -411,7 +411,7 @@ informative:
           +-- bysetpos*      int32
           +-- wkst*          schedule:weekday
 ~~~~
-{: #figure-3 title="UCL Tree Diagram" artwork-align="center"}
+{: #schedule-tree title="UCL Tree Diagram" artwork-align="center"}
 
 ###  The YANG Module
 
@@ -428,7 +428,7 @@ file="ietf-schedule@2023-01-19.yang"
 
 ###  Module Overview
 
-   {{figure-4}} provides the tree strcuture of the "ietf-ucl-acl" module.
+   {{ucl-tree}} provides the tree strcuture of the "ietf-ucl-acl" module.
 
 ~~~~
 module: ietf-ucl-acl
@@ -485,7 +485,7 @@ module: ietf-ucl-acl
                       +--rw start?            yang:date-and-time
                       +--rw duration?         yang:time-no-zone
 ~~~~
-{: #figure-4 title="UCL Extension" artwork-align="center"}
+{: #ucl-tree title="UCL Extension" artwork-align="center"}
 
    This module specifies an extension to the IETF-ACL model {{!RFC8519}}
    such that the UCL group index may be referenced by augmenting the
@@ -556,7 +556,7 @@ file="ietf-ucl-acl@2023-01-19.yang"
    The User-Access-Group-ID Attribute is associated with the following
    identifier: 241.TBA1.
 
-#  Table of Attributes
+#  Table of RADIUS Attributes
 
    The following table provides a guide as what type of RADIUS packets
    that may contain User-Access-Group-ID Attribute, and in what
