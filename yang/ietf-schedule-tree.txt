@@ -1,0 +1,32 @@
+module: ietf-schedule
+
+  grouping period
+    +-- period-of-time
+       +-- (forms)?
+          +--:(period-explicit)
+          |  +-- explicit-start?   yang:date-and-time
+          |  +-- explicit-end?     yang:date-and-time
+          +--:(period-start)
+             +-- start?            yang:date-and-time
+             +-- duration?         yang:time-no-zone
+  grouping recurrence
+    +-- recurrence
+       +-- freq           enumeration
+       +-- (until-or-count)?
+       |  +--:(until)
+       |  |  +-- until?   union
+       |  +--:(count)
+       |     +-- count?   uint32
+       +-- interval?      uint32
+       +-- bysecond*      uint32
+       +-- byminute*      uint32
+       +-- byhour*        uint32
+       +-- byday* [weekday]
+       |  +-- direction?   int32
+       |  +-- weekday?     schedule:weekday
+       +-- bymonthday*    int32
+       +-- byyearday*     int32
+       +-- byyearweek*    int32
+       +-- byyearmonth*   uint32
+       +-- bysetpos*      int32
+       +-- wkst*          schedule:weekday

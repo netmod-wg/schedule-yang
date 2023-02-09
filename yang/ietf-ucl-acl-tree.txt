@@ -1,0 +1,52 @@
+
+module: ietf-ucl-acl
+  augment /acl:acls/acl:acl:
+    +--rw endpoint-groups
+       +--rw endpoint-group* [endpoint-group-id]
+          +--rw endpoint-group-id     uint32
+          +--rw (group-type)?
+             +--:(user-group)
+             |  +--rw user-group
+             |     +--rw role?   string
+             +--:(device-group)
+                +--rw device-group
+                   +--rw device-type?   string
+  augment /acl:acls/acl:acl/acl:aces/acl:ace/acl:matches:
+    +--rw endpoint-group {match-on-endpoint-group}?
+       +--rw source-match
+       |  +--rw endpoint-group-id?   leafref
+       +--rw destination-match
+          +--rw endpoint-group-id?   leafref
+  augment /acl:acls/acl:acl/acl:aces/acl:ace:
+    +--rw time-range {match-on-time}?
+       +--rw (time-range-type)?
+          +--:(periodic-range)
+          |  +--rw recurrence
+          |     +--rw freq           enumeration
+          |     +--rw (until-or-count)?
+          |     |  +--:(until)
+          |     |  |  +--rw until?   union
+          |     |  +--:(count)
+          |     |     +--rw count?   uint32
+          |     +--rw interval?      uint32
+          |     +--rw bysecond*      uint32
+          |     +--rw byminute*      uint32
+          |     +--rw byhour*        uint32
+          |     +--rw byday* [weekday]
+          |     |  +--rw direction?   int32
+          |     |  +--rw weekday      schedule:weekday
+          |     +--rw bymonthday*    int32
+          |     +--rw byyearday*     int32
+          |     +--rw byyearweek*    int32
+          |     +--rw byyearmonth*   uint32
+          |     +--rw bysetpos*      int32
+          |     +--rw wkst*          schedule:weekday
+          +--:(absolute-range)
+             +--rw period-of-time
+                +--rw (forms)?
+                   +--:(period-explicit)
+                   |  +--rw explicit-start?   yang:date-and-time
+                   |  +--rw explicit-end?     yang:date-and-time
+                   +--:(period-start)
+                      +--rw start?            yang:date-and-time
+                      +--rw duration?         yang:time-no-zone
