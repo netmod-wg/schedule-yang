@@ -378,37 +378,7 @@ informative:
    schedule" module.
 
 ~~~~
-   module: ietf-schedule
-     grouping period:
-       +-- period-of-time
-          +-- (forms)?
-             +--:(period-explicit)
-             |  +-- explicit-start?   yang:date-and-time
-             |  +-- explicit-end?     yang:date-and-time
-             +--:(period-start)
-                +-- start?            yang:date-and-time
-                +-- duration?         yang:time-no-zone
-     grouping recurrence:
-       +-- recurrence
-          +-- freq           enumeration
-          +-- (until-or-count)?
-          |  +--:(until)
-          |  |  +-- until?   union
-          |  +--:(count)
-          |     +-- count?   uint32
-          +-- interval?      uint32
-          +-- bysecond*      uint32
-          +-- byminute*      uint32
-          +-- byhour*        uint32
-          +-- byday* [weekday]
-          |  +-- direction?   int32
-          |  +-- weekday?     schedule:weekday
-          +-- bymonthday*    int32
-          +-- byyearday*     int32
-          +-- byyearweek*    int32
-          +-- byyearmonth*   uint32
-          +-- bysetpos*      int32
-          +-- wkst*          schedule:weekday
+{::include ./yang/ietf-schedule-tree.txt}
 ~~~~
 {: #schedule-tree title="UCL Tree Diagram" artwork-align="center"}
 
@@ -430,65 +400,13 @@ file="ietf-schedule@2023-01-19.yang"
    {{ucl-tree}} provides the tree strcuture of the "ietf-ucl-acl" module.
 
 ~~~~
-module: ietf-ucl-acl
-  augment /acl:acls/acl:acl:
-    +--rw endpoint-groups
-       +--rw endpoint-group* [endpoint-group-id]
-          +--rw endpoint-group-id     uint32
-          +--rw (group-type)?
-             +--:(user-group)
-             |  +--rw user-group
-             |     +--rw role?   string
-             +--:(device-group)
-                +--rw device-group
-                   +--rw device-type?   string
-  augment /acl:acls/acl:acl/acl:aces/acl:ace/acl:matches:
-    +--rw endpoint-group {match-on-endpoint-group}?
-       +--rw source-match
-       |  +--rw endpoint-group-id?
-       |          -> ../../../../../../endpoint-groups/endpoint-group/endpoint-group-id
-       +--rw destination-match
-          +--rw endpoint-group-id?
-          |       -> ../../../../../../endpoint-groups/endpoint-group/endpoint-group-id
-  augment /acl:acls/acl:acl/acl:aces/acl:ace:
-    +--rw time-range {match-on-time}?
-       +--rw (time-range-type)?
-          +--:(periodic-range)
-          |  +--rw recurrence
-          |     +--rw freq           enumeration
-          |     +--rw (until-or-count)?
-          |     |  +--:(until)
-          |     |  |  +--rw until?   union
-          |     |  +--:(count)
-          |     |     +--rw count?   uint32
-          |     +--rw interval?      uint32
-          |     +--rw bysecond*      uint32
-          |     +--rw byminute*      uint32
-          |     +--rw byhour*        uint32
-          |     +--rw byday* [weekday]
-          |     |  +--rw direction?   int32
-          |     |  +--rw weekday      schedule:weekday
-          |     +--rw bymonthday*    int32
-          |     +--rw byyearday*     int32
-          |     +--rw byyearweek*    int32
-          |     +--rw byyearmonth*   uint32
-          |     +--rw bysetpos*      int32
-          |     +--rw wkst*          schedule:weekday
-          +--:(absolute-range)
-             +--rw period-of-time
-                +--rw (forms)?
-                   +--:(period-explicit)
-                   |  +--rw explicit-start?   yang:date-and-time
-                   |  +--rw explicit-end?     yang:date-and-time
-                   +--:(period-start)
-                      +--rw start?            yang:date-and-time
-                      +--rw duration?         yang:time-no-zone
+{::include ./yang/ietf-ucl-acl-tree.txt}
 ~~~~
 {: #ucl-tree title="UCL Extension" artwork-align="center"}
 
-   This module specifies an extension to the IETF-ACL model {{!RFC8519}}
-   such that the UCL group index may be referenced by augmenting the
-   "matches" data node.
+   This module specifies an extension to the IETF ACL model {{!RFC8519}}
+   such that the UCL group index can be referenced by augmenting the
+   "match" data node.
 
 ###  The YANG Module
 
@@ -594,7 +512,14 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    RESTCONF users to a preconfigured subset of all available NETCONF or
    RESTCONF protocol operations and content.
 
-   There are a number of data nodes defined in this YANG module that are
+   The "ietf-schedule" module defines a set of types and
+   groupings.  These nodes are intended to be reused by other YANG
+   modules.  The module by itself does not expose any data nodes that
+   are writable, data nodes that contain read-only state, or RPCs.  As
+   such, there are no additional security issues related to the "ietf-
+   schedule" module that need to be considered.
+
+   There are a number of data nodes defined in the "ietf-ucl-acl" YANG module that are
    writable, creatable, and deletable (i.e., config true, which is the
    default).  These data nodes may be considered sensitive or vulnerable
    in some network environments.  Write operations to these data nodes
@@ -602,6 +527,11 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 
    <<add-more-about privacy considerations as the modules manipulate PII
    data.>>
+
+    Some of the readable data nodes in the "ietf-ucl-acl" YANG module may be considered sensitive or vulnerable in some network environments. It is thus important to control read access (e.g., via get, get-config, or notification) to these data nodes. These are the subtrees and data nodes and their sensitivity/vulnerability:
+
+    *  <list subtrees and data nodes and state why they are sensitive>
+    *  <list subtrees and data nodes and state why they are sensitive>
 
 ##  RADIUS
 
