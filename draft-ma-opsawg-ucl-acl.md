@@ -509,10 +509,14 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    in some network environments.  Write operations to these data nodes
    could have a negative effect on network and security operations.
 
-   <<add-more-about privacy considerations as the modules manipulate PII
-   data.>>
+   * <add-more-about privacy considerations as the modules manipulate PII data.>
+   * TBC
 
-    Some of the readable data nodes in the "ietf-ucl-acl" YANG module may be considered sensitive or vulnerable in some network environments. It is thus important to control read access (e.g., via get, get-config, or notification) to these data nodes. These are the subtrees and data nodes and their sensitivity/vulnerability:
+    Some of the readable data nodes in the "ietf-ucl-acl" YANG module may
+    be considered sensitive or vulnerable in some network environments. It
+    is thus important to control read access (e.g., via get, get-config,
+    or notification) to these data nodes. These are the subtrees and data
+    nodes and their sensitivity/vulnerability:
 
     *  <list subtrees and data nodes and state why they are sensitive>
     *  <list subtrees and data nodes and state why they are sensitive>
@@ -530,7 +534,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 
 ##  YANG
 
-   This document registers the following URI in the "IETF XML Registry" {{!RFC3688}}.
+   This document registers the following URIs in the "IETF XML Registry" {{!RFC3688}}.
 
 ~~~~
         URI: urn:ietf:params:xml:ns:yang:ietf-schedule
@@ -542,7 +546,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
         XML: N/A, the requested URI is an XML namespace.
 ~~~~
 
-   This document registers a YANG module in the "YANG Module Names"
+   This document registers the following YANG modules in the "YANG Module Names"
    registry {{!RFC6020}}.
 
 ~~~~
@@ -561,7 +565,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 
 ##  RADIUS
 
-   IANA is requested to assign a new RADIUS attribute typs from the IANA
+   This document requests IANA to assign a new RADIUS attribute types from the IANA
    registry "Radius Attribute Types" {{RADIUS-Types}}:
 
 | Value    | Description          | Data Type | Reference     |
