@@ -414,7 +414,7 @@ informative:
 
 ###  The YANG Module
 
-   This module imports types defined in {{!RFC6991}}.
+   This module imports types defined in {{!I-D.ietf-netmod-rfc6991-bis}}.
 
 ~~~~
 <CODE BEGINS>
@@ -685,16 +685,15 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 {:numbered="false"}
 
    This work has benefited from the discussions of User-group-based
-   Security Policy over the years.  In particular, [I-D.you-i2nsf-user-
-   group-based-policy] and [I-D.yizhou-anima-ip-to-access-control-
-   groups] provide mechanisms to establish the mapping between the IP
-   address/prefix of user and access control group ID.
+   Security Policy over the years.  In particular, {{?I-D.you-i2nsf-user-group-based-policy}}
+   and {{?I-D.yizhou-anima-ip-to-access-control-groups}} provide mechanisms to
+   establish the mapping between the IP address/prefix of user and access
+   control group ID.
 
    Jianjie You, Myo Zarny, Christian Jacquenet, Mohamed Boucadair, and
-   Yizhou Li contributed to an earlier version of [I-D.you-i2nsf-user-
-   group-based-policy].  We would like to thank the authors of that
-   draft on modern network access control mechanisms for material that
-   assisted in thinking about this document.
+   Yizhou Li contributed to an earlier version of {{?I-D.you-i2nsf-user-group-based-policy}}.
+   We would like to thank the authors of that draft on modern network access
+   control mechanisms for material that assisted in thinking about this document.
 
    The authors would like to thank Joe Clarke, Bill Fenner, Benoit
    Claise, Rob Wiltion, David Somers-Harris for their valuable comments

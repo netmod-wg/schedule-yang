@@ -5,8 +5,9 @@
      
      import ietf-yang-types {
        prefix yang; 
+       revision-date 2023-01-23;
        reference
-         "RFC 6991: Common YANG Data Types";
+         "RFC XXXX: Common YANG Data Types";
      }
      organization
        "IETF OPSAWG Working Group";
@@ -31,7 +32,7 @@
         (https://www.rfc-editor.org/info/rfcXXXX); see the RFC
         itself for full legal notices.";
 
-     revision 2023-01-09 {
+     revision 2023-01-19 {
        description
          "Initial revision.";
        reference
@@ -183,12 +184,12 @@
                 rule in a inclusive manner.";
              leaf until {
                type union { 
-                 type yang:date;
+                 type yang:date-no-zone;
                  type yang:date-and-time;
                }
                description
-                 "This parameter specifies a date or date-time value
-                  to bounds the recurrence.";
+                 "This parameter specifies a date-no-zone or 
+                  date-time value to bounds the recurrence.";
              }
            }
            case count {
@@ -298,3 +299,4 @@
        }
      }
    }
+
