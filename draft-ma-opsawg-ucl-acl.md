@@ -509,7 +509,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    in some network environments.  Write operations to these data nodes
    could have a negative effect on network and security operations.
 
-   * <add-more-about privacy considerations as the modules manipulate PII data.>
+   * TBC
    * TBC
 
     Some of the readable data nodes in the "ietf-ucl-acl" YANG module may
