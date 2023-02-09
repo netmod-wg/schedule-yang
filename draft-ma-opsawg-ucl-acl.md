@@ -224,7 +224,7 @@ informative:
 
       Multiple PEPs can be involved in a network.
 
-      A PEP exposes a NETCONF interface to the SDN Controller.
+      A PEP exposes a NETCONF interface to the SDN Controller {{!RFC6241}}.
 
    {{arch}} provides the overall architecture and procedure for policy-
    based access control management.
@@ -308,7 +308,7 @@ informative:
 
    This document does not make any assumption about how groups are
    defined.  Such considerations are deployment specific and are out of
-   scope.  However, and for illustration purposes, Table 1 shows an
+   scope.  However, and for illustration purposes, {{ug-example}} shows an
    example of how user-group definitions may be characterized.  User-
    groups may share several common criteria.  That is, user-group
    criteria are not mutually exclusive.  For example, the policy
@@ -319,31 +319,15 @@ informative:
    groups depending on the time of day or the type of day (e.g.,
    weekdays versus weekends), etc.
 
-~~~~
-       +--------------+------------+--------------------------------+
-       |  Group Name  |  Group ID  |        Group Definition        |
-       +--------------+------------+--------------------------------+
-       |   R&D        |     10     |  R&D employees                 |
-       +--------------+------------+--------------------------------+
-       |   R&D BYOD   |     11     |  Personal devices of R&D       |
-       |              |            |  employees                     |
-       +--------------+------------+--------------------------------+
-       |   Sales      |     20     |  Sales employees               |
-       +--------------+------------+--------------------------------+
-       |   VIP        |     30     |  VIP employees                 |
-       +--------------+------------+--------------------------------+
-       |   Workflow   |     40     |  IP addresses of Workflow      |
-       |              |            |  resource servers              |
-       +--------------+------------+--------------------------------+
-       | R&D Resource |     50     | IP addresses of R&D resource   |
-       |              |            | servers                        |
-       +--------------+------------+--------------------------------+
-       |Sales Resource|     54     | IP addresses of Sales resource |
-       |              |            | servers                        |
-       +--------------+------------+--------------------------------+
-
-                   Table 1: User-Group Example
-~~~~
+| Group Name | Group ID | Group Definition |
+| R&D        |     10     |  R&D employees                 |
+| R&D BYOD   |     11     |  Personal devices of R&D employees |
+| Sales      |     20     |  Sales employees               |
+| VIP        |     30     |  VIP employees                 |
+| Workflow   |     40     |  IP addresses of Workflow  resource servers   |
+| R&D Resource |     50     | IP addresses of R&D resource servers |
+|Sales Resource|     54     | IP addresses of Sales resource servers |
+{: #ug-example title='User-Group Example'}
 
 
 ###  Device Group
@@ -549,7 +533,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    This document registers the following URI in the "IETF XML Registry" {{!RFC3688}}.
 
 ~~~~
-        URI: urn:ietf:params:xml:ns:yang:ietf-ucl-group
+        URI: urn:ietf:params:xml:ns:yang:ietf-schedule
         Registrant Contact: The IESG.
         XML: N/A, the requested URI is an XML namespace.
 
@@ -562,9 +546,9 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    registry {{!RFC6020}}.
 
 ~~~~
-        name:               ietf-ucl-group
-        namespace:          urn:ietf:params:xml:ns:yang:ietf-ucl-group
-        prefix:             uclg
+        name:               ietf-schedule
+        namespace:          urn:ietf:params:xml:ns:yang:ietf-schedule
+        prefix:             schedule
         maintained by IANA: N
         reference:          RFC XXXX
 
@@ -580,15 +564,10 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    IANA is requested to assign a new RADIUS attribute typs from the IANA
    registry "Radius Attribute Types" {{RADIUS-Types}}:
 
-~~~~
-      +==========+======================+===========+===============+
-      | Value    | Description          | Data Type | Reference     |
-      +==========+======================+===========+===============+
-      | 241.TBA1 | User-Access-Group-ID | string    | This-Document |
-      +----------+----------------------+-----------+---------------+
+| Value    | Description          | Data Type | Reference     |
+| 241.TBA1 | User-Access-Group-ID | string    | This-Document |
+{: #rad-reg title='RADIUS Attribute'}
 
-                         Table 2: RADIUS Attribute
-~~~~
 
 --- back
 
