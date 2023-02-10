@@ -69,7 +69,7 @@ informative:
 --- abstract
 
    This document defines a YANG module for policy-based network access
-   control, which provide consistent and efficient enforcement of
+   control, which provides consistent and efficient enforcement of
    network access control policies based on group identity.  In
    addition, this document defines a mechanism to ease the maintenance
    of the mapping between a user-group ID and a set of IP/MAC addresses
@@ -123,8 +123,8 @@ informative:
    The document also defines a YANG module for policy-based Network
    Access Control ({{NIST-ABAC}}), which extends the IETF Access Control
    Lists (ACLs) module defined in {{!RFC8519}}.  This module defined in
-   {{NIST-ABAC}} is meant to ensure consistent enforcement of ACL policies
-   based on group identity.  In addition, this document defines a
+   {{sec-UCL}} is meant to ensure consistent enforcement of ACL policies
+   based on group identity. In addition, this document defines a
    mechanism to establish a mapping between the user-group ID and common
    IP packet headers and other enclosed packet data (e.g., MAC address)
    to execute the policy-based access control.
@@ -150,8 +150,8 @@ informative:
    The document uses the terms defined in {{!RFC8519}}.
 
    In the current version of the draft, the term "endpoint" refers also
-   to the host or end user that actually connect to a network.  Endpoint
-   device refers to servers, IoTs and other devices owned by the
+   to a host device or end user that actually connect to a network. While
+   host device here refers to servers, IoTs and other devices owned by the
    enterprise.
 
 #  Sample Usage
@@ -201,7 +201,7 @@ informative:
       Enforcement Points) that need them.  A PDP is also known as
       "policy server" {{?RFC2753}}.
 
-      The SDN Controller may interacts with AAA server or NAS.
+      The SDN Controller may interact with AAA server or NAS.
 
    *  A Network Access Server (NAS) entity which handles authentication
       requests.  The NAS interacts with an AAA server to complete user
@@ -260,7 +260,7 @@ informative:
 
    Step 1:  Administrators (or the Orchestrator) configure an SDN
       controller with network-level ACLs using the YANG module defined
-      in Section 5.2.
+      in {{sec-UCL}}.
 
    Step 2:  When a user first logs onto the network, the user is
       required to be authenticated (e.g., using user name and password)
@@ -284,8 +284,8 @@ informative:
       the mapping between the user-group ID and related common packet
       header attributes (e.g., IP/MAC address).
 
-   Step 5:  The access control policies are maintained on relevant PEPs
-      under the controller's management.
+   Step 5:  Either group or IP/MAC address based access control policies
+      are maintained on relevant PEPs under the controller's management.
 
 ##  Endpoint Group
 
@@ -298,7 +298,7 @@ informative:
    different user-groups if their composite attributes, environment,
    and/or local enterprise policy change.
 
-   A user is authenticated, and classified at the network ingress, and
+   A user is authenticated, and classified at the AAA server, and
    assigned to a user-group.  A user's group membership may change as
    aspects of the user change.  For example, if the user-group
    membership is determined solely by the source IP address, then a
@@ -306,10 +306,10 @@ informative:
    IP address that falls outside of the range of addresses of the
    previous user-group.
 
-   This document does not make any assumption about how groups are
+   This document does not make any assumption about how user groups are
    defined.  Such considerations are deployment specific and are out of
-   scope.  However, and for illustration purposes, {{ug-example}} shows an
-   example of how user-group definitions may be characterized.  User-
+   scope.  However, and for illustration purposes, {{ug-example}} shows
+   an example of how user-group definitions may be characterized. User-
    groups may share several common criteria.  That is, user-group
    criteria are not mutually exclusive.  For example, the policy
    criteria of user-groups R&D Regular and R&D BYOD may share the same
@@ -319,14 +319,11 @@ informative:
    groups depending on the time of day or the type of day (e.g.,
    weekdays versus weekends), etc.
 
-| Group Name | Group ID | Group Definition |
+| Group Name | Group ID | Group Role |
 | R&D        |     10     |  R&D employees                 |
 | R&D BYOD   |     11     |  Personal devices of R&D employees |
 | Sales      |     20     |  Sales employees               |
 | VIP        |     30     |  VIP employees                 |
-| Workflow   |     40     |  IP addresses of Workflow  resource servers   |
-| R&D Resource |     50     | IP addresses of R&D resource servers |
-|Sales Resource|     54     | IP addresses of Sales resource servers |
 {: #ug-example title='User-Group Example'}
 
 
@@ -337,7 +334,15 @@ informative:
    could be an server that hosts applications or software that deliver
    services to enterprise users.  It could also be an enterprise IoT
    device that serve a limited purpose, e.g., a printer that allows
-   users to scan, print and send emails.
+   users to scan, print and send emails. {{dg-example}} shows an example
+   of how device-group definitions may be characterized.
+
+   | Group Name | Group ID | Group Type |
+   | Workflow   |     40     |  Workflow  resource servers   |
+   | R&D Resource |     50     | R&D resource servers |
+   |Sales Resource|     54     | Sales resource servers |
+   {: #dg-example title='Device-Group Example'}
+
 
    Users accessing to enterprise device should be strictly controlled.
    Matching abstract device group ID instead of specified addresses in
@@ -377,7 +382,7 @@ file="ietf-schedule@2023-01-19.yang"
 <CODE ENDS>
 ~~~~
 
-##  The UCL Extension to the ACL Model
+##  The UCL Extension to the ACL Model {#sec-UCL}
 
 ###  Module Overview
 
