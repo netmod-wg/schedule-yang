@@ -90,7 +90,8 @@ module ietf-ucl-acl {
           }
           case device-group {
             description
-              "The static resources in a network, such as a specific application.";
+              "The static resources in a network, such as a specific
+               application.";
             container device-group {
               description
                 "Defines the device-group container.";
@@ -108,7 +109,8 @@ module ietf-ucl-acl {
 
   augment "/acl:acls/acl:acl/acl:aces/acl:ace/acl:matches" {
     description
-      "Add another choice to allow ace match based on endpoint group id.";
+      "Add another choice to allow ace match based on endpoint group
+       id.";
     container endpoint-group {
       if-feature "match-on-endpoint-group";
       description
@@ -118,7 +120,8 @@ module ietf-ucl-acl {
           "The source matched information.";
         leaf endpoint-group-id {
           type leafref {
-            path "../../../../../../endpoint-groups/endpoint-group/endpoint-group-id";
+            path "../../../../../../endpoint-groups/endpoint-group/"+
+                 "endpoint-group-id";
           }
           description
             "The matched source endpoint group ID.";
@@ -129,7 +132,8 @@ module ietf-ucl-acl {
           "The destination matched information.";
         leaf endpoint-group-id {
           type leafref {
-            path "../../../../../../endpoint-groups/endpoint-group/endpoint-group-id";
+            path "../../../../../../endpoint-groups/endpoint-group/"+
+                 "endpoint-group-id";
           }
           description
             "The matched destination endpoint group ID.";

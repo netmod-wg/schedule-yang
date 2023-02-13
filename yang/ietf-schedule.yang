@@ -238,8 +238,8 @@ module ietf-schedule {
         description
           "Specify a list of days of the week.";
         leaf direction {
-          when '(enum-value(../../freq) >= 6) and '
-             + '(enum-value(../../freq) = 7) and not(../../byyearweek)';
+          when '(enum-value(../../freq) >= 6) and ' +
+            '(enum-value(../../freq) = 7) and not(../../byyearweek)';
           type int32 {
             range "-53..-1|1..53";
           }
