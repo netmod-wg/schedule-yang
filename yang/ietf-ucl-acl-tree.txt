@@ -1,5 +1,5 @@
-
 module: ietf-ucl-acl
+
   augment /acl:acls/acl:acl:
     +--rw endpoint-groups
        +--rw endpoint-group* [endpoint-group-id]
@@ -12,13 +12,13 @@ module: ietf-ucl-acl
                 +--rw device-group
                    +--rw device-type?   string
   augment /acl:acls/acl:acl/acl:aces/acl:ace/acl:matches:
-    +--rw endpoint-group {match-on-endpoint-group}?
+    +--rw endpoint-group {match-on-group}?
        +--rw source-match
        |  +--rw endpoint-group-id?   leafref
        +--rw destination-match
           +--rw endpoint-group-id?   leafref
   augment /acl:acls/acl:acl/acl:aces/acl:ace:
-    +--rw time-range {match-on-time}?
+    +--rw time-range {time-condition}?
        +--rw (time-range-type)?
           +--:(periodic-range)
           |  +--rw recurrence

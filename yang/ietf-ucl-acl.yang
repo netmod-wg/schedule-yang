@@ -44,14 +44,72 @@ module ietf-ucl-acl {
       "RFC XXXX: A Policy-based Network Access Control";
   }
 
-  feature match-on-endpoint-group {
+  identity group-acl-type {
+    if-feature "group";
+    base acl:acl-base;
+    description
+      "An ACL that matches based on an abstract group identity,
+       which may be within the NVO3 header extension, but may not
+       correspond to any field in the packet header.";
+  }
+  identity mixed-ipv4-group-type {
+    if-feature "mixed-ipv4-group";
+    base acl:ipv4-acl-type;
+    base uacl:group-acl-type;
+    description
+      "An ACL that contains a mix of entries that match on fields
+       in IPv4 headers and abstract group identities.  Matching on 
+       Layer 4 header fields may also exist in the list.";
+  }
+  identity mixed-ipv6-group-type {
+    if-feature "mixed-ipv6-group";  
+    base acl:ipv6-acl-type;
+    base uacl:group-acl-type;
+    description
+      "An ACL that contains a mix of entries that match on fields 
+       in IPv6 headers and abstract group identities.  Matching on 
+       Layer 4 header fields may also exist in the list.";
+  }
+  identity mixed-ipv4-ipv6-group-type {
+    if-feature "mixed-ipv4-ipv6-group";  
+    base acl:ipv4-acl-type;
+    base acl:ipv6-acl-type;
+    base uacl:group-acl-type;
+    description
+      "An ACL that contains a mix of entries that match on fields 
+       in IPv4 headers, and IPv6 headers. Matching on Layer 4 header
+       fields may also exist in the list.";
+  }
+  feature match-on-group {
     description
       "The device can support matching on endpoint groups.";
   }
-
-  feature match-on-time {
+  feature group {
+    if-feature "uacl:match-on-group";
     description
-      "The device can support a time-based condition match.";
+      "Plain group ACL supported.";
+  }
+  feature mixed-ipv4-group {
+    if-feature "acl:match-on-ipv4 and uacl:match-on-group";
+    description
+      "IPv4 and group ACL combinations supported.";    
+  }
+  feature mixed-ipv6-group {
+    if-feature "acl:match-on-ipv6 and uacl:match-on-group";
+    description
+      "IPv6 and group ACL combinations supported.";
+  }
+  feature mixed-ipv4-ipv6-group {
+    if-feature "acl:match-on-ipv4 and acl:match-on-ipv6 and " + "
+                uacl:match-on-group";
+    description
+      "IPv4, IPv6 and group ACL combinations supported.";
+  }
+
+  feature time-condition {
+    description
+      "The device can support a time condition based ACL policy
+       enforcement.";
   }
 
   augment "/acl:acls/acl:acl" {
@@ -112,7 +170,7 @@ module ietf-ucl-acl {
       "Add another choice to allow ace match based on endpoint group
        id.";
     container endpoint-group {
-      if-feature "match-on-endpoint-group";
+      if-feature "match-on-group";
       description
         "Add new match types.";
       container source-match {
@@ -143,7 +201,7 @@ module ietf-ucl-acl {
   }
 
   augment "/acl:acls/acl:acl/acl:aces/acl:ace" {
-    if-feature "match-on-time";
+    if-feature "time-condition";
     description
       "Add a new parameter to the Access Control Entry (ACE).";
     container time-range {
@@ -170,3 +228,4 @@ module ietf-ucl-acl {
     }
   }
 }
+
