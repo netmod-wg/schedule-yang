@@ -170,6 +170,8 @@ module ietf-ucl-acl {
       "Add another choice to allow ace match based on endpoint group
        id.";
     container endpoint-group {
+      when "derived-from-or-self(/acl:acls/acl:acl/acl:type, "
+         + "'uacl:group-acl-type')";
       if-feature "match-on-group";
       description
         "Add new match types.";
