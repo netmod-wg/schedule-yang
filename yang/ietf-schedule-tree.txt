@@ -1,6 +1,6 @@
 module: ietf-schedule
 
-  grouping period
+  grouping period:
     +-- period-of-time
        +-- (forms)?
           +--:(period-explicit)
@@ -9,10 +9,10 @@ module: ietf-schedule
           +--:(period-start)
              +-- start?            yang:date-and-time
              +-- duration?         yang:time-no-zone
-  grouping recurrence
+  grouping recurrence:
     +-- recurrence
        +-- freq           enumeration
-       +-- (until-or-count)?
+       +-- (recurrence-bound)?
        |  +--:(until)
        |  |  +-- until?   union
        |  +--:(count)

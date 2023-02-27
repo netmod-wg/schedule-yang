@@ -16,8 +16,12 @@ module ietf-schedule {
     "WG Web: <https://datatracker.ietf.org/wg/opsawg/>
      WG List: <mailto:opsawg@ietf.org>";
   description
-    "This YANG module defines two properties of an iSchedule
-     object:period of time and recurrence rule.
+    "This YANG module defines two groupings for iCalendar (Internet
+     Calendaring and Scheduling Core Object Specification) data
+     types:period of time and recurrence rule, for representing and
+     exchanging calendaring and scheduling information. The YANG
+     module complies with section 3.3.9 and 3.3.10 in RFC5545. 
+     Future extensions may define more as needed.
 
      Copyright (c) 2023 IETF Trust and the persons identified
      as authors of the code. All rights reserved.
@@ -43,30 +47,37 @@ module ietf-schedule {
   typedef weekday {
     type enumeration {
       enum sunday {
+        value 0;
         description
           "Sunday of the week.";
       }
       enum monday {
+        value 1;
         description
           "Monday of the week.";
       }
       enum tuesday {
+        value 2;
         description
           "Tuesday of the week.";
       }
       enum wednesday {
+        value 3;
         description
           "Wednesday of the week.";
       }
       enum thursday {
+        value 4;
         description
           "Thursday of the week.";
       }
       enum friday {
+        value 5;
         description
           "Friday of the week.";
       }
       enum saturday {
+        value 6;
         description
           "Saturday of the week.";
       }
@@ -176,13 +187,14 @@ module ietf-schedule {
           "This parameter is defined to identify the type of
            recurrence rule.";
       }
-      choice until-or-count {
+      choice recurrence-bound {
         description
-          "Modes to bound the recurrence rule.";
+          "Modes to bound the recurrence rule. If both not present,
+           the recurrence rule is considered to repeat forever.";
         case until {
           description
             "This case defines a way that bounds the recurrence
-             rule in a inclusive manner.";
+             rule in an inclusive manner.";
           leaf until {
             type union {
               type yang:date-no-zone;
@@ -190,7 +202,9 @@ module ietf-schedule {
             }
             description
               "This parameter specifies a date-no-zone or
-               date-time value to bounds the recurrence.";
+               date-time value to bounds the recurrence. The 
+               specified value becomes the last instance of the
+               recurrence.";
           }
         }
         case count {
@@ -210,7 +224,12 @@ module ietf-schedule {
         default "1";
         description
           "A positive integer representing at which intervals the
-           recurrence rule repeats.";
+           recurrence rule repeats. The default value is ‘1’, 
+           meaning every second for a secondly rule, every minute
+           for a minutely rule, every hour for an hourly rule, every
+           day for a daily rule, every week for a weekly rule, every
+           month for a monthly rule, and every year for a yearly 
+           rule.";
       }
       leaf-list bysecond {
         type uint32 {
@@ -300,3 +319,4 @@ module ietf-schedule {
     }
   }
 }
+
