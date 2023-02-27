@@ -2,8 +2,8 @@ module: ietf-ucl-acl
 
   augment /acl:acls/acl:acl:
     +--rw endpoint-groups
-       +--rw endpoint-group* [endpoint-group-id]
-          +--rw endpoint-group-id     uint32
+       +--rw endpoint-group* [group-id]
+          +--rw group-id              uint32
           +--rw (group-type)?
              +--:(user-group)
              |  +--rw user-group
@@ -13,17 +13,15 @@ module: ietf-ucl-acl
                    +--rw device-type?   string
   augment /acl:acls/acl:acl/acl:aces/acl:ace/acl:matches:
     +--rw endpoint-group {match-on-group}?
-       +--rw source-match
-       |  +--rw endpoint-group-id?   leafref
-       +--rw destination-match
-          +--rw endpoint-group-id?   leafref
+       +--rw source-group-id?        leafref
+       +--rw destination-group-id?   leafref
   augment /acl:acls/acl:acl/acl:aces/acl:ace:
     +--rw time-range {time-condition}?
        +--rw (time-range-type)?
           +--:(periodic-range)
           |  +--rw recurrence
           |     +--rw freq           enumeration
-          |     +--rw (until-or-count)?
+          |     +--rw (recurrence-bound)?
           |     |  +--:(until)
           |     |  |  +--rw until?   union
           |     |  +--:(count)
