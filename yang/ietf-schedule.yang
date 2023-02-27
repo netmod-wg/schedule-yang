@@ -20,7 +20,7 @@ module ietf-schedule {
      Calendaring and Scheduling Core Object Specification) data
      types:period of time and recurrence rule, for representing and
      exchanging calendaring and scheduling information. The YANG
-     module complies with section 3.3.9 and 3.3.10 in RFC5545. 
+     module complies with sections 3.3.9 and 3.3.10 in RFC5545. 
      Future extensions may define more as needed.
 
      Copyright (c) 2023 IETF Trust and the persons identified
@@ -319,4 +319,3 @@ module ietf-schedule {
     }
   }
 }
-
