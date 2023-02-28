@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<acls xmlns="urn:ietf:params:xml:ns:yang:ietf-access-control-list"
+      xmlns:uacl="urn:ietf:params:xml:ns:yang:ietf-ucl-acl">
+  <acl>
+    <name>sample-group-acl</name>
+    <type>uacl:mixed-ipv4-group-type</type>
+    <endpoint-groups 
+      xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl">
+      <endpoint-group>
+        <group-id>20</group-id>
+        <user-group>
+          <role>R&amp;D</role>
+        </user-group>
+      </endpoint-group>
+      <endpoint-group>
+        <group-id>22</group-id>
+        <user-group>
+          <role>R&amp;D BYOD</role>
+        </user-group>
+      </endpoint-group>
+    </endpoint-groups>
+    <aces>
+      <ace>
+        <name>rule1</name>
+        <matches>
+          <endpoint-group 
+            xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl">
+            <source-group-id>22</source-group-id>
+            <destination-group-id>20</destination-group-id>
+          </endpoint-group>
+        </matches>
+        <actions>
+          <forwarding>accept</forwarding>
+        </actions>
+      </ace>
+      <ace>
+        <name>rule2</name>
+        <matches>
+          <endpoint-group 
+            xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl">
+            <source-group-id>22</source-group-id>
+          </endpoint-group>
+          <ipv4>
+            <destination-ipv4-network>10.1.1.0/24</destination\
+-ipv4-network>
+          </ipv4>
+        </matches>
+        <actions>
+          <forwarding>reject</forwarding>
+        </actions>
+      </ace>
+    </aces>
+  </acl>
+</acls>

@@ -121,10 +121,10 @@ informative:
    condition.  This model can be used in other scheduling contexts.
 
    The document also defines a YANG module for policy-based Network
-   Access Control ({{NIST-ABAC}}), which extends the IETF Access Control
+   Access Control, which extends the IETF Access Control
    Lists (ACLs) module defined in {{!RFC8519}}.  This module defined in
    {{sec-UCL}} is meant to ensure consistent enforcement of ACL policies
-   based on group identity. In addition, this document defines a
+   based on the group identity. In addition, this document defines a
    mechanism to establish a mapping between the user-group ID and common
    IP packet headers and other enclosed packet data (e.g., MAC address)
    to execute the policy-based access control.
@@ -156,10 +156,10 @@ informative:
 
 #  Sample Usage
 
-   Access to some networks (e.g., Enterprise Networks) require to
+   Access to some networks (e.g., Enterprise Networks) requires to
    recognize the users' identities no matter how, where, and when they
    connect to the network resources.  Then, the network maps the
-   (conencting) users to their access authorization rights.  Such rights
+   (connecting) users to their access authorization rights.  Such rights
    are defined following local policies.  As discussed in the
    introduction, because there is a large number of users and the source
    IP addresses of the same user are in different network segments,
@@ -183,7 +183,7 @@ informative:
 
 #  Policy-based Network Access Control
 
-##  Overview
+##  Overview {#overview}
 
    To provide real-time and consistent enforcement of access control
    policies, the following functional entities and interfaces are
@@ -191,7 +191,7 @@ informative:
 
    *  A Service Orchestrator which coordinates the overall service,
       including security policies.  The service may be connectivity or
-      any other resources that can be hosted and offerd by a newtork.
+      any other resources that can be hosted and offered by a network.
 
    *  The SDN Controller is responsible for maintaining endpoint-group
       based ACLs and mapping the endpoint-group to the associated
@@ -201,15 +201,23 @@ informative:
       Enforcement Points) that need them.  A PDP is also known as
       "policy server" {{?RFC2753}}.
 
-      The SDN Controller may interact with AAA server or NAS.
+      The SDN Controller may interact with AAA (Authentication,
+      Authorization and Accounting) server or NAS.
 
    *  A Network Access Server (NAS) entity which handles authentication
       requests.  The NAS interacts with an AAA server to complete user
-      authentication using Remote Authentication Dial-in User Service
-      (RADIUS) {{!RFC2865}}.  When access is granted, the AAA server
-      provides the group identifier (group ID) to which the user belongs
-      when the user first logs onto the network.  A new attribute is
-      defined in {{sec-radius}}.
+      authentication using protocols like Remote Authentication Dial-in
+      User Service (RADIUS) {{!RFC2865}}. When access is granted, the AAA
+      server provides the group identifier (group ID) to which the user
+      belongs when the user first logs onto the network. A new attribute
+      is defined in {{sec-radius}}.
+
+   *  The AAA server provides a collection of authentication, authorization
+      and accounting functions and is responsible for centralized user
+      information management. The AAA server is preconfigured with user
+      credentials (e.g., user name and password), possible group identities
+      and related user attributes (users may be divided into different
+      groups based on different user attributes).
 
    *  The Policy Enforcement Point (PEP) {{?RFC3198}} is the central entity
       which is responsible for enforcing appropriate access control
@@ -260,23 +268,24 @@ informative:
 
    Step 1:  Administrators (or the Orchestrator) configure an SDN
       controller with network-level ACLs using the YANG module defined
-      in {{sec-UCL}}.
+      in {{sec-UCL}}. An example of this is provided in {{controller-ucl}}.
 
    Step 2:  When a user first logs onto the network, the user is
       required to be authenticated (e.g., using user name and password)
       at the NAS.
 
    Step 3:  The authentication request is then relayed to the AAA server
-      using RADIUS {{!RFC2865}}.  It is assumed that the AAA server has
-      been appropriately configured to store user credentials, e.g.,
-      user name, password, group information and other user attributes.
+      using protocols like RADIUS {{!RFC2865}}. It is assumed that the
+      AAA server has been appropriately configured to store user credentials,
+      e.g., user name, password, group information and other user attributes.
       If the authentication request succeeds, the user is placed in a
       user-group which is returned to the network access server as the
       authentication result (see {{sec-radius}}).
-      If the authentication fails, the user is not assigned a user-
-      group, which also means that the user has no or limited access
-      permissions for the network (as a fucntion of the local policy).
-      ACLs are enforced so that flows from that IP address are discarded
+      If the authentication fails, the user is not assigned any user-
+      group, which also means that the user has no access; or the user
+      is assigned a special group with very limited access permissions
+      for the network (as a function of the local policy). ACLs are
+      enforced so that flows from that IP address are discarded
       (or rate-limited) by the network.  In some implementations, AAA
       server can be integrated with an SDN controller.
 
@@ -286,6 +295,9 @@ informative:
 
    Step 5:  Either group or IP/MAC address based access control policies
       are maintained on relevant PEPs under the controller's management.
+      Whether the PEP enforces the group or IP/MAC address based ACL is
+      implementation specific. Either type of ACL policies may exist on
+      the PEP. {{PEP-ucl}} and {{PEP-acl}} elaborate on each case.
 
 ##  Endpoint Group
 
@@ -580,9 +592,74 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 
 --- back
 
+# Example Usage
+
+## Configuring the Controller Using Group based ACL {#controller-ucl}
+
+   Assume the organization would like to restrict the access of R&D
+   employees that bring personally owned devices into the workplace.
+
+   Access requirements are following:
+
+   * Permit traffic from R&D BYOD employees, destined to R&D employees.
+
+   * Deny traffic from R&D BYOD employees, destined to finance servers
+     located in the enterprise DC network.
+
+   The following example illustrates configuring the SDN controller
+   using the group-based ACL:
+
+~~~~
+{::include ./examples/controller-ucl.xml}
+~~~~
+
+## Configuring the PEP Using Group based ACL {#PEP-ucl}
+
+   This section illustrates an example configuring the PEP device using
+   the group-based ACL.
+
+   The PEP which enforces group-based ACL may acquire group identities
+   from the AAA server if working as a NAS authenticating both the
+   source endpoint and the destination endpoint users. Another case for
+   a PEP enforcing a group-based ACL is to obtain the group identity of
+   the source endpoint directly from the packet field
+   {{?I-D.smith-vxlan-group-policy}}. This does not intend to be exhaustive.
+
+   Assume the mapping between device group ID and IP addresses is
+   predefined or acquired via device authentication. The following example
+   shows ACL configurations delivered from the controller to the PEP. This
+   example is consistent with the example presented in {{controller-ucl}}.
+
+~~~~
+{::include ./examples/PEP-ucl.xml}
+~~~~
+
+## Configuring the PEP Using Address based ACL {#PEP-acl}
+
+   The section illustrates an example configuring the PEP device using
+   IP address based ACL. IP address based access control policies could
+   be applied to the PEP that may not understand the group information,
+   e.g., firewall.
+
+   Assume an employee in the R&D department accesses the network
+   wirelessly from a non-corporate laptop using IP address 192.168.1.10.
+   The SDN controller associates the user group to which the employee
+   belongs with the user address according to step 1 to 4 in {{overview}}.
+
+   Assume the mapping between device group ID and IP addresses is
+   predefined or acquired via device authentication. The following
+   example shows IPv4 address based ACL configurations delivered from
+   the controller to the PEP. This example is consistent with the example
+   presented in {{controller-ucl}}.
+
+~~~~
+{::include ./examples/PEP-acl.xml}
+~~~~
+
 # Changes between Revisions
 
    v00 - v01
+
    *  Define a common schedule yang module and reuse in UCL yang module
       to support time/date-based activation condition.
 
