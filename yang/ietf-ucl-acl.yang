@@ -21,7 +21,9 @@ module ietf-ucl-acl {
     "WG Web: <https://datatracker.ietf.org/wg/opsawg/>
      WG List: <mailto:opsawg@ietf.org>";
   description
-    "This YANG module defines XXX.
+    "This YANG module augments the IETF access control lists(ACLs) 
+     module and is meant to ensure consistent enforcement of ACL 
+     policies based on the group identity.
 
      Copyright (c) 2023 IETF Trust and the persons identified
      as authors of the code. All rights reserved.

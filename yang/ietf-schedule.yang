@@ -20,7 +20,7 @@ module ietf-schedule {
      Calendaring and Scheduling Core Object Specification) data
      types:period of time and recurrence rule, for representing and
      exchanging calendaring and scheduling information. The YANG
-     module complies with sections 3.3.9 and 3.3.10 in RFC5545. 
+     module complies with sections 3.3.9 and 3.3.10 in RFC 5545. 
      Future extensions may define more as needed.
 
      Copyright (c) 2023 IETF Trust and the persons identified
@@ -89,6 +89,9 @@ module ietf-schedule {
   grouping period {
     description
       "This grouping is defined for period of time property.";
+    reference 
+      "RFC 5545: Internet Calendaring and Scheduling Core Object 
+       Specification (iCalendar)";      
     container period-of-time {
       description
         "This container is defined to identify period values that
@@ -134,6 +137,9 @@ module ietf-schedule {
     description
       "This grouping is defined to identify properties that
        contain a recurrence rule specification";
+    reference 
+      "RFC 5545: Internet Calendaring and Scheduling Core Object 
+       Specification (iCalendar)";          
     container recurrence {
       description
         "Recurrence rule definition.";
@@ -189,8 +195,9 @@ module ietf-schedule {
       }
       choice recurrence-bound {
         description
-          "Modes to bound the recurrence rule. If both not present,
-           the recurrence rule is considered to repeat forever.";
+          "Modes to bound the recurrence rule. If no choice is
+           indicated, the recurrence rule is considered to repeat
+           forever.";
         case until {
           description
             "This case defines a way that bounds the recurrence
@@ -224,7 +231,7 @@ module ietf-schedule {
         default "1";
         description
           "A positive integer representing at which intervals the
-           recurrence rule repeats. The default value is ‘1’, 
+           recurrence rule repeats. The default value is '1', 
            meaning every second for a secondly rule, every minute
            for a minutely rule, every hour for an hourly rule, every
            day for a daily rule, every week for a weekly rule, every
@@ -319,3 +326,4 @@ module ietf-schedule {
     }
   }
 }
+
