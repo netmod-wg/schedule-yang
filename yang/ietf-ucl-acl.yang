@@ -49,8 +49,11 @@ module ietf-ucl-acl {
     base acl:acl-base;
     description
       "An ACL that matches based on an endpoint group identity,
-       which may be within the packet header extension, but may not
-       correspond to any field in the packet header.";
+       which can represent the collective identity of a group of 
+       authenticated users or enterprise end devices. An endpoint
+       group identity may be carried in the outer/inner packet
+       header(e.g., via NVO3 encapsulation), but may not correspond
+       to any field in the packet header.";
   }
   identity mixed-ipv4-group-type {
     if-feature "mixed-ipv4-group";
@@ -58,8 +61,8 @@ module ietf-ucl-acl {
     base uacl:group-acl-type;
     description
       "An ACL that contains a mix of entries that match on fields
-       in IPv4 headers and endpoint group identities.  Matching on 
-       Layer 4 header fields may also exist in the ACL entries.";
+       in IPv4 headers and endpoint group identities. Matching on 
+       Layer 4 header fields may also exist in the ACEs.";
   }
   identity mixed-ipv6-group-type {
     if-feature "mixed-ipv6-group";  
@@ -68,7 +71,7 @@ module ietf-ucl-acl {
     description
       "An ACL that contains a mix of entries that match on fields 
        in IPv6 headers and endpoint group identities.  Matching on 
-       Layer 4 header fields may also exist in the ACL entries.";
+       Layer 4 header fields may also exist in the ACEs.";
   }
   identity mixed-ipv4-ipv6-group-type {
     if-feature "mixed-ipv4-ipv6-group";  
@@ -78,7 +81,7 @@ module ietf-ucl-acl {
     description
       "An ACL that contains a mix of entries that match on fields 
        in IPv4 headers, and IPv6 headers. Matching on Layer 4 header
-       fields may also exist in the ACL entries.";
+       fields may also exist in the ACEs.";
   }
   feature match-on-group {
     description
@@ -222,3 +225,4 @@ module ietf-ucl-acl {
     }
   }
 }
+
