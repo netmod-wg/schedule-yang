@@ -61,8 +61,10 @@ module ietf-ucl-acl {
     base uacl:group-acl-type;
     description
       "An ACL that contains a mix of entries that match on fields
-       in IPv4 headers and endpoint group identities. Matching on 
-       Layer 4 header fields may also exist in the ACEs.";
+       in IPv4 headers and endpoint group identities, which can 
+       represent the collective identity of a group of authenticated
+       users or enterprise end devices. Matching on Layer 4 header 
+       fields may also exist in the ACEs.";
   }
   identity mixed-ipv6-group-type {
     if-feature "mixed-ipv6-group";  
@@ -70,8 +72,10 @@ module ietf-ucl-acl {
     base uacl:group-acl-type;
     description
       "An ACL that contains a mix of entries that match on fields 
-       in IPv6 headers and endpoint group identities.  Matching on 
-       Layer 4 header fields may also exist in the ACEs.";
+       in IPv6 headers and endpoint group identities, which can 
+       represent the collective identity of a group of authenticated
+       users or enterprise end devices. Matching on Layer 4 header
+       fields may also exist in the ACEs.";
   }
   identity mixed-ipv4-ipv6-group-type {
     if-feature "mixed-ipv4-ipv6-group";  
@@ -80,8 +84,10 @@ module ietf-ucl-acl {
     base uacl:group-acl-type;
     description
       "An ACL that contains a mix of entries that match on fields 
-       in IPv4 headers, and IPv6 headers. Matching on Layer 4 header
-       fields may also exist in the ACEs.";
+       in IPv4 headers, IPv6 headers and endpoint group identities,
+       which can represent the collective identity of a group of 
+       authenticated users or enterprise end devices. Matching on 
+       Layer 4 header fields may also exist in the ACEs.";
   }
   feature match-on-group {
     description
