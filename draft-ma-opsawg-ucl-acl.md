@@ -606,7 +606,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    * Deny traffic from R&D BYOD of employees, destined to finance servers
      located in the enterprise DC network.
 
-   The following example illustrates configuring the SDN controller
+   The following example illustrates the configuration of the SDN controller
    using the group-based ACL:
 
 ~~~~
