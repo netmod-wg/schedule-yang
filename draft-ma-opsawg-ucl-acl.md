@@ -636,7 +636,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 
 ## Configuring the PEP Using Address based ACL {#PEP-acl}
 
-   The section illustrates an example configuring the PEP device using
+   The section illustrates an example of configuring a PEP using
    IP address based ACL. IP address based access control policies could
    be applied to the PEP that may not understand the group information,
    e.g., firewall.
