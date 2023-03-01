@@ -601,7 +601,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 
    The access requirements are as follows:
 
-   * Permit traffic from R&D BYOD employees, destined to R&D employees.
+   * Permit traffic from R&D BYOD of employees, destined to R&D employees' devices.
 
    * Deny traffic from R&D BYOD employees, destined to finance servers
      located in the enterprise DC network.
