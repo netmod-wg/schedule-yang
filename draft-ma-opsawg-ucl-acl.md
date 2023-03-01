@@ -599,7 +599,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    Assume the organization would like to restrict the access of R&D
    employees that bring personally owned devices into the workplace.
 
-   Access requirements are following:
+   The access requirements are as follows:
 
    * Permit traffic from R&D BYOD employees, destined to R&D employees.
 
