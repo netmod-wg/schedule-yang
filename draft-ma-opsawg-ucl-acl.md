@@ -603,7 +603,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 
    * Permit traffic from R&D BYOD of employees, destined to R&D employees' devices.
 
-   * Deny traffic from R&D BYOD employees, destined to finance servers
+   * Deny traffic from R&D BYOD of employees, destined to finance servers
      located in the enterprise DC network.
 
    The following example illustrates configuring the SDN controller
