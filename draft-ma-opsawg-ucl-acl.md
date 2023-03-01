@@ -615,7 +615,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 
 ## Configuring the PEP Using Group based ACL {#PEP-ucl}
 
-   This section illustrates an example configuring the PEP device using
+   This section illustrates an example to configure a PEP  using
    the group-based ACL.
 
    The PEP which enforces group-based ACL may acquire group identities
