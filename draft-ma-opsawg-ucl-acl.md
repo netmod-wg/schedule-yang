@@ -597,7 +597,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 ## Configuring the Controller Using Group based ACL {#controller-ucl}
 
    Let's consider an organization that would like to restrict the access of R&D
-   employees that bring personally owned devices into the workplace.
+   employees that bring personally owned devices (BYOD) into the workplace.
 
    The access requirements are as follows:
 
