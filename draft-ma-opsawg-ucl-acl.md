@@ -402,7 +402,7 @@ file="ietf-schedule@2023-01-19.yang"
 
 #### Period of Time
 
-   The period starting at 08:00:00 UTC, on January 1, 2023 and ending at 18:00:00 UTC
+   The example of a period that starts at 08:00:00 UTC, on January 1, 2023 and ends at 18:00:00 UTC
    on December 31, 2025:
 
 ~~~~
