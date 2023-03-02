@@ -439,7 +439,7 @@ file="ietf-schedule@2023-01-19.yang"
 
 #### Recurrence Rule
 
-  Every day in December
+  The following snippet can be used to indicate a daily recurrent in December:
 
 ~~~
 {
