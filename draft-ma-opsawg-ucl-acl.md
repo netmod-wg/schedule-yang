@@ -471,7 +471,7 @@ file="ietf-schedule@2023-01-19.yang"
 {
   "recurrence": {
     "freq": "monthly",
-    "until": "2023-12-25",    
+    "until": "2023-12-25", 
     "byday": [
       { "weekday": "monday" },
       { "weekday": "tuesday" },
