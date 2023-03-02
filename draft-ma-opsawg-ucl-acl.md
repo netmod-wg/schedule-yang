@@ -450,7 +450,7 @@ file="ietf-schedule@2023-01-19.yang"
 }
 ~~~
 
-   10 occurrences that occur every last Saturday of the month:
+   The following snippet can be used to indicate 10 occurrences that occur every last Saturday of the month:
 
 ~~~~
 {
