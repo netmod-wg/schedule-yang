@@ -448,7 +448,7 @@ file="ietf-schedule@2023-01-19.yang"
     "bymonth": "12"
   }
 }
-~~~  
+~~~
 
    10 occurrences that occur every last Saturday of the month:
 
@@ -463,7 +463,7 @@ file="ietf-schedule@2023-01-19.yang"
     }
   }
 }
-~~~~     
+~~~~
 
    The last workday of the month, until December 25, 2023:
 
@@ -471,7 +471,7 @@ file="ietf-schedule@2023-01-19.yang"
 {
   "recurrence": {
     "freq": "monthly",
-    "until": "2023-12-25", 
+    "until": "2023-12-25",
     "byday": [
       { "weekday": "monday" },
       { "weekday": "tuesday" },
@@ -498,7 +498,7 @@ file="ietf-schedule@2023-01-19.yang"
     "wkst": "monday"
   }
 }
-~~~   
+~~~
 
 
 ##  The UCL Extension to the ACL Model {#sec-UCL}
