@@ -415,7 +415,7 @@ file="ietf-schedule@2023-01-19.yang"
 ~~~~
 
    An example of a period that starts at 08:00:00 UTC, on January 1, 2023 and lasts 15 days and
-   5 hours and 20 minutes:
+   5 hours and 20 minutes is encoded as follows:
 
 ~~~~
 {
