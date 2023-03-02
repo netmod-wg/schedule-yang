@@ -441,14 +441,14 @@ file="ietf-schedule@2023-01-19.yang"
 
   The following snippet can be used to indicate a daily recurrent in December:
 
-~~~
+~~~~
 {
   "recurrence": {
     "freq": "daily",
-    "bymonth": "12"
+    "byyearmonth": [12]
   }
 }
-~~~
+~~~~
 
    The following snippet can be used to indicate 10 occurrences that occur every last Saturday of the month:
 
@@ -456,11 +456,13 @@ file="ietf-schedule@2023-01-19.yang"
 {
   "recurrence": {
     "freq": "monthly",
-    "count": "10",
-    "byday": {
-      "direction": "-1",
-      "weekday": "saturday"
-    }
+    "count": 10,
+    "byday": [
+      {
+        "direction": [-1],
+        "weekday": "saturday"
+      }
+    ]
   }
 }
 ~~~~
@@ -479,10 +481,11 @@ file="ietf-schedule@2023-01-19.yang"
       { "weekday": "thursday" },
       { "weekday": "friday" }
     ],
-    "bysetpos": "-1"
+    "bysetpos": [-1]
   }
 }
 ~~~~
+
 
    Every other week on Tuesday and Sunday, the week starts from Monday:
 
@@ -490,7 +493,7 @@ file="ietf-schedule@2023-01-19.yang"
 {
   "recurrence": {
     "freq": "weekly",
-    "interval": "2",
+    "interval": 2,
     "byday": [
       { "weekday": "tuesday" },
       { "weekday": "sunday" }
