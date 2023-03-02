@@ -467,7 +467,7 @@ file="ietf-schedule@2023-01-19.yang"
 }
 ~~~~
 
-   The following indicates the example of a recurrence that occurs last workday of the month until December 25, 2023:
+   The following indicates the example of a recurrence that occurs on the last workday of the month until December 25, 2023:
 
 ~~~~
 {
