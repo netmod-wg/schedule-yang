@@ -426,7 +426,7 @@ file="ietf-schedule@2023-01-19.yang"
 }
 ~~~~
 
-   The period starting at 08:00:00 UTC, on January 1, 2023 and lasting 20 weeks:
+   Now, consider the example of a period that starts at 08:00:00 UTC, on January 1, 2023 and lasts 20 weeks:
 
 ~~~~
 {
