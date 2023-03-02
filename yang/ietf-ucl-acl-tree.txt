@@ -31,7 +31,7 @@ module: ietf-ucl-acl
           |     +--rw byminute*      uint32
           |     +--rw byhour*        uint32
           |     +--rw byday* [weekday]
-          |     |  +--rw direction?   int32
+          |     |  +--rw direction*   int32
           |     |  +--rw weekday      schedule:weekday
           |     +--rw bymonthday*    int32
           |     +--rw byyearday*     int32
@@ -39,6 +39,7 @@ module: ietf-ucl-acl
           |     +--rw byyearmonth*   uint32
           |     +--rw bysetpos*      int32
           |     +--rw wkst*          schedule:weekday
+          |     +--rw duration?      schedule:duration
           +--:(absolute-range)
              +--rw period-of-time
                 +--rw (forms)?
@@ -47,4 +48,4 @@ module: ietf-ucl-acl
                    |  +--rw explicit-end?     yang:date-and-time
                    +--:(period-start)
                       +--rw start?            yang:date-and-time
-                      +--rw duration?         yang:time-no-zone
+                      +--rw duration?         duration
