@@ -398,7 +398,7 @@ file="ietf-schedule@2023-01-19.yang"
 ### Examples
 
    Here are some examples to illustrate the use of the period and recurrence formats defined as
-   YANG groupings. The data is provided in JSON.
+   YANG groupings. Only the message body is provided with JSON used for encoding {{?RFC7951}}
 
 #### Period of Time
 
