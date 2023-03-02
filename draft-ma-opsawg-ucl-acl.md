@@ -394,6 +394,113 @@ file="ietf-schedule@2023-01-19.yang"
 <CODE ENDS>
 ~~~~
 
+
+### Examples
+
+   Here are some delicated examples of period and recurrence formats defined as
+   YANG groupings. The data is provided in JSON.
+
+#### Period of Time
+
+   The period starting at 08:00:00 UTC, on January 1, 2023 and ending at 18:00:00 UTC
+   on December 31, 2025:
+
+~~~~
+{
+  "period-of-time": {
+    "explicit-start": "2023-01-01T08:00:00Z",
+    "explicit-end": "2025-12-01T18:00:00Z"
+  }
+}
+~~~~
+
+   The period starting at 08:00:00 UTC, on January 1, 2023 and lasting 15 days and
+   5 hours and 20 minutes:
+
+~~~~
+{
+  "period-of-time": {
+    "start": "2023-01-01T08:00:00Z",
+    "duration": "P15DT05:20:00"
+  }
+}
+~~~~
+
+   The period starting at 08:00:00 UTC, on January 1, 2023 and lasting 20 weeks:
+
+~~~~
+{
+  "period-of-time": {
+    "start": "2023-01-01T08:00:00Z",
+    "duration": "P20W"
+  }
+}
+~~~~
+
+#### Recurrence Rule
+
+  Every day in December
+
+~~~
+{
+  "recurrence": {
+    "freq": "daily",
+    "bymonth": "12"
+  }
+}
+~~~  
+
+   10 occurrences that occur every last Saturday of the month:
+
+~~~~
+{
+  "recurrence": {
+    "freq": "monthly",
+    "count": "10",
+    "byday": {
+      "direction": "-1",
+      "weekday": "saturday"
+    }
+  }
+}
+~~~~     
+
+   The last workday of the month, until December 25, 2023:
+
+~~~~
+{
+  "recurrence": {
+    "freq": "monthly",
+    "until": "2023-12-25",    
+    "byday": [
+      { "weekday": "monday" },
+      { "weekday": "tuesday" },
+      { "weekday": "wednesday" },
+      { "weekday": "thursday" },
+      { "weekday": "friday" }
+    ],
+    "bysetpos": "-1"
+  }
+}
+~~~~
+
+   Every other week on Tuesday and Sunday, the week starts from Monday:
+
+~~~
+{
+  "recurrence": {
+    "freq": "weekly",
+    "interval": "2",
+    "byday": [
+      { "weekday": "tuesday" },
+      { "weekday": "sunday" }
+    ],
+    "wkst": "monday"
+  }
+}
+~~~   
+
+
 ##  The UCL Extension to the ACL Model {#sec-UCL}
 
 ###  Module Overview
@@ -601,10 +708,13 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 
    The access requirements are as follows:
 
-   * Permit traffic from R&D BYOD of employees, destined to R&D employees' devices.
+   * Permit traffic from R&D BYOD of employees, destined to R&D employees'
+     devices every work day from 8:00 to 18:00.
 
    * Deny traffic from R&D BYOD of employees, destined to finance servers
-     located in the enterprise DC network.
+     located in the enterprise DC network starting at 8:30:00 of January 20,
+     2023 with an offset of -08:00 from UTC (Pacific Standard Time) and ending
+     at 18:00:00 in Pacific Standard Time on December 31, 2023.
 
    The following example illustrates the configuration of the SDN controller
    using the group-based ACL:
