@@ -343,7 +343,7 @@ module ietf-schedule {
            specified by the rule. It must only be used in conjunction
            with another byXXX rule part.";
       }
-      leaf-list wkst {
+      leaf wkst {
         type schedule:weekday;
         default "monday";
         description

@@ -29,4 +29,4 @@ module: ietf-schedule
        +-- byyearweek*    int32
        +-- byyearmonth*   uint32
        +-- bysetpos*      int32
-       +-- wkst*          schedule:weekday
+       +-- wkst?          schedule:weekday

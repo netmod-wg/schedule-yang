@@ -33,6 +33,28 @@
         <actions>
           <forwarding>accept</forwarding>
         </actions>
+        <time-range xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl">
+          <recurrence>
+            <freq>daily</freq>
+            <byhour>8</byhour>
+            <byday>
+              <weekday>monday</weekday>
+            </byday>
+            <byday>
+              <weekday>tuesday</weekday>
+            </byday> 
+            <byday>            
+              <weekday>wednesday</weekday>
+            </byday> 
+            <byday>            
+              <weekday>thursday</weekday>
+            </byday>
+            <byday>            
+              <weekday>friday</weekday>              
+            </byday>  
+            <duration>PT10:00:00</duration>
+          </recurrence>
+        </time-range>          
       </ace>
       <ace>
         <name>rule2</name>
@@ -49,6 +71,12 @@
         <actions>
           <forwarding>reject</forwarding>
         </actions>
+        <time-range xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl">
+          <period-of-time>
+            <explicit-start>2023-01-20T08:30:00-08:00</explicit-start>
+            <explicit-end>2023-12-31T18:00:00-08:00</explicit-end>
+          </period-of-time>
+        </time-range>        
       </ace>
     </aces>
   </acl>
