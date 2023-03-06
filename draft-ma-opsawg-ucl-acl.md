@@ -43,9 +43,9 @@ author:
     email: mohamed.boucadair@orange.com
  -
     fullname: Daniel King
-    organization: Old Dog Consulting
+    organization: Lancaster University
     country: United Kingdom
-    email: daniel@olddog.co.uk
+    email: d.king@lancaster.ac.uk
 
 normative:
 
@@ -124,7 +124,7 @@ informative:
    Access Control, which extends the IETF Access Control
    Lists (ACLs) module defined in {{!RFC8519}}.  This module can be used to ensure consistent enforcement of ACL policies
    based on the group identity.
-   
+
    This document defines also a mechanism to establish a mapping between the user-group identifier (ID) and common
    IP packet headers and other enclosed packet data (e.g., MAC address)
    to execute the policy-based access control.
