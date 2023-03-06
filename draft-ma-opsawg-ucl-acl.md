@@ -72,7 +72,7 @@ informative:
    control, which provides consistent and efficient enforcement of
    network access control policies based on group identity.  In
    addition, this document defines a mechanism to ease the maintenance
-   of the mapping between a user-group ID and a set of IP/MAC addresses
+   of the mapping between a user-group identifier and a set of IP/MAC addresses
    to enforce policy-based network access control.
 
    Also, the document defines a common schedule YANG module which is
@@ -118,25 +118,26 @@ informative:
 
    This document defines a common schedule YANG module which is designed
    to be applicable for policy activation based on date and time
-   condition.  This model can be used in other scheduling contexts.
+   conditions. This model is designed with the intent to be reusable in other scheduling contexts.
 
-   The document also defines a YANG module for policy-based Network
+   {{sec-UCL}} defines a YANG module for policy-based Network
    Access Control, which extends the IETF Access Control
-   Lists (ACLs) module defined in {{!RFC8519}}.  This module defined in
-   {{sec-UCL}} is meant to ensure consistent enforcement of ACL policies
-   based on the group identity. In addition, this document defines a
-   mechanism to establish a mapping between the user-group ID and common
+   Lists (ACLs) module defined in {{!RFC8519}}.  This module can be used to ensure consistent enforcement of ACL policies
+   based on the group identity.
+   
+   This document defines also a mechanism to establish a mapping between the user-group identifier (ID) and common
    IP packet headers and other enclosed packet data (e.g., MAC address)
    to execute the policy-based access control.
 
-   Last, the document defines a RADIUS attribute that is used to
+   Last, the document defines a Remote Authentication Dial-in
+   User Service (RADIUS) {{!RFC2865}} attribute that is used to
    communicate the user group identifier as part of identification and
    authorization information ({{sec-radius}}).
 
    As the ACL notion has been generalized, not to be device-specific,
    but also be defined at network/administrative domain
    levels {{?I-D.dbb-netmod-acl}}, the YANG module for policy-based network
-   access control defined in this document does not limit how it can be
+   access control defined in {{sec-UCL}} does not limit how it can be
    used.
 
 
@@ -149,7 +150,7 @@ informative:
 
    The document uses the terms defined in {{!RFC8519}}.
 
-   In the current version of the draft, the term "endpoint" refers also
+   In the current version of the document, the term "endpoint" refers also
    to a host device or end user that actually connect to a network. While
    host device here refers to servers, IoTs and other devices owned by the
    enterprise.
@@ -206,14 +207,13 @@ informative:
 
    *  A Network Access Server (NAS) entity which handles authentication
       requests.  The NAS interacts with an AAA server to complete user
-      authentication using protocols like Remote Authentication Dial-in
-      User Service (RADIUS) {{!RFC2865}}. When access is granted, the AAA
+      authentication using protocols like RADIUS {{!RFC2865}}. When access is granted, the AAA
       server provides the group identifier (group ID) to which the user
-      belongs when the user first logs onto the network. A new attribute
+      belongs when the user first logs onto the network. A new RADIUS attribute
       is defined in {{sec-radius}}.
 
-   *  The AAA server provides a collection of authentication, authorization
-      and accounting functions and is responsible for centralized user
+   *  The AAA server provides a collection of authentication, authorization,
+      and accounting functions. The AAA serveris responsible for centralized user
       information management. The AAA server is preconfigured with user
       credentials (e.g., user name and password), possible group identities
       and related user attributes (users may be divided into different
@@ -361,7 +361,7 @@ informative:
    ACL polices helps shield the consequences of address change (e.g.,
    back-end Virtual Machine (VM)-based server migration).
 
-#  YANG Modules
+#  Modules Overview
 
 ##  The Schedule YANG Module
 
@@ -373,32 +373,19 @@ informative:
    module with the intention that the time/date definition can be
    reused.
 
-###  Module Overview
-
    {{schedule-tree}} provides an overview of the tree structure of the "ietf-
    schedule" module.
 
 ~~~~
 {::include ./yang/ietf-schedule-tree.txt}
 ~~~~
-{: #schedule-tree title="UCL Tree Diagram" artwork-align="center"}
-
-###  The YANG Module
-
-   This module imports types defined in {{!I-D.ietf-netmod-rfc6991-bis}}.
-
-~~~~
-<CODE BEGINS>
-file="ietf-schedule@2023-01-19.yang"
-{::include ./yang/ietf-schedule.yang}
-<CODE ENDS>
-~~~~
+{: #schedule-tree title="Schedule Tree Structure" artwork-align="center"}
 
 
 ### Examples
 
-   Here are some examples to illustrate the use of the period and recurrence formats defined as
-   YANG groupings. Only the message body is provided with JSON used for encoding {{?RFC7951}}
+   The following subsections provide some examples to illustrate the use of the period and recurrence formats defined as
+   YANG groupings. Only the message body is provided with JSON used for encoding {{?RFC7951}}.
 
 #### Period of Time
 
@@ -506,8 +493,6 @@ file="ietf-schedule@2023-01-19.yang"
 
 ##  The UCL Extension to the ACL Model {#sec-UCL}
 
-###  Module Overview
-
    {{ucl-tree}} provides the tree strcuture of the "ietf-ucl-acl" module.
 
 ~~~~
@@ -519,7 +504,21 @@ file="ietf-schedule@2023-01-19.yang"
    such that the UCL group index can be referenced by augmenting the
    "match" data node.
 
-###  The YANG Module
+#  YANG Modules
+
+##  The "ietf-schedule" YANG Module
+
+   This module imports types defined in {{!I-D.ietf-netmod-rfc6991-bis}}.
+
+~~~~
+<CODE BEGINS>
+file="ietf-schedule@2023-01-19.yang"
+{::include ./yang/ietf-schedule.yang}
+<CODE ENDS>
+~~~~
+
+
+##  The "ietf-ucl-acl" YANG Module
 
    This module imports types defined in {{!RFC6991}}, {{!RFC8194}}, and
    {{!RFC8519}}.
@@ -702,7 +701,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 
 --- back
 
-# Example Usage
+# Examples Usage
 
 ## Configuring the Controller Using Group based ACL {#controller-ucl}
 
@@ -800,8 +799,8 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    This work has benefited from the discussions of User-group-based
    Security Policy over the years.  In particular, {{?I-D.you-i2nsf-user-group-based-policy}}
    and {{?I-D.yizhou-anima-ip-to-access-control-groups}} provide mechanisms to
-   establish the mapping between the IP address/prefix of user and access
-   control group ID.
+   establish a mapping between the IP address/prefix of users and access
+   control group IDs.
 
    Jianjie You, Myo Zarny, Christian Jacquenet, Mohamed Boucadair, and
    Yizhou Li contributed to an earlier version of {{?I-D.you-i2nsf-user-group-based-policy}}.
@@ -809,5 +808,5 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    control mechanisms for material that assisted in thinking about this document.
 
    The authors would like to thank Joe Clarke, Bill Fenner, Benoit
-   Claise, Rob Wiltion, David Somers-Harris for their valuable comments
+   Claise, Rob Wiltion, and David Somers-Harris for their valuable comments
    and great input to this work.
