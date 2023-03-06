@@ -771,6 +771,11 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 
 # Changes between Revisions
 
+  v01 - v02
+
+  *  Add more examples.
+
+
    v00 - v01
 
    *  Define a common schedule yang module and reuse in UCL yang module
