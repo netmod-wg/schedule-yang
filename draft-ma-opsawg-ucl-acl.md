@@ -85,7 +85,7 @@ informative:
 
 --- middle
 
-# Introduction
+# Introduction {#intro}
 
    With the increased adoption of remote access technologies (e.g.,
    Virtual Private Networks (VPNs)) and Bring Your Own Device (BYOD)
@@ -157,25 +157,26 @@ informative:
 
 #  Sample Usage
 
-   Access to some networks (e.g., Enterprise Networks) requires to
-   recognize the users' identities no matter how, where, and when they
+   Access to some networks (e.g., Enterprise networks) requires to
+   recognize the users'identities no matter how, where, and when they
    connect to the network resources.  Then, the network maps the
    (connecting) users to their access authorization rights.  Such rights
-   are defined following local policies.  As discussed in the
-   introduction, because there is a large number of users and the source
+   are defined following local policies.  As discussed in {{intro}},
+   because (1) there is a large number of users and (2) the source
    IP addresses of the same user are in different network segments,
    deploying a network access control policy for each IP address or
-   network segment is heavy workload.  An alternative approach is to
+   network segment is heavy workload.  An alternate approach is to
    configure endpoint groups to classify users and enterprise devices
-   and associate ACLs with endpoint groups so that endpoint in each
+   and associate ACLs with endpoint groups so that endpoints in each
    group can share a group of ACL rules.  This approach greatly reduces
    the workload of the administrators and optimizes the ACL resources.
+
    The Network ACLs (NACLs) can be provisioned on devices using specific
    mechanisms, such as {{!RFC8519}} or {{?I-D.dbb-netmod-acl}}.
 
-   Network access control policies may need to vary over time.  For
-   example, companies may restrict/grant employees access to specific
-   resources (internal and/or external resources) during work hours,
+   NACL policies may need to vary over time.  For
+   example, companies may restrict (or grant) employees access to specific
+   internal or external resources during work hours,
    while another policy is adopted during off-hours and weekends.  A
    network administrator may also require to enforce traffic shaping
    (Section 2.3.3.3 of {{?RFC2475}}) and policing (Section 2.3.3.4 of
@@ -194,26 +195,26 @@ informative:
       including security policies.  The service may be connectivity or
       any other resources that can be hosted and offered by a network.
 
-   *  The SDN Controller is responsible for maintaining endpoint-group
+   *  An SDN Controller which is responsible for maintaining endpoint-group
       based ACLs and mapping the endpoint-group to the associated
-      attributes information (e.g., IP/MAC address).  The SDN Controller
-      also works as the Policy Decision Point (PDP) {{?RFC3198}} and pushes
-      the required access control policies to relevant PEPs (Policy
-      Enforcement Points) that need them.  A PDP is also known as
+      attributes information (e.g., IP/MAC address).  An SDN Controller
+      also behaves as a Policy Decision Point (PDP) {{?RFC3198}} and pushes
+      the required access control policies to relevant Policy
+      Enforcement Points (PEPs).  A PDP is also known as
       "policy server" {{?RFC2753}}.
 
-      The SDN Controller may interact with AAA (Authentication,
-      Authorization and Accounting) server or NAS.
+      An SDN Controller may interact with an Authentication,
+      Authorization and Accounting (AAA) server or a Network Access Server (NAS).
 
    *  A Network Access Server (NAS) entity which handles authentication
       requests.  The NAS interacts with an AAA server to complete user
       authentication using protocols like RADIUS {{!RFC2865}}. When access is granted, the AAA
       server provides the group identifier (group ID) to which the user
       belongs when the user first logs onto the network. A new RADIUS attribute
-      is defined in {{sec-radius}}.
+      is defined in {{sec-radius}} for this purpose.
 
    *  The AAA server provides a collection of authentication, authorization,
-      and accounting functions. The AAA serveris responsible for centralized user
+      and accounting functions. The AAA server is responsible for centralized user
       information management. The AAA server is preconfigured with user
       credentials (e.g., user name and password), possible group identities
       and related user attributes (users may be divided into different
@@ -221,16 +222,16 @@ informative:
 
    *  The Policy Enforcement Point (PEP) {{?RFC3198}} is the central entity
       which is responsible for enforcing appropriate access control
-      policies.  In some cases, A PEP may map incoming packets to their
+      policies.  In some cases, a PEP may map incoming packets to their
       associated source or destination endpoint-group IDs, and acts on
       the endpoint-group ID based ACL policies, e.g., a NAS as the PEP
       or a group identifier could be carried in packet header (see
       Section 6.2.3 in {{?I-D.ietf-nvo3-encap}}).  While in other cases,
-      the SDN controller maps group ID to the related common packet
+      the SDN controller maps the group ID to the related common packet
       header and delivers IP/MAC address based ACL policies to the
       required PEPs.
 
-      Multiple PEPs can be involved in a network.
+      Multiple PEPs may be involved in a network.
 
       A PEP exposes a NETCONF interface to the SDN Controller {{!RFC6241}}.
 
@@ -369,7 +370,7 @@ informative:
    from the "period of time" and "recurrence rule" format defined in
    {{?RFC5545}}.
 
-   This module is defined as a standalone module rather than in the UCL
+   This module is defined as a standalone module rather than as part of the UCL
    module with the intention that the time/date definition can be
    reused.
 
@@ -725,7 +726,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 {::include ./examples/controller-ucl.xml}
 ~~~~
 
-## Configuring the PEP Using Group based ACL {#PEP-ucl}
+## Configuring a PEP Using Group based ACL {#PEP-ucl}
 
    This section illustrates an example to configure a PEP  using
    the group-based ACL.
