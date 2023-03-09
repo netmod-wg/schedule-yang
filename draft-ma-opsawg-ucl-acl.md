@@ -70,8 +70,7 @@ informative:
 
    This document defines a YANG module for policy-based network access
    control, which provides consistent and efficient enforcement of
-   network access control policies based on group identity.  In
-   addition, this document defines a mechanism to ease the maintenance
+   network access control policies based on group identity.  Moreover, this document defines a mechanism to ease the maintenance
    of the mapping between a user-group identifier and a set of IP/MAC addresses
    to enforce policy-based network access control.
 
@@ -140,6 +139,8 @@ informative:
    access control defined in {{sec-UCL}} does not limit how it can be
    used.
 
+   The YANG data models in this document conform to the Network
+   Management Datastore Architecture (NMDA) defined in {{!RFC8342}}.
 
 # Conventions and Definitions
 
@@ -158,7 +159,7 @@ informative:
 #  Sample Usage
 
    Access to some networks (e.g., Enterprise networks) requires to
-   recognize the users'identities no matter how, where, and when they
+   recognize the users’ identities no matter how, where, and when they
    connect to the network resources.  Then, the network maps the
    (connecting) users to their access authorization rights.  Such rights
    are defined following local policies.  As discussed in {{intro}},
@@ -256,9 +257,9 @@ informative:
         (Step 2)  |          |(Step 3)   |               |
                   |          |           |               |
                   |        +-+-----------+---------------+------------+
-                  |        | +----------------------+   +------------+|
-       +-------+  +--------+ | Network Access Server|   |firewall,etc||
-       |User #2+-----------+ |       (NAS)          |   +------------+|
+                  |        | +----------------------+ +--------------+|
+       +-------+  +--------+ | Network Access Server| |firewall, etc.||
+       |User #2+-----------+ |       (NAS)          | +--------------+|
        +-------+           | +----------------------+                 |
                            |                     (PEP)                |
                            +------------------------------------------+
@@ -494,7 +495,7 @@ informative:
 
 ##  The UCL Extension to the ACL Model {#sec-UCL}
 
-   {{ucl-tree}} provides the tree strcuture of the "ietf-ucl-acl" module.
+   {{ucl-tree}} provides the tree structure of the "ietf-ucl-acl" module.
 
 ~~~~
 {::include ./yang/ietf-ucl-acl-tree.txt}
@@ -513,7 +514,7 @@ informative:
 
 ~~~~
 <CODE BEGINS>
-file="ietf-schedule@2023-01-19.yang"
+file=ietf-schedule@2023-01-19.yang
 {::include ./yang/ietf-schedule.yang}
 <CODE ENDS>
 ~~~~
@@ -526,7 +527,7 @@ file="ietf-schedule@2023-01-19.yang"
 
 ~~~~
 <CODE BEGINS>
-file="ietf-ucl-acl@2023-01-19.yang"
+file=ietf-ucl-acl@2023-01-19.yang
 {::include ./yang/ietf-ucl-acl.yang}
 <CODE ENDS>
 ~~~~
@@ -809,5 +810,5 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    control mechanisms for material that assisted in thinking about this document.
 
    The authors would like to thank Joe Clarke, Bill Fenner, Benoit
-   Claise, Rob Wiltion, and David Somers-Harris for their valuable comments
+   Claise, Rob Wilton, and David Somers-Harris for their valuable comments
    and great input to this work.
