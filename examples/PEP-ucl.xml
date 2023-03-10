@@ -64,8 +64,7 @@
             <source-group-id>22</source-group-id>
           </endpoint-group>
           <ipv4>
-            <destination-ipv4-network>10.1.1.0/24</destination\
--ipv4-network>
+            <destination-ipv4-network>10.1.1.0/24</destination-ipv4-network>
           </ipv4>
         </matches>
         <actions>
