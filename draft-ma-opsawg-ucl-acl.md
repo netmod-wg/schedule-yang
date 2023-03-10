@@ -724,7 +724,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    using the group-based ACL:
 
 ~~~~
-{::include ./examples/controller-ucl.xml}
+{::include-fold ./examples/controller-ucl.xml}
 ~~~~
 
 ## Configuring a PEP Using Group based ACL {#PEP-ucl}
@@ -737,7 +737,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    source endpoint and the destination endpoint users. Another case for
    a PEP enforcing a group-based ACL is to obtain the group identity of
    the source endpoint directly from the packet field
-   {{?I-D.smith-vxlan-group-policy}}. This does not intend to be exhaustive.
+   {{?I-D.smith-vxlan-group-policy}}. This example does not intend to be exhaustive.
 
    Assume the mapping between device group ID and IP addresses is
    predefined or acquired via device authentication. The following example
@@ -745,7 +745,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    example is consistent with the example presented in {{controller-ucl}}.
 
 ~~~~
-{::include ./examples/PEP-ucl.xml}
+{::include-fold ./examples/PEP-ucl.xml}
 ~~~~
 
 ## Configuring the PEP Using Address based ACL {#PEP-acl}
@@ -767,7 +767,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    presented in {{controller-ucl}}.
 
 ~~~~
-{::include ./examples/PEP-acl.xml}
+{::include-fold ./examples/PEP-acl.xml}
 ~~~~
 
 # Changes between Revisions
