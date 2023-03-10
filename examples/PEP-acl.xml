@@ -9,8 +9,7 @@
         <name>rule1</name>
         <matches>
           <ipv4>
-            <destination-ipv4-network>192.168.2.1/24</destination\
--ipv4-network>
+            <destination-ipv4-network>192.168.2.1/24</destination-ipv4-network>
             <source-ipv4-network>192.168.1.1/24</source-ipv4-network>
           </ipv4>
         </matches>
@@ -44,8 +43,7 @@
         <name>rule2</name>
         <matches>
           <ipv4>
-            <destination-ipv4-network>10.1.1.0/24</destination\
--ipv4-network>
+            <destination-ipv4-network>10.1.1.0/24</destination-ipv4-network>
             <source-ipv4-network>192.168.1.1/24</source-ipv4-network>
           </ipv4>
         </matches>
