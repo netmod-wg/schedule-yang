@@ -18,10 +18,9 @@ module ietf-schedule {
   description
     "This YANG module defines two groupings for iCalendar (Internet
      Calendaring and Scheduling Core Object Specification) data
-     types:period of time and recurrence rule, for representing and
+     types: period of time and recurrence rule, for representing and
      exchanging calendaring and scheduling information. The YANG
-     module complies with sections 3.3.9 and 3.3.10 in RFC 5545. 
-     Future extensions may define more as needed.
+     module complies with Sections 3.3.9 and 3.3.10 of RFC 5545. 
 
      Copyright (c) 2023 IETF Trust and the persons identified
      as authors of the code. All rights reserved.
@@ -100,7 +99,7 @@ module ietf-schedule {
        used to schedule an alarm to trigger before an associated time.";
     reference 
       "RFC 5545: Internet Calendaring and Scheduling Core Object 
-       Specification (iCalendar)";    
+                 Specification (iCalendar)";    
       
   }
   
@@ -109,7 +108,7 @@ module ietf-schedule {
       "This grouping is defined for period of time property.";
     reference 
       "RFC 5545: Internet Calendaring and Scheduling Core Object 
-       Specification (iCalendar)";      
+                 Specification (iCalendar)";      
     container period-of-time {
       description
         "This container is defined to identify period values that
@@ -341,7 +340,7 @@ module ietf-schedule {
           "Specifies a list of values that corresponds to the nth
            occurrence within the set of recurrence instances
            specified by the rule. It must only be used in conjunction
-           with another byXXX rule part.";
+           with another by the rule part.";
       }
       leaf wkst {
         type schedule:weekday;
