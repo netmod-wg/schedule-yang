@@ -139,8 +139,8 @@ informative:
    access control defined in {{sec-UCL}} does not limit how it can be
    used.
 
-Although the document cites MAC address as an example of an identifier, the document does not make an assumption about which identifiers are used to trigger ACLs.
-These examples should not be considered as recommendations. Readers should be aware that MAC-based ACLs can be bypassed by flushing out the MAC address. Other implications on the change of MAC addresses are discussed in {{I-D.ietf-madinas-use-cases}}.
+Although the document cites MAC address as an example in some sections, the document does not make an assumption about which identifiers are used to trigger ACLs.
+These examples should not be considered as recommendations. Readers should be aware that MAC-based ACLs can be bypassed by flushing out the MAC address. Other implications related to the change of MAC addresses are discussed in {{?I-D.ietf-madinas-use-cases}}.
 
    The YANG data models in this document conform to the Network
    Management Datastore Architecture (NMDA) defined in {{!RFC8342}}.
