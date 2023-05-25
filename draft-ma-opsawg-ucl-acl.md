@@ -424,7 +424,7 @@ informative:
    The bysetpos allows a list of values that corresponds to the nth occurance
    within the set of recurrence instances to be specified. For example, in a "monthly"
    recurrence rule, the byday parameter specifies every Monday of the week, the
-   bysetpos with values of "-1" and "-2" represents the last two Mondays of the month.
+   bysetpos with value of "-1" represents the last Monday of the month.
    Not setting the bysetpos parameter represents every Monday of the month.
 
    The wkst parameter allows to specify the day on which the week starts. This is
@@ -524,7 +524,7 @@ informative:
 ~~~~
 
 
-   Every other week on Tuesday and Sunday, the week starts from Sunday:
+   The following indicates the example of a recurrence that occurs every other week on Tuesday and Sunday, the week starts from Monday:
 
 ~~~
 {
@@ -535,7 +535,7 @@ informative:
       { "weekday": "tuesday" },
       { "weekday": "sunday" }
     ],
-    "wkst": "Sunday"
+    "wkst": "monday"
   }
 }
 ~~~
@@ -564,7 +564,7 @@ informative:
    ACL model {{!RFC8519}} so that a source and/or destination endpoint group index
    can be referenced as the macth criteria.
 
-   The third part of the data model augments the "ace" list in the IETF ACL 
+   The third part of the data model augments the "ace" list in the IETF ACL
    model {{!RFC8519}} with date and time specific parameters to allow ACE to be
    activated based on a date/time condition. Two types of time range are defined,
    which reuses "recurrence" and "period" groupings defined in the "ietf-schedule"
