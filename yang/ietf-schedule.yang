@@ -20,7 +20,7 @@ module ietf-schedule {
      Calendaring and Scheduling Core Object Specification) data
      types: period of time and recurrence rule, for representing and
      exchanging calendaring and scheduling information. The YANG
-     module complies with Sections 3.3.9 and 3.3.10 of RFC 5545. 
+     module complies with Sections 3.3.9 and 3.3.10 of RFC 5545.
 
      Copyright (c) 2023 IETF Trust and the persons identified
      as authors of the code. All rights reserved.
@@ -84,7 +84,7 @@ module ietf-schedule {
     description
       "Seven days of the week.";
   }
-  
+
   typedef duration {
     type string {
       pattern '((\+)?|\-)P((([0-9]+)D)?(T(0[0-9]|1[0-9]|2[0-3])'
@@ -92,26 +92,31 @@ module ietf-schedule {
     }
     description
       "Duration of the time. The format can represent nominal
-       durations (weeks and days) and accurate durations (hours, 
-       minutes, and seconds). Note that this value type doesn't 
-       support the 'Y' and 'M' designators to specify durations in 
-       terms of years and months. Negative durations are typically 
+       durations (weeks and days) and accurate durations (hours,
+       minutes, and seconds). Note that this value type doesn't
+       support the 'Y' and 'M' designators to specify durations in
+       terms of years and months. Negative durations are typically
        used to schedule an alarm to trigger before an associated time.";
-    reference 
-      "RFC 5545: Internet Calendaring and Scheduling Core Object 
-                 Specification (iCalendar)";    
+    reference
+      "RFC 5545: Internet Calendaring and Scheduling Core Object
+                 Specification (iCalendar)";
   }
-  
+
   grouping period {
     description
       "This grouping is defined for period of time property.";
-    reference 
-      "RFC 5545: Internet Calendaring and Scheduling Core Object 
-                 Specification (iCalendar)";      
+    reference
+      "RFC 5545: Internet Calendaring and Scheduling Core Object
+                 Specification (iCalendar)";
     container period-of-time {
       description
         "This container is defined to identify period values that
          contain a precise period of time.";
+      leaf period-start {
+        type yang:date-and-time;
+        description
+          "Period start time.";
+      }
       choice forms {
         description
           "Two forms of period of time.";
@@ -119,26 +124,16 @@ module ietf-schedule {
           description
             "A period of time is identified by its start and its
              end.";
-          leaf explicit-start {
-            type yang:date-and-time;
-            description
-              "Period start time.";
-          }
           leaf explicit-end {
             type yang:date-and-time;
             description
               "Period end time.";
           }
         }
-        case period-start {
+        case period-duration {
           description
             "A period of time is defined by a start and a
              positive duration of time.";
-          leaf start {
-            type yang:date-and-time;
-            description
-              "Period start time.";
-          }
           leaf duration {
             type duration {
               pattern 'P((([0-9]+)D)?(T(0[0-9]|1[0-9]|2[0-3])'
@@ -156,9 +151,9 @@ module ietf-schedule {
     description
       "This grouping is defined to identify properties that
        contain a recurrence rule specification";
-    reference 
-      "RFC 5545: Internet Calendaring and Scheduling Core Object 
-       Specification (iCalendar)";          
+    reference
+      "RFC 5545: Internet Calendaring and Scheduling Core Object
+       Specification (iCalendar)";
     container recurrence {
       description
         "Recurrence rule definition.";
@@ -228,7 +223,7 @@ module ietf-schedule {
             }
             description
               "This parameter specifies a date-no-zone or
-               date-time value to bounds the recurrence. The 
+               date-time value to bounds the recurrence. The
                specified value becomes the last instance of the
                recurrence.";
           }
@@ -250,11 +245,11 @@ module ietf-schedule {
         default "1";
         description
           "A positive integer representing at which intervals the
-           recurrence rule repeats. The default value is '1', 
+           recurrence rule repeats. The default value is '1',
            meaning every second for a secondly rule, every minute
            for a minutely rule, every hour for an hourly rule, every
            day for a daily rule, every week for a weekly rule, every
-           month for a monthly rule, and every year for a yearly 
+           month for a monthly rule, and every year for a yearly
            rule.";
       }
       leaf-list bysecond {
@@ -301,7 +296,7 @@ module ietf-schedule {
             "Corresponding to seven days of the week.";
         }
       }
-      
+
       leaf-list bymonthday {
         type int32 {
           range "-31..-1|1..31";

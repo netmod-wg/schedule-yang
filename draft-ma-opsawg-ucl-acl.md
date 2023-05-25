@@ -71,7 +71,7 @@ informative:
    This document defines a YANG module for policy-based network access
    control, which provides consistent and efficient enforcement of
    network access control policies based on group identity.  Moreover, this document defines a mechanism to ease the maintenance
-   of the mapping between a user-group identifier and a set of IP/MAC addresses
+   of the mapping between a user group identifier and a set of IP/MAC addresses
    to enforce policy-based network access control.
 
    Also, the document defines a common schedule YANG module which is
@@ -91,9 +91,9 @@ informative:
    policies, enterprises adopted more flexibility related to how, where,
    and when employees work and collaborate.  However, more flexibility
    comes with increased risks.  Enabling office flexibility (e.g.,
-   mobility across many access locations) for large-scale employees
-   induces a set of challenges compared to conventional network access
-   management approaches.  Examples of such challenges are listed below:
+   mobility across many access locations) introduces a set of challenges
+   for large-scale enterprises compared to conventional network access management approaches.
+   Examples of such challenges are listed below:
 
    *  Endpoints do not have a stable IP address.  For example, Wireless
       LAN (WLAN) and VPN clients, as well as back-end Virtual Machine
@@ -115,32 +115,36 @@ informative:
       current context, and map the users to their correct access
       entitlement to the network.
 
-   This document defines a common schedule YANG module which is designed
-   to be applicable for policy activation based on date and time
-   conditions. This model is designed with the intent to be reusable in other scheduling contexts.
+   This document defines a common schedule YANG module in {{sec-schedule}} which
+   is designed to be applicable for policy activation based on date and time
+   conditions. This model is designed with the intent to be reusable in other
+   scheduling contexts.
 
-   {{sec-UCL}} defines a YANG module for policy-based Network
-   Access Control, which extends the IETF Access Control
-   Lists (ACLs) module defined in {{!RFC8519}}.  This module can be used to ensure consistent enforcement of ACL policies
+   {{sec-UCL}} defines a YANG module for policy-based network access control,
+   which extends the IETF Access Control Lists (ACLs) module defined in {{!RFC8519}}.
+   This module can be used to ensure consistent enforcement of ACL policies
    based on the group identity.
 
-   This document defines also a mechanism to establish a mapping between the user-group identifier (ID) and common
-   IP packet headers and other enclosed packet data (e.g., MAC address)
-   to execute the policy-based access control.
+   The ACL notion has been generalized to be device-nonspecific, and can be
+   defined at network/administrative domain level {{?I-D.dbb-netmod-acl}}. To
+   allow for all applications of ACLs, the YANG module for policy-based network
+   access control defined in {{sec-UCL}} does not limit how it can be used.
 
-   Last, the document defines a Remote Authentication Dial-in
+   This document also defines a mechanism to establish a mapping between the
+   user group identifier (ID) and common IP packet header fields and other
+   encapsulating packet data (e.g., MAC address) to execute the policy-based access control.
+
+   Additionally, the document defines a Remote Authentication Dial-in
    User Service (RADIUS) {{!RFC2865}} attribute that is used to
    communicate the user group identifier as part of identification and
    authorization information ({{sec-radius}}).
 
-   As the ACL notion has been generalized, not to be device-specific,
-   but also be defined at network/administrative domain
-   levels {{?I-D.dbb-netmod-acl}}, the YANG module for policy-based network
-   access control defined in {{sec-UCL}} does not limit how it can be
-   used.
-
-Although the document cites MAC address as an example in some sections, the document does not make an assumption about which identifiers are used to trigger ACLs.
-These examples should not be considered as recommendations. Readers should be aware that MAC-based ACLs can be bypassed by flushing out the MAC address. Other implications related to the change of MAC addresses are discussed in {{?I-D.ietf-madinas-use-cases}}.
+   Although the document cites MAC address as an example in some sections, the
+   document does not make an assumption about which identifiers are used to trigger ACLs.
+   These examples should not be considered as recommendations. Readers should be
+   aware that MAC-based ACLs can be bypassed by flushing out the MAC address.
+   Other implications related to the change of MAC addresses are discussed in
+   {{?I-D.ietf-madinas-use-cases}}.
 
    The YANG data models in this document conform to the Network
    Management Datastore Architecture (NMDA) defined in {{!RFC8342}}.
@@ -152,12 +156,22 @@ These examples should not be considered as recommendations. Readers should be aw
    The meanings of the symbols in tree diagrams are defined in
    {{?RFC8340}}.
 
-   The document uses the terms defined in {{!RFC8519}}.
+   The document uses the following definitions and acronyms defined in {{!RFC8519}}:
 
-   In the current version of the document, the term "endpoint" refers also
-   to a host device or end user that actually connect to a network. While
-   host device here refers to servers, IoTs and other devices owned by the
-   enterprise.
+   * ACE
+
+   * ACL
+
+   The follow term are used throughout this document:
+
+   * User group based ACL (UCL): A YANG data model for policy-based network access
+     control that specifies an extension to the IETF ACL model defined in RFC 8519.
+     It allows policy enforcement based on the group identity, which can be used
+     both at the network device level and at the network/administrative domain level.
+
+   In this document, the term "endpoint" refers to a host device or end user
+   that actually connects to a network. Host device refers to servers, IoTs
+   and other devices owned by the enterprise.
 
 #  Sample Usage
 
@@ -166,10 +180,10 @@ These examples should not be considered as recommendations. Readers should be aw
    connect to the network resources.  Then, the network maps the
    (connecting) users to their access authorization rights.  Such rights
    are defined following local policies.  As discussed in {{intro}},
-   because (1) there is a large number of users and (2) the source
-   IP addresses of the same user are in different network segments,
+   because (1) there is a large number of users and (2) a user may have different
+   source IP addresses in different network segments,
    deploying a network access control policy for each IP address or
-   network segment is heavy workload.  An alternate approach is to
+   network segment is a heavy workload.  An alternate approach is to
    configure endpoint groups to classify users and enterprise devices
    and associate ACLs with endpoint groups so that endpoints in each
    group can share a group of ACL rules.  This approach greatly reduces
@@ -191,23 +205,23 @@ These examples should not be considered as recommendations. Readers should be aw
 
 ##  Overview {#overview}
 
-   To provide real-time and consistent enforcement of access control
-   policies, the following functional entities and interfaces are
-   involved:
+   The architecture of a system that provides real-time and consistent
+   enforcement of access control policies is shown in {{arch}} and
+   includes the following functional entities and interfaces.
 
    *  A Service Orchestrator which coordinates the overall service,
       including security policies.  The service may be connectivity or
       any other resources that can be hosted and offered by a network.
 
-   *  An SDN Controller which is responsible for maintaining endpoint-group
+   *  An SDN controller which is responsible for maintaining endpoint-group
       based ACLs and mapping the endpoint-group to the associated
-      attributes information (e.g., IP/MAC address).  An SDN Controller
+      attributes information (e.g., IP/MAC address).  An SDN controller
       also behaves as a Policy Decision Point (PDP) {{?RFC3198}} and pushes
       the required access control policies to relevant Policy
       Enforcement Points (PEPs).  A PDP is also known as
       "policy server" {{?RFC2753}}.
 
-      An SDN Controller may interact with an Authentication,
+      An SDN controller may interact with an Authentication,
       Authorization and Accounting (AAA) server or a Network Access Server (NAS).
 
    *  A Network Access Server (NAS) entity which handles authentication
@@ -228,7 +242,7 @@ These examples should not be considered as recommendations. Readers should be aw
       which is responsible for enforcing appropriate access control
       policies.  In some cases, a PEP may map incoming packets to their
       associated source or destination endpoint-group IDs, and acts on
-      the endpoint-group ID based ACL policies, e.g., a NAS as the PEP
+      the endpoint-group ID based ACL policies, e.g., an NAS as the PEP
       or a group identifier could be carried in packet header (see
       Section 6.2.3 in {{?I-D.ietf-nvo3-encap}}).  While in other cases,
       the SDN controller maps the group ID to the related common packet
@@ -237,7 +251,7 @@ These examples should not be considered as recommendations. Readers should be aw
 
       Multiple PEPs may be involved in a network.
 
-      A PEP exposes a NETCONF interface to the SDN Controller {{!RFC6241}}.
+      A PEP exposes a NETCONF interface to the SDN controller {{!RFC6241}}.
 
    {{arch}} provides the overall architecture and procedure for policy-
    based access control management.
@@ -248,7 +262,7 @@ These examples should not be considered as recommendations. Readers should be aw
                                          +------+-----+
        Service                                  | (Step 1)
       ------------------------------------------+-------------
-      ------------------------------------------+-------------
+                                                |
        Network                                  |
                                  (Step 4)       |
        +-------+        +--------+     +--------+-----------+
@@ -280,13 +294,13 @@ These examples should not be considered as recommendations. Readers should be aw
       at the NAS.
 
    Step 3:  The authentication request is then relayed to the AAA server
-      using protocols like RADIUS {{!RFC2865}}. It is assumed that the
+      using a protocol such as RADIUS {{!RFC2865}}. It is assumed that the
       AAA server has been appropriately configured to store user credentials,
       e.g., user name, password, group information and other user attributes.
       If the authentication request succeeds, the user is placed in a
-      user-group which is returned to the network access server as the
-      authentication result (see {{sec-radius}}).
-      If the authentication fails, the user is not assigned any user-
+      user group the identity of which is returned to the network access server
+      as the authentication result (see {{sec-radius}}).
+      If the authentication fails, the user is not assigned any user
       group, which also means that the user has no access; or the user
       is assigned a special group with very limited access permissions
       for the network (as a function of the local policy). ACLs are
@@ -294,45 +308,45 @@ These examples should not be considered as recommendations. Readers should be aw
       (or rate-limited) by the network.  In some implementations, AAA
       server can be integrated with an SDN controller.
 
-   Step 4:  Either the AAA server or the NAS notify the SDN controller
-      the mapping between the user-group ID and related common packet
+   Step 4:  Either the AAA server or the NAS notifies the SDN controller
+      of the mapping between the user group ID and related common packet
       header attributes (e.g., IP/MAC address).
 
    Step 5:  Either group or IP/MAC address based access control policies
-      are maintained on relevant PEPs under the controller's management.
+      are maintained on relevant PEPs under the SDN controller's management.
       Whether the PEP enforces the group or IP/MAC address based ACL is
-      implementation specific. Either type of ACL policies may exist on
+      implementation specific. Both types of ACL policy may exist on
       the PEP. {{PEP-ucl}} and {{PEP-acl}} elaborate on each case.
 
 ##  Endpoint Group
 
 ###  User Group
 
-   The user-group ID is an identifier that represents the collective
-   identity of a group of users.  It is determined by a set of
-   predefined policy criteria (e.g., source IP address, geolocation
-   data, time of day, or device certificate).  Users may be moved to
-   different user-groups if their composite attributes, environment,
-   and/or local enterprise policy change.
+   The user group is determined by a set of predefined policy criteria
+   (e.g., source IP address, geolocation data, time of day, or device certificate).
+   It uses an identifier (user group ID) to represent the collective identity of
+   a group of users. Users may be moved to different user-groups if their
+   composite attributes, environment, and/or local enterprise policy change.
+
 
    A user is authenticated, and classified at the AAA server, and
-   assigned to a user-group.  A user's group membership may change as
-   aspects of the user change.  For example, if the user-group
+   assigned to a user group.  A user's group membership may change as
+   aspects of the user change.  For example, if the user group
    membership is determined solely by the source IP address, then a
-   given user's user-group ID will change when the user moves to a new
+   given user's group ID will change when the user moves to a new
    IP address that falls outside of the range of addresses of the
-   previous user-group.
+   previous user group.
 
    This document does not make any assumption about how user groups are
    defined.  Such considerations are deployment specific and are out of
    scope.  However, and for illustration purposes, {{ug-example}} shows
-   an example of how user-group definitions may be characterized. User-
-   groups may share several common criteria.  That is, user-group
+   an example of how user group definitions may be characterized. User
+   groups may share several common criteria.  That is, user group
    criteria are not mutually exclusive.  For example, the policy
-   criteria of user-groups R&D Regular and R&D BYOD may share the same
+   criteria of user groups R&D Regular and R&D BYOD may share the same
    set of users that belong to the R&D organization, and differ only in
    the type of clients (firm-issued clients vs. users' personal
-   clients).  Likewise, the same user may be assigned to different user-
+   clients).  Likewise, the same user may be assigned to different user
    groups depending on the time of day or the type of day (e.g.,
    weekdays versus weekends), etc.
 
@@ -341,14 +355,14 @@ These examples should not be considered as recommendations. Readers should be aw
 | R&D BYOD   |     11     |  Personal devices of R&D employees |
 | Sales      |     20     |  Sales employees               |
 | VIP        |     30     |  VIP employees                 |
-{: #ug-example title='User-Group Example'}
+{: #ug-example title='User Group Example'}
 
 
 ###  Device Group
 
    The device-group ID is an identifier that represents the collective
    identity of a group of enterprise end devices.  An enterprise device
-   could be an server that hosts applications or software that deliver
+   could be a server that hosts applications or software that deliver
    services to enterprise users.  It could also be an enterprise IoT
    device that serve a limited purpose, e.g., a printer that allows
    users to scan, print and send emails. {{dg-example}} shows an example
@@ -361,7 +375,7 @@ These examples should not be considered as recommendations. Readers should be aw
    {: #dg-example title='Device-Group Example'}
 
 
-   Users accessing to enterprise device should be strictly controlled.
+   Users accessing an enterprise device should be strictly controlled.
    Matching abstract device group ID instead of specified addresses in
    ACL polices helps shield the consequences of address change (e.g.,
    back-end Virtual Machine (VM)-based server migration).
@@ -375,8 +389,7 @@ These examples should not be considered as recommendations. Readers should be aw
    {{?RFC5545}}.
 
    This module is defined as a standalone module rather than as part of the UCL
-   module with the intention that the time/date definition can be
-   reused.
+   with the intention that the time/date definition can be reused.
 
    {{schedule-tree}} provides an overview of the tree structure of the "ietf-
    schedule" module.
@@ -386,6 +399,38 @@ These examples should not be considered as recommendations. Readers should be aw
 ~~~~
 {: #schedule-tree title="Schedule Tree Structure" artwork-align="center"}
 
+   The "period-of-time" allows a time period to be represented using either a start
+   and end date and time, or a start and a positive duration of time.
+
+   The "recurrence" allows an indication of the repeat scheduling of an event. The
+   repetition can be scoped by a specified end time or by a count of occurences,
+   and the frequency identifies the type of recurrence rule. For example, a "daily"
+   frequency value specifies repeating events based on an interval of a day or more.
+   The interval represents at which intervals the recurrence rule repeats. For example,
+   within a daily recurrence rule, an interval value of "8" means every eight days.
+
+   An array of the bysecond/byminute/byhour specifies a list of seconds within a minute/
+   minutes within an hour/hours of the day.
+
+   The parameter byday specifies a list of days of
+   the week, with a optional direction indicates the nth orrurance of a specific day within
+   the "monthly" or "yearly" frequency. For example, within a "monthly" rule,
+   the weekday with a value of "monday" and the direction with a value of "-1"
+   represents the last Monday of the month.
+
+   An array of the bymonthday/byyearday/byyearweek/byyearmonth specifies a list of
+   days of the month/days of the year/weeks of the year/months of the year.
+
+   The bysetpos allows a list of values that corresponds to the nth occurance
+   within the set of recurrence instances to be specified. For example, in a "monthly"
+   recurrence rule, the byday parameter specifies every Monday of the week, the
+   bysetpos with values of "-1" and "-2" represents the last two Mondays of the month.
+   Not setting the bysetpos parameter represents every Monday of the month.
+
+   The wkst parameter allows to specify the day on which the week starts. This is
+   significant when a "weekly" recurrence rule has an interval greater than 1, and
+   a byday parameter is specified. This is also significant when in a "yearly" rule
+   and a byyearweek is specified. The default value is "monday".
 
 ### Examples
 
@@ -400,7 +445,7 @@ These examples should not be considered as recommendations. Readers should be aw
 ~~~~
 {
   "period-of-time": {
-    "explicit-start": "2023-01-01T08:00:00Z",
+    "period-start": "2023-01-01T08:00:00Z",
     "explicit-end": "2025-12-01T18:00:00Z"
   }
 }
@@ -412,7 +457,7 @@ These examples should not be considered as recommendations. Readers should be aw
 ~~~~
 {
   "period-of-time": {
-    "start": "2023-01-01T08:00:00Z",
+    "period-start": "2023-01-01T08:00:00Z",
     "duration": "P15DT05:20:00"
   }
 }
@@ -423,7 +468,7 @@ These examples should not be considered as recommendations. Readers should be aw
 ~~~~
 {
   "period-of-time": {
-    "start": "2023-01-01T08:00:00Z",
+    "period-start": "2023-01-01T08:00:00Z",
     "duration": "P20W"
   }
 }
@@ -479,7 +524,7 @@ These examples should not be considered as recommendations. Readers should be aw
 ~~~~
 
 
-   Every other week on Tuesday and Sunday, the week starts from Monday:
+   Every other week on Tuesday and Sunday, the week starts from Sunday:
 
 ~~~
 {
@@ -490,13 +535,17 @@ These examples should not be considered as recommendations. Readers should be aw
       { "weekday": "tuesday" },
       { "weekday": "sunday" }
     ],
-    "wkst": "monday"
+    "wkst": "Sunday"
   }
 }
 ~~~
 
 
-##  The UCL Extension to the ACL Model {#sec-UCL}
+##  The UCL Extension to the ACL Model
+
+   This module specifies an extension to the IETF ACL model {{!RFC8519}} to add
+   endpoint groups so that an endpoint group index can be matched upon, and also
+   enable access control policy activation based on date and time conditions.
 
    {{ucl-tree}} provides the tree structure of the "ietf-ucl-acl" module.
 
@@ -505,13 +554,28 @@ These examples should not be considered as recommendations. Readers should be aw
 ~~~~
 {: #ucl-tree title="UCL Extension" artwork-align="center"}
 
-   This module specifies an extension to the IETF ACL model {{!RFC8519}}
-   such that the UCL group index can be referenced by augmenting the
-   "match" data node.
+   The first part of the data model augments the "acl" list in the
+   IETF ACL model {{!RFC8519}} with a "endpoint-groups" container
+   having a list of "endpoint group" inside, each entry has a group-id that uniquely
+   identifies the endpoint group. The choice statement allows for the selection
+   of group type between "user-group" or "device-group".
+
+   The second part of the data model augments the "matches" container in the IETF
+   ACL model {{!RFC8519}} so that a source and/or destination endpoint group index
+   can be referenced as the macth criteria.
+
+   The third part of the data model augments the "ace" list in the IETF ACL 
+   model {{!RFC8519}} with date and time specific parameters to allow ACE to be
+   activated based on a date/time condition. Two types of time range are defined,
+   which reuses "recurrence" and "period" groupings defined in the "ietf-schedule"
+   YANG model, respectively. Note that the data model augments the definition of
+   "recurrence" grouping with a "duration" data node to specify the duration of
+   time for each occurance the policy activation is triggered.
+
 
 #  YANG Modules
 
-##  The "ietf-schedule" YANG Module
+##  The "ietf-schedule" YANG Module {#sec-schedule}
 
    This module imports types defined in {{!I-D.ietf-netmod-rfc6991-bis}}.
 
@@ -523,9 +587,9 @@ file=ietf-schedule@2023-01-19.yang
 ~~~~
 
 
-##  The "ietf-ucl-acl" YANG Module
+##  The "ietf-ucl-acl" YANG Module {#sec-UCL}
 
-   This module imports types defined in {{!RFC6991}}, {{!RFC8194}}, and
+   This module imports types defined in {{!RFC8194}}, and
    {{!RFC8519}}.
 
 ~~~~
@@ -540,7 +604,7 @@ file=ietf-ucl-acl@2023-01-19.yang
    The User-Access-Group-ID RADIUS attribute and its embedded TLVs are
    defined with globally unique names.  The definition of the attribute
    follows the guidelines in Section 2.7.1 of {{!RFC6929}}.  This attribute
-   is used to indicate the user-group ID to be used by the NAS.  When
+   is used to indicate the user group ID to be used by the NAS.  When
    the User-Access-Group-ID RADIUS attribute is present in the RADIUS
    Access-Accept, the system applies the related access control to the
    users after it authenticates.
@@ -736,7 +800,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    the group-based ACL.
 
    The PEP which enforces group-based ACL may acquire group identities
-   from the AAA server if working as a NAS authenticating both the
+   from the AAA server if working as an NAS authenticating both the
    source endpoint and the destination endpoint users. Another case for
    a PEP enforcing a group-based ACL is to obtain the group identity of
    the source endpoint directly from the packet field

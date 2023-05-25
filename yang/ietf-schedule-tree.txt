@@ -2,13 +2,12 @@ module: ietf-schedule
 
   grouping period:
     +-- period-of-time
+       +-- period-start?         yang:date-and-time
        +-- (forms)?
           +--:(period-explicit)
-          |  +-- explicit-start?   yang:date-and-time
-          |  +-- explicit-end?     yang:date-and-time
-          +--:(period-start)
-             +-- start?            yang:date-and-time
-             +-- duration?         duration
+          |  +-- explicit-end?   yang:date-and-time
+          +--:(period-duration)
+             +-- duration?       duration
   grouping recurrence:
     +-- recurrence
        +-- freq           enumeration
