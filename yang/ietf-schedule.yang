@@ -124,7 +124,7 @@ module ietf-schedule {
           description
             "A period of time is identified by its start and its
              end.";
-          leaf explicit-end {
+          leaf period-end {
             type yang:date-and-time;
             description
               "Period end time.";
