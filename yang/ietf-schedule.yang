@@ -119,7 +119,8 @@ module ietf-schedule {
       }
       choice forms {
         description
-          "Two forms of period of time.";
+          "Indicates the type of the time period. Two types are
+            supported.";
         case period-explicit {
           description
             "A period of time is identified by its start and its
