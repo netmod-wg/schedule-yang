@@ -158,7 +158,7 @@ informative:
 
    The document uses the following definitions and acronyms defined in {{!RFC8519}}:
 
-   * Access Control Entry (ACE)  
+   * Access Control Entry (ACE)
 
    * Access Control List (ACL)
 
