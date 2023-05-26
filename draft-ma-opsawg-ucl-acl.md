@@ -155,6 +155,7 @@ informative:
    * XXXX --> the assigned RFC number for this draft
    * YYYY --> the assigned RFC number for {{I-D.ietf-netmod-rfc6991-bis}}
    * 2023-01-19 --> the actual date of the publication of this document
+
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
@@ -596,7 +597,7 @@ file=ietf-schedule@2023-01-19.yang
 ##  The "ietf-ucl-acl" YANG Module {#sec-UCL}
 
    This module imports types and groupings defined in the "ietf-schedule" YANG
-   module in {{sec-schedule}}. It also augments IETF ACL YANG module defined in {{!RFC8519}}.
+   module in {{sec-schedule}}. It also augments the IETF ACL YANG module defined in {{!RFC8519}}.
 
 ~~~~
 <CODE BEGINS>
@@ -708,10 +709,20 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    writable, creatable, and deletable (i.e., config true, which is the
    default).  These data nodes may be considered sensitive or vulnerable
    in some network environments.  Write operations to these data nodes
-   could have a negative effect on network and security operations.
+   could have a negative effect on network and security operations. These are the
+   subtrees and data nodes and their sensitivity/vulnerability:
 
-   * TBC
-   * TBC
+   * /acl:acls/acl:acl/uacl:endpoint-groups/uacl:endpoint-group:
+     This list specifies all the endpoint group entries. Unauthorized write access to this
+     list can allow intruders to modify the entries so as to forge an endpoint
+     group that does not exist or maliciously delete an existing endpoint group,
+     which could be used to craft an attack.
+
+   * /acl:acls/acl:acl/acl:aces/acl:ace/acl:matches/uacl:endpoint-group:
+     This subtree specifies a source and/or endpoint group index as match criteria in the
+     ACEs. Unauthorized write access to this data node may allow intruders to
+     modify the group identity so as to permit access that should not be
+     permitted, or deny access that should be permitted.
 
     Some of the readable data nodes in the "ietf-ucl-acl" YANG module may
     be considered sensitive or vulnerable in some network environments. It
@@ -719,8 +730,11 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
     or notification) to these data nodes. These are the subtrees and data
     nodes and their sensitivity/vulnerability:
 
-    *  <list subtrees and data nodes and state why they are sensitive>
-    *  <list subtrees and data nodes and state why they are sensitive>
+    *  /acl:acls/acl:acl/acl:aces/acl:ace/uacl:time-range:
+       This subtree specifies when the access control entry rules are in effect.
+       An unauthorized read access of the list will allow the attacker to
+       determine which rules are in effect, to better craft an attack.
+
 
 ##  RADIUS
 
