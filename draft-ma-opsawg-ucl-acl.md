@@ -50,6 +50,7 @@ author:
 normative:
 
 informative:
+
   RADIUS-Types:
      title: RADIUS Types
      author:
@@ -95,15 +96,15 @@ informative:
       policy enforcement.  IP address-based policies may not be flexible
       enough to accommodate endpoints with volatile IP addresses.
 
-   *  With the massive adoption of teleworking, there is now a need to
+   *  With the massive adoption of teleworking, there is a need to
       apply different security policies to the same set of users under
       different circumstances (e.g., prevent relaying attacks against a
-      local attachment point to the Enterprise network).  For example,
+      local attachment point to the enterprise network).  For example,
       network access might be granted based upon criteria such as users'
       access location, source network reputation, users' role, time-of-
       day, type of network device used (e.g., corporate issued device
       versus personal device), device's security posture, etc.  This
-      means the network needs to recognize the users' identity and their
+      means that the network needs to recognize the users' identity and their
       current context, and map the users to their correct access
       entitlement to the network.
 
@@ -169,20 +170,21 @@ informative:
 
    * Access Control List (ACL)
 
-   The follow terms are used throughout this document:
+   The following terms are used throughout this document:
 
-   * User group based ACL (UCL): A YANG data model for policy-based network access
-     control that specifies an extension to the IETF ACL model defined in RFC 8519.
+   * User group based ACL (UCL):
+   : A YANG data model for policy-based network access
+     control that specifies an extension to the IETF ACL model defined in {{!RFC8519}}.
      It allows policy enforcement based on the group identity, which can be used
      both at the network device level and at the network/administrative domain level.
 
-   In this document, the term "endpoint" refers to a host device or end user
-   that actually connects to a network. Host device refers to servers, IoTs
+   * Endpoint:
+   : refers to a host device or end user that actually connects to a network. Host device refers to servers, IoTs
    and other devices owned by the enterprise.
 
 #  Sample Usage
 
-   Access to some networks (e.g., Enterprise networks) requires to
+   Access to some networks (e.g., enterprise networks) requires to
    recognize the users’ identities no matter how, where, and when they
    connect to the network resources.  Then, the network maps the
    (connecting) users to their access authorization rights.  Such rights
@@ -197,15 +199,15 @@ informative:
    the workload of the administrators and optimizes the ACL resources.
 
    The Network ACLs (NACLs) can be provisioned on devices using specific
-   mechanisms, such as {{!RFC8519}} or {{?I-D.dbb-netmod-acl}}.
+   mechanisms, such as {{!RFC8519}} or {{?I-D.ietf-netmod-acl-extensions}}.
 
    NACL policies may need to vary over time.  For
    example, companies may restrict (or grant) employees access to specific
    internal or external resources during work hours,
    while another policy is adopted during off-hours and weekends.  A
    network administrator may also require to enforce traffic shaping
-   (Section 2.3.3.3 of {{?RFC2475}}) and policing (Section 2.3.3.4 of
-   {{?RFC2475}}) during peak hours in order not to affect other data
+   ({{Section 2.3.3.3 of ?RFC2475}}) and policing (
+   {{Section 2.3.3.4 of ?RFC2475}}) during peak hours in order not to affect other data
    services.
 
 #  Policy-based Network Access Control
@@ -216,9 +218,9 @@ informative:
    enforcement of access control policies is shown in {{arch}}. This architecture
    includes the following functional entities and interfaces:
 
-   *  A Service Orchestrator which coordinates the overall service,
+   *  A service orchestrator which coordinates the overall service,
       including security policies.  The service may be connectivity or
-      any other resources that can be hosted and offered by a network.
+      any other access to resources that can be hosted and offered by a network.
 
    *  An SDN controller which is responsible for maintaining endpoint-group
       based ACLs and mapping the endpoint-group to the associated
@@ -251,14 +253,14 @@ informative:
       associated source or destination endpoint-group IDs, and acts on
       the endpoint-group ID based ACL policies, e.g., a NAS as the PEP
       or a group identifier could be carried in packet header (see
-      Section 6.2.3 in {{?I-D.ietf-nvo3-encap}}).  While in other cases,
+      {{Section 6.2.3 of ?I-D.ietf-nvo3-encap}}).  While in other cases,
       the SDN controller maps the group ID to the related common packet
       header and delivers IP/MAC address based ACL policies to the
       required PEPs.
 
       Multiple PEPs may be involved in a network.
 
-      A PEP exposes a NETCONF interface {{!RFC6241}} to the SDN controller.
+      A PEP exposes a NETCONF interface {{!RFC6241}} to an SDN controller.
 
    {{arch}} provides the overall architecture and procedure for policy-
    based access control management.
@@ -292,11 +294,11 @@ informative:
 
    In reference to {{arch}}, the following typical flow is experienced:
 
-   Step 1:  Administrators (or the Orchestrator) configure an SDN
+   Step 1:  Administrators (or a service orchestrator) configure an SDN
       controller with network-level ACLs using the YANG module defined
-      in {{sec-UCL}}. An example of this is provided in {{controller-ucl}}.
+      in {{sec-UCL}}. An example is provided in {{controller-ucl}}.
 
-   Step 2:  When a user first logs onto the network, the user is
+   Step 2:  When a user first logs onto the network, he/she is
       required to be authenticated (e.g., using user name and password)
       at the NAS.
 
@@ -315,7 +317,7 @@ informative:
       (or rate-limited) by the network.  In some implementations, AAA
       server can be integrated with an SDN controller.
 
-   Step 4:  Either the AAA server or the NAS notifies the SDN controller
+   Step 4:  Either the AAA server or the NAS notifies an SDN controller
       of the mapping between the user group ID and related common packet
       header attributes (e.g., IP/MAC address).
 
@@ -385,7 +387,7 @@ informative:
    Users accessing an enterprise device should be strictly controlled.
    Matching abstract device group ID instead of specified addresses in
    ACL polices helps shield the consequences of address change (e.g.,
-   back-end Virtual Machine (VM)-based server migration).
+   back-end VM-based server migration).
 
 #  Modules Overview
 
@@ -807,7 +809,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
      2023 with an offset of -08:00 from UTC (Pacific Standard Time) and ending
      at 18:00:00 in Pacific Standard Time on December 31, 2023.
 
-   The following example illustrates the configuration of the SDN controller
+   The following example illustrates the configuration of an SDN controller
    using the group-based ACL:
 
 ~~~~
