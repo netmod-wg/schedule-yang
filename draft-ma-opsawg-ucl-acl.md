@@ -418,8 +418,7 @@ informative:
    The interval represents at which intervals the recurrence rule repeats. For example,
    within a daily recurrence rule, an interval value of "8" means every eight days.
 
-    An array of the bysecond (or byminut, byhour) specifies a list of seconds within a minute (or
-    minutes within an hour, hours of the day).
+   An array of the bysecond (or byminut, byhour) specifies a list of seconds within a minute (or minutes within an hour, hours of the day).
 
    The parameter "byday" specifies a list of days of
    the week, with an optional direction which indicates the nth occurrence of a specific day within
@@ -715,13 +714,13 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    subtrees and data nodes and their sensitivity/vulnerability:
 
    * /acl:acls/acl:acl/uacl:endpoint-groups/uacl:endpoint-group:
-     This list specifies all the endpoint group entries. Unauthorized write access to this
+   : This list specifies all the endpoint group entries. Unauthorized write access to this
      list can allow intruders to modify the entries so as to forge an endpoint
      group that does not exist or maliciously delete an existing endpoint group,
      which could be used to craft an attack.
 
    * /acl:acls/acl:acl/acl:aces/acl:ace/acl:matches/uacl:endpoint-group:
-     This subtree specifies a source and/or endpoint group index as match criteria in the
+   : This subtree specifies a source and/or endpoint group index as match criteria in the
      ACEs. Unauthorized write access to this data node may allow intruders to
      modify the group identity so as to permit access that should not be
      permitted, or deny access that should be permitted.
@@ -732,10 +731,10 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
     or notification) to these data nodes. These are the subtrees and data
     nodes and their sensitivity/vulnerability:
 
-    *  /acl:acls/acl:acl/acl:aces/acl:ace/uacl:time-range:
-       This subtree specifies when the access control entry rules are in effect.
-       An unauthorized read access of the list will allow the attacker to
-       determine which rules are in effect, to better craft an attack.
+   * /acl:acls/acl:acl/acl:aces/acl:ace/uacl:time-range:
+  : This subtree specifies when the access control entry rules are in effect. An
+    unauthorized read access of the list will allow the attacker to determine
+    which rules are in effect, to better craft an attack.
 
 
 ##  RADIUS
