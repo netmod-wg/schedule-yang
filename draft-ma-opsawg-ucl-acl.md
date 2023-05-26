@@ -115,23 +115,23 @@ informative:
       current context, and map the users to their correct access
       entitlement to the network.
 
-   This document defines a common schedule YANG module in {{sec-schedule}} which
+   This document defines a common schedule YANG module ({{sec-schedule}}) which
    is designed to be applicable for policy activation based on date and time
    conditions. This model is designed with the intent to be reusable in other
-   scheduling contexts.
+   scheduling contexts. In particular, the groupings can be reused by other modules.
 
    {{sec-UCL}} defines a YANG module for policy-based network access control,
    which extends the IETF Access Control Lists (ACLs) module defined in {{!RFC8519}}.
    This module can be used to ensure consistent enforcement of ACL policies
    based on the group identity.
 
-   The ACL notion has been generalized to be device-nonspecific, and can be
-   defined at network/administrative domain level {{?I-D.dbb-netmod-acl}}. To
+   The ACL concept has been generalized to be device-nonspecific, and can be
+   defined at network/administrative domain level {{?I-D.ietf-netmod-acl-extensions}}. To
    allow for all applications of ACLs, the YANG module for policy-based network
-   access control defined in {{sec-UCL}} does not limit how it can be used.
+   ACL defined in {{sec-UCL}} does not limit how it can be used.
 
-   This document also defines a mechanism to establish a mapping between the
-   user group identifier (ID) and common IP packet header fields and other
+   This document also defines a mechanism to establish a mapping between (1) the
+   user group identifier (ID) and (2) common IP packet header fields and other
    encapsulating packet data (e.g., MAC address) to execute the policy-based access control.
 
    Additionally, the document defines a Remote Authentication Dial-in
@@ -139,8 +139,8 @@ informative:
    communicate the user group identifier as part of identification and
    authorization information ({{sec-radius}}).
 
-   Although the document cites MAC address as an example in some sections, the
-   document does not make an assumption about which identifiers are used to trigger ACLs.
+   Although the document cites MAC addresses as an example in some sections, the
+   document does not make assumptions about which identifiers are used to trigger ACLs.
    These examples should not be considered as recommendations. Readers should be
    aware that MAC-based ACLs can be bypassed by flushing out the MAC address.
    Other implications related to the change of MAC addresses are discussed in
@@ -158,11 +158,11 @@ informative:
 
    The document uses the following definitions and acronyms defined in {{!RFC8519}}:
 
-   * ACE
+   * Access Control Entry (ACE)  
 
-   * ACL
+   * Access Control List (ACL)
 
-   The follow term are used throughout this document:
+   The follow terms are used throughout this document:
 
    * User group based ACL (UCL): A YANG data model for policy-based network access
      control that specifies an extension to the IETF ACL model defined in RFC 8519.
@@ -206,8 +206,8 @@ informative:
 ##  Overview {#overview}
 
    The architecture of a system that provides real-time and consistent
-   enforcement of access control policies is shown in {{arch}} and
-   includes the following functional entities and interfaces.
+   enforcement of access control policies is shown in {{arch}}. This architecture
+   includes the following functional entities and interfaces:
 
    *  A Service Orchestrator which coordinates the overall service,
       including security policies.  The service may be connectivity or
@@ -242,7 +242,7 @@ informative:
       which is responsible for enforcing appropriate access control
       policies.  In some cases, a PEP may map incoming packets to their
       associated source or destination endpoint-group IDs, and acts on
-      the endpoint-group ID based ACL policies, e.g., an NAS as the PEP
+      the endpoint-group ID based ACL policies, e.g., a NAS as the PEP
       or a group identifier could be carried in packet header (see
       Section 6.2.3 in {{?I-D.ietf-nvo3-encap}}).  While in other cases,
       the SDN controller maps the group ID to the related common packet
@@ -251,7 +251,7 @@ informative:
 
       Multiple PEPs may be involved in a network.
 
-      A PEP exposes a NETCONF interface to the SDN controller {{!RFC6241}}.
+      A PEP exposes a NETCONF interface {{!RFC6241}} to the SDN controller.
 
    {{arch}} provides the overall architecture and procedure for policy-
    based access control management.
@@ -399,38 +399,38 @@ informative:
 ~~~~
 {: #schedule-tree title="Schedule Tree Structure" artwork-align="center"}
 
-   The "period-of-time" allows a time period to be represented using either a start
-   and end date and time, or a start and a positive duration of time.
+   The "period-of-time" allows a time period to be represented using either a start ("period-start")
+   and end date and time ("period-end"), or a start ("period-start") and a positive time duration ("period-duration").
 
-   The "recurrence" allows an indication of the repeat scheduling of an event. The
+   The "recurrence" indicates the scheduling recurrence of an event. The
    repetition can be scoped by a specified end time or by a count of occurences,
    and the frequency identifies the type of recurrence rule. For example, a "daily"
    frequency value specifies repeating events based on an interval of a day or more.
    The interval represents at which intervals the recurrence rule repeats. For example,
    within a daily recurrence rule, an interval value of "8" means every eight days.
 
-   An array of the bysecond/byminute/byhour specifies a list of seconds within a minute/
-   minutes within an hour/hours of the day.
+    An array of the bysecond (or byminut, byhour) specifies a list of seconds within a minute (or
+    minutes within an hour, hours of the day).
 
-   The parameter byday specifies a list of days of
-   the week, with a optional direction indicates the nth orrurance of a specific day within
+   The parameter "byday" specifies a list of days of
+   the week, with an optional direction which indicates the nth occurrence of a specific day within
    the "monthly" or "yearly" frequency. For example, within a "monthly" rule,
-   the weekday with a value of "monday" and the direction with a value of "-1"
+   the "weekday" with a value of "monday" and the "direction" with a value of "-1"
    represents the last Monday of the month.
 
-   An array of the bymonthday/byyearday/byyearweek/byyearmonth specifies a list of
-   days of the month/days of the year/weeks of the year/months of the year.
+   An array of the "bymonthday" (or byyearday", "byyearweek", or "byyearmonth") specifies a list of
+   days of the month (or days of the year, weeks of the year, or months of the year).
 
-   The bysetpos allows a list of values that corresponds to the nth occurance
+   The "bysetpos" conveys a list of values that corresponds to the nth occurrence
    within the set of recurrence instances to be specified. For example, in a "monthly"
-   recurrence rule, the byday parameter specifies every Monday of the week, the
-   bysetpos with value of "-1" represents the last Monday of the month.
-   Not setting the bysetpos parameter represents every Monday of the month.
+   recurrence rule, the "byday" data node specifies every Monday of the week, the
+   "bysetpos" with value of "-1" represents the last Monday of the month.
+   Not setting the "bysetpos" data node represents every Monday of the month.
 
-   The wkst parameter allows to specify the day on which the week starts. This is
+   The "wkst" data node specifies the day on which the week starts. This is
    significant when a "weekly" recurrence rule has an interval greater than 1, and
-   a byday parameter is specified. This is also significant when in a "yearly" rule
-   and a byyearweek is specified. The default value is "monday".
+   a "byday" data node is specified. This is also significant when in a "yearly" rule
+   and a "byyearweek" is specified. The default value is "monday".
 
 ### Examples
 
@@ -446,7 +446,7 @@ informative:
 {
   "period-of-time": {
     "period-start": "2023-01-01T08:00:00Z",
-    "explicit-end": "2025-12-01T18:00:00Z"
+    "period-end": "2025-12-01T18:00:00Z"
   }
 }
 ~~~~
@@ -458,7 +458,7 @@ informative:
 {
   "period-of-time": {
     "period-start": "2023-01-01T08:00:00Z",
-    "duration": "P15DT05:20:00"
+    "period-duration": "P15DT05:20:00"
   }
 }
 ~~~~
@@ -469,7 +469,7 @@ informative:
 {
   "period-of-time": {
     "period-start": "2023-01-01T08:00:00Z",
-    "duration": "P20W"
+    "period-duration": "P20W"
   }
 }
 ~~~~
@@ -524,7 +524,7 @@ informative:
 ~~~~
 
 
-   The following indicates the example of a recurrence that occurs every other week on Tuesday and Sunday, the week starts from Monday:
+   The following depicts the example of a recurrence that occurs every other week on Tuesday and Sunday, the week starts from Monday:
 
 ~~~
 {
@@ -543,7 +543,7 @@ informative:
 
 ##  The UCL Extension to the ACL Model
 
-   This module specifies an extension to the IETF ACL model {{!RFC8519}} to add
+   This module specifies an extension to the IETF ACL model {{!RFC8519}}. This extension adds
    endpoint groups so that an endpoint group index can be matched upon, and also
    enable access control policy activation based on date and time conditions.
 
@@ -556,21 +556,21 @@ informative:
 
    The first part of the data model augments the "acl" list in the
    IETF ACL model {{!RFC8519}} with a "endpoint-groups" container
-   having a list of "endpoint group" inside, each entry has a group-id that uniquely
-   identifies the endpoint group. The choice statement allows for the selection
+   having a list of "endpoint group" inside, each entry has a "group-id" that uniquely
+   identifies the endpoint group. The choice statement controls the selection
    of group type between "user-group" or "device-group".
 
    The second part of the data model augments the "matches" container in the IETF
    ACL model {{!RFC8519}} so that a source and/or destination endpoint group index
-   can be referenced as the macth criteria.
+   can be referenced as the match criteria.
 
    The third part of the data model augments the "ace" list in the IETF ACL
    model {{!RFC8519}} with date and time specific parameters to allow ACE to be
    activated based on a date/time condition. Two types of time range are defined,
-   which reuses "recurrence" and "period" groupings defined in the "ietf-schedule"
-   YANG model, respectively. Note that the data model augments the definition of
+   which reuse "recurrence" and "period" groupings defined in the "ietf-schedule"
+   YANG module, respectively. Note that the data model augments the definition of
    "recurrence" grouping with a "duration" data node to specify the duration of
-   time for each occurance the policy activation is triggered.
+   time for each occurrence the policy activation is triggered.
 
 
 #  YANG Modules
@@ -589,7 +589,7 @@ file=ietf-schedule@2023-01-19.yang
 
 ##  The "ietf-ucl-acl" YANG Module {#sec-UCL}
 
-   This module imports types defined in {{!RFC8194}}, and
+   This module imports types defined in {{!RFC8194}} and
    {{!RFC8519}}.
 
 ~~~~
@@ -800,7 +800,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    the group-based ACL.
 
    The PEP which enforces group-based ACL may acquire group identities
-   from the AAA server if working as an NAS authenticating both the
+   from the AAA server if working as a NAS authenticating both the
    source endpoint and the destination endpoint users. Another case for
    a PEP enforcing a group-based ACL is to obtain the group identity of
    the source endpoint directly from the packet field

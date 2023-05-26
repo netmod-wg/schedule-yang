@@ -117,7 +117,7 @@ module ietf-schedule {
         description
           "Period start time.";
       }
-      choice forms {
+      choice period-type {
         description
           "Indicates the type of the time period. Two types are
             supported.";
@@ -131,7 +131,7 @@ module ietf-schedule {
               "Period end time.";
           }
         }
-        case period-start {
+        case period-duration {
           description
             "A period of time is defined by a start and a
              positive duration of time.";
