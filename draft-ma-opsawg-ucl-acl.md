@@ -50,14 +50,6 @@ author:
 normative:
 
 informative:
-  NIST-ABAC:
-     title: Guide to Attribute Based Access Control (ABAC) Definition and Considerations
-     author:
-       -
-         fullname: Vincent C. Hu
-     target: https://www.iana.org/assignments/media-types
-     date: January 2014
-
   RADIUS-Types:
      title: RADIUS Types
      author:
@@ -675,9 +667,9 @@ file=ietf-ucl-acl@2023-01-19.yang
    quantity.
 
 ~~~~
-Access- Access- Access-  Challenge Acct.    #        Attribute
-Request Accept  Reject             Request
- 0+      0+      0        0         0+      241.TBA1 User-Access-Group-ID
+Access- Access- Access- Challenge Acct.   #        Attribute
+Request Accept  Reject            Request
+ 0+      0+      0       0         0+     241.TBA1 User-Access-Group-ID
 
 CoA-Request CoA-ACK CoA-NACK #        Attribute
   0+          0       0      241.TBA2 User-Access-Group-ID
