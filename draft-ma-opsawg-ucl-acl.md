@@ -817,7 +817,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
    e.g., firewall.
 
    Assume an employee in the R&D department accesses the network
-   wirelessly from a non-corporate laptop using IP address 192.168.1.10.
+   wirelessly from a non-corporate laptop using IP address 192.0.2.10.
    The SDN controller associates the user group to which the employee
    belongs with the user address according to step 1 to 4 in {{overview}}.
 
