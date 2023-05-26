@@ -125,7 +125,7 @@ module ietf-ucl-acl {
 
   augment "/acl:acls/acl:acl" {
     description
-      "Add a new container to store endpoint group information.";
+      "Adds a new container to store endpoint group information.";
     container endpoint-groups {
       description
         "Container definition for the endpoint group.";
@@ -153,7 +153,7 @@ module ietf-ucl-acl {
               leaf role {
                 type string;
                 description
-                  "The common role of this user group.";
+                  "Specifies the common role of this user group.";
               }
             }
           }
@@ -178,8 +178,8 @@ module ietf-ucl-acl {
 
   augment "/acl:acls/acl:acl/acl:aces/acl:ace/acl:matches" {
     description
-      "Allow a source and/or destination endpoint group index can be 
-       referenced as the match criteria in the ACEs";
+      "Specifies how a source and/or destination endpoint group index
+       can be referenced as the match criteria in the ACEs.";
     container endpoint-group {
       when "derived-from-or-self(/acl:acls/acl:acl/acl:type, "
          + "'uacl:group-acl-type')";

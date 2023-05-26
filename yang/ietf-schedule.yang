@@ -91,10 +91,10 @@ module ietf-schedule {
             + ':[0-5][0-9]:[0-5][0-9]))|P([0-9]+)W';
     }
     description
-      "Duration of the time as defined in Section 3.3.6 of RFC 5545. 
-       The format can represent nominal durations (weeks designated 
-       by 'W' and days designated by 'D') and accurate durations 
-       (hours:minutes:seconds follows the designator 'T').
+      "Duration of the time. The format can represent nominal 
+       durations (weeks designated by 'W' and days designated by 'D') 
+       and accurate durations (hours:minutes:seconds follows the 
+       designator 'T').
            
        Note that this value type doesn't support the 'Y' and 'M' 
        designators to specify durations in terms of years and months. 
@@ -103,16 +103,16 @@ module ietf-schedule {
        trigger before an associated time.";
     reference 
       "RFC 5545: Internet Calendaring and Scheduling Core Object 
-                 Specification (iCalendar)";    
+                 Specification (iCalendar), Sections 3.3.6 and 
+                 3.8.6.3";    
   }
   
   grouping period {
     description
-      "This grouping is defined for period of time property as 
-       defined in Section 3.3.9 in RFC 5545.";
+      "This grouping is defined for period of time property.";
     reference 
       "RFC 5545: Internet Calendaring and Scheduling Core Object 
-                 Specification (iCalendar)";      
+                 Specification (iCalendar), Section 3.3.9";      
     container period-of-time {
       description
         "This container is defined to identify period values that
@@ -158,10 +158,10 @@ module ietf-schedule {
   grouping recurrence {
     description
       "This grouping is defined to identify properties that contain a 
-      recurrence rule as defined in Section 3.3.10 in RFC 5545.";
+      recurrence rule.";
     reference 
       "RFC 5545: Internet Calendaring and Scheduling Core Object 
-       Specification (iCalendar)";          
+       Specification (iCalendar), Section 3.3.10";        
     container recurrence {
       description
         "Recurrence rule definition.";
