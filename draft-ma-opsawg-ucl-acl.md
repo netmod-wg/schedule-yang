@@ -418,7 +418,7 @@ informative:
    The interval represents at which intervals the recurrence rule repeats. For example,
    within a daily recurrence rule, an interval value of "8" means every eight days.
 
-   An array of the bysecond (or byminut, byhour) specifies a list of seconds within a minute (or minutes within an hour, hours of the day).
+   An array of the "bysecond" (or "byminut", "byhour") specifies a list of seconds within a minute (or minutes within an hour, hours of the day).
 
    The parameter "byday" specifies a list of days of
    the week, with an optional direction which indicates the nth occurrence of a specific day within
