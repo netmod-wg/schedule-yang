@@ -149,6 +149,20 @@ informative:
    The YANG data models in this document conform to the Network
    Management Datastore Architecture (NMDA) defined in {{!RFC8342}}.
 
+## Editorial Note (To be removed by RFC Editor)
+
+   Note to the RFC Editor: This section is to be removed prior to publication.
+
+   This document contains placeholder values that need to be replaced with finalized
+   values at the time of publication.  This note summarizes all of the
+   substitutions that are needed.  No other RFC Editor instructions are specified
+   elsewhere in this document.
+
+   Please apply the following replacements:
+
+   * XXXX --> the assigned RFC number for this draft
+   * YYYY --> the assigned RFC number for {{I-D.ietf-netmod-rfc6991-bis}}
+   * 2023-01-19 --> the actual date of the publication of this document
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
@@ -589,8 +603,8 @@ file=ietf-schedule@2023-01-19.yang
 
 ##  The "ietf-ucl-acl" YANG Module {#sec-UCL}
 
-   This module imports types defined in {{!RFC8194}} and
-   {{!RFC8519}}.
+   This module imports types and groupings defined in the "ietf-schedule" YANG
+   module in {{sec-schedule}}. It also augments IETF ACL YANG module defined in {{!RFC8519}}.
 
 ~~~~
 <CODE BEGINS>
