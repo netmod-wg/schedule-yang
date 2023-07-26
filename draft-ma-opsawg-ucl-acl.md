@@ -609,9 +609,9 @@ file=ietf-ucl-acl@2023-01-19.yang
 
 # User Access Control Group ID RADIUS Attribute {#sec-radius}
 
-   The User-Access-Group-ID RADIUS attribute and its embedded TLVs are
-   defined with globally unique names.  The definition of the attribute
-   follows the guidelines in Section 2.7.1 of {{!RFC6929}}.  This attribute
+   The User-Access-Group-ID RADIUS attribute is
+   defined with a globally unique name.  The definition of the attribute
+   follows the guidelines in {{Section 2.7.1 of !RFC6929}}.  This attribute
    is used to indicate the user group ID to be used by the NAS.  When
    the User-Access-Group-ID RADIUS attribute is present in the RADIUS
    Access-Accept, the system applies the related access control to the
@@ -621,7 +621,7 @@ file=ietf-ucl-acl@2023-01-19.yang
    encrypted as, for example, Tunnel- Password Attribute {{?RFC2868}}.
 
    The User-Access-Group-ID Attribute is of type "string" as defined in
-   Section 3.5 of {{!RFC8044}}.
+   {{Section 3.5 of !RFC8044}}.
 
    The User-Access-Group-ID Attribute MAY appear in a RADIUS Access-
    Accept packet.  It MAY also appear in a RADIUS Access-Request packet
@@ -781,7 +781,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 
 ##  RADIUS
 
-   This document requests IANA to assign a new RADIUS attribute types from the IANA
+   This document requests IANA to assign a new RADIUS attribute type from the IANA
    registry "Radius Attribute Types" {{RADIUS-Types}}:
 
 | Value    | Description          | Data Type | Reference     |
@@ -815,7 +815,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 {::include-fold ./examples/controller-ucl.xml}
 ~~~~
 
-## Configuring a PEP Using Group based ACL {#PEP-ucl}
+## Configuring a PEP Using Group-based ACL {#PEP-ucl}
 
    This section illustrates an example to configure a PEP  using
    the group-based ACL.
@@ -836,7 +836,7 @@ CoA-Request CoA-ACK CoA-NACK #        Attribute
 {::include-fold ./examples/PEP-ucl.xml}
 ~~~~
 
-## Configuring the PEP Using Address based ACL {#PEP-acl}
+## Configuring the PEP Using Address-based ACL {#PEP-acl}
 
    The section illustrates an example of configuring a PEP using
    IP address based ACL. IP address based access control policies could
