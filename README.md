@@ -2,10 +2,10 @@
 
 This is the working area for the individual Internet-Draft, "A Policy-based Network Access Control".
 
-* [Editor's Copy](https://boucadair.github.io/policy-based-network-acl/#go.draft-ma-opsawg-ucl-acl.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ma-opsawg-ucl-acl)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ma-opsawg-ucl-acl)
-* [Compare Editor's Copy to Individual Draft](https://boucadair.github.io/policy-based-network-acl/#go.draft-ma-opsawg-ucl-acl.diff)
+* [Editor's Copy](https://boucadair.github.io/policy-based-network-acl/#go.draft-ietf-opsawg-ucl-acl.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-opsawg-ucl-acl)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ucl-acl)
+* [Compare Editor's Copy to Individual Draft](https://boucadair.github.io/policy-based-network-acl/#go.draft-ietf-opsawg-ucl-acl.diff)
 
 
 ## Contributing
