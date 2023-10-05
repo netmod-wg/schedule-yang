@@ -783,7 +783,7 @@ CoA-Request CoA-ACK CoA-NACK                Attribute
    registry "Radius Attribute Types" {{RADIUS-Types}}:
 
 | Value    | Description          | Data Type | Reference     |
-| 241.TBA1 | User-Access-Group-ID | string    | This-Document |
+| TBA1 | User-Access-Group-ID | string    | This-Document |
 {: #rad-reg title='RADIUS Attribute'}
 
 
