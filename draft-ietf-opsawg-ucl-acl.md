@@ -305,7 +305,7 @@ informative:
    Step 3:  The authentication request is then relayed to the AAA server
       using a protocol such as RADIUS {{!RFC2865}}. It is assumed that the
       AAA server has been appropriately configured to store user credentials,
-      e.g., user name, password, group information and other user attributes.
+      e.g., user name, password, group information, and other user attributes.
       If the authentication request succeeds, the user is placed in a
       user group the identity of which is returned to the network access server
       as the authentication result (see {{sec-radius}}).
@@ -617,22 +617,22 @@ file=ietf-ucl-acl@2023-01-19.yang
    Access-Accept, the system applies the related access control to the
    users after it authenticates.
 
-   The value fields of the Attribute are encoded in clear and not
-   encrypted as, for example, Tunnel- Password Attribute {{?RFC2868}}.
-
    The User-Access-Group-ID Attribute is of type "string" as defined in
    {{Section 3.5 of !RFC8044}}.
 
    The User-Access-Group-ID Attribute MAY appear in a RADIUS Access-
    Accept packet.  It MAY also appear in a RADIUS Access-Request packet
    as a hint to the RADIUS server to indicate a preference.  However,
-   the server is not required to honor such a preference.
+   the server is not required to honor such a preference. If more than
+   one instance of the User-Access-Group-ID Attribute appears in a RADIUS
+   Access-Accept packet, this means that the user is a member of many groups.
 
    The User-Access-Group-ID Attribute MAY appear in a RADIUS CoA-Request
    packet.
 
    The User-Access-Group-ID Attribute MAY appear in a RADIUS Accounting-
-   Request packet.
+   Request packet. Specifically, this may be used by a NAS to acknowledge that the attribute
+   was received in the RADIUS Access-Request and the NAS is enforcing that policy.
 
    The User-Access-Group-ID Attribute MUST NOT appear in any other
    RADIUS packet.
@@ -642,7 +642,7 @@ file=ietf-ucl-acl@2023-01-19.yang
 ~~~~
    Type
 
-      241
+      TBA1
 
    Length
 
@@ -650,17 +650,15 @@ file=ietf-ucl-acl@2023-01-19.yang
       this attribute, including the Type, Length, Extended-Type, and the
       "Value".
 
-   Extended-Type
+   Data Type
 
-      TBA1
+      string ({{Section 3.5 of !RFC8044}})
 
    Value
 
       This field contains the user group ID.
 ~~~~
 
-   The User-Access-Group-ID Attribute is associated with the following
-   identifier: 241.TBA1.
 
 #  RADIUS Attributes
 
@@ -669,12 +667,12 @@ file=ietf-ucl-acl@2023-01-19.yang
    quantity.
 
 ~~~~
-Access- Access- Access- Challenge Acct.   #        Attribute
+Access- Access- Access- Challenge Acct.     Attribute
 Request Accept  Reject            Request
- 0+      0+      0       0         0+     241.TBA1 User-Access-Group-ID
+ 0+      0+      0       0         0+       User-Access-Group-ID
 
-CoA-Request CoA-ACK CoA-NACK #        Attribute
-  0+          0       0      241.TBA2 User-Access-Group-ID
+CoA-Request CoA-ACK CoA-NACK                Attribute
+    0+          0       0                   User-Access-Group-ID
 
    The following table defines the meaning of the above table entries:
 
