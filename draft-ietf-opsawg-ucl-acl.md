@@ -896,5 +896,5 @@ CoA-Request CoA-ACK CoA-NACK                Attribute
    control mechanisms for material that assisted in thinking about this document.
 
    The authors would like to thank Joe Clarke, Bill Fenner, Benoit
-   Claise, Rob Wilton, and David Somers-Harris for their valuable comments
+   Claise, Rob Wilton, David Somers-Harris, and Alan Dekok for their valuable comments
    and great input to this work.
