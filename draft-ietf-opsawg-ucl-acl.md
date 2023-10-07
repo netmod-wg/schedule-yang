@@ -228,7 +228,7 @@ informative:
 
    *  A software-defined networking (SDN) {{?RFC7149}} {{?RFC7426}} controller which is
       responsible for maintaining endpoint-group based ACLs and mapping the
-      endpoint-group to the associated attributes information (e.g., IP/MAC address).  
+      endpoint-group to the associated attributes information (e.g., IP/MAC address).
       An SDN controller also behaves as a Policy Decision Point (PDP) {{?RFC3198}}
       and pushes the required access control policies to relevant Policy
       Enforcement Points (PEPs) {{?RFC3198}}.  A PDP is also known as
