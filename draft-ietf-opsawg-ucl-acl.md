@@ -170,17 +170,21 @@ informative:
 
    * Access Control List (ACL)
 
-   The following terms are used throughout this document:
+   The following definitions and acronyms are used throughout this document:
 
-   * User group based ACL (UCL):
+   * Network Access Control List (NACL)
+
+   * User group based Control List (UCL) model:
    : A YANG data model for policy-based network access
      control that specifies an extension to the IETF ACL model defined in {{!RFC8519}}.
      It allows policy enforcement based on the group identity, which can be used
      both at the network device level and at the network/administrative domain level.
 
    * Endpoint:
-   : refers to a host device or end user that actually connects to a network. Host device refers to servers, IoTs
-   and other devices owned by the enterprise.
+   : refers to an end-user or host device that actually connects to a network.
+     An end-user is defined as a person. A host device provides compute, memory,
+     storage and networking capabilities and connects to the network without any user intervention. Host devices refer to servers, IoTs and other devices owned
+     by the enterprise.
 
 #  Sample Usage
 
@@ -201,8 +205,8 @@ informative:
    The Network ACLs (NACLs) can be provisioned on devices using specific
    mechanisms, such as {{!RFC8519}} or {{?I-D.ietf-netmod-acl-extensions}}.
 
-   NACL policies may need to vary over time.  For
-   example, companies may restrict (or grant) employees access to specific
+   Different policies may need to be applied in different contextual situations.
+   For example, companies may restrict (or grant) employees access to specific
    internal or external resources during work hours,
    while another policy is adopted during off-hours and weekends.  A
    network administrator may also require to enforce traffic shaping
@@ -222,16 +226,16 @@ informative:
       including security policies.  The service may be connectivity or
       any other access to resources that can be hosted and offered by a network.
 
-   *  An SDN controller which is responsible for maintaining endpoint-group
-      based ACLs and mapping the endpoint-group to the associated
-      attributes information (e.g., IP/MAC address).  An SDN controller
-      also behaves as a Policy Decision Point (PDP) {{?RFC3198}} and pushes
-      the required access control policies to relevant Policy
-      Enforcement Points (PEPs).  A PDP is also known as
+   *  A software-defined networking (SDN) {{?RFC7149}} {{?RFC7426}} controller which is
+      responsible for maintaining endpoint-group based ACLs and mapping the
+      endpoint-group to the associated attributes information (e.g., IP/MAC address).  
+      An SDN controller also behaves as a Policy Decision Point (PDP) {{?RFC3198}}
+      and pushes the required access control policies to relevant Policy
+      Enforcement Points (PEPs) {{?RFC3198}}.  A PDP is also known as
       "policy server" {{?RFC2753}}.
 
       An SDN controller may interact with an Authentication,
-      Authorization and Accounting (AAA) server or a Network Access Server (NAS).
+      Authorization and Accounting (AAA) {{?RFC3539}} server or a Network Access Server (NAS) {{?RFC7542}}.
 
    *  A Network Access Server (NAS) entity which handles authentication
       requests.  The NAS interacts with an AAA server to complete user
@@ -247,7 +251,7 @@ informative:
       and related user attributes (users may be divided into different
       groups based on different user attributes).
 
-   *  The Policy Enforcement Point (PEP) {{?RFC3198}} is the central entity
+   *  The Policy Enforcement Point (PEP) is the central entity
       which is responsible for enforcing appropriate access control
       policies.  In some cases, a PEP may map incoming packets to their
       associated source or destination endpoint-group IDs, and acts on
