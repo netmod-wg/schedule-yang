@@ -179,7 +179,7 @@ informative:
      both at the network device level and at the network/administrative domain level.
 
    * Endpoint:
-   : refers to a host device or end user that actually connects to a network. Host device refers to servers, IoTs
+   : refers to a host device or end user that actually connects to a network. Host device refers to servers, IoTs,
    and other devices owned by the enterprise.
 
 #  Sample Usage
@@ -306,6 +306,9 @@ informative:
       using a protocol such as RADIUS {{!RFC2865}}. It is assumed that the
       AAA server has been appropriately configured to store user credentials,
       e.g., user name, password, group information, and other user attributes.
+      This document does not restrict what authentication method is used. Administrators
+      may refer to, e.g., {{Section 7.3 of ?I-D.dekok-radext-deprecating-radius}}
+      for authentication method recommendations.
       If the authentication request succeeds, the user is placed in a
       user group the identity of which is returned to the network access server
       as the authentication result (see {{sec-radius}}).
