@@ -1,5 +1,5 @@
 ---
-title: "A Policy-based Network Access Control"
+title: "A YANG data model and RADIUS extension for Policy-Based Network Access Control"
 abbrev: "A Policy-based NACL"
 category: std
 
@@ -163,6 +163,10 @@ informative:
 
    The meanings of the symbols in tree diagrams are defined in
    {{?RFC8340}}.
+
+   The document uses the following definition in {{?RFC3198}}:
+
+   * policy
 
    The document uses the following definitions and acronyms defined in {{!RFC8519}}:
 
