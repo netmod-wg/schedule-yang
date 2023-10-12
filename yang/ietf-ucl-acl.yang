@@ -134,7 +134,9 @@ module ietf-ucl-acl {
         description
           "Definition of the endpoint group list.";
         leaf group-id {
-          type string;
+          type string {
+            length "1..64";
+          };
           description
             "The endpoint group identifier that uniquely identifies
              an endpoint group.";
