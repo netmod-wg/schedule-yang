@@ -123,6 +123,16 @@ module ietf-ucl-acl {
        enforcement.";
   }
 
+  typedef group-id-reference {
+    type leafref {
+      path "/acl:acls/acl:acl/uacl:endpoint-groups"
+         + "/uacl:endpoint-group/uacl:group-id";
+    }
+    description
+      "Defines a type to group identifier for referencing
+       purposes.";
+  }
+
   augment "/acl:acls/acl:acl" {
     description
       "Adds a new container to store endpoint group information.";
@@ -187,18 +197,12 @@ module ietf-ucl-acl {
       description
         "Add new match types.";
       leaf source-group-id {
-        type leafref {
-          path "../../../../../endpoint-groups/endpoint-group/"+
-               "group-id";
-        }
+        type group-id-reference;
         description
           "The matched source endpoint group ID.";
       }
       leaf destination-group-id {
-        type leafref {
-          path "../../../../../endpoint-groups/endpoint-group/"+
-               "group-id";
-        }
+        type type group-id-reference;
         description
           "The matched destination endpoint group ID.";
       }
