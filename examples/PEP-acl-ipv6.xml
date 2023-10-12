@@ -12,9 +12,9 @@
         <name>rule1</name>
 
         <matches>
-          <ipv4>
-            <destination-ipv4-network>2001:db8::/64</destination-ipv4-network>
-          </ipv4>
+          <ipv6>
+            <destination-ipv6-network>2001:db8::/64</destination-ipv6-network>
+          </ipv6>
         </matches>
 
         <actions>
