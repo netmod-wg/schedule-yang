@@ -3,7 +3,7 @@ module: ietf-ucl-acl
   augment /acl:acls/acl:acl:
     +--rw endpoint-groups
        +--rw endpoint-group* [group-id]
-          +--rw group-id              uint32
+          +--rw group-id              string
           +--rw (group-type)?
              +--:(user-group)
              |  +--rw user-group
