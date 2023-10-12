@@ -202,7 +202,7 @@ module ietf-ucl-acl {
           "The matched source endpoint group ID.";
       }
       leaf destination-group-id {
-        type type group-id-reference;
+        type group-id-reference;
         description
           "The matched destination endpoint group ID.";
       }
