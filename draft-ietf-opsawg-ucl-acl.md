@@ -371,10 +371,10 @@ informative:
    weekdays versus weekends), etc.
 
 | Group Name | Group ID | Group Role |
-| R&D        |     10     |  R&D employees                 |
-| R&D BYOD   |     11     |  Personal devices of R&D employees |
-| Sales      |     20     |  Sales employees               |
-| VIP        |     30     |  VIP employees                 |
+| R&D        |   foo-10 |  R&D employees                 |
+| R&D BYOD   |   foo-11 |  Personal devices of R&D employees |
+| Sales      |   foo-20 |  Sales employees               |
+| VIP        |   foo-30 |  VIP employees                 |
 {: #ug-example title='User Group Example'}
 
 
@@ -389,9 +389,9 @@ informative:
    of how device-group definitions may be characterized.
 
    | Group Name | Group ID | Group Type |
-   | Workflow   |     40     |  Workflow  resource servers   |
-   | R&D Resource |     50     | R&D resource servers |
-   |Sales Resource|     54     | Sales resource servers |
+   | Workflow   |   foo-40     |  Workflow  resource servers   |
+   | R&D Resource |   foo-50     | R&D resource servers |
+   |Sales Resource|   foo-54     | Sales resource servers |
    {: #dg-example title='Device-Group Example'}
 
 
