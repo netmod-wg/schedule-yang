@@ -867,6 +867,13 @@ CoA-Request CoA-ACK CoA-NACK                Attribute
 {::include-fold ./examples/PEP-acl.xml}
 ~~~~
 
+The following shows an example of the same policy but with a destination IPv6 prefix.
+
+~~~~
+{::include-fold ./examples/PEP-acl-ipv6.xml}
+~~~~
+
+
 # Changes between Revisions
 
   v01 - v02
