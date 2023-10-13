@@ -901,5 +901,5 @@ Notation for {{rad-att}}:
    control mechanisms for material that assisted in thinking about this document.
 
    The authors would like to thank Joe Clarke, Bill Fenner, Benoit
-   Claise, Rob Wilton, David Somers-Harris, and Alan Dekok for their valuable comments
+   Claise, Rob Wilton, David Somers-Harris, Alan Dekok, and Heikki Vatiainen for their valuable comments
    and great input to this work.
