@@ -13,8 +13,8 @@ module: ietf-ucl-acl
                    +--rw device-type?   string
   augment /acl:acls/acl:acl/acl:aces/acl:ace/acl:matches:
     +--rw endpoint-group {match-on-group}?
-       +--rw source-group-id?        leafref
-       +--rw destination-group-id?   leafref
+       +--rw source-group-id?        group-id-reference
+       +--rw destination-group-id?   group-id-reference
   augment /acl:acls/acl:acl/acl:aces/acl:ace:
     +--rw time-range {time-condition}?
        +--rw (time-range-type)?
