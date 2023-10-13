@@ -361,10 +361,10 @@ informative:
    weekdays versus weekends), etc.
 
 | Group Name | Group ID | Group Role |
-| R&D        |     10     |  R&D employees                 |
-| R&D BYOD   |     11     |  Personal devices of R&D employees |
-| Sales      |     20     |  Sales employees               |
-| VIP        |     30     |  VIP employees                 |
+| R&D        |   foo-10 |  R&D employees                 |
+| R&D BYOD   |   foo-11 |  Personal devices of R&D employees |
+| Sales      |   foo-20 |  Sales employees               |
+| VIP        |   foo-30 |  VIP employees                 |
 {: #ug-example title='User Group Example'}
 
 
@@ -379,9 +379,9 @@ informative:
    of how device-group definitions may be characterized.
 
    | Group Name | Group ID | Group Type |
-   | Workflow   |     40     |  Workflow  resource servers   |
-   | R&D Resource |     50     | R&D resource servers |
-   |Sales Resource|     54     | Sales resource servers |
+   | Workflow   |   foo-40     |  Workflow  resource servers   |
+   | R&D Resource |   foo-50     | R&D resource servers |
+   |Sales Resource|   foo-54     | Sales resource servers |
    {: #dg-example title='Device-Group Example'}
 
 
@@ -470,46 +470,44 @@ file=ietf-ucl-acl@2023-01-19.yang
 
    The User-Access-Group-ID Attribute is structured as follows:
 
-~~~~
    Type
 
-      TBA1
+   : TBA1
 
    Length
 
-      This field indicates the total length, in octets, of all fields of
-      this attribute, including the Type, Length, Extended-Type, and the
-      "Value".
+   : This field indicates the total length, in octets, of all fields of
+     this attribute, including the Type, Length, Extended-Type, and the
+     "Value". The Length MUST be at most 67 octets.
 
    Data Type
 
-      string ({{Section 3.5 of !RFC8044}})
+   : string ({{Section 3.5 of !RFC8044}})
 
    Value
 
-      This field contains the user group ID.
-~~~~
+   : This field contains the user group ID.
 
 
 #  RADIUS Attributes
 
-   The following table provides a guide as what type of RADIUS packets
+   {{rad-att}} provides a guide as what type of RADIUS packets
    that may contain User-Access-Group-ID Attribute, and in what
    quantity.
 
-~~~~
-Access- Access- Access- Challenge Acct.     Attribute
-Request Accept  Reject            Request
- 0+      0+      0       0         0+       User-Access-Group-ID
+|Access-Request	|Access-Accept	|Access-Reject	|Challenge	| Attribute     |
+| 0+            |  0+          | 0            |    0     | User-Access-Group-ID     |
+|Accounting-Request|	CoA-Request|	CoA-ACK	|CoA-NACK		| Attribute     |
+|    0+            | 0+         | 0       | 0        | User-Access-Group-ID     |
+{: #rad-att title='Table of Attributes'}
 
-CoA-Request CoA-ACK CoA-NACK                Attribute
-    0+          0       0                   User-Access-Group-ID
+Notation for {{rad-att}}:
 
-   The following table defines the meaning of the above table entries:
+   0
+   :  This attribute MUST NOT be present in packet.
 
-   0  This attribute MUST NOT be present in packet.
-   0+ Zero or more instances of this attribute MAY be present in packet.
-~~~~
+   0+
+   : Zero or more instances of this attribute MAY be present in packet.
 
 # Security Considerations
 
@@ -670,6 +668,13 @@ CoA-Request CoA-ACK CoA-NACK                Attribute
 {::include-fold ./examples/PEP-acl.xml}
 ~~~~
 
+The following shows an example of the same policy but with a destination IPv6 prefix.
+
+~~~~
+{::include-fold ./examples/PEP-acl-ipv6.xml}
+~~~~
+
+
 # Changes between Revisions
 
   v01 - v02
@@ -710,5 +715,5 @@ CoA-Request CoA-ACK CoA-NACK                Attribute
    control mechanisms for material that assisted in thinking about this document.
 
    The authors would like to thank Joe Clarke, Bill Fenner, Benoit
-   Claise, Rob Wilton, David Somers-Harris, and Alan Dekok for their valuable comments
+   Claise, Rob Wilton, David Somers-Harris, Alan Dekok, and Heikki Vatiainen for their valuable comments
    and great input to this work.
