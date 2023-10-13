@@ -61,15 +61,11 @@ informative:
 
 --- abstract
 
-   This document defines a YANG module for policy-based network access
+   This document defines a YANG data model for policy-based network access
    control, which provides consistent and efficient enforcement of
    network access control policies based on group identity.  Moreover, this document defines a mechanism to ease the maintenance
    of the mapping between a user group identifier and a set of IP/MAC addresses
    to enforce policy-based network access control.
-
-   Also, the document defines a common schedule YANG module which is
-   designed to be applicable for policy activation based on date and
-   time conditions.
 
    In addition, the document defines a RADIUS attribute that is used to
    communicate the user group identifier as part of identification and
@@ -108,12 +104,7 @@ informative:
       current context, and map the users to their correct access
       entitlement to the network.
 
-   This document defines a common schedule YANG module ({{sec-schedule}}) which
-   is designed to be applicable for policy activation based on date and time
-   conditions. This model is designed with the intent to be reusable in other
-   scheduling contexts. In particular, the groupings can be reused by other modules.
-
-   {{sec-UCL}} defines a YANG module for policy-based network access control,
+   This document defines a YANG data model ({{sec-UCL}}) for policy-based network access control,
    which extends the IETF Access Control Lists (ACLs) module defined in {{!RFC8519}}.
    This module can be used to ensure consistent enforcement of ACL policies
    based on the group identity.
@@ -154,7 +145,6 @@ informative:
    Please apply the following replacements:
 
    * XXXX --> the assigned RFC number for this draft
-   * YYYY --> the assigned RFC number for {{I-D.ietf-netmod-rfc6991-bis}}
    * 2023-01-19 --> the actual date of the publication of this document
 
 # Conventions and Definitions
@@ -402,164 +392,6 @@ informative:
 
 #  Modules Overview
 
-##  The Schedule YANG Module
-
-   This module defines a common schedule YANG module.  It is inspired
-   from the "period of time" and "recurrence rule" format defined in
-   {{?RFC5545}}.
-
-   This module is defined as a standalone module rather than as part of the UCL
-   with the intention that the time/date definition can be reused.
-
-   {{schedule-tree}} provides an overview of the tree structure of the "ietf-
-   schedule" module.
-
-~~~~
-{::include ./yang/ietf-schedule-tree.txt}
-~~~~
-{: #schedule-tree title="Schedule Tree Structure" artwork-align="center"}
-
-   The "period-of-time" allows a time period to be represented using either a start ("period-start")
-   and end date and time ("period-end"), or a start ("period-start") and a positive time duration ("period-duration").
-
-   The "recurrence" indicates the scheduling recurrence of an event. The
-   repetition can be scoped by a specified end time or by a count of occurences,
-   and the frequency identifies the type of recurrence rule. For example, a "daily"
-   frequency value specifies repeating events based on an interval of a day or more.
-   The interval represents at which intervals the recurrence rule repeats. For example,
-   within a daily recurrence rule, an interval value of "8" means every eight days.
-
-   An array of the "bysecond" (or "byminut", "byhour") specifies a list of seconds within a minute (or minutes within an hour, hours of the day).
-
-   The parameter "byday" specifies a list of days of
-   the week, with an optional direction which indicates the nth occurrence of a specific day within
-   the "monthly" or "yearly" frequency. For example, within a "monthly" rule,
-   the "weekday" with a value of "monday" and the "direction" with a value of "-1"
-   represents the last Monday of the month.
-
-   An array of the "bymonthday" (or byyearday", "byyearweek", or "byyearmonth") specifies a list of
-   days of the month (or days of the year, weeks of the year, or months of the year).
-
-   The "bysetpos" conveys a list of values that corresponds to the nth occurrence
-   within the set of recurrence instances to be specified. For example, in a "monthly"
-   recurrence rule, the "byday" data node specifies every Monday of the week, the
-   "bysetpos" with value of "-1" represents the last Monday of the month.
-   Not setting the "bysetpos" data node represents every Monday of the month.
-
-   The "wkst" data node specifies the day on which the week starts. This is
-   significant when a "weekly" recurrence rule has an interval greater than 1, and
-   a "byday" data node is specified. This is also significant when in a "yearly" rule
-   and a "byyearweek" is specified. The default value is "monday".
-
-### Examples
-
-   The following subsections provide some examples to illustrate the use of the period and recurrence formats defined as
-   YANG groupings. Only the message body is provided with JSON used for encoding {{?RFC7951}}.
-
-#### Period of Time
-
-   The example of a period that starts at 08:00:00 UTC, on January 1, 2023 and ends at 18:00:00 UTC
-   on December 31, 2025 is encoded as follows:
-
-~~~~
-{
-  "period-of-time": {
-    "period-start": "2023-01-01T08:00:00Z",
-    "period-end": "2025-12-01T18:00:00Z"
-  }
-}
-~~~~
-
-   An example of a period that starts at 08:00:00 UTC, on January 1, 2023 and lasts 15 days and
-   5 hours and 20 minutes is encoded as follows:
-
-~~~~
-{
-  "period-of-time": {
-    "period-start": "2023-01-01T08:00:00Z",
-    "period-duration": "P15DT05:20:00"
-  }
-}
-~~~~
-
-   Now, consider the example of a period that starts at 08:00:00 UTC, on January 1, 2023 and lasts 20 weeks:
-
-~~~~
-{
-  "period-of-time": {
-    "period-start": "2023-01-01T08:00:00Z",
-    "period-duration": "P20W"
-  }
-}
-~~~~
-
-#### Recurrence Rule
-
-  The following snippet can be used to indicate a daily recurrent in December:
-
-~~~~
-{
-  "recurrence": {
-    "freq": "daily",
-    "byyearmonth": [12]
-  }
-}
-~~~~
-
-   The following snippet can be used to indicate 10 occurrences that occur every last Saturday of the month:
-
-~~~~
-{
-  "recurrence": {
-    "freq": "monthly",
-    "count": 10,
-    "byday": [
-      {
-        "direction": [-1],
-        "weekday": "saturday"
-      }
-    ]
-  }
-}
-~~~~
-
-   The following indicates the example of a recurrence that occurs on the last workday of the month until December 25, 2023:
-
-~~~~
-{
-  "recurrence": {
-    "freq": "monthly",
-    "until": "2023-12-25",
-    "byday": [
-      { "weekday": "monday" },
-      { "weekday": "tuesday" },
-      { "weekday": "wednesday" },
-      { "weekday": "thursday" },
-      { "weekday": "friday" }
-    ],
-    "bysetpos": [-1]
-  }
-}
-~~~~
-
-
-   The following depicts the example of a recurrence that occurs every other week on Tuesday and Sunday, the week starts from Monday:
-
-~~~
-{
-  "recurrence": {
-    "freq": "weekly",
-    "interval": 2,
-    "byday": [
-      { "weekday": "tuesday" },
-      { "weekday": "sunday" }
-    ],
-    "wkst": "monday"
-  }
-}
-~~~
-
-
 ##  The UCL Extension to the ACL Model
 
    This module specifies an extension to the IETF ACL model {{!RFC8519}}. This extension adds
@@ -587,29 +419,17 @@ informative:
    model {{!RFC8519}} with date and time specific parameters to allow ACE to be
    activated based on a date/time condition. Two types of time range are defined,
    which reuse "recurrence" and "period" groupings defined in the "ietf-schedule"
-   YANG module, respectively. Note that the data model augments the definition of
+   YANG module in <!--to add a reference-->, respectively. Note that the data model augments the definition of
    "recurrence" grouping with a "duration" data node to specify the duration of
    time for each occurrence the policy activation is triggered.
 
 
 #  YANG Modules
 
-##  The "ietf-schedule" YANG Module {#sec-schedule}
-
-   This module imports types defined in {{!I-D.ietf-netmod-rfc6991-bis}}.
-
-~~~~
-<CODE BEGINS>
-file=ietf-schedule@2023-01-19.yang
-{::include ./yang/ietf-schedule.yang}
-<CODE ENDS>
-~~~~
-
-
 ##  The "ietf-ucl-acl" YANG Module {#sec-UCL}
 
    This module imports types and groupings defined in the "ietf-schedule" YANG
-   module in {{sec-schedule}}. It also augments the IETF ACL YANG module defined in {{!RFC8519}}.
+   module in <!--to add a reference-->. It also augments the IETF ACL YANG module defined in {{!RFC8519}}.
 
 ~~~~
 <CODE BEGINS>
@@ -708,13 +528,6 @@ CoA-Request CoA-ACK CoA-NACK                Attribute
    RESTCONF users to a preconfigured subset of all available NETCONF or
    RESTCONF protocol operations and content.
 
-   The "ietf-schedule" module defines a set of types and
-   groupings.  These nodes are intended to be reused by other YANG
-   modules.  The module by itself does not expose any data nodes that
-   are writable, data nodes that contain read-only state, or RPCs.  As
-   such, there are no additional security issues related to the "ietf-
-   schedule" module that need to be considered.
-
    There are a number of data nodes defined in the "ietf-ucl-acl" YANG module that are
    writable, creatable, and deletable (i.e., config true, which is the
    default).  These data nodes may be considered sensitive or vulnerable
@@ -762,10 +575,6 @@ CoA-Request CoA-ACK CoA-NACK                Attribute
    This document registers the following URIs in the "IETF XML Registry" {{!RFC3688}}.
 
 ~~~~
-        URI: urn:ietf:params:xml:ns:yang:ietf-schedule
-        Registrant Contact: The IESG.
-        XML: N/A, the requested URI is an XML namespace.
-
         URI: urn:ietf:params:xml:ns:yang:ietf-ucl-acl
         Registrant Contact: The IESG.
         XML: N/A, the requested URI is an XML namespace.
@@ -775,12 +584,6 @@ CoA-Request CoA-ACK CoA-NACK                Attribute
    registry {{!RFC6020}}.
 
 ~~~~
-        name:               ietf-schedule
-        namespace:          urn:ietf:params:xml:ns:yang:ietf-schedule
-        prefix:             schedule
-        maintained by IANA: N
-        reference:          RFC XXXX
-
         name:               ietf-ucl-acl
         namespace:          urn:ietf:params:xml:ns:yang:ietf-ucl-acl
         prefix:             uacl
