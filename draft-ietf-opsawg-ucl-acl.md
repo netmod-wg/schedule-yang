@@ -681,7 +681,7 @@ Notation for {{rad-att}}:
 
    0
    :  This attribute MUST NOT be present in packet.
-   
+
    0+
    : Zero or more instances of this attribute MAY be present in packet.
 
