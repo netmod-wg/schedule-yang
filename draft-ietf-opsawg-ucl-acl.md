@@ -1,5 +1,5 @@
 ---
-title: "A YANG Data Model and RADIUS Extension for Policy-based Network Access Control"
+title: "YANG Data Models and RADIUS Extension for Policy-based Network Access Control"
 abbrev: "A Policy-based NACL"
 category: std
 
@@ -69,7 +69,7 @@ informative:
 
    Also, the document defines a common schedule YANG module which is
    designed to be applicable for policy activation based on date and
-   time conditions.
+   time conditions. This module is not specific to ACLs.
 
    In addition, the document defines a RADIUS attribute that is used to
    communicate the user group identifier as part of identification and
@@ -404,12 +404,13 @@ informative:
 
 ##  The Schedule YANG Module
 
-   This module defines a common schedule YANG module.  It is inspired
+   The schedule YANG module is designed to be a reusuable module. It is inspired
    from the "period of time" and "recurrence rule" format defined in
    {{?RFC5545}}.
 
    This module is defined as a standalone module rather than as part of the UCL
-   with the intention that the time/date definition can be reused.
+   with the intention that the time/date definition can be reused. The module can
+   be reused in other contexts than ACL policy enforcement.
 
    {{schedule-tree}} provides an overview of the tree structure of the "ietf-
    schedule" module.
@@ -451,114 +452,7 @@ informative:
    a "byday" data node is specified. This is also significant when in a "yearly" rule
    and a "byyearweek" is specified. The default value is "monday".
 
-### Examples
-
-   The following subsections provide some examples to illustrate the use of the period and recurrence formats defined as
-   YANG groupings. Only the message body is provided with JSON used for encoding {{?RFC7951}}.
-
-#### Period of Time
-
-   The example of a period that starts at 08:00:00 UTC, on January 1, 2023 and ends at 18:00:00 UTC
-   on December 31, 2025 is encoded as follows:
-
-~~~~
-{
-  "period-of-time": {
-    "period-start": "2023-01-01T08:00:00Z",
-    "period-end": "2025-12-01T18:00:00Z"
-  }
-}
-~~~~
-
-   An example of a period that starts at 08:00:00 UTC, on January 1, 2023 and lasts 15 days and
-   5 hours and 20 minutes is encoded as follows:
-
-~~~~
-{
-  "period-of-time": {
-    "period-start": "2023-01-01T08:00:00Z",
-    "period-duration": "P15DT05:20:00"
-  }
-}
-~~~~
-
-   Now, consider the example of a period that starts at 08:00:00 UTC, on January 1, 2023 and lasts 20 weeks:
-
-~~~~
-{
-  "period-of-time": {
-    "period-start": "2023-01-01T08:00:00Z",
-    "period-duration": "P20W"
-  }
-}
-~~~~
-
-#### Recurrence Rule
-
-  The following snippet can be used to indicate a daily recurrent in December:
-
-~~~~
-{
-  "recurrence": {
-    "freq": "daily",
-    "byyearmonth": [12]
-  }
-}
-~~~~
-
-   The following snippet can be used to indicate 10 occurrences that occur every last Saturday of the month:
-
-~~~~
-{
-  "recurrence": {
-    "freq": "monthly",
-    "count": 10,
-    "byday": [
-      {
-        "direction": [-1],
-        "weekday": "saturday"
-      }
-    ]
-  }
-}
-~~~~
-
-   The following indicates the example of a recurrence that occurs on the last workday of the month until December 25, 2023:
-
-~~~~
-{
-  "recurrence": {
-    "freq": "monthly",
-    "until": "2023-12-25",
-    "byday": [
-      { "weekday": "monday" },
-      { "weekday": "tuesday" },
-      { "weekday": "wednesday" },
-      { "weekday": "thursday" },
-      { "weekday": "friday" }
-    ],
-    "bysetpos": [-1]
-  }
-}
-~~~~
-
-
-   The following depicts the example of a recurrence that occurs every other week on Tuesday and Sunday, the week starts from Monday:
-
-~~~
-{
-  "recurrence": {
-    "freq": "weekly",
-    "interval": 2,
-    "byday": [
-      { "weekday": "tuesday" },
-      { "weekday": "sunday" }
-    ],
-    "wkst": "monday"
-  }
-}
-~~~
-
+   A set of examples are provided in {{app-sch}}.
 
 ##  The UCL Extension to the ACL Model
 
@@ -591,6 +485,7 @@ informative:
    "recurrence" grouping with a "duration" data node to specify the duration of
    time for each occurrence the policy activation is triggered.
 
+   Some examples are provided in {{app-ucl}}.
 
 #  YANG Modules
 
@@ -650,24 +545,21 @@ file=ietf-ucl-acl@2023-01-19.yang
 
    The User-Access-Group-ID Attribute is structured as follows:
 
+~~~~
    Type
-
-   : TBA1
+     TBA1
 
    Length
-
-   : This field indicates the total length, in octets, of all fields of
+     This field indicates the total length, in octets, of all fields of
      this attribute, including the Type, Length, Extended-Type, and the
      "Value". The Length MUST be at most 67 octets.
 
    Data Type
-
-   : string ({{Section 3.5 of !RFC8044}})
+     string ({{Section 3.5 of !RFC8044}})
 
    Value
-
-   : This field contains the user group ID.
-
+      This field contains the user group ID.
+~~~~
 
 #  RADIUS Attributes
 
@@ -798,7 +690,116 @@ Notation for {{rad-att}}:
 
 --- back
 
-# Examples Usage
+# Schedule Examples {#app-sch}
+
+   The following subsections provide some examples to illustrate the use of the period and recurrence formats defined as
+   YANG groupings in the "ietf-schedule" module. Only the message body is provided with JSON used for encoding {{?RFC7951}}.
+
+## Period of Time
+
+   The example of a period that starts at 08:00:00 UTC, on January 1, 2023 and ends at 18:00:00 UTC
+   on December 31, 2025 is encoded as follows:
+
+~~~~
+{
+  "period-of-time": {
+    "period-start": "2023-01-01T08:00:00Z",
+    "period-end": "2025-12-01T18:00:00Z"
+  }
+}
+~~~~
+
+   An example of a period that starts at 08:00:00 UTC, on January 1, 2023 and lasts 15 days and
+   5 hours and 20 minutes is encoded as follows:
+
+~~~~
+{
+  "period-of-time": {
+    "period-start": "2023-01-01T08:00:00Z",
+    "period-duration": "P15DT05:20:00"
+  }
+}
+~~~~
+
+   Now, consider the example of a period that starts at 08:00:00 UTC, on January 1, 2023 and lasts 20 weeks:
+
+~~~~
+{
+  "period-of-time": {
+    "period-start": "2023-01-01T08:00:00Z",
+    "period-duration": "P20W"
+  }
+}
+~~~~
+
+## Recurrence Rule
+
+  The following snippet can be used to indicate a daily recurrent in December:
+
+~~~~
+{
+  "recurrence": {
+    "freq": "daily",
+    "byyearmonth": [12]
+  }
+}
+~~~~
+
+   The following snippet can be used to indicate 10 occurrences that occur every last Saturday of the month:
+
+~~~~
+{
+  "recurrence": {
+    "freq": "monthly",
+    "count": 10,
+    "byday": [
+      {
+        "direction": [-1],
+        "weekday": "saturday"
+      }
+    ]
+  }
+}
+~~~~
+
+   The following indicates the example of a recurrence that occurs on the last workday of the month until December 25, 2023:
+
+~~~~
+{
+  "recurrence": {
+    "freq": "monthly",
+    "until": "2023-12-25",
+    "byday": [
+      { "weekday": "monday" },
+      { "weekday": "tuesday" },
+      { "weekday": "wednesday" },
+      { "weekday": "thursday" },
+      { "weekday": "friday" }
+    ],
+    "bysetpos": [-1]
+  }
+}
+~~~~
+
+
+   The following depicts the example of a recurrence that occurs every other week on Tuesday and Sunday, the week starts from Monday:
+
+~~~
+{
+  "recurrence": {
+    "freq": "weekly",
+    "interval": 2,
+    "byday": [
+      { "weekday": "tuesday" },
+      { "weekday": "sunday" }
+    ],
+    "wkst": "monday"
+  }
+}
+~~~
+
+
+# UCL Examples Usage {#app-ucl}
 
 ## Configuring the Controller Using Group based ACL {#controller-ucl}
 
