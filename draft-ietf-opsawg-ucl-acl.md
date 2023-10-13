@@ -470,23 +470,21 @@ file=ietf-ucl-acl@2023-01-19.yang
 
    The User-Access-Group-ID Attribute is structured as follows:
 
+~~~~
    Type
-
-   : TBA1
+     TBA1
 
    Length
-
-   : This field indicates the total length, in octets, of all fields of
+     This field indicates the total length, in octets, of all fields of
      this attribute, including the Type, Length, Extended-Type, and the
      "Value". The Length MUST be at most 67 octets.
 
    Data Type
-
-   : string ({{Section 3.5 of !RFC8044}})
+     string ({{Section 3.5 of !RFC8044}})
 
    Value
-
-   : This field contains the user group ID.
+      This field contains the user group ID.
+~~~~
 
 
 #  RADIUS Attributes
