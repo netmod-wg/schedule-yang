@@ -66,7 +66,7 @@ informative:
    is designed to be applicable for scheduling information such as event, policy,
    services or resources based on date and time.
 
-   This document uses the YANG terminology defined in Section 3 of {{!RFC7950}}.
+   
 
 ## Editorial Note (To be removed by RFC Editor)
 
