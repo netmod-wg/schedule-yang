@@ -3,14 +3,14 @@ title: "A YANG Data Model for Scheduling"
 abbrev: "schedule YANG"
 category: std
 
-docname: draft-ma-netmod-schedule-yang-latest
+docname: draft-ma-opsawg-schedule-yang-latest
 submissiontype: IETF
 number:
 date:
 consensus: true
 v: 3
 area: "Operations and Management"
-workgroup: "NETMOD"
+workgroup: "OPSAWG"
 keyword:
  - calendaring
  - scheduling
