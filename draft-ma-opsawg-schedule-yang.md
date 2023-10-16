@@ -89,6 +89,7 @@ informative:
 
    The meanings of the symbols in tree diagrams are defined in
    {{?RFC8340}}.
+Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950}}.
 
 #  Modules Overview
 
