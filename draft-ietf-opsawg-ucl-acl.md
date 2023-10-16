@@ -432,8 +432,7 @@ informative:
    module in {{!I-D.ma-opsawg-schedule-yang}}. It also augments the IETF ACL YANG module defined in {{!RFC8519}}.
 
 ~~~~
-<CODE BEGINS>
-file=ietf-ucl-acl@2023-01-19.yang
+<CODE BEGINS> file "ietf-ucl-acl@2023-01-19.yang"
 {::include ./yang/ietf-ucl-acl.yang}
 <CODE ENDS>
 ~~~~
@@ -543,11 +542,11 @@ Notation for {{rad-att}}:
      modify the group identity so as to permit access that should not be
      permitted, or deny access that should be permitted.
 
-    Some of the readable data nodes in the "ietf-ucl-acl" YANG module may
-    be considered sensitive or vulnerable in some network environments. It
-    is thus important to control read access (e.g., via get, get-config,
-    or notification) to these data nodes. These are the subtrees and data
-    nodes and their sensitivity/vulnerability:
+  Some of the readable data nodes in the "ietf-ucl-acl" YANG module may
+  be considered sensitive or vulnerable in some network environments. It
+  is thus important to control read access (e.g., via get, get-config,
+  or notification) to these data nodes. These are the subtrees and data
+  nodes and their sensitivity/vulnerability:
 
    * /acl:acls/acl:acl/acl:aces/acl:ace/uacl:time-range:
   : This subtree specifies when the access control entry rules are in effect. An
