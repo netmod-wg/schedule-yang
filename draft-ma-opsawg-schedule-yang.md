@@ -97,7 +97,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
    This module defines two groupings "period" and "recurrence", which conform to
    the definition of the "period of time" and "recurrence rule" formats defined in
-   {{?RFC5545}}. The authors might consider to define more formats in future revisions.
+   {{?RFC5545}}. Other formats may be considered in future revisions.
 
    {{schedule-tree}} provides an overview of the tree structure of the "ietf-
    schedule" module in terms of its groupings.
