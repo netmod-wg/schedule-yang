@@ -419,7 +419,7 @@ informative:
    model {{!RFC8519}} with date and time specific parameters to allow ACE to be
    activated based on a date/time condition. Two types of time range are defined,
    which reuse "recurrence" and "period" groupings defined in the "ietf-schedule"
-   YANG module in <!--to add a reference-->, respectively. Note that the data model augments the definition of
+   YANG module in {{!I-D.ma-opsawg-schedule-yang}}, respectively. Note that the data model augments the definition of
    "recurrence" grouping with a "duration" data node to specify the duration of
    time for each occurrence the policy activation is triggered.
 
@@ -429,7 +429,7 @@ informative:
 ##  The "ietf-ucl-acl" YANG Module {#sec-UCL}
 
    This module imports types and groupings defined in the "ietf-schedule" YANG
-   module in <!--to add a reference-->. It also augments the IETF ACL YANG module defined in {{!RFC8519}}.
+   module in {{!I-D.ma-opsawg-schedule-yang}}. It also augments the IETF ACL YANG module defined in {{!RFC8519}}.
 
 ~~~~
 <CODE BEGINS>
