@@ -66,8 +66,6 @@ informative:
    is designed to be applicable for scheduling information such as event, policy,
    services or resources based on date and time.
 
-   
-
 ## Editorial Note (To be removed by RFC Editor)
 
    Note to the RFC Editor: This section is to be removed prior to publication.
