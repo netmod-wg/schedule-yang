@@ -64,11 +64,9 @@ informative:
 
    This document defines a common schedule YANG module which
    is designed to be applicable for scheduling information such as event, policy,
-   services or resources based on date and time. This model is designed with the intent to be reusable in other
-   scheduling contexts. In particular, the groupings can be reused by other modules.
+   services or resources based on date and time.
 
-   The YANG data models in this document conform to the Network
-   Management Datastore Architecture (NMDA) defined in {{!RFC8342}}.
+   This document uses the YANG terminology defined in Section 3 of {{!RFC7950}}.
 
 ## Editorial Note (To be removed by RFC Editor)
 
@@ -249,9 +247,7 @@ informative:
 ~~~
 
 
-#  YANG Modules
-
-##  The "ietf-schedule" YANG Module {#sec-schedule}
+#  The "ietf-schedule" YANG Module {#sec-schedule}
 
    This module imports types defined in {{!I-D.ietf-netmod-rfc6991-bis}}.
 
@@ -288,7 +284,7 @@ file=ietf-schedule@2023-01-19.yang
 
 ##  The "IETF XML" Registry
 
-   This document registers the following URIs in the "IETF XML Registry" {{!RFC3688}}.
+   This document registers the following URI in the "IETF XML Registry" {{!RFC3688}}.
 
 ~~~~
         URI: urn:ietf:params:xml:ns:yang:ietf-schedule
@@ -298,7 +294,7 @@ file=ietf-schedule@2023-01-19.yang
 
 ##  The "YANG Module Names" Registry
 
-   This document registers the following YANG modules in the "YANG Module Names"
+   This document registers the following YANG module in the "YANG Module Names"
    registry {{!RFC6020}}.
 
 ~~~~
@@ -318,7 +314,7 @@ file=ietf-schedule@2023-01-19.yang
 {:numbered="false"}
 
    This work is derived from the {{?I-D.ietf-opsawg-ucl-acl}}. There is a desire
-   from the WG to see this model be seperately defined for wide use in scheduling context.
+   from the OPSAWG to see this model be separately defined for wide use in scheduling context.
 
-   The authors would like to thank Adrian Farrel, Wei Pan, Tianran Zhou and Joe Clarke
+   Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, and Joe Clarke
    for their valuable comments and great input to this work.
