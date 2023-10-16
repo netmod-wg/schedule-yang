@@ -317,4 +317,4 @@ file=ietf-schedule@2023-01-19.yang
    from the OPSAWG to see this model be separately defined for wide use in scheduling context.
 
    Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, and Joe Clarke
-   for their valuable comments and great input to this work.
+   for their valuable comments and inputs to this work.
