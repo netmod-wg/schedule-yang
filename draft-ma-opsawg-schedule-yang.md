@@ -251,8 +251,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    This module imports types defined in {{!I-D.ietf-netmod-rfc6991-bis}}.
 
 ~~~~
-<CODE BEGINS>
-file=ietf-schedule@2023-01-19.yang
+<CODE BEGINS> file "ietf-schedule@2023-01-19.yang"
 {::include ./yang/ietf-schedule.yang}
 <CODE ENDS>
 ~~~~
