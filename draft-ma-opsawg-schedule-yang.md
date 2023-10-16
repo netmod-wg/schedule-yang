@@ -56,7 +56,7 @@ informative:
 
    This document defines a common schedule YANG module which is
    designed to be applicable for scheduling information such as event, policy,
-   services or resources based on date and time.
+   services, or resources based on date and time.
 
 --- middle
 
