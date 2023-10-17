@@ -7,6 +7,14 @@ This is the working area for the individual Internet-Draft, "A Policy-based Netw
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ucl-acl)
 * [Compare Editor's Copy to Individual Draft](https://boucadair.github.io/policy-based-network-acl/#go.draft-ietf-opsawg-ucl-acl.diff)
 
+# A YANG Data Model for Scheduling 
+
+This is the working area for the individual Internet-Draft, "A YANG Data Model for Scheduling".
+
+* [Editor's Copy](https://boucadair.github.io/policy-based-network-acl/#go.draft-ma-opsawg-schedule-yang.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ma-opsawg-schedule-yang)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ma-opsawg-schedule-yang)
+* [Compare Editor's Copy to Individual Draft](https://boucadair.github.io/policy-based-network-acl/#go.draft-ma-opsawg-schedule-yang.diff)
 
 ## Contributing
 

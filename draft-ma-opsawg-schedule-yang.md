@@ -137,12 +137,12 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    a "byday" data node is specified. This is also significant when in a "yearly" rule
    and a "byyearweek" is specified. The default value is "monday".
 
-### Examples
+## Examples
 
    The following subsections provide some examples to illustrate the use of the period and recurrence formats defined as
    YANG groupings. Only the message body is provided with JSON used for encoding {{?RFC7951}}.
 
-#### Period of Time
+### Period of Time
 
    The example of a period that starts at 08:00:00 UTC, on January 1, 2023 and ends at 18:00:00 UTC
    on December 31, 2025 is encoded as follows:
@@ -179,7 +179,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 }
 ~~~~
 
-#### Recurrence Rule
+### Recurrence Rule
 
   The following snippet can be used to indicate a daily recurrent in December:
 
@@ -251,8 +251,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    This module imports types defined in {{!I-D.ietf-netmod-rfc6991-bis}}.
 
 ~~~~
-<CODE BEGINS>
-file=ietf-schedule@2023-01-19.yang
+<CODE BEGINS> file "ietf-schedule@2023-01-19.yang"
 {::include ./yang/ietf-schedule.yang}
 <CODE ENDS>
 ~~~~
