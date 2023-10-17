@@ -1,5 +1,4 @@
 ---
-test
 title: "A YANG Data Model and RADIUS Extension for Policy-based Network Access Control"
 abbrev: "A Policy-based NACL"
 category: std
