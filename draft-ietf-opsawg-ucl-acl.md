@@ -674,28 +674,23 @@ The following shows an example of the same policy but with a destination IPv6 pr
 
 # Changes between Revisions
 
-  v01 - v02
+  v00 - v01
 
-  *  Add more examples.
+  *  Change the document title and add a reference to "policy"
 
+  *  Split the definition of schedule YANG module into a seperate document
 
-   v00 - v01
+  *  Add reference to draft-dekok-radext-deprecating-radius for authentication method recommendations
 
-   *  Define a common schedule yang module and reuse in UCL yang module
-      to support time/date-based activation condition.
+  *  Change endpoint group-id as a string, and fix related examples accordingly
 
-   *  Either group-based or address-based ACL policies could be enforced
-      at PEP, and allow group-based ACL policies maintained at the
-      network controller.
+  *  Use typedef to ease leafref of the node
 
-   *  Optimize the process in section 4.1.
+  *  Tweaks to the RADIUS section and add a restriction to the length based on comments from RADEXT
 
-   *  Extend ACL module to support a generalized endpoint-group to cover
-      both end users (e.g., enterprise employees) and enterprise hosts
-      (e.g., IoT devices or servers);
+  *  Add IPv6 examples
 
-   *  Simplify the definition of group in UCL model with only the most
-      necessary group ID retained.
+  *  Editorial changes
 
 # Acknowledgments
 {:numbered="false"}
