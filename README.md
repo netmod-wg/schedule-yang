@@ -1,6 +1,6 @@
 # A Policy-based Network Access Control
 
-This is the working area for the individual Internet-Draft, "A Policy-based Network Access Control".
+This is the working area for the OPSAWG Internet-Draft, "A Policy-based Network Access Control".
 
 * [Editor's Copy](https://boucadair.github.io/policy-based-network-acl/#go.draft-ietf-opsawg-ucl-acl.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-opsawg-ucl-acl)
