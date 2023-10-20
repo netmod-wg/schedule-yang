@@ -62,9 +62,15 @@ informative:
 
 # Introduction {#intro}
 
-   This document defines a common schedule YANG module which
-   is designed to be applicable for scheduling information such as event, policy,
-   services or resources based on date and time.
+Several specifications include a provision for scheduling. Examples of such specifications
+are {{?I-D.ietf-opsawg-ucl-acl}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.united-tvr-schedule-yang}}.
+Both {{?I-D.ietf-opsawg-ucl-acl}} and {{?I-D.contreras-opsawg-scheduling-oam-tests}} use the "ietf-schedule" module
+initially specified in {{?I-D.ietf-opsawg-ucl-acl}}.
+
+Given that the applicability of the "ietf-schedule" module is more general than scheduled
+policy and OAMs, this document defines "ietf-schedule" as a common schedule YANG module. The module includes a set of reusable groupings which
+are designed to be applicable for scheduling information such as event, policy,
+services or resources based on date and time.
 
 ## Editorial Note (To be removed by RFC Editor)
 
@@ -87,6 +93,7 @@ informative:
 
    The meanings of the symbols in tree diagrams are defined in
    {{?RFC8340}}.
+
 Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950}}.
 
 #  Modules Overview
