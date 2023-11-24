@@ -1,31 +1,95 @@
 module: ietf-schedule
 
-  grouping period:
-    +-- period-of-time
-       +-- period-start?            yang:date-and-time
-       +-- (period-type)?
-          +--:(period-explicit)
-          |  +-- period-end?        yang:date-and-time
-          +--:(period-duration)
-             +-- period-duration?   duration
+  grouping period-of-time:
+    +-- period-start?            yang:date-and-time
+    +-- time-zone-identifier?    string
+    +-- (period-type)?
+       +--:(period-explicit)
+       |  +-- period-end?        yang:date-and-time
+       +--:(period-duration)
+          +-- period-duration?   duration
   grouping recurrence:
-    +-- recurrence
-       +-- freq           enumeration
-       +-- (recurrence-bound)?
-       |  +--:(until)
-       |  |  +-- until?   union
-       |  +--:(count)
-       |     +-- count?   uint32
-       +-- interval?      uint32
-       +-- bysecond*      uint32
-       +-- byminute*      uint32
-       +-- byhour*        uint32
-       +-- byday* [weekday]
-       |  +-- direction*   int32
-       |  +-- weekday?     schedule:weekday
-       +-- bymonthday*    int32
-       +-- byyearday*     int32
-       +-- byyearweek*    int32
-       +-- byyearmonth*   uint32
-       +-- bysetpos*      int32
-       +-- wkst?          schedule:weekday
+    +-- recur-first
+    |  +-- dt-start?               union
+    |  +-- time-zone-identifier?   string
+    |  +-- duration?               duration
+    +-- freq           enumeration
+    +-- interval?      uint32
+    +-- (recurrence-bound)?
+       +--:(until)
+       |  +-- until?   union
+       +--:(count)
+          +-- count?   uint32
+  grouping recurrence-with-date-times:
+    +-- recur-first
+    |  +-- dt-start?               union
+    |  +-- time-zone-identifier?   string
+    |  +-- duration?               duration
+    +-- freq                      enumeration
+    +-- interval?                 uint32
+    +-- (recurrence-bound)?
+    |  +--:(until)
+    |  |  +-- until?              union
+    |  +--:(count)
+    |     +-- count?              uint32
+    +-- (date-times-choice)?
+       +--:(date-time)
+       |  +-- date-times*         yang:date-and-time
+       +--:(date)
+       |  +-- dates*              yang:date-no-zone
+       +--:(period-timeticks)
+       |  +-- period-timeticks* [period-start]
+       |     +-- period-start?   yang:timeticks
+       |     +-- period-end?     yang:timeticks
+       +--:(period)
+          +-- period* [period-start]
+             +-- period-start?            yang:date-and-time
+             +-- time-zone-identifier?    string
+             +-- (period-type)?
+                +--:(period-explicit)
+                |  +-- period-end?        yang:date-and-time
+                +--:(period-duration)
+                   +-- period-duration?   duration
+  grouping icalendar-recurrence:
+    +-- recur-first
+    |  +-- dt-start?               union
+    |  +-- time-zone-identifier?   string
+    |  +-- duration?               duration
+    +-- freq                      enumeration
+    +-- interval?                 uint32
+    +-- (recurrence-bound)?
+    |  +--:(until)
+    |  |  +-- until?              union
+    |  +--:(count)
+    |     +-- count?              uint32
+    +-- (date-times-choice)?
+    |  +--:(date-time)
+    |  |  +-- date-times*         yang:date-and-time
+    |  +--:(date)
+    |  |  +-- dates*              yang:date-no-zone
+    |  +--:(period-timeticks)
+    |  |  +-- period-timeticks* [period-start]
+    |  |     +-- period-start?   yang:timeticks
+    |  |     +-- period-end?     yang:timeticks
+    |  +--:(period)
+    |     +-- period* [period-start]
+    |        +-- period-start?            yang:date-and-time
+    |        +-- time-zone-identifier?    string
+    |        +-- (period-type)?
+    |           +--:(period-explicit)
+    |           |  +-- period-end?        yang:date-and-time
+    |           +--:(period-duration)
+    |              +-- period-duration?   duration
+    +-- bysecond*                 uint32
+    +-- byminute*                 uint32
+    +-- byhour*                   uint32
+    +-- byday* [weekday]
+    |  +-- direction*   int32
+    |  +-- weekday?     schedule:weekday
+    +-- bymonthday*               int32
+    +-- byyearday*                int32
+    +-- byyearweek*               int32
+    +-- byyearmonth*              uint32
+    +-- bysetpos*                 int32
+    +-- wkst?                     schedule:weekday
+    +-- exdates*                  union
