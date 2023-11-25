@@ -20,7 +20,7 @@ module ietf-schedule {
      Calendaring and Scheduling Core Object Specification) data
      types: period of time and recurrence rule, for representing and
      exchanging calendaring and scheduling information. The YANG
-     module complies with Sections 3.3.9 and 3.3.10 of RFC 5545. 
+     module complies with Sections 3.3.9 and 3.3.10 of RFC 5545.
 
      Copyright (c) 2023 IETF Trust and the persons identified
      as authors of the code. All rights reserved.
@@ -35,7 +35,7 @@ module ietf-schedule {
      This version of this YANG module is part of RFC XXXX
      (https://www.rfc-editor.org/info/rfcXXXX); see the RFC
      itself for full legal notices.
-     
+
      The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
      NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
      'MAY', and 'OPTIONAL' in this document are to be interpreted as
@@ -90,35 +90,35 @@ module ietf-schedule {
     description
       "Seven days of the week.";
   }
-  
+
   typedef duration {
     type string {
       pattern '((\+)?|\-)P((([0-9]+)D)?(T(0[0-9]|1[0-9]|2[0-3])'
             + ':[0-5][0-9]:[0-5][0-9]))|P([0-9]+)W';
     }
     description
-      "Duration of the time. The format can represent nominal 
-       durations (weeks designated by 'W' and days designated by 'D') 
-       and accurate durations (hours:minutes:seconds follows the 
+      "Duration of the time. The format can represent nominal
+       durations (weeks designated by 'W' and days designated by 'D')
+       and accurate durations (hours:minutes:seconds follows the
        designator 'T').
-           
-       Note that this value type doesn't support the 'Y' and 'M' 
-       designators to specify durations in terms of years and months. 
-       
+
+       Note that this value type doesn't support the 'Y' and 'M'
+       designators to specify durations in terms of years and months.
+
        Negative durations are typically used to schedule an alarm to
        trigger before an associated time.";
-    reference 
-      "RFC 5545: Internet Calendaring and Scheduling Core Object 
-                 Specification (iCalendar), Sections 3.3.6 and 
-                 3.8.6.3";    
-  } 
-  
+    reference
+      "RFC 5545: Internet Calendaring and Scheduling Core Object
+                 Specification (iCalendar), Sections 3.3.6 and
+                 3.8.6.3";
+  }
+
   grouping period-of-time {
     description
       "This grouping is defined for period of time property.";
-    reference 
-      "RFC 5545: Internet Calendaring and Scheduling Core Object 
-                 Specification (iCalendar), Section 3.3.9";      
+    reference
+      "RFC 5545: Internet Calendaring and Scheduling Core Object
+                 Specification (iCalendar), Section 3.3.9";
     leaf period-start {
       type yang:date-and-time;
       description
@@ -127,9 +127,9 @@ module ietf-schedule {
     leaf time-zone-identifier {
       type string;
       description
-        "Indicates the identifier for the time zone in a time zone 
+        "Indicates the identifier for the time zone in a time zone
          database. This parameter MUST be specified if 'period-start'
-         value is neither reported in the format of UTC nor time zone 
+         value is neither reported in the format of UTC nor time zone
          offset to UTC.";
     }
     choice period-type {
@@ -138,15 +138,15 @@ module ietf-schedule {
           supported.";
       case period-explicit {
         description
-          "A period of time is identified by its start and its end. 
+          "A period of time is identified by its start and its end.
            'period-start' indicates the period start.";
         leaf period-end {
           type yang:date-and-time;
           description
             "Period end time. If a local time without time zone offset
              to UTC time is specified, it MUST use the same time zone
-             reference as 'period-start' parameter. If 'period-start' 
-             also uses a local time without time zone offset to UTC, 
+             reference as 'period-start' parameter. If 'period-start'
+             also uses a local time without time zone offset to UTC,
              it MUST use the time zone as specified by the 'time-zone-
              identifier' parameter.";
         }
@@ -161,14 +161,14 @@ module ietf-schedule {
                   + ':[0-5][0-9]:[0-5][0-9]))|P([0-9]+)W';
           }
           description
-            "A positive duration of the time. This value is 
-             equivalent to the format of duration type except that 
+            "A positive duration of the time. This value is
+             equivalent to the format of duration type except that
              the value cannot be negative.";
         }
       }
     }
   }
-  
+
   grouping recurrence {
     description
       "A simplified definition of recurrence.";
@@ -182,22 +182,23 @@ module ietf-schedule {
         }
         description
           "Defines the first instance in the recurrence set. If it is
-           specified as a date-no-zone value type, the recurrence's 
-           duration is taken to be one day. It SHOULD match the 
-           pattern of the recurrence rule, if specified.";        
+           specified as a date-no-zone value type with no duration 
+           specified, the recurrence's duration is taken to be one 
+           day. It SHOULD match the pattern of the recurrence rule, 
+           if specified.";
       }
       leaf time-zone-identifier {
         type string;
         description
-          "Indicates the identifier for the time zone in a time zone 
+          "Indicates the identifier for the time zone in a time zone
            database. This parameter MUST be specified if 'start' value
-           is neither reported in the format of UTC nor time zone 
+           is neither reported in the format of UTC nor time zone
            offset to UTC.";
       }
       leaf duration {
         type duration;
         description
-          "When optionally specified, it refers to the duration of 
+          "When optionally specified, it refers to the duration of
            the first occurrence. The exact duration also applies to
            all the recurrence instance.";
       }
@@ -257,11 +258,11 @@ module ietf-schedule {
       default "1";
       description
         "A positive integer representing at which intervals the
-         recurrence rule repeats. The default value is '1', 
+         recurrence rule repeats. The default value is '1',
          meaning every second for a secondly rule, every minute
          for a minutely rule, every hour for an hourly rule, every
          day for a daily rule, every week for a weekly rule, every
-         month for a monthly rule, and every year for a yearly 
+         month for a monthly rule, and every year for a yearly
          rule.";
     }
     choice recurrence-bound {
@@ -280,9 +281,9 @@ module ietf-schedule {
           }
           description
             "This parameter specifies a date-no-zone or
-             date-time value to bounds the recurrence. If the value 
-             specified by this parameter is synchronized with the 
-             specified recurrence, it becomes the last instance of 
+             date-time value to bounds the recurrence. If the value
+             specified by this parameter is synchronized with the
+             specified recurrence, it becomes the last instance of
              the recurrence. The value MUST have the same value type
              as the value type of 'start' parameter.";
         }
@@ -300,7 +301,7 @@ module ietf-schedule {
       }
     }
   }
-  
+
   grouping recurrence-with-date-times {
     description
       "This grouping defines an aggregate set of repeating occurrences.
@@ -312,8 +313,8 @@ module ietf-schedule {
       description
         "Specify a list of occurrences which complement the recurrence
          set defined by 'recurrence' grouping. If it is specified as
-         a period value, the duration of the recurrence instance will 
-         be the one specified by it, and not the duration defined 
+         a period value, the duration of the recurrence instance will
+         be the one specified by it, and not the duration defined
          inside the recur-first parameter.";
       case date-time {
         description
@@ -343,26 +344,26 @@ module ietf-schedule {
               "A list of period with timeticks formats.";
             leaf period-start {
               type yang:timeticks;
-              must "((../../../freq = 'secondly') and "
+              must "((../../freq = 'secondly') and "
                 +      "(current() < 100)) or "
-                +  "((../../../recurrence = 'minutely') and "
+                +  "((../../freq = 'minutely') and "
                 +      "(current() < 6000)) or "
-                +  "((../../../recurrence = 'hourly') and "
-                +      "(current() < 360000)) or "                 
-                +  "((../../../recurrence = 'daily') and "
+                +  "((../../freq = 'hourly') and "
+                +      "(current() < 360000)) or "
+                +  "((../../freq = 'daily') and "
                 +      "(current() < 8640000)) or "
-                +  "((../../../recurrence = 'weekly') and "
-                +      "(current() < 60480000)) or "                 
-                +  "((../../../recurrence = 'monthly') and "
+                +  "((../../freq = 'weekly') and "
+                +      "(current() < 60480000)) or "
+                +  "((../../freq = 'monthly') and "
                 +      "(current() < 267840000)) or "
-                +   "((../../../recurrence = 'yearly') and "
+                +   "((../../freq = 'yearly') and "
                 +      "(current() < 3162240000))"  {
                 error-message
                   "The period-start must not exceed the frequency
                    interval.";
               }
               description
-                "Start time of the scheduled value within one 
+                "Start time of the scheduled value within one
                  recurrence.";
             }
             leaf period-end {
@@ -380,19 +381,19 @@ module ietf-schedule {
           key "period-start";
           description
             "A list of period with date-and-time formats.";
-          uses period-of-time;          
+          uses period-of-time;
         }
       }
     }
   }
-  
+
   grouping icalendar-recurrence {
     description
-      "This grouping is defined to identify properties that contain a 
+      "This grouping is defined to identify properties that contain a
        recurrence rule.";
-    reference 
-      "RFC 5545: Internet Calendaring and Scheduling Core Object 
-       Specification (iCalendar), Section 3.8.5";        
+    reference
+      "RFC 5545: Internet Calendaring and Scheduling Core Object
+       Specification (iCalendar), Section 3.8.5";
 
     uses recurrence-with-date-times;
     leaf-list bysecond {
@@ -439,7 +440,7 @@ module ietf-schedule {
           "Corresponding to seven days of the week.";
       }
     }
-      
+
     leaf-list bymonthday {
       type int32 {
         range "-31..-1|1..31";
@@ -495,5 +496,4 @@ module ietf-schedule {
     }
   }
 }
-
 
