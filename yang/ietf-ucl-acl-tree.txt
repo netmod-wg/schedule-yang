@@ -19,11 +19,11 @@ module: ietf-ucl-acl
     +--rw time-range {time-condition}?
        +--rw (time-range-type)?
           +--:(periodic-range)
-          |  +--rw recur-first
-          |  |  +--rw dt-start?               union
-          |  |  +--rw time-zone-identifier?   string
+          |  +--rw recurrence-first
+          |  |  +--rw date-time-start?        union
+          |  |  +--rw time-zone-identifier?   sys:timezone-name
           |  |  +--rw duration?               duration
-          |  +--rw freq                      enumeration
+          |  +--rw frequency?                identityref
           |  +--rw interval?                 uint32
           |  +--rw (recurrence-bound)?
           |  |  +--:(until)
@@ -41,13 +41,13 @@ module: ietf-ucl-acl
           |  |  |     +--rw period-end?     yang:timeticks
           |  |  +--:(period)
           |  |     +--rw period* [period-start]
-          |  |        +--rw period-start             yang:date-and-time
-          |  |        +--rw time-zone-identifier?    string
+          |  |        +--rw period-start            yang:date-and-time
+          |  |        +--rw time-zone-identifier?   sys:timezone-name
           |  |        +--rw (period-type)?
-          |  |           +--:(period-explicit)
-          |  |           |  +--rw period-end?        yang:date-and-time
-          |  |           +--:(period-duration)
-          |  |              +--rw period-duration?   duration
+          |  |           +--:(explicit)
+          |  |           |  +--rw period-end?       yang:date-and-time
+          |  |           +--:(duration)
+          |  |              +--rw duration?         duration
           |  +--rw bysecond*                 uint32
           |  +--rw byminute*                 uint32
           |  +--rw byhour*                   uint32
@@ -59,13 +59,13 @@ module: ietf-ucl-acl
           |  +--rw byyearweek*               int32
           |  +--rw byyearmonth*              uint32
           |  +--rw bysetpos*                 int32
-          |  +--rw wkst?                     schedule:weekday
-          |  +--rw exdates*                  union
+          |  +--rw workweek-start?           schedule:weekday
+          |  +--rw exception-dates*          union
           +--:(absolute-range)
              +--rw period-start?             yang:date-and-time
-             +--rw time-zone-identifier?     string
+             +--rw time-zone-identifier?     sys:timezone-name
              +--rw (period-type)?
-                +--:(period-explicit)
+                +--:(explicit)
                 |  +--rw period-end?         yang:date-and-time
-                +--:(period-duration)
-                   +--rw period-duration?    duration
+                +--:(duration)
+                   +--rw duration?           duration

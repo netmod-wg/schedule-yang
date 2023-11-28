@@ -324,7 +324,7 @@ module ietf-schedule {
          set defined by 'recurrence' grouping. If it is specified as
          a period value, the duration of the recurrence instance will
          be the one specified by it, and not the duration defined
-         inside the recur-first parameter.";
+         inside the recurrence-first parameter.";
       case date-time {
         description
           "Specify a list of occurrences with date-and-time values.";
