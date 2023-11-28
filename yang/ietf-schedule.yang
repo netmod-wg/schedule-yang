@@ -267,14 +267,10 @@ module ietf-schedule {
     }
     leaf interval {
       type uint32;
-      default "1";
       description
         "A positive integer representing at which intervals the
-         recurrence rule repeats. The default value means every 
-         second for a secondly rule, every minute for a minutely 
-         rule, every hour for an hourly rule, every day for a daily 
-         rule, every week for a weekly rule, every month for a monthly 
-         rule, and every year for a yearly rule.";
+         recurrence rule repeats. For example, within a 'daily'
+         recurrence rule, a value of '8' means every eight days.";
     }
     choice recurrence-bound {
       description
