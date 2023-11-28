@@ -1,31 +1,31 @@
 module: ietf-schedule
 
   grouping period-of-time:
-    +-- period-start?            yang:date-and-time
-    +-- time-zone-identifier?    string
+    +-- period-start?           yang:date-and-time
+    +-- time-zone-identifier?   sys:timezone-name
     +-- (period-type)?
-       +--:(period-explicit)
-       |  +-- period-end?        yang:date-and-time
-       +--:(period-duration)
-          +-- period-duration?   duration
+       +--:(explicit)
+       |  +-- period-end?       yang:date-and-time
+       +--:(duration)
+          +-- duration?         duration
   grouping recurrence:
-    +-- recur-first
-    |  +-- dt-start?               union
-    |  +-- time-zone-identifier?   string
+    +-- recurrence-first
+    |  +-- date-time-start?        union
+    |  +-- time-zone-identifier?   sys:timezone-name
     |  +-- duration?               duration
-    +-- freq           enumeration
-    +-- interval?      uint32
+    +-- frequency?          identityref
+    +-- interval?           uint32
     +-- (recurrence-bound)?
        +--:(until)
-       |  +-- until?   union
+       |  +-- until?        union
        +--:(count)
-          +-- count?   uint32
+          +-- count?        uint32
   grouping recurrence-with-date-times:
-    +-- recur-first
-    |  +-- dt-start?               union
-    |  +-- time-zone-identifier?   string
+    +-- recurrence-first
+    |  +-- date-time-start?        union
+    |  +-- time-zone-identifier?   sys:timezone-name
     |  +-- duration?               duration
-    +-- freq                      enumeration
+    +-- frequency?                identityref
     +-- interval?                 uint32
     +-- (recurrence-bound)?
     |  +--:(until)
@@ -43,19 +43,19 @@ module: ietf-schedule
        |     +-- period-end?     yang:timeticks
        +--:(period)
           +-- period* [period-start]
-             +-- period-start?            yang:date-and-time
-             +-- time-zone-identifier?    string
+             +-- period-start?           yang:date-and-time
+             +-- time-zone-identifier?   sys:timezone-name
              +-- (period-type)?
-                +--:(period-explicit)
-                |  +-- period-end?        yang:date-and-time
-                +--:(period-duration)
-                   +-- period-duration?   duration
+                +--:(explicit)
+                |  +-- period-end?       yang:date-and-time
+                +--:(duration)
+                   +-- duration?         duration
   grouping icalendar-recurrence:
-    +-- recur-first
-    |  +-- dt-start?               union
-    |  +-- time-zone-identifier?   string
+    +-- recurrence-first
+    |  +-- date-time-start?        union
+    |  +-- time-zone-identifier?   sys:timezone-name
     |  +-- duration?               duration
-    +-- freq                      enumeration
+    +-- frequency?                identityref
     +-- interval?                 uint32
     +-- (recurrence-bound)?
     |  +--:(until)
@@ -73,13 +73,13 @@ module: ietf-schedule
     |  |     +-- period-end?     yang:timeticks
     |  +--:(period)
     |     +-- period* [period-start]
-    |        +-- period-start?            yang:date-and-time
-    |        +-- time-zone-identifier?    string
+    |        +-- period-start?           yang:date-and-time
+    |        +-- time-zone-identifier?   sys:timezone-name
     |        +-- (period-type)?
-    |           +--:(period-explicit)
-    |           |  +-- period-end?        yang:date-and-time
-    |           +--:(period-duration)
-    |              +-- period-duration?   duration
+    |           +--:(explicit)
+    |           |  +-- period-end?       yang:date-and-time
+    |           +--:(duration)
+    |              +-- duration?         duration
     +-- bysecond*                 uint32
     +-- byminute*                 uint32
     +-- byhour*                   uint32
@@ -91,5 +91,5 @@ module: ietf-schedule
     +-- byyearweek*               int32
     +-- byyearmonth*              uint32
     +-- bysetpos*                 int32
-    +-- wkst?                     schedule:weekday
-    +-- exdates*                  union
+    +-- workweek-start?           schedule:weekday
+    +-- exception-dates*          union
