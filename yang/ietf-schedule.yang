@@ -238,8 +238,10 @@ module ietf-schedule {
           "Defines the first instance in the recurrence set. If it is
            specified as a date-no-zone value type with no duration
            specified, the recurrence's duration is taken to be one
-           day. It SHOULD match the pattern of the recurrence rule,
-           if specified.";
+           day.";
+        reference
+          "RFC 5545: Internet Calendaring and Scheduling Core Object
+           Specification (iCalendar), Section 3.3.10";
       }
       leaf time-zone-identifier {
         type sys:timezone-name;
