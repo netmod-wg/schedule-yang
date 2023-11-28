@@ -355,19 +355,19 @@ module ietf-schedule {
               "A list of period with timeticks formats.";
             leaf period-start {
               type yang:timeticks;
-              must "((../../freq = 'secondly') and "
+              must "(derived-from(../../frequency, 'secondly') and "
                 +      "(current() < 100)) or "
-                +  "((../../freq = 'minutely') and "
+                +  "(derived-from(../../frequency, 'minutely') and "
                 +      "(current() < 6000)) or "
-                +  "((../../freq = 'hourly') and "
+                +  "(derived-from(../../frequency, 'hourly') and "
                 +      "(current() < 360000)) or "
-                +  "((../../freq = 'daily') and "
+                +  "(derived-from(../../frequency, 'daily') and "
                 +      "(current() < 8640000)) or "
-                +  "((../../freq = 'weekly') and "
+                +  "(derived-from(../../frequency, 'weekly') and "
                 +      "(current() < 60480000)) or "
-                +  "((../../freq = 'monthly') and "
+                +  "(derived-from(../../frequency, 'monthly') and "
                 +      "(current() < 267840000)) or "
-                +   "((../../freq = 'yearly') and "
+                +   "(derived-from(../../frequency, 'yearly') and "
                 +      "(current() < 3162240000))"  {
                 error-message
                   "The period-start must not exceed the frequency
@@ -433,8 +433,9 @@ module ietf-schedule {
       description
         "Specify a list of days of the week.";
       leaf-list direction {
-        when "(../../freq = 'monthly') or (../../freq = 'yearly') "
-          +  " and not(../../byyearweek)";
+        when "derived-from(../../frequency, 'monthly') or "
+          +  "(derived-from(../../frequency, 'yearly') "
+          +  " and not(../../byyearweek))";          
         type int32 {
           range "-53..-1|1..53";
         }
@@ -467,7 +468,7 @@ module ietf-schedule {
         "Specifies a list of days of the year.";
     }
     leaf-list byyearweek {
-      when 'enum-value(../freq)=7';
+      when "derived-from(../frequency, 'yearly')";
       type int32 {
         range "-53..-1|1..53";
       }
@@ -503,7 +504,7 @@ module ietf-schedule {
         type yang:date-and-time;
       }
       description
-        "Define a list a exceptions for recurrence.";
+        "Defines a list of exceptions for recurrence.";
     }
   }
 }
