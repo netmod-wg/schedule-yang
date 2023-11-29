@@ -54,7 +54,7 @@ module ietf-schedule {
     reference
       "RFC XXXX: A YANG Data Model for Scheduling.";
   }
-
+  
   typedef weekday {
     type enumeration {
       enum sunday {
@@ -353,20 +353,21 @@ module ietf-schedule {
               "A list of period with timeticks formats.";
             leaf period-start {
               type yang:timeticks;
-              must "(derived-from(../../frequency, 'secondly') and "
-                +      "(current() < 100)) or "
-                +  "(derived-from(../../frequency, 'minutely') and "
-                +      "(current() < 6000)) or "
-                +  "(derived-from(../../frequency, 'hourly') and "
-                +      "(current() < 360000)) or "
-                +  "(derived-from(../../frequency, 'daily') and "
-                +      "(current() < 8640000)) or "
-                +  "(derived-from(../../frequency, 'weekly') and "
-                +      "(current() < 60480000)) or "
-                +  "(derived-from(../../frequency, 'monthly') and "
-                +      "(current() < 267840000)) or "
-                +   "(derived-from(../../frequency, 'yearly') and "
-                +      "(current() < 3162240000))"  {
+              must 
+              "(not(derived-from(../../frequency,'schedule:secondly'))"
+             +" or (current() < 100)) and "
+             +"(not(derived-from(../../frequency,'schedule:minutely'))"
+             +" or (current() < 6000)) and "
+             +"(not(derived-from(../../frequency,'schedule:hourly'))"
+             +" or (current() < 360000)) and "
+             +"(not(derived-from(../../frequency,'schedule:daily'))"
+             +" or (current() < 8640000)) and "
+             +"(not(derived-from(../../frequency,'schedule:weekly'))"
+             +" or (current() < 60480000)) and "
+             +"(not(derived-from(../../frequency,'schedule:monthly'))"
+             +" or (current() < 267840000)) and "
+             +"(not(derived-from(../../frequency,'schedule:yearly'))"
+             +" or (current() < 3162240000))" {
                 error-message
                   "The period-start must not exceed the frequency
                    interval.";
@@ -431,8 +432,8 @@ module ietf-schedule {
       description
         "Specify a list of days of the week.";
       leaf-list direction {
-        when "derived-from(../../frequency, 'monthly') or "
-          +  "(derived-from(../../frequency, 'yearly') "
+        when "derived-from(../../frequency, 'schedule:monthly') or "
+          +  "(derived-from(../../frequency, 'schedule:yearly') "
           +  " and not(../../byyearweek))";          
         type int32 {
           range "-53..-1|1..53";
@@ -466,7 +467,7 @@ module ietf-schedule {
         "Specifies a list of days of the year.";
     }
     leaf-list byyearweek {
-      when "derived-from(../frequency, 'yearly')";
+      when "derived-from(../frequency, 'schedule:yearly')";
       type int32 {
         range "-53..-1|1..53";
       }
