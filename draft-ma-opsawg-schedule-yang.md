@@ -63,12 +63,12 @@ informative:
 # Introduction {#intro}
 
 Several specifications include a provision for scheduling. Examples of such specifications
-are {{?I-D.ietf-opsawg-ucl-acl}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.united-tvr-schedule-yang}}.
+are (but not limited to) {{?I-D.ietf-opsawg-ucl-acl}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.united-tvr-schedule-yang}}.
 Both {{?I-D.ietf-opsawg-ucl-acl}} and {{?I-D.contreras-opsawg-scheduling-oam-tests}} use the "ietf-schedule" module
 initially specified in {{?I-D.ietf-opsawg-ucl-acl}}.
 
 Given that the applicability of the "ietf-schedule" module is more general than scheduled
-policy and OAMs, this document defines "ietf-schedule" as a common schedule YANG module. The module includes a set of reusable groupings which
+policy and OAM tests, this document defines "ietf-schedule" as a common schedule YANG module. The module includes a set of reusable groupings which
 are designed to be applicable for scheduling information such as event, policy,
 services or resources based on date and time.
 
@@ -323,3 +323,6 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
    Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, and Joe Clarke
    for their valuable comments and inputs to this work.
+
+   Many thanks to the authors of {{?I-D.united-tvr-schedule-yang}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.ietf-netmod-eca-policy}}
+   for the constructive discussion during IETF#118.
