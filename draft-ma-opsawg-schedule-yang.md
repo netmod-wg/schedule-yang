@@ -154,7 +154,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   only one recurrence is considered.
 
   Date-times definition inside "recurrence-with-date-times" grouping refers to
-  but does not fully comply with {{Section 3.8.5.2 of ?RFC5545}}. A timeticks
+  but does not fully comply with {{Section 3.8.5.2 of !RFC5545}}. A timeticks
   type based period is added.
 
 ## The "icalendar-recurrence" Grouping
