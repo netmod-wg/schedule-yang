@@ -130,7 +130,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   The "recurrence" grouping specifies a simple recurrence rule, the definition
   conforms to part of the "recurrence rule" properties in {{Section 3.3.10 of ?RFC5545}}.
 
-  The "recurrence-first" container defines the first instance in the recurrence set,
+  The "recurrence-first" container defines the first instance in the recurrence set.
   it also determines the start time and duration (if specified) of subsequent recurrence instances. If the
   "date-time-start" node is specified as a date-no-zone value type with no duration specified,
   the recurrence's duration is taken to be one day.
