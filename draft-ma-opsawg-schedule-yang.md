@@ -271,7 +271,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
    This section provides some examples to illustrate the use of the
    period and recurrence formats defined as YANG groupings. Note that "grouping"
-   does not define any nodes in the schema tree, the examples illustrated are
+   does not define any data nodes in the schema tree, the examples illustrated are
    just for the ease of understanding. Only the message body is provided with
    JSON used for encoding {{?RFC7951}}.
 
