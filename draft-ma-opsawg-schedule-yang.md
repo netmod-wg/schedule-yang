@@ -99,32 +99,75 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 #  Module Overview
 
-   This module defines two groupings "period" and "recurrence", which conform to
-   the definition of the "period of time" and "recurrence rule" formats defined in
-   {{?RFC5545}}. Other formats may be considered in future revisions.
+   The "ietf-schedule" module defines the following "grouping" statement:
 
-   {{schedule-tree}} provides an overview of the tree structure of the "ietf-
-   schedule" module in terms of its groupings.
+   * period-of-time
+   * recurrence
+   * recurrence-with-date-times
+   * icalendar-recurrence
+
+   {{schedule-tree}} provides an overview of the tree structure {{?RFC8340}} of
+   the "ietf-schedule" module in terms of its groupings.
 
 ~~~~
 {::include ./yang/ietf-schedule-tree.txt}
 ~~~~
 {: #schedule-tree title="Schedule Tree Structure" artwork-align="center"}
 
-   The "period-of-time" allows a time period to be represented using either a start ("period-start")
-   and end date and time ("period-end"), or a start ("period-start") and a positive time duration ("period-duration").
+   Each of these groupings are presented in the following subsections. Examples
+   are provided in {{usage}}.
 
-   The "recurrence" indicates the scheduling recurrence of an event. The
-   repetition can be scoped by a specified end time or by a count of occurences,
-   and the frequency identifies the type of recurrence rule. For example, a "daily"
-   frequency value specifies repeating events based on an interval of a day or more.
-   The interval represents at which intervals the recurrence rule repeats. For example,
-   within a daily recurrence rule, an interval value of "8" means every eight days.
+## The "period-of-time" Grouping
 
-   An array of the "bysecond" (or "byminut", "byhour") specifies a list of seconds within a minute (or minutes within an hour, hours of the day).
+   The "period-of-time" grouping allows a time period to be represented using
+   either a start ("period-start") and end date and time ("period-end"), or a
+   start ("period-start") and a positive time duration ("duration"). For the first
+   format, the start of the period MUST be before the end of the period
+   {{Section 3.3.9 of ?RFC5545}}.
 
-   The parameter "byday" specifies a list of days of
-   the week, with an optional direction which indicates the nth occurrence of a specific day within
+## The "recurrence" Grouping
+
+  The "recurrence" grouping specifies a simple recurrence rule, the definition
+  conforms to part of the "recurrence rule" properties in {{Section 3.3.10 of ?RFC5545}}.
+
+  The "recurrence-first" container defines the first instance in the recurrence set,
+  it also determines the start time and duration (if specified) of subsequent recurrence instances. If the
+  "date-time-start" node is specified as a date-no-zone value type with no duration specified,
+  the recurrence's duration is taken to be one day.
+
+  The frequency ("frequency") identifies the type of recurrence rule. For example,
+  a "daily" frequency value specifies repeating events based on an interval of a day or more.
+
+  The interval represents at which intervals the recurrence rule repeats. For example,
+  within a daily recurrence rule, an interval value of "8" means every eight days.
+
+  The repetition can be scoped by a specified end time or by a count of occurrences,
+  indicated by the "recurrence-bound" choice. The "date-time-start" value always counts
+  as the first occurrence.
+
+## The "recurrence-with-date-times" Grouping
+
+  The "recurrence-with-date-times" grouping uses the "recurrence" grouping and
+  adds a "date-times-choice" statement to define an aggregate set of repeating occurrences.
+  The recurrence instances are defined by the union of occurrences defined by
+  both date-times and recurrence rule. When duplicate instances are generated,
+  only one recurrence is considered.
+
+  Date-times definition inside "recurrence-with-date-times" grouping refers to
+  but does not fully comply with {{Section 3.8.5.2 of ?RFC5545}}. A timeticks
+  type based period is added.
+
+## The "icalendar-recurrence" Grouping
+
+  The "icalendar-recurrence" grouping uses the "recurrence-with-date-times" grouping
+  and add more data nodes to enrich the definition of recurrence. It conforms to
+  the definition of recurrence component defined in {{Section 3.8.5 of ?RFC5545}}.
+
+   An array of the "bysecond" (or "byminut", "byhour") specifies a list of
+   seconds within a minute (or minutes within an hour, hours of the day).
+
+   The parameter "byday" specifies a list of days of the week, with an optional
+   direction which indicates the nth occurrence of a specific day within
    the "monthly" or "yearly" frequency. For example, within a "monthly" rule,
    the "weekday" with a value of "monday" and the "direction" with a value of "-1"
    represents the last Monday of the month.
@@ -138,11 +181,32 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    "bysetpos" with value of "-1" represents the last Monday of the month.
    Not setting the "bysetpos" data node represents every Monday of the month.
 
-   The "wkst" data node specifies the day on which the week starts. This is
+   The "workweek-start" data node specifies the day on which the week starts. This is
    significant when a "weekly" recurrence rule has an interval greater than 1, and
    a "byday" data node is specified. This is also significant when in a "yearly" rule
    and a "byyearweek" is specified. The default value is "monday".
 
+   the "exception-dates" data node specifies a list of exceptions for recurrence. The
+   final recurrence set is generated by gathering all of the date and time values
+   generated by any of the specified recurrence rule and date-times, and then
+   excluding any start date and time values specified by "exception-dates" parameter.
+
+#  Features and Augmentation
+
+   The "ietf-schedule" data model defines the recurrence related groupings using
+   a modular approach. Basic, intermediate and advanced representation of recurrence
+   groupings are defined, with each reusing the previous one and adding more parameters.
+   To allow for different options, two features are defined in the data model:
+
+   *  basic-recurrence-supported
+   *  icalendar-recurrence-supported
+
+   {{features}} provides an example about how that could be used. Implementations
+   may support a basic recurrence rule or an advanced one as needed, by declaring
+   different features.
+
+   These groupings can also be augmented to support specific needs. As an example,
+   {{augments}} demonstrates how additional parameter can be augmented.
 
 #  The "ietf-schedule" YANG Module {#sec-schedule}
 
@@ -203,22 +267,23 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 --- back
 
-# Examples
+# Examples of Format Representation {#usage}
 
-   The following subsections provide some examples to illustrate the use of the period and recurrence formats defined as
-   YANG groupings. Only the message body is provided with JSON used for encoding {{?RFC7951}}.
+   This section provides some examples to illustrate the use of the
+   period and recurrence formats defined as YANG groupings. Note that "grouping"
+   does not define any nodes in the schema tree, the examples illustrated are
+   just for the ease of understanding. Only the message body is provided with
+   JSON used for encoding {{?RFC7951}}.
 
-## Period of Time
+## The "period-of-time" Grouping
 
    The example of a period that starts at 08:00:00 UTC, on January 1, 2023 and ends at 18:00:00 UTC
    on December 31, 2025 is encoded as follows:
 
 ~~~~
 {
-  "period-of-time": {
-    "period-start": "2023-01-01T08:00:00Z",
-    "period-end": "2025-12-01T18:00:00Z"
-  }
+  "period-start": "2023-01-01T08:00:00Z",
+  "period-end": "2025-12-01T18:00:00Z"
 }
 ~~~~
 
@@ -227,89 +292,193 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 ~~~~
 {
-  "period-of-time": {
-    "period-start": "2023-01-01T08:00:00Z",
-    "period-duration": "P15DT05:20:00"
-  }
+  "period-start": "2023-01-01T08:00:00Z",
+  "duration": "P15DT05:20:00"
 }
 ~~~~
 
-   Now, consider the example of a period that starts at 08:00:00 UTC, on January 1, 2023 and lasts 20 weeks:
+   An example of a period that starts at 2:00 A.M. in Los Angeles on November 19,
+   2023 and lasts 20 weeks:
 
 ~~~~
 {
-  "period-of-time": {
-    "period-start": "2023-01-01T08:00:00Z",
-    "period-duration": "P20W"
-  }
+  "period-start": "2023-11-19T02:00:00",
+  "time-zone-identifier": "America/Los_Angeles",
+  "duration": "P20W"
 }
 ~~~~
 
-## Recurrence Rule
+## The "recurrence" Grouping
 
-  The following snippet can be used to indicate a daily recurrent in December:
+   The following snippet can be used to indicate a every other day recurrence for
+   10 occurrences, starting at 3 p.m. on December 1, 2023 in the Eastern United States time zone:
 
 ~~~~
 {
-  "recurrence": {
-    "freq": "daily",
-    "byyearmonth": [12]
-  }
+  "recurrence-first": {
+    "date-time-start": "2023-11-01T15:00:00",
+    "time-zone-identifier": "America/New_York"
+  },
+  "frequency": "ietf-schedule:daily",
+  "interval": 2,
+  "count": 10
 }
 ~~~~
 
-   The following snippet can be used to indicate 10 occurrences that occur every last Saturday of the month:
+   An example of an anniversary that will occur annually, from 1997-11-25, until 2050-11-25:
 
 ~~~~
 {
-  "recurrence": {
-    "freq": "monthly",
-    "count": 10,
-    "byday": [
-      {
-        "direction": [-1],
-        "weekday": "saturday"
-      }
-    ]
-  }
+  "recurrence-first": {
+    "date-time-start": "1979-11-25"
+  },
+  "frequency": "ietf-schedule:yearly",
+  "until": "2050-11-25"
 }
 ~~~~
 
-   The following indicates the example of a recurrence that occurs on the last workday of the month until December 25, 2023:
+## The "recurrence-with-date-times" Grouping
+
+   The following snippet can be used to indicate a recurrence that occur every 2
+   hours from 9:00 AM to 5:00 PM, and 6PM UTC time on 2023-12-01:
 
 ~~~~
 {
-  "recurrence": {
-    "freq": "monthly",
-    "until": "2023-12-25",
-    "byday": [
-      { "weekday": "monday" },
-      { "weekday": "tuesday" },
-      { "weekday": "wednesday" },
-      { "weekday": "thursday" },
-      { "weekday": "friday" }
-    ],
-    "bysetpos": [-1]
-  }
+  "recurrence-first": {
+    "date-time-start": "2023-12-01T09:00:00Z"
+  },
+  "frequency": "ietf-schedule:hourly",
+  "interval": 2,
+  "until": "2023-12-01T17:00:00Z",
+  "date-times": ["2023-12-01T18:00:00Z"]
 }
 ~~~~
 
+   The following snippet can be used to indicate a recurrence that occur every
+   30 minutes and last for 15 minutes from 9:00 AM to 5:00 PM, and extra two occurrences
+   at 6:00 PM and 6:30 PM with each lasting for 20 minutes on 2023-12-01:
 
-   The following depicts the example of a recurrence that occurs every other week on Tuesday and Sunday, the week starts from Monday:
-
-~~~
+~~~~
 {
-  "recurrence": {
-    "freq": "weekly",
-    "interval": 2,
-    "byday": [
-      { "weekday": "tuesday" },
-      { "weekday": "sunday" }
-    ],
-    "wkst": "monday"
-  }
+  "recurrence-first": {
+    "date-time-start": "2023-12-01T09:00:00Z",
+    "duration": "PT00:00:15"
+  },
+  "frequency": "ietf-schedule:minutely",
+  "interval": 30,
+  "until": "2023-12-01T17:00:00Z",
+  "period": [
+    {
+      "period-start": "2023-12-01T18:00:00Z",
+      "duration": "PT00:00:20"
+    },
+    {
+      "period-start": "2023-12-01T18:30:00Z",
+      "duration": "PT00:00:20"
+    }
+   ]
 }
-~~~
+~~~~
+
+## The "icalendar-recurrence" Grouping
+
+   The following snippet can be used to indicate 10 occurrences that occur at
+   8:00 AM (EST), every last Saturday of the month starting in January 2024:
+
+~~~~
+{
+  "recurrence-first": {
+    "date-time-start": "2024-01-27T08:00:00",
+    "time-zone-identifier": "America/New_York"
+  },
+  "frequency": "ietf-schedule:monthly",
+  "count": 10,
+  "byday": [
+    {
+      "direction": [-1],
+      "weekday": "saturday"
+    }
+  ]
+}
+~~~~
+
+   The following indicates the example of a recurrence that occurs on the last
+   workday of the month until December 25, 2024, from January 1, 2024:
+
+~~~~
+{
+  "recurrence-first": {
+  "date-time-start": "2024-01-01"
+  },
+  "frequency": "ietf-schedule:monthly",
+  "until": "2024-12-25",
+  "byday": [
+    { "weekday": "monday"},
+    { "weekday": "tuesday"},
+    { "weekday": "wednesday"},
+    { "weekday": "thursday"},
+    { "weekday": "friday"}
+  ],
+  "bysetpos": [-1]
+}
+~~~~
+
+  The following snippet can be used to indicate a recurrence that occur every 20
+  minutes from 9:00 AM to 4:40 PM (UTC), with the occurrence starting at 10:20 AM
+  being excluded on 2023-12-01:
+
+~~~~
+{
+  "recurrence-first": {
+  "date-time-start": "2023-12-01T09:00:00Z"
+  },
+  "until": "2023-12-01T16:40:00Z",
+  "frequency": "ietf-schedule:minutely",
+  "byminute": [0, 20, 40],
+  "byhour": [9, 10, 11, 12, 13, 14, 15, 16],
+  "exception-dates": ["2023-12-01T10:20:00Z"]
+}
+~~~~
+
+# Examples of Using/Extending the "ietf-schedule" Module
+
+   This non-normative section shows two examples for how the "ietf-schedule" module
+   can be used or extended for scheduled events or attributes based on date and time.
+
+## Example: Schedule Tasks to Execute Based on a Recurrence Rule {#features}
+
+   Scheduled tasks can be used to execute specific actions based on certain recurrence rules (e.g.,
+   every Friday at 8:00 AM). The following example module which "uses" the "icalendar-recurrence"
+   grouping from "ietf-schedule" module shows how a scheduled task could be defined
+   with different features used for options.
+
+~~~~
+{::include ./yang/example-scheduled-backup.yang}
+~~~~
+
+## Example: Schedule Network Properties to Change Based on Date and Time {#augments}
+
+   Network properties may change over a specific period of time or based on a
+   recurrence rule, e.g., {{?I-D.ietf-tvr-use-cases}}.
+   The following example module which augments the "recurrence-with-date-times"
+   grouping from "ietf-schedule" module shows how a scheduled based attribute
+   could be defined.
+
+~~~~
+{::include ./yang/example-scheduled-link-bandwidth.yang}
+~~~~
+
+  Following is a configuration example which indicates a link's bandwidth is
+  scheduled between 2023/12/01 0:00 UTC to the end of 2023/12/31 with a daily
+  schedule. In each day, the bandwidth value is scheduled to be 500Kbps between
+  1:00 AM to 6:00 AM and 800Kbps between 10:00 PM to 11:00 PM. The bandwidth
+  value that's not covered by the period above is 1000Kbps by default.
+
+~~~~
+{::include ./examples/example-scheduled-link-bandwidth.xml}
+~~~~
+
+# Changes between Revisions
 
 
 # Acknowledgments
