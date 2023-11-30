@@ -7,7 +7,6 @@ module example-scheduled-link-bandwidth {
     prefix "nw";
     reference
       "RFC 8345: A YANG Data Model for Network Topologies";
-
   }
 
   import ietf-schedule {
@@ -23,7 +22,7 @@ module example-scheduled-link-bandwidth {
     "Support at example.com";
 
   description
-    "Example of a module defining an scheduled link bandwidth.";
+    "Example of a module defining a scheduled link bandwidth.";
 
   revision "2023-01-19" {
     description
@@ -49,16 +48,16 @@ module example-scheduled-link-bandwidth {
     list link {
       key "source-node destination-node";
       description
-        "The list of the scheduled link attributes.";
+        "Definition of link attributes.";
       leaf source-node {
         type nw:node-id;
         description
-          "The source node id.";
+          "Indicates the source node identifier.";
       }
       leaf destination-node {
         type nw:node-id;
         description
-          "The destination node id.";
+          "Indicates the source node identifier.";
       }
 
       leaf default-bandwidth {
@@ -70,7 +69,7 @@ module example-scheduled-link-bandwidth {
 
       choice time-variant-type {
         description
-          "The schedule type.";
+          "Controls the schedule type.";
         case period {
           uses schedule:period-of-time;
         }
@@ -78,14 +77,13 @@ module example-scheduled-link-bandwidth {
           uses schedule:recurrence-with-date-times {
             augment "date-times-choice/period-timeticks/period-timeticks" {
               description
-                "Allow the attributes to be specified inside each period
-                 -timesticks entry.";
+                "Specifies the attributes inside each period-timeticks
+                 entry.";
               uses link-bandwidth-grouping;
             }
             augment "date-times-choice/period/period" {
               description
-                "Allow the attributes to be specified inside each period
-                 entry.";
+                "Specifies the attributes within each period entry.";
               uses link-bandwidth-grouping;
             }
           }

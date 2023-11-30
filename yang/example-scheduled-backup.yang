@@ -1,7 +1,7 @@
-module example-scheduled-backup-module {
+module example-scheduled-backup {
   yang-version 1.1;
-  namespace "http://example.com/example-scheduled-backup-module";
-  prefix "exscback";
+  namespace "http://example.com/example-scheduled-backup";
+  prefix "ex-scback";
 
   import ietf-inet-types {
     prefix "inet";
@@ -34,11 +34,11 @@ module example-scheduled-backup-module {
 
     choice local-or-remote {
       description
-        "Specify whether the configuration to be backed up is local or
+        "Specifies whether the configuration to be backed up is local or
          remote.";
       case local {
         description
-          "Configuration parameter for backing up of local device.";
+          "Configuration parameter for backing up of local devices.";
         leaf local {
           type empty;
           description
@@ -48,7 +48,7 @@ module example-scheduled-backup-module {
       }
       case remote {
         description
-          "Configuration parameter for backing up of remote device.";
+          "Configuration parameter for backing up of remote devices.";
         leaf remote {
           type inet:domain-name;
           description
