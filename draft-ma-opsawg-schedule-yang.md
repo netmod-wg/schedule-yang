@@ -382,7 +382,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 ## The "icalendar-recurrence" Grouping
 
-   The following snippet can be used to indicate 10 occurrences that occur at
+   The following snippet indicates 10 occurrences that occur at
    8:00 AM (EST), every last Saturday of the month starting in January 2024:
 
 ~~~~
