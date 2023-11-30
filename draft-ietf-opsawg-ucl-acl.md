@@ -264,29 +264,29 @@ informative:
    based access control management.
 
 ~~~~
-                                         +------------+
+                                         .------------.
                                          |Orchestrator|
-                                         +------+-----+
+                                         '------+-----'
        Service                                  | (Step 1)
-      ------------------------------------------+-------------
+      --------------------------------------------------------
                                                 |
        Network                                  |
                                  (Step 4)       |
-       +-------+        +--------+     +--------+-----------+
+       .-------.        .--------.     .--------+-----------.
        |User #1+--+     | AAA    |     |    SDN Controller  |
-       +-------+  |     | Server +-----+        (PDP)       |
-                  |     +----+---+     +--------+-----------+
+       '-------'  |     | Server +-----+        (PDP)       |
+                  |     '----+---'     '--------+-----------'
                   |          |                  |
-                  |          |           +---------------+(Step 5)
+                  |          |           +------+--------+(Step 5)
         (Step 2)  |          |(Step 3)   |               |
                   |          |           |               |
-                  |        +-+-----------+---------------+------------+
-                  |        | +----------------------+ +--------------+|
-       +-------+  +--------+ | Network Access Server| |firewall, etc.||
-       |User #2+-----------+ |       (NAS)          | +--------------+|
-       +-------+           | +----------------------+                 |
+                  |        .-+-----------+---------------+------------.
+                  |        | .----------------------. .--------------.|
+       .-------.  +--------+ | Network Access Server| |firewall, etc.||
+       |User #2+-----------+ |       (NAS)          | '--------------'|
+       '-------'           | '----------------------'                 |
                            |                     (PEP)                |
-                           +------------------------------------------+
+                           '------------------------------------------'
 ~~~~
 {: #arch title="An Architecture for Group-based Policy Management" artwork-align="center"}
 
@@ -408,8 +408,12 @@ informative:
    The first part of the data model augments the "acl" list in the
    IETF ACL model {{!RFC8519}} with a "endpoint-groups" container
    having a list of "endpoint group" inside, each entry has a "group-id" that uniquely
-   identifies the endpoint group. The choice statement controls the selection
-   of group type between "user-group" or "device-group".
+   identifies the endpoint group.
+
+> "group-id" is defined as a string rather than uint to accommodate deployments which require some identification hierarchy within a domain. Such a hierarchy is meant to ease coordination within an administrative domain. There might be cases where a domain needs to tag packets with the group they belong to. The tagging does not need to mirror exactly the "group id" used to populate the policy. Future augmentation may be considered in the future to cover encapsulation considerations.
+
+   The choice statement controls the selection of group type between
+   "user-group" or "device-group".
 
    The second part of the data model augments the "matches" container in the IETF
    ACL model {{!RFC8519}} so that a source and/or destination endpoint group index
