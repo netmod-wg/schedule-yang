@@ -99,7 +99,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 #  Module Overview
 
-   The "ietf-schedule" module defines the following "grouping" statement:
+   The "ietf-schedule" module defines the following groupings:
 
    * period-of-time
    * recurrence
