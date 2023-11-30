@@ -277,32 +277,32 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 ## The "period-of-time" Grouping
 
-   The example of a period that starts at 08:00:00 UTC, on January 1, 2023 and ends at 18:00:00 UTC
-   on December 31, 2025 is encoded as follows:
+   The example of a period that starts at 08:00:00 UTC, on January 1, 2025 and ends at 18:00:00 UTC
+   on December 31, 2027 is encoded as follows:
 
 ~~~~
 {
-  "period-start": "2023-01-01T08:00:00Z",
-  "period-end": "2025-12-01T18:00:00Z"
+  "period-start": "2025-01-01T08:00:00Z",
+  "period-end": "2027-12-01T18:00:00Z"
 }
 ~~~~
 
-   An example of a period that starts at 08:00:00 UTC, on January 1, 2023 and lasts 15 days and
+   An example of a period that starts at 08:00:00 UTC, on January 1, 2025 and lasts 15 days and
    5 hours and 20 minutes is encoded as follows:
 
 ~~~~
 {
-  "period-start": "2023-01-01T08:00:00Z",
+  "period-start": "2025-01-01T08:00:00Z",
   "duration": "P15DT05:20:00"
 }
 ~~~~
 
    An example of a period that starts at 2:00 A.M. in Los Angeles on November 19,
-   2023 and lasts 20 weeks:
+   2025 and lasts 20 weeks:
 
 ~~~~
 {
-  "period-start": "2023-11-19T02:00:00",
+  "period-start": "2025-11-19T02:00:00",
   "time-zone-identifier": "America/Los_Angeles",
   "duration": "P20W"
 }
@@ -310,13 +310,13 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 ## The "recurrence" Grouping
 
-   The following snippet can be used to indicate a every other day recurrence for
-   10 occurrences, starting at 3 p.m. on December 1, 2023 in the Eastern United States time zone:
+   The following snippet indicates a every other day recurrence for
+   10 occurrences, starting at 3 p.m. on December 1, 2025 in the Eastern United States time zone:
 
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2023-11-01T15:00:00",
+    "date-time-start": "2025-11-01T15:00:00",
     "time-zone-identifier": "America/New_York"
   },
   "frequency": "ietf-schedule:daily",
@@ -339,41 +339,41 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 ## The "recurrence-with-date-times" Grouping
 
-   The following snippet can be used to indicate a recurrence that occurs every 2
-   hours from 9:00 AM to 5:00 PM, and 6PM UTC time on 2023-12-01:
+   The following snippet indicates a recurrence that occurs every 2
+   hours from 9:00 AM to 5:00 PM, and 6PM UTC time on 2025-12-01:
 
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2023-12-01T09:00:00Z"
+    "date-time-start": "2025-12-01T09:00:00Z"
   },
   "frequency": "ietf-schedule:hourly",
   "interval": 2,
-  "until": "2023-12-01T17:00:00Z",
-  "date-times": ["2023-12-01T18:00:00Z"]
+  "until": "2025-12-01T17:00:00Z",
+  "date-times": ["2025-12-01T18:00:00Z"]
 }
 ~~~~
 
-   The following snippet can be used to indicate a recurrence that occurs every
+   The following snippet indicates a recurrence that occurs every
    30 minutes and last for 15 minutes from 9:00 AM to 5:00 PM, and extra two occurrences
-   at 6:00 PM and 6:30 PM with each lasting for 20 minutes on 2023-12-01:
+   at 6:00 PM and 6:30 PM with each lasting for 20 minutes on 2025-12-01:
 
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2023-12-01T09:00:00Z",
+    "date-time-start": "2025-12-01T09:00:00Z",
     "duration": "PT00:00:15"
   },
   "frequency": "ietf-schedule:minutely",
   "interval": 30,
-  "until": "2023-12-01T17:00:00Z",
+  "until": "2025-12-01T17:00:00Z",
   "period": [
     {
-      "period-start": "2023-12-01T18:00:00Z",
+      "period-start": "2025-12-01T18:00:00Z",
       "duration": "PT00:00:20"
     },
     {
-      "period-start": "2023-12-01T18:30:00Z",
+      "period-start": "2025-12-01T18:30:00Z",
       "duration": "PT00:00:20"
     }
    ]
@@ -423,20 +423,20 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 }
 ~~~~
 
-  The following snippet can be used to indicate a recurrence that occur every 20
+  The following snippet indicates a recurrence that occur every 20
   minutes from 9:00 AM to 4:40 PM (UTC), with the occurrence starting at 10:20 AM
-  being excluded on 2023-12-01:
+  being excluded on 2025-12-01:
 
 ~~~~
 {
   "recurrence-first": {
-  "date-time-start": "2023-12-01T09:00:00Z"
+    "date-time-start": "2025-12-01T09:00:00Z"
   },
-  "until": "2023-12-01T16:40:00Z",
+  "until": "2025-12-01T16:40:00Z",
   "frequency": "ietf-schedule:minutely",
   "byminute": [0, 20, 40],
   "byhour": [9, 10, 11, 12, 13, 14, 15, 16],
-  "exception-dates": ["2023-12-01T10:20:00Z"]
+  "exception-dates": ["2025-12-01T10:20:00Z"]
 }
 ~~~~
 
@@ -475,7 +475,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   value that's not covered by the period above is 1000Kbps by default.
 
 ~~~~
-{::include ./examples/example-scheduled-link-bandwidth.xml}
+{::include-fold ./examples/example-scheduled-link-bandwidth.xml}
 ~~~~
 
 # Changes between Revisions
