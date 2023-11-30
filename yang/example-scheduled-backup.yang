@@ -1,0 +1,77 @@
+module example-scheduled-backup-module {
+  yang-version 1.1;
+  namespace "http://example.com/example-scheduled-backup-module";
+  prefix "exscback";
+
+  import ietf-inet-types {
+    prefix "inet";
+  }
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  organization
+    "Example, Inc.";
+
+  contact
+    "Support at example.com";
+
+  description
+    "Example of a module defining an scheduled based backup operation.";
+
+  revision "2023-01-19" {
+    description
+      "Initial Version.";
+    reference
+      "RFC XXXX: A YANG Data Model for Scheduling.";
+    }
+
+  container scheduled-backup-tasks {
+    description
+      "A container for backing up all current running configuration
+       on the device.";
+
+    choice local-or-remote {
+      description
+        "Specify whether the configuration to be backed up is local or
+         remote.";
+      case local {
+        description
+          "Configuration parameter for backing up of local device.";
+        leaf local {
+          type empty;
+          description
+            "The parameter specifies the configuration to be backed up
+             is on the local device.";
+        }
+      }
+      case remote {
+        description
+          "Configuration parameter for backing up of remote device.";
+        leaf remote {
+          type inet:domain-name;
+          description
+            "The parameter specifies the remote device domain name.";
+        }
+      }
+    }
+    
+    container basic-recurrence-schedules {
+      if-feature schedule:basic-recurrence-supported;
+      description
+        "Basic recurrence schedule specification, only applies when 
+         schedule:basic-recurrence-supported feaure is supported.";
+      uses schedule:recurrence;
+    }
+
+    container icalendar-recurrence-schedules {
+      if-feature schedule:icalendar-recurrence-supported;    
+      description
+        "Basic recurrence schedule specification, only applies when 
+         schedule:icalendar-recurrence-supported feaure is supported.";
+      uses schedule:icalendar-recurrence;
+    }
+  }
+}
+
