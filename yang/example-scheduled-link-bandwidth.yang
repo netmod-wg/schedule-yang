@@ -1,7 +1,7 @@
 module example-scheduled-link-bandwidth {
   yang-version 1.1;
   namespace "http://example.com/example-scheduled-link-bandwidth";
-  prefix "exscattr";
+  prefix "ex-scattr";
 
   import ietf-network {
     prefix "nw";
