@@ -1,6 +1,6 @@
 ---
-title: "A YANG Data Model for Scheduling"
-abbrev: "schedule YANG"
+title: "A Common YANG Data Model for Scheduling"
+abbrev: "Common Schedule YANG"
 category: std
 
 docname: draft-ma-opsawg-schedule-yang-latest
@@ -56,7 +56,8 @@ informative:
 
    This document defines a common schedule YANG module which is
    designed to be applicable for scheduling information such as event, policy,
-   services, or resources based on date and time.
+   services, or resources based on date and time. For the sake of better modularity,
+   the module includes basic, intermediate, and advanced version of scheduling groupings.
 
 --- middle
 
