@@ -339,7 +339,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 ## The "recurrence-with-date-times" Grouping
 
-   The following snippet can be used to indicate a recurrence that occur every 2
+   The following snippet can be used to indicate a recurrence that occurs every 2
    hours from 9:00 AM to 5:00 PM, and 6PM UTC time on 2023-12-01:
 
 ~~~~
