@@ -19,33 +19,53 @@ module: ietf-ucl-acl
     +--rw time-range {time-condition}?
        +--rw (time-range-type)?
           +--:(periodic-range)
-          |  +--rw recurrence
-          |     +--rw freq           enumeration
-          |     +--rw (recurrence-bound)?
-          |     |  +--:(until)
-          |     |  |  +--rw until?   union
-          |     |  +--:(count)
-          |     |     +--rw count?   uint32
-          |     +--rw interval?      uint32
-          |     +--rw bysecond*      uint32
-          |     +--rw byminute*      uint32
-          |     +--rw byhour*        uint32
-          |     +--rw byday* [weekday]
-          |     |  +--rw direction*   int32
-          |     |  +--rw weekday      schedule:weekday
-          |     +--rw bymonthday*    int32
-          |     +--rw byyearday*     int32
-          |     +--rw byyearweek*    int32
-          |     +--rw byyearmonth*   uint32
-          |     +--rw bysetpos*      int32
-          |     +--rw wkst*          schedule:weekday
-          |     +--rw duration?      schedule:duration
+          |  +--rw recurrence-first
+          |  |  +--rw date-time-start?        union
+          |  |  +--rw time-zone-identifier?   sys:timezone-name
+          |  |  +--rw duration?               duration
+          |  +--rw frequency?                identityref
+          |  +--rw interval?                 uint32
+          |  +--rw (recurrence-bound)?
+          |  |  +--:(until)
+          |  |  |  +--rw until?              union
+          |  |  +--:(count)
+          |  |     +--rw count?              uint32
+          |  +--rw (date-times-choice)?
+          |  |  +--:(date-time)
+          |  |  |  +--rw date-times*         yang:date-and-time
+          |  |  +--:(date)
+          |  |  |  +--rw dates*              yang:date-no-zone
+          |  |  +--:(period-timeticks)
+          |  |  |  +--rw period-timeticks* [period-start]
+          |  |  |     +--rw period-start    yang:timeticks
+          |  |  |     +--rw period-end?     yang:timeticks
+          |  |  +--:(period)
+          |  |     +--rw period* [period-start]
+          |  |        +--rw period-start            yang:date-and-time
+          |  |        +--rw time-zone-identifier?   sys:timezone-name
+          |  |        +--rw (period-type)?
+          |  |           +--:(explicit)
+          |  |           |  +--rw period-end?       yang:date-and-time
+          |  |           +--:(duration)
+          |  |              +--rw duration?         duration
+          |  +--rw bysecond*                 uint32
+          |  +--rw byminute*                 uint32
+          |  +--rw byhour*                   uint32
+          |  +--rw byday* [weekday]
+          |  |  +--rw direction*   int32
+          |  |  +--rw weekday      schedule:weekday
+          |  +--rw bymonthday*               int32
+          |  +--rw byyearday*                int32
+          |  +--rw byyearweek*               int32
+          |  +--rw byyearmonth*              uint32
+          |  +--rw bysetpos*                 int32
+          |  +--rw workweek-start?           schedule:weekday
+          |  +--rw exception-dates*          union
           +--:(absolute-range)
-             +--rw period-of-time
-                +--rw (forms)?
-                   +--:(period-explicit)
-                   |  +--rw explicit-start?   yang:date-and-time
-                   |  +--rw explicit-end?     yang:date-and-time
-                   +--:(period-start)
-                      +--rw start?            yang:date-and-time
-                      +--rw duration?         duration
+             +--rw period-start?             yang:date-and-time
+             +--rw time-zone-identifier?     sys:timezone-name
+             +--rw (period-type)?
+                +--:(explicit)
+                |  +--rw period-end?         yang:date-and-time
+                +--:(duration)
+                   +--rw duration?           duration
