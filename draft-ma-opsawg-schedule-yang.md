@@ -96,9 +96,7 @@ services or resources based on date and time.
 
 Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950}}.
 
-#  Modules Overview
-
-##  The Schedule YANG Module
+#  Module Overview
 
    This module defines two groupings "period" and "recurrence", which conform to
    the definition of the "period of time" and "recurrence rule" formats defined in
@@ -144,12 +142,72 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    a "byday" data node is specified. This is also significant when in a "yearly" rule
    and a "byyearweek" is specified. The default value is "monday".
 
-## Examples
+
+#  The "ietf-schedule" YANG Module {#sec-schedule}
+
+   This module imports types defined in {{!I-D.ietf-netmod-rfc6991-bis}}.
+
+~~~~
+<CODE BEGINS> file "ietf-schedule@2023-01-19.yang"
+{::include ./yang/ietf-schedule.yang}
+<CODE ENDS>
+~~~~
+
+# Security Considerations
+
+   The "ietf-schedule" YANG module specified in this document defines schema for data
+   that is designed to be accessed via network management protocols such
+   as NETCONF {{!RFC6241}} or RESTCONF {{!RFC8040}}.  The lowest NETCONF layer
+   is the secure transport layer, and the mandatory-to-implement secure
+   transport is Secure Shell (SSH) {{!RFC6242}}.  The lowest RESTCONF layer
+   is HTTPS, and the mandatory-to-implement secure transport is TLS
+   {{!RFC8446}}.
+
+   The Network Configuration Access Control Model (NACM) {{!RFC8341}}
+   provides the means to restrict access for particular NETCONF or
+   RESTCONF users to a preconfigured subset of all available NETCONF or
+   RESTCONF protocol operations and content.
+
+   The "ietf-schedule" module defines a set of types and
+   groupings.  These nodes are intended to be reused by other YANG
+   modules.  The module by itself does not expose any data nodes that
+   are writable, data nodes that contain read-only state, or RPCs.  As
+   such, there are no additional security issues related to the "ietf-
+   schedule" module that need to be considered.
+
+#  IANA Considerations
+
+##  The "IETF XML" Registry
+
+   This document registers the following URI in the "IETF XML Registry" {{!RFC3688}}.
+
+~~~~
+        URI: urn:ietf:params:xml:ns:yang:ietf-schedule
+        Registrant Contact: The IESG.
+        XML: N/A, the requested URI is an XML namespace.
+~~~~
+
+##  The "YANG Module Names" Registry
+
+   This document registers the following YANG module in the "YANG Module Names"
+   registry {{!RFC6020}}.
+
+~~~~
+        name:               ietf-schedule
+        namespace:          urn:ietf:params:xml:ns:yang:ietf-schedule
+        prefix:             schedule
+        maintained by IANA: N
+        reference:          RFC XXXX
+~~~~
+
+--- back
+
+# Examples
 
    The following subsections provide some examples to illustrate the use of the period and recurrence formats defined as
    YANG groupings. Only the message body is provided with JSON used for encoding {{?RFC7951}}.
 
-### Period of Time
+## Period of Time
 
    The example of a period that starts at 08:00:00 UTC, on January 1, 2023 and ends at 18:00:00 UTC
    on December 31, 2025 is encoded as follows:
@@ -186,7 +244,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 }
 ~~~~
 
-### Recurrence Rule
+## Recurrence Rule
 
   The following snippet can be used to indicate a daily recurrent in December:
 
@@ -251,68 +309,6 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   }
 }
 ~~~
-
-
-#  The "ietf-schedule" YANG Module {#sec-schedule}
-
-   This module imports types defined in {{!I-D.ietf-netmod-rfc6991-bis}}.
-
-~~~~
-<CODE BEGINS> file "ietf-schedule@2023-01-19.yang"
-{::include ./yang/ietf-schedule.yang}
-<CODE ENDS>
-~~~~
-
-# Security Considerations
-
-   The "ietf-schedule" YANG module specified in this document defines schema for data
-   that is designed to be accessed via network management protocols such
-   as NETCONF {{!RFC6241}} or RESTCONF {{!RFC8040}}.  The lowest NETCONF layer
-   is the secure transport layer, and the mandatory-to-implement secure
-   transport is Secure Shell (SSH) {{!RFC6242}}.  The lowest RESTCONF layer
-   is HTTPS, and the mandatory-to-implement secure transport is TLS
-   {{!RFC8446}}.
-
-   The Network Configuration Access Control Model (NACM) {{!RFC8341}}
-   provides the means to restrict access for particular NETCONF or
-   RESTCONF users to a preconfigured subset of all available NETCONF or
-   RESTCONF protocol operations and content.
-
-   The "ietf-schedule" module defines a set of types and
-   groupings.  These nodes are intended to be reused by other YANG
-   modules.  The module by itself does not expose any data nodes that
-   are writable, data nodes that contain read-only state, or RPCs.  As
-   such, there are no additional security issues related to the "ietf-
-   schedule" module that need to be considered.
-
-#  IANA Considerations
-
-##  The "IETF XML" Registry
-
-   This document registers the following URI in the "IETF XML Registry" {{!RFC3688}}.
-
-~~~~
-        URI: urn:ietf:params:xml:ns:yang:ietf-schedule
-        Registrant Contact: The IESG.
-        XML: N/A, the requested URI is an XML namespace.
-~~~~
-
-##  The "YANG Module Names" Registry
-
-   This document registers the following YANG module in the "YANG Module Names"
-   registry {{!RFC6020}}.
-
-~~~~
-        name:               ietf-schedule
-        namespace:          urn:ietf:params:xml:ns:yang:ietf-schedule
-        prefix:             schedule
-        maintained by IANA: N
-        reference:          RFC XXXX
-~~~~
-
---- back
-
-# Changes between Revisions
 
 
 # Acknowledgments
