@@ -123,7 +123,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    either a start ("period-start") and end date and time ("period-end"), or a
    start ("period-start") and a positive time duration ("duration"). For the first
    format, the start of the period MUST be before the end of the period
-   {{Section 3.3.9 of ?RFC5545}}.
+   {{Section 3.3.9 of !RFC5545}}.
 
 ## The "recurrence" Grouping
 
