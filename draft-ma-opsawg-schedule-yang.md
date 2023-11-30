@@ -402,7 +402,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 }
 ~~~~
 
-   The following indicates the example of a recurrence that occurs on the last
+   The following is an example of a recurrence that occurs on the last
    workday of the month until December 25, 2024, from January 1, 2024:
 
 ~~~~
