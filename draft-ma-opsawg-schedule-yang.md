@@ -161,7 +161,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
   The "icalendar-recurrence" grouping uses the "recurrence-with-date-times" grouping
   and add more data nodes to enrich the definition of recurrence. It conforms to
-  the definition of recurrence component defined in {{Section 3.8.5 of ?RFC5545}}.
+  the definition of recurrence component defined in {{Section 3.8.5 of !RFC5545}}.
 
    An array of the "bysecond" (or "byminut", "byhour") specifies a list of
    seconds within a minute (or minutes within an hour, hours of the day).
