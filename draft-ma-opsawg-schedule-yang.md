@@ -114,7 +114,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 ~~~~
 {: #schedule-tree title="Schedule Tree Structure" artwork-align="center"}
 
-   Each of these groupings are presented in the following subsections. Examples
+   Each of these groupings is presented in the following subsections. Examples
    are provided in {{usage}}.
 
 ## The "period-of-time" Grouping
