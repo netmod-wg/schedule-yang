@@ -354,7 +354,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 }
 ~~~~
 
-   The following snippet can be used to indicate a recurrence that occur every
+   The following snippet can be used to indicate a recurrence that occurs every
    30 minutes and last for 15 minutes from 9:00 AM to 5:00 PM, and extra two occurrences
    at 6:00 PM and 6:30 PM with each lasting for 20 minutes on 2023-12-01:
 
