@@ -44,7 +44,7 @@ module example-scheduled-link-bandwidth {
 
   container link-attributes {
     description
-      "The container for the link attributes definition.";
+      "Definition of link attributes.";
     list link {
       key "source-node destination-node";
       description
