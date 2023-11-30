@@ -119,7 +119,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 ## The "period-of-time" Grouping
 
-   The "period-of-time" grouping allows a time period to be represented using
+   The "period-of-time" grouping represents a time period using
    either a start ("period-start") and end date and time ("period-end"), or a
    start ("period-start") and a positive time duration ("duration"). For the first
    format, the start of the period MUST be before the end of the period
