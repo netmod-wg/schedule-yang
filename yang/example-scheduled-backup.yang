@@ -38,7 +38,7 @@ module example-scheduled-backup {
          remote.";
       case local {
         description
-          "Configuration parameter for backing up of local devices.";
+          "Configuration parameters for backing up of local devices.";
         leaf local {
           type empty;
           description
@@ -48,7 +48,7 @@ module example-scheduled-backup {
       }
       case remote {
         description
-          "Configuration parameter for backing up of remote devices.";
+          "Configuration parameters for backing up of remote devices.";
         leaf remote {
           type inet:domain-name;
           description
