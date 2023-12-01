@@ -114,7 +114,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 ~~~~
 {::include ./yang/schedule/overall.txt}
 ~~~~
-{: #schedule-tree title="Overall Schedule Tree Structure" artwork-align="Left"}
+{: #schedule-tree title="Overall Schedule Tree Structure"}
 
    Each of these groupings is presented in the following subsections. Examples
    are provided in {{usage}}.
@@ -131,7 +131,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 ~~~~
 {::include ./yang/schedule/period-grp.txt}
 ~~~~
-{: #pt-tree title="Period of Time Grouping Tree Structure" artwork-align="Left"}
+{: #pt-tree title="Period of Time Grouping Tree Structure"}
 
 
 ## The "recurrence" Grouping {#sec-rec}
@@ -142,7 +142,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 ~~~~
 {::include ./yang/schedule/rec-grp.txt}
 ~~~~
-{: #rec-grp-tree title="Recurrence Grouping Tree Structure" artwork-align="Left"}
+{: #rec-grp-tree title="Recurrence Grouping Tree Structure"}
 
   The "recurrence-first" container defines the first instance in the recurrence set.
   It also determines the start time and duration (if specified) of subsequent recurrence instances. If the
@@ -167,7 +167,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 ~~~~
 {::include ./yang/schedule/rec-dt-grp.txt}
 ~~~~
-{: #rec-dt-grp-tree title="Recurrence with Date Times Grouping Tree Structure" artwork-align="Left"}
+{: #rec-dt-grp-tree title="Recurrence with Date Times Grouping Tree Structure"}
 
   The recurrence instances are defined by the union of occurrences defined by
   both date-times and recurrence rule. When duplicate instances are generated,
@@ -186,7 +186,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 ~~~~
 {::include ./yang/schedule/ical-grp.txt}
 ~~~~
-{: #ical-grp-tree title="iCalendar Recurrence Grouping Tree Structure" artwork-align="Left"}
+{: #ical-grp-tree title="iCalendar Recurrence Grouping Tree Structure"}
 
    An array of the "bysecond" (or "byminut", "byhour") specifies a list of
    seconds within a minute (or minutes within an hour, hours of the day).
@@ -311,7 +311,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "period-end": "2027-12-01T18:00:00Z"
 }
 ~~~~
-{: #ex-1 title="Simple Start/End Schedule" artwork-align="Left"}
+{: #ex-1 title="Simple Start/End Schedule"}
 
    An example of a period that starts at 08:00:00 UTC, on January 1, 2025 and lasts 15 days and
    5 hours and 20 minutes is encoded as shown in {{ex-2}}.
@@ -322,7 +322,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "duration": "P15DT05:20:00"
 }
 ~~~~
-{: #ex-2 title="Simple Schedule with Duration" artwork-align="Left"}
+{: #ex-2 title="Simple Schedule with Duration"}
 
    An example of a period that starts at 2:00 A.M. in Los Angeles on November 19,
    2025 and lasts 20 weeks is depicted in {{ex-3}}.
@@ -334,7 +334,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "duration": "P20W"
 }
 ~~~~
-{: #ex-3 title="Simple Schedule with Time Zone Indication" artwork-align="Left"}
+{: #ex-3 title="Simple Schedule with Time Zone Indication"}
 
 ## The "recurrence" Grouping
 
@@ -352,7 +352,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "count": 10
 }
 ~~~~
-{: #ex-4 title="Simple Schedule with Recurrence" artwork-align="Left"}
+{: #ex-4 title="Simple Schedule with Recurrence"}
 
    {{ex-5}} illustrates an example of an anniversary that will occur annually, from 1997-11-25, until 2050-11-25:
 
@@ -365,7 +365,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "until": "2050-11-25"
 }
 ~~~~
-{: #ex-5 title="Simple Schedule with Recurrence and End Date" artwork-align="Left"}
+{: #ex-5 title="Simple Schedule with Recurrence and End Date"}
 
 ## The "recurrence-with-date-times" Grouping
 
@@ -383,7 +383,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "date-times": ["2025-12-01T18:00:00Z"]
 }
 ~~~~
-{: #ex-6 title="Example of Recurrence With Date Times" artwork-align="Left"}
+{: #ex-6 title="Example of Recurrence With Date Times"}
 
 
    {{ex-7}} indicates a recurrence that occurs every
@@ -411,7 +411,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    ]
 }
 ~~~~
-{: #ex-7 title="Example of Advanced Recurrence Schedule" artwork-align="Left"}
+{: #ex-7 title="Example of Advanced Recurrence Schedule"}
 
 ## The "icalendar-recurrence" Grouping
 
@@ -434,7 +434,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   ]
 }
 ~~~~
-{: #ex-8 title="Simple iCalendar Recurrence" artwork-align="Left"}
+{: #ex-8 title="Simple iCalendar Recurrence"}
 
    {{ex-9}} is an example of a recurrence that occurs on the last
    workday of the month until December 25, 2024, from January 1, 2024:
@@ -456,7 +456,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "bysetpos": [-1]
 }
 ~~~~
-{: #ex-9 title="Example of Advanced iCalendar Recurrence" artwork-align="Left"}
+{: #ex-9 title="Example of Advanced iCalendar Recurrence"}
 
   {{ex-10}} indicates a recurrence that occur every 20
   minutes from 9:00 AM to 4:40 PM (UTC), with the occurrence starting at 10:20 AM
@@ -474,7 +474,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "exception-dates": ["2025-12-01T10:20:00Z"]
 }
 ~~~~
-{: #ex-10 title="Example of Advanced iCalendar Recurrence with Exceptions" artwork-align="Left"}
+{: #ex-10 title="Example of Advanced iCalendar Recurrence with Exceptions"}
 
 
 # Examples of Using/Extending the "ietf-schedule" Module {#sec-ext}
@@ -514,7 +514,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 ~~~~
 {::include-fold ./examples/example-scheduled-link-bandwidth.xml}
 ~~~~
-{: #ex-11 title="Example of Scheduled Link's Bandwidth" artwork-align="Left"}
+{: #ex-11 title="Example of Scheduled Link's Bandwidth"}
 
 
 # Acknowledgments
