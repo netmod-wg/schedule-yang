@@ -1,0 +1,16 @@
+module: ietf-schedule
+
+  grouping period-of-time:
+    +-- period-start?           yang:date-and-time
+    +-- time-zone-identifier?   sys:timezone-name
+    +-- (period-type)?
+       +--:(explicit)
+       |  +-- period-end?       yang:date-and-time
+       +--:(duration)
+          +-- duration?         duration
+  grouping recurrence:
+    ...
+  grouping recurrence-with-date-times:
+    ...
+  grouping icalendar-recurrence:
+    ...
