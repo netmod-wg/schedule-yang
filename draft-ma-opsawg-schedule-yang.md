@@ -112,7 +112,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    the "ietf-schedule" module in terms of its groupings.
 
 ~~~~
-{::include ./yang/schedule/overall.txt
+{::include ./yang/schedule/overall.txt}
 ~~~~
 {: #schedule-tree title="Overall Schedule Tree Structure" artwork-align="center"}
 
