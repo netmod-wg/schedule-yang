@@ -73,7 +73,7 @@ policy and OAM tests, this document defines "ietf-schedule" as a common schedule
 are designed to be applicable for scheduling information such as event, policy,
 services or resources based on date and time.
 
-Examples to illustrate the use of the common groupings are provided in {{usage}}. Also, sample modules to exemplify how future module can use the extensibility provisions in "ietf-schedule" are provided in {{sec-ext}}.
+Examples to illustrate the use of the common groupings are provided in {{usage}}. Also, sample modules to exemplify how future modules can use the extensibility provisions in "ietf-schedule" are provided in {{sec-ext}}.
 
 ## Editorial Note (To be removed by RFC Editor)
 
