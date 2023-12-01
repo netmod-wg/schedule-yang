@@ -278,7 +278,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 ## The "period-of-time" Grouping
 
    The example of a period that starts at 08:00:00 UTC, on January 1, 2025 and ends at 18:00:00 UTC
-   on December 31, 2027 is encoded as follows:
+   on December 31, 2027 is encoded as shown in {{ex-1}}.
 
 ~~~~
 {
@@ -286,9 +286,10 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "period-end": "2027-12-01T18:00:00Z"
 }
 ~~~~
+{: #ex-1 title="Simple Start/End Schedule" artwork-align="center"}
 
    An example of a period that starts at 08:00:00 UTC, on January 1, 2025 and lasts 15 days and
-   5 hours and 20 minutes is encoded as follows:
+   5 hours and 20 minutes is encoded as shown in {{ex-2}}.
 
 ~~~~
 {
@@ -296,9 +297,10 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "duration": "P15DT05:20:00"
 }
 ~~~~
+{: #ex-2 title="Simple Schedule with Duration" artwork-align="center"}
 
    An example of a period that starts at 2:00 A.M. in Los Angeles on November 19,
-   2025 and lasts 20 weeks:
+   2025 and lasts 20 weeks is depicted in {{ex-3}}.
 
 ~~~~
 {
@@ -307,10 +309,11 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "duration": "P20W"
 }
 ~~~~
+{: #ex-3 title="Simple Schedule with Time Zone Indication" artwork-align="center"}
 
 ## The "recurrence" Grouping
 
-   The following snippet indicates a recurrence of every 2 days for
+   {{ex-4}} indicates a recurrence of every 2 days for
    10 occurrences, starting at 3 p.m. on December 1, 2025 in the Eastern United States time zone:
 
 ~~~~
@@ -324,8 +327,9 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "count": 10
 }
 ~~~~
+{: #ex-4 title="Simple Schedule with Recurrence" artwork-align="center"}
 
-   An example of an anniversary that will occur annually, from 1997-11-25, until 2050-11-25:
+   {{ex-5}} illustrates an example of an anniversary that will occur annually, from 1997-11-25, until 2050-11-25:
 
 ~~~~
 {
@@ -336,10 +340,11 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "until": "2050-11-25"
 }
 ~~~~
+{: #ex-5 title="Simple Schedule with Recurrence and End Date" artwork-align="center"}
 
 ## The "recurrence-with-date-times" Grouping
 
-   The following snippet indicates a recurrence that occurs every 2
+   {{ex-6}} indicates a recurrence that occurs every 2
    hours from 9:00 AM to 5:00 PM, and 6PM UTC time on 2025-12-01:
 
 ~~~~
@@ -353,8 +358,10 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "date-times": ["2025-12-01T18:00:00Z"]
 }
 ~~~~
+{: #ex-6 title="Example of Recurrence With Date Times" artwork-align="center"}
 
-   The following snippet indicates a recurrence that occurs every
+
+   {{ex-7}} indicates a recurrence that occurs every
    30 minutes and last for 15 minutes from 9:00 AM to 5:00 PM, and extra two occurrences
    at 6:00 PM and 6:30 PM with each lasting for 20 minutes on 2025-12-01:
 
@@ -379,10 +386,11 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    ]
 }
 ~~~~
+{: #ex-7 title="Example of Advanced Recurrence Schedule" artwork-align="center"}
 
 ## The "icalendar-recurrence" Grouping
 
-   The following snippet indicates 10 occurrences that occur at
+   {{ex-8}} indicates 10 occurrences that occur at
    8:00 AM (EST), every last Saturday of the month starting in January 2024:
 
 ~~~~
@@ -401,8 +409,9 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   ]
 }
 ~~~~
+{: #ex-8 title="Simple iCalendar Recurrence" artwork-align="center"}
 
-   The following is an example of a recurrence that occurs on the last
+   {{ex-9}} is an example of a recurrence that occurs on the last
    workday of the month until December 25, 2024, from January 1, 2024:
 
 ~~~~
@@ -422,8 +431,9 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "bysetpos": [-1]
 }
 ~~~~
+{: #ex-9 title="Example of Advanced iCalendar Recurrence" artwork-align="center"}
 
-  The following snippet indicates a recurrence that occur every 20
+  {{ex-10}} indicates a recurrence that occur every 20
   minutes from 9:00 AM to 4:40 PM (UTC), with the occurrence starting at 10:20 AM
   being excluded on 2025-12-01:
 
@@ -439,6 +449,8 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "exception-dates": ["2025-12-01T10:20:00Z"]
 }
 ~~~~
+{: #ex-10 title="Example of Advanced iCalendar Recurrence with Exceptions" artwork-align="center"}
+
 
 # Examples of Using/Extending the "ietf-schedule" Module
 
@@ -468,15 +480,16 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 {::include ./yang/example-scheduled-link-bandwidth.yang}
 ~~~~
 
-  Following is a configuration example which indicates a link's bandwidth is
+  {{ex-11}} shows a configuration example of a link's bandwidth that is
   scheduled between 2023/12/01 0:00 UTC to the end of 2023/12/31 with a daily
   schedule. In each day, the bandwidth value is scheduled to be 500Kbps between
-  1:00 AM to 6:00 AM and 800Kbps between 10:00 PM to 11:00 PM. The bandwidth
-  value that's not covered by the period above is 1000Kbps by default.
+  1:00 AM to 6:00 AM and 800 Kbps between 10:00 PM to 11:00 PM. The bandwidth
+  value that's not covered by the period above is 1000 Kbps by default.
 
 ~~~~
 {::include-fold ./examples/example-scheduled-link-bandwidth.xml}
 ~~~~
+{: #ex-11 title="Example of Scheduled Link's Bandwidth" artwork-align="center"}
 
 # Changes between Revisions
 
