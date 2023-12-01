@@ -313,7 +313,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 ## The "recurrence" Grouping
 
-   {{ex-4}} indicates a every other day recurrence for
+   {{ex-4}} indicates a recurrence of every 2 days for
    10 occurrences, starting at 3 p.m. on December 1, 2025 in the Eastern United States time zone:
 
 ~~~~
