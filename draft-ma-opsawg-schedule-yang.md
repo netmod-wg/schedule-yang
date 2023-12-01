@@ -129,7 +129,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 
 ~~~~
-{::include ./yang/schedule/period-grp.txt
+{::include ./yang/schedule/period-grp.txt}
 ~~~~
 {: #pt-tree title="Period of Time Grouping Tree Structure" artwork-align="center"}
 
@@ -140,7 +140,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   conforms to part of the "recurrence rule" properties in {{Section 3.3.10 of !RFC5545}}.
 
 ~~~~
-{::include ./yang/schedule/rec-grp.txt
+{::include ./yang/schedule/rec-grp.txt}
 ~~~~
 {: #rec-grp-tree title="Recurrence Grouping Tree Structure" artwork-align="center"}
 
@@ -165,7 +165,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   adds a "date-times-choice" statement to define an aggregate set of repeating occurrences.
 
 ~~~~
-{::include ./yang/schedule/rec-dt-grp.txt
+{::include ./yang/schedule/rec-dt-grp.txt}
 ~~~~
 {: #rec-dt-grp-tree title="Recurrence with Date Times Grouping Tree Structure" artwork-align="center"}
 
@@ -184,7 +184,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   the definition of recurrence component defined in {{Section 3.8.5 of !RFC5545}}.
 
 ~~~~
-{::include ./yang/schedule/ical-grp.txt
+{::include ./yang/schedule/ical-grp.txt}
 ~~~~
 {: #ical-grp-tree title="iCalendar Recurrence Grouping Tree Structure" artwork-align="center"}
 
