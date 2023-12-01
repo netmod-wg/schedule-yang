@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<link-attributes
+  xmlns="http://example.com/example-scheduled-link-bandwidth"
+  xmlns:schedule="urn:ietf:params:xml:ns:yang:ietf-schedule">
+  <link>
+    <source-node>ne1</source-node>
+    <destination-node>ne2</destination-node>
+    <default-bandwidth>1000</default-bandwidth>
+    <recurrence-first>
+      <date-time-start>2023-12-01T01:00:00Z</date-time-start>
+    </recurrence-first>
+    <frequency>schedule:daily</frequency>
+    <until>2023-12-31T23:59:59Z</until>
+    <period-timeticks>
+      <period-start>360000</period-start>
+      <period-end>2160000</period-end>
+      <scheduled-bandwidth>500</scheduled-bandwidth>
+    </period-timeticks>
+    <period-timeticks>
+      <period-start>7920000</period-start>
+      <period-end>8280000</period-end>
+      <scheduled-bandwidth>800</scheduled-bandwidth>
+    </period-timeticks>
+  </link>
+</link-attributes>
+

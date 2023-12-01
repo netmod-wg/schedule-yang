@@ -486,7 +486,6 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   1:00 AM to 6:00 AM and 800 Kbps between 10:00 PM to 11:00 PM. The bandwidth
   value that's not covered by the period above is 1000 Kbps by default.
 
-~~~~
 {::include-fold ./examples/example-scheduled-link-bandwidth.xml}
 ~~~~
 {: #ex-11 title="Example of Scheduled Link's Bandwidth" artwork-align="center"}
