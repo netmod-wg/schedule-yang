@@ -75,10 +75,11 @@ module example-scheduled-link-bandwidth {
         }
         case recurrence {
           uses schedule:recurrence-with-date-times {
-            augment "date-times-choice/period-timeticks/period-timeticks" {
+            augment "date-times-choice/period-timeticks"
+                  + "/period-timeticks" {
               description
-                "Specifies the attributes inside each period-timeticks
-                 entry.";
+                "Specifies the attributes inside each 
+                 period-timeticks entry.";
               uses link-bandwidth-grouping;
             }
             augment "date-times-choice/period/period" {
