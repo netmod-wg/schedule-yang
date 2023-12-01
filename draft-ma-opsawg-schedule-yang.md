@@ -57,7 +57,7 @@ informative:
    This document defines a common schedule YANG module which is
    designed to be applicable for scheduling information such as event, policy,
    services, or resources based on date and time. For the sake of better modularity,
-   the module includes basic, intermediate, and advanced version of scheduling groupings.
+   the module includes basic, intermediate, and advanced versions of schedule groupings.
 
 --- middle
 
@@ -72,6 +72,8 @@ Given that the applicability of the "ietf-schedule" module is more general than 
 policy and OAM tests, this document defines "ietf-schedule" as a common schedule YANG module. The module includes a set of reusable groupings which
 are designed to be applicable for scheduling information such as event, policy,
 services or resources based on date and time.
+
+Examples to illustrate the use of the common groupings are provided in {{usage}}. Also, sample modules to exemplify how future modules can use the extensibility provisions in "ietf-schedule" are provided in {{sec-ext}}.
 
 ## Editorial Note (To be removed by RFC Editor)
 
@@ -99,12 +101,12 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 #  Module Overview
 
-   The "ietf-schedule" module defines the following groupings:
+   The "ietf-schedule" module ({{sec-schedule}}) defines the following groupings:
 
-   * period-of-time
-   * recurrence
-   * recurrence-with-date-times
-   * icalendar-recurrence
+   * period-of-time ({{sec-period}})
+   * recurrence ({{sec-rec}})
+   * recurrence-with-date-times ({{sec-rec-dt}})
+   * icalendar-recurrence ({{sec-ical-rec}})
 
    {{schedule-tree}} provides an overview of the tree structure {{?RFC8340}} of
    the "ietf-schedule" module in terms of its groupings.
@@ -117,7 +119,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    Each of these groupings is presented in the following subsections. Examples
    are provided in {{usage}}.
 
-## The "period-of-time" Grouping
+## The "period-of-time" Grouping {#sec-period}
 
    The "period-of-time" grouping ({{pt-tree}}) represents a time period using
    either a start ("period-start") and end date and time ("period-end"), or a
@@ -125,10 +127,12 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    format, the start of the period MUST be before the end of the period
    {{Section 3.3.9 of !RFC5545}}.
 
+
 ~~~~
 {::include ./yang/schedule/period-grp.txt
 ~~~~
 {: #pt-tree title="Period of Time Grouping Tree Structure" artwork-align="center"}
+
 
 ## The "recurrence" Grouping {#sec-rec}
 
@@ -173,7 +177,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   but does not fully comply with {{Section 3.8.5.2 of !RFC5545}}. A timeticks
   type based period is added.
 
-## The "icalendar-recurrence" Grouping
+## The "icalendar-recurrence" Grouping {#sec-ical-rec}
 
   The "icalendar-recurrence" grouping ({{ical-grp-tree}}) uses the "recurrence-with-date-times" grouping ({{sec-rec-dt}})
   and add more data nodes to enrich the definition of recurrence. The structure of the "icalendar-recurrence" grouping conforms to
@@ -219,8 +223,8 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    groupings are defined, with each reusing the previous one and adding more parameters.
    To allow for different options, two features are defined in the data model:
 
-   *  basic-recurrence-supported
-   *  icalendar-recurrence-supported
+   *  'basic-recurrence-supported'
+   *  'icalendar-recurrence-supported'
 
    {{features}} provides an example about how that could be used. Implementations
    may support a basic recurrence rule or an advanced one as needed, by declaring
@@ -235,7 +239,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 ~~~~
 <CODE BEGINS> file "ietf-schedule@2023-01-19.yang"
-{::include ./yang/ietf-schedule.yang}
+{::include-fold ./yang/ietf-schedule.yang}
 <CODE ENDS>
 ~~~~
 
@@ -473,7 +477,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 {: #ex-10 title="Example of Advanced iCalendar Recurrence with Exceptions" artwork-align="center"}
 
 
-# Examples of Using/Extending the "ietf-schedule" Module
+# Examples of Using/Extending the "ietf-schedule" Module {#sec-ext}
 
    This non-normative section shows two examples for how the "ietf-schedule" module
    can be used or extended for scheduled events or attributes based on date and time.
@@ -486,7 +490,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    with different features used for options.
 
 ~~~~
-{::include ./yang/example-scheduled-backup.yang}
+{::include-fold ./yang/example-scheduled-backup.yang}
 ~~~~
 
 ## Example: Schedule Network Properties to Change Based on Date and Time {#augments}
@@ -498,7 +502,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    could be defined.
 
 ~~~~
-{::include ./yang/example-scheduled-link-bandwidth.yang}
+{::include-fold ./yang/example-scheduled-link-bandwidth.yang}
 ~~~~
 
   {{ex-11}} shows a configuration example of a link's bandwidth that is
@@ -511,8 +515,6 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 {::include-fold ./examples/example-scheduled-link-bandwidth.xml}
 ~~~~
 {: #ex-11 title="Example of Scheduled Link's Bandwidth" artwork-align="center"}
-
-# Changes between Revisions
 
 
 # Acknowledgments
