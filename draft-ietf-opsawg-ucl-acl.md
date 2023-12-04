@@ -175,10 +175,10 @@ informative:
      both at the network device level and at the network/administrative domain level.
 
    * Endpoint:
-   : refers to an end-user, host device or application that actually connects to a network.
+   : refers to an end-user, host device, or application that actually connects to a network.
      An end-user is defined as a person. A host device provides compute, memory,
      storage and networking capabilities and connects to the network without any user intervention. Host devices refer to servers, IoTs and other devices owned
-     by the enterprise. An application is a software program including the Application Programming Interfaces (APIs) used for a specific service.
+     by the enterprise. An application is a software program used for a specific service.
 
 #  Sample Usage
 
@@ -393,8 +393,8 @@ informative:
    An application group is a collection of applications that share a common access control policies.
    A device may run multiple applications, and different policies might need to be
    applied to the applications and device. A single application may need to run on
-   multiple devices/VMs/containers, the abstraction of application group without
-   attention to its deployment details helps ease the process of application migration.
+   multiple devices/VMs/containers, the abstraction of application group eases the
+   process of application migration. For example, the policy does not depend on the transport coordinates (i.e., 5-tuple).
    {{ag-example}} shows an example of how application-group definitions may be characterized.
 
    | Group Name | Group ID | Group Description |
@@ -625,12 +625,12 @@ Notation for {{rad-att}}:
    The access requirements are as follows:
 
    * Permit traffic from R&D BYOD of employees, destined to R&D employees'
-     devices every work day from 8:00 to 18:00.
+     devices every work day from 8:00:00 to 18:00:00 UTC, starting in January 1st, 2024.
 
    * Deny traffic from R&D BYOD of employees, destined to finance servers
      located in the enterprise DC network starting at 8:30:00 of January 20,
-     2023 with an offset of -08:00 from UTC (Pacific Standard Time) and ending
-     at 18:00:00 in Pacific Standard Time on December 31, 2023.
+     2024 with an offset of -08:00 from UTC (Pacific Standard Time) and ending
+     at 18:00:00 in Pacific Standard Time on December 31, 2024.
 
    The following example illustrates the configuration of an SDN controller
    using the group-based ACL:

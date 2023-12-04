@@ -52,10 +52,11 @@ module ietf-ucl-acl {
     description
       "An ACL that matches based on an endpoint group identity,
        which can represent the collective identity of a group of
-       authenticated users or enterprise end devices. An endpoint
+       authenticated users, end devices, or applications. An endpoint
        group identity may be carried in the outer/inner packet
-       header (e.g., via NVO3 encapsulation), but may not correspond
-       to any field in the packet header.";
+       header (e.g., via NVO3 encapsulation), may also not correspond
+       to any field in the packet header. Matching on Layer 4 header
+       fields may also exist in the ACEs.";
   }
   
   identity mixed-ipv4-group-type {
@@ -66,7 +67,7 @@ module ietf-ucl-acl {
       "An ACL that contains a mix of entries that match on fields
        in IPv4 headers and endpoint group identities, which can
        represent the collective identity of a group of authenticated
-       users or enterprise end devices. Matching on Layer 4 header
+       users, end devices, or applications. Matching on Layer 4 header
        fields may also exist in the ACEs.";
   }
   
@@ -78,7 +79,7 @@ module ietf-ucl-acl {
       "An ACL that contains a mix of entries that match on fields
        in IPv6 headers and endpoint group identities, which can
        represent the collective identity of a group of authenticated
-       users or enterprise end devices. Matching on Layer 4 header
+       users, end devices, or applications. Matching on Layer 4 header
        fields may also exist in the ACEs.";
   }
   
@@ -89,12 +90,64 @@ module ietf-ucl-acl {
     base uacl:group-acl-type;
     description
       "An ACL that contains a mix of entries that match on fields
-       in IPv4 headers, IPv6 headers and endpoint group identities,
+       in IPv4 headers, IPv6 headers, and endpoint group identities,
        which can represent the collective identity of a group of
-       authenticated users or enterprise end devices. Matching on
+       authenticated users, end devices, or applications. Matching on
        Layer 4 header fields may also exist in the ACEs.";
   }
   
+  identity mixed-eth-group-type {
+    if-feature "mixed-eth-group";
+    base acl:eth-acl-type;
+    base uacl:group-acl-type;
+    description
+      "An ACL that contains a mix of entries that match on fields
+       in Ethernet headers and endpoint group identities,
+       which can represent the collective identity of a group of
+       authenticated users, end devices, or applications. Matching on
+       Layer 4 header fields may also exist in the ACEs.";
+  }
+  
+  identity mixed-eth-ipv4-group-type {
+    if-feature "mixed-eth-ipv4-group";
+    base acl:eth-acl-type;
+    base acl:ipv4-acl-type;
+    base uacl:group-acl-type;
+    description
+      "An ACL that contains a mix of entries that match on fields
+       in Ethernet headers, IPv4 headers, and endpoint group identities,
+       which can represent the collective identity of a group of
+       authenticated users, end devices or applications. Matching on
+       Layer 4 header fields may also exist in the ACEs.";
+  }  
+  
+  identity mixed-eth-ipv6-group-type {
+    if-feature "mixed-eth-ipv6-group";
+    base acl:eth-acl-type;
+    base acl:ipv6-acl-type;
+    base uacl:group-acl-type;
+    description
+      "An ACL that contains a mix of entries that match on fields
+       in Ethernet headers, IPv6 headers, and endpoint group identities,
+       which can represent the collective identity of a group of
+       authenticated users, end devices or applications. Matching on
+       Layer 4 header fields may also exist in the ACEs.";
+  }  
+  
+  identity mixed-eth-ipv4-ipv6-group-type {
+    if-feature "mixed-eth-ipv4-ipv6-group";
+    base acl:eth-acl-type;
+    base acl:ipv4-acl-type;    
+    base acl:ipv6-acl-type;
+    base uacl:group-acl-type;
+    description
+      "An ACL that contains a mix of entries that match on fields
+       in Ethernet headers, IPv4 headers, IPv6 headers, and endpoint 
+       group identities, which can represent the collective identity 
+       of a group of authenticated users, end devices or applications. 
+       Matching on Layer 4 header fields may also exist in the ACEs.";
+  }  
+    
   identity endpoint-group-type {
     description
       "Identity for the type of endpoint group.";
@@ -120,13 +173,13 @@ module ietf-ucl-acl {
   
   feature match-on-group {
     description
-      "The device can support matching on endpoint groups.";
+      "The implementation supports matching on endpoint groups.";
   }
   
   feature group {
     if-feature "uacl:match-on-group";
     description
-      "Plain group ACL supported.";
+      "Indicates support of group-based ACLs.";
   }
   
   feature mixed-ipv4-group {
@@ -147,7 +200,34 @@ module ietf-ucl-acl {
     description
       "IPv4, IPv6, and group ACL combinations supported.";
   }
-
+  
+  feature mixed-eth-group {
+    if-feature "acl:match-on-eth and uacl:match-on-group";
+    description
+      "Eth and group ACL combinations supported.";    
+  }
+  
+  feature mixed-eth-ipv4-group {
+    if-feature "acl:match-on-eth and acl:match-on-ipv4 and " + "
+                uacl:match-on-group";
+    description
+      "Eth, IPv4, and group ACL combinations supported.";       
+  }
+  
+  feature mixed-eth-ipv6-group {
+    if-feature "acl:match-on-eth and acl:match-on-ipv6 and " + "
+                uacl:match-on-group";
+    description
+      "Eth, IPv6, and group ACL combinations supported.";    
+  }
+  
+  feature mixed-eth-ipv4-ipv6-group {
+    if-feature "acl:match-on-eth and acl:match-on-ipv4 and " + "
+                acl:match-on-ipv6 and uacl:match-on-group";
+    description
+      "Eth, IPv4, IPv6, and group ACL combinations supported.";   
+  }
+  
   typedef group-id-reference {
     type leafref {
       path "/acl:acls/acl:acl/uacl:endpoint-groups"
@@ -212,11 +292,11 @@ module ietf-ucl-acl {
 
   augment "/acl:acls/acl:acl/acl:aces/acl:ace" {
     description
-      "Add schedule parameters to allow the ACE to take effect based 
+      "Adds schedule parameters to allow the ACE to take effect based 
        on date and time.";
     container effective-schedule {
       description
-        "This container defines when the access control entry rules 
+        "Defines when the access control entry rules 
         are in effect based on date and time condition.
 
          If it is not configured, the access control entry
