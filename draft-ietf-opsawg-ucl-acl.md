@@ -175,10 +175,10 @@ informative:
      both at the network device level and at the network/administrative domain level.
 
    * Endpoint:
-   : refers to an end-user or host device that actually connects to a network.
+   : refers to an end-user, host device or application that actually connects to a network.
      An end-user is defined as a person. A host device provides compute, memory,
      storage and networking capabilities and connects to the network without any user intervention. Host devices refer to servers, IoTs and other devices owned
-     by the enterprise.
+     by the enterprise. An application is a software program including the Application Programming Interfaces (APIs) used for a specific service.
 
 #  Sample Usage
 
@@ -360,13 +360,12 @@ informative:
    groups depending on the time of day or the type of day (e.g.,
    weekdays versus weekends), etc.
 
-| Group Name | Group ID | Group Role |
+| Group Name | Group ID | Group Description |
 | R&D        |   foo-10 |  R&D employees                 |
 | R&D BYOD   |   foo-11 |  Personal devices of R&D employees |
 | Sales      |   foo-20 |  Sales employees               |
 | VIP        |   foo-30 |  VIP employees                 |
 {: #ug-example title='User Group Example'}
-
 
 ###  Device Group
 
@@ -378,17 +377,31 @@ informative:
    users to scan, print and send emails. {{dg-example}} shows an example
    of how device-group definitions may be characterized.
 
-   | Group Name | Group ID | Group Type |
-   | Workflow   |   foo-40     |  Workflow  resource servers   |
-   | R&D Resource |   foo-50     | R&D resource servers |
-   |Sales Resource|   foo-54     | Sales resource servers |
+   | Group Name | Group ID | Group Description |
+   | Workflow   |   bar-40     |  Workflow  resource servers   |
+   | R&D Resource |   bar-50     | R&D resource servers |
+   |Printer Resource|   bar-60     | Printer resources |
    {: #dg-example title='Device-Group Example'}
-
 
    Users accessing an enterprise device should be strictly controlled.
    Matching abstract device group ID instead of specified addresses in
    ACL polices helps shield the consequences of address change (e.g.,
    back-end VM-based server migration).
+
+### Application Group
+
+   An application group is a collection of applications that share a common access control policies.
+   A device may run multiple applications, and different policies might need to be
+   applied to the applications and device. A single application may need to run on
+   multiple devices/VMs/containers, the abstraction of application group without
+   attention to its deployment details helps ease the process of application migration.
+   {{ag-example}} shows an example of how application-group definitions may be characterized.
+
+   | Group Name | Group ID | Group Description |
+   | Audio/Video Streaming  |   baz-70   |  Audio/Video conferecing application |
+   | Instant messaging |   baz-80   | Messaging application |
+   | document collaboration |  baz-90  | Real-time document editing application |
+   {: #ag-example title='Application-Group Example'}
 
 #  Modules Overview
 

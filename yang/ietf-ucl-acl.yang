@@ -21,8 +21,8 @@ module ietf-ucl-acl {
     "WG Web: <https://datatracker.ietf.org/wg/opsawg/>
      WG List: <mailto:opsawg@ietf.org>";
   description
-    "This YANG module augments the IETF access control lists (ACLs) 
-     module and is meant to ensure consistent enforcement of ACL 
+    "This YANG module augments the IETF access control lists (ACLs)
+     module and is meant to ensure consistent enforcement of ACL
      policies based on the group identity.
 
      Copyright (c) 2023 IETF Trust and the persons identified
@@ -51,76 +51,101 @@ module ietf-ucl-acl {
     base acl:acl-base;
     description
       "An ACL that matches based on an endpoint group identity,
-       which can represent the collective identity of a group of 
+       which can represent the collective identity of a group of
        authenticated users or enterprise end devices. An endpoint
        group identity may be carried in the outer/inner packet
        header (e.g., via NVO3 encapsulation), but may not correspond
        to any field in the packet header.";
   }
+  
   identity mixed-ipv4-group-type {
     if-feature "mixed-ipv4-group";
     base acl:ipv4-acl-type;
     base uacl:group-acl-type;
     description
       "An ACL that contains a mix of entries that match on fields
-       in IPv4 headers and endpoint group identities, which can 
-       represent the collective identity of a group of authenticated
-       users or enterprise end devices. Matching on Layer 4 header 
-       fields may also exist in the ACEs.";
-  }
-  identity mixed-ipv6-group-type {
-    if-feature "mixed-ipv6-group";  
-    base acl:ipv6-acl-type;
-    base uacl:group-acl-type;
-    description
-      "An ACL that contains a mix of entries that match on fields 
-       in IPv6 headers and endpoint group identities, which can 
+       in IPv4 headers and endpoint group identities, which can
        represent the collective identity of a group of authenticated
        users or enterprise end devices. Matching on Layer 4 header
        fields may also exist in the ACEs.";
   }
+  
+  identity mixed-ipv6-group-type {
+    if-feature "mixed-ipv6-group";
+    base acl:ipv6-acl-type;
+    base uacl:group-acl-type;
+    description
+      "An ACL that contains a mix of entries that match on fields
+       in IPv6 headers and endpoint group identities, which can
+       represent the collective identity of a group of authenticated
+       users or enterprise end devices. Matching on Layer 4 header
+       fields may also exist in the ACEs.";
+  }
+  
   identity mixed-ipv4-ipv6-group-type {
-    if-feature "mixed-ipv4-ipv6-group";  
+    if-feature "mixed-ipv4-ipv6-group";
     base acl:ipv4-acl-type;
     base acl:ipv6-acl-type;
     base uacl:group-acl-type;
     description
-      "An ACL that contains a mix of entries that match on fields 
+      "An ACL that contains a mix of entries that match on fields
        in IPv4 headers, IPv6 headers and endpoint group identities,
-       which can represent the collective identity of a group of 
-       authenticated users or enterprise end devices. Matching on 
+       which can represent the collective identity of a group of
+       authenticated users or enterprise end devices. Matching on
        Layer 4 header fields may also exist in the ACEs.";
   }
+  
+  identity endpoint-group-type {
+    description
+      "Identity for the type of endpoint group.";
+  }
+  
+  identity user-group {
+    base uacl:endpoint-group-type;
+    description
+      "Identity for the user endpoint group.";
+  }
+  
+  identity device-group {
+    base uacl:endpoint-group-type;
+    description
+      "Identity for the device endpoint group.";
+  }
+  
+  identity application-group {
+    base uacl:endpoint-group-type;
+    description
+      "Identity for the application endpoint group.";
+  }
+  
   feature match-on-group {
     description
       "The device can support matching on endpoint groups.";
   }
+  
   feature group {
     if-feature "uacl:match-on-group";
     description
       "Plain group ACL supported.";
   }
+  
   feature mixed-ipv4-group {
     if-feature "acl:match-on-ipv4 and uacl:match-on-group";
     description
-      "IPv4 and group ACL combinations supported.";    
+      "IPv4 and group ACL combinations supported.";
   }
+  
   feature mixed-ipv6-group {
     if-feature "acl:match-on-ipv6 and uacl:match-on-group";
     description
       "IPv6 and group ACL combinations supported.";
   }
+  
   feature mixed-ipv4-ipv6-group {
     if-feature "acl:match-on-ipv4 and acl:match-on-ipv6 and " + "
                 uacl:match-on-group";
     description
       "IPv4, IPv6, and group ACL combinations supported.";
-  }
-
-  feature time-condition {
-    description
-      "The device can support a time condition based ACL policy
-       enforcement.";
   }
 
   typedef group-id-reference {
@@ -135,10 +160,10 @@ module ietf-ucl-acl {
 
   augment "/acl:acls/acl:acl" {
     description
-      "Adds a new container to store endpoint group information.";
+      "Adds a container for endpoint group definition.";
     container endpoint-groups {
       description
-        "Container definition for the endpoint group.";
+        "Defines a container for the endpoint group list.";
       list endpoint-group {
         key "group-id";
         description
@@ -151,36 +176,12 @@ module ietf-ucl-acl {
             "The endpoint group identifier that uniquely identifies
              an endpoint group.";
         }
-        choice group-type {
+        leaf group-type {
+          type identityref {
+            base endpoint-group-type;
+          }
           description
-            "Choice of each different type of endpoint.";
-          case user-group {
-            description
-              "The employee that connects to the network.";
-            container user-group {
-              description
-                "Defines the user-group container.";
-              leaf role {
-                type string;
-                description
-                  "Specifies the common role of this user group.";
-              }
-            }
-          }
-          case device-group {
-            description
-              "The static resources in a network, such as a specific
-               application.";
-            container device-group {
-              description
-                "Defines the device-group container.";
-              leaf device-type {
-                type string;
-                description
-                  "The type of the static resource.";
-              }
-            }
-          }
+            "Specifies the endpoint group type.";
         }
       }
     }
@@ -210,32 +211,32 @@ module ietf-ucl-acl {
   }
 
   augment "/acl:acls/acl:acl/acl:aces/acl:ace" {
-    if-feature "time-condition";
     description
-      "Add a new parameter to the Access Control Entry (ACE).";
-    container time-range {
+      "Add schedule parameters to allow the ACE to take effect based 
+       on date and time.";
+    container effective-schedule {
       description
-        "This container defines when the access control
-         entry rules are in effect.
+        "This container defines when the access control entry rules 
+        are in effect based on date and time condition.
 
          If it is not configured, the access control entry
          is immediately and always in effect.";
-      choice time-range-type {
+      choice schedule-type {
         description
           "Choice based on the type of the time range.";
-        case periodic-range {
+        case period {
           description
-            "A periodic range of time to take effect.";
-          uses schedule:icalendar-recurrence;
+            "The ACE takes effect based on a precise period of time.";        
+            uses schedule:period-of-time;
         }
-        case absolute-range {
+        case recurrence {
+          if-feature "schedule:icalendar-recurrence-supported";
           description
-            "A single precise period of time to take effect.";
-          uses schedule:period-of-time;
+            "The ACE takes effect based on a recurrence rule.";
+          uses schedule:icalendar-recurrence;          
         }
       }
     }
   }
 }
-
 
