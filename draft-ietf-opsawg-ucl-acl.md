@@ -164,7 +164,7 @@ informative:
 
    * Access Control List (ACL)
 
-   The following definitions and acronyms are used throughout this document:  
+   The following definitions and acronyms are used throughout this document:
 
    * User group based Control List (UCL) model:
    : A YANG data model for policy-based network access
