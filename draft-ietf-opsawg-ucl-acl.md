@@ -175,10 +175,10 @@ informative:
      both at the network device level and at the network/administrative domain level.
 
    * Endpoint:
-   : refers to an end-user or host device that actually connects to a network.
+   : refers to an end-user, host device, or application that actually connects to a network.
      An end-user is defined as a person. A host device provides compute, memory,
      storage and networking capabilities and connects to the network without any user intervention. Host devices refer to servers, IoTs and other devices owned
-     by the enterprise.
+     by the enterprise. An application is a software program used for a specific service.
 
 #  Sample Usage
 
@@ -366,13 +366,12 @@ informative:
    groups depending on the time of day or the type of day (e.g.,
    weekdays versus weekends), etc.
 
-| Group Name | Group ID | Group Role |
+| Group Name | Group ID | Group Description |
 | R&D        |   foo-10 |  R&D employees                 |
 | R&D BYOD   |   foo-11 |  Personal devices of R&D employees |
 | Sales      |   foo-20 |  Sales employees               |
 | VIP        |   foo-30 |  VIP employees                 |
 {: #ug-example title='User Group Example'}
-
 
 ###  Device Group
 
@@ -384,17 +383,31 @@ informative:
    users to scan, print and send emails. {{dg-example}} shows an example
    of how device-group definitions may be characterized.
 
-   | Group Name | Group ID | Group Type |
-   | Workflow   |   foo-40     |  Workflow  resource servers   |
-   | R&D Resource |   foo-50     | R&D resource servers |
-   |Sales Resource|   foo-54     | Sales resource servers |
+   | Group Name | Group ID | Group Description |
+   | Workflow   |   bar-40     |  Workflow  resource servers   |
+   | R&D Resource |   bar-50     | R&D resource servers |
+   |Printer Resource|   bar-60     | Printer resources |
    {: #dg-example title='Device-Group Example'}
-
 
    Users accessing an enterprise device should be strictly controlled.
    Matching abstract device group ID instead of specified addresses in
    ACL polices helps shield the consequences of address change (e.g.,
    back-end VM-based server migration).
+
+### Application Group
+
+   An application group is a collection of applications that share a common access control policies.
+   A device may run multiple applications, and different policies might need to be
+   applied to the applications and device. A single application may need to run on
+   multiple devices/VMs/containers, the abstraction of application group eases the
+   process of application migration. For example, the policy does not depend on the transport coordinates (i.e., 5-tuple).
+   {{ag-example}} shows an example of how application-group definitions may be characterized.
+
+   | Group Name | Group ID | Group Description |
+   | Audio/Video Streaming  |   baz-70   |  Audio/Video conferecing application |
+   | Instant messaging |   baz-80   | Messaging application |
+   | document collaboration |  baz-90  | Real-time document editing application |
+   {: #ag-example title='Application-Group Example'}
 
 #  Modules Overview
 
@@ -414,12 +427,9 @@ informative:
    The first part of the data model augments the "acl" list in the
    "ietf-access-control-list" model {{!RFC8519}} with a "endpoint-groups" container
    having a list of "endpoint group" inside, each entry has a "group-id" that uniquely
-   identifies the endpoint group.
+   identifies the endpoint group and a "group-type" parameter to specify the endpoint group type.
 
 > "group-id" is defined as a string rather than uint to accommodate deployments which require some identification hierarchy within a domain. Such a hierarchy is meant to ease coordination within an administrative domain. There might be cases where a domain needs to tag packets with the group they belong to. The tagging does not need to mirror exactly the "group id" used to populate the policy. Future augmentation may be considered in the future to cover encapsulation considerations.
-
-   The choice statement controls the selection of group type between
-   "user-group" or "device-group".
 
    The second part of the data model augments the "matches" container in the IETF
    ACL model {{!RFC8519}} so that a source and/or destination endpoint group index
@@ -618,12 +628,12 @@ Notation for {{rad-att}}:
    The access requirements are as follows:
 
    * Permit traffic from R&D BYOD of employees, destined to R&D employees'
-     devices every work day from 8:00 to 18:00.
+     devices every work day from 8:00:00 to 18:00:00 UTC, starting in January 1st, 2025.
 
    * Deny traffic from R&D BYOD of employees, destined to finance servers
      located in the enterprise DC network starting at 8:30:00 of January 20,
-     2023 with an offset of -08:00 from UTC (Pacific Standard Time) and ending
-     at 18:00:00 in Pacific Standard Time on December 31, 2023.
+     2025 with an offset of -08:00 from UTC (Pacific Standard Time) and ending
+     at 18:00:00 in Pacific Standard Time on December 31, 2025.
 
    The following example illustrates the configuration of an SDN controller
    using the group-based ACL:

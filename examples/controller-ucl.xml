@@ -5,86 +5,76 @@
   <acl>
     <name>sample-group-acl</name>
     <type>uacl:group-acl-type</type>
-    <endpoint-groups 
+    <endpoint-groups
       xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl">
       <endpoint-group>
-        <group-id>20</group-id>
-        <user-group>
-          <role>R&amp;D</role>
-        </user-group>
+        <group-id>R&amp;D</group-id>
+        <group-type>user-group</group-type>
       </endpoint-group>
       <endpoint-group>
-        <group-id>22</group-id>
-        <user-group>
-          <role>R&amp;D BYOD</role>
-        </user-group>
+        <group-id>R&amp;D BYOD</group-id>
+        <group-type>user-group</group-type>
       </endpoint-group>
       <endpoint-group>
-        <group-id>50</group-id>
-        <device-group>
-          <device-type>finance server</device-type>
-        </device-group>
+        <group-id>finance server</group-id>
+        <group-type>device-group</group-type>          
       </endpoint-group>
     </endpoint-groups>
     <aces>
       <ace>
         <name>rule1</name>
         <matches>
-          <endpoint-group 
+          <endpoint-group
             xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl">
-            <source-group-id>22</source-group-id>
-            <destination-group-id>20</destination-group-id>
+            <source-group-id>R&amp;D BYOD</source-group-id>
+            <destination-group-id>R&amp;D</destination-group-id>
           </endpoint-group>
         </matches>
         <actions>
           <forwarding>accept</forwarding>
         </actions>
-        <time-range xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl">
-          <recurrence>
-            <freq>daily</freq>
-            <byhour>8</byhour>
-            <byday>
-              <weekday>monday</weekday>
-            </byday>
-            <byday>
-              <weekday>tuesday</weekday>
-            </byday> 
-            <byday>            
-              <weekday>wednesday</weekday>
-            </byday> 
-            <byday>            
-              <weekday>thursday</weekday>
-            </byday>
-            <byday>            
-              <weekday>friday</weekday>              
-            </byday>  
+        <effective-schedule xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl"
+          xmlns:schedule="urn:ietf:params:xml:ns:yang:ietf-schedule">
+          <recurrence-first>
+            <date-time-start>2025-01-01T08:00:00Z</date-time-start>
             <duration>PT10:00:00</duration>
-          </recurrence>
-        </time-range>  
+          </recurrence-first>
+          <frequency>schedule:daily</frequency>
+          <byday>
+            <weekday>monday</weekday>
+          </byday>
+          <byday>
+            <weekday>tuesday</weekday>
+          </byday>
+          <byday>
+            <weekday>wednesday</weekday>
+          </byday>
+          <byday>
+            <weekday>thursday</weekday>
+          </byday>
+          <byday>
+            <weekday>friday</weekday>
+          </byday>
+        </effective-schedule>
       </ace>
       <ace>
         <name>rule2</name>
         <matches>
-          <endpoint-group 
+          <endpoint-group
             xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl">
-            <source-group-id>22</source-group-id>
-            <destination-group-id>50</destination-group-id>
+            <source-group-id>R&amp;D BYOD</source-group-id>
+            <destination-group-id>finance server</destination-group-id>
           </endpoint-group>
         </matches>
         <actions>
           <forwarding>reject</forwarding>
         </actions>
-        <time-range xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl">
-          <period-of-time>
-            <explicit-start>2023-01-20T08:30:00-08:00</explicit-start>
-            <explicit-end>2023-12-31T18:00:00-08:00</explicit-end>
-          </period-of-time>
-        </time-range>
+        <effective-schedule xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl">
+          <period-start>2025-01-20T08:30:00-08:00</period-start>
+          <period-end>2025-12-31T18:00:00-08:00</period-end>
+        </effective-schedule>
       </ace>
     </aces>
   </acl>
 </acls>
-
-
-
 
