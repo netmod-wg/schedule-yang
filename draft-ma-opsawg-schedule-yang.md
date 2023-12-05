@@ -21,6 +21,7 @@ author:
  -
     fullname: Qiufang Ma
     organization: Huawei
+    role: editor
     street: 101 Software Avenue, Yuhua District
     city: Jiangsu
     code: 210012
@@ -37,6 +38,7 @@ author:
  -
     fullname: Mohamed Boucadair
     organization: Orange
+    role: editor
     city: Rennes
     code: 35000
     country: France
