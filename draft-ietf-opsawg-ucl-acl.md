@@ -429,7 +429,7 @@ informative:
    having a list of "endpoint group" inside, each entry has a "group-id" that uniquely
    identifies the endpoint group and a "group-type" parameter to specify the endpoint group type.
 
-> "group-id" is defined as a string rather than uint to accommodate deployments which require some identification hierarchy within a domain. Such a hierarchy is meant to ease coordination within an administrative domain. There might be cases where a domain needs to tag packets with the group they belong to. The tagging does not need to mirror exactly the "group id" used to populate the policy. How the "group-id" string is mapped to the tagging or field in the packet header in encapsulation scenario is outside the scope of this document. Further augmentation may be considered in the future to cover encapsulation considerations.
+> "group-id" is defined as a string rather than uint to accommodate deployments which require some identification hierarchy within a domain. Such a hierarchy is meant to ease coordination within an administrative domain. There might be cases where a domain needs to tag packets with the group they belong to. The tagging does not need to mirror exactly the "group id" used to populate the policy. How the "group-id" string is mapped to the tagging or field in the packet header in encapsulation scenario is outside the scope of this document. Augmentation may be considered in the future to cover encapsulation considerations.
 
    The second part of the data model augments the "matches" container in the IETF
    ACL model {{!RFC8519}} so that a source and/or destination endpoint group index
