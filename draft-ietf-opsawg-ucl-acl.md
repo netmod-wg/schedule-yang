@@ -622,12 +622,12 @@ Notation for {{rad-att}}:
    The access requirements are as follows:
 
    * Permit traffic from R&D BYOD of employees, destined to R&D employees'
-     devices every work day from 8:00:00 to 18:00:00 UTC, starting in January 1st, 2024.
+     devices every work day from 8:00:00 to 18:00:00 UTC, starting in January 1st, 2025.
 
    * Deny traffic from R&D BYOD of employees, destined to finance servers
      located in the enterprise DC network starting at 8:30:00 of January 20,
-     2024 with an offset of -08:00 from UTC (Pacific Standard Time) and ending
-     at 18:00:00 in Pacific Standard Time on December 31, 2024.
+     2025 with an offset of -08:00 from UTC (Pacific Standard Time) and ending
+     at 18:00:00 in Pacific Standard Time on December 31, 2025.
 
    The following example illustrates the configuration of an SDN controller
    using the group-based ACL:
