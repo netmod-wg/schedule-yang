@@ -1,6 +1,6 @@
 ---
 title: "A YANG Data Model and RADIUS Extension for Policy-based Network Access Control"
-abbrev: "A Policy-based NACL"
+abbrev: "A Policy-based Network Access Control"
 category: std
 
 docname: draft-ietf-opsawg-ucl-acl-latest
@@ -168,11 +168,9 @@ informative:
 
    The following definitions and acronyms are used throughout this document:
 
-   * Network Access Control List (NACL)
-
    * User group based Control List (UCL) model:
    : A YANG data model for policy-based network access
-     control that specifies an extension to the IETF ACL model defined in {{!RFC8519}}.
+     control that specifies an extension to the "ietf-access-control-list" model {{!RFC8519}}.
      It allows policy enforcement based on the group identity, which can be used
      both at the network device level and at the network/administrative domain level.
 
@@ -198,7 +196,7 @@ informative:
    group can share a group of ACL rules.  This approach greatly reduces
    the workload of the administrators and optimizes the ACL resources.
 
-   The Network ACLs (NACLs) can be provisioned on devices using specific
+   The network ACLs can be provisioned on devices using specific
    mechanisms, such as {{!RFC8519}} or {{?I-D.ietf-netmod-acl-extensions}}.
 
    Different policies may need to be applied in different contextual situations.
@@ -294,37 +292,43 @@ informative:
 
    In reference to {{arch}}, the following typical flow is experienced:
 
-   Step 1:  Administrators (or a service orchestrator) configure an SDN
+   Step 1:
+   :  Administrators (or a service orchestrator) configure an SDN
       controller with network-level ACLs using the YANG module defined
       in {{sec-UCL}}. An example is provided in {{controller-ucl}}.
 
-   Step 2:  When a user first logs onto the network, he/she is
+   Step 2:
+   :  When a user first logs onto the network, he/she is
       required to be authenticated (e.g., using user name and password)
       at the NAS.
 
-   Step 3:  The authentication request is then relayed to the AAA server
+   Step 3:
+   :  The authentication request is then relayed to the AAA server
       using a protocol such as RADIUS {{!RFC2865}}. It is assumed that the
       AAA server has been appropriately configured to store user credentials,
       e.g., user name, password, group information, and other user attributes.
       This document does not restrict what authentication method is used. Administrators
       may refer to, e.g., {{Section 7.3 of ?I-D.dekok-radext-deprecating-radius}}
       for authentication method recommendations.
-      If the authentication request succeeds, the user is placed in a
+    : If the authentication request succeeds, the user is placed in a
       user group the identity of which is returned to the network access server
       as the authentication result (see {{sec-radius}}).
-      If the authentication fails, the user is not assigned any user
+    : If the authentication fails, the user is not assigned any user
       group, which also means that the user has no access; or the user
       is assigned a special group with very limited access permissions
       for the network (as a function of the local policy). ACLs are
       enforced so that flows from that IP address are discarded
-      (or rate-limited) by the network.  In some implementations, AAA
+      (or rate-limited) by the network.
+      :  In some implementations, AAA
       server can be integrated with an SDN controller.
 
-   Step 4:  Either the AAA server or the NAS notifies an SDN controller
+   Step 4:
+   :  Either the AAA server or the NAS notifies an SDN controller
       of the mapping between the user group ID and related common packet
       header attributes (e.g., IP/MAC address).
 
-   Step 5:  Either group or IP/MAC address based access control policies
+   Step 5:
+   :  Either group or IP/MAC address based access control policies
       are maintained on relevant PEPs under the SDN controller's management.
       Whether the PEP enforces the group or IP/MAC address based ACL is
       implementation specific. Both types of ACL policy may exist on
@@ -396,8 +400,8 @@ informative:
 
 ##  The UCL Extension to the ACL Model
 
-   This module specifies an extension to the IETF ACL model {{!RFC8519}}. This extension adds
-   endpoint groups so that an endpoint group index can be matched upon, and also
+   This module specifies an extension to the "ietf-access-control-list" model {{!RFC8519}}. This extension adds
+   endpoint groups so that an endpoint group identifier can be matched upon, and also
    enable access control policy activation based on date and time conditions.
 
    {{ucl-tree}} provides the tree structure of the "ietf-ucl-acl" module.
@@ -408,7 +412,7 @@ informative:
 {: #ucl-tree title="UCL Extension" artwork-align="center"}
 
    The first part of the data model augments the "acl" list in the
-   IETF ACL model {{!RFC8519}} with a "endpoint-groups" container
+   "ietf-access-control-list" model {{!RFC8519}} with a "endpoint-groups" container
    having a list of "endpoint group" inside, each entry has a "group-id" that uniquely
    identifies the endpoint group.
 
@@ -421,7 +425,7 @@ informative:
    ACL model {{!RFC8519}} so that a source and/or destination endpoint group index
    can be referenced as the match criteria.
 
-   The third part of the data model augments the "ace" list in the IETF ACL
+   The third part of the data model augments the "ace" list in the "ietf-access-control-list"
    model {{!RFC8519}} with date and time specific parameters to allow ACE to be
    activated based on a date/time condition. Two types of time range are defined,
    which reuse "recurrence" and "period" groupings defined in the "ietf-schedule"
@@ -435,7 +439,7 @@ informative:
 ##  The "ietf-ucl-acl" YANG Module {#sec-UCL}
 
    This module imports types and groupings defined in the "ietf-schedule" YANG
-   module in {{!I-D.ma-opsawg-schedule-yang}}. It also augments the IETF ACL YANG module defined in {{!RFC8519}}.
+   module in {{!I-D.ma-opsawg-schedule-yang}}. It also augments the "ietf-access-control-list" module defined in {{!RFC8519}}.
 
 ~~~~
 <CODE BEGINS> file "ietf-ucl-acl@2023-01-19.yang"
