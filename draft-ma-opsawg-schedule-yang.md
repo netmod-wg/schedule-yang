@@ -38,7 +38,7 @@ author:
  -
     fullname: Mohamed Boucadair
     organization: Orange
-    role: editor    
+    role: editor
     city: Rennes
     code: 35000
     country: France
