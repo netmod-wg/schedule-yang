@@ -254,7 +254,8 @@ informative:
       {{Section 6.2.3 of ?I-D.ietf-nvo3-encap}}).  While in other cases,
       the SDN controller maps the group ID to the related common packet
       header and delivers IP/MAC address based ACL policies to the
-      required PEPs.
+      required PEPs. In such a case, PEPs do not require to implement specific logic
+      (including hardware) compared to the enforcement of conventional ACLs.
 
       Multiple PEPs may be involved in a network.
 
