@@ -541,9 +541,10 @@ Notation for {{rad-att}}:
    or VM/application migration, dedicated hardware/software support might be needed
    for PEPs to understand the endpoint group identifier. In scenrio where the NAS
    works as the PEP which acquires the source and/or destination endpoint group
-   ID from the AAA server, ACL policy enforcement based on the group identity towards non-encapsulation
-   packet might affect the forwarding performance. Implementation needs to evaluate
-   the operational tradeoff (flexibility brought to the network vs. the complexity of implementation) carefully.
+   ID from the AAA server, ACL policy enforcement based on the group identity without
+   being encapsulated into packet header might affect the forwarding performance.
+   Implementation needs to evaluate the operational tradeoff (flexibility brought
+   to the network vs. the complexity of implementation) carefully.
 
 # Security Considerations
 
