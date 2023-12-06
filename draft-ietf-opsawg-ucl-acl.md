@@ -247,14 +247,13 @@ informative:
 
    *  The Policy Enforcement Point (PEP) is the central entity
       which is responsible for enforcing appropriate access control
-      policies.  In some cases, a PEP may map incoming packets to their
-      associated source or destination endpoint-group IDs, and acts on
-      the endpoint-group ID based ACL policies, e.g., a NAS as the PEP
-      or a group identifier could be carried in packet header (see
-      {{Section 6.2.3 of ?I-D.ietf-nvo3-encap}}).  While in other cases,
+      policies. A first deployment scenario assumes that
       the SDN controller maps the group ID to the related common packet
       header and delivers IP/MAC address based ACL policies to the
-      required PEPs.
+      required PEPs.  Another deployment scenario may require that PEPs map incoming packets to their
+      associated source or destination endpoint-group IDs, and acts upon
+      the endpoint-group ID based ACL policies (e.g., a group identifier may be carried in packet headers such as discussed in
+      {{Section 6.2.3 of ?I-D.ietf-nvo3-encap}}). More details are provided in the "Implementation Considerations" Section.
 
       Multiple PEPs may be involved in a network.
 
