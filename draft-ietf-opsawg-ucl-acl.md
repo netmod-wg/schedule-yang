@@ -525,6 +525,26 @@ Notation for {{rad-att}}:
    0+
    : Zero or more instances of this attribute MAY be present in packet.
 
+# Implementation Considerations
+
+   The UCL model can be implemented in different ways.
+
+   In some cases, UCL model is implemented at the network/administrative domain
+   level, the SDN controller maintains the dynamical mapping from endpoint
+   group ID to IP/transport fields (e.g., the 5-tuple) and programs the PEPs with
+   IP address/5-tuple based ACLs. In such cases, PEPs do not require to implement
+   specific logic (including hardware) compared to the enforcement of conventional ACLs.
+
+   It is possible for the UCL model to be implemented at the network device level.
+   While it eliminates the need for the SDN controller to interact frequently
+   with the PEPs for reasons like the user's context of network connection change
+   or VM/application migration, dedicated hardware/software support might be needed
+   for PEPs to understand the endpoint group identifier. In scenrio where the NAS
+   works as the PEP which acquires the source and/or destination endpoint group
+   ID from the AAA server, ACL policy enforcement based on the group identity towards non-encapsulation
+   packet might affect the forwarding performance. Implementation needs to evaluate
+   the operational tradeoff (flexibility brought to the network vs. the complexity of implementation) carefully.
+
 # Security Considerations
 
 ##  YANG
