@@ -310,17 +310,16 @@ informative:
       This document does not restrict what authentication method is used. Administrators
       may refer to, e.g., {{Section 7.3 of ?I-D.dekok-radext-deprecating-radius}}
       for authentication method recommendations.
-    : If the authentication request succeeds, the user is placed in a
+      If the authentication request succeeds, the user is placed in a
       user group the identity of which is returned to the network access server
       as the authentication result (see {{sec-radius}}).
-    : If the authentication fails, the user is not assigned any user
+      If the authentication fails, the user is not assigned any user
       group, which also means that the user has no access; or the user
       is assigned a special group with very limited access permissions
       for the network (as a function of the local policy). ACLs are
       enforced so that flows from that IP address are discarded
       (or rate-limited) by the network.
-      :  In some implementations, AAA
-      server can be integrated with an SDN controller.
+      In some implementations, AAA server can be integrated with an SDN controller.
 
    Step 4:
    :  Either the AAA server or the NAS notifies an SDN controller
