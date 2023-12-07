@@ -132,6 +132,9 @@ informative:
    Other implications related to the change of MAC addresses are discussed in
    {{?I-D.ietf-madinas-use-cases}}.
 
+   The document does not specify how to map the policy group identifiers
+   to dedicated field (e.g.,  Group Based Policy (GBP) discussed in {{Section 6.2.3 of ?I-D.ietf-nvo3-encap}}).
+
    The YANG data models in this document conform to the Network
    Management Datastore Architecture (NMDA) defined in {{!RFC8342}}.
 
