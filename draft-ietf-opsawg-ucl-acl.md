@@ -253,7 +253,7 @@ informative:
       required PEPs.  Another deployment scenario may require that PEPs map incoming packets to their
       associated source and/or destination endpoint-group IDs, and acts upon
       the endpoint-group ID based ACL policies (e.g., a group identifier may be carried in packet headers such as discussed in
-      {{Section 6.2.3 of ?I-D.ietf-nvo3-encap}}). More details are provided in the "Implementation Considerations" Section.
+      {{Section 6.2.3 of ?I-D.ietf-nvo3-encap}}). More details are provided in {{implement-considerations}}.
 
       Multiple PEPs may be involved in a network.
 
