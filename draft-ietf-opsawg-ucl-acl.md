@@ -251,7 +251,7 @@ informative:
       the SDN controller maps the group ID to the related common packet
       header and delivers IP/MAC address based ACL policies to the
       required PEPs.  Another deployment scenario may require that PEPs map incoming packets to their
-      associated source or destination endpoint-group IDs, and acts upon
+      associated source and/or destination endpoint-group IDs, and acts upon
       the endpoint-group ID based ACL policies (e.g., a group identifier may be carried in packet headers such as discussed in
       {{Section 6.2.3 of ?I-D.ietf-nvo3-encap}}). More details are provided in the "Implementation Considerations" Section.
 
