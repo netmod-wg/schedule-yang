@@ -146,8 +146,9 @@ module ietf-ucl-acl {
       "An ACL that contains a mix of entries that match on fields
        in Ethernet headers, IPv4 headers, IPv6 headers, and endpoint 
        group identities, which can represent the collective identity 
-       of a group of authenticated users, end devices or applications. 
-       Matching on Layer 4 header fields may also exist in the ACEs.";
+       of a group of authenticated users, end devices or 
+       applications. Matching on Layer 4 header fields may also exist 
+       in the ACEs.";
   }  
     
   identity endpoint-group-type {
@@ -308,7 +309,8 @@ module ietf-ucl-acl {
           "Choice based on the type of the time range.";
         case period {
           description
-            "The ACE takes effect based on a precise period of time.";        
+            "The ACE takes effect based on a precise period of 
+             time.";        
             uses schedule:period-of-time;
         }
         case recurrence {

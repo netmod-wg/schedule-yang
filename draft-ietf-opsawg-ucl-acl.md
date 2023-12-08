@@ -717,6 +717,20 @@ The following shows an example of the same policy but with a destination IPv6 pr
 
 # Changes between Revisions
 
+  v01 - v02
+
+*  Tree overview and examples update to reflect the latest schedule module
+
+*  Clairfy why we define endpoint group ID as string
+
+*  Exclude the mapping of string to tagging mechanism from the document scope
+
+*  Add implementation considerations section to discuss the deployment scenarios and possible tradeoff
+
+*  Add application group, define endpoint group type as "identityref" in YANG data model
+
+*  Editorial changes, e.g., remove the NACL definition, fix long lines.
+
   v00 - v01
 
   *  Change the document title and add a reference to "policy"
