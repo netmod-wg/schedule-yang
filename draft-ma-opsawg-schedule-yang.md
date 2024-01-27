@@ -396,7 +396,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 {
   "recurrence-first": {
     "date-time-start": "2025-12-01T09:00:00Z",
-    "duration": "PT00:00:15"
+    "duration": "PT00:15:00"
   },
   "frequency": "ietf-schedule:minutely",
   "interval": 30,
@@ -404,11 +404,11 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "period": [
     {
       "period-start": "2025-12-01T18:00:00Z",
-      "duration": "PT00:00:20"
+      "duration": "PT00:20:00"
     },
     {
       "period-start": "2025-12-01T18:30:00Z",
-      "duration": "PT00:00:20"
+      "duration": "PT00:20:00"
     }
    ]
 }
