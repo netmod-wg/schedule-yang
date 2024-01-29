@@ -28,7 +28,7 @@ module ietf-schedule {
      exchanging calendaring and scheduling information. The YANG
      module complies with Sections 3.3.9 and 3.3.10 of RFC 5545.
 
-     Copyright (c) 2023 IETF Trust and the persons identified
+     Copyright (c) 2024 IETF Trust and the persons identified
      as authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with
@@ -52,7 +52,7 @@ module ietf-schedule {
     description
       "Initial revision.";
     reference
-      "RFC XXXX: A YANG Data Model for Scheduling.";
+      "RFC XXXX: A YANG Data Model for Scheduling";
   }
   
   feature basic-recurrence-supported {
@@ -68,7 +68,7 @@ module ietf-schedule {
     reference
       "RFC 5545: Internet Calendaring and Scheduling Core Object
                  Specification (iCalendar),
-                 Section 3.3.10 and 3.8.5";
+                 Sections 3.3.10 and 3.8.5";
   }
 
   typedef weekday {
@@ -257,7 +257,7 @@ module ietf-schedule {
            day.";
         reference
           "RFC 5545: Internet Calendaring and Scheduling Core Object
-           Specification (iCalendar), Section 3.3.10";
+                     Specification (iCalendar), Section 3.3.10";
       }
       leaf time-zone-identifier {
         type sys:timezone-name;
