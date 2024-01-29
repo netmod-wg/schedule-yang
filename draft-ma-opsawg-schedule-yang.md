@@ -230,7 +230,8 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
    {{features}} provides an example about how that could be used. Implementations
    may support a basic recurrence rule or an advanced one as needed, by declaring
-   different features.
+   different features. Whether only one or both features are supported is implementation
+   specific and depend on specific scheduling context.
 
    These groupings can also be augmented to support specific needs. As an example,
    {{augments}} demonstrates how additional parameters can be added to comply with specifc schedule needs.
