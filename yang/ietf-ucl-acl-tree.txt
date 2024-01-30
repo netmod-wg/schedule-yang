@@ -1,6 +1,6 @@
 module: ietf-ucl-acl
 
-  augment /acl:acls/acl:acl:
+  augment /acl:acls:
     +--rw endpoint-groups
        +--rw endpoint-group* [group-id]
           +--rw group-id      string

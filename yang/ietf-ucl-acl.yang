@@ -234,14 +234,14 @@ module ietf-ucl-acl {
   
   typedef group-id-reference {
     type leafref {
-      path "/acl:acls/acl:acl/uacl:endpoint-groups"
+      path "/acl:acls/uacl:endpoint-groups"
          + "/uacl:endpoint-group/uacl:group-id";
     }
     description
       "Defines a reference to a group identifier.";
   }
 
-  augment "/acl:acls/acl:acl" {
+  augment "/acl:acls" {
     description
       "Adds a container for endpoint group definition.";
     container endpoint-groups {
