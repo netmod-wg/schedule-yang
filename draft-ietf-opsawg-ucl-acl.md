@@ -573,7 +573,7 @@ Notation for {{rad-att}}:
    could have a negative effect on network and security operations. These are the
    subtrees and data nodes and their sensitivity/vulnerability:
 
-   * /acl:acls/acl:acl/uacl:endpoint-groups/uacl:endpoint-group:
+   * /acl:acls/uacl:endpoint-groups/uacl:endpoint-group:
    : This list specifies all the endpoint group entries. Unauthorized write access to this
      list can allow intruders to modify the entries so as to forge an endpoint
      group that does not exist or maliciously delete an existing endpoint group,
