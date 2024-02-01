@@ -722,7 +722,7 @@ Notation for {{rad-att}}:
 
   v02 - v03
 
-*  List endpoint-groups definition under acls and examples update to reflect the latest schedule module
+*  List endpoint-groups definition under acls and examples update to reflect the latest module
 
 *  Add contact info in the UCL module
 
