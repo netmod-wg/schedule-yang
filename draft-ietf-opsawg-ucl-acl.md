@@ -720,6 +720,12 @@ Notation for {{rad-att}}:
 
 # Changes between Revisions
 
+  v02 - v03
+
+*  List endpoint-groups definition under acls and examples update to reflect the latest schedule module
+
+*  Add contact info in the UCL module
+
   v01 - v02
 
 *  Tree overview and examples update to reflect the latest schedule module
