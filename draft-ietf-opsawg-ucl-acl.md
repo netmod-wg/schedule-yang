@@ -658,12 +658,13 @@ Notation for {{rad-att}}:
      2025 with an offset of -08:00 from UTC (Pacific Standard Time) and ending
      at 18:00:00 in Pacific Standard Time on December 31, 2025.
 
-   The following example illustrates the configuration of an SDN controller
+   The example shown in {{ex-controller-ucl}} illustrates the configuration of an SDN controller
    using the group-based ACL:
 
 ~~~~
 {::include-fold ./examples/controller-ucl.xml}
 ~~~~
+{: #ex-controller-ucl title="Example of UCL Configuration"}
 
 ## Configuring a PEP Using Group-based ACL {#PEP-ucl}
 
@@ -678,15 +679,16 @@ Notation for {{rad-att}}:
    {{?I-D.smith-vxlan-group-policy}}. This example does not intend to be exhaustive.
 
    Assume the mapping between device group ID and IP addresses is
-   predefined or acquired via device authentication. The following example
-   shows ACL configurations delivered from the controller to the PEP. This
+   predefined or acquired via device authentication. {{ex-PEP-ucl}}
+   shows the ACL configuration delivered from the controller to the PEP. This
    example is consistent with the example presented in {{controller-ucl}}.
 
 ~~~~
 {::include-fold ./examples/PEP-ucl.xml}
 ~~~~
+{: #ex-PEP-ucl title="Example of PEP Configuration"}
 
-## Configuring the PEP Using Address-based ACL {#PEP-acl}
+## Configuring PEPs Using Address-based ACLs {#PEP-acl}
 
    The section illustrates an example of configuring a PEP using
    IP address based ACL. IP address based access control policies could
@@ -699,21 +701,22 @@ Notation for {{rad-att}}:
    belongs with the user address according to step 1 to 4 in {{overview}}.
 
    Assume the mapping between device group ID and IP addresses is
-   predefined or acquired via device authentication. The following
-   example shows IPv4 address based ACL configurations delivered from
+   predefined or acquired via device authentication. {{ex-PEP-acl}}
+   shows an IPv4 address based ACL configuration delivered from
    the controller to the PEP. This example is consistent with the example
    presented in {{controller-ucl}}.
 
 ~~~~
 {::include-fold ./examples/PEP-acl.xml}
 ~~~~
+{: #ex-PEP-acl title="Example of PEP Configuration"}
 
-The following shows an example of the same policy but with a destination IPv6 prefix.
+{{ex-PEP-acl-ipv6}} shows an example of the same policy but with a destination IPv6 prefix.
 
 ~~~~
 {::include-fold ./examples/PEP-acl-ipv6.xml}
 ~~~~
-
+{: #ex-PEP-acl-ipv6 title="Example of PEP Configuration (IPv6)"}
 
 # Changes between Revisions
 
@@ -721,7 +724,7 @@ The following shows an example of the same policy but with a destination IPv6 pr
 
 *  Tree overview and examples update to reflect the latest schedule module
 
-*  Clairfy why we define endpoint group ID as string
+*  Clarify why we define endpoint group ID as string
 
 *  Exclude the mapping of string to tagging mechanism from the document scope
 
