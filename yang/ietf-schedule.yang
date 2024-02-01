@@ -20,7 +20,16 @@ module ietf-schedule {
     "IETF OPSAWG Working Group";
   contact
     "WG Web: <https://datatracker.ietf.org/wg/opsawg/>
-     WG List: <mailto:opsawg@ietf.org>";
+     WG List: <mailto:opsawg@ietf.org>
+
+     Editor:   Qiufang Ma
+               <mailto:maqiufang1@huawei.com
+     Author:   Qin Wu
+               <mailto:bill.wu@huawei.com>
+     Editor:   Mohamed Boucadair
+               <mailto:mohamed.boucadair@orange.com>
+     Author:   Daniel King
+               <mailto:d.king@lancaster.ac.uk>";
   description
     "This YANG module defines two groupings for iCalendar (Internet
      Calendaring and Scheduling Core Object Specification) data
