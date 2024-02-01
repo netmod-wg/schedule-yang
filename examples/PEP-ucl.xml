@@ -2,20 +2,20 @@
 
 <acls xmlns="urn:ietf:params:xml:ns:yang:ietf-access-control-list"
       xmlns:uacl="urn:ietf:params:xml:ns:yang:ietf-ucl-acl">
+  <endpoint-groups
+      xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl">
+    <endpoint-group>
+      <group-id>R&amp;D</group-id>
+      <group-type>user-group</group-type>
+    </endpoint-group>
+    <endpoint-group>
+      <group-id>R&amp;D BYOD</group-id>
+      <group-type>user-group</group-type>
+    </endpoint-group>
+  </endpoint-groups>
   <acl>
     <name>sample-group-acl</name>
     <type>uacl:mixed-ipv4-group-type</type>
-    <endpoint-groups
-      xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl">
-      <endpoint-group>
-        <group-id>R&amp;D</group-id>
-        <group-type>user-group</group-type>
-      </endpoint-group>
-      <endpoint-group>
-        <group-id>R&amp;D BYOD</group-id>
-        <group-type>user-group</group-type>
-      </endpoint-group>
-    </endpoint-groups>
     <aces>
       <ace>
         <name>rule1</name>
