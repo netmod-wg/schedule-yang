@@ -205,7 +205,22 @@ module ietf-schedule {
     description
       "Identity for a recurrence based schedule.";
   }
-
+  identity schedule-state {
+    description
+      "Base identity for schedule state.";
+  }
+  identity enabled {
+    description
+      "Identity for the recurrence with enabled state.";
+  }
+  identity disabled {
+    description
+      "Identity for the recurrence with disabled state.";
+  }
+  identity out-of-date {
+    description
+      "Identity for the recurrence with out-of-date state.";
+  }  
   grouping period-of-time {
     description
       "This grouping is defined for period of time property.";
@@ -579,49 +594,36 @@ module ietf-schedule {
       description
         "The timestamp that the schedule is last updated.";
     }
-    leaf time-zone-identifier {
-      type sys:timezone-name;
-      description
-        "Indicates the referenced time zone identifier of the schedule.";
-    }
     leaf version {
       type uint16;
       description
         "The version number of the schedule.";
     }
     leaf state {
-      type enumeration {
-        enum enabled {
-          value 1;
-          description
-            "The schedule is currently enabled.";
-        }
-        enum disabled {
-          value 2;
-          description
-            "The schedule is currently disabled.";
-        }        
-        enum out-of-date {
-          value 3;
-          description
-            "The schedule is currently out-of-date.";
-        }
+      type identityref {
+        base schedule-state;
       }
       description
         "The current state of the schedule.";
     }
-    leaf-list occurrence-list {
+    leaf counter {
+      when "derived-from-or-self(../schedule-type, 'schedule:recurrence')";
+      type uint32;
+      description
+        "The counter of occurrences since the schedule was enabled.";
+    }
+    leaf last-occurrence {
       when "derived-from-or-self(../schedule-type, 'schedule:recurrence')";
       type yang:date-and-time;
       description
-        "The list of occurrences.";
+        "The timestamp of last occurrence.";    
     }
     leaf upcoming-occurrence {
-      when "derived-from-or-self(../schedule-type, 'schedule:recurrence')";
+      when "derived-from-or-self(../schedule-type, 'schedule:recurrence')"
+          +"and derived-from-or-self(../state, 'schedule:enabled')";
       type yang:date-and-time;
       description
         "The timestamp of next occurrence.";
     }    
   }
 }
-
