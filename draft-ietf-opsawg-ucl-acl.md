@@ -553,6 +553,8 @@ Notation for {{rad-att}}:
 
 ##  YANG
 
+This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rfc8407bis}}.
+
    The YANG modules specified in this document defines schema for data
    that is designed to be accessed via network management protocols such
    as NETCONF {{!RFC6241}} or RESTCONF {{!RFC8040}}.  The lowest NETCONF layer
@@ -569,9 +571,10 @@ Notation for {{rad-att}}:
    There are a number of data nodes defined in the "ietf-ucl-acl" YANG module that are
    writable, creatable, and deletable (i.e., config true, which is the
    default).  These data nodes may be considered sensitive or vulnerable
-   in some network environments.  Write operations to these data nodes
-   could have a negative effect on network and security operations. These are the
-   subtrees and data nodes and their sensitivity/vulnerability:
+   in some network environments. Write operations (e.g., edit-config) and delete
+   operations to these data nodes without proper protection or authentication can
+   have a negative effect on network operations. Specifically,
+   the following subtrees and data nodes have particular sensitivities/vulnerabilities:
 
    * /acl:acls/uacl:endpoint-groups/uacl:endpoint-group:
    : This list specifies all the endpoint group entries. Unauthorized write access to this
@@ -588,8 +591,8 @@ Notation for {{rad-att}}:
   Some of the readable data nodes in the "ietf-ucl-acl" YANG module may
   be considered sensitive or vulnerable in some network environments. It
   is thus important to control read access (e.g., via get, get-config,
-  or notification) to these data nodes. These are the subtrees and data
-  nodes and their sensitivity/vulnerability:
+  or notification) to these data nodes.  Specifically,
+  the following subtrees and data nodes have particular sensitivities/vulnerabilities:
 
    * /acl:acls/acl:acl/acl:aces/acl:ace/uacl:time-range:
   : This subtree specifies when the access control entry rules are in effect. An
