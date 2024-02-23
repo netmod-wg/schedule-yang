@@ -190,6 +190,21 @@ module ietf-schedule {
       "Identity for a repeating event based on an interval of
        a year or more.";
   }
+  identity schedule-type {
+    description
+      "Base identity for schedule type.";
+  }
+  identity period {
+    base schedule-type;
+    description
+      "Identity for a period based schedule.";
+  }
+  
+  identity recurrence {
+    base schedule-type;
+    description
+      "Identity for a recurrence based schedule.";
+  }
 
   grouping period-of-time {
     description
@@ -540,4 +555,71 @@ module ietf-schedule {
         "Defines a list of exceptions for recurrence.";
     }
   }
+  
+  grouping schedule-status {
+    description
+      "This grouping is defined to identify common properties of 
+       scheduling status.";
+    leaf schedule-id {
+      type string;
+      description
+        "The schedule identifier that globally identifies a schedule.";
+    }
+    leaf schedule-type {
+      type identityref {
+        base schedule-type;
+      }
+      description
+        "The schedule type";
+    }    
+    leaf last-update {
+      type yang:date-and-time;
+      description
+        "The timestamp that the schedule is last updated.";
+    }
+    leaf time-zone-identifier {
+      type sys:timezone-name;
+      description
+        "Indicates the referenced time zone identifier of the schedule.";
+    }
+    leaf version {
+      type uint16;
+      description
+        "The version number of the schedule.";
+    }
+    leaf state {
+      type enumeration {
+        enum enabled {
+          value 1;
+          description
+            "The schedule is currently enabled.";
+        }
+        enum disabled {
+          value 2;
+          description
+            "The schedule is currently disabled.";
+        }        
+        enum out-of-date {
+          value 3;
+          description
+            "The schedule is currently out-of-date.";
+        }
+      }
+      description
+        "The current state of the schedule.";
+    }
+    leaf-list occurrence-list {
+      when "derived-from-or-self(../schedule-type, 'schedule:recurrence')";
+      type yang:date-and-time;
+      description
+        "The list of occurrences.";
+    }
+    leaf upcoming-occurrence {
+      when "derived-from-or-self(../schedule-type, 'schedule:recurrence')";
+      type yang:date-and-time;
+      description
+        "The timestamp of next occurrence.";
+    }    
+  }
 }
+
