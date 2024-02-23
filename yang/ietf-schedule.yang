@@ -563,7 +563,9 @@ module ietf-schedule {
     leaf schedule-id {
       type string;
       description
-        "The schedule identifier that globally identifies a schedule.";
+        "The schedule identifier that globally identifies a schedule in
+          a device, controller, network, etc. The unicity scope depends
+          on the implementation.";
     }
     leaf schedule-type {
       type identityref {
