@@ -610,7 +610,8 @@ module ietf-schedule {
       when "derived-from-or-self(../schedule-type, 'schedule:recurrence')";
       type uint32;
       description
-        "The counter of occurrences since the schedule was enabled.";
+        "The counter of occurrences since the schedule was enabled.
+          The count wraps around when it reaches the maximum value.";
     }
     leaf last-occurrence {
       when "derived-from-or-self(../schedule-type, 'schedule:recurrence')";
