@@ -227,7 +227,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 ~~~~
 {::include ./yang/schedule/schedule-status.txt}
 ~~~~
-{: #sche-status-tree title="Schedule Status Grouping Tree Structure"}   
+{: #sche-status-tree title="Schedule Status Grouping Tree Structure"}
 
    The "schedule-id" parameter is useful to uniquely identify a schedule in
    a network device or controller if multiple scheduling contexts exists.
