@@ -49,3 +49,5 @@ module: ietf-schedule
     +-- bysetpos*                 int32
     +-- workweek-start?           schedule:weekday
     +-- exception-dates*          union
+  grouping schedule-status:
+    ...
