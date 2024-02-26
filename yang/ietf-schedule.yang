@@ -593,7 +593,15 @@ module ietf-schedule {
       type uint16;
       description
         "The version number of the schedule.";
-    }    
+    }
+    leaf schedule-type {
+      type identityref {
+        base schedule-type;
+      }
+      config false;
+      description
+        "The schedule type.";
+    }
     leaf last-update {
       type yang:date-and-time;
       config false;
