@@ -582,23 +582,6 @@ module ietf-schedule {
           a device, controller, network, etc. The unicity scope depends
           on the implementation.";
     }
-    leaf schedule-type {
-      type identityref {
-        base schedule-type;
-      }
-      description
-        "The schedule type";
-    }    
-    leaf last-update {
-      type yang:date-and-time;
-      description
-        "The timestamp that the schedule is last updated.";
-    }
-    leaf version {
-      type uint16;
-      description
-        "The version number of the schedule.";
-    }
     leaf state {
       type identityref {
         base schedule-state;
@@ -606,16 +589,29 @@ module ietf-schedule {
       description
         "The current state of the schedule.";
     }
+    leaf version {
+      type uint16;
+      description
+        "The version number of the schedule.";
+    }    
+    leaf last-update {
+      type yang:date-and-time;
+      config false;
+      description
+        "The timestamp that the schedule is last updated.";
+    }
     leaf counter {
       when "derived-from-or-self(../schedule-type, 'schedule:recurrence')";
       type uint32;
+      config false;
       description
         "The counter of occurrences since the schedule was enabled.
-          The count wraps around when it reaches the maximum value.";
+         The count wraps around when it reaches the maximum value.";
     }
     leaf last-occurrence {
       when "derived-from-or-self(../schedule-type, 'schedule:recurrence')";
       type yang:date-and-time;
+      config false;
       description
         "The timestamp of last occurrence.";    
     }
@@ -623,6 +619,7 @@ module ietf-schedule {
       when "derived-from-or-self(../schedule-type, 'schedule:recurrence')"
           +"and derived-from-or-self(../state, 'schedule:enabled')";
       type yang:date-and-time;
+      config false;
       description
         "The timestamp of next occurrence.";
     }    
