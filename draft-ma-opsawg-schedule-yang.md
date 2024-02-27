@@ -232,16 +232,24 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    The "schedule-id" parameter is useful to uniquely identify a schedule in
    a network device or controller if multiple scheduling contexts exists.
 
-   The "state" parameter is defined to configure/expose the sheduling state, depends
-   on the use of the grouping. Likewise, the "version" parameter summarizes the
-   current schedule version information.
+   The "state" parameter is defined to configure/expose the sheduling state,
+   depending on the use of the grouping. The "identityref" type is used for this
+   parameter to allow extensibility in future modules. For example, a "conflicted"
+   state is valid in scheduling contexts where multiple systems struggle for the
+   scheduling of the same property.
 
-   The "last-update" parameter identifies when the schedule was last modified.
+   The "version" parameter summarizes the current schedule version information,
+   and the "last-update" parameter identifies when the schedule was last modified.
 
    The "schedule-type" parameter identifies the type of the current schedule.
    The "counter", "last-occurrence", and "upcoming-occurrence" data nodes are
    only avaliable when the "schedule-type" is "recurrence".
 
+   The current grouping captures the most common definition that is applicable
+   to all scheduling contexts. Future modules can define other useful
+   parameters as needed. For example, in scheduling context that allows multiple
+   system sources to exist, the "source" and "precedence" parameters may need to
+   reflect how schedules from different sources should be prioritised.
 
 #  Features and Augmentations
 
