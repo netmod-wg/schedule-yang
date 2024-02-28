@@ -4,3 +4,4 @@
     +-- max-allowed-start?      yang:date-and-time
     +-- min-allowed-start?      yang:date-and-time
     +-- max-allowed-end?        yang:date-and-time
+    +-- discard-action?         enumeration
