@@ -1,5 +1,7 @@
 module: ietf-schedule
 
+  grouping generic-schedule-params:
+    ...
   grouping period-of-time:
     ...
   grouping recurrence:
