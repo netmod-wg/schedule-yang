@@ -232,7 +232,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    The "schedule-id" parameter is useful to uniquely identify a schedule in
    a network device or controller if multiple scheduling contexts exists.
 
-   The "state" parameter is defined to configure/expose the sheduling state,
+   The "state" parameter is defined to configure/expose the scheduling state,
    depending on the use of the grouping. The "identityref" type is used for this
    parameter to allow extensibility in future modules. For example, a "conflicted"
    state is valid in scheduling contexts where multiple systems struggle for the
