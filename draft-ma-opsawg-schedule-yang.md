@@ -126,7 +126,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 ## The "generic-schedule-params" Grouping {#sec-gen}
 
-This grouping specifies a set of configuration parameters that are
+The "generic-schedule-params" grouping specifies a set of configuration parameters that are
 used by a system for validating requested schedules. These parameters
 apply to all schedules on a system and are meant to provide guards against
 stale configuration, too short schedule requests that would
