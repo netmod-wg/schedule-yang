@@ -239,7 +239,9 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    scheduling of the same property. The conflict may be induced by, e.g., multiple entities managing the schedules for the same target component.
 
    The "version" parameter is used to track the current schedule version information. The version can be bumped by the entity who create the schedule.
-   and the "last-update" parameter identifies when the schedule was last modified.
+   The "last-update" parameter identifies when the schedule was last modified.
+   In some contexts, this parameter can be used to track the configuration of a
+   given schedule. In such cases, the "version" may not be used.
 
    The "schedule-type" parameter identifies the type of the current schedule.
    The "counter", "last-occurrence", and "upcoming-occurrence" data nodes are
