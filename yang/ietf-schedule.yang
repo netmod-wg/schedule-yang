@@ -267,6 +267,24 @@ module ietf-schedule {
         "A requested schedule will be rejected if the last occurence
          of that schedule or its duratioon exceed 'max-allowed-end'.";
     }
+    leaf discard-action {
+      type enumeration {
+        enum warning {
+          description
+            "A warning message is generated when a schedule is discarded
+             when enforcing the guards in this grouping or it is received
+             out-of-date.";
+        }
+        enum silently-discard {
+          description
+           "Discards silently a schedule when it is invalid because
+            it is not consistent with the guards in this grouping or
+            it is received out-of-date.";
+        }
+      }
+      description
+        "Specifies the behavior when a schedule is discarded.";    
+    }
   }
 
   grouping period-of-time {
