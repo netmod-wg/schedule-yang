@@ -234,7 +234,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
    The "state" parameter is defined to configure/expose the scheduling state,
    depending on the use of the grouping. The "identityref" type is used for this
-   parameter to allow extensibility in future modules. For example, a "conflicted"
+   parameter to allow extensibility in future modules. For example, a "conflict"
    state is valid in scheduling contexts where multiple systems struggle for the
    scheduling of the same property.
 
