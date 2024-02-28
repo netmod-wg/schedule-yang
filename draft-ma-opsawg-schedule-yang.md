@@ -248,7 +248,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    only avaliable when the "schedule-type" is "recurrence".
 
    The current grouping captures the most common definition that is applicable
-   to all scheduling contexts. Future modules can define other useful
+   to typical scheduling contexts known so far. Future modules can define other useful
    parameters as needed. For example, in scheduling context that allows multiple
    system sources to exist, the "source" and "precedence" parameters may need to
    reflect how schedules from different sources should be prioritised.
