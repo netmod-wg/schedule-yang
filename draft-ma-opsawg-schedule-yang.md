@@ -106,11 +106,12 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
    The "ietf-schedule" module ({{sec-schedule}}) defines the following groupings:
 
-   * period-of-time ({{sec-period}})
-   * recurrence ({{sec-rec}})
-   * recurrence-with-date-times ({{sec-rec-dt}})
-   * icalendar-recurrence ({{sec-ical-rec}})
-   * schedule-status ({{sec-schedule-status}})
+   * "generic-schedule-params" {#sec-gen}
+   * "period-of-time" ({{sec-period}})
+   * "recurrence" ({{sec-rec}})
+   * "recurrence-with-date-times" ({{sec-rec-dt}})
+   * "icalendar-recurrence" ({{sec-ical-rec}})
+   * "schedule-status" ({{sec-schedule-status}})
 
    {{schedule-tree}} provides an overview of the tree structure {{?RFC8340}} of
    the "ietf-schedule" module in terms of its groupings.
@@ -122,6 +123,19 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
    Each of these groupings is presented in the following subsections. Examples
    are provided in {{usage}}.
+
+## The "generic-schedule-params" Grouping {#sec-gen}
+
+The "generic-schedule-params" grouping specifies a set of configuration parameters that are
+used by a system for validating requested schedules. These parameters
+apply to all schedules on a system and are meant to provide guards against
+stale configuration, too short schedule requests that would
+prevent validation by admins of some critical systems, etc.
+
+~~~~
+{::include ./yang/schedule/sch-generic-params.txt}
+~~~~
+{: #gsp-tree title="Generic Schedule Configuration Tree Structure"}
 
 ## The "period-of-time" Grouping {#sec-period}
 
