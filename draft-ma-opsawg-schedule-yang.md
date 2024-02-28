@@ -236,7 +236,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    depending on the use of the grouping. The "identityref" type is used for this
    parameter to allow extensibility in future modules. For example, a "conflict"
    state is valid in scheduling contexts where multiple systems struggle for the
-   scheduling of the same property.
+   scheduling of the same property. The conflict may be induced by, e.g., multiple entities managing the schedules for the same target component.
 
    The "version" parameter summarizes the current schedule version information,
    and the "last-update" parameter identifies when the schedule was last modified.
