@@ -281,7 +281,9 @@ module ietf-schedule {
             it is not consistent with the guards in this grouping or
             it is received out-of-date.";
         }
-      }    
+      }
+      description
+        "Specifies the behavior when a schedule is discarded.";    
     }
   }
 
