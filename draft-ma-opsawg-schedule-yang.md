@@ -249,7 +249,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
    The current grouping captures the most common definition that is applicable
    to typical scheduling contexts known so far. Future modules can define other useful
-   parameters as needed. For example, in scheduling context that allows multiple
+   parameters as needed. For example, in a  scheduling context with multiple
    system sources to exist, the "source" and "precedence" parameters may need to
    reflect how schedules from different sources should be prioritised.
 
