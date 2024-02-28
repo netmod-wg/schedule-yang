@@ -277,7 +277,7 @@ module ietf-schedule {
         }
         enum silently-discard {
           description
-           "Discards silently a schedule when it is invalidated because
+           "Discards silently a schedule when it is invalid because
             it is not consistent with the guards in this grouping or
             it is received out-of-date.";
         }
