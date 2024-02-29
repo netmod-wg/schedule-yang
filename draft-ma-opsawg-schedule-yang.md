@@ -59,8 +59,8 @@ informative:
    This document defines a common schedule YANG module which is
    designed to be applicable for scheduling information such as event, policy,
    services, or resources based on date and time. For the sake of better modularity,
-   the module includes basic, intermediate, and advanced versions of schedule groupings.
-   In addition, a common schedule status grouping is also defined.
+   the module includes basic, intermediate, and advanced versions of recurrence
+   related groupings. In addition, a common schedule status grouping is also defined.
 
 --- middle
 
@@ -106,7 +106,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
    The "ietf-schedule" module ({{sec-schedule}}) defines the following groupings:
 
-   * "generic-schedule-params" {#sec-gen}
+   * "generic-schedule-params" ({{sec-gen}})
    * "period-of-time" ({{sec-period}})
    * "recurrence" ({{sec-rec}})
    * "recurrence-with-date-times" ({{sec-rec-dt}})
@@ -126,7 +126,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 ## The "generic-schedule-params" Grouping {#sec-gen}
 
-The "generic-schedule-params" grouping specifies a set of configuration parameters that are
+The "generic-schedule-params" grouping ({{gsp-tree}}) specifies a set of configuration parameters that are
 used by a system for validating requested schedules. These parameters
 apply to all schedules on a system and are meant to provide guards against
 stale configuration, too short schedule requests that would

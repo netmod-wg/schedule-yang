@@ -1,3 +1,5 @@
+module: ietf-schedule
+
   grouping generic-schedule-params:
     +-- time-zone-identifier?   sys:timezone-name
     +-- validity?               yang:date-and-time
@@ -5,3 +7,13 @@
     +-- min-allowed-start?      yang:date-and-time
     +-- max-allowed-end?        yang:date-and-time
     +-- discard-action?         enumeration
+  grouping period-of-time:
+    ...
+  grouping recurrence:
+    ...
+  grouping recurrence-with-date-times:
+    ...
+  grouping icalendar-recurrence:
+    ...
+  grouping schedule-status:
+    ...
