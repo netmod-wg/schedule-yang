@@ -106,7 +106,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
    The "ietf-schedule" module ({{sec-schedule}}) defines the following groupings:
 
-   * "generic-schedule-params" ({{#sec-gen}})
+   * "generic-schedule-params" ({{sec-gen}})
    * "period-of-time" ({{sec-period}})
    * "recurrence" ({{sec-rec}})
    * "recurrence-with-date-times" ({{sec-rec-dt}})
