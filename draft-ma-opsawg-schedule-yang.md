@@ -60,7 +60,7 @@ informative:
    designed to be applicable for scheduling information such as event, policy,
    services, or resources based on date and time. For the sake of better modularity,
    the module includes basic, intermediate, and advanced versions of recurrence
-   related groupings. In addition, a common schedule status grouping is also defined.
+   related groupings.
 
 --- middle
 
@@ -261,7 +261,7 @@ prevent validation by admins of some critical systems, etc.
    The "counter", "last-occurrence", and "upcoming-occurrence" data nodes are
    only avaliable when the "schedule-type" is "recurrence".
 
-   The current grouping captures the most common definition that is applicable
+   The current grouping captures common parameters that is applicable
    to typical scheduling contexts known so far. Future modules can define other useful
    parameters as needed. For example, in a  scheduling context with multiple
    system sources to feed the schedules, the "source" and "precedence" parameters may be needed to
