@@ -1,0 +1,996 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2023-03-12T01:11:52.544488+00:00",
+  "repo": "boucadair/policy-based-network-acl",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOI7U4Jc5fFQwt",
+      "title": "Add More Examples",
+      "url": "https://github.com/boucadair/policy-based-network-acl/issues/1",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "QiufangMa"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-02-22T14:33:31Z",
+      "updatedAt": "2023-03-03T09:37:18Z",
+      "closedAt": "2023-03-03T09:37:18Z",
+      "comments": []
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOI7U4Jc5fjFIl",
+      "title": "Perform editorial review of main text. ",
+      "url": "https://github.com/boucadair/policy-based-network-acl/issues/4",
+      "state": "OPEN",
+      "author": "danielkinguk",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "Will clean up grammar and some typos. ",
+      "createdAt": "2023-02-28T13:02:57Z",
+      "updatedAt": "2023-02-28T13:02:58Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOI7U4Jc5gB4Hg",
+      "title": "Change of affiliation ",
+      "url": "https://github.com/boucadair/policy-based-network-acl/issues/7",
+      "state": "CLOSED",
+      "author": "danielkinguk",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "danielkinguk"
+      ],
+      "labels": [],
+      "body": "Folks, if there is no objection I would like to use my Lancaster affiliation in the next version of the document. \r\n\r\nDaniel King \r\nLancaster University\r\nd.king@lancaster.ac.uk\r\n\r\nAs we will be implementing the model as part of a new project TUDOR:\r\n\r\nhttps://www.lancaster.ac.uk/dsi/about-us/news/new-12m-project-to-make-future-telecommunications-network-greener-more-resilient-and-ubiquitous\r\n\r\nA key component of the project is scheduled access control to resources. I am leading some of the management and control plane work on TUDOR and will be using ETSI TFS (an SDN Controller I helped develop in the EC project TERAFLOW) and a RADIUS server to manage authentication and authorisation. This I-D will be implemented and tested, so I'll have some implementation feedback in the near future.    \r\n",
+      "createdAt": "2023-03-06T10:28:04Z",
+      "updatedAt": "2023-03-06T12:15:55Z",
+      "closedAt": "2023-03-06T12:15:55Z",
+      "comments": [
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Sure, just update your affiliation whenever you like, but be aware that the submission window will be closed next Monday. So happy to know that you will be implementing this draft, that's a very exciting news! Looking forward to your implementation feedback;-)",
+          "createdAt": "2023-03-06T11:08:59Z",
+          "updatedAt": "2023-03-06T11:08:59Z"
+        },
+        {
+          "author": "danielkinguk",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks! I will also present the I-D on the next ETSI TFS call. I will be keen to see if any of the TeraFlow vendor partners will support the work.  ",
+          "createdAt": "2023-03-06T11:25:13Z",
+          "updatedAt": "2023-03-06T11:25:13Z"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOI7U4Jc5gKj3z",
+      "title": "Should we use a string/group-name to uniquely identify a group rather than an int32 group ID?",
+      "url": "https://github.com/boucadair/policy-based-network-acl/issues/8",
+      "state": "OPEN",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Unsure if a domain-name parameter is needed for each endpoint group. The follow-up question is whether we need to distinguish between local and global groups. Thoughts?\r\n\r\n",
+      "createdAt": "2023-03-07T12:52:59Z",
+      "updatedAt": "2023-03-09T08:47:30Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "body": "What would be the use of that domain name? \r\n\r\nAs a side comment, I think that its is better to use a string/group-name to uniquely identify a a group rather than an int32:\r\n\r\n>        +--rw endpoint-group* [group-id]\r\n>           +--rw group-id              uint32",
+          "createdAt": "2023-03-07T15:45:57Z",
+          "updatedAt": "2023-03-07T15:45:57Z"
+        },
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Unsure yet, but a user belongs to a specific domain which is bound with specific AAA schemes, but not sure for a collective user or device group.\r\n\r\nIs it because a group-name itself is descriptive? Using a unique groupID can have benefits if we would like the ID to be carried in the encapsulation headers.",
+          "createdAt": "2023-03-08T03:03:09Z",
+          "updatedAt": "2023-03-08T03:03:09Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "body": "> Using a unique groupID can have benefits if we would like the ID to be carried in the encapsulation headers.\r\n\r\nThe use of string or even uri allows for some hierarchy that can ease coordination within an administrative domain. We can always map strings to keys if there is a need to tag packets with the group they belong to. The tagging does not need to mirror exactly the one used to populate the policy. \r\n\r\nWe may even consider customized mapping per encapsulation scheme, but it is too early to dive into this. Thanks",
+          "createdAt": "2023-03-08T07:32:35Z",
+          "updatedAt": "2023-03-08T07:32:35Z"
+        },
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I feel the mapping needs to be bidirectional, not only to be able to uniquely map a string value to an ID, but also to uniquely map an ID back to that string. \r\nI suggest we leave this issue open for the moment and have more discussion after the WG has got interests in group-based access control policies and adopts this work.",
+          "createdAt": "2023-03-09T08:33:05Z",
+          "updatedAt": "2023-03-09T08:33:05Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "body": "> I suggest we leave this issue open for the moment and have more discussion after the WG has got interests in group-based access control policies and adopts this work.\r\n\r\nAgree.",
+          "createdAt": "2023-03-09T08:47:29Z",
+          "updatedAt": "2023-03-09T08:47:29Z"
+        }
+      ]
+    }
+  ],
+  "pulls": [
+    {
+      "number": 2,
+      "id": "PR_kwDOI7U4Jc5KzUI0",
+      "title": "optimize the YANG modules",
+      "url": "https://github.com/boucadair/policy-based-network-acl/pull/2",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-02-27T07:09:56Z",
+      "updatedAt": "2023-02-28T12:42:27Z",
+      "baseRepository": "boucadair/policy-based-network-acl",
+      "baseRefName": "main",
+      "baseRefOid": "5420a69170eff3f25be7bfbf8ff2c8fa4005d55f",
+      "headRepository": "QiufangMa/policy-based-network-acl",
+      "headRefName": "main",
+      "headRefOid": "079c562f6eec530e0e1abef3e3bf4cf66d8d5090",
+      "closedAt": "2023-02-28T12:42:27Z",
+      "mergedAt": "2023-02-28T12:42:27Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "884fb951abfbb455de28c12d170c05bb9528abc8"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOI7U4Jc5OYrin",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-27T08:23:59Z",
+          "updatedAt": "2023-02-27T08:29:51Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\n     module complies with Sections 3.3.9 and 3.3.10 in RFC5545. \r\n```",
+              "createdAt": "2023-02-27T08:24:00Z",
+              "updatedAt": "2023-02-27T08:29:51Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "Shouldn't this be schedule rather that calendar?",
+              "createdAt": "2023-02-27T08:24:53Z",
+              "updatedAt": "2023-02-27T08:29:51Z"
+            },
+            {
+              "originalPosition": 10,
+              "body": "Why nvo3 specifically?",
+              "createdAt": "2023-02-27T08:26:09Z",
+              "updatedAt": "2023-02-27T08:29:51Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "\"abstract group identities\" is too abstract, IMO. ",
+              "createdAt": "2023-02-27T08:28:14Z",
+              "updatedAt": "2023-02-27T08:29:51Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "which list?",
+              "createdAt": "2023-02-27T08:28:23Z",
+              "updatedAt": "2023-02-27T08:29:51Z"
+            },
+            {
+              "originalPosition": 28,
+              "body": "Idem as for the comment related to IPv4.",
+              "createdAt": "2023-02-27T08:28:46Z",
+              "updatedAt": "2023-02-27T08:29:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5OZvXw",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-27T11:10:50Z",
+          "updatedAt": "2023-02-27T11:10:50Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "fixed.",
+              "createdAt": "2023-02-27T11:10:50Z",
+              "updatedAt": "2023-02-27T11:10:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5OZyOx",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-27T11:18:50Z",
+          "updatedAt": "2023-02-27T11:18:50Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Yes, we are defining a schedule module, but it came from the icalendar(which is the title of RFC5545) data value type definition. So I am still using iCalendar concept here but use the 'schedule' elsewhere. Make sense?",
+              "createdAt": "2023-02-27T11:18:50Z",
+              "updatedAt": "2023-02-27T11:18:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5OZyr9",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-27T11:20:01Z",
+          "updatedAt": "2023-02-27T11:20:02Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "how about this: s/NVO3 header extension/packet header extension/?",
+              "createdAt": "2023-02-27T11:20:01Z",
+              "updatedAt": "2023-02-27T11:20:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5OZzF7",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-27T11:21:10Z",
+          "updatedAt": "2023-02-27T11:21:11Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "how about this: s/abstract group identities/endpoint group identities/?",
+              "createdAt": "2023-02-27T11:21:10Z",
+              "updatedAt": "2023-02-27T11:21:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5OZzxH",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-27T11:23:01Z",
+          "updatedAt": "2023-02-27T11:23:02Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "It follows RFC8519. Or how about this: s/in the list/in the ACL entries/?",
+              "createdAt": "2023-02-27T11:23:01Z",
+              "updatedAt": "2023-02-27T11:23:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5OZz71",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-27T11:23:28Z",
+          "updatedAt": "2023-02-27T11:23:29Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "See comments above.",
+              "createdAt": "2023-02-27T11:23:29Z",
+              "updatedAt": "2023-02-27T11:23:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5Oa_Xh",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-27T14:26:08Z",
+          "updatedAt": "2023-02-27T14:26:08Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "OK, thanks.",
+              "createdAt": "2023-02-27T14:26:08Z",
+              "updatedAt": "2023-02-27T14:26:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5ObAmc",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-27T14:28:41Z",
+          "updatedAt": "2023-02-27T14:28:42Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "If the intent is to cover encap schemes, e.g., outer/inner headers, then I would make make that explicit. Thanks.",
+              "createdAt": "2023-02-27T14:28:42Z",
+              "updatedAt": "2023-02-27T14:28:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5ObBeA",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-27T14:30:26Z",
+          "updatedAt": "2023-02-27T14:30:26Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "That is better, but still the description should be updated to call out what is meant by \"endpoint group identities\"; otherwise it is not that easy for readers to get the intent. Thanks.",
+              "createdAt": "2023-02-27T14:30:26Z",
+              "updatedAt": "2023-02-27T14:30:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5ObB2b",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-27T14:31:15Z",
+          "updatedAt": "2023-02-27T14:31:16Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "I would then change to \"ACEs\".",
+              "createdAt": "2023-02-27T14:31:15Z",
+              "updatedAt": "2023-02-27T14:31:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5ObB8h",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-27T14:31:28Z",
+          "updatedAt": "2023-02-27T14:31:29Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "Same replies ;-)",
+              "createdAt": "2023-02-27T14:31:28Z",
+              "updatedAt": "2023-02-27T14:31:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5Oe6ep",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-28T02:50:16Z",
+          "updatedAt": "2023-02-28T02:50:16Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "fixed.",
+              "createdAt": "2023-02-28T02:50:16Z",
+              "updatedAt": "2023-02-28T02:50:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5Oe7e7",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-28T02:56:18Z",
+          "updatedAt": "2023-02-28T02:56:19Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "I have updated with: An endpoint\r\n       group identity may be carried in the outer/inner packet\r\n       header(e.g., via NVO3 encapsulation), but may not correspond\r\n       to any field in the packet header.\r\nAny suggestion?",
+              "createdAt": "2023-02-28T02:56:19Z",
+              "updatedAt": "2023-02-28T02:56:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5Oe7r0",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-28T02:57:34Z",
+          "updatedAt": "2023-02-28T02:57:35Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "Updated with: An ACL that matches based on an endpoint group identity,\r\n       which can represent the collective identity of a group of \r\n       authenticated users or enterprise end devices.\r\nWould this be okay?",
+              "createdAt": "2023-02-28T02:57:34Z",
+              "updatedAt": "2023-02-28T02:57:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5Ogd3Y",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-28T09:41:51Z",
+          "updatedAt": "2023-02-28T09:41:52Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "That's much more better, @QiufangMa. Thanks",
+              "createdAt": "2023-02-28T09:41:52Z",
+              "updatedAt": "2023-02-28T09:41:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5OgfJ6",
+          "commit": {
+            "abbreviatedOid": "204121d"
+          },
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-28T09:44:05Z",
+          "updatedAt": "2023-02-28T09:44:05Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "Works for me.  thanks. ",
+              "createdAt": "2023-02-28T09:44:05Z",
+              "updatedAt": "2023-02-28T09:44:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5Ogf_d",
+          "commit": {
+            "abbreviatedOid": "a4d6aaf"
+          },
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-28T09:45:20Z",
+          "updatedAt": "2023-02-28T09:50:26Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "```suggestion\r\n          \"Modes to bound the recurrence rule. If no choice is indicated,\r\n```",
+              "createdAt": "2023-02-28T09:45:20Z",
+              "updatedAt": "2023-02-28T09:50:26Z"
+            },
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\n     module complies with Sections 3.3.9 and 3.3.10 in RFC 5545. \r\n```",
+              "createdAt": "2023-02-28T09:46:59Z",
+              "updatedAt": "2023-02-28T09:50:26Z"
+            },
+            {
+              "originalPosition": 79,
+              "body": "Please add a reference statement to point to https://www.rfc-editor.org/rfc/rfc5545#section-3.3.10.",
+              "createdAt": "2023-02-28T09:49:38Z",
+              "updatedAt": "2023-02-28T09:50:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5Ohhw5",
+          "commit": {
+            "abbreviatedOid": "a4d6aaf"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-28T12:19:17Z",
+          "updatedAt": "2023-02-28T12:19:18Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "fixed.",
+              "createdAt": "2023-02-28T12:19:18Z",
+              "updatedAt": "2023-02-28T12:19:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5Ohh0M",
+          "commit": {
+            "abbreviatedOid": "a4d6aaf"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-28T12:19:25Z",
+          "updatedAt": "2023-02-28T12:19:25Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "fixed.",
+              "createdAt": "2023-02-28T12:19:25Z",
+              "updatedAt": "2023-02-28T12:19:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5OhiLg",
+          "commit": {
+            "abbreviatedOid": "a4d6aaf"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-28T12:20:22Z",
+          "updatedAt": "2023-02-28T12:20:22Z",
+          "comments": [
+            {
+              "originalPosition": 79,
+              "body": "Sure. I 've add as the grouping's substatement.",
+              "createdAt": "2023-02-28T12:20:22Z",
+              "updatedAt": "2023-02-28T12:20:22Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDOI7U4Jc5K7ZMg",
+      "title": "Adding UCL examples & editorial updates",
+      "url": "https://github.com/boucadair/policy-based-network-acl/pull/3",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add examples showing how group-based ACLs are used. The current examples haven't consider the schedule mechanism yet, which needs to be added in following commits. But I'd like to let my co-authors to review this part firstly.",
+      "createdAt": "2023-02-28T12:52:18Z",
+      "updatedAt": "2023-03-02T09:39:30Z",
+      "baseRepository": "boucadair/policy-based-network-acl",
+      "baseRefName": "main",
+      "baseRefOid": "884fb951abfbb455de28c12d170c05bb9528abc8",
+      "headRepository": "QiufangMa/policy-based-network-acl",
+      "headRefName": "main",
+      "headRefOid": "911d3b1edbd82baa5f143568492bc0b60f2cfc41",
+      "closedAt": "2023-03-02T09:39:30Z",
+      "mergedAt": "2023-03-02T09:39:30Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "202cc7887480c7d56031d95ed2020842987f2afd"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOI7U4Jc5Oh5Mi",
+          "commit": {
+            "abbreviatedOid": "53bc943"
+          },
+          "author": "danielkinguk",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "The proposed changes fix a few NITs, I'd like to do a full review of the document text to squash some additional typos. ",
+          "createdAt": "2023-02-28T13:00:27Z",
+          "updatedAt": "2023-02-28T13:00:27Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5Oj-yh",
+          "commit": {
+            "abbreviatedOid": "53bc943"
+          },
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "some few nits fixes",
+          "createdAt": "2023-02-28T16:37:08Z",
+          "updatedAt": "2023-02-28T16:40:49Z",
+          "comments": [
+            {
+              "originalPosition": 128,
+              "body": "```suggestion\r\n   The access requirements are as follows:\r\n```",
+              "createdAt": "2023-02-28T16:37:08Z",
+              "updatedAt": "2023-02-28T16:40:49Z"
+            },
+            {
+              "originalPosition": 125,
+              "body": "```suggestion\r\n   Let's consider an organization that would like to restrict the access of R&D\r\n```",
+              "createdAt": "2023-02-28T16:37:27Z",
+              "updatedAt": "2023-02-28T16:40:49Z"
+            },
+            {
+              "originalPosition": 126,
+              "body": "```suggestion\r\n   employees that bring personally owned devices (BYOD) into the workplace.\r\n```",
+              "createdAt": "2023-02-28T16:37:42Z",
+              "updatedAt": "2023-02-28T16:40:49Z"
+            },
+            {
+              "originalPosition": 130,
+              "body": "```suggestion\r\n   * Permit traffic from R&D BYOD of employees, destined to R&D employees' devices.\r\n```",
+              "createdAt": "2023-02-28T16:38:18Z",
+              "updatedAt": "2023-02-28T16:40:49Z"
+            },
+            {
+              "originalPosition": 132,
+              "body": "```suggestion\r\n   * Deny traffic from R&D BYOD of employees, destined to finance servers\r\n```",
+              "createdAt": "2023-02-28T16:38:35Z",
+              "updatedAt": "2023-02-28T16:40:50Z"
+            },
+            {
+              "originalPosition": 135,
+              "body": "```suggestion\r\n   The following example illustrates the configuration of the SDN controller\r\n```",
+              "createdAt": "2023-02-28T16:39:23Z",
+              "updatedAt": "2023-02-28T16:40:50Z"
+            },
+            {
+              "originalPosition": 144,
+              "body": "```suggestion\r\n   This section illustrates an example to configure a PEP  using\r\n```",
+              "createdAt": "2023-02-28T16:39:55Z",
+              "updatedAt": "2023-02-28T16:40:50Z"
+            },
+            {
+              "originalPosition": 165,
+              "body": "```suggestion\r\n   The section illustrates an example of configuring a PEP using\r\n```",
+              "createdAt": "2023-02-28T16:40:27Z",
+              "updatedAt": "2023-02-28T16:40:50Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOI7U4Jc5LHKUc",
+      "title": "update examples with schedule mechanism",
+      "url": "https://github.com/boucadair/policy-based-network-acl/pull/5",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Adding delicated examples to show how to use period and recurrence formats defined in ietf schedule YANG module; update examples in Appendix considering schedule and period mechanism. All of the examples have passed the yanglint validation.",
+      "createdAt": "2023-03-02T09:52:55Z",
+      "updatedAt": "2023-03-03T09:37:17Z",
+      "baseRepository": "boucadair/policy-based-network-acl",
+      "baseRefName": "main",
+      "baseRefOid": "202cc7887480c7d56031d95ed2020842987f2afd",
+      "headRepository": "QiufangMa/policy-based-network-acl",
+      "headRefName": "main",
+      "headRefOid": "8e5f9661b0932b948d030398c484875e5697c559",
+      "closedAt": "2023-03-03T09:37:17Z",
+      "mergedAt": "2023-03-03T09:37:17Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "e2a05f5e26619b081fa816deb06180502b9c3903"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOI7U4Jc5OxCa1",
+          "commit": {
+            "abbreviatedOid": "9be6a48"
+          },
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "state": "DISMISSED",
+          "body": "",
+          "createdAt": "2023-03-02T10:14:32Z",
+          "updatedAt": "2023-03-03T09:37:02Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\n   Here are some examples to illustrate the use of the period and recurrence formats defined as\r\n```",
+              "createdAt": "2023-03-02T10:14:32Z",
+              "updatedAt": "2023-03-02T10:25:31Z"
+            },
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\n   YANG groupings. Only the message body is provided with JSON used for encoding {{?RFC7951}}\r\n```",
+              "createdAt": "2023-03-02T10:15:45Z",
+              "updatedAt": "2023-03-02T10:25:31Z"
+            },
+            {
+              "originalPosition": 12,
+              "body": "```suggestion\r\n   The example of a period that starts at 08:00:00 UTC, on January 1, 2023 and ends at 18:00:00 UTC\r\n```",
+              "createdAt": "2023-03-02T10:16:23Z",
+              "updatedAt": "2023-03-02T10:25:31Z"
+            },
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\n   An example of a period that starts at 08:00:00 UTC, on January 1, 2023 and lasts 15 days and\r\n```",
+              "createdAt": "2023-03-02T10:17:13Z",
+              "updatedAt": "2023-03-02T10:25:31Z"
+            },
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\r\n   5 hours and 20 minutes is encoded as follows:\r\n```",
+              "createdAt": "2023-03-02T10:17:27Z",
+              "updatedAt": "2023-03-02T10:25:31Z"
+            },
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\n   on December 31, 2025 is encoded as follows:\r\n```",
+              "createdAt": "2023-03-02T10:18:03Z",
+              "updatedAt": "2023-03-02T10:25:31Z"
+            },
+            {
+              "originalPosition": 36,
+              "body": "```suggestion\r\n   Now, consider the example of a period that starts at 08:00:00 UTC, on January 1, 2023 and lasts 20 weeks:\r\n```",
+              "createdAt": "2023-03-02T10:18:42Z",
+              "updatedAt": "2023-03-02T10:25:31Z"
+            },
+            {
+              "originalPosition": 49,
+              "body": "```suggestion\r\n  The following snippet can be used to indicate a daily recurrent in December:\r\n```",
+              "createdAt": "2023-03-02T10:19:36Z",
+              "updatedAt": "2023-03-02T10:25:31Z"
+            },
+            {
+              "originalPosition": 60,
+              "body": "```suggestion\r\n   The following snippet can be used to indicate 10 occurrences that occur every last Saturday of the month:\r\n```",
+              "createdAt": "2023-03-02T10:20:30Z",
+              "updatedAt": "2023-03-02T10:25:31Z"
+            },
+            {
+              "originalPosition": 75,
+              "body": "```suggestion\r\n   The following indicates the example of a recurrence that occurs last workday of the month until December 25, 2023:\r\n```",
+              "createdAt": "2023-03-02T10:21:29Z",
+              "updatedAt": "2023-03-02T10:25:32Z"
+            },
+            {
+              "originalPosition": 75,
+              "body": "Not sure to get this one. Also, isn't \"bysetpos\" defined as a leaf-list?",
+              "createdAt": "2023-03-02T10:23:51Z",
+              "updatedAt": "2023-03-02T10:25:32Z"
+            },
+            {
+              "originalPosition": 60,
+              "body": "Isn't \"direction\" a leaf-list? Or I'm not reading the latest version of the yang module?",
+              "createdAt": "2023-03-02T10:25:00Z",
+              "updatedAt": "2023-03-02T10:25:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5OxKt5",
+          "commit": {
+            "abbreviatedOid": "1ca2bca"
+          },
+          "author": "danielkinguk",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-03-02T10:28:47Z",
+          "updatedAt": "2023-03-02T10:28:47Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5OxRaV",
+          "commit": {
+            "abbreviatedOid": "9be6a48"
+          },
+          "author": "danielkinguk",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-02T10:40:31Z",
+          "updatedAt": "2023-03-02T10:40:32Z",
+          "comments": [
+            {
+              "originalPosition": 75,
+              "body": "Yup, leaf-list and integer - I think. It would limit the number of instances within a specific time period. The text might be improved with \"on the\"... But just checking the example to make sure it is the case.\r\n\r\n\"The following indicates the example of a recurrence that occurs on the last workday of the month until December 25, 2023:\"",
+              "createdAt": "2023-03-02T10:40:32Z",
+              "updatedAt": "2023-03-02T10:40:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5OxzmJ",
+          "commit": {
+            "abbreviatedOid": "9be6a48"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-02T11:56:52Z",
+          "updatedAt": "2023-03-02T11:56:53Z",
+          "comments": [
+            {
+              "originalPosition": 60,
+              "body": "Sorry, the direction is indeed a leaf-list, I will fix the json snippet.",
+              "createdAt": "2023-03-02T11:56:53Z",
+              "updatedAt": "2023-03-02T11:56:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOI7U4Jc5Ox0Tm",
+          "commit": {
+            "abbreviatedOid": "9be6a48"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-02T11:58:52Z",
+          "updatedAt": "2023-03-02T11:58:53Z",
+          "comments": [
+            {
+              "originalPosition": 75,
+              "body": "Sorry, you guys are right, I will fix that. ",
+              "createdAt": "2023-03-02T11:58:53Z",
+              "updatedAt": "2023-03-02T11:58:53Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOI7U4Jc5LWKM4",
+      "title": "add changes between revision v01-v02",
+      "url": "https://github.com/boucadair/policy-based-network-acl/pull/6",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "add changes between revision v01-v02",
+      "createdAt": "2023-03-06T09:22:55Z",
+      "updatedAt": "2023-03-06T09:23:57Z",
+      "baseRepository": "boucadair/policy-based-network-acl",
+      "baseRefName": "main",
+      "baseRefOid": "e2a05f5e26619b081fa816deb06180502b9c3903",
+      "headRepository": "QiufangMa/policy-based-network-acl",
+      "headRefName": "main",
+      "headRefOid": "69e095a6e6e5794cf77a45aced7ccd5f303e114e",
+      "closedAt": "2023-03-06T09:23:57Z",
+      "mergedAt": "2023-03-06T09:23:57Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "434371ca27f6b7dc2f0f34ce8d45a0d390611691"
+      },
+      "comments": [
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Just minor updates. I'll merge it directly.",
+          "createdAt": "2023-03-06T09:23:46Z",
+          "updatedAt": "2023-03-06T09:23:46Z"
+        }
+      ],
+      "reviews": []
+    }
+  ]
+}
