@@ -199,7 +199,7 @@ prevent validation by admins of some critical systems, etc.
 ~~~~
 {: #ical-grp-tree title="iCalendar Recurrence Grouping Tree Structure"}
 
-   An array of the "bysecond" (or "byminut", "byhour") specifies a list of
+   An array of the "bysecond" (or "byminute", "byhour") specifies a list of
    seconds within a minute (or minutes within an hour, hours of the day).
 
    The parameter "byday" specifies a list of days of the week, with an optional
