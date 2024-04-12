@@ -5,11 +5,11 @@
 OPSAWG                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 1 September 2024                              M. Boucadair, Ed.
+Expires: 14 October 2024                               M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                        29 February 2024
+                                                           12 April 2024
 
 
  A YANG Data Model and RADIUS Extension for Policy-based Network Access
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 September 2024.
+   This Internet-Draft will expire on 14 October 2024.
 
 Copyright Notice
 
@@ -1149,9 +1149,9 @@ Table of Contents
    [I-D.ma-opsawg-schedule-yang]
               Ma, Q., Wu, Q., Boucadair, M., and D. King, "A Common YANG
               Data Model for Scheduling", Work in Progress, Internet-
-              Draft, draft-ma-opsawg-schedule-yang-03, 2 February 2024,
+              Draft, draft-ma-opsawg-schedule-yang-04, 1 March 2024,
               <https://datatracker.ietf.org/doc/html/draft-ma-opsawg-
-              schedule-yang-03>.
+              schedule-yang-04>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1229,9 +1229,9 @@ Table of Contents
    [I-D.ietf-madinas-use-cases]
               Henry, J. and Y. Lee, "Randomized and Changing MAC Address
               Use Cases", Work in Progress, Internet-Draft, draft-ietf-
-              madinas-use-cases-08, 22 February 2024,
+              madinas-use-cases-09, 29 February 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-madinas-
-              use-cases-08>.
+              use-cases-09>.
 
    [I-D.ietf-netmod-acl-extensions]
               de Dios, O. G., Barguil, S., Boucadair, M., and Q. Wu,
