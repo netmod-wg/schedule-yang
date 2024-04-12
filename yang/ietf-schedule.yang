@@ -31,11 +31,12 @@ module ietf-schedule {
      Author:   Daniel King
                <mailto:d.king@lancaster.ac.uk>";
   description
-    "This YANG module defines two groupings for iCalendar (Internet
-     Calendaring and Scheduling Core Object Specification) data
-     types: period of time and recurrence rule, for representing and
-     exchanging calendaring and scheduling information. The YANG
-     module complies with Sections 3.3.9 and 3.3.10 of RFC 5545.
+    "This YANG module defines common shedule groupings. It defines
+     in particuler groupings for Internet Calendaring and Scheduling
+     Core Object Specification (iCalendar) data types: period of time
+     and recurrence rule, for representing and exchanging calendaring
+     and scheduling information. The YANG module complies with
+     Sections 3.3.9 and 3.3.10 of RFC 5545.
 
      Copyright (c) 2024 IETF Trust and the persons identified
      as authors of the code. All rights reserved.
@@ -61,7 +62,7 @@ module ietf-schedule {
     description
       "Initial revision.";
     reference
-      "RFC XXXX: A YANG Data Model for Scheduling";
+      "RFC XXXX: A Common YANG Data Model for Scheduling";
   }
   
   feature basic-recurrence-supported {
