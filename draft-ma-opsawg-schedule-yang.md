@@ -66,7 +66,7 @@ informative:
 
 # Introduction {#intro}
 
-This document defines a common schedule YANG module ("ietf-schedule") that can be in several scheduling context (e.g., (but not limited to) {{?I-D.ietf-opsawg-ucl-acl}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.united-tvr-schedule-yang}}). The module includes a set of reusable groupings which
+This document defines a common schedule YANG module ("ietf-schedule") that can be used in several scheduling contexts (e.g., (but not limited to) {{?I-D.ietf-opsawg-ucl-acl}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.united-tvr-schedule-yang}}). The module includes a set of reusable groupings which
 are designed to be applicable for scheduling information such as event, policy,
 services or resources based on date and time.
 
