@@ -5,11 +5,11 @@
 OPSAWG                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 14 October 2024                               M. Boucadair, Ed.
+Expires: 17 October 2024                               M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                           12 April 2024
+                                                           15 April 2024
 
 
                 A Common YANG Data Model for Scheduling
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 October 2024.
+   This Internet-Draft will expire on 17 October 2024.
 
 Copyright Notice
 
@@ -104,8 +104,8 @@ Table of Contents
 1.  Introduction
 
    This document defines a common schedule YANG module ("ietf-schedule")
-   that can be in several scheduling context (e.g., (but not limited to)
-   [I-D.ietf-opsawg-ucl-acl],
+   that can be used in several scheduling contexts (e.g., (but not
+   limited to) [I-D.ietf-opsawg-ucl-acl],
    [I-D.contreras-opsawg-scheduling-oam-tests], and
    [I-D.united-tvr-schedule-yang]).  The module includes a set of
    reusable groupings which are designed to be applicable for scheduling
