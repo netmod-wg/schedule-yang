@@ -408,7 +408,7 @@ module ietf-schedule {
     }
   }
   
-  grouping recurrence-UTC {
+  grouping recurrence-utc {
     description
       "A simple definition of recurrence with time specified in 
        UTC. This grouping is intended to be machine-friendly.";  
@@ -442,7 +442,7 @@ module ietf-schedule {
     }
   }
   
-  grouping recurrence-TZ {
+  grouping recurrence-with-time-zone {
     description
       "A simple definition of recurrence that allows the time to
        be specified with a local time and time zone. This grouping
@@ -464,7 +464,7 @@ module ietf-schedule {
           description
             "Indicates the identifier for the time zone in a time zone
              database. This parameter MUST be specified if 
-             'first-recur-date-time' and/or 'until' value is neither 
+             'date-time-start' and/or 'until' value is neither 
              reported in the format of UTC nor time zone offset to 
              UTC.";    
         }      
@@ -472,14 +472,14 @@ module ietf-schedule {
     }
   }
 
-  grouping recurrence-UTC-with-date-times {
+  grouping recurrence-utc-with-date-times {
     description
       "This grouping defines an aggregate set of repeating 
        occurrences with UTC time format. The recurrence instances 
        are specified by the union of occurrences defined by both 
        the recurrence rule and 'period-timeticks' list. Duplicate 
        instances are ignored.";
-    uses recurrence-UTC;
+    uses recurrence-utc;
     list period-timeticks {
       key "period-start";
       description
@@ -516,14 +516,14 @@ module ietf-schedule {
     }
   }  
   
-  grouping recurrence-TZ-with-date-times {
+  grouping recurrence-time-zone-with-date-times {
     description
       "This grouping defines an aggregate set of repeating 
        occurrences with local time format and time zone specified. 
        The recurrence instances are specified by the union of 
        occurrences defined by both the recurrence rule and 'period' 
        list. Duplicate instances are ignored.";  
-    uses recurrence-TZ;
+    uses recurrence-with-time-zone;
     list period {
       key "period-start";
       description
@@ -540,7 +540,7 @@ module ietf-schedule {
       "RFC 5545: Internet Calendaring and Scheduling
                  Core Object Specification (iCalendar),
                  Section 3.8.5";
-    uses recurrence-TZ-with-date-times;
+    uses recurrence-time-zone-with-date-times;
     leaf-list bysecond {
       type uint32 {
         range "0..60";
