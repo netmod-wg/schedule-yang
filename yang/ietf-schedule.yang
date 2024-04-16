@@ -17,10 +17,10 @@ module ietf-schedule {
   }
 
   organization
-    "IETF OPSAWG Working Group";
+    "IETF NETMOD Working Group";
   contact
-    "WG Web: <https://datatracker.ietf.org/wg/opsawg/>
-     WG List: <mailto:opsawg@ietf.org>
+    "WG Web: <https://datatracker.ietf.org/wg/netmod/>
+     WG List: <mailto:netmod@ietf.org>
 
      Editor:   Qiufang Ma
                <mailto:maqiufang1@huawei.com
@@ -58,7 +58,7 @@ module ietf-schedule {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.";
 
-  revision 2023-01-19 {
+  revision 2024-04-16 {
     description
       "Initial revision.";
     reference
@@ -230,8 +230,8 @@ module ietf-schedule {
 
        These parameters apply to all schedules.
 
-        Such parameters are used as guards to prevent, e.g., stale
-        configuration.";
+       Such parameters are used as guards to prevent, e.g., stale
+       configuration.";
     leaf time-zone-identifier {
       type sys:timezone-name;
       description
@@ -350,38 +350,11 @@ module ietf-schedule {
   grouping recurrence {
     description
       "A simple definition of recurrence.";
-    container recurrence-first {
+    leaf first-recur-date-time {
+      type yang:date-and-time;
       description
-        "Specifies the first instance of the recurrence.";
-      leaf date-time-start {
-        type union {
-          type yang:date-no-zone;
-          type yang:date-and-time;
-        }
-        description
-          "Defines the first instance in the recurrence set. If it is
-           specified as a date-no-zone value type with no duration
-           specified, the recurrence's duration is taken to be one
-           day.";
-        reference
-          "RFC 5545: Internet Calendaring and Scheduling Core Object
-                     Specification (iCalendar), Section 3.3.10";
-      }
-      leaf time-zone-identifier {
-        type sys:timezone-name;
-        description
-          "Indicates the identifier for the time zone in a time zone
-           database. This parameter MUST be specified if 'start'
-           value is neither reported in the format of UTC nor time
-           zone offset to UTC.";
-      }
-      leaf duration {
-        type duration;
-        description
-          "When specified, it refers to the duration of
-           the first occurrence. The exact duration also applies to
-           all the recurrence instance.";
-      }
+        "Defines the instant date and time of the first instance 
+         in the recurrence set.";
     }
     leaf frequency {
       type identityref {
@@ -408,17 +381,13 @@ module ietf-schedule {
           "This case defines a way that bounds the recurrence
            rule in an inclusive manner.";
         leaf until {
-          type union {
-            type yang:date-no-zone;
-            type yang:date-and-time;
-          }
+          type yang:date-and-time;
           description
-            "This parameter specifies a date-no-zone or
-             date-time value to bounds the recurrence. If the value
-             specified by this parameter is synchronized with the
-             specified recurrence, it becomes the last instance of
-             the recurrence. The value MUST have the same value type
-             as the value type of 'start' parameter.";
+            "This parameter specifies a date and time value to 
+             bound the recurrence. If the value specified by this 
+             parameter is synchronized with the specified 
+             recurrence, it becomes the last instance of the 
+             recurrence.";
         }
       }
       case count {
@@ -434,110 +403,127 @@ module ietf-schedule {
       }
     }
   }
-
-  grouping recurrence-with-date-times {
+  
+  grouping recurrence-UTC {
     description
-      "This grouping defines an aggregate set of repeating
-       occurrences. The recurrence instances are defined by
-       the union of occurrences defined by both the
-       'recurrence' and 'date-times'. Duplicate instances
-       are ignored.";
-    uses recurrence;
-    choice date-times-choice {
+      "A simple definition of recurrence with time specified in 
+       UTC. This grouping is intended to be machine-friendly.";  
+    uses recurrence {
+      refine "first-recur-date-time" {
+        description
+          "Defines the instant date and time of the first instance 
+           in the recurrence set. A UTC format MUST be used.";
+      }
+      refine "recurrence-bound/until" {
+        description
+          "This parameter specifies a date and time value to 
+           bound the recurrence. If the value specified by this 
+           parameter is synchronized with the specified 
+           recurrence, it becomes the last instance of the 
+           recurrence. A UTC format MUST be used.";
+      }
+    }
+    leaf duration {
+      type yang:seconds32;
       description
-        "Specify a list of occurrences which complement the
-         recurrence set defined by 'recurrence' grouping. If
-         it is specified as a period value, the duration of
-         the recurrence instance will be the one specified
-         by it, and not the duration defined inside the
-         recurrence-first parameter.";
-      case date-time {
+        "When specified, it refers to the duration of each 
+         occurrence. The duration is in units of seconds.";
+    }
+  }
+  
+  grouping recurrence-TZ {
+    description
+      "A simple definition of recurrence that allows the time to
+       be specified with a local time and time zone. This grouping
+       is intended to be human-friendly.";
+    uses recurrence;
+    leaf duration {
+      type duration;
+      description
+        "When specified, it refers to the duration of
+         the first occurrence. The exact duration also applies to
+         all the recurrence instance.";
+    }
+    leaf time-zone-identifier {
+      type sys:timezone-name;
+      description
+        "Indicates the identifier for the time zone in a time zone
+         database. This parameter MUST be specified if 
+         'first-recur-date-time' and/or 'until' value is neither 
+         reported in the format of UTC nor time zone offset to 
+         UTC.";    
+    }
+  }
+
+  grouping recurrence-UTC-with-date-times {
+    description
+      "This grouping defines an aggregate set of repeating 
+       occurrences with UTC time format. The recurrence instances 
+       are specified by the union of occurrences defined by both 
+       the recurrence rule and 'period-timeticks' list. Duplicate 
+       instances are ignored.";
+    uses recurrence-UTC;
+    list period-timeticks {
+      key "period-start";
+      description
+        "A list of period with timeticks formats.";      
+      leaf period-start {
+        type yang:timeticks;
+        must
+          "(not(derived-from(../../frequency,"
+         +"'schedule:secondly')) or (current() < 100)) and "
+         +"(not(derived-from(../../frequency,"
+         +"'schedule:minutely')) or (current() < 6000)) and "
+         +"(not(derived-from(../../frequency,'schedule:hourly'))"
+         +" or (current() < 360000)) and "
+         +"(not(derived-from(../../frequency,'schedule:daily'))"
+         +" or (current() < 8640000)) and "
+         +"(not(derived-from(../../frequency,'schedule:weekly'))"
+         +" or (current() < 60480000)) and "
+         +"(not(derived-from(../../frequency,"
+         +"'schedule:monthly')) or (current() < 267840000)) and "
+         +"(not(derived-from(../../frequency,'schedule:yearly'))"
+         +" or (current() < 3162240000))" {
+        error-message
+          "The period-start must not exceed the frequency 
+           interval.";
+        }        
         description
-          "Specify a list of occurrences with date-and-time
-           values.";
-          leaf-list date-times {
-            type yang:date-and-time;
-            description
-              "Specifies a set of date-and-time values of
-               occurrences.";
-          }
+          "Start time of the schedule within one recurrence.";
       }
-      case date {
+      leaf period-end {
+        type yang:timeticks;
         description
-          "Specifies a list of occurrences with date-no-zone
-           values.";
-          leaf-list dates {
-            type yang:date-no-zone;
-            description
-              "Specifies a set of date-no-zone values of
-               occurrences.";
-          }
-      }
-      case period-timeticks {
-        description
-          "Specifies a list of occurrences with period span of
-           timeticks format.";
-          list period-timeticks {
-            key "period-start";
-            description
-              "A list of period with timeticks formats.";
-            leaf period-start {
-              type yang:timeticks;
-              must
-              "(not(derived-from(../../frequency,"
-             +"'schedule:secondly')) or (current() < 100)) and "
-             +"(not(derived-from(../../frequency,"
-             +"'schedule:minutely')) or (current() < 6000)) and "
-             +"(not(derived-from(../../frequency,'schedule:hourly'))"
-             +" or (current() < 360000)) and "
-             +"(not(derived-from(../../frequency,'schedule:daily'))"
-             +" or (current() < 8640000)) and "
-             +"(not(derived-from(../../frequency,'schedule:weekly'))"
-             +" or (current() < 60480000)) and "
-             +"(not(derived-from(../../frequency,"
-             +"'schedule:monthly')) or (current() < 267840000)) and "
-             +"(not(derived-from(../../frequency,'schedule:yearly'))"
-             +" or (current() < 3162240000))" {
-                error-message
-                  "The period-start must not exceed the frequency
-                   interval.";
-              }
-              description
-                "Start time of the scheduled value within one
-                 recurrence.";
-            }
-            leaf period-end {
-              type yang:timeticks;
-              description
-                "End time of the scheduled value within one
-                 recurrence.";
-            }
-          }
-      }
-      case period {
-        description
-          "Specifies a list of occurrences with period span
-           of date-and -time format.";
-        list period {
-          key "period-start";
-          description
-            "A list of period with date-and-time formats.";
-          uses period-of-time;
-        }
-      }
+          "End time of the schedule within one recurrence.";
+      }      
+    }
+  }  
+  
+  grouping recurrence-TZ-with-date-times {
+    description
+      "This grouping defines an aggregate set of repeating 
+       occurrences with local time format and time zone specified. 
+       The recurrence instances are specified by the union of 
+       occurrences defined by both the recurrence rule and 'period' 
+       list. Duplicate instances are ignored.";  
+    uses recurrence-TZ;
+    list period {
+      key "period-start";
+      description
+        "A list of period with date-and-time formats.";
+      uses period-of-time;
     }
   }
 
   grouping icalendar-recurrence {
     description
-      "This grouping is defined to identify properties
-       that contain a recurrence rule.";
+      "This grouping is defined to identify properties that 
+       contain a recurrence rule.";
     reference
       "RFC 5545: Internet Calendaring and Scheduling
                  Core Object Specification (iCalendar),
                  Section 3.8.5";
-
-    uses recurrence-with-date-times;
+    uses recurrence-TZ-with-date-times;
     leaf-list bysecond {
       type uint32 {
         range "0..60";
@@ -573,10 +559,9 @@ module ietf-schedule {
         description
           "When specified, it indicates the nth occurrence of a
            specific day within the monthly or yearly recurrence
-           rule.
-           For example, within a monthly rule, +1 monday represents
-           the first monday within the month, whereas -1 monday
-           represents the last monday of the month.";
+           rule. For example, within a monthly rule, +1 monday 
+           represents the first monday within the month, whereas 
+           -1 monday represents the last monday of the month.";
       }
       leaf weekday {
         type schedule:weekday;
@@ -705,3 +690,4 @@ module ietf-schedule {
     }    
   }
 }
+
