@@ -350,11 +350,15 @@ module ietf-schedule {
   grouping recurrence {
     description
       "A simple definition of recurrence.";
-    leaf first-recur-date-time {
-      type yang:date-and-time;
+    container recurrence-first {
       description
-        "Defines the instant date and time of the first instance 
-         in the recurrence set.";
+        "Specifies the first instance of the recurrence.";
+      leaf date-time-start {
+        type yang:date-and-time;
+        description
+          "Defines the instant date and time of the first instance 
+           in the recurrence set.";
+      }  
     }
     leaf frequency {
       type identityref {
@@ -409,7 +413,7 @@ module ietf-schedule {
       "A simple definition of recurrence with time specified in 
        UTC. This grouping is intended to be machine-friendly.";  
     uses recurrence {
-      refine "first-recur-date-time" {
+      refine "recurrence-first/date-time-start" {
         description
           "Defines the instant date and time of the first instance 
            in the recurrence set. A UTC format MUST be used.";
@@ -422,12 +426,19 @@ module ietf-schedule {
            recurrence, it becomes the last instance of the 
            recurrence. A UTC format MUST be used.";
       }
-    }
-    leaf duration {
-      type yang:seconds32;
-      description
-        "When specified, it refers to the duration of each 
-         occurrence. The duration is in units of seconds.";
+      augment "recurrence-first" {
+        description
+          "Add a parameter indicating how long the occurence 
+           lasts.";
+        leaf duration {
+          type yang:seconds32;
+          description
+            "When specified, it refers to the duration of each 
+             occurrence. The duration is in units of seconds. The 
+             exact duration also applies to all the recurrence 
+             instance.";
+        }      
+      }
     }
   }
   
@@ -436,22 +447,28 @@ module ietf-schedule {
       "A simple definition of recurrence that allows the time to
        be specified with a local time and time zone. This grouping
        is intended to be human-friendly.";
-    uses recurrence;
-    leaf duration {
-      type duration;
-      description
-        "When specified, it refers to the duration of
-         the first occurrence. The exact duration also applies to
-         all the recurrence instance.";
-    }
-    leaf time-zone-identifier {
-      type sys:timezone-name;
-      description
-        "Indicates the identifier for the time zone in a time zone
-         database. This parameter MUST be specified if 
-         'first-recur-date-time' and/or 'until' value is neither 
-         reported in the format of UTC nor time zone offset to 
-         UTC.";    
+    uses recurrence {
+      augment "recurrence-first" {
+        description
+          "Add parameters indicating how long the occurence 
+           lasts and time zone identifier of the occurence.";
+        leaf duration {
+          type duration;
+          description
+            "When specified, it refers to the duration of
+             the first occurrence. The exact duration also applies to
+             all the recurrence instance.";
+        }
+        leaf time-zone-identifier {
+          type sys:timezone-name;
+          description
+            "Indicates the identifier for the time zone in a time zone
+             database. This parameter MUST be specified if 
+             'first-recur-date-time' and/or 'until' value is neither 
+             reported in the format of UTC nor time zone offset to 
+             UTC.";    
+        }      
+      }
     }
   }
 
