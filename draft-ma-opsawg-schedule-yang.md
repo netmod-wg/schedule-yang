@@ -57,7 +57,7 @@ informative:
 --- abstract
 
    This document defines a common schedule YANG module which is
-   designed to be applicable for scheduling information such as event, policy,
+   designed to be applicable for scheduling purposes such as event, policy,
    services, or resources based on date and time. For the sake of better modularity,
    the module includes basic, intermediate, and advanced versions of recurrence
    related groupings.
@@ -66,13 +66,7 @@ informative:
 
 # Introduction {#intro}
 
-Several specifications include a provision for scheduling. Examples of such specifications
-are (but not limited to) {{?I-D.ietf-opsawg-ucl-acl}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.united-tvr-schedule-yang}}.
-Both {{?I-D.ietf-opsawg-ucl-acl}} and {{?I-D.contreras-opsawg-scheduling-oam-tests}} use the "ietf-schedule" module
-initially specified in {{?I-D.ietf-opsawg-ucl-acl}}.
-
-Given that the applicability of the "ietf-schedule" module is more general than scheduled
-policy and OAM tests, this document defines "ietf-schedule" as a common schedule YANG module. The module includes a set of reusable groupings which
+This document defines a common schedule YANG module ("ietf-schedule") that can be used in several scheduling contexts (e.g., (but not limited to) {{?I-D.ietf-opsawg-ucl-acl}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.united-tvr-schedule-yang}}). The module includes a set of reusable groupings which
 are designed to be applicable for scheduling information such as event, policy,
 services or resources based on date and time.
 
@@ -205,7 +199,7 @@ prevent validation by admins of some critical systems, etc.
 ~~~~
 {: #ical-grp-tree title="iCalendar Recurrence Grouping Tree Structure"}
 
-   An array of the "bysecond" (or "byminut", "byhour") specifies a list of
+   An array of the "bysecond" (or "byminute", "byhour") specifies a list of
    seconds within a minute (or minutes within an hour, hours of the day).
 
    The parameter "byday" specifies a list of days of the week, with an optional
@@ -380,7 +374,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "period-start": "2025-01-01T08:00:00Z",
-  "period-end": "2027-12-01T18:00:00Z"
+  "period-end": "2027-12-31T18:00:00Z"
 }
 ~~~~
 {: #ex-1 title="Simple Start/End Schedule"}
@@ -416,7 +410,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2025-11-01T15:00:00",
+    "date-time-start": "2025-12-01T15:00:00",
     "time-zone-identifier": "America/New_York"
   },
   "frequency": "ietf-schedule:daily",
@@ -595,7 +589,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
    This work is derived from the {{?I-D.ietf-opsawg-ucl-acl}}. There is a desire
    from the OPSAWG to see this model be separately defined for wide use in scheduling context.
 
-   Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, and Joe Clarke
+   Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, and Dhruv Dhody
    for their valuable comments and inputs to this work.
 
    Many thanks to the authors of {{?I-D.united-tvr-schedule-yang}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.ietf-netmod-eca-policy}}
