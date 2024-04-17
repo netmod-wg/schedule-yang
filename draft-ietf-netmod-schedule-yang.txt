@@ -2,7 +2,7 @@
 
 
 
-OPSAWG                                                        Q. Ma, Ed.
+netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
 Expires: 19 October 2024                               M. Boucadair, Ed.
@@ -13,7 +13,7 @@ Expires: 19 October 2024                               M. Boucadair, Ed.
 
 
                 A Common YANG Data Model for Scheduling
-                 draft-ietf-opsawg-schedule-yang-latest
+                 draft-ietf-netmod-schedule-yang-latest
 
 Abstract
 
