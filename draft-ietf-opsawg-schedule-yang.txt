@@ -13,7 +13,7 @@ Expires: 19 October 2024                               M. Boucadair, Ed.
 
 
                 A Common YANG Data Model for Scheduling
-                  draft-ma-opsawg-schedule-yang-latest
+                 draft-ietf-opsawg-schedule-yang-latest
 
 Abstract
 
