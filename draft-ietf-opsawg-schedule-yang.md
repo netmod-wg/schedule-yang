@@ -3,7 +3,7 @@ title: "A Common YANG Data Model for Scheduling"
 abbrev: "Common Schedule YANG"
 category: std
 
-docname: draft-ma-opsawg-schedule-yang-latest
+docname: draft-ietf-opsawg-schedule-yang-latest
 submissiontype: IETF
 number:
 date:
