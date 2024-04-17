@@ -21,7 +21,7 @@
 <meta content="scheduling" name="keyword">
 <meta content="YANG" name="keyword">
 <meta content="groupings" name="keyword">
-<meta content="draft-ma-opsawg-schedule-yang-latest" name="ietf.draft">
+<meta content="draft-ietf-opsawg-schedule-yang-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.20.1
     Python 3.11.8
@@ -38,7 +38,7 @@
     six 1.16.0
     wcwidth 0.2.13
 -->
-<link href="draft-ma-opsawg-schedule-yang.xml" rel="alternate" type="application/rfc+xml">
+<link href="draft-ietf-opsawg-schedule-yang.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">@font-face {
   font-family: 'Lora';
@@ -1039,7 +1039,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Ma, et al.</td>
-<td class="center">Expires 17 October 2024</td>
+<td class="center">Expires 19 October 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1049,15 +1049,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">OPSAWG</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-ma-opsawg-schedule-yang-latest</dd>
+<dd class="internet-draft">draft-ietf-opsawg-schedule-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-04-15" class="published">15 April 2024</time>
+<time datetime="2024-04-17" class="published">17 April 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-10-17">17 October 2024</time></dd>
+<dd class="expires"><time datetime="2024-10-19">19 October 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1120,7 +1120,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 17 October 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 19 October 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1786,6 +1786,8 @@ current time <span class="bcp14">SHOULD</span> be ignored<a href="#section-5-2.5
 <div class="breakable sourcecode" id="section-6-2">
 <pre>&lt;CODE BEGINS&gt; file "ietf-schedule@2023-01-19.yang"
 
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
 module ietf-schedule {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-schedule";
@@ -1805,10 +1807,10 @@ module ietf-schedule {
   }
 
   organization
-    "IETF OPSAWG Working Group";
+    "IETF NETMOD Working Group";
   contact
-    "WG Web: &lt;https://datatracker.ietf.org/wg/opsawg/&gt;
-     WG List: &lt;mailto:opsawg@ietf.org&gt;
+    "WG Web: &lt;https://datatracker.ietf.org/wg/netmod/&gt;
+     WG List: &lt;mailto:netmod@ietf.org&gt;
 
      Editor:   Qiufang Ma
                &lt;mailto:maqiufang1@huawei.com
@@ -1846,7 +1848,7 @@ module ietf-schedule {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.";
 
-  revision 2023-01-19 {
+  revision 2024-04-16 {
     description
       "Initial revision.";
     reference
@@ -2018,8 +2020,8 @@ module ietf-schedule {
 
        These parameters apply to all schedules.
 
-        Such parameters are used as guards to prevent, e.g., stale
-        configuration.";
+       Such parameters are used as guards to prevent, e.g., stale
+       configuration.";
     leaf time-zone-identifier {
       type sys:timezone-name;
       description
@@ -2142,33 +2144,10 @@ module ietf-schedule {
       description
         "Specifies the first instance of the recurrence.";
       leaf date-time-start {
-        type union {
-          type yang:date-no-zone;
-          type yang:date-and-time;
-        }
+        type yang:date-and-time;
         description
-          "Defines the first instance in the recurrence set. If it is
-           specified as a date-no-zone value type with no duration
-           specified, the recurrence's duration is taken to be one
-           day.";
-        reference
-          "RFC 5545: Internet Calendaring and Scheduling Core Object
-                     Specification (iCalendar), Section 3.3.10";
-      }
-      leaf time-zone-identifier {
-        type sys:timezone-name;
-        description
-          "Indicates the identifier for the time zone in a time zone
-           database. This parameter MUST be specified if 'start'
-           value is neither reported in the format of UTC nor time
-           zone offset to UTC.";
-      }
-      leaf duration {
-        type duration;
-        description
-          "When specified, it refers to the duration of
-           the first occurrence. The exact duration also applies to
-           all the recurrence instance.";
+          "Defines the instant date and time of the first instance
+           in the recurrence set.";
       }
     }
     leaf frequency {
@@ -2196,17 +2175,13 @@ module ietf-schedule {
           "This case defines a way that bounds the recurrence
            rule in an inclusive manner.";
         leaf until {
-          type union {
-            type yang:date-no-zone;
-            type yang:date-and-time;
-          }
+          type yang:date-and-time;
           description
-            "This parameter specifies a date-no-zone or
-             date-time value to bounds the recurrence. If the value
-             specified by this parameter is synchronized with the
-             specified recurrence, it becomes the last instance of
-             the recurrence. The value MUST have the same value type
-             as the value type of 'start' parameter.";
+            "This parameter specifies a date and time value to
+             bound the recurrence. If the value specified by this
+             parameter is synchronized with the specified
+             recurrence, it becomes the last instance of the
+             recurrence.";
         }
       }
       case count {
@@ -2223,109 +2198,140 @@ module ietf-schedule {
     }
   }
 
-  grouping recurrence-with-date-times {
+  grouping recurrence-utc {
     description
-      "This grouping defines an aggregate set of repeating
-       occurrences. The recurrence instances are defined by
-       the union of occurrences defined by both the
-       'recurrence' and 'date-times'. Duplicate instances
-       are ignored.";
-    uses recurrence;
-    choice date-times-choice {
-      description
-        "Specify a list of occurrences which complement the
-         recurrence set defined by 'recurrence' grouping. If
-         it is specified as a period value, the duration of
-         the recurrence instance will be the one specified
-         by it, and not the duration defined inside the
-         recurrence-first parameter.";
-      case date-time {
+      "A simple definition of recurrence with time specified in
+       UTC. This grouping is intended to be machine-friendly.";
+    uses recurrence {
+      refine "recurrence-first/date-time-start" {
         description
-          "Specify a list of occurrences with date-and-time
-           values.";
-          leaf-list date-times {
-            type yang:date-and-time;
-            description
-              "Specifies a set of date-and-time values of
-               occurrences.";
-          }
+          "Defines the instant date and time of the first instance
+           in the recurrence set. A UTC format MUST be used.";
       }
-      case date {
+      refine "recurrence-bound/until" {
         description
-          "Specifies a list of occurrences with date-no-zone
-           values.";
-          leaf-list dates {
-            type yang:date-no-zone;
-            description
-              "Specifies a set of date-no-zone values of
-               occurrences.";
-          }
+          "This parameter specifies a date and time value to
+           bound the recurrence. If the value specified by this
+           parameter is synchronized with the specified
+           recurrence, it becomes the last instance of the
+           recurrence. A UTC format MUST be used.";
       }
-      case period-timeticks {
+      augment "recurrence-first" {
         description
-          "Specifies a list of occurrences with period span of
-           timeticks format.";
-          list period-timeticks {
-            key "period-start";
-            description
-              "A list of period with timeticks formats.";
-            leaf period-start {
-              type yang:timeticks;
-              must
-              "(not(derived-from(../../frequency,"
-             +"'schedule:secondly')) or (current() &lt; 100)) and "
-             +"(not(derived-from(../../frequency,"
-             +"'schedule:minutely')) or (current() &lt; 6000)) and "
-             +"(not(derived-from(../../frequency,'schedule:hourly'))"
-             +" or (current() &lt; 360000)) and "
-             +"(not(derived-from(../../frequency,'schedule:daily'))"
-             +" or (current() &lt; 8640000)) and "
-             +"(not(derived-from(../../frequency,'schedule:weekly'))"
-             +" or (current() &lt; 60480000)) and "
-             +"(not(derived-from(../../frequency,"
-             +"'schedule:monthly')) or (current() &lt; 267840000)) and "
-             +"(not(derived-from(../../frequency,'schedule:yearly'))"
-             +" or (current() &lt; 3162240000))" {
-                error-message
-                  "The period-start must not exceed the frequency
-                   interval.";
-              }
-              description
-                "Start time of the scheduled value within one
-                 recurrence.";
-            }
-            leaf period-end {
-              type yang:timeticks;
-              description
-                "End time of the scheduled value within one
-                 recurrence.";
-            }
-          }
-      }
-      case period {
-        description
-          "Specifies a list of occurrences with period span
-           of date-and -time format.";
-        list period {
-          key "period-start";
+          "Add a parameter indicating how long the occurence
+           lasts.";
+        leaf duration {
+          type yang:seconds32;
           description
-            "A list of period with date-and-time formats.";
-          uses period-of-time;
+            "When specified, it refers to the duration of each
+             occurrence. The duration is in units of seconds. The
+             exact duration also applies to all the recurrence
+             instance.";
         }
       }
     }
   }
 
+  grouping recurrence-with-time-zone {
+    description
+      "A simple definition of recurrence that allows the time to
+       be specified with a local time and time zone. This grouping
+       is intended to be human-friendly.";
+    uses recurrence {
+      augment "recurrence-first" {
+        description
+          "Add parameters indicating how long the occurence
+           lasts and time zone identifier of the occurence.";
+        leaf duration {
+          type duration;
+          description
+            "When specified, it refers to the duration of
+             the first occurrence. The exact duration also applies to
+             all the recurrence instance.";
+        }
+        leaf time-zone-identifier {
+          type sys:timezone-name;
+          description
+            "Indicates the identifier for the time zone in a time \
+                                                                 zone
+             database. This parameter MUST be specified if
+             'date-time-start' and/or 'until' value is neither
+             reported in the format of UTC nor time zone offset to
+             UTC.";
+        }
+      }
+    }
+  }
+
+  grouping recurrence-utc-with-date-times {
+    description
+      "This grouping defines an aggregate set of repeating
+       occurrences with UTC time format. The recurrence instances
+       are specified by the union of occurrences defined by both
+       the recurrence rule and 'period-timeticks' list. Duplicate
+       instances are ignored.";
+    uses recurrence-utc;
+    list period-timeticks {
+      key "period-start";
+      description
+        "A list of period with timeticks formats.";
+      leaf period-start {
+        type yang:timeticks;
+        must
+          "(not(derived-from(../../frequency,"
+         +"'schedule:secondly')) or (current() &lt; 100)) and "
+         +"(not(derived-from(../../frequency,"
+         +"'schedule:minutely')) or (current() &lt; 6000)) and "
+         +"(not(derived-from(../../frequency,'schedule:hourly'))"
+         +" or (current() &lt; 360000)) and "
+         +"(not(derived-from(../../frequency,'schedule:daily'))"
+         +" or (current() &lt; 8640000)) and "
+         +"(not(derived-from(../../frequency,'schedule:weekly'))"
+         +" or (current() &lt; 60480000)) and "
+         +"(not(derived-from(../../frequency,"
+         +"'schedule:monthly')) or (current() &lt; 267840000)) and "
+         +"(not(derived-from(../../frequency,'schedule:yearly'))"
+         +" or (current() &lt; 3162240000))" {
+        error-message
+          "The period-start must not exceed the frequency
+           interval.";
+        }
+        description
+          "Start time of the schedule within one recurrence.";
+      }
+      leaf period-end {
+        type yang:timeticks;
+        description
+          "End time of the schedule within one recurrence.";
+      }
+    }
+  }
+
+  grouping recurrence-time-zone-with-date-times {
+    description
+      "This grouping defines an aggregate set of repeating
+       occurrences with local time format and time zone specified.
+       The recurrence instances are specified by the union of
+       occurrences defined by both the recurrence rule and 'period'
+       list. Duplicate instances are ignored.";
+    uses recurrence-with-time-zone;
+    list period {
+      key "period-start";
+      description
+        "A list of period with date-and-time formats.";
+      uses period-of-time;
+    }
+  }
+
   grouping icalendar-recurrence {
     description
-      "This grouping is defined to identify properties
-       that contain a recurrence rule.";
+      "This grouping is defined to identify properties that
+       contain a recurrence rule.";
     reference
       "RFC 5545: Internet Calendaring and Scheduling
                  Core Object Specification (iCalendar),
                  Section 3.8.5";
-
-    uses recurrence-with-date-times;
+    uses recurrence-time-zone-with-date-times;
     leaf-list bysecond {
       type uint32 {
         range "0..60";
@@ -2361,10 +2367,9 @@ module ietf-schedule {
         description
           "When specified, it indicates the nth occurrence of a
            specific day within the monthly or yearly recurrence
-           rule.
-           For example, within a monthly rule, +1 monday represents
-           the first monday within the month, whereas -1 monday
-           represents the last monday of the month.";
+           rule. For example, within a monthly rule, +1 monday
+           represents the first monday within the month, whereas
+           -1 monday represents the last monday of the month.";
       }
       leaf weekday {
         type schedule:weekday;
@@ -2494,6 +2499,7 @@ module ietf-schedule {
   }
 }
 
+
 &lt;CODE ENDS&gt;</pre><a href="#section-6-2" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2503,7 +2509,7 @@ module ietf-schedule {
       <h2 id="name-security-considerations">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-7-1">This section uses the template described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-09#section-3.7" class="relref">Section 3.7</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">This section uses the template described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-10#section-3.7" class="relref">Section 3.7</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">The "ietf-schedule" YANG module specified in this document defines schema for data
    that is designed to be accessed via network management protocols such
    as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> or RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.  The lowest NETCONF layer
@@ -2640,7 +2646,7 @@ module ietf-schedule {
 <dd class="break"></dd>
 <dt id="I-D.ietf-netmod-rfc8407bis">[I-D.ietf-netmod-rfc8407bis]</dt>
         <dd>
-<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-09</span>, <time datetime="2024-02-28" class="refDate">28 February 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-09">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-09</a>&gt;</span>. </dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-10</span>, <time datetime="2024-04-15" class="refDate">15 April 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-10">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-10</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-opsawg-ucl-acl">[I-D.ietf-opsawg-ucl-acl]</dt>
         <dd>
