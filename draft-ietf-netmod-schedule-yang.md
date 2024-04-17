@@ -10,7 +10,7 @@ date:
 consensus: true
 v: 3
 area: "Operations and Management"
-workgroup: "OPSAWG"
+workgroup: "netmod"
 keyword:
  - calendaring
  - scheduling
