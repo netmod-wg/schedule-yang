@@ -1,0 +1,3226 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>A YANG Data Model and RADIUS Extension for Policy-based Network Access Control</title>
+<meta content="Qiufang Ma" name="author">
+<meta content="Qin Wu" name="author">
+<meta content="Mohamed Boucadair" name="author">
+<meta content="Daniel King" name="author">
+<meta content="
+       This document defines a YANG data model for policy-based network access
+   control, which provides consistent and efficient enforcement of
+   network access control policies based on group identity.  Moreover, this document defines a mechanism to ease the maintenance
+   of the mapping between a user group identifier and a set of IP/MAC addresses
+   to enforce policy-based network access control. 
+       In addition, the document defines a RADIUS attribute that is used to
+   communicate the user group identifier as part of identification and
+   authorization information. 
+    " name="description">
+<meta content="xml2rfc 3.20.1" name="generator">
+<meta content="ACL" name="keyword">
+<meta content="Policy-based" name="keyword">
+<meta content="BYOD" name="keyword">
+<meta content="Access control" name="keyword">
+<meta content="draft-ietf-opsawg-ucl-acl-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.20.1
+    Python 3.11.8
+    ConfigArgParse 1.7
+    google-i18n-address 3.1.0
+    intervaltree 3.1.0
+    Jinja2 3.1.2
+    lxml 4.9.3
+    platformdirs 4.2.0
+    pycountry 22.3.5
+    PyYAML 6.0.1
+    requests 2.31.0
+    setuptools 68.2.2
+    six 1.16.0
+    wcwidth 0.2.13
+-->
+<link href="draft-ietf-opsawg-ucl-acl.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Cabin Condensed", sans-serif;
+  font-weight: 600;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1#title {
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1#title, h1#rfcnum {
+  margin: 1.5em 0 0.2em;
+}
+h1#rfcnum + h1#title {
+  margin: 0.2em 0;
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+}
+#abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 16px;
+  line-height: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+/* font-family isn't space-separated, but =~ will have to do */
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+}
+:is(ol, ul) :is(ol, ul) {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  line-height: 1;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+}
+dl.olPercent {
+  --indent: 5ch;
+}
+dl > dt {
+  float: left;
+  margin-right: 2ch;
+  min-width: 8ch;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .8em;
+  margin-left: var(--indent) !important; /* stupid element overrides */
+  min-height: 2ex;
+}
+dl.olPercent > dt {
+  min-width: calc(var(--indent) - 2ch);
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:first-child, .break:first-child + *) {
+  margin-top: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:last-child) {
+  margin-bottom: 0;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+:is(dd, span).break {
+  display: none;
+}
+
+/* links */
+a, a[href].selfRef:hover {
+  text-decoration: none;
+}
+a[href] {
+  color: var(--link-color);
+}
+a[href].selfRef, .iref + a[href].internal {
+  color: var(--text-color);
+}
+a[href]:hover {
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
+  pre, svg {
+    display: inline-block;
+    overflow-x: auto;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 0 3px 1em;
+}
+table p {
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+}
+a.pilcrow[href] { color: var(--pilcrow-weak); }
+a.pilcrow[href]:hover { text-decoration: none; }
+@media not print {
+  :hover > a.pilcrow {
+    opacity: 1;
+  }
+  a.pilcrow[href]:hover {
+    color: var(--pilcrow-strong);
+    background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+.role {
+  font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+}
+#identifiers dt {
+  width: var(--identifier-width);
+  min-width: var(--identifier-width);
+  clear: left;
+  float: left;
+  text-align: right;
+  margin-right: 1ch;
+}
+#identifiers dd {
+  margin: 0;
+  margin-left: calc(1em + var(--identifier-width)) !important;
+  min-width: 5em;
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+#toc nav ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+#toc nav li {
+  line-height: 1.3em;
+  margin: 2px 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+#toc a.xref {
+  white-space: normal;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 10ch;
+  margin-right: 1.5ch;
+}
+.references dt:target::before {
+  content: "⇒";
+  width: 15px;
+  margin: 0 10px 0 -25px;
+}
+.references dd {
+  margin-left: 12ch !important;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 1px 0 0 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc.active {
+      opacity: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 8px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active nav {
+    display: block;
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin-top: 2px;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  #toc nav > ul  {
+    margin-bottom: 2em;
+  }
+  #toc ul {
+    margin: 0 0 0 4px;
+    font-size: var(--small-font-size);
+  }
+  #toc ul :is(p, li) {
+    margin: 2px 0;
+    line-height: 22px;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre, .vcard {
+    page-break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  :is(h2, h3, h4, h5, h6)+*, dd {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+  .toplink {
+    display: none;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Changes introduced to fix issues found during implementation */
+
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin: 8px 0.5em 0;
+}
+
+/* Provide styling for table cell text alignment */
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact information look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 20em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
+  stroke: var(--text-color);
+}
+svg :is([stroke="white"], [stroke^="#fff"]) {
+  stroke: var(--background-color);
+}
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
+  fill: var(--text-color);
+}
+svg :is([fill="white"], [fill^="#fff"]) {
+  fill: var(--background-color);
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">A Policy-based Network Access Control</td>
+<td class="right">April 2024</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Ma, et al.</td>
+<td class="center">Expires 19 October 2024</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">OPSAWG</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-ietf-opsawg-ucl-acl-latest</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2024-04-17" class="published">17 April 2024</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Standards Track</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2024-10-19">19 October 2024</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">Q. Ma, <span class="editor">Ed.</span>
+</div>
+<div class="org">Huawei</div>
+</div>
+<div class="author">
+      <div class="author-name">Q. Wu</div>
+<div class="org">Huawei</div>
+</div>
+<div class="author">
+      <div class="author-name">M. Boucadair, <span class="editor">Ed.</span>
+</div>
+<div class="org">Orange</div>
+</div>
+<div class="author">
+      <div class="author-name">D. King</div>
+<div class="org">Lancaster University</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">A YANG Data Model and RADIUS Extension for Policy-based Network Access Control</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">This document defines a YANG data model for policy-based network access
+   control, which provides consistent and efficient enforcement of
+   network access control policies based on group identity.  Moreover, this document defines a mechanism to ease the maintenance
+   of the mapping between a user group identifier and a set of IP/MAC addresses
+   to enforce policy-based network access control.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">In addition, the document defines a RADIUS attribute that is used to
+   communicate the user group identifier as part of identification and
+   authorization information.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-discussion-venues">
+<a href="#name-discussion-venues" class="section-name selfRef">Discussion Venues</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">Discussion of this document takes place on the
+    Operations and Management Area Working Group Working Group mailing list (opsawg@ietf.org),
+    which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/opsawg/">https://mailarchive.ietf.org/arch/browse/opsawg/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">Source for this draft and an issue tracker can be found at
+    <span><a href="https://github.com/boucadair/policy-based-network-acl">https://github.com/boucadair/policy-based-network-acl</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 19 October 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2024 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-editorial-note-to-be-remove" class="internal xref">Editorial Note (To be removed by RFC Editor)</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-sample-usage" class="internal xref">Sample Usage</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-policy-based-network-access" class="internal xref">Policy-based Network Access Control</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-overview" class="internal xref">Overview</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-endpoint-group" class="internal xref">Endpoint Group</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.1">
+                    <p id="section-toc.1-1.4.2.2.2.1.1"><a href="#section-4.2.1" class="auto internal xref">4.2.1</a>.  <a href="#name-user-group" class="internal xref">User Group</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.2">
+                    <p id="section-toc.1-1.4.2.2.2.2.1"><a href="#section-4.2.2" class="auto internal xref">4.2.2</a>.  <a href="#name-device-group" class="internal xref">Device Group</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.3">
+                    <p id="section-toc.1-1.4.2.2.2.3.1"><a href="#section-4.2.3" class="auto internal xref">4.2.3</a>.  <a href="#name-application-group" class="internal xref">Application Group</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-modules-overview" class="internal xref">Modules Overview</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-the-ucl-extension-to-the-ac" class="internal xref">The UCL Extension to the ACL Model</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-yang-modules" class="internal xref">YANG Modules</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-the-ietf-ucl-acl-yang-modul" class="internal xref">The "ietf-ucl-acl" YANG Module</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-user-access-control-group-i" class="internal xref">User Access Control Group ID RADIUS Attribute</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-radius-attributes" class="internal xref">RADIUS Attributes</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-implementation-consideratio" class="internal xref">Implementation Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-yang" class="internal xref">YANG</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-radius" class="internal xref">RADIUS</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1">
+                <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="auto internal xref">11.1</a>.  <a href="#name-yang-2" class="internal xref">YANG</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
+                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.  <a href="#name-radius-2" class="internal xref">RADIUS</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1">
+                <p id="section-toc.1-1.12.2.1.1"><a href="#section-12.1" class="auto internal xref">12.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.2">
+                <p id="section-toc.1-1.12.2.2.1"><a href="#section-12.2" class="auto internal xref">12.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-examples-usage" class="internal xref">Examples Usage</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
+                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-configuring-the-controller-" class="internal xref">Configuring the Controller Using Group based ACL</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
+                <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-configuring-a-pep-using-gro" class="internal xref">Configuring a PEP Using Group-based ACL</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.3">
+                <p id="section-toc.1-1.13.2.3.1"><a href="#appendix-A.3" class="auto internal xref">A.3</a>.  <a href="#name-configuring-peps-using-addr" class="internal xref">Configuring PEPs Using Address-based ACLs</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-changes-between-revisions" class="internal xref">Changes between Revisions</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
+            <p id="section-toc.1-1.15.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
+            <p id="section-toc.1-1.16.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="intro">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">With the increased adoption of remote access technologies (e.g.,
+   Virtual Private Networks (VPNs)) and Bring Your Own Device (BYOD)
+   policies, enterprises adopted more flexibility related to how, where,
+   and when employees work and collaborate.  However, more flexibility
+   comes with increased risks.  Enabling office flexibility (e.g.,
+   mobility across many access locations) introduces a set of challenges
+   for large-scale enterprises compared to conventional network access management approaches.
+   Examples of such challenges are listed below:<a href="#section-1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1-2.1">
+          <p id="section-1-2.1.1">Endpoints do not have a stable IP address.  For example, Wireless
+LAN (WLAN) and VPN clients, as well as back-end Virtual Machine
+(VM)-based servers, can move; their IP addresses could change as a
+result.  This means that relying on IP/transport fields (e.g., the
+5-tuple) is inadequate to ensure consistent and efficient security
+policy enforcement.  IP address-based policies may not be flexible
+enough to accommodate endpoints with volatile IP addresses.<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-2.2">
+          <p id="section-1-2.2.1">With the massive adoption of teleworking, there is a need to
+apply different security policies to the same set of users under
+different circumstances (e.g., prevent relaying attacks against a
+local attachment point to the enterprise network).  For example,
+network access might be granted based upon criteria such as users'
+access location, source network reputation, users' role, time-of-
+day, type of network device used (e.g., corporate issued device
+versus personal device), device's security posture, etc.  This
+means that the network needs to recognize the users' identity and their
+current context, and map the users to their correct access
+entitlement to the network.<a href="#section-1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-1-3">This document defines a YANG data model (<a href="#sec-UCL" class="auto internal xref">Section 6.1</a>) for policy-based network access control,
+   which extends the IETF Access Control Lists (ACLs) module defined in <span>[<a href="#RFC8519" class="cite xref">RFC8519</a>]</span>.
+   This module can be used to ensure consistent enforcement of ACL policies
+   based on the group identity.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">The ACL concept has been generalized to be device-nonspecific, and can be
+   defined at network/administrative domain level <span>[<a href="#I-D.ietf-netmod-acl-extensions" class="cite xref">I-D.ietf-netmod-acl-extensions</a>]</span>. To
+   allow for all applications of ACLs, the YANG module for policy-based network
+   ACL defined in <a href="#sec-UCL" class="auto internal xref">Section 6.1</a> does not limit how it can be used.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">This document also defines a mechanism to establish a mapping between (1) the
+   user group identifier (ID) and (2) common IP packet header fields and other
+   encapsulating packet data (e.g., MAC address) to execute the policy-based access control.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">Additionally, the document defines a Remote Authentication Dial-in
+   User Service (RADIUS) <span>[<a href="#RFC2865" class="cite xref">RFC2865</a>]</span> attribute that is used to
+   communicate the user group identifier as part of identification and
+   authorization information (<a href="#sec-radius" class="auto internal xref">Section 7</a>).<a href="#section-1-6" class="pilcrow">¶</a></p>
+<p id="section-1-7">Although the document cites MAC addresses as an example in some sections, the
+   document does not make assumptions about which identifiers are used to trigger ACLs.
+   These examples should not be considered as recommendations. Readers should be
+   aware that MAC-based ACLs can be bypassed by flushing out the MAC address.
+   Other implications related to the change of MAC addresses are discussed in
+   <span>[<a href="#I-D.ietf-madinas-use-cases" class="cite xref">I-D.ietf-madinas-use-cases</a>]</span>.<a href="#section-1-7" class="pilcrow">¶</a></p>
+<p id="section-1-8">The document does not specify how to map the policy group identifiers
+   to dedicated fields (e.g.,  Group Based Policy (GBP) discussed in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-nvo3-encap-12#section-6.2.3" class="relref">Section 6.2.3</a> of [<a href="#I-D.ietf-nvo3-encap" class="cite xref">I-D.ietf-nvo3-encap</a>]</span>).<a href="#section-1-8" class="pilcrow">¶</a></p>
+<p id="section-1-9">The YANG data models in this document conform to the Network
+   Management Datastore Architecture (NMDA) defined in <span>[<a href="#RFC8342" class="cite xref">RFC8342</a>]</span>.<a href="#section-1-9" class="pilcrow">¶</a></p>
+<div id="editorial-note-to-be-removed-by-rfc-editor">
+<section id="section-1.1">
+        <h3 id="name-editorial-note-to-be-remove">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-editorial-note-to-be-remove" class="section-name selfRef">Editorial Note (To be removed by RFC Editor)</a>
+        </h3>
+<p id="section-1.1-1">Note to the RFC Editor: This section is to be removed prior to publication.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">This document contains placeholder values that need to be replaced with finalized
+   values at the time of publication.  This note summarizes all of the
+   substitutions that are needed.  No other RFC Editor instructions are specified
+   elsewhere in this document.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3">Please apply the following replacements:<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1.1-4.1">
+            <p id="section-1.1-4.1.1">XXXX --&gt; the assigned RFC number for this draft<a href="#section-1.1-4.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-4.2">
+            <p id="section-1.1-4.2.1">2023-01-19 --&gt; the actual date of the publication of this document<a href="#section-1.1-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="conventions-and-definitions">
+<section id="section-2">
+      <h2 id="name-conventions-and-definitions">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
+      </h2>
+<p id="section-2-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+"<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
+described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
+appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">The meanings of the symbols in tree diagrams are defined in
+   <span>[<a href="#RFC8340" class="cite xref">RFC8340</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">The document uses the following definition in <span>[<a href="#RFC3198" class="cite xref">RFC3198</a>]</span>:<a href="#section-2-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-4.1">
+          <p id="section-2-4.1.1">policy<a href="#section-2-4.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-2-5">The document uses the following definitions and acronyms defined in <span>[<a href="#RFC8519" class="cite xref">RFC8519</a>]</span>:<a href="#section-2-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-6.1">
+          <p id="section-2-6.1.1">Access Control Entry (ACE)<a href="#section-2-6.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-2-6.2">
+          <p id="section-2-6.2.1">Access Control List (ACL)<a href="#section-2-6.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-2-7">The following definitions and acronyms are used throughout this document:<a href="#section-2-7" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-8.1">
+          <span class="break"></span><dl class="dlParallel" id="section-2-8.1.1">
+            <dt id="section-2-8.1.1.1">User group based Control List (UCL) model:</dt>
+            <dd style="margin-left: 1.5em" id="section-2-8.1.1.2">
+              <p id="section-2-8.1.1.2.1">A YANG data model for policy-based network access
+control that specifies an extension to the "ietf-access-control-list" model <span>[<a href="#RFC8519" class="cite xref">RFC8519</a>]</span>.
+It allows policy enforcement based on the group identity, which can be used
+both at the network device level and at the network/administrative domain level.<a href="#section-2-8.1.1.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+</dl>
+</li>
+        <li class="normal" id="section-2-8.2">
+          <span class="break"></span><dl class="dlParallel" id="section-2-8.2.1">
+            <dt id="section-2-8.2.1.1">Endpoint:</dt>
+            <dd style="margin-left: 1.5em" id="section-2-8.2.1.2">
+              <p id="section-2-8.2.1.2.1">refers to an end-user, host device, or application that actually connects to a network.
+An end-user is defined as a person. A host device provides compute, memory,
+storage and networking capabilities and connects to the network without any user intervention. Host devices refer to servers, IoTs and other devices owned
+by the enterprise. An application is a software program used for a specific service.<a href="#section-2-8.2.1.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+</dl>
+</li>
+      </ul>
+</section>
+</div>
+<div id="sample-usage">
+<section id="section-3">
+      <h2 id="name-sample-usage">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-sample-usage" class="section-name selfRef">Sample Usage</a>
+      </h2>
+<p id="section-3-1">Access to some networks (e.g., enterprise networks) requires to
+   recognize the users’ identities no matter how, where, and when they
+   connect to the network resources.  Then, the network maps the
+   (connecting) users to their access authorization rights.  Such rights
+   are defined following local policies.  As discussed in <a href="#intro" class="auto internal xref">Section 1</a>,
+   because (1) there is a large number of users and (2) a user may have different
+   source IP addresses in different network segments,
+   deploying a network access control policy for each IP address or
+   network segment is a heavy workload.  An alternate approach is to
+   configure endpoint groups to classify users and enterprise devices
+   and associate ACLs with endpoint groups so that endpoints in each
+   group can share a group of ACL rules.  This approach greatly reduces
+   the workload of the administrators and optimizes the ACL resources.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">The network ACLs can be provisioned on devices using specific
+   mechanisms, such as <span>[<a href="#RFC8519" class="cite xref">RFC8519</a>]</span> or <span>[<a href="#I-D.ietf-netmod-acl-extensions" class="cite xref">I-D.ietf-netmod-acl-extensions</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">Different policies may need to be applied in different contextual situations.
+   For example, companies may restrict (or grant) employees access to specific
+   internal or external resources during work hours,
+   while another policy is adopted during off-hours and weekends.  A
+   network administrator may also require to enforce traffic shaping
+   (<span><a href="https://rfc-editor.org/rfc/rfc2475#section-2.3.3.3" class="relref">Section 2.3.3.3</a> of [<a href="#RFC2475" class="cite xref">RFC2475</a>]</span>) and policing (
+   <span><a href="https://rfc-editor.org/rfc/rfc2475#section-2.3.3.4" class="relref">Section 2.3.3.4</a> of [<a href="#RFC2475" class="cite xref">RFC2475</a>]</span>) during peak hours in order not to affect other data
+   services.<a href="#section-3-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="policy-based-network-access-control">
+<section id="section-4">
+      <h2 id="name-policy-based-network-access">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-policy-based-network-access" class="section-name selfRef">Policy-based Network Access Control</a>
+      </h2>
+<div id="overview">
+<section id="section-4.1">
+        <h3 id="name-overview">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-overview" class="section-name selfRef">Overview</a>
+        </h3>
+<p id="section-4.1-1">The architecture of a system that provides real-time and consistent
+   enforcement of access control policies is shown in <a href="#arch" class="auto internal xref">Figure 1</a>. This architecture
+   includes the following functional entities and interfaces:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.1-2.1">
+            <p id="section-4.1-2.1.1">A service orchestrator which coordinates the overall service,
+including security policies.  The service may be connectivity or
+any other access to resources that can be hosted and offered by a network.<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-2.2">
+            <p id="section-4.1-2.2.1">A software-defined networking (SDN) <span>[<a href="#RFC7149" class="cite xref">RFC7149</a>]</span> <span>[<a href="#RFC7426" class="cite xref">RFC7426</a>]</span> controller which is
+responsible for maintaining endpoint-group based ACLs and mapping the
+endpoint-group to the associated attributes information (e.g., IP/MAC address).
+An SDN controller also behaves as a Policy Decision Point (PDP) <span>[<a href="#RFC3198" class="cite xref">RFC3198</a>]</span>
+and pushes the required access control policies to relevant Policy
+Enforcement Points (PEPs) <span>[<a href="#RFC3198" class="cite xref">RFC3198</a>]</span>.  A PDP is also known as
+"policy server" <span>[<a href="#RFC2753" class="cite xref">RFC2753</a>]</span>.<a href="#section-4.1-2.2.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2.2.2">
+An SDN controller may interact with an Authentication,
+Authorization and Accounting (AAA) <span>[<a href="#RFC3539" class="cite xref">RFC3539</a>]</span> server or a Network Access Server (NAS) <span>[<a href="#RFC7542" class="cite xref">RFC7542</a>]</span>.<a href="#section-4.1-2.2.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-2.3">
+            <p id="section-4.1-2.3.1">A Network Access Server (NAS) entity which handles authentication
+requests.  The NAS interacts with an AAA server to complete user
+authentication using protocols like RADIUS <span>[<a href="#RFC2865" class="cite xref">RFC2865</a>]</span>. When access is granted, the AAA
+server provides the group identifier (group ID) to which the user
+belongs when the user first logs onto the network. A new RADIUS attribute
+is defined in <a href="#sec-radius" class="auto internal xref">Section 7</a> for this purpose.<a href="#section-4.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-2.4">
+            <p id="section-4.1-2.4.1">The AAA server provides a collection of authentication, authorization,
+and accounting functions. The AAA server is responsible for centralized user
+information management. The AAA server is preconfigured with user
+credentials (e.g., user name and password), possible group identities
+and related user attributes (users may be divided into different
+groups based on different user attributes).<a href="#section-4.1-2.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-2.5">
+            <p id="section-4.1-2.5.1">The Policy Enforcement Point (PEP) is the central entity
+which is responsible for enforcing appropriate access control
+policies. A first deployment scenario assumes that
+the SDN controller maps the group ID to the related common packet
+header and delivers IP/MAC address based ACL policies to the
+required PEPs.  Another deployment scenario may require that PEPs map incoming packets to their
+associated source and/or destination endpoint-group IDs, and acts upon
+the endpoint-group ID based ACL policies (e.g., a group identifier may be carried in packet headers such as discussed in
+<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-nvo3-encap-12#section-6.2.3" class="relref">Section 6.2.3</a> of [<a href="#I-D.ietf-nvo3-encap" class="cite xref">I-D.ietf-nvo3-encap</a>]</span>). More details are provided in <a href="#implement-considerations" class="auto internal xref">Section 9</a>.<a href="#section-4.1-2.5.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2.5.2">
+Multiple PEPs may be involved in a network.<a href="#section-4.1-2.5.2" class="pilcrow">¶</a></p>
+<p id="section-4.1-2.5.3">
+A PEP exposes a NETCONF interface <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> to an SDN controller.<a href="#section-4.1-2.5.3" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.1-3"><a href="#arch" class="auto internal xref">Figure 1</a> provides the overall architecture and procedure for policy-
+   based access control management.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+<span id="name-an-architecture-for-group-b"></span><div id="arch">
+<figure id="figure-1">
+          <div class="alignCenter art-text artwork" id="section-4.1-4.1">
+<pre>
+                                         .------------.
+                                         |Orchestrator|
+                                         '------+-----'
+       Service                                  | (Step 1)
+      --------------------------------------------------------
+                                                |
+       Network                                  |
+                                 (Step 4)       |
+       .-------.        .--------.     .--------+-----------.
+       |User #1+--+     | AAA    |     |    SDN Controller  |
+       '-------'  |     | Server +-----+        (PDP)       |
+                  |     '----+---'     '--------+-----------'
+                  |          |                  |
+                  |          |           +------+--------+(Step 5)
+        (Step 2)  |          |(Step 3)   |               |
+                  |          |           |               |
+                  |        .-+-----------+---------------+------------.
+                  |        | .----------------------. .--------------.|
+       .-------.  +--------+ | Network Access Server| |firewall, etc.||
+       |User #2+-----------+ |       (NAS)          | '--------------'|
+       '-------'           | '----------------------'                 |
+                           |                     (PEP)                |
+                           '------------------------------------------'
+</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-an-architecture-for-group-b" class="selfRef">An Architecture for Group-based Policy Management</a>
+          </figcaption></figure>
+</div>
+<p id="section-4.1-5">In reference to <a href="#arch" class="auto internal xref">Figure 1</a>, the following typical flow is experienced:<a href="#section-4.1-5" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.1-6">
+          <dt id="section-4.1-6.1">Step 1:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-6.2">
+            <p id="section-4.1-6.2.1">Administrators (or a service orchestrator) configure an SDN
+controller with network-level ACLs using the YANG module defined
+in <a href="#sec-UCL" class="auto internal xref">Section 6.1</a>. An example is provided in <a href="#controller-ucl" class="auto internal xref">Appendix A.1</a>.<a href="#section-4.1-6.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.1-6.3">Step 2:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-6.4">
+            <p id="section-4.1-6.4.1">When a user first logs onto the network, he/she is
+required to be authenticated (e.g., using user name and password)
+at the NAS.<a href="#section-4.1-6.4.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.1-6.5">Step 3:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-6.6">
+            <p id="section-4.1-6.6.1">The authentication request is then relayed to the AAA server
+using a protocol such as RADIUS <span>[<a href="#RFC2865" class="cite xref">RFC2865</a>]</span>. It is assumed that the
+AAA server has been appropriately configured to store user credentials,
+e.g., user name, password, group information, and other user attributes.
+This document does not restrict what authentication method is used. Administrators
+may refer to, e.g., <span><a href="https://datatracker.ietf.org/doc/html/draft-dekok-radext-deprecating-radius-05#section-7.3" class="relref">Section 7.3</a> of [<a href="#I-D.dekok-radext-deprecating-radius" class="cite xref">I-D.dekok-radext-deprecating-radius</a>]</span>
+for authentication method recommendations.
+If the authentication request succeeds, the user is placed in a
+user group the identity of which is returned to the network access server
+as the authentication result (see <a href="#sec-radius" class="auto internal xref">Section 7</a>).
+If the authentication fails, the user is not assigned any user
+group, which also means that the user has no access; or the user
+is assigned a special group with very limited access permissions
+for the network (as a function of the local policy). ACLs are
+enforced so that flows from that IP address are discarded
+(or rate-limited) by the network.
+In some implementations, AAA server can be integrated with an SDN controller.<a href="#section-4.1-6.6.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.1-6.7">Step 4:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-6.8">
+            <p id="section-4.1-6.8.1">Either the AAA server or the NAS notifies an SDN controller
+of the mapping between the user group ID and related common packet
+header attributes (e.g., IP/MAC address).<a href="#section-4.1-6.8.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.1-6.9">Step 5:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-6.10">
+            <p id="section-4.1-6.10.1">Either group or IP/MAC address based access control policies
+are maintained on relevant PEPs under the SDN controller's management.
+Whether the PEP enforces the group or IP/MAC address based ACL is
+implementation specific. Both types of ACL policy may exist on
+the PEP. <a href="#PEP-ucl" class="auto internal xref">Appendix A.2</a> and <a href="#PEP-acl" class="auto internal xref">Appendix A.3</a> elaborate on each case.<a href="#section-4.1-6.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="endpoint-group">
+<section id="section-4.2">
+        <h3 id="name-endpoint-group">
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-endpoint-group" class="section-name selfRef">Endpoint Group</a>
+        </h3>
+<div id="user-group">
+<section id="section-4.2.1">
+          <h4 id="name-user-group">
+<a href="#section-4.2.1" class="section-number selfRef">4.2.1. </a><a href="#name-user-group" class="section-name selfRef">User Group</a>
+          </h4>
+<p id="section-4.2.1-1">The user group is determined by a set of predefined policy criteria
+   (e.g., source IP address, geolocation data, time of day, or device certificate).
+   It uses an identifier (user group ID) to represent the collective identity of
+   a group of users. Users may be moved to different user-groups if their
+   composite attributes, environment, and/or local enterprise policy change.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.1-2">A user is authenticated, and classified at the AAA server, and
+   assigned to a user group.  A user's group membership may change as
+   aspects of the user change.  For example, if the user group
+   membership is determined solely by the source IP address, then a
+   given user's group ID will change when the user moves to a new
+   IP address that falls outside of the range of addresses of the
+   previous user group.<a href="#section-4.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.1-3">This document does not make any assumption about how user groups are
+   defined.  Such considerations are deployment specific and are out of
+   scope.  However, and for illustration purposes, <a href="#ug-example" class="auto internal xref">Table 1</a> shows
+   an example of how user group definitions may be characterized. User
+   groups may share several common criteria.  That is, user group
+   criteria are not mutually exclusive.  For example, the policy
+   criteria of user groups R&amp;D Regular and R&amp;D BYOD may share the same
+   set of users that belong to the R&amp;D organization, and differ only in
+   the type of clients (firm-issued clients vs. users' personal
+   clients).  Likewise, the same user may be assigned to different user
+   groups depending on the time of day or the type of day (e.g.,
+   weekdays versus weekends), etc.<a href="#section-4.2.1-3" class="pilcrow">¶</a></p>
+<span id="name-user-group-example"></span><div id="ug-example">
+<table class="center" id="table-1">
+            <caption>
+<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#name-user-group-example" class="selfRef">User Group Example</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">Group Name</th>
+                <th class="text-left" rowspan="1" colspan="1">Group ID</th>
+                <th class="text-left" rowspan="1" colspan="1">Group Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">R&amp;D</td>
+                <td class="text-left" rowspan="1" colspan="1">foo-10</td>
+                <td class="text-left" rowspan="1" colspan="1">R&amp;D employees</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">R&amp;D BYOD</td>
+                <td class="text-left" rowspan="1" colspan="1">foo-11</td>
+                <td class="text-left" rowspan="1" colspan="1">Personal devices of R&amp;D employees</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">Sales</td>
+                <td class="text-left" rowspan="1" colspan="1">foo-20</td>
+                <td class="text-left" rowspan="1" colspan="1">Sales employees</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">VIP</td>
+                <td class="text-left" rowspan="1" colspan="1">foo-30</td>
+                <td class="text-left" rowspan="1" colspan="1">VIP employees</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+</section>
+</div>
+<div id="device-group">
+<section id="section-4.2.2">
+          <h4 id="name-device-group">
+<a href="#section-4.2.2" class="section-number selfRef">4.2.2. </a><a href="#name-device-group" class="section-name selfRef">Device Group</a>
+          </h4>
+<p id="section-4.2.2-1">The device-group ID is an identifier that represents the collective
+   identity of a group of enterprise end devices.  An enterprise device
+   could be a server that hosts applications or software that deliver
+   services to enterprise users.  It could also be an enterprise IoT
+   device that serve a limited purpose, e.g., a printer that allows
+   users to scan, print and send emails. <a href="#dg-example" class="auto internal xref">Table 2</a> shows an example
+   of how device-group definitions may be characterized.<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
+<span id="name-device-group-example"></span><div id="dg-example">
+<table class="center" id="table-2">
+            <caption>
+<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#name-device-group-example" class="selfRef">Device-Group Example</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">Group Name</th>
+                <th class="text-left" rowspan="1" colspan="1">Group ID</th>
+                <th class="text-left" rowspan="1" colspan="1">Group Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">Workflow</td>
+                <td class="text-left" rowspan="1" colspan="1">bar-40</td>
+                <td class="text-left" rowspan="1" colspan="1">Workflow  resource servers</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">R&amp;D Resource</td>
+                <td class="text-left" rowspan="1" colspan="1">bar-50</td>
+                <td class="text-left" rowspan="1" colspan="1">R&amp;D resource servers</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">Printer Resource</td>
+                <td class="text-left" rowspan="1" colspan="1">bar-60</td>
+                <td class="text-left" rowspan="1" colspan="1">Printer resources</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+<p id="section-4.2.2-3">Users accessing an enterprise device should be strictly controlled.
+   Matching abstract device group ID instead of specified addresses in
+   ACL polices helps shield the consequences of address change (e.g.,
+   back-end VM-based server migration).<a href="#section-4.2.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="application-group">
+<section id="section-4.2.3">
+          <h4 id="name-application-group">
+<a href="#section-4.2.3" class="section-number selfRef">4.2.3. </a><a href="#name-application-group" class="section-name selfRef">Application Group</a>
+          </h4>
+<p id="section-4.2.3-1">An application group is a collection of applications that share a common access control policies.
+   A device may run multiple applications, and different policies might need to be
+   applied to the applications and device. A single application may need to run on
+   multiple devices/VMs/containers, the abstraction of application group eases the
+   process of application migration. For example, the policy does not depend on the transport coordinates (i.e., 5-tuple).
+   <a href="#ag-example" class="auto internal xref">Table 3</a> shows an example of how application-group definitions may be characterized.<a href="#section-4.2.3-1" class="pilcrow">¶</a></p>
+<span id="name-application-group-example"></span><div id="ag-example">
+<table class="center" id="table-3">
+            <caption>
+<a href="#table-3" class="selfRef">Table 3</a>:
+<a href="#name-application-group-example" class="selfRef">Application-Group Example</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">Group Name</th>
+                <th class="text-left" rowspan="1" colspan="1">Group ID</th>
+                <th class="text-left" rowspan="1" colspan="1">Group Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">Audio/Video Streaming</td>
+                <td class="text-left" rowspan="1" colspan="1">baz-70</td>
+                <td class="text-left" rowspan="1" colspan="1">Audio/Video conferecing application</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">Instant messaging</td>
+                <td class="text-left" rowspan="1" colspan="1">baz-80</td>
+                <td class="text-left" rowspan="1" colspan="1">Messaging application</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">document collaboration</td>
+                <td class="text-left" rowspan="1" colspan="1">baz-90</td>
+                <td class="text-left" rowspan="1" colspan="1">Real-time document editing application</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="modules-overview">
+<section id="section-5">
+      <h2 id="name-modules-overview">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-modules-overview" class="section-name selfRef">Modules Overview</a>
+      </h2>
+<div id="the-ucl-extension-to-the-acl-model">
+<section id="section-5.1">
+        <h3 id="name-the-ucl-extension-to-the-ac">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-the-ucl-extension-to-the-ac" class="section-name selfRef">The UCL Extension to the ACL Model</a>
+        </h3>
+<p id="section-5.1-1">This module specifies an extension to the "ietf-access-control-list" model <span>[<a href="#RFC8519" class="cite xref">RFC8519</a>]</span>. This extension adds
+   endpoint groups so that an endpoint group identifier can be matched upon, and also
+   enable access control policy activation based on date and time conditions.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2"><a href="#ucl-tree" class="auto internal xref">Figure 2</a> provides the tree structure of the "ietf-ucl-acl" module.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<span id="name-ucl-extension"></span><div id="ucl-tree">
+<figure id="figure-2">
+          <div class="alignCenter art-text artwork" id="section-5.1-3.1">
+<pre>
+module: ietf-ucl-acl
+
+  augment /acl:acls:
+    +--rw endpoint-groups
+       +--rw endpoint-group* [group-id]
+          +--rw group-id      string
+          +--rw group-type?   identityref
+  augment /acl:acls/acl:acl/acl:aces/acl:ace/acl:matches:
+    +--rw endpoint-group {match-on-group}?
+       +--rw source-group-id?        group-id-reference
+       +--rw destination-group-id?   group-id-reference
+  augment /acl:acls/acl:acl/acl:aces/acl:ace:
+    +--rw effective-schedule
+       +--rw (schedule-type)?
+          +--:(period)
+          |  +--rw period-start?             yang:date-and-time
+          |  +--rw time-zone-identifier?     sys:timezone-name
+          |  +--rw (period-type)?
+          |     +--:(explicit)
+          |     |  +--rw period-end?         yang:date-and-time
+          |     +--:(duration)
+          |        +--rw duration?           duration
+          +--:(recurrence) {schedule:icalendar-recurrence-supported}?
+             +--rw recurrence-first
+             |  +--rw date-time-start?        union
+             |  +--rw time-zone-identifier?   sys:timezone-name
+             |  +--rw duration?               duration
+             +--rw frequency?                identityref
+             +--rw interval?                 uint32
+             +--rw (recurrence-bound)?
+             |  +--:(until)
+             |  |  +--rw until?              union
+             |  +--:(count)
+             |     +--rw count?              uint32
+             +--rw (date-times-choice)?
+             |  +--:(date-time)
+             |  |  +--rw date-times*         yang:date-and-time
+             |  +--:(date)
+             |  |  +--rw dates*              yang:date-no-zone
+             |  +--:(period-timeticks)
+             |  |  +--rw period-timeticks* [period-start]
+             |  |     +--rw period-start    yang:timeticks
+             |  |     +--rw period-end?     yang:timeticks
+             |  +--:(period)
+             |     +--rw period* [period-start]
+             |        +--rw period-start            yang:date-and-time
+             |        +--rw time-zone-identifier?   sys:timezone-name
+             |        +--rw (period-type)?
+             |           +--:(explicit)
+             |           |  +--rw period-end?       yang:date-and-time
+             |           +--:(duration)
+             |              +--rw duration?         duration
+             +--rw bysecond*                 uint32
+             +--rw byminute*                 uint32
+             +--rw byhour*                   uint32
+             +--rw byday* [weekday]
+             |  +--rw direction*   int32
+             |  +--rw weekday      schedule:weekday
+             +--rw bymonthday*               int32
+             +--rw byyearday*                int32
+             +--rw byyearweek*               int32
+             +--rw byyearmonth*              uint32
+             +--rw bysetpos*                 int32
+             +--rw workweek-start?           schedule:weekday
+             +--rw exception-dates*          union
+</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-ucl-extension" class="selfRef">UCL Extension</a>
+          </figcaption></figure>
+</div>
+<p id="section-5.1-4">The first part of the data model augments the "acl" list in the
+   "ietf-access-control-list" model <span>[<a href="#RFC8519" class="cite xref">RFC8519</a>]</span> with a "endpoint-groups" container
+   having a list of "endpoint group" inside, each entry has a "group-id" that uniquely
+   identifies the endpoint group and a "group-type" parameter to specify the endpoint group type.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-5.1-5.1">
+            <p id="section-5.1-5.1.1">"group-id" is defined as a string rather than uint to accommodate deployments which require some identification hierarchy within a domain. Such a hierarchy is meant to ease coordination within an administrative domain. There might be cases where a domain needs to tag packets with the group they belong to. The tagging does not need to mirror exactly the "group id" used to populate the policy. How the "group-id" string is mapped to the tagging or field in the packet header in encapsulation scenario is outside the scope of this document. Augmentation may be considered in the future to cover encapsulation considerations.<a href="#section-5.1-5.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.1-6">The second part of the data model augments the "matches" container in the IETF
+   ACL model <span>[<a href="#RFC8519" class="cite xref">RFC8519</a>]</span> so that a source and/or destination endpoint group index
+   can be referenced as the match criteria.<a href="#section-5.1-6" class="pilcrow">¶</a></p>
+<p id="section-5.1-7">The third part of the data model augments the "ace" list in the "ietf-access-control-list"
+   model <span>[<a href="#RFC8519" class="cite xref">RFC8519</a>]</span> with date and time specific parameters to allow ACE to be
+   activated based on a date/time condition. Two types of time range are defined,
+   which reuse "recurrence" and "period" groupings defined in the "ietf-schedule"
+   YANG module in <span>[<a href="#I-D.ma-opsawg-schedule-yang" class="cite xref">I-D.ma-opsawg-schedule-yang</a>]</span>, respectively. Note that the data model augments the definition of
+   "recurrence" grouping with a "duration" data node to specify the duration of
+   time for each occurrence the policy activation is triggered.<a href="#section-5.1-7" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="yang-modules">
+<section id="section-6">
+      <h2 id="name-yang-modules">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-yang-modules" class="section-name selfRef">YANG Modules</a>
+      </h2>
+<div id="sec-UCL">
+<section id="section-6.1">
+        <h3 id="name-the-ietf-ucl-acl-yang-modul">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-the-ietf-ucl-acl-yang-modul" class="section-name selfRef">The "ietf-ucl-acl" YANG Module</a>
+        </h3>
+<p id="section-6.1-1">This module imports types and groupings defined in the "ietf-schedule" YANG
+   module in <span>[<a href="#I-D.ma-opsawg-schedule-yang" class="cite xref">I-D.ma-opsawg-schedule-yang</a>]</span>. It also augments the "ietf-access-control-list" module defined in <span>[<a href="#RFC8519" class="cite xref">RFC8519</a>]</span>.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<div class="breakable sourcecode" id="section-6.1-2">
+<pre>&lt;CODE BEGINS&gt; file "ietf-ucl-acl@2023-01-19.yang"
+
+module ietf-ucl-acl {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-ucl-acl";
+  prefix uacl;
+
+  import ietf-access-control-list {
+    prefix acl;
+    reference
+      "RFC 8519: YANG Data Model for Network Access
+                 Control Lists (ACLs)";
+  }
+  import ietf-schedule {
+    prefix schedule;
+    reference
+      "RFC XXXX: A Policy-based Network Access Control";
+  }
+
+  organization
+    "IETF OPSWG Working Group";
+  contact
+    "WG Web: &lt;https://datatracker.ietf.org/wg/opsawg/&gt;
+     WG List: &lt;mailto:opsawg@ietf.org&gt;
+
+     Editor:   Qiufang Ma
+               &lt;mailto:maqiufang1@huawei.com
+     Author:   Qin Wu
+               &lt;mailto:bill.wu@huawei.com&gt;
+     Editor:   Mohamed Boucadair
+               &lt;mailto:mohamed.boucadair@orange.com&gt;
+     Author:   Daniel King
+               &lt;mailto:d.king@lancaster.ac.uk&gt;";
+  description
+    "This YANG module augments the IETF access control lists (ACLs)
+     module and is meant to ensure consistent enforcement of ACL
+     policies based on the group identity.
+
+     Copyright (c) 2024 IETF Trust and the persons identified
+     as authors of the code. All rights reserved.
+
+     Redistribution and use in source and binary forms, with
+     or without modification, is permitted pursuant to, and
+     subject to the license terms contained in, the Revised
+     BSD License set forth in Section 4.c of the IETF Trust's
+     Legal Provisions Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
+
+     This version of this YANG module is part of RFC XXXX
+     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC
+     itself for full legal notices.";
+
+  revision 2023-01-19 {
+    description
+      "Initial revision.";
+    reference
+      "RFC XXXX: A Policy-based Network Access Control";
+  }
+
+  identity group-acl-type {
+    if-feature "group";
+    base acl:acl-base;
+    description
+      "An Access Control List (ACL) that matches based on an endpoint
+       group identity, which can represent the collective identity of
+       a group of authenticated users, end devices, or applications.
+       An endpoint group identity may be carried in the outer/inner
+       packet header (e.g., via NVO3 encapsulation), may also not
+       correspond to any field in the packet header. Matching on
+       Layer 4 header fields may also exist in the Access Control
+       Entries (ACEs).";
+  }
+
+  identity mixed-ipv4-group-type {
+    if-feature "mixed-ipv4-group";
+    base acl:ipv4-acl-type;
+    base uacl:group-acl-type;
+    description
+      "An ACL that contains a mix of entries that match on fields
+       in the IPv4 header and endpoint group identities, which can
+       represent the collective identity of a group of authenticated
+       users, end devices, or applications. Matching on Layer 4
+       header fields may also exist in the ACEs.";
+  }
+
+  identity mixed-ipv6-group-type {
+    if-feature "mixed-ipv6-group";
+    base acl:ipv6-acl-type;
+    base uacl:group-acl-type;
+    description
+      "An ACL that contains a mix of entries that match on fields
+       in the IPv6 header and endpoint group identities, which can
+       represent the collective identity of a group of authenticated
+       users, end devices, or applications. Matching on Layer 4
+       header fields may also exist in the ACEs.";
+  }
+
+  identity mixed-ipv4-ipv6-group-type {
+    if-feature "mixed-ipv4-ipv6-group";
+    base acl:ipv4-acl-type;
+    base acl:ipv6-acl-type;
+    base uacl:group-acl-type;
+    description
+      "An ACL that contains a mix of entries that match on fields
+       in the IPv4 header, IPv6 header, and endpoint group identities,
+       which can represent the collective identity of a group of
+       authenticated users, end devices, or applications. Matching
+       on Layer 4 header fields may also exist in the ACEs.";
+  }
+
+  identity mixed-eth-group-type {
+    if-feature "mixed-eth-group";
+    base acl:eth-acl-type;
+    base uacl:group-acl-type;
+    description
+      "An ACL that contains a mix of entries that match on fields
+       in the Ethernet header and endpoint group identities,
+       which can represent the collective identity of a group of
+       authenticated users, end devices, or applications. Matching
+       on Layer 4 header fields may also exist in the ACEs.";
+  }
+
+  identity mixed-eth-ipv4-group-type {
+    if-feature "mixed-eth-ipv4-group";
+    base acl:eth-acl-type;
+    base acl:ipv4-acl-type;
+    base uacl:group-acl-type;
+    description
+      "An ACL that contains a mix of entries that match on fields
+       in the Ethernet header, IPv4 header, and endpoint group
+       identities, which can represent the collective identity of a
+       group of authenticated users, end devices or applications.
+       Matching on Layer 4 header fields may also exist in the
+       ACEs.";
+  }
+
+  identity mixed-eth-ipv6-group-type {
+    if-feature "mixed-eth-ipv6-group";
+    base acl:eth-acl-type;
+    base acl:ipv6-acl-type;
+    base uacl:group-acl-type;
+    description
+      "An ACL that contains a mix of entries that match on fields
+       in the Ethernet header, IPv6 header, and endpoint group
+       identities, which can represent the collective identity of
+       a group of authenticated users, end devices or applications.
+       Matching on Layer 4 header fields may also exist in the
+       ACEs.";
+  }
+
+  identity mixed-eth-ipv4-ipv6-group-type {
+    if-feature "mixed-eth-ipv4-ipv6-group";
+    base acl:eth-acl-type;
+    base acl:ipv4-acl-type;
+    base acl:ipv6-acl-type;
+    base uacl:group-acl-type;
+    description
+      "An ACL that contains a mix of entries that match on fields
+       in the Ethernet header, IPv4 header, IPv6 header, and endpoint
+       group identities, which can represent the collective identity
+       of a group of authenticated users, end devices or
+       applications. Matching on Layer 4 header fields may also exist
+       in the ACEs.";
+  }
+
+  identity endpoint-group-type {
+    description
+      "Identity for the type of endpoint group.";
+  }
+
+  identity user-group {
+    base uacl:endpoint-group-type;
+    description
+      "Identity for the user endpoint group.";
+  }
+
+  identity device-group {
+    base uacl:endpoint-group-type;
+    description
+      "Identity for the device endpoint group.";
+  }
+
+  identity application-group {
+    base uacl:endpoint-group-type;
+    description
+      "Identity for the application endpoint group.";
+  }
+
+  feature match-on-group {
+    description
+      "The implementation supports matching on endpoint groups.";
+  }
+
+  feature group {
+    if-feature "uacl:match-on-group";
+    description
+      "Indicates support of group-based ACLs.";
+  }
+
+  feature mixed-ipv4-group {
+    if-feature "acl:match-on-ipv4 and uacl:match-on-group";
+    description
+      "IPv4 and group ACL combinations supported.";
+  }
+
+  feature mixed-ipv6-group {
+    if-feature "acl:match-on-ipv6 and uacl:match-on-group";
+    description
+      "IPv6 and group ACL combinations supported.";
+  }
+
+  feature mixed-ipv4-ipv6-group {
+    if-feature "acl:match-on-ipv4 and acl:match-on-ipv6 and "
+             + "uacl:match-on-group";
+    description
+      "IPv4, IPv6, and group ACL combinations supported.";
+  }
+
+  feature mixed-eth-group {
+    if-feature "acl:match-on-eth and uacl:match-on-group";
+    description
+      "Eth and group ACL combinations supported.";
+  }
+
+  feature mixed-eth-ipv4-group {
+    if-feature "acl:match-on-eth and acl:match-on-ipv4 and "
+             + "uacl:match-on-group";
+    description
+      "Eth, IPv4, and group ACL combinations supported.";
+  }
+
+  feature mixed-eth-ipv6-group {
+    if-feature "acl:match-on-eth and acl:match-on-ipv6 and "
+             + "uacl:match-on-group";
+    description
+      "Eth, IPv6, and group ACL combinations supported.";
+  }
+
+  feature mixed-eth-ipv4-ipv6-group {
+    if-feature "acl:match-on-eth and acl:match-on-ipv4 and "
+             + "acl:match-on-ipv6 and uacl:match-on-group";
+    description
+      "Eth, IPv4, IPv6, and group ACL combinations supported.";
+  }
+
+  typedef group-id-reference {
+    type leafref {
+      path "/acl:acls/uacl:endpoint-groups"
+         + "/uacl:endpoint-group/uacl:group-id";
+    }
+    description
+      "Defines a reference to a group identifier.";
+  }
+
+  augment "/acl:acls" {
+    description
+      "Adds a container for endpoint group definition.";
+    container endpoint-groups {
+      description
+        "Defines a container for the endpoint group list.";
+      list endpoint-group {
+        key "group-id";
+        description
+          "Definition of the endpoint group list.";
+        leaf group-id {
+          type string {
+            length "1..64";
+          }
+          description
+            "The endpoint group identifier that uniquely identifies
+             an endpoint group.";
+        }
+        leaf group-type {
+          type identityref {
+            base endpoint-group-type;
+          }
+          description
+            "Specifies the endpoint group type.";
+        }
+      }
+    }
+  }
+
+  augment "/acl:acls/acl:acl/acl:aces/acl:ace/acl:matches" {
+    description
+      "Specifies how a source and/or destination endpoint group
+       index can be referenced as the match criteria in the ACEs.";
+    container endpoint-group {
+      when "derived-from-or-self(/acl:acls/acl:acl/acl:type, "
+         + "'uacl:group-acl-type')";
+      if-feature "match-on-group";
+      description
+        "Adds new match types.";
+      leaf source-group-id {
+        type group-id-reference;
+        description
+          "The matched source endpoint group ID.";
+      }
+      leaf destination-group-id {
+        type group-id-reference;
+        description
+          "The matched destination endpoint group ID.";
+      }
+    }
+  }
+
+  augment "/acl:acls/acl:acl/acl:aces/acl:ace" {
+    description
+      "Adds schedule parameters to allow the ACE to take effect
+       based on date and time.";
+    container effective-schedule {
+      description
+        "Defines when the access control entry rules
+         are in effect based on date and time condition.
+
+         If it is not configured, the access control entry
+         is immediately and always in effect.";
+      choice schedule-type {
+        description
+          "Choice based on the type of the time range.";
+        case period {
+          description
+            "The ACE takes effect based on a precise period of
+             time.";
+            uses schedule:period-of-time;
+        }
+        case recurrence {
+          if-feature "schedule:icalendar-recurrence-supported";
+          description
+            "The ACE takes effect based on a recurrence rule.";
+          uses schedule:icalendar-recurrence;
+        }
+      }
+    }
+  }
+}
+
+
+&lt;CODE ENDS&gt;</pre><a href="#section-6.1-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="sec-radius">
+<section id="section-7">
+      <h2 id="name-user-access-control-group-i">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-user-access-control-group-i" class="section-name selfRef">User Access Control Group ID RADIUS Attribute</a>
+      </h2>
+<p id="section-7-1">The User-Access-Group-ID RADIUS attribute is
+   defined with a globally unique name.  The definition of the attribute
+   follows the guidelines in <span><a href="https://rfc-editor.org/rfc/rfc6929#section-2.7.1" class="relref">Section 2.7.1</a> of [<a href="#RFC6929" class="cite xref">RFC6929</a>]</span>.  This attribute
+   is used to indicate the user group ID to be used by the NAS.  When
+   the User-Access-Group-ID RADIUS attribute is present in the RADIUS
+   Access-Accept, the system applies the related access control to the
+   users after it authenticates.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">The User-Access-Group-ID Attribute is of type "string" as defined in
+   <span><a href="https://rfc-editor.org/rfc/rfc8044#section-3.5" class="relref">Section 3.5</a> of [<a href="#RFC8044" class="cite xref">RFC8044</a>]</span>.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">The User-Access-Group-ID Attribute <span class="bcp14">MAY</span> appear in a RADIUS Access-
+   Accept packet.  It <span class="bcp14">MAY</span> also appear in a RADIUS Access-Request packet
+   as a hint to the RADIUS server to indicate a preference.  However,
+   the server is not required to honor such a preference. If more than
+   one instance of the User-Access-Group-ID Attribute appears in a RADIUS
+   Access-Accept packet, this means that the user is a member of many groups.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-4">The User-Access-Group-ID Attribute <span class="bcp14">MAY</span> appear in a RADIUS CoA-Request
+   packet.<a href="#section-7-4" class="pilcrow">¶</a></p>
+<p id="section-7-5">The User-Access-Group-ID Attribute <span class="bcp14">MAY</span> appear in a RADIUS Accounting-
+   Request packet. Specifically, this may be used by a NAS to acknowledge that the attribute
+   was received in the RADIUS Access-Request and the NAS is enforcing that policy.<a href="#section-7-5" class="pilcrow">¶</a></p>
+<p id="section-7-6">The User-Access-Group-ID Attribute <span class="bcp14">MUST NOT</span> appear in any other
+   RADIUS packet.<a href="#section-7-6" class="pilcrow">¶</a></p>
+<p id="section-7-7">The User-Access-Group-ID Attribute is structured as follows:<a href="#section-7-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-7-8">
+<pre>
+   Type
+     TBA1
+
+   Length
+     This field indicates the total length, in octets, of all fields of
+     this attribute, including the Type, Length, Extended-Type, and the
+     "Value". The Length MUST be at most 67 octets.
+
+   Data Type
+     string ({{Section 3.5 of RFC8044}})
+
+   Value
+      This field contains the user group ID.
+</pre><a href="#section-7-8" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="radius-attributes">
+<section id="section-8">
+      <h2 id="name-radius-attributes">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-radius-attributes" class="section-name selfRef">RADIUS Attributes</a>
+      </h2>
+<p id="section-8-1"><a href="#rad-att" class="auto internal xref">Table 4</a> provides a guide as what type of RADIUS packets
+   that may contain User-Access-Group-ID Attribute, and in what
+   quantity.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<span id="name-table-of-attributes"></span><div id="rad-att">
+<table class="center" id="table-4">
+        <caption>
+<a href="#table-4" class="selfRef">Table 4</a>:
+<a href="#name-table-of-attributes" class="selfRef">Table of Attributes</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">Access-Request</th>
+            <th class="text-left" rowspan="1" colspan="1">Access-Accept</th>
+            <th class="text-left" rowspan="1" colspan="1">Access-Reject</th>
+            <th class="text-left" rowspan="1" colspan="1">Challenge</th>
+            <th class="text-left" rowspan="1" colspan="1">Attribute</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">0+</td>
+            <td class="text-left" rowspan="1" colspan="1">0+</td>
+            <td class="text-left" rowspan="1" colspan="1">0</td>
+            <td class="text-left" rowspan="1" colspan="1">0</td>
+            <td class="text-left" rowspan="1" colspan="1">User-Access-Group-ID</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">Accounting-Request</td>
+            <td class="text-left" rowspan="1" colspan="1">CoA-Request</td>
+            <td class="text-left" rowspan="1" colspan="1">CoA-ACK</td>
+            <td class="text-left" rowspan="1" colspan="1">CoA-NACK</td>
+            <td class="text-left" rowspan="1" colspan="1">Attribute</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">0+</td>
+            <td class="text-left" rowspan="1" colspan="1">0+</td>
+            <td class="text-left" rowspan="1" colspan="1">0</td>
+            <td class="text-left" rowspan="1" colspan="1">0</td>
+            <td class="text-left" rowspan="1" colspan="1">User-Access-Group-ID</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<p id="section-8-3">Notation for <a href="#rad-att" class="auto internal xref">Table 4</a>:<a href="#section-8-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-8-4">
+        <dt id="section-8-4.1">0</dt>
+        <dd style="margin-left: 1.5em" id="section-8-4.2">
+          <p id="section-8-4.2.1">This attribute <span class="bcp14">MUST NOT</span> be present in packet.<a href="#section-8-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-8-4.3">0+</dt>
+        <dd style="margin-left: 1.5em" id="section-8-4.4">
+          <p id="section-8-4.4.1">Zero or more instances of this attribute <span class="bcp14">MAY</span> be present in packet.<a href="#section-8-4.4.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="implement-considerations">
+<section id="section-9">
+      <h2 id="name-implementation-consideratio">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-implementation-consideratio" class="section-name selfRef">Implementation Considerations</a>
+      </h2>
+<p id="section-9-1">The UCL model can be implemented in different ways.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-2">In some cases, the UCL model is implemented at the network/administrative domain
+   level with an SDN controller maintaining the dynamical mapping from endpoint
+   group ID to IP/transport fields (e.g., the 5-tuple) and programing the PEPs with
+   IP address/5-tuple based ACLs. In such cases, PEPs do not require to implement
+   specific logic (including hardware) compared to the enforcement of conventional ACLs.<a href="#section-9-2" class="pilcrow">¶</a></p>
+<p id="section-9-3">It is possible for the UCL model to be implemented at the network device level.
+   While it eliminates the need for an SDN controller to interact frequently
+   with the PEPs for reasons like the user's context of network connection change
+   or VM/application migration, dedicated hardware/software support might be needed
+   for PEPs to understand the endpoint group identifier. In scenrios where the NAS
+   behaves as the PEP which acquires the source and/or destination endpoint group
+   ID from the AAA server, ACL policy enforcement based on the group identity without
+   being encapsulated into packet headers might affect the forwarding performance.
+   Implementations need to evaluate the operational tradeoff (flexibility brought
+   to the network vs. the complexity of implementation) carefully. Such assessment
+   is out of scope of this document.<a href="#section-9-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-10">
+      <h2 id="name-security-considerations">
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<div id="yang">
+<section id="section-10.1">
+        <h3 id="name-yang">
+<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-yang" class="section-name selfRef">YANG</a>
+        </h3>
+<p id="section-10.1-1">This section uses the template described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-10#section-3.7" class="relref">Section 3.7</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
+<p id="section-10.1-2">The YANG modules specified in this document defines schema for data
+   that is designed to be accessed via network management protocols such
+   as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> or RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.  The lowest NETCONF layer
+   is the secure transport layer, and the mandatory-to-implement secure
+   transport is Secure Shell (SSH) <span>[<a href="#RFC6242" class="cite xref">RFC6242</a>]</span>.  The lowest RESTCONF layer
+   is HTTPS, and the mandatory-to-implement secure transport is TLS
+   <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>.<a href="#section-10.1-2" class="pilcrow">¶</a></p>
+<p id="section-10.1-3">The Network Configuration Access Control Model (NACM) <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span>
+   provides the means to restrict access for particular NETCONF or
+   RESTCONF users to a preconfigured subset of all available NETCONF or
+   RESTCONF protocol operations and content.<a href="#section-10.1-3" class="pilcrow">¶</a></p>
+<p id="section-10.1-4">There are a number of data nodes defined in the "ietf-ucl-acl" YANG module that are
+   writable, creatable, and deletable (i.e., config true, which is the
+   default).  These data nodes may be considered sensitive or vulnerable
+   in some network environments. Write operations (e.g., edit-config) and delete
+   operations to these data nodes without proper protection or authentication can
+   have a negative effect on network operations. Specifically,
+   the following subtrees and data nodes have particular sensitivities/vulnerabilities:<a href="#section-10.1-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-10.1-5.1">
+            <span class="break"></span><dl class="dlParallel" id="section-10.1-5.1.1">
+              <dt id="section-10.1-5.1.1.1">/acl:acls/uacl:endpoint-groups/uacl:endpoint-group:</dt>
+              <dd style="margin-left: 1.5em" id="section-10.1-5.1.1.2">
+                <p id="section-10.1-5.1.1.2.1">This list specifies all the endpoint group entries. Unauthorized write access to this
+list can allow intruders to modify the entries so as to forge an endpoint
+group that does not exist or maliciously delete an existing endpoint group,
+which could be used to craft an attack.<a href="#section-10.1-5.1.1.2.1" class="pilcrow">¶</a></p>
+</dd>
+            <dd class="break"></dd>
+</dl>
+</li>
+          <li class="normal" id="section-10.1-5.2">
+            <span class="break"></span><dl class="dlParallel" id="section-10.1-5.2.1">
+              <dt id="section-10.1-5.2.1.1">/acl:acls/acl:acl/acl:aces/acl:ace/acl:matches/uacl:endpoint-group:</dt>
+              <dd style="margin-left: 1.5em" id="section-10.1-5.2.1.2">
+                <p id="section-10.1-5.2.1.2.1">This subtree specifies a source and/or endpoint group index as match criteria in the
+ACEs. Unauthorized write access to this data node may allow intruders to
+modify the group identity so as to permit access that should not be
+permitted, or deny access that should be permitted.<a href="#section-10.1-5.2.1.2.1" class="pilcrow">¶</a></p>
+</dd>
+            <dd class="break"></dd>
+</dl>
+</li>
+        </ul>
+<p id="section-10.1-6">Some of the readable data nodes in the "ietf-ucl-acl" YANG module may
+  be considered sensitive or vulnerable in some network environments. It
+  is thus important to control read access (e.g., via get, get-config,
+  or notification) to these data nodes.  Specifically,
+  the following subtrees and data nodes have particular sensitivities/vulnerabilities:<a href="#section-10.1-6" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-10.1-7.1">
+            <span class="break"></span><dl class="dlParallel" id="section-10.1-7.1.1">
+              <dt id="section-10.1-7.1.1.1">/acl:acls/acl:acl/acl:aces/acl:ace/uacl:time-range:</dt>
+              <dd style="margin-left: 1.5em" id="section-10.1-7.1.1.2">
+                <p id="section-10.1-7.1.1.2.1">This subtree specifies when the access control entry rules are in effect. An
+unauthorized read access of the list will allow the attacker to determine
+which rules are in effect, to better craft an attack.<a href="#section-10.1-7.1.1.2.1" class="pilcrow">¶</a></p>
+</dd>
+            <dd class="break"></dd>
+</dl>
+</li>
+        </ul>
+</section>
+</div>
+<div id="radius">
+<section id="section-10.2">
+        <h3 id="name-radius">
+<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-radius" class="section-name selfRef">RADIUS</a>
+        </h3>
+<p id="section-10.2-1">RADIUS-related security considerations are discussed in <span>[<a href="#RFC2865" class="cite xref">RFC2865</a>]</span>.<a href="#section-10.2-1" class="pilcrow">¶</a></p>
+<p id="section-10.2-2">This document targets deployments where a trusted relationship is in
+   place between the RADIUS client and server with communication
+   optionally secured by IPsec or Transport Layer Security (TLS)
+   <span>[<a href="#RFC6614" class="cite xref">RFC6614</a>]</span>.<a href="#section-10.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-11">
+      <h2 id="name-iana-considerations">
+<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<div id="yang-1">
+<section id="section-11.1">
+        <h3 id="name-yang-2">
+<a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-yang-2" class="section-name selfRef">YANG</a>
+        </h3>
+<p id="section-11.1-1">This document registers the following URIs in the "IETF XML Registry" <span>[<a href="#RFC3688" class="cite xref">RFC3688</a>]</span>.<a href="#section-11.1-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-11.1-2">
+<pre>
+        URI: urn:ietf:params:xml:ns:yang:ietf-ucl-acl
+        Registrant Contact: The IESG.
+        XML: N/A, the requested URI is an XML namespace.
+</pre><a href="#section-11.1-2" class="pilcrow">¶</a>
+</div>
+<p id="section-11.1-3">This document registers the following YANG modules in the "YANG Module Names"
+   registry <span>[<a href="#RFC6020" class="cite xref">RFC6020</a>]</span>.<a href="#section-11.1-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-11.1-4">
+<pre>
+        name:               ietf-ucl-acl
+        namespace:          urn:ietf:params:xml:ns:yang:ietf-ucl-acl
+        prefix:             uacl
+        maintained by IANA: N
+        reference:          RFC XXXX
+</pre><a href="#section-11.1-4" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="radius-1">
+<section id="section-11.2">
+        <h3 id="name-radius-2">
+<a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-radius-2" class="section-name selfRef">RADIUS</a>
+        </h3>
+<p id="section-11.2-1">This document requests IANA to assign a new RADIUS attribute type from the IANA
+   registry "Radius Attribute Types" <span>[<a href="#RADIUS-Types" class="cite xref">RADIUS-Types</a>]</span>:<a href="#section-11.2-1" class="pilcrow">¶</a></p>
+<span id="name-radius-attribute"></span><div id="rad-reg">
+<table class="center" id="table-5">
+          <caption>
+<a href="#table-5" class="selfRef">Table 5</a>:
+<a href="#name-radius-attribute" class="selfRef">RADIUS Attribute</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">Data Type</th>
+              <th class="text-left" rowspan="1" colspan="1">Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">TBA1</td>
+              <td class="text-left" rowspan="1" colspan="1">User-Access-Group-ID</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">This-Document</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</section>
+</div>
+</section>
+</div>
+<section id="section-12">
+      <h2 id="name-references">
+<a href="#section-12" class="section-number selfRef">12. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<div id="sec-normative-references">
+<section id="section-12.1">
+        <h3 id="name-normative-references">
+<a href="#section-12.1" class="section-number selfRef">12.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="I-D.ma-opsawg-schedule-yang">[I-D.ma-opsawg-schedule-yang]</dt>
+        <dd>
+<span class="refAuthor">Ma, Q.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">D. King</span>, <span class="refTitle">"A Common YANG Data Model for Scheduling"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ma-opsawg-schedule-yang-04</span>, <time datetime="2024-03-01" class="refDate">1 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ma-opsawg-schedule-yang-04">https://datatracker.ietf.org/doc/html/draft-ma-opsawg-schedule-yang-04</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2865">[RFC2865]</dt>
+        <dd>
+<span class="refAuthor">Rigney, C.</span>, <span class="refAuthor">Willens, S.</span>, <span class="refAuthor">Rubens, A.</span>, and <span class="refAuthor">W. Simpson</span>, <span class="refTitle">"Remote Authentication Dial In User Service (RADIUS)"</span>, <span class="seriesInfo">RFC 2865</span>, <span class="seriesInfo">DOI 10.17487/RFC2865</span>, <time datetime="2000-06" class="refDate">June 2000</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2865">https://www.rfc-editor.org/rfc/rfc2865</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3688">[RFC3688]</dt>
+        <dd>
+<span class="refAuthor">Mealling, M.</span>, <span class="refTitle">"The IETF XML Registry"</span>, <span class="seriesInfo">BCP 81</span>, <span class="seriesInfo">RFC 3688</span>, <span class="seriesInfo">DOI 10.17487/RFC3688</span>, <time datetime="2004-01" class="refDate">January 2004</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3688">https://www.rfc-editor.org/rfc/rfc3688</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6020">[RFC6020]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"YANG - A Data Modeling Language for the Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6020</span>, <span class="seriesInfo">DOI 10.17487/RFC6020</span>, <time datetime="2010-10" class="refDate">October 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6020">https://www.rfc-editor.org/rfc/rfc6020</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6241">[RFC6241]</dt>
+        <dd>
+<span class="refAuthor">Enns, R., Ed.</span>, <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refAuthor">Schoenwaelder, J., Ed.</span>, and <span class="refAuthor">A. Bierman, Ed.</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6241</span>, <span class="seriesInfo">DOI 10.17487/RFC6241</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6241">https://www.rfc-editor.org/rfc/rfc6241</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6242">[RFC6242]</dt>
+        <dd>
+<span class="refAuthor">Wasserman, M.</span>, <span class="refTitle">"Using the NETCONF Protocol over Secure Shell (SSH)"</span>, <span class="seriesInfo">RFC 6242</span>, <span class="seriesInfo">DOI 10.17487/RFC6242</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6242">https://www.rfc-editor.org/rfc/rfc6242</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6929">[RFC6929]</dt>
+        <dd>
+<span class="refAuthor">DeKok, A.</span> and <span class="refAuthor">A. Lior</span>, <span class="refTitle">"Remote Authentication Dial In User Service (RADIUS) Protocol Extensions"</span>, <span class="seriesInfo">RFC 6929</span>, <span class="seriesInfo">DOI 10.17487/RFC6929</span>, <time datetime="2013-04" class="refDate">April 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6929">https://www.rfc-editor.org/rfc/rfc6929</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8040">[RFC8040]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8040">https://www.rfc-editor.org/rfc/rfc8040</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8044">[RFC8044]</dt>
+        <dd>
+<span class="refAuthor">DeKok, A.</span>, <span class="refTitle">"Data Types in RADIUS"</span>, <span class="seriesInfo">RFC 8044</span>, <span class="seriesInfo">DOI 10.17487/RFC8044</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8044">https://www.rfc-editor.org/rfc/rfc8044</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+        <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8341">[RFC8341]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span> and <span class="refAuthor">M. Bjorklund</span>, <span class="refTitle">"Network Configuration Access Control Model"</span>, <span class="seriesInfo">STD 91</span>, <span class="seriesInfo">RFC 8341</span>, <span class="seriesInfo">DOI 10.17487/RFC8341</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8341">https://www.rfc-editor.org/rfc/rfc8341</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8342">[RFC8342]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M.</span>, <span class="refAuthor">Schoenwaelder, J.</span>, <span class="refAuthor">Shafer, P.</span>, <span class="refAuthor">Watsen, K.</span>, and <span class="refAuthor">R. Wilton</span>, <span class="refTitle">"Network Management Datastore Architecture (NMDA)"</span>, <span class="seriesInfo">RFC 8342</span>, <span class="seriesInfo">DOI 10.17487/RFC8342</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8342">https://www.rfc-editor.org/rfc/rfc8342</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8446">[RFC8446]</dt>
+        <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8446">https://www.rfc-editor.org/rfc/rfc8446</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8519">[RFC8519]</dt>
+      <dd>
+<span class="refAuthor">Jethanandani, M.</span>, <span class="refAuthor">Agarwal, S.</span>, <span class="refAuthor">Huang, L.</span>, and <span class="refAuthor">D. Blair</span>, <span class="refTitle">"YANG Data Model for Network Access Control Lists (ACLs)"</span>, <span class="seriesInfo">RFC 8519</span>, <span class="seriesInfo">DOI 10.17487/RFC8519</span>, <time datetime="2019-03" class="refDate">March 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8519">https://www.rfc-editor.org/rfc/rfc8519</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="sec-informative-references">
+<section id="section-12.2">
+        <h3 id="name-informative-references">
+<a href="#section-12.2" class="section-number selfRef">12.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="I-D.dekok-radext-deprecating-radius">[I-D.dekok-radext-deprecating-radius]</dt>
+        <dd>
+<span class="refAuthor">DeKok, A.</span>, <span class="refTitle">"Deprecating Insecure Practices in RADIUS"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-dekok-radext-deprecating-radius-05</span>, <time datetime="2023-10-23" class="refDate">23 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-dekok-radext-deprecating-radius-05">https://datatracker.ietf.org/doc/html/draft-dekok-radext-deprecating-radius-05</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-madinas-use-cases">[I-D.ietf-madinas-use-cases]</dt>
+        <dd>
+<span class="refAuthor">Henry, J.</span> and <span class="refAuthor">Y. Lee</span>, <span class="refTitle">"Randomized and Changing MAC Address Use Cases"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-madinas-use-cases-09</span>, <time datetime="2024-02-29" class="refDate">29 February 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-madinas-use-cases-09">https://datatracker.ietf.org/doc/html/draft-ietf-madinas-use-cases-09</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-netmod-acl-extensions">[I-D.ietf-netmod-acl-extensions]</dt>
+        <dd>
+<span class="refAuthor">de Dios, O. G.</span>, <span class="refAuthor">Barguil, S.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Extensions to the Access Control Lists (ACLs) YANG Model"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-acl-extensions-06</span>, <time datetime="2024-01-30" class="refDate">30 January 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-acl-extensions-06">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-acl-extensions-06</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-netmod-rfc8407bis">[I-D.ietf-netmod-rfc8407bis]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-10</span>, <time datetime="2024-04-15" class="refDate">15 April 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-10">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-10</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-nvo3-encap">[I-D.ietf-nvo3-encap]</dt>
+        <dd>
+<span class="refAuthor">Boutros, S.</span> and <span class="refAuthor">D. E. Eastlake</span>, <span class="refTitle">"Network Virtualization Overlays (NVO3) Encapsulation Considerations"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-nvo3-encap-12</span>, <time datetime="2024-02-19" class="refDate">19 February 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-nvo3-encap-12">https://datatracker.ietf.org/doc/html/draft-ietf-nvo3-encap-12</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.smith-vxlan-group-policy">[I-D.smith-vxlan-group-policy]</dt>
+        <dd>
+<span class="refAuthor">Smith, M.</span> and <span class="refAuthor">L. Kreeger</span>, <span class="refTitle">"VXLAN Group Policy Option"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-smith-vxlan-group-policy-05</span>, <time datetime="2018-10-22" class="refDate">22 October 2018</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-smith-vxlan-group-policy-05">https://datatracker.ietf.org/doc/html/draft-smith-vxlan-group-policy-05</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.yizhou-anima-ip-to-access-control-groups">[I-D.yizhou-anima-ip-to-access-control-groups]</dt>
+        <dd>
+<span class="refAuthor">Li, Y.</span>, <span class="refAuthor">Shen, L.</span>, and <span class="refAuthor">Y. Zhou</span>, <span class="refTitle">"Autonomic IP Address To Access Control Group ID Mapping"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-yizhou-anima-ip-to-access-control-groups-02</span>, <time datetime="2021-11-15" class="refDate">15 November 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-yizhou-anima-ip-to-access-control-groups-02">https://datatracker.ietf.org/doc/html/draft-yizhou-anima-ip-to-access-control-groups-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.you-i2nsf-user-group-based-policy">[I-D.you-i2nsf-user-group-based-policy]</dt>
+        <dd>
+<span class="refAuthor">You, J.</span>, <span class="refAuthor">Zarny, M.</span>, <span class="refAuthor">Jacquenet, C.</span>, <span class="refAuthor">Boucadair, M.</span>, <span class="refAuthor">Li, Y.</span>, <span class="refAuthor">Strassner, J.</span>, and <span class="refAuthor">S. Majee</span>, <span class="refTitle">"User-group-based Security Policy for Service Layer"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-you-i2nsf-user-group-based-policy-02</span>, <time datetime="2016-07-08" class="refDate">8 July 2016</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-you-i2nsf-user-group-based-policy-02">https://datatracker.ietf.org/doc/html/draft-you-i2nsf-user-group-based-policy-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RADIUS-Types">[RADIUS-Types]</dt>
+        <dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"RADIUS Types"</span>, <span>&lt;<a href="http://www.iana.org/assignments/radius-types">http://www.iana.org/assignments/radius-types</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2475">[RFC2475]</dt>
+        <dd>
+<span class="refAuthor">Blake, S.</span>, <span class="refAuthor">Black, D.</span>, <span class="refAuthor">Carlson, M.</span>, <span class="refAuthor">Davies, E.</span>, <span class="refAuthor">Wang, Z.</span>, and <span class="refAuthor">W. Weiss</span>, <span class="refTitle">"An Architecture for Differentiated Services"</span>, <span class="seriesInfo">RFC 2475</span>, <span class="seriesInfo">DOI 10.17487/RFC2475</span>, <time datetime="1998-12" class="refDate">December 1998</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2475">https://www.rfc-editor.org/rfc/rfc2475</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2753">[RFC2753]</dt>
+        <dd>
+<span class="refAuthor">Yavatkar, R.</span>, <span class="refAuthor">Pendarakis, D.</span>, and <span class="refAuthor">R. Guerin</span>, <span class="refTitle">"A Framework for Policy-based Admission Control"</span>, <span class="seriesInfo">RFC 2753</span>, <span class="seriesInfo">DOI 10.17487/RFC2753</span>, <time datetime="2000-01" class="refDate">January 2000</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2753">https://www.rfc-editor.org/rfc/rfc2753</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3198">[RFC3198]</dt>
+        <dd>
+<span class="refAuthor">Westerinen, A.</span>, <span class="refAuthor">Schnizlein, J.</span>, <span class="refAuthor">Strassner, J.</span>, <span class="refAuthor">Scherling, M.</span>, <span class="refAuthor">Quinn, B.</span>, <span class="refAuthor">Herzog, S.</span>, <span class="refAuthor">Huynh, A.</span>, <span class="refAuthor">Carlson, M.</span>, <span class="refAuthor">Perry, J.</span>, and <span class="refAuthor">S. Waldbusser</span>, <span class="refTitle">"Terminology for Policy-Based Management"</span>, <span class="seriesInfo">RFC 3198</span>, <span class="seriesInfo">DOI 10.17487/RFC3198</span>, <time datetime="2001-11" class="refDate">November 2001</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3198">https://www.rfc-editor.org/rfc/rfc3198</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3539">[RFC3539]</dt>
+        <dd>
+<span class="refAuthor">Aboba, B.</span> and <span class="refAuthor">J. Wood</span>, <span class="refTitle">"Authentication, Authorization and Accounting (AAA) Transport Profile"</span>, <span class="seriesInfo">RFC 3539</span>, <span class="seriesInfo">DOI 10.17487/RFC3539</span>, <time datetime="2003-06" class="refDate">June 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3539">https://www.rfc-editor.org/rfc/rfc3539</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6614">[RFC6614]</dt>
+        <dd>
+<span class="refAuthor">Winter, S.</span>, <span class="refAuthor">McCauley, M.</span>, <span class="refAuthor">Venaas, S.</span>, and <span class="refAuthor">K. Wierenga</span>, <span class="refTitle">"Transport Layer Security (TLS) Encryption for RADIUS"</span>, <span class="seriesInfo">RFC 6614</span>, <span class="seriesInfo">DOI 10.17487/RFC6614</span>, <time datetime="2012-05" class="refDate">May 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6614">https://www.rfc-editor.org/rfc/rfc6614</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7149">[RFC7149]</dt>
+        <dd>
+<span class="refAuthor">Boucadair, M.</span> and <span class="refAuthor">C. Jacquenet</span>, <span class="refTitle">"Software-Defined Networking: A Perspective from within a Service Provider Environment"</span>, <span class="seriesInfo">RFC 7149</span>, <span class="seriesInfo">DOI 10.17487/RFC7149</span>, <time datetime="2014-03" class="refDate">March 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7149">https://www.rfc-editor.org/rfc/rfc7149</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7426">[RFC7426]</dt>
+        <dd>
+<span class="refAuthor">Haleplidis, E., Ed.</span>, <span class="refAuthor">Pentikousis, K., Ed.</span>, <span class="refAuthor">Denazis, S.</span>, <span class="refAuthor">Hadi Salim, J.</span>, <span class="refAuthor">Meyer, D.</span>, and <span class="refAuthor">O. Koufopavlou</span>, <span class="refTitle">"Software-Defined Networking (SDN): Layers and Architecture Terminology"</span>, <span class="seriesInfo">RFC 7426</span>, <span class="seriesInfo">DOI 10.17487/RFC7426</span>, <time datetime="2015-01" class="refDate">January 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7426">https://www.rfc-editor.org/rfc/rfc7426</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7542">[RFC7542]</dt>
+        <dd>
+<span class="refAuthor">DeKok, A.</span>, <span class="refTitle">"The Network Access Identifier"</span>, <span class="seriesInfo">RFC 7542</span>, <span class="seriesInfo">DOI 10.17487/RFC7542</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7542">https://www.rfc-editor.org/rfc/rfc7542</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8340">[RFC8340]</dt>
+      <dd>
+<span class="refAuthor">Bjorklund, M.</span> and <span class="refAuthor">L. Berger, Ed.</span>, <span class="refTitle">"YANG Tree Diagrams"</span>, <span class="seriesInfo">BCP 215</span>, <span class="seriesInfo">RFC 8340</span>, <span class="seriesInfo">DOI 10.17487/RFC8340</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8340">https://www.rfc-editor.org/rfc/rfc8340</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+</section>
+<div id="examples-usage">
+<section id="appendix-A">
+      <h2 id="name-examples-usage">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-examples-usage" class="section-name selfRef">Examples Usage</a>
+      </h2>
+<div id="controller-ucl">
+<section id="appendix-A.1">
+        <h3 id="name-configuring-the-controller-">
+<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-configuring-the-controller-" class="section-name selfRef">Configuring the Controller Using Group based ACL</a>
+        </h3>
+<p id="appendix-A.1-1">Let's consider an organization that would like to restrict the access of R&amp;D
+   employees that bring personally owned devices (BYOD) into the workplace.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-2">The access requirements are as follows:<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-A.1-3.1">
+            <p id="appendix-A.1-3.1.1">Permit traffic from R&amp;D BYOD of employees, destined to R&amp;D employees'
+devices every work day from 8:00:00 to 18:00:00 UTC, starting in January 1st, 2025.<a href="#appendix-A.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-A.1-3.2">
+            <p id="appendix-A.1-3.2.1">Deny traffic from R&amp;D BYOD of employees, destined to finance servers
+located in the enterprise DC network starting at 8:30:00 of January 20,
+2025 with an offset of -08:00 from UTC (Pacific Standard Time) and ending
+at 18:00:00 in Pacific Standard Time on December 31, 2025.<a href="#appendix-A.1-3.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="appendix-A.1-4">The example shown in <a href="#ex-controller-ucl" class="auto internal xref">Figure 3</a> illustrates the configuration of an SDN controller
+   using the group-based ACL:<a href="#appendix-A.1-4" class="pilcrow">¶</a></p>
+<span id="name-example-of-ucl-configuratio"></span><div id="ex-controller-ucl">
+<figure id="figure-3">
+          <div class="alignLeft art-text artwork" id="appendix-A.1-5.1">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;acls xmlns="urn:ietf:params:xml:ns:yang:ietf-access-control-list"
+      xmlns:uacl="urn:ietf:params:xml:ns:yang:ietf-ucl-acl"&gt;
+    &lt;endpoint-groups
+      xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl"&gt;
+      &lt;endpoint-group&gt;
+        &lt;group-id&gt;R&amp;amp;D&lt;/group-id&gt;
+        &lt;group-type&gt;user-group&lt;/group-type&gt;
+      &lt;/endpoint-group&gt;
+      &lt;endpoint-group&gt;
+        &lt;group-id&gt;R&amp;amp;D BYOD&lt;/group-id&gt;
+        &lt;group-type&gt;user-group&lt;/group-type&gt;
+      &lt;/endpoint-group&gt;
+      &lt;endpoint-group&gt;
+        &lt;group-id&gt;finance server&lt;/group-id&gt;
+        &lt;group-type&gt;device-group&lt;/group-type&gt;
+      &lt;/endpoint-group&gt;
+    &lt;/endpoint-groups&gt;
+    &lt;acl&gt;
+    &lt;name&gt;sample-group-acl&lt;/name&gt;
+    &lt;type&gt;uacl:group-acl-type&lt;/type&gt;
+    &lt;aces&gt;
+      &lt;ace&gt;
+        &lt;name&gt;rule1&lt;/name&gt;
+        &lt;matches&gt;
+          &lt;endpoint-group
+            xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl"&gt;
+            &lt;source-group-id&gt;R&amp;amp;D BYOD&lt;/source-group-id&gt;
+            &lt;destination-group-id&gt;R&amp;amp;D&lt;/destination-group-id&gt;
+          &lt;/endpoint-group&gt;
+        &lt;/matches&gt;
+        &lt;actions&gt;
+          &lt;forwarding&gt;accept&lt;/forwarding&gt;
+        &lt;/actions&gt;
+        &lt;effective-schedule xmlns="urn:ietf:params:xml:ns:yang:ietf-\
+                                                             ucl-acl"
+          xmlns:schedule="urn:ietf:params:xml:ns:yang:ietf-schedule"&gt;
+          &lt;recurrence-first&gt;
+            &lt;date-time-start&gt;2025-01-01T08:00:00Z&lt;/date-time-start&gt;
+            &lt;duration&gt;PT10:00:00&lt;/duration&gt;
+          &lt;/recurrence-first&gt;
+          &lt;frequency&gt;schedule:daily&lt;/frequency&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;monday&lt;/weekday&gt;
+          &lt;/byday&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;tuesday&lt;/weekday&gt;
+          &lt;/byday&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;wednesday&lt;/weekday&gt;
+          &lt;/byday&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;thursday&lt;/weekday&gt;
+          &lt;/byday&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;friday&lt;/weekday&gt;
+          &lt;/byday&gt;
+        &lt;/effective-schedule&gt;
+      &lt;/ace&gt;
+      &lt;ace&gt;
+        &lt;name&gt;rule2&lt;/name&gt;
+        &lt;matches&gt;
+          &lt;endpoint-group
+            xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl"&gt;
+            &lt;source-group-id&gt;R&amp;amp;D BYOD&lt;/source-group-id&gt;
+            &lt;destination-group-id&gt;finance server&lt;/destination-group-\
+                                                                  id&gt;
+          &lt;/endpoint-group&gt;
+        &lt;/matches&gt;
+        &lt;actions&gt;
+          &lt;forwarding&gt;reject&lt;/forwarding&gt;
+        &lt;/actions&gt;
+        &lt;effective-schedule xmlns="urn:ietf:params:xml:ns:yang:ietf-\
+                                                            ucl-acl"&gt;
+          &lt;period-start&gt;2025-01-20T08:30:00-08:00&lt;/period-start&gt;
+          &lt;period-end&gt;2025-12-31T18:00:00-08:00&lt;/period-end&gt;
+        &lt;/effective-schedule&gt;
+      &lt;/ace&gt;
+    &lt;/aces&gt;
+  &lt;/acl&gt;
+&lt;/acls&gt;
+
+</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-example-of-ucl-configuratio" class="selfRef">Example of UCL Configuration</a>
+          </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="PEP-ucl">
+<section id="appendix-A.2">
+        <h3 id="name-configuring-a-pep-using-gro">
+<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-configuring-a-pep-using-gro" class="section-name selfRef">Configuring a PEP Using Group-based ACL</a>
+        </h3>
+<p id="appendix-A.2-1">This section illustrates an example to configure a PEP  using
+   the group-based ACL.<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.2-2">The PEP which enforces group-based ACL may acquire group identities
+   from the AAA server if working as a NAS authenticating both the
+   source endpoint and the destination endpoint users. Another case for
+   a PEP enforcing a group-based ACL is to obtain the group identity of
+   the source endpoint directly from the packet field
+   <span>[<a href="#I-D.smith-vxlan-group-policy" class="cite xref">I-D.smith-vxlan-group-policy</a>]</span>. This example does not intend to be exhaustive.<a href="#appendix-A.2-2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2-3">Assume the mapping between device group ID and IP addresses is
+   predefined or acquired via device authentication. <a href="#ex-PEP-ucl" class="auto internal xref">Figure 4</a>
+   shows the ACL configuration delivered from the controller to the PEP. This
+   example is consistent with the example presented in <a href="#controller-ucl" class="auto internal xref">Appendix A.1</a>.<a href="#appendix-A.2-3" class="pilcrow">¶</a></p>
+<span id="name-example-of-pep-configuratio"></span><div id="ex-PEP-ucl">
+<figure id="figure-4">
+          <div class="alignLeft art-text artwork" id="appendix-A.2-4.1">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;acls xmlns="urn:ietf:params:xml:ns:yang:ietf-access-control-list"
+      xmlns:uacl="urn:ietf:params:xml:ns:yang:ietf-ucl-acl"&gt;
+  &lt;endpoint-groups
+      xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl"&gt;
+    &lt;endpoint-group&gt;
+      &lt;group-id&gt;R&amp;amp;D&lt;/group-id&gt;
+      &lt;group-type&gt;user-group&lt;/group-type&gt;
+    &lt;/endpoint-group&gt;
+    &lt;endpoint-group&gt;
+      &lt;group-id&gt;R&amp;amp;D BYOD&lt;/group-id&gt;
+      &lt;group-type&gt;user-group&lt;/group-type&gt;
+    &lt;/endpoint-group&gt;
+  &lt;/endpoint-groups&gt;
+  &lt;acl&gt;
+    &lt;name&gt;sample-group-acl&lt;/name&gt;
+    &lt;type&gt;uacl:mixed-ipv4-group-type&lt;/type&gt;
+    &lt;aces&gt;
+      &lt;ace&gt;
+        &lt;name&gt;rule1&lt;/name&gt;
+        &lt;matches&gt;
+          &lt;endpoint-group
+            xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl"&gt;
+            &lt;source-group-id&gt;R&amp;amp;D BYOD&lt;/source-group-id&gt;
+            &lt;destination-group-id&gt;R&amp;amp;D&lt;/destination-group-id&gt;
+          &lt;/endpoint-group&gt;
+        &lt;/matches&gt;
+        &lt;actions&gt;
+          &lt;forwarding&gt;accept&lt;/forwarding&gt;
+        &lt;/actions&gt;
+        &lt;effective-schedule xmlns="urn:ietf:params:xml:ns:yang:ietf-\
+                                                             ucl-acl"
+          xmlns:schedule="urn:ietf:params:xml:ns:yang:ietf-schedule"&gt;
+          &lt;recurrence-first&gt;
+            &lt;date-time-start&gt;2025-01-01T08:00:00Z&lt;/date-time-start&gt;
+            &lt;duration&gt;PT10:00:00&lt;/duration&gt;
+          &lt;/recurrence-first&gt;
+          &lt;frequency&gt;schedule:daily&lt;/frequency&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;monday&lt;/weekday&gt;
+          &lt;/byday&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;tuesday&lt;/weekday&gt;
+          &lt;/byday&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;wednesday&lt;/weekday&gt;
+          &lt;/byday&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;thursday&lt;/weekday&gt;
+          &lt;/byday&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;friday&lt;/weekday&gt;
+          &lt;/byday&gt;
+        &lt;/effective-schedule&gt;
+      &lt;/ace&gt;
+      &lt;ace&gt;
+        &lt;name&gt;rule2&lt;/name&gt;
+        &lt;matches&gt;
+          &lt;endpoint-group
+            xmlns="urn:ietf:params:xml:ns:yang:ietf-ucl-acl"&gt;
+            &lt;source-group-id&gt;R&amp;amp;D BYOD&lt;/source-group-id&gt;
+          &lt;/endpoint-group&gt;
+          &lt;ipv4&gt;
+            &lt;destination-ipv4-network&gt;203.0.113.1/24&lt;/destination-\
+                                                        ipv4-network&gt;
+          &lt;/ipv4&gt;
+        &lt;/matches&gt;
+        &lt;actions&gt;
+          &lt;forwarding&gt;reject&lt;/forwarding&gt;
+        &lt;/actions&gt;
+        &lt;effective-schedule xmlns="urn:ietf:params:xml:ns:yang:ietf-\
+                                                            ucl-acl"&gt;
+          &lt;period-start&gt;2025-01-20T08:30:00-08:00&lt;/period-start&gt;
+          &lt;period-end&gt;2025-12-31T18:00:00-08:00&lt;/period-end&gt;
+        &lt;/effective-schedule&gt;
+      &lt;/ace&gt;
+    &lt;/aces&gt;
+  &lt;/acl&gt;
+&lt;/acls&gt;
+
+</pre>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-example-of-pep-configuratio" class="selfRef">Example of PEP Configuration</a>
+          </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="PEP-acl">
+<section id="appendix-A.3">
+        <h3 id="name-configuring-peps-using-addr">
+<a href="#appendix-A.3" class="section-number selfRef">A.3. </a><a href="#name-configuring-peps-using-addr" class="section-name selfRef">Configuring PEPs Using Address-based ACLs</a>
+        </h3>
+<p id="appendix-A.3-1">The section illustrates an example of configuring a PEP using
+   IP address based ACL. IP address based access control policies could
+   be applied to the PEP that may not understand the group information,
+   e.g., firewall.<a href="#appendix-A.3-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.3-2">Assume an employee in the R&amp;D department accesses the network
+   wirelessly from a non-corporate laptop using IP address 192.0.2.10.
+   The SDN controller associates the user group to which the employee
+   belongs with the user address according to step 1 to 4 in <a href="#overview" class="auto internal xref">Section 4.1</a>.<a href="#appendix-A.3-2" class="pilcrow">¶</a></p>
+<p id="appendix-A.3-3">Assume the mapping between device group ID and IP addresses is
+   predefined or acquired via device authentication. <a href="#ex-PEP-acl" class="auto internal xref">Figure 5</a>
+   shows an IPv4 address based ACL configuration delivered from
+   the controller to the PEP. This example is consistent with the example
+   presented in <a href="#controller-ucl" class="auto internal xref">Appendix A.1</a>.<a href="#appendix-A.3-3" class="pilcrow">¶</a></p>
+<span id="name-example-of-pep-configuration"></span><div id="ex-PEP-acl">
+<figure id="figure-5">
+          <div class="alignLeft art-text artwork" id="appendix-A.3-4.1">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;acls xmlns="urn:ietf:params:xml:ns:yang:ietf-access-control-list"&gt;
+  &lt;acl&gt;
+    &lt;name&gt;sample-group-acl&lt;/name&gt;
+    &lt;type&gt;ipv4-acl-type&lt;/type&gt;
+    &lt;aces&gt;
+      &lt;ace&gt;
+        &lt;name&gt;rule1&lt;/name&gt;
+        &lt;matches&gt;
+          &lt;ipv4&gt;
+            &lt;destination-ipv4-network&gt;192.168.2.1/24&lt;/destination-\
+                                                        ipv4-network&gt;
+            &lt;source-ipv4-network&gt;192.168.1.1/24&lt;/source-ipv4-network&gt;
+          &lt;/ipv4&gt;
+        &lt;/matches&gt;
+        &lt;actions&gt;
+          &lt;forwarding&gt;accept&lt;/forwarding&gt;
+        &lt;/actions&gt;
+        &lt;effective-schedule xmlns="urn:ietf:params:xml:ns:yang:ietf-\
+                                                             ucl-acl"
+          xmlns:schedule="urn:ietf:params:xml:ns:yang:ietf-schedule"&gt;
+          &lt;recurrence-first&gt;
+            &lt;date-time-start&gt;2025-01-01T08:00:00Z&lt;/date-time-start&gt;
+            &lt;duration&gt;PT10:00:00&lt;/duration&gt;
+          &lt;/recurrence-first&gt;
+          &lt;frequency&gt;schedule:daily&lt;/frequency&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;monday&lt;/weekday&gt;
+          &lt;/byday&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;tuesday&lt;/weekday&gt;
+          &lt;/byday&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;wednesday&lt;/weekday&gt;
+          &lt;/byday&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;thursday&lt;/weekday&gt;
+          &lt;/byday&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;friday&lt;/weekday&gt;
+          &lt;/byday&gt;
+        &lt;/effective-schedule&gt;
+      &lt;/ace&gt;
+      &lt;ace&gt;
+        &lt;name&gt;rule2&lt;/name&gt;
+        &lt;matches&gt;
+          &lt;ipv4&gt;
+            &lt;destination-ipv4-network&gt;203.0.113.1/24&lt;/destination-\
+                                                        ipv4-network&gt;
+            &lt;source-ipv4-network&gt;192.168.1.1/24&lt;/source-ipv4-network&gt;
+          &lt;/ipv4&gt;
+        &lt;/matches&gt;
+        &lt;actions&gt;
+          &lt;forwarding&gt;reject&lt;/forwarding&gt;
+        &lt;/actions&gt;
+        &lt;effective-schedule xmlns="urn:ietf:params:xml:ns:yang:ietf-\
+                                                            ucl-acl"&gt;
+          &lt;period-start&gt;2025-01-20T08:30:00-08:00&lt;/period-start&gt;
+          &lt;period-end&gt;2025-12-31T18:00:00-08:00&lt;/period-end&gt;
+        &lt;/effective-schedule&gt;
+      &lt;/ace&gt;
+    &lt;/aces&gt;
+  &lt;/acl&gt;
+&lt;/acls&gt;
+</pre>
+</div>
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<a href="#name-example-of-pep-configuration" class="selfRef">Example of PEP Configuration</a>
+          </figcaption></figure>
+</div>
+<p id="appendix-A.3-5"><a href="#ex-PEP-acl-ipv6" class="auto internal xref">Figure 6</a> shows an example of the same policy but with a destination IPv6 prefix.<a href="#appendix-A.3-5" class="pilcrow">¶</a></p>
+<span id="name-example-of-pep-configuration-"></span><div id="ex-PEP-acl-ipv6">
+<figure id="figure-6">
+          <div class="alignLeft art-text artwork" id="appendix-A.3-6.1">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;acls xmlns="urn:ietf:params:xml:ns:yang:ietf-access-control-list"&gt;
+  &lt;acl&gt;
+    &lt;name&gt;another-sample-but-with-ipv6&lt;/name&gt;
+    &lt;type&gt;ipv6-acl-type&lt;/type&gt;
+    &lt;aces&gt;
+      &lt;ace&gt;
+        &lt;name&gt;rule1&lt;/name&gt;
+        &lt;matches&gt;
+          &lt;ipv6&gt;
+            &lt;destination-ipv6-network&gt;2001:db8::/64&lt;/destination-\
+                                                        ipv6-network&gt;
+          &lt;/ipv6&gt;
+        &lt;/matches&gt;
+        &lt;actions&gt;
+          &lt;forwarding&gt;accept&lt;/forwarding&gt;
+        &lt;/actions&gt;
+        &lt;effective-schedule xmlns="urn:ietf:params:xml:ns:yang:ietf-\
+                                                             ucl-acl"
+          xmlns:schedule="urn:ietf:params:xml:ns:yang:ietf-schedule"&gt;
+          &lt;recurrence-first&gt;
+            &lt;date-time-start&gt;2025-01-01T08:00:00Z&lt;/date-time-start&gt;
+            &lt;duration&gt;PT10:00:00&lt;/duration&gt;
+          &lt;/recurrence-first&gt;
+          &lt;frequency&gt;schedule:daily&lt;/frequency&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;monday&lt;/weekday&gt;
+          &lt;/byday&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;tuesday&lt;/weekday&gt;
+          &lt;/byday&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;wednesday&lt;/weekday&gt;
+          &lt;/byday&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;thursday&lt;/weekday&gt;
+          &lt;/byday&gt;
+          &lt;byday&gt;
+            &lt;weekday&gt;friday&lt;/weekday&gt;
+          &lt;/byday&gt;
+        &lt;/effective-schedule&gt;
+      &lt;/ace&gt;
+    &lt;/aces&gt;
+  &lt;/acl&gt;
+&lt;/acls&gt;
+
+</pre>
+</div>
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<a href="#name-example-of-pep-configuration-" class="selfRef">Example of PEP Configuration (IPv6)</a>
+          </figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="changes-between-revisions">
+<section id="appendix-B">
+      <h2 id="name-changes-between-revisions">
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-changes-between-revisions" class="section-name selfRef">Changes between Revisions</a>
+      </h2>
+<p id="appendix-B-1">v02 - v03<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B-2.1">
+          <p id="appendix-B-2.1.1">List endpoint-groups definition under acls and examples update to reflect the latest module<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.2">
+          <p id="appendix-B-2.2.1">Add contact info in the UCL module<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-B-3">v01 - v02<a href="#appendix-B-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B-4.1">
+          <p id="appendix-B-4.1.1">Tree overview and examples update to reflect the latest schedule module<a href="#appendix-B-4.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-4.2">
+          <p id="appendix-B-4.2.1">Clarify why we define endpoint group ID as string<a href="#appendix-B-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-4.3">
+          <p id="appendix-B-4.3.1">Exclude the mapping of string to tagging mechanism from the document scope<a href="#appendix-B-4.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-4.4">
+          <p id="appendix-B-4.4.1">Add implementation considerations section to discuss the deployment scenarios and possible tradeoff<a href="#appendix-B-4.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-4.5">
+          <p id="appendix-B-4.5.1">Add application group, define endpoint group type as "identityref" in YANG data model<a href="#appendix-B-4.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-4.6">
+          <p id="appendix-B-4.6.1">Editorial changes, e.g., remove the NACL definition, fix long lines.<a href="#appendix-B-4.6.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-B-5">v00 - v01<a href="#appendix-B-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B-6.1">
+          <p id="appendix-B-6.1.1">Change the document title and add a reference to "policy"<a href="#appendix-B-6.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-6.2">
+          <p id="appendix-B-6.2.1">Split the definition of schedule YANG module into a seperate document<a href="#appendix-B-6.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-6.3">
+          <p id="appendix-B-6.3.1">Add reference to draft-dekok-radext-deprecating-radius for authentication method recommendations<a href="#appendix-B-6.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-6.4">
+          <p id="appendix-B-6.4.1">Change endpoint group-id as a string, and fix related examples accordingly<a href="#appendix-B-6.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-6.5">
+          <p id="appendix-B-6.5.1">Use typedef to ease leafref of the node<a href="#appendix-B-6.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-6.6">
+          <p id="appendix-B-6.6.1">Tweaks to the RADIUS section and add a restriction to the length based on comments from RADEXT<a href="#appendix-B-6.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-6.7">
+          <p id="appendix-B-6.7.1">Add IPv6 examples<a href="#appendix-B-6.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-6.8">
+          <p id="appendix-B-6.8.1">Editorial changes<a href="#appendix-B-6.8.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="appendix-C">
+      <h2 id="name-acknowledgments">
+<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+      </h2>
+<p id="appendix-C-1">This work has benefited from the discussions of User-group-based
+   Security Policy over the years.  In particular, <span>[<a href="#I-D.you-i2nsf-user-group-based-policy" class="cite xref">I-D.you-i2nsf-user-group-based-policy</a>]</span>
+   and <span>[<a href="#I-D.yizhou-anima-ip-to-access-control-groups" class="cite xref">I-D.yizhou-anima-ip-to-access-control-groups</a>]</span> provide mechanisms to
+   establish a mapping between the IP address/prefix of users and access
+   control group IDs.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<p id="appendix-C-2">Jianjie You, Myo Zarny, Christian Jacquenet, Mohamed Boucadair, and
+   Yizhou Li contributed to an earlier version of <span>[<a href="#I-D.you-i2nsf-user-group-based-policy" class="cite xref">I-D.you-i2nsf-user-group-based-policy</a>]</span>.
+   We would like to thank the authors of that draft on modern network access
+   control mechanisms for material that assisted in thinking about this document.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
+<p id="appendix-C-3">The authors would like to thank Joe Clarke, Bill Fenner, Benoit
+   Claise, Rob Wilton, David Somers-Harris, Alan Dekok, and Heikki Vatiainen for their valuable comments
+   and great input to this work.<a href="#appendix-C-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-D">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Qiufang Ma (<span class="role">editor</span>)</span></div>
+<div dir="auto" class="left"><span class="org">Huawei</span></div>
+<div dir="auto" class="left"><span class="street-address">101 Software Avenue, Yuhua District</span></div>
+<div dir="auto" class="left"><span class="locality">Jiangsu</span></div>
+<div dir="auto" class="left"><span class="postal-code">210012</span></div>
+<div dir="auto" class="left"><span class="country-name">China</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:maqiufang1@huawei.com" class="email">maqiufang1@huawei.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Qin Wu</span></div>
+<div dir="auto" class="left"><span class="org">Huawei</span></div>
+<div dir="auto" class="left"><span class="street-address">101 Software Avenue, Yuhua District</span></div>
+<div dir="auto" class="left"><span class="locality">Jiangsu</span></div>
+<div dir="auto" class="left"><span class="postal-code">210012</span></div>
+<div dir="auto" class="left"><span class="country-name">China</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:bill.wu@huawei.com" class="email">bill.wu@huawei.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Mohamed Boucadair (<span class="role">editor</span>)</span></div>
+<div dir="auto" class="left"><span class="org">Orange</span></div>
+<div dir="auto" class="left">
+<span class="postal-code">35000</span> <span class="locality">Rennes</span>
+</div>
+<div dir="auto" class="left"><span class="country-name">France</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:mohamed.boucadair@orange.com" class="email">mohamed.boucadair@orange.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Daniel King</span></div>
+<div dir="auto" class="left"><span class="org">Lancaster University</span></div>
+<div dir="auto" class="left"><span class="country-name">United Kingdom</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:d.king@lancaster.ac.uk" class="email">d.king@lancaster.ac.uk</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
