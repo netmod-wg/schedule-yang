@@ -9,12 +9,12 @@ This is the working area for the OPSAWG Internet-Draft, "A Policy-based Network 
 
 # A YANG Data Model for Scheduling 
 
-This is the working area for the individual Internet-Draft, "A YANG Data Model for Scheduling".
+This is the working area for the NETMOD WG Internet-Draft, "A YANG Data Model for Scheduling".
 
-* [Editor's Copy](https://boucadair.github.io/policy-based-network-acl/#go.draft-ma-opsawg-schedule-yang.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ma-opsawg-schedule-yang)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ma-opsawg-schedule-yang)
-* [Compare Editor's Copy to Individual Draft](https://boucadair.github.io/policy-based-network-acl/#go.draft-ma-opsawg-schedule-yang.diff)
+* [Editor's Copy](https://boucadair.github.io/policy-based-network-acl/#go.draft-ietf-netmod-schedule-yang.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-netmod-schedule-yang)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-netmod-schedule-yang)
+* [Compare Editor's Copy to Individual Draft](https://boucadair.github.io/policy-based-network-acl/#go.draft-ietf-netmod-schedule-yang.diff)
 
 ## Contributing
 
