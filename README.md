@@ -1,25 +1,21 @@
-# A Policy-based Network Access Control
+# A Common YANG Data Model for Scheduling
 
-This is the working area for the OPSAWG Internet-Draft, "A Policy-based Network Access Control".
+This is the working area for the NETMOD Internet-Draft, "A Common YANG Data Model for Scheduling".
 
-* [Editor's Copy](https://boucadair.github.io/policy-based-network-acl/#go.draft-ietf-opsawg-ucl-acl.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-opsawg-ucl-acl)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ucl-acl)
-* [Compare Editor's Copy to Individual Draft](https://boucadair.github.io/policy-based-network-acl/#go.draft-ietf-opsawg-ucl-acl.diff)
 
 # A YANG Data Model for Scheduling 
 
 This is the working area for the NETMOD WG Internet-Draft, "A YANG Data Model for Scheduling".
 
-* [Editor's Copy](https://boucadair.github.io/policy-based-network-acl/#go.draft-ietf-netmod-schedule-yang.html)
+* [Editor's Copy](https://netmod-wg.github.io/schedule-yang/draft-ietf-netmod-schedule-yang.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-netmod-schedule-yang)
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-netmod-schedule-yang)
-* [Compare Editor's Copy to Individual Draft](https://boucadair.github.io/policy-based-network-acl/#go.draft-ietf-netmod-schedule-yang.diff)
+* [Compare Editor's Copy to Individual Draft](https://netmod-wg.github.io/schedule-yang/#go.draft-ietf-netmod-schedule-yang.diff)
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/boucadair/policy-based-network-acl/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/netmod-wg/schedule-yang/blob/main/CONTRIBUTING.md).
 
 Contributions can be made by creating pull requests.
 The GitHub interface supports creating pull requests using the Edit (✏) button.
