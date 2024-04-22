@@ -74,17 +74,11 @@ module example-scheduled-link-bandwidth {
           uses schedule:period-of-time;
         }
         case recurrence {
-          uses schedule:recurrence-with-date-times {
-            augment "date-times-choice/period-timeticks"
-                  + "/period-timeticks" {
+          uses schedule:recurrence-utc-with-date-times {
+            augment "period-timeticks" {
               description
                 "Specifies the attributes inside each 
                  period-timeticks entry.";
-              uses link-bandwidth-grouping;
-            }
-            augment "date-times-choice/period/period" {
-              description
-                "Specifies the attributes within each period entry.";
               uses link-bandwidth-grouping;
             }
           }

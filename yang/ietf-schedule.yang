@@ -249,26 +249,27 @@ module ietf-schedule {
     leaf max-allowed-start {
       type yang:date-and-time;
       description
-        "Specifies the date and time after which a requested schedule
-         instance cannot be accepted by the entity. Specifically, 
+        "Specifies the maximum scheduled start date and time, a 
+         requested schedule instance whose first occurence after 
+         this value cannot be accepted by the entity. Specifically, 
          a requested schedule will be rejected if the first occurence
          of that new schedule exceeds 'max-allowed-start'.";
     }
     leaf min-allowed-start {
       type yang:date-and-time;
       description
-        "Specifies the date and time before which a requested
-         schedule instance cannot be accepted by the entity.
-         Specifically, a requested schedule will be rejected if the
-         first occurence of that new schedule is to be scheduled
-         before 'min-allowed-start'.";
+        "Specifies the minimum scheduled start date and time, a 
+         requested schedule instance whose first occurence before 
+         this value cannot be accepted by the entity. Specifically, 
+         a requested schedule will be rejected if the first occurence 
+         of that new schedule is scheduled before 
+         'min-allowed-start'.";
     }
     leaf max-allowed-end {
       type yang:date-and-time;
       description
-        "A requested schedule will be rejected if the last
-         occurence of that schedule or its duratioon exceed
-         'max-allowed-end'.";
+        "A requested schedule will be rejected if the end time of 
+         the last occurence exceed 'max-allowed-end'.";
     }
     leaf discard-action {
       type enumeration {
@@ -450,20 +451,20 @@ module ietf-schedule {
     uses recurrence {
       augment "recurrence-first" {
         description
-          "Add parameters indicating how long the occurence 
-           lasts and time zone identifier of the occurence.";
+          "Add parameters indicating how long the occurrence 
+           lasts and time zone identifier of the occurrence.";
         leaf duration {
           type duration;
           description
-            "When specified, it refers to the duration of
-             the first occurrence. The exact duration also applies to
-             all the recurrence instance.";
+            "When specified, it refers to the duration of the first 
+             occurrence. The exact duration also applies to all the 
+             recurrence instance.";
         }
         leaf time-zone-identifier {
           type sys:timezone-name;
           description
-            "Indicates the identifier for the time zone in a time zone
-             database. This parameter MUST be specified if 
+            "Indicates the identifier for the time zone in a time 
+             zone database. This parameter MUST be specified if 
              'date-time-start' and/or 'until' value is neither 
              reported in the format of UTC nor time zone offset to 
              UTC.";    
@@ -707,4 +708,3 @@ module ietf-schedule {
     }    
   }
 }
-
