@@ -1,0 +1,52 @@
+module: ietf-schedule
+
+  grouping generic-schedule-params:
+    ...
+  grouping period-of-time:
+    ...
+  grouping recurrence:
+    ...
+  grouping recurrence-utc:
+    ...
+  grouping recurrence-with-time-zone:
+    ...
+  grouping recurrence-utc-with-date-times:
+    ...
+  grouping recurrence-time-zone-with-date-times:
+    ...
+  grouping icalendar-recurrence:
+    +-- recurrence-first
+    |  +-- date-time-start?        yang:date-and-time
+    |  +-- duration?               duration
+    |  +-- time-zone-identifier?   sys:timezone-name
+    +-- frequency?          identityref
+    +-- interval?           uint32
+    +-- (recurrence-bound)?
+    |  +--:(until)
+    |  |  +-- until?        yang:date-and-time
+    |  +--:(count)
+    |     +-- count?        uint32
+    +-- period* [period-start]
+    |  +-- period-start?           yang:date-and-time
+    |  +-- time-zone-identifier?   sys:timezone-name
+    |  +-- (period-type)?
+    |     +--:(explicit)
+    |     |  +-- period-end?       yang:date-and-time
+    |     +--:(duration)
+    |        +-- duration?         duration
+    +-- bysecond*           uint32
+    +-- byminute*           uint32
+    +-- byhour*             uint32
+    +-- byday* [weekday]
+    |  +-- direction*   int32
+    |  +-- weekday?     schedule:weekday
+    +-- bymonthday*         int32
+    +-- byyearday*          int32
+    +-- byyearweek*         int32
+    +-- byyearmonth*        uint32
+    +-- bysetpos*           int32
+    +-- workweek-start?     schedule:weekday
+    +-- exception-dates*    union
+  grouping schedule-status:
+    ...
+
