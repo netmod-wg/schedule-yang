@@ -103,10 +103,10 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    * "generic-schedule-params" ({{sec-gen}})
    * "period-of-time" ({{sec-period}})
    * "recurrence" ({{sec-rec}})
-   * "recurrence-utc" ({{sec-rec-utc}})   
-   * "recurrence-with-time-zone" ({{sec-rec-tz}})      
-   * "recurrence-utc-with-date-times" ({{sec-rec-utc-dt}})   
-   * "recurrence-time-zone-with-date-times" ({{sec-rec-tz-dt}})        
+   * "recurrence-utc" ({{sec-rec-utc}})
+   * "recurrence-with-time-zone" ({{sec-rec-tz}})
+   * "recurrence-utc-with-date-times" ({{sec-rec-utc-dt}})
+   * "recurrence-time-zone-with-date-times" ({{sec-rec-tz-dt}})
    * "icalendar-recurrence" ({{sec-ical-rec}})
    * "schedule-status" ({{sec-schedule-status}})
 
@@ -542,7 +542,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2025-06-01T09:00:00Z",  
+    "date-time-start": "2025-06-01T09:00:00Z",
   },
   "frequency": "ietf-schedule:daily",
   "interval": 2,
@@ -572,7 +572,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
   "recurrence-first": {
     "date-time-start": "2025-12-01T09:00:00",
     "duration": "PT00:15:00",
-    "time-zone-identifier": "America/New_York"    
+    "time-zone-identifier": "America/New_York"
   },
   "frequency": "ietf-schedule:minutely",
   "interval": 30,
