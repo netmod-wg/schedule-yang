@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-04-21T00:53:42.534395+00:00",
+  "timestamp": "2024-04-23T00:50:23.085221+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -50,5 +50,91 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOLuooYM5tU3KM",
+      "title": "update MD file and tree structures to reflect YANG model update",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/1",
+      "state": "OPEN",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-04-22T09:41:36Z",
+      "updatedAt": "2024-04-22T13:13:42Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "abf94e15b3106829321b81effc2d0a6c8408c2ca",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "4b871c0e309f09730585aece8f3a6ff21d2f7fcd",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM54FCY4",
+          "commit": {
+            "abbreviatedOid": "4b871c0"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "some broken pyang trees (I think this is a bug in pyang)",
+          "createdAt": "2024-04-22T12:11:56Z",
+          "updatedAt": "2024-04-22T12:13:46Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "```suggestion\r\n    |  +-- weekday     schedule:weekday\r\n```\r\n\r\nThis is a mandatory leaf",
+              "createdAt": "2024-04-22T12:11:56Z",
+              "updatedAt": "2024-04-22T12:13:46Z"
+            },
+            {
+              "originalPosition": 30,
+              "body": "```suggestion\r\n    |  +-- period-start            yang:date-and-time\r\n```\r\n\r\nThis is a list key.",
+              "createdAt": "2024-04-22T12:12:24Z",
+              "updatedAt": "2024-04-22T12:13:46Z"
+            },
+            {
+              "originalPosition": 28,
+              "body": "```suggestion\r\n       +-- period-start            yang:date-and-time\r\n```\r\n\r\nThis one is mandatory",
+              "createdAt": "2024-04-22T12:13:02Z",
+              "updatedAt": "2024-04-22T12:13:46Z"
+            },
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\r\n       +-- period-start    yang:timeticks\r\n```",
+              "createdAt": "2024-04-22T12:13:18Z",
+              "updatedAt": "2024-04-22T12:13:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM54FlFy",
+          "commit": {
+            "abbreviatedOid": "4b871c0"
+          },
+          "author": "kwatsen",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-04-22T13:13:42Z",
+          "updatedAt": "2024-04-22T13:13:42Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "https://github.com/mbj4668/pyang/issues/902",
+              "createdAt": "2024-04-22T13:13:42Z",
+              "updatedAt": "2024-04-22T13:13:42Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
