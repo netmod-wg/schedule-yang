@@ -22,7 +22,7 @@ module: ietf-schedule
     |  +--:(count)
     |     +-- count?        uint32
     +-- period-timeticks* [period-start]
-       +-- period-start?   yang:timeticks
+       +-- period-start    yang:timeticks
        +-- period-end?     yang:timeticks
   grouping recurrence-time-zone-with-date-times:
     ...
