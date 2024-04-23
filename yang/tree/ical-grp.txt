@@ -27,7 +27,7 @@ module: ietf-schedule
     |  +--:(count)
     |     +-- count?        uint32
     +-- period* [period-start]
-    |  +-- period-start?           yang:date-and-time
+    |  +-- period-start            yang:date-and-time
     |  +-- time-zone-identifier?   sys:timezone-name
     |  +-- (period-type)?
     |     +--:(explicit)
