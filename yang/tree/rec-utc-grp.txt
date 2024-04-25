@@ -5,20 +5,26 @@ module: ietf-schedule
   grouping period-of-time:
     ...
   grouping recurrence:
+    ...
+  grouping recurrence-utc:
     +-- recurrence-first
-    |  +-- date-time-start?        union
-    |  +-- time-zone-identifier?   sys:timezone-name
-    |  +-- duration?               duration
-    +-- frequency?          identityref
+    |  +-- date-time-start?   yang:date-and-time
+    |  +-- duration?          yang:seconds32
+    +-- frequency           identityref
     +-- interval?           uint32
     +-- (recurrence-bound)?
        +--:(until)
-       |  +-- until?        union
+       |  +-- until?        yang:date-and-time
        +--:(count)
           +-- count?        uint32
-  grouping recurrence-with-date-times:
+  grouping recurrence-with-time-zone:
+    ...
+  grouping recurrence-utc-with-date-times:
+    ...
+  grouping recurrence-time-zone-with-date-times:
     ...
   grouping icalendar-recurrence:
     ...
   grouping schedule-status:
     ...
+

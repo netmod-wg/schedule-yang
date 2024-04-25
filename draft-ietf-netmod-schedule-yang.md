@@ -66,11 +66,16 @@ informative:
 
 # Introduction {#intro}
 
-This document defines a common schedule YANG module ("ietf-schedule") that can be used in several scheduling contexts (e.g., (but not limited to) {{?I-D.ietf-opsawg-ucl-acl}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.united-tvr-schedule-yang}}). The module includes a set of reusable groupings which
-are designed to be applicable for scheduling information such as event, policy,
+This document defines a common schedule YANG module ("ietf-schedule") that can
+be used in several scheduling contexts, e.g., (but not limited to)
+{{?I-D.ietf-opsawg-ucl-acl}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}},
+and {{?I-D.united-tvr-schedule-yang}}. The module includes a set of reusable groupings which
+are designed to be applicable for scheduling purposes such as event, policy,
 services or resources based on date and time.
 
-Examples to illustrate the use of the common groupings are provided in {{usage}}. Also, sample modules to exemplify how future modules can use the extensibility provisions in "ietf-schedule" are provided in {{sec-ext}}.
+Examples to illustrate the use of the common groupings are provided in {{usage}}.
+Also, sample modules to exemplify how future modules can use the extensibility
+provisions in "ietf-schedule" are provided in {{sec-ext}}.
 
 ## Editorial Note (To be removed by RFC Editor)
 
@@ -85,7 +90,7 @@ Examples to illustrate the use of the common groupings are provided in {{usage}}
 
    * XXXX --> the assigned RFC number for this draft
    * YYYY --> the assigned RFC number for {{I-D.ietf-netmod-rfc6991-bis}}
-   * 2023-01-19 --> the actual date of the publication of this document
+   * 2024-04-16 --> the actual date of the publication of this document
 
 # Conventions and Definitions
 
@@ -103,7 +108,10 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    * "generic-schedule-params" ({{sec-gen}})
    * "period-of-time" ({{sec-period}})
    * "recurrence" ({{sec-rec}})
-   * "recurrence-with-date-times" ({{sec-rec-dt}})
+   * "recurrence-utc" ({{sec-rec-utc}})
+   * "recurrence-with-time-zone" ({{sec-rec-tz}})
+   * "recurrence-utc-with-date-times" ({{sec-rec-utc-dt}})
+   * "recurrence-time-zone-with-date-times" ({{sec-rec-tz-dt}})
    * "icalendar-recurrence" ({{sec-ical-rec}})
    * "schedule-status" ({{sec-schedule-status}})
 
@@ -111,7 +119,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    the "ietf-schedule" module in terms of its groupings.
 
 ~~~~
-{::include ./yang/schedule/overall.txt}
+{::include ./yang/tree/overall.txt}
 ~~~~
 {: #schedule-tree title="Overall Schedule Tree Structure"}
 
@@ -120,16 +128,34 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 ## The "generic-schedule-params" Grouping {#sec-gen}
 
-The "generic-schedule-params" grouping ({{gsp-tree}}) specifies a set of configuration parameters that are
-used by a system for validating requested schedules. These parameters
-apply to all schedules on a system and are meant to provide guards against
-stale configuration, too short schedule requests that would
-prevent validation by admins of some critical systems, etc.
+   The "generic-schedule-params" grouping ({{gsp-tree}}) specifies a set of
+   configuration parameters that are used by a system for validating requested
+   schedules.
 
 ~~~~
-{::include ./yang/schedule/sch-generic-params.txt}
+{::include ./yang/tree/sch-generic-params.txt}
 ~~~~
 {: #gsp-tree title="Generic Schedule Configuration Tree Structure"}
+
+   The "time-zone-identifier" parameter, if provided, specifies the
+   time zone reference of the date and time values with local time format.
+
+   The "validity" parameter specifies the date and time after which a schedule
+   will be considered as invalid.
+
+   The "max/min-allowed-start" parameters specify the maximum/minimum scheduled
+   start date and time, a requested schedule will be rejected if the first
+   occurrence of the schedule is later/earlier than the configured values.
+
+   The "max-allowed-end" parameter specifies the maximum allowed end time of
+   the last occurrence.
+
+   The "discard-action" parameter specifies the action if a requested schedule
+   is considered inactive or out-of-date.
+
+   These parameters apply to all schedules on a system and are meant
+   to provide guards against stale configuration, too short schedule requests
+   that would prevent validation by admins of some critical systems, etc.
 
 ## The "period-of-time" Grouping {#sec-period}
 
@@ -140,64 +166,120 @@ prevent validation by admins of some critical systems, etc.
 
 
 ~~~~
-{::include ./yang/schedule/period-grp.txt}
+{::include ./yang/tree/period-grp.txt}
 ~~~~
 {: #pt-tree title="Period of Time Grouping Tree Structure"}
 
 
 ## The "recurrence" Grouping {#sec-rec}
 
-  The "recurrence" grouping ({{rec-grp-tree}}) specifies a simple recurrence rule, the definition
-  conforms to part of the "recurrence rule" properties in {{Section 3.3.10 of !RFC5545}}.
+  The "recurrence" grouping ({{rec-grp-tree}}) specifies a simple recurrence rule.
 
 ~~~~
-{::include ./yang/schedule/rec-grp.txt}
+{::include ./yang/tree/rec-grp.txt}
 ~~~~
-{: #rec-grp-tree title="Recurrence Grouping Tree Structure"}
+{: #rec-grp-tree title="recurrence Grouping Tree Structure"}
 
-  The "recurrence-first" container defines the first instance in the recurrence set.
-  It also determines the start time and duration (if specified) of subsequent recurrence instances. If the
-  "date-time-start" node is specified as a date-no-zone value type with no duration specified,
-  the recurrence's duration is taken to be one day.
+  The "recurrence-first" container defines the first instance in the recurrence
+  set, and the "date-time-start" specifies the date and time at which the first
+  instance in the recurrence set occurs.
 
-  The frequency ("frequency") identifies the type of recurrence rule. For example,
+  The frequency ("frequency") which is mandatory, identifies the type of recurrence rule. For example,
   a "daily" frequency value specifies repeating events based on an interval of a day or more.
 
-  The interval represents at which intervals the recurrence rule repeats. For example,
+  The interval ("interval") represents at which intervals the recurrence rule repeats. For example,
   within a daily recurrence rule, an interval value of "8" means every eight days.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
   indicated by the "recurrence-bound" choice. The "date-time-start" value always counts
   as the first occurrence.
 
-## The "recurrence-with-date-times" Grouping {#sec-rec-dt}
+## The "recurrence-utc" Grouping {#sec-rec-utc}
 
-  The "recurrence-with-date-times" grouping ({{rec-dt-grp-tree}}) uses the "recurrence" grouping ({{sec-rec}}) and
-  adds a "date-times-choice" statement to define an aggregate set of repeating occurrences.
+   The "recurrence-utc" grouping ({{rec-utc-grp-tree}}) specifies a simple recurrence
+   rule in UTC format.
 
 ~~~~
-{::include ./yang/schedule/rec-dt-grp.txt}
+{::include ./yang/tree/rec-utc-grp.txt}
 ~~~~
-{: #rec-dt-grp-tree title="Recurrence with Date Times Grouping Tree Structure"}
+{: #rec-utc-grp-tree title="recurrence-utc Grouping Tree Structure"}
 
-  The recurrence instances are defined by the union of occurrences defined by
-  both date-times and recurrence rule. When duplicate instances are generated,
-  only one recurrence is considered.
+   The "recurrence-utc" grouping refines the "recurrence" grouping to require
+   that the date and time values to describe the recurrence be reported in UTC format.
 
-  Date-times definition inside "recurrence-with-date-times" grouping refers to
-  but does not fully comply with {{Section 3.8.5.2 of !RFC5545}}. A timeticks
-  type based period is added.
+   It also augments the "recurrence-first" container with a parameter "duration"
+   in units of seconds to allow the time period of the first occurrence to be
+   specified. The "duration" also applies to subsequent recurrence instances.
+
+   The "recurrence-utc" grouping is designed to be reused in scheduling contexts
+   where machine readability is more desirable.
+
+## The "recurrence-with-time-zone" Grouping {#sec-rec-tz}
+
+   The "recurrence-with-time-zone" grouping ({{rec-tz-grp-tree}}) specifies a simple recurrence
+   rule with a time zone.
+
+~~~~
+{::include ./yang/tree/rec-tz-grp.txt}
+~~~~
+{: #rec-tz-grp-tree title="recurrence-with-time-zone Grouping Tree Structure"}
+
+   The "recurrence-with-time-zone" grouping augments the "recurrence-first" container
+   with the "time-zone-identifier" parameter which MUST be specified if the date
+   and time value is neither reported in the format of UTC nor time zone offset
+   to UTC.
+
+   It also augments the "recurrence-first" container with a parameter "duration"
+   to allow the time period of the first occurrence to be specified. The
+   "duration" also applies to subsequent recurrence instances.
+
+   Unlike the definition of "recurrence-utc" grouping {{sec-rec-utc}},
+   "recurrence-with-time-zone" is intended to promote human readability over
+   machine readability.
+
+## The "recurrence-utc-with-date-times" Grouping {#sec-rec-utc-dt}
+
+   The "recurrence-utc-with-date-times" grouping ({{rec-utc-dt-grp-tree}}) uses
+   the "recurrence-utc" grouping ({{sec-rec-utc}}) and adds a "period-timeticks"
+   list to define an aggregate set of repeating occurrences.
+
+~~~~
+{::include ./yang/tree/rec-utc-dt-grp.txt}
+~~~~
+{: #rec-utc-dt-grp-tree title="recurrence-utc-with-date-times Grouping Tree Structure"}
+
+  The recurrence instances are specified by the union of occurrences defined
+  by both the recurrence rule and "period-timeticks" list. Duplicate instances
+  are ignored. The value of the "period-start" instance must not exceed the
+  value of "frequency" instance.
+
+## The "recurrence-time-zone-with-date-times" Grouping {#sec-rec-tz-dt}
+
+  The "recurrence-time-zone-with-date-times" grouping ({{rec-tz-dt-grp-tree}}) uses
+  the "recurrence-with-time-zone" grouping ({{sec-rec-tz}}) and
+  adds a "period" list to define an aggregate set of repeating occurrences.
+
+~~~~
+{::include ./yang/tree/rec-tz-dt-grp.txt}
+~~~~
+{: #rec-tz-dt-grp-tree title="recurrence-time-zone-with-date-times Grouping Tree Structure"}
+
+  The recurrence instances are specified by the union of occurrences defined
+  by both the recurrence rule and "period" list. Duplicate instances
+  are ignored.
 
 ## The "icalendar-recurrence" Grouping {#sec-ical-rec}
 
-  The "icalendar-recurrence" grouping ({{ical-grp-tree}}) uses the "recurrence-with-date-times" grouping ({{sec-rec-dt}})
-  and add more data nodes to enrich the definition of recurrence. The structure of the "icalendar-recurrence" grouping conforms to
-  the definition of recurrence component defined in {{Section 3.8.5 of !RFC5545}}.
+  The "icalendar-recurrence" grouping ({{ical-grp-tree}}) uses the
+  "recurrence-time-zone-with-date-times" grouping ({{sec-rec-tz-dt}}) and define
+  more data nodes to enrich the definition of recurrence. The structure of the
+  "icalendar-recurrence" grouping refers to the definition of recurrence
+  component defined in {{Section 3.8.5 of ?RFC5545}}.
 
 ~~~~
-{::include ./yang/schedule/ical-grp.txt}
+{::include ./yang/tree/ical-grp.txt}
 ~~~~
-{: #ical-grp-tree title="iCalendar Recurrence Grouping Tree Structure"}
+{: #ical-grp-tree title="icalendar-recurrence Grouping Tree Structure"}
 
    An array of the "bysecond" (or "byminute", "byhour") specifies a list of
    seconds within a minute (or minutes within an hour, hours of the day).
@@ -233,7 +315,7 @@ prevent validation by admins of some critical systems, etc.
    for scheduling management/status exposure.
 
 ~~~~
-{::include ./yang/schedule/schedule-status.txt}
+{::include ./yang/tree/schedule-status.txt}
 ~~~~
 {: #sche-status-tree title="Schedule Status Grouping Tree Structure"}
 
@@ -244,9 +326,11 @@ prevent validation by admins of some critical systems, etc.
    depending on the use of the grouping. The "identityref" type is used for this
    parameter to allow extensibility in future modules. For example, a "conflict"
    state is valid in scheduling contexts where multiple systems struggle for the
-   scheduling of the same property. The conflict may be induced by, e.g., multiple entities managing the schedules for the same target component.
+   scheduling of the same property. The conflict may be induced by, e.g., multiple
+   entities managing the schedules for the same target component.
 
-   The "version" parameter is used to track the current schedule version information. The version can be bumped by the entity who create the schedule.
+   The "version" parameter is used to track the current schedule version
+   information. The version can be bumped by the entity who create the schedule.
    The "last-update" parameter identifies when the schedule was last modified.
    In some contexts, this parameter can be used to track the configuration of a
    given schedule. In such cases, the "version" may not be used.
@@ -256,10 +340,10 @@ prevent validation by admins of some critical systems, etc.
    only avaliable when the "schedule-type" is "recurrence".
 
    The current grouping captures common parameters that is applicable
-   to typical scheduling contexts known so far. Future modules can define other useful
-   parameters as needed. For example, in a  scheduling context with multiple
-   system sources to feed the schedules, the "source" and "precedence" parameters may be needed to
-   reflect how schedules from different sources should be prioritised.
+   to typical scheduling contexts known so far. Future modules can define other
+   useful parameters as needed. For example, in a  scheduling context with multiple
+   system sources to feed the schedules, the "source" and "precedence" parameters
+   may be needed to reflect how schedules from different sources should be prioritised.
 
 #  Features and Augmentations
 
@@ -302,7 +386,7 @@ prevent validation by admins of some critical systems, etc.
    This module imports types defined in {{!I-D.ietf-netmod-rfc6991-bis}}.
 
 ~~~~
-<CODE BEGINS> file "ietf-schedule@2023-01-19.yang"
+<CODE BEGINS> file "ietf-schedule@2024-04-16.yang"
 {::include-fold ./yang/ietf-schedule.yang}
 <CODE ENDS>
 ~~~~
@@ -404,14 +488,13 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ## The "recurrence" Grouping
 
-   {{ex-4}} indicates a recurrence of every 2 days for
-   10 occurrences, starting at 3 p.m. on December 1, 2025 in the Eastern United States time zone:
+   {{ex-6}} indicates a recurrence of every 2 days for 10 occurrences, starting
+   at 3 p.m. on December 1, 2025 with an offset of -8:00 from UTC:
 
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2025-12-01T15:00:00",
-    "time-zone-identifier": "America/New_York"
+    "date-time-start": "2025-12-01T15:00:00-08:00:00"
   },
   "frequency": "ietf-schedule:daily",
   "interval": 2,
@@ -420,68 +503,104 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {: #ex-4 title="Simple Schedule with Recurrence"}
 
-   {{ex-5}} illustrates an example of an anniversary that will occur annually, from 1997-11-25, until 2050-11-25:
+## The "recurrence-utc" Grouping
+
+   {{ex-5}} indicates a recurrence from 8:00 AM to 9:00 AM every day, from
+   December 1 to December 31, 2025 in UTC:
 
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "1979-11-25"
+    "date-time-start": "2025-12-01T08:00:00Z",
+    "duration": "3600";
   },
-  "frequency": "ietf-schedule:yearly",
-  "until": "2050-11-25"
+  "frequency": "ietf-schedule:daily",
+  "interval": 1,
+  "until": "2025-12-31T23:59:59Z"
 }
 ~~~~
-{: #ex-5 title="Simple Schedule with Recurrence and End Date"}
+{: #ex-5 title="Simple Schedule with Recurrence in UTC"}
 
-## The "recurrence-with-date-times" Grouping
+## The "recurrence-with-time-zone" Grouping
 
-   {{ex-6}} indicates a recurrence that occurs every 2
-   hours from 9:00 AM to 5:00 PM, and 6PM UTC time on 2025-12-01:
+   {{ex-6}} indicates a recurrence of every 2 hours for 10 occurrences, lasting
+   10 minutes, and starting at 3 p.m. on December 1, 2025 in New York:
 
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2025-12-01T09:00:00Z"
+    "date-time-start": "2025-12-01T15:00:00",
+    "duration": "PT00:10:00",
+    "time-zone-identifier": "America/New_York"
   },
   "frequency": "ietf-schedule:hourly",
   "interval": 2,
-  "until": "2025-12-01T17:00:00Z",
-  "date-times": ["2025-12-01T18:00:00Z"]
+  "count": 10
 }
 ~~~~
-{: #ex-6 title="Example of Recurrence With Date Times"}
+{: #ex-6 title="Simple Schedule with Recurrence with Time Zone Indication"}
 
+## The "recurrence-utc-with-date-times" Grouping
 
-   {{ex-7}} indicates a recurrence that occurs every
-   30 minutes and last for 15 minutes from 9:00 AM to 5:00 PM, and extra two occurrences
-   at 6:00 PM and 6:30 PM with each lasting for 20 minutes on 2025-12-01:
+   {{ex-7}} indicates a recurrence that occurs every two days starting at 9:00 AM
+   and 3:00 PM for a duration of 30 minutes and 40 minutes respectively,
+   from 2025-06-01 to 2025-06-30 in UTC:
 
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2025-12-01T09:00:00Z",
-    "duration": "PT00:15:00"
+    "date-time-start": "2025-06-01T09:00:00Z",
+  },
+  "frequency": "ietf-schedule:daily",
+  "interval": 2,
+  "until": "2025-06-30T23:59:59Z",
+  "period-timeticks": [
+    {
+      "period-start": "3240000",
+      "period-end": "3420000"
+     },
+     {
+      "period-start": "5400000",
+      "period-end": "5640000"
+     }
+   ]
+}
+~~~~
+{: #ex-7 title="Example of Recurrence With Date Times"}
+
+## The "recurrence-time-zone-with-date-times" Grouping
+
+   {{ex-8}} indicates a recurrence that occurs every
+   30 minutes and last for 15 minutes from 9:00 AM to 5:00 PM, and extra two occurrences
+   at 6:00 PM and 6:30 PM with each lasting for 20 minutes on 2025-12-01 (New York):
+
+~~~~
+{
+  "recurrence-first": {
+    "date-time-start": "2025-12-01T09:00:00",
+    "duration": "PT00:15:00",
+    "time-zone-identifier": "America/New_York"
   },
   "frequency": "ietf-schedule:minutely",
   "interval": 30,
   "until": "2025-12-01T17:00:00Z",
   "period": [
     {
-      "period-start": "2025-12-01T18:00:00Z",
+      "period-start": "2025-12-01T18:00:00",
       "duration": "PT00:20:00"
     },
     {
-      "period-start": "2025-12-01T18:30:00Z",
+      "period-start": "2025-12-01T18:30:00",
       "duration": "PT00:20:00"
     }
    ]
 }
 ~~~~
-{: #ex-7 title="Example of Advanced Recurrence Schedule"}
+{: #ex-8 title="Example of Advanced Recurrence Schedule"}
 
 ## The "icalendar-recurrence" Grouping
 
-   {{ex-8}} indicates 10 occurrences that occur at
+   {{ex-9}} indicates 10 occurrences that occur at
    8:00 AM (EST), every last Saturday of the month starting in January 2024:
 
 ~~~~
@@ -500,9 +619,9 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
   ]
 }
 ~~~~
-{: #ex-8 title="Simple iCalendar Recurrence"}
+{: #ex-9 title="Simple iCalendar Recurrence"}
 
-   {{ex-9}} is an example of a recurrence that occurs on the last
+   {{ex-10}} is an example of a recurrence that occurs on the last
    workday of the month until December 25, 2024, from January 1, 2024:
 
 ~~~~
@@ -522,9 +641,9 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
   "bysetpos": [-1]
 }
 ~~~~
-{: #ex-9 title="Example of Advanced iCalendar Recurrence"}
+{: #ex-10 title="Example of Advanced iCalendar Recurrence"}
 
-  {{ex-10}} indicates a recurrence that occur every 20
+  {{ex-11}} indicates a recurrence that occur every 20
   minutes from 9:00 AM to 4:40 PM (UTC), with the occurrence starting at 10:20 AM
   being excluded on 2025-12-01:
 
@@ -540,7 +659,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
   "exception-dates": ["2025-12-01T10:20:00Z"]
 }
 ~~~~
-{: #ex-10 title="Example of Advanced iCalendar Recurrence with Exceptions"}
+{: #ex-11 title="Example of Advanced iCalendar Recurrence with Exceptions"}
 
 
 # Examples of Using/Extending the "ietf-schedule" Module {#sec-ext}
@@ -571,8 +690,8 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 {::include-fold ./yang/example-scheduled-link-bandwidth.yang}
 ~~~~
 
-  {{ex-11}} shows a configuration example of a link's bandwidth that is
-  scheduled between 2023/12/01 0:00 UTC to the end of 2023/12/31 with a daily
+  {{ex-12}} shows a configuration example of a link's bandwidth that is
+  scheduled between 2025-12-01 0:00 UTC to the end of 2025-12-31 with a daily
   schedule. In each day, the bandwidth value is scheduled to be 500 Kbps between
   1:00 AM to 6:00 AM and 800 Kbps between 10:00 PM to 11:00 PM. The bandwidth
   value that's not covered by the period above is 1000 Kbps by default.
@@ -580,7 +699,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {::include-fold ./examples/example-scheduled-link-bandwidth.xml}
 ~~~~
-{: #ex-11 title="Example of Scheduled Link's Bandwidth"}
+{: #ex-12 title="Example of Scheduled Link's Bandwidth"}
 
 
 # Acknowledgments

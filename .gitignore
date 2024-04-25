@@ -2,7 +2,8 @@
 *.pdf
 *.redxml
 *.swp
-*.txt
+draft-ietf-netmod-schedule-yang.xml
+draft-ietf-netmod-schedule-yang.txt
 *.upload
 *~
 .tags

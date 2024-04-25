@@ -1,0 +1,31 @@
+module: ietf-schedule
+
+  grouping generic-schedule-params:
+    ...
+  grouping period-of-time:
+    ...
+  grouping recurrence:
+    ...
+  grouping recurrence-utc:
+    ...
+  grouping recurrence-with-time-zone:
+    +-- recurrence-first
+    |  +-- date-time-start?        yang:date-and-time
+    |  +-- duration?               duration
+    |  +-- time-zone-identifier?   sys:timezone-name
+    +-- frequency           identityref
+    +-- interval?           uint32
+    +-- (recurrence-bound)?
+       +--:(until)
+       |  +-- until?        yang:date-and-time
+       +--:(count)
+          +-- count?        uint32
+  grouping recurrence-utc-with-date-times:
+    ...
+  grouping recurrence-time-zone-with-date-times:
+    ...
+  grouping icalendar-recurrence:
+    ...
+  grouping schedule-status:
+    ...
+

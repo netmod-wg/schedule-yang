@@ -7,10 +7,10 @@
     <destination-node>ne2</destination-node>
     <default-bandwidth>1000</default-bandwidth>
     <recurrence-first>
-      <date-time-start>2023-12-01T01:00:00Z</date-time-start>
+      <date-time-start>2025-12-01T01:00:00Z</date-time-start>
     </recurrence-first>
     <frequency>schedule:daily</frequency>
-    <until>2023-12-31T23:59:59Z</until>
+    <until>2025-12-31T23:59:59Z</until>
     <period-timeticks>
       <period-start>360000</period-start>
       <period-end>2160000</period-end>
@@ -23,4 +23,3 @@
     </period-timeticks>
   </link>
 </link-attributes>
-
