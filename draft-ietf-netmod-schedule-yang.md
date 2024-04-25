@@ -89,7 +89,6 @@ provisions in "ietf-schedule" are provided in {{sec-ext}}.
    Please apply the following replacements:
 
    * XXXX --> the assigned RFC number for this draft
-   * YYYY --> the assigned RFC number for {{I-D.ietf-netmod-rfc6991-bis}}
    * 2024-04-16 --> the actual date of the publication of this document
 
 # Conventions and Definitions
@@ -383,7 +382,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 #  The "ietf-schedule" YANG Module {#sec-schedule}
 
-   This module imports types defined in {{!I-D.ietf-netmod-rfc6991-bis}}.
+   This module imports types defined in {{!RFC6991}}.
 
 ~~~~
 <CODE BEGINS> file "ietf-schedule@2024-04-16.yang"
