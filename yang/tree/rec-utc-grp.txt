@@ -9,7 +9,7 @@ module: ietf-schedule
   grouping recurrence-utc:
     +-- recurrence-first
     |  +-- date-time-start?   yang:date-and-time
-    |  +-- duration?          yang:seconds32
+    |  +-- duration?          int32
     +-- frequency           identityref
     +-- interval?           uint32
     +-- (recurrence-bound)?

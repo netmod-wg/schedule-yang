@@ -46,7 +46,7 @@ module: ietf-schedule
     +-- byyearmonth*        uint32
     +-- bysetpos*           int32
     +-- workweek-start?     schedule:weekday
-    +-- exception-dates*    union
+    +-- exception-dates*    yang:date-and-time
   grouping schedule-status:
     ...
 
