@@ -7,7 +7,7 @@ This is the working area for the NETMOD Internet-Draft, "A Common YANG Data Mode
 
 This is the working area for the NETMOD WG Internet-Draft, "A YANG Data Model for Scheduling".
 
-* [Editor's Copy](https://netmod-wg.github.io/schedule-yang/draft-ietf-netmod-schedule-yang.html)
+* [Editor's Copy](https://htmlpreview.github.io/?https://github.com/netmod-wg/schedule-yang/blob/gh-pages/draft-ietf-netmod-schedule-yang.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-netmod-schedule-yang)
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-netmod-schedule-yang)
 * [Compare Editor's Copy to Individual Draft](https://netmod-wg.github.io/schedule-yang/#go.draft-ietf-netmod-schedule-yang.diff)
