@@ -69,7 +69,7 @@ informative:
 This document defines a common schedule YANG module ("ietf-schedule") that can
 be used in several scheduling contexts, e.g., (but not limited to)
 {{?I-D.ietf-opsawg-ucl-acl}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}},
-and {{?I-D.united-tvr-schedule-yang}}. The module includes a set of reusable groupings which
+and {{?I-D.ietf-tvr-schedule-yang}}. The module includes a set of reusable groupings which
 are designed to be applicable for scheduling purposes such as event, policy,
 services or resources based on date and time.
 
@@ -711,5 +711,5 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
    Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, and Dhruv Dhody
    for their valuable comments and inputs to this work.
 
-   Many thanks to the authors of {{?I-D.united-tvr-schedule-yang}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.ietf-netmod-eca-policy}}
+   Many thanks to the authors of {{?I-D.ietf-tvr-schedule-yang}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.ietf-netmod-eca-policy}}
    for the constructive discussion during IETF#118.
