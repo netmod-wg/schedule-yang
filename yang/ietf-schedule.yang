@@ -30,12 +30,9 @@ module ietf-schedule {
      Author:   Daniel King
                <mailto:d.king@lancaster.ac.uk>";
   description
-    "This YANG module defines common shedule groupings. It defines
-     in particuler groupings for Internet Calendaring and Scheduling
-     Core Object Specification (iCalendar) data types: period of time
-     and recurrence rule, for representing and exchanging calendaring
-     and scheduling information. The YANG module complies with
-     Sections 3.3.9 and 3.3.10 of RFC 5545.
+    "This YANG module defines a set of common schedule groupings
+     which are applicable for scheduling purposes such as events,
+     policy, services, or resources based on date and time.
 
      Copyright (c) 2024 IETF Trust and the persons identified
      as authors of the code. All rights reserved.
@@ -210,17 +207,44 @@ module ietf-schedule {
       "Base identity for schedule state.";
   }
   identity enabled {
+    base schedule-state;
     description
       "Identity for the recurrence with enabled state.";
   }
   identity disabled {
+    base schedule-state;
     description
       "Identity for the recurrence with disabled state.";
   }
   identity out-of-date {
+    base schedule-state;
     description
       "Identity for the recurrence with out-of-date state.";
-  }  
+  }
+  
+  identity discard-action {
+    description
+      "Identity for the discard options.";
+  }
+  
+  identity warning {
+    base discard-action;
+    description
+      "Identity for the action that a warning message is generated
+       when a schedule is discarded.";
+  }
+  identity error {
+    base discard-action;
+    description
+      "Identity for the action that an error message is generated
+       when a schedule is discarded.";
+  }
+  identity silently-discard {
+    base discard-action;
+    description
+      "Identity for the action that silently discards an invalid
+       schedule.";
+  }
 
   grouping generic-schedule-params {
     description
@@ -272,22 +296,13 @@ module ietf-schedule {
          the last occurence exceed 'max-allowed-end'.";
     }
     leaf discard-action {
-      type enumeration {
-        enum warning {
-          description
-            "A warning message is generated when a schedule is
-             discarded when enforcing the guards in this grouping
-             or it is received out-of-date.";
-        }
-        enum silently-discard {
-          description
-           "Discards silently a schedule when it is invalid because
-            it is not consistent with the guards in this grouping or
-            it is received out-of-date.";
-        }
+      type identityref {
+        base discard-action;
       }
       description
-        "Specifies the behavior when a schedule is discarded.";    
+        "Specifies the behavior when a schedule is discarded when
+         enforcing the guards in this grouping or it is received
+         out-of-date.";    
     }
   }
 
@@ -708,4 +723,5 @@ module ietf-schedule {
     }    
   }
 }
+
 
