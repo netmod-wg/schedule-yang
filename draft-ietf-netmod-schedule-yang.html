@@ -2025,8 +2025,6 @@ current time <span class="bcp14">SHOULD</span> be ignored<a href="#section-5-2.5
 <div class="breakable sourcecode" id="section-6-2">
 <pre>&lt;CODE BEGINS&gt; file "ietf-schedule@2024-04-16.yang"
 
-=============== NOTE: '\' line wrapping per RFC 8792 ================
-
 module ietf-schedule {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-schedule";
@@ -2280,8 +2278,9 @@ module ietf-schedule {
         "Specifies the maximum scheduled start date and time, a
          requested schedule instance whose first occurence after
          this value cannot be accepted by the entity. Specifically,
-         a requested schedule will be rejected if the first occurence
-         of that new schedule exceeds 'max-allowed-start'.";
+         a requested schedule will be rejected if the first
+         occurence of that new schedule exceeds
+         'max-allowed-start'.";
     }
     leaf min-allowed-start {
       type yang:date-and-time;
@@ -2289,9 +2288,8 @@ module ietf-schedule {
         "Specifies the minimum scheduled start date and time, a
          requested schedule instance whose first occurence before
          this value cannot be accepted by the entity. Specifically,
-         a requested schedule will be rejected if the first \
-                                                           occurence
-         of that new schedule is scheduled before
+         a requested schedule will be rejected if the first
+         occurence of that new schedule is scheduled before
          'min-allowed-start'.";
     }
     leaf max-allowed-end {
