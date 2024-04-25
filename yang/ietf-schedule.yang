@@ -5,9 +5,8 @@ module ietf-schedule {
 
   import ietf-yang-types {
     prefix yang;
-    revision-date 2023-01-23;
     reference
-      "RFC YYYY: Common YANG Data Types";
+      "RFC 6991: Common YANG Data Types";
   }
 
   import ietf-system {
@@ -434,7 +433,8 @@ module ietf-schedule {
           "Add a parameter indicating how long the occurence 
            lasts.";
         leaf duration {
-          type yang:seconds32;
+          type int32;
+          units "seconds";
           description
             "When specified, it refers to the duration of each 
              occurrence. The duration is in units of seconds. The 
@@ -636,10 +636,7 @@ module ietf-schedule {
         "Specifies the day on which the workweek starts.";
     }
     leaf-list exception-dates {
-      type union {
-        type yang:date-no-zone;
-        type yang:date-and-time;
-      }
+      type yang:date-and-time;
       description
         "Defines a list of exceptions for recurrence.";
     }
