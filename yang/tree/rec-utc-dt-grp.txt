@@ -14,7 +14,7 @@ module: ietf-schedule
     +-- recurrence-first
     |  +-- date-time-start?   yang:date-and-time
     |  +-- duration?          yang:seconds32
-    +-- frequency?          identityref
+    +-- frequency           identityref
     +-- interval?           uint32
     +-- (recurrence-bound)?
     |  +--:(until)

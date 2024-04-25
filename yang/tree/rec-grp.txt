@@ -7,7 +7,7 @@ module: ietf-schedule
   grouping recurrence:
     +-- recurrence-first
     |  +-- date-time-start?   yang:date-and-time
-    +-- frequency?          identityref
+    +-- frequency           identityref
     +-- interval?           uint32
     +-- (recurrence-bound)?
        +--:(until)

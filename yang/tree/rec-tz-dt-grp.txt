@@ -17,7 +17,7 @@ module: ietf-schedule
     |  +-- date-time-start?        yang:date-and-time
     |  +-- duration?               duration
     |  +-- time-zone-identifier?   sys:timezone-name
-    +-- frequency?          identityref
+    +-- frequency           identityref
     +-- interval?           uint32
     +-- (recurrence-bound)?
     |  +--:(until)
