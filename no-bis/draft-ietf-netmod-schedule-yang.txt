@@ -137,8 +137,6 @@ Table of Contents
 
    *  XXXX --> the assigned RFC number for this draft
 
-   *  YYYY --> the assigned RFC number for [I-D.ietf-netmod-rfc6991-bis]
-
    *  2024-04-16 --> the actual date of the publication of this document
 
 2.  Conventions and Definitions
@@ -760,7 +758,7 @@ Table of Contents
 
 6.  The "ietf-schedule" YANG Module
 
-   This module imports types defined in [I-D.ietf-netmod-rfc6991-bis].
+   This module imports types defined in [RFC6991].
 
    <CODE BEGINS> file "ietf-schedule@2024-04-16.yang"
    =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -1528,13 +1526,6 @@ Table of Contents
 
 9.1.  Normative References
 
-   [I-D.ietf-netmod-rfc6991-bis]
-              Schönwälder, J., "Common YANG Data Types", Work in
-              Progress, Internet-Draft, draft-ietf-netmod-rfc6991-bis-
-              15, 23 January 2023,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              rfc6991-bis-15>.
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -1557,6 +1548,10 @@ Table of Contents
    [RFC6242]  Wasserman, M., "Using the NETCONF Protocol over Secure
               Shell (SSH)", RFC 6242, DOI 10.17487/RFC6242, June 2011,
               <https://www.rfc-editor.org/rfc/rfc6242>.
+
+   [RFC6991]  Schoenwaelder, J., Ed., "Common YANG Data Types",
+              RFC 6991, DOI 10.17487/RFC6991, July 2013,
+              <https://www.rfc-editor.org/rfc/rfc6991>.
 
    [RFC7950]  Bjorklund, M., Ed., "The YANG 1.1 Data Modeling Language",
               RFC 7950, DOI 10.17487/RFC7950, August 2016,
