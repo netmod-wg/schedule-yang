@@ -66,11 +66,16 @@ informative:
 
 # Introduction {#intro}
 
-This document defines a common schedule YANG module ("ietf-schedule") that can be used in several scheduling contexts (e.g., (but not limited to) {{?I-D.ietf-opsawg-ucl-acl}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.united-tvr-schedule-yang}}). The module includes a set of reusable groupings which
+This document defines a common schedule YANG module ("ietf-schedule") that can
+be used in several scheduling contexts, e.g., (but not limited to)
+{{?I-D.ietf-opsawg-ucl-acl}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}},
+and {{?I-D.united-tvr-schedule-yang}}. The module includes a set of reusable groupings which
 are designed to be applicable for scheduling purposes such as event, policy,
 services or resources based on date and time.
 
-Examples to illustrate the use of the common groupings are provided in {{usage}}. Also, sample modules to exemplify how future modules can use the extensibility provisions in "ietf-schedule" are provided in {{sec-ext}}.
+Examples to illustrate the use of the common groupings are provided in {{usage}}.
+Also, sample modules to exemplify how future modules can use the extensibility
+provisions in "ietf-schedule" are provided in {{sec-ext}}.
 
 ## Editorial Note (To be removed by RFC Editor)
 
@@ -127,8 +132,13 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    configuration parameters that are used by a system for validating requested
    schedules.
 
+~~~~
+{::include ./yang/tree/sch-generic-params.txt}
+~~~~
+{: #gsp-tree title="Generic Schedule Configuration Tree Structure"}
+
    The "time-zone-identifier" parameter, if provided, specifies the
-   time zone reference of the date-and-time values.
+   time zone reference of the date and time values with local time format.
 
    The "validity" parameter specifies the date and time after which a schedule
    will be considered as invalid.
@@ -146,12 +156,6 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    These parameters apply to all schedules on a system and are meant
    to provide guards against stale configuration, too short schedule requests
    that would prevent validation by admins of some critical systems, etc.
-
-
-~~~~
-{::include ./yang/tree/sch-generic-params.txt}
-~~~~
-{: #gsp-tree title="Generic Schedule Configuration Tree Structure"}
 
 ## The "period-of-time" Grouping {#sec-period}
 
@@ -174,16 +178,16 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 ~~~~
 {::include ./yang/tree/rec-grp.txt}
 ~~~~
-{: #rec-grp-tree title="Recurrence Grouping Tree Structure"}
+{: #rec-grp-tree title="recurrence Grouping Tree Structure"}
 
   The "recurrence-first" container defines the first instance in the recurrence
   set, and the "date-time-start" specifies the date and time at which the first
   instance in the recurrence set occurs.
 
-  The frequency ("frequency") identifies the type of recurrence rule. For example,
+  The frequency ("frequency") which is mandatory, identifies the type of recurrence rule. For example,
   a "daily" frequency value specifies repeating events based on an interval of a day or more.
 
-  The interval represents at which intervals the recurrence rule repeats. For example,
+  The interval ("interval") represents at which intervals the recurrence rule repeats. For example,
   within a daily recurrence rule, an interval value of "8" means every eight days.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
@@ -207,6 +211,9 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    in units of seconds to allow the time period of the first occurrence to be
    specified. The "duration" also applies to subsequent recurrence instances.
 
+   The "recurrence-utc" grouping is designed to be reused in scheduling contexts
+   where machine readability is more desirable.
+
 ## The "recurrence-with-time-zone" Grouping {#sec-rec-tz}
 
    The "recurrence-with-time-zone" grouping ({{rec-tz-grp-tree}}) specifies a simple recurrence
@@ -227,8 +234,8 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    "duration" also applies to subsequent recurrence instances.
 
    Unlike the definition of "recurrence-utc" grouping {{sec-rec-utc}},
-   "recurrence-with-time-zone" is intended to be friendly to human instead of
-   machine.
+   "recurrence-with-time-zone" is intended to promote human readability over
+   machine readability.
 
 ## The "recurrence-utc-with-date-times" Grouping {#sec-rec-utc-dt}
 
@@ -255,7 +262,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 ~~~~
 {::include ./yang/tree/rec-tz-dt-grp.txt}
 ~~~~
-{: #rec-tz-dt-grp-tree title="Recurrence with Date Times Grouping Tree Structure"}
+{: #rec-tz-dt-grp-tree title="recurrence-time-zone-with-date-times Grouping Tree Structure"}
 
   The recurrence instances are specified by the union of occurrences defined
   by both the recurrence rule and "period" list. Duplicate instances
@@ -266,13 +273,13 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   The "icalendar-recurrence" grouping ({{ical-grp-tree}}) uses the
   "recurrence-time-zone-with-date-times" grouping ({{sec-rec-tz-dt}}) and define
   more data nodes to enrich the definition of recurrence. The structure of the
-  "icalendar-recurrence" grouping conforms to the definition of recurrence
+  "icalendar-recurrence" grouping refers to the definition of recurrence
   component defined in {{Section 3.8.5 of ?RFC5545}}.
 
 ~~~~
 {::include ./yang/tree/ical-grp.txt}
 ~~~~
-{: #ical-grp-tree title="iCalendar Recurrence Grouping Tree Structure"}
+{: #ical-grp-tree title="icalendar-recurrence Grouping Tree Structure"}
 
    An array of the "bysecond" (or "byminute", "byhour") specifies a list of
    seconds within a minute (or minutes within an hour, hours of the day).

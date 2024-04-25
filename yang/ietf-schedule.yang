@@ -365,12 +365,14 @@ module ietf-schedule {
       type identityref {
         base frequency-type;
       }
+      mandatory true;
       description
         "This parameter is defined to identify the frequency type of
          the recurrence rule.";
     }
     leaf interval {
       type uint32;
+      default "1";
       description
         "A positive integer representing at which intervals the
          recurrence rule repeats. For example, within a 'daily'
@@ -708,3 +710,4 @@ module ietf-schedule {
     }    
   }
 }
+
