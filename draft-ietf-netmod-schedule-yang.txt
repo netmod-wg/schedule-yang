@@ -113,10 +113,9 @@ Table of Contents
    that can be used in several scheduling contexts, e.g., (but not
    limited to) [I-D.ietf-opsawg-ucl-acl],
    [I-D.contreras-opsawg-scheduling-oam-tests], and
-   [I-D.united-tvr-schedule-yang].  The module includes a set of
-   reusable groupings which are designed to be applicable for scheduling
-   purposes such as event, policy, services or resources based on date
-   and time.
+   [I-D.ietf-tvr-schedule-yang].  The module includes a set of reusable
+   groupings which are designed to be applicable for scheduling purposes
+   such as event, policy, services or resources based on date and time.
 
    Examples to illustrate the use of the common groupings are provided
    in Appendix A.  Also, sample modules to exemplify how future modules
@@ -1615,20 +1614,19 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
               ucl-acl-03>.
 
+   [I-D.ietf-tvr-schedule-yang]
+              Qu, Y., Lindem, A., Kinzie, E., Fedyk, D., and M.
+              Blanchet, "YANG Data Model for Scheduled Attributes", Work
+              in Progress, Internet-Draft, draft-ietf-tvr-schedule-yang-
+              00, 16 April 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-tvr-schedule-yang-00>.
+
    [I-D.ietf-tvr-use-cases]
               Birrane, E. J., Kuhn, N., Qu, Y., Taylor, R., and L.
               Zhang, "TVR (Time-Variant Routing) Use Cases", Work in
               Progress, Internet-Draft, draft-ietf-tvr-use-cases-09, 29
               February 2024, <https://datatracker.ietf.org/doc/html/
               draft-ietf-tvr-use-cases-09>.
-
-   [I-D.united-tvr-schedule-yang]
-              Qu, Y., Lindem, A., Kinzie, E., Fedyk, D., and M.
-              Blanchet, "YANG Data Model for Scheduled Attributes", Work
-              in Progress, Internet-Draft, draft-united-tvr-schedule-
-              yang-01, 3 March 2024,
-              <https://datatracker.ietf.org/doc/html/draft-united-tvr-
-              schedule-yang-01>.
 
    [RFC3339]  Klyne, G. and C. Newman, "Date and Time on the Internet:
               Timestamps", RFC 3339, DOI 10.17487/RFC3339, July 2002,
@@ -2126,7 +2124,7 @@ Acknowledgments
    Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, and Dhruv
    Dhody for their valuable comments and inputs to this work.
 
-   Many thanks to the authors of [I-D.united-tvr-schedule-yang],
+   Many thanks to the authors of [I-D.ietf-tvr-schedule-yang],
    [I-D.contreras-opsawg-scheduling-oam-tests], and
    [I-D.ietf-netmod-eca-policy] for the constructive discussion during
    IETF#118.
