@@ -250,7 +250,9 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   The recurrence instances are specified by the union of occurrences defined
   by both the recurrence rule and "period-timeticks" list. Duplicate instances
   are ignored. The value of the "period-start" instance must not exceed the
-  value of "frequency" instance.
+  value indicated by the value of "frequency" instance, e.g., the timeticks
+  value must not exceed 100 in a secondly recurrence rule, and it must not
+  exceed 6000 in a minutely recurrence rule, and so on.
 
 ## The "recurrence-time-zone-with-date-times" Grouping {#sec-rec-tz-dt}
 
@@ -273,7 +275,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "recurrence-time-zone-with-date-times" grouping ({{sec-rec-tz-dt}}) and define
   more data nodes to enrich the definition of recurrence. The structure of the
   "icalendar-recurrence" grouping refers to the definition of recurrence
-  component defined in {{Section 3.8.5 of ?RFC5545}}.
+  component defined in {{Section 3.3.10 and Section 3.8.5 of ?RFC5545}}.
 
 ~~~~
 {::include ./yang/tree/ical-grp.txt}
@@ -281,7 +283,10 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 {: #ical-grp-tree title="icalendar-recurrence Grouping Tree Structure"}
 
    An array of the "bysecond" (or "byminute", "byhour") specifies a list of
-   seconds within a minute (or minutes within an hour, hours of the day).
+   seconds within a minute (or minutes within an hour, hours of the day). For
+   example, within a "minutely" recurrence rule, the values of "byminute" node
+   "10" and "20" means the occurrences generates at the 10th and 20th minute
+   within an hour, reducing the number of recurrence instances from all minutes.
 
    The parameter "byday" specifies a list of days of the week, with an optional
    direction which indicates the nth occurrence of a specific day within
@@ -291,6 +296,10 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
    An array of the "bymonthday" (or byyearday", "byyearweek", or "byyearmonth") specifies a list of
    days of the month (or days of the year, weeks of the year, or months of the year).
+   For example, within a "yearly" recurrence rule, the values of "byyearmonth"
+   instance "1" and "2" means the occurrences generates in January and February,
+   increasing the "yearly" recurrence from every year to every January and February
+   of the year.
 
    The "bysetpos" conveys a list of values that corresponds to the nth occurrence
    within the set of recurrence instances to be specified. For example, in a "monthly"
