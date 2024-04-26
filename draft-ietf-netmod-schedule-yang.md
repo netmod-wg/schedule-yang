@@ -275,7 +275,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   "recurrence-time-zone-with-date-times" grouping ({{sec-rec-tz-dt}}) and define
   more data nodes to enrich the definition of recurrence. The structure of the
   "icalendar-recurrence" grouping refers to the definition of recurrence
-  component defined in {{Section 3.3.10 and Section 3.8.5 of ?RFC5545}}.
+  component defined in {{Sections 3.3.10 and 3.8.5 of !RFC5545}}.
 
 ~~~~
 {::include ./yang/tree/ical-grp.txt}
