@@ -151,8 +151,8 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    occurrence of the schedule is later/earlier than the configured values.
 
    The "max-allowed-end" parameter specifies the maximum allowed end time of
-   the last occurrence. A requested schedule will be rejected if the last
-   occurrence of the schedule is later than the configured "max-allowed-end" value.
+   the last occurrence. A requested schedule will be rejected if the end time
+   of last occurrence of the schedule is later than the configured "max-allowed-end" value.
 
    The "discard-action" parameter specifies the action if a requested schedule
    is considered inactive or out-of-date.
