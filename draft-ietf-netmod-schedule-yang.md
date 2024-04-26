@@ -462,7 +462,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
   "time-zone-identifier": "China/Beijing",
   "min-allowed-start": "2025-01-01T08:00:00",
   "max-allowed-end": "2025-01-31T20:00:00",
-  "discard-action": "silently-discard"
+"discard-action": "ietf-schedule:silently-discard"
 }
 ~~~~
 {: #ex-0 title="Generic Parameters for Schedule Validation"}
