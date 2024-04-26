@@ -127,9 +127,11 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 ## The "generic-schedule-params" Grouping {#sec-gen}
 
-   The "generic-schedule-params" grouping ({{gsp-tree}}) specifies a set of
-   configuration parameters that are used by a system for validating requested
-   schedules.
+   A system accepts and handles the schedule requests, which may help further
+   automate the scheduling process of events, policy, services, or resources
+   based on date and time. The "generic-schedule-params" grouping ({{gsp-tree}})
+   specifies a set of configuration parameters that are used by a system for
+   validating requested schedules.
 
 ~~~~
 {::include ./yang/tree/sch-generic-params.txt}
@@ -453,7 +455,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
    {{ex-0}} indicates the example of a requested schedule that needs to start no earlier than
    08:00 AM, January 1, 2025 and end no later than 8:00 PM, January 31, 2025 (Beijing time).
-   Schedule requests fail to meet the requirements are ignored by the system.
+   Schedule requests that fail to meet the requirements are ignored by the system.
 
 ~~~~
 {
@@ -658,7 +660,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {: #ex-10 title="Example of Advanced iCalendar Recurrence"}
 
-   {{ex-11}} indicates a recurrence that occur every 20
+   {{ex-11}} indicates a recurrence that occurs every 20
    minutes from 9:00 AM to 4:40 PM (UTC), with the occurrence starting at 10:20 AM
    being excluded on 2025-12-01:
 
@@ -683,15 +685,20 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "state": "enabled",
+  "state": "ietf-schedule:enabled",
   "version": 1,
-  "schedule-type": "recurrence",
+  "schedule-type": "ietf-schedule:recurrence",
   "counter": 9,
   "last-occurrence": ["2025-12-01T12:00:00Z"],
   "upcoming-occurrence": ["2025-12-01T12:20:00Z"]
 }
 ~~~~
 {: #ex-12 title="Example of a Schedule Status"}
+
+  At the time of 12:15 PM, 2025-12-01 (UTC), the recurring event occurred at
+  (note that occurrence at 10:20 AM is excluded):
+  9:00, 9:20, 9:40, 10:00, 10:40, 11:00, 11:20, 11:40, 12:00.
+  The last occurrence was at 12:00, the upcoming one is at 12:20.
 
 # Examples of Using/Extending the "ietf-schedule" Module {#sec-ext}
 
