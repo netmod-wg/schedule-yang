@@ -30,8 +30,8 @@ module ietf-schedule {
      Author:   Daniel King
                <mailto:d.king@lancaster.ac.uk>";
   description
-    "This YANG module defines a set of common schedule groupings
-     which are applicable for scheduling purposes such as events,
+    "This YANG module defines a set of common groupings which
+     are applicable for scheduling purposes such as events,
      policy, services, or resources based on date and time.
 
      Copyright (c) 2024 IETF Trust and the persons identified
@@ -230,20 +230,20 @@ module ietf-schedule {
   identity warning {
     base discard-action;
     description
-      "Identity for the action that a warning message is generated
+      "Indicates that a warning message is generated
        when a schedule is discarded.";
   }
   identity error {
     base discard-action;
     description
-      "Identity for the action that an error message is generated
+      "Indicates that an error message is generated
        when a schedule is discarded.";
   }
   identity silently-discard {
     base discard-action;
     description
-      "Identity for the action that silently discards an invalid
-       schedule.";
+      "Indicates that an invalid schedule is silently 
+       discarded.";
   }
 
   grouping generic-schedule-params {
@@ -723,5 +723,3 @@ module ietf-schedule {
     }    
   }
 }
-
-
