@@ -387,11 +387,13 @@ module ietf-schedule {
     }
     leaf interval {
       type uint32;
-      default "1";
       description
         "A positive integer representing at which intervals the
          recurrence rule repeats. For example, within a 'daily'
-         recurrence rule, a value of '8' means every eight days.";
+         recurrence rule, a value of '8' means every eight days.
+         The default value is '1', means every second for a 
+         'secondly' recurrence rule, every minute for a 'minutely'
+         rule, and so on.";
     }
     choice recurrence-bound {
       description
@@ -647,9 +649,9 @@ module ietf-schedule {
     }
     leaf workweek-start {
       type schedule:weekday;
-      default "monday";
       description
-        "Specifies the day on which the workweek starts.";
+        "Specifies the day on which the workweek starts. The 
+         default value is 'monday'.";
     }
     leaf-list exception-dates {
       type yang:date-and-time;
