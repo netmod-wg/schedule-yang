@@ -30,12 +30,9 @@ module ietf-schedule {
      Author:   Daniel King
                <mailto:d.king@lancaster.ac.uk>";
   description
-    "This YANG module defines common shedule groupings. It defines
-     in particuler groupings for Internet Calendaring and Scheduling
-     Core Object Specification (iCalendar) data types: period of time
-     and recurrence rule, for representing and exchanging calendaring
-     and scheduling information. The YANG module complies with
-     Sections 3.3.9 and 3.3.10 of RFC 5545.
+    "This YANG module defines a set of common groupings which
+     are applicable for scheduling purposes such as events,
+     policy, services, or resources based on date and time.
 
      Copyright (c) 2024 IETF Trust and the persons identified
      as authors of the code. All rights reserved.
@@ -151,43 +148,43 @@ module ietf-schedule {
   identity secondly {
     base frequency-type;
     description
-      "Identity for a repeating event based on an interval of
+      "Indicates a repeating rule based on an interval of
        a second or more.";
   }
   identity minutely {
     base frequency-type;
     description
-      "Identity for a repeating event based on an interval of
+      "Indicates a repeating rule based on an interval of
        a minute or more.";
   }
   identity hourly {
     base frequency-type;
     description
-      "Identity for a repeating event based on an interval of
+      "Indicates a repeating rule based on an interval of
        an hour or more.";
   }
   identity daily {
     base frequency-type;
     description
-      "Identity for a repeating event based on an interval of
+      "Indicates a repeating rule based on an interval of
        a day or more.";
   }
   identity weekly {
     base frequency-type;
     description
-      "Identity for a repeating event based on an interval of
+      "Indicates a repeating rule based on an interval of
        a week or more.";
   }
   identity monthly {
     base frequency-type;
     description
-      "Identity for a repeating event based on an interval of
+      "Indicates a repeating rule based on an interval of
        a month or more.";
   }
   identity yearly {
     base frequency-type;
     description
-      "Identity for a repeating event based on an interval of
+      "Indicates a repeating rule based on an interval of
        a year or more.";
   }
   identity schedule-type {
@@ -197,30 +194,57 @@ module ietf-schedule {
   identity period {
     base schedule-type;
     description
-      "Identity for a period based schedule.";
+      "Indicates a period based schedule.";
   }
   
   identity recurrence {
     base schedule-type;
     description
-      "Identity for a recurrence based schedule.";
+      "Indicates a recurrence based schedule.";
   }
   identity schedule-state {
     description
       "Base identity for schedule state.";
   }
   identity enabled {
+    base schedule-state;
     description
-      "Identity for the recurrence with enabled state.";
+      "Indicates a recurrence with an enabled state.";
   }
   identity disabled {
+    base schedule-state;
     description
-      "Identity for the recurrence with disabled state.";
+      "Indicates a recurrence with a disabled state.";
   }
   identity out-of-date {
+    base schedule-state;
     description
-      "Identity for the recurrence with out-of-date state.";
-  }  
+      "Indicates a recurrence with an out-of-date state.";
+  }
+  
+  identity discard-action {
+    description
+      "Indicates that schedule will be discarded.";
+  }
+  
+  identity warning {
+    base discard-action;
+    description
+      "Indicates that a warning message is generated
+       when a schedule is discarded.";
+  }
+  identity error {
+    base discard-action;
+    description
+      "Indicates that an error message is generated
+       when a schedule is discarded.";
+  }
+  identity silently-discard {
+    base discard-action;
+    description
+      "Indicates that an invalid schedule is silently 
+       discarded.";
+  }
 
   grouping generic-schedule-params {
     description
@@ -272,22 +296,13 @@ module ietf-schedule {
          the last occurence exceed 'max-allowed-end'.";
     }
     leaf discard-action {
-      type enumeration {
-        enum warning {
-          description
-            "A warning message is generated when a schedule is
-             discarded when enforcing the guards in this grouping
-             or it is received out-of-date.";
-        }
-        enum silently-discard {
-          description
-           "Discards silently a schedule when it is invalid because
-            it is not consistent with the guards in this grouping or
-            it is received out-of-date.";
-        }
+      type identityref {
+        base discard-action;
       }
       description
-        "Specifies the behavior when a schedule is discarded.";    
+        "Specifies the behavior when a schedule is discarded when
+         enforcing the guards in this grouping or it is received
+         out-of-date.";    
     }
   }
 
