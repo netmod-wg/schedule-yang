@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 27 October 2024                               M. Boucadair, Ed.
+Expires: 28 October 2024                               M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                           25 April 2024
+                                                           26 April 2024
 
 
                 A Common YANG Data Model for Scheduling
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 October 2024.
+   This Internet-Draft will expire on 28 October 2024.
 
 Copyright Notice
 
@@ -92,13 +92,15 @@ Table of Contents
      9.1.  Normative References
      9.2.  Informative References
    Appendix A.  Examples of Format Representation
-     A.1.  The "period-of-time" Grouping
-     A.2.  The "recurrence" Grouping
-     A.3.  The "recurrence-utc" Grouping
-     A.4.  The "recurrence-with-time-zone" Grouping
-     A.5.  The "recurrence-utc-with-date-times" Grouping
-     A.6.  The "recurrence-time-zone-with-date-times" Grouping
-     A.7.  The "icalendar-recurrence" Grouping
+     A.1.  The "generic-schedule-params" Grouping
+     A.2.  The "period-of-time" Grouping
+     A.3.  The "recurrence" Grouping
+     A.4.  The "recurrence-utc" Grouping
+     A.5.  The "recurrence-with-time-zone" Grouping
+     A.6.  The "recurrence-utc-with-date-times" Grouping
+     A.7.  The "recurrence-time-zone-with-date-times" Grouping
+     A.8.  The "icalendar-recurrence" Grouping
+     A.9.  The "schedule-status" Grouping
    Appendix B.  Examples of Using/Extending the "ietf-schedule" Module
      B.1.  Example: Schedule Tasks to Execute Based on a Recurrence
            Rule
@@ -206,9 +208,11 @@ Table of Contents
 
 3.1.  The "generic-schedule-params" Grouping
 
-   The "generic-schedule-params" grouping (Figure 2) specifies a set of
-   configuration parameters that are used by a system for validating
-   requested schedules.
+   A system accepts and handles the schedule requests, which may help
+   further automate the scheduling process of events, policy, services,
+   or resources based on date and time.  The "generic-schedule-params"
+   grouping (Figure 2) specifies a set of configuration parameters that
+   are used by a system for validating requested schedules.
 
    module: ietf-schedule
 
@@ -1641,32 +1645,48 @@ Appendix A.  Examples of Format Representation
    examples illustrated are just for the ease of understanding.  Only
    the message body is provided with JSON used for encoding [RFC7951].
 
-A.1.  The "period-of-time" Grouping
+A.1.  The "generic-schedule-params" Grouping
+
+   Figure 11 indicates the example of a requested schedule that needs to
+   start no earlier than 08:00 AM, January 1, 2025 and end no later than
+   8:00 PM, January 31, 2025 (Beijing time).  Schedule requests that
+   fail to meet the requirements are ignored by the system.
+
+   {
+     "time-zone-identifier": "China/Beijing",
+     "min-allowed-start": "2025-01-01T08:00:00",
+     "max-allowed-end": "2025-01-31T20:00:00",
+     "discard-action": "silently-discard"
+   }
+
+           Figure 11: Generic Parameters for Schedule Validation
+
+A.2.  The "period-of-time" Grouping
 
    The example of a period that starts at 08:00:00 UTC, on January 1,
    2025 and ends at 18:00:00 UTC on December 31, 2027 is encoded as
-   shown in Figure 11.
+   shown in Figure 12.
 
    {
      "period-start": "2025-01-01T08:00:00Z",
      "period-end": "2027-12-31T18:00:00Z"
    }
 
-                    Figure 11: Simple Start/End Schedule
+                    Figure 12: Simple Start/End Schedule
 
    An example of a period that starts at 08:00:00 UTC, on January 1,
    2025 and lasts 15 days and 5 hours and 20 minutes is encoded as shown
-   in Figure 12.
+   in Figure 13.
 
    {
      "period-start": "2025-01-01T08:00:00Z",
      "duration": "P15DT05:20:00"
    }
 
-                  Figure 12: Simple Schedule with Duration
+                  Figure 13: Simple Schedule with Duration
 
    An example of a period that starts at 2:00 A.M. in Los Angeles on
-   November 19, 2025 and lasts 20 weeks is depicted in Figure 13.
+   November 19, 2025 and lasts 20 weeks is depicted in Figure 14.
 
    {
      "period-start": "2025-11-19T02:00:00",
@@ -1674,11 +1694,11 @@ A.1.  The "period-of-time" Grouping
      "duration": "P20W"
    }
 
-            Figure 13: Simple Schedule with Time Zone Indication
+            Figure 14: Simple Schedule with Time Zone Indication
 
-A.2.  The "recurrence" Grouping
+A.3.  The "recurrence" Grouping
 
-   Figure 16 indicates a recurrence of every 2 days for 10 occurrences,
+   Figure 17 indicates a recurrence of every 2 days for 10 occurrences,
    starting at 3 p.m. on December 1, 2025 with an offset of -8:00 from
    UTC:
 
@@ -1691,28 +1711,28 @@ A.2.  The "recurrence" Grouping
      "count": 10
    }
 
-                 Figure 14: Simple Schedule with Recurrence
+                 Figure 15: Simple Schedule with Recurrence
 
-A.3.  The "recurrence-utc" Grouping
+A.4.  The "recurrence-utc" Grouping
 
-   Figure 15 indicates a recurrence from 8:00 AM to 9:00 AM every day,
+   Figure 16 indicates a recurrence from 8:00 AM to 9:00 AM every day,
    from December 1 to December 31, 2025 in UTC:
 
    {
      "recurrence-first": {
        "date-time-start": "2025-12-01T08:00:00Z",
-       "duration": "3600";
+       "duration": 3600;
      },
      "frequency": "ietf-schedule:daily",
      "interval": 1,
      "until": "2025-12-31T23:59:59Z"
    }
 
-             Figure 15: Simple Schedule with Recurrence in UTC
+             Figure 16: Simple Schedule with Recurrence in UTC
 
-A.4.  The "recurrence-with-time-zone" Grouping
+A.5.  The "recurrence-with-time-zone" Grouping
 
-   Figure 16 indicates a recurrence of every 2 hours for 10 occurrences,
+   Figure 17 indicates a recurrence of every 2 hours for 10 occurrences,
    lasting 10 minutes, and starting at 3 p.m. on December 1, 2025 in New
    York:
 
@@ -1727,11 +1747,11 @@ A.4.  The "recurrence-with-time-zone" Grouping
      "count": 10
    }
 
-    Figure 16: Simple Schedule with Recurrence with Time Zone Indication
+    Figure 17: Simple Schedule with Recurrence with Time Zone Indication
 
-A.5.  The "recurrence-utc-with-date-times" Grouping
+A.6.  The "recurrence-utc-with-date-times" Grouping
 
-   Figure 17 indicates a recurrence that occurs every two days starting
+   Figure 18 indicates a recurrence that occurs every two days starting
    at 9:00 AM and 3:00 PM for a duration of 30 minutes and 40 minutes
    respectively, from 2025-06-01 to 2025-06-30 in UTC:
 
@@ -1754,11 +1774,11 @@ A.5.  The "recurrence-utc-with-date-times" Grouping
       ]
    }
 
-              Figure 17: Example of Recurrence With Date Times
+              Figure 18: Example of Recurrence With Date Times
 
-A.6.  The "recurrence-time-zone-with-date-times" Grouping
+A.7.  The "recurrence-time-zone-with-date-times" Grouping
 
-   Figure 18 indicates a recurrence that occurs every 30 minutes and
+   Figure 19 indicates a recurrence that occurs every 30 minutes and
    last for 15 minutes from 9:00 AM to 5:00 PM, and extra two
    occurrences at 6:00 PM and 6:30 PM with each lasting for 20 minutes
    on 2025-12-01 (New York):
@@ -1784,11 +1804,11 @@ A.6.  The "recurrence-time-zone-with-date-times" Grouping
       ]
    }
 
-             Figure 18: Example of Advanced Recurrence Schedule
+             Figure 19: Example of Advanced Recurrence Schedule
 
-A.7.  The "icalendar-recurrence" Grouping
+A.8.  The "icalendar-recurrence" Grouping
 
-   Figure 19 indicates 10 occurrences that occur at 8:00 AM (EST), every
+   Figure 20 indicates 10 occurrences that occur at 8:00 AM (EST), every
    last Saturday of the month starting in January 2024:
 
    {
@@ -1806,17 +1826,17 @@ A.7.  The "icalendar-recurrence" Grouping
      ]
    }
 
-                   Figure 19: Simple iCalendar Recurrence
+                   Figure 20: Simple iCalendar Recurrence
 
-   Figure 20 is an example of a recurrence that occurs on the last
-   workday of the month until December 25, 2024, from January 1, 2024:
+   Figure 21 is an example of a recurrence that occurs on the last
+   workday of the month until December 25, 2025, from January 1, 2025:
 
    {
      "recurrence-first": {
-     "date-time-start": "2024-01-01"
+     "date-time-start": "2025-01-01"
      },
      "frequency": "ietf-schedule:monthly",
-     "until": "2024-12-25",
+     "until": "2025-12-25",
      "byday": [
        { "weekday": "monday"},
        { "weekday": "tuesday"},
@@ -1827,9 +1847,9 @@ A.7.  The "icalendar-recurrence" Grouping
      "bysetpos": [-1]
    }
 
-            Figure 20: Example of Advanced iCalendar Recurrence
+            Figure 21: Example of Advanced iCalendar Recurrence
 
-   Figure 21 indicates a recurrence that occur every 20 minutes from
+   Figure 22 indicates a recurrence that occurs every 20 minutes from
    9:00 AM to 4:40 PM (UTC), with the occurrence starting at 10:20 AM
    being excluded on 2025-12-01:
 
@@ -1844,7 +1864,28 @@ A.7.  The "icalendar-recurrence" Grouping
      "exception-dates": ["2025-12-01T10:20:00Z"]
    }
 
-    Figure 21: Example of Advanced iCalendar Recurrence with Exceptions
+    Figure 22: Example of Advanced iCalendar Recurrence with Exceptions
+
+A.9.  The "schedule-status" Grouping
+
+   Figure 23 indicates the scheduled recurrence status of Figure 22 at
+   the time of 12:15 PM, 2025-12-01 (UTC):
+
+   {
+     "state": "ietf-schedule:enabled",
+     "version": 1,
+     "schedule-type": "ietf-schedule:recurrence",
+     "counter": 9,
+     "last-occurrence": ["2025-12-01T12:00:00Z"],
+     "upcoming-occurrence": ["2025-12-01T12:20:00Z"]
+   }
+
+                  Figure 23: Example of a Schedule Status
+
+   At the time of 12:15 PM, 2025-12-01 (UTC), the recurring event
+   occurred at (note that occurrence at 10:20 AM is excluded): 9:00,
+   9:20, 9:40, 10:00, 10:40, 11:00, 11:20, 11:40, 12:00.  The last
+   occurrence was at 12:00, the upcoming one is at 12:20.
 
 Appendix B.  Examples of Using/Extending the "ietf-schedule" Module
 
@@ -1974,7 +2015,7 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
 
    Network properties may change over a specific period of time or based
    on a recurrence rule, e.g., [I-D.ietf-tvr-use-cases].  The following
-   example module which augments the "recurrence-with-date-times"
+   example module which augments the "recurrence-utc-with-date-times"
    grouping from "ietf-schedule" module shows how a scheduled based
    attribute could be defined.
 
@@ -2068,7 +2109,7 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
      }
    }
 
-   Figure 22 shows a configuration example of a link's bandwidth that is
+   Figure 24 shows a configuration example of a link's bandwidth that is
    scheduled between 2025-12-01 0:00 UTC to the end of 2025-12-31 with a
    daily schedule.  In each day, the bandwidth value is scheduled to be
    500 Kbps between 1:00 AM to 6:00 AM and 800 Kbps between 10:00 PM to
@@ -2101,7 +2142,7 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
      </link>
    </link-attributes>
 
-              Figure 22: Example of Scheduled Link's Bandwidth
+              Figure 24: Example of Scheduled Link's Bandwidth
 
 Acknowledgments
 
