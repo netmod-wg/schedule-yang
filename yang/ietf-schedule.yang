@@ -148,43 +148,43 @@ module ietf-schedule {
   identity secondly {
     base frequency-type;
     description
-      "Identity for a repeating event based on an interval of
+      "Indicates a repeating rule based on an interval of
        a second or more.";
   }
   identity minutely {
     base frequency-type;
     description
-      "Identity for a repeating event based on an interval of
+      "Indicates a repeating rule based on an interval of
        a minute or more.";
   }
   identity hourly {
     base frequency-type;
     description
-      "Identity for a repeating event based on an interval of
+      "Indicates a repeating rule based on an interval of
        an hour or more.";
   }
   identity daily {
     base frequency-type;
     description
-      "Identity for a repeating event based on an interval of
+      "Indicates a repeating rule based on an interval of
        a day or more.";
   }
   identity weekly {
     base frequency-type;
     description
-      "Identity for a repeating event based on an interval of
+      "Indicates a repeating rule based on an interval of
        a week or more.";
   }
   identity monthly {
     base frequency-type;
     description
-      "Identity for a repeating event based on an interval of
+      "Indicates a repeating rule based on an interval of
        a month or more.";
   }
   identity yearly {
     base frequency-type;
     description
-      "Identity for a repeating event based on an interval of
+      "Indicates a repeating rule based on an interval of
        a year or more.";
   }
   identity schedule-type {
@@ -194,13 +194,13 @@ module ietf-schedule {
   identity period {
     base schedule-type;
     description
-      "Identity for a period based schedule.";
+      "Indicates a period based schedule.";
   }
   
   identity recurrence {
     base schedule-type;
     description
-      "Identity for a recurrence based schedule.";
+      "Indicates a recurrence based schedule.";
   }
   identity schedule-state {
     description
@@ -209,22 +209,22 @@ module ietf-schedule {
   identity enabled {
     base schedule-state;
     description
-      "Identity for the recurrence with enabled state.";
+      "Indicates a recurrence with an enabled state.";
   }
   identity disabled {
     base schedule-state;
     description
-      "Identity for the recurrence with disabled state.";
+      "Indicates a recurrence with a disabled state.";
   }
   identity out-of-date {
     base schedule-state;
     description
-      "Identity for the recurrence with out-of-date state.";
+      "Indicates a recurrence with an out-of-date state.";
   }
   
   identity discard-action {
     description
-      "Identity for the discard options.";
+      "Indicates that schedule will be discarded.";
   }
   
   identity warning {
