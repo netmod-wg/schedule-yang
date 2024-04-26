@@ -293,7 +293,7 @@ module ietf-schedule {
       type yang:date-and-time;
       description
         "A requested schedule will be rejected if the end time of 
-         the last occurrence exceed 'max-allowed-end'.";
+         the last occurrence exceeds 'max-allowed-end'.";
     }
     leaf discard-action {
       type identityref {
@@ -448,7 +448,7 @@ module ietf-schedule {
       }
       augment "recurrence-first" {
         description
-          "Add a parameter indicating how long the occurrence 
+          "Adds a parameter indicating how long the occurrence 
            lasts.";
         leaf duration {
           type int32;
@@ -471,7 +471,7 @@ module ietf-schedule {
     uses recurrence {
       augment "recurrence-first" {
         description
-          "Add parameters indicating how long the occurrence 
+          "Adds parameters indicating how long the occurrence 
            lasts and time zone identifier of the occurrence.";
         leaf duration {
           type duration;
