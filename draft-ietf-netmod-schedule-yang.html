@@ -1559,7 +1559,10 @@ module: ietf-schedule
 <p id="section-3.3-4">The frequency ("frequency") which is mandatory, identifies the type of recurrence rule. For example,
   a "daily" frequency value specifies repeating events based on an interval of a day or more.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 <p id="section-3.3-5">The interval ("interval") represents at which intervals the recurrence rule repeats. For example,
-  within a daily recurrence rule, an interval value of "8" means every eight days.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+  within a daily recurrence rule, an interval value of "8" means every eight days.
+  The default value is "1", meaning every second for a secondly recurrence rule,
+  every minute for a minutely rule, every hour for an hourly rule, every day for a
+  daily rule, and so on. Note that per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-11#section-4.13" class="relref">Section 4.13</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>, no "default" substatement is used here because there are cases (e.g., profiling) where the use of the default is problematic.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
 <p id="section-3.3-6">The repetition can be scoped by a specified end time or by a count of occurrences,
   indicated by the "recurrence-bound" choice. The "date-time-start" value always counts
   as the first occurrence.<a href="#section-3.3-6" class="pilcrow">¶</a></p>
@@ -2410,7 +2413,10 @@ module ietf-schedule {
       description
         "A positive integer representing at which intervals the
          recurrence rule repeats. For example, within a 'daily'
-         recurrence rule, a value of '8' means every eight days.";
+         recurrence rule, a value of '8' means every eight days.
+         The default value is '1', means every second for a
+         'secondly' recurrence rule, every minute for a 'minutely'
+         rule, and so on.";
     }
     choice recurrence-bound {
       description
@@ -2667,7 +2673,8 @@ module ietf-schedule {
     leaf workweek-start {
       type schedule:weekday;
       description
-        "Specifies the day on which the workweek starts.";
+        "Specifies the day on which the workweek starts. The
+         default value is 'monday'.";
     }
     leaf-list exception-dates {
       type yang:date-and-time;
@@ -2741,7 +2748,6 @@ module ietf-schedule {
     }
   }
 }
-
 
 &lt;CODE ENDS&gt;</pre><a href="#section-6-2" class="pilcrow">¶</a>
 </div>
