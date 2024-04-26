@@ -1447,12 +1447,15 @@ module: ietf-schedule
 <p id="section-3.1-3">The "time-zone-identifier" parameter, if provided, specifies the
    time zone reference of the date and time values with local time format.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1-4">The "validity" parameter specifies the date and time after which a schedule
-   will be considered as invalid.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+   will be considered as invalid. It determines the latest time that a schedule
+   can be executed by a system and takes precedence over similar attributes
+   that are provided at the schedule instance itself.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 <p id="section-3.1-5">The "max/min-allowed-start" parameters specify the maximum/minimum scheduled
    start date and time, a requested schedule will be rejected if the first
    occurrence of the schedule is later/earlier than the configured values.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 <p id="section-3.1-6">The "max-allowed-end" parameter specifies the maximum allowed end time of
-   the last occurrence.<a href="#section-3.1-6" class="pilcrow">¶</a></p>
+   the last occurrence. A requested schedule will be rejected if the end time
+   of last occurrence is later than the configured "max-allowed-end" value.<a href="#section-3.1-6" class="pilcrow">¶</a></p>
 <p id="section-3.1-7">The "discard-action" parameter specifies the action if a requested schedule
    is considered inactive or out-of-date.<a href="#section-3.1-7" class="pilcrow">¶</a></p>
 <p id="section-3.1-8">These parameters apply to all schedules on a system and are meant
@@ -2320,27 +2323,27 @@ module ietf-schedule {
       type yang:date-and-time;
       description
         "Specifies the maximum scheduled start date and time, a
-         requested schedule instance whose first occurence after
+         requested schedule instance whose first occurrence after
          this value cannot be accepted by the entity. Specifically,
          a requested schedule will be rejected if the first
-         occurence of that new schedule exceeds
+         occurrence of that new schedule exceeds
          'max-allowed-start'.";
     }
     leaf min-allowed-start {
       type yang:date-and-time;
       description
         "Specifies the minimum scheduled start date and time, a
-         requested schedule instance whose first occurence before
+         requested schedule instance whose first occurrence before
          this value cannot be accepted by the entity. Specifically,
          a requested schedule will be rejected if the first
-         occurence of that new schedule is scheduled before
+         occurrence of that new schedule is scheduled before
          'min-allowed-start'.";
     }
     leaf max-allowed-end {
       type yang:date-and-time;
       description
         "A requested schedule will be rejected if the end time of
-         the last occurence exceed 'max-allowed-end'.";
+         the last occurrence exceeds 'max-allowed-end'.";
     }
     leaf discard-action {
       type identityref {
@@ -2495,7 +2498,7 @@ module ietf-schedule {
       }
       augment "recurrence-first" {
         description
-          "Add a parameter indicating how long the occurence
+          "Adds a parameter indicating how long the occurrence
            lasts.";
         leaf duration {
           type int32;
@@ -2518,7 +2521,7 @@ module ietf-schedule {
     uses recurrence {
       augment "recurrence-first" {
         description
-          "Add parameters indicating how long the occurrence
+          "Adds parameters indicating how long the occurrence
            lasts and time zone identifier of the occurrence.";
         leaf duration {
           type duration;
