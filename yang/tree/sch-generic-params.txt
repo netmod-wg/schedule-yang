@@ -6,7 +6,7 @@ module: ietf-schedule
     +-- max-allowed-start?      yang:date-and-time
     +-- min-allowed-start?      yang:date-and-time
     +-- max-allowed-end?        yang:date-and-time
-    +-- discard-action?         enumeration
+    +-- discard-action?         identityref
   grouping period-of-time:
     ...
   grouping recurrence:
