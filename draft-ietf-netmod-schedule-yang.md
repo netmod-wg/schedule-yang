@@ -142,14 +142,17 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    time zone reference of the date and time values with local time format.
 
    The "validity" parameter specifies the date and time after which a schedule
-   will be considered as invalid.
+   will be considered as invalid. It determines the latest time that a schedule
+   can be executed by a system and takes precedence over similar attributes
+   that are provided at the schedule instance itself.
 
    The "max/min-allowed-start" parameters specify the maximum/minimum scheduled
    start date and time, a requested schedule will be rejected if the first
    occurrence of the schedule is later/earlier than the configured values.
 
    The "max-allowed-end" parameter specifies the maximum allowed end time of
-   the last occurrence.
+   the last occurrence. A requested schedule will be rejected if the end time
+   of last occurrence is later than the configured "max-allowed-end" value.
 
    The "discard-action" parameter specifies the action if a requested schedule
    is considered inactive or out-of-date.
