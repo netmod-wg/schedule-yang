@@ -1738,7 +1738,9 @@ module: ietf-schedule
 <p id="section-3.6-3">The recurrence instances are specified by the union of occurrences defined
   by both the recurrence rule and "period-timeticks" list. Duplicate instances
   are ignored. The value of the "period-start" instance must not exceed the
-  value of "frequency" instance.<a href="#section-3.6-3" class="pilcrow">¶</a></p>
+  value indicated by the value of "frequency" instance, e.g., the timeticks
+  value must not exceed 100 in a secondly recurrence rule, and it must not
+  exceed 6000 in a minutely recurrence rule, and so on.<a href="#section-3.6-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-rec-tz-dt">
@@ -1812,7 +1814,7 @@ module: ietf-schedule
   "recurrence-time-zone-with-date-times" grouping (<a href="#sec-rec-tz-dt" class="auto internal xref">Section 3.7</a>) and define
   more data nodes to enrich the definition of recurrence. The structure of the
   "icalendar-recurrence" grouping refers to the definition of recurrence
-  component defined in <span><a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.5" class="relref">Section 3.8.5</a> of [<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#section-3.8-1" class="pilcrow">¶</a></p>
+  component defined in Sections <a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.10" class="relref">3.3.10</a> and <a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.5" class="relref">3.8.5</a> of <span>[<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#section-3.8-1" class="pilcrow">¶</a></p>
 <span id="name-icalendar-recurrence-groupi"></span><div id="ical-grp-tree">
 <figure id="figure-9">
           <div class="alignLeft art-text artwork" id="section-3.8-2.1">
@@ -1876,14 +1878,21 @@ module: ietf-schedule
           </figcaption></figure>
 </div>
 <p id="section-3.8-3">An array of the "bysecond" (or "byminute", "byhour") specifies a list of
-   seconds within a minute (or minutes within an hour, hours of the day).<a href="#section-3.8-3" class="pilcrow">¶</a></p>
+   seconds within a minute (or minutes within an hour, hours of the day). For
+   example, within a "minutely" recurrence rule, the values of "byminute" node
+   "10" and "20" means the occurrences generates at the 10th and 20th minute
+   within an hour, reducing the number of recurrence instances from all minutes.<a href="#section-3.8-3" class="pilcrow">¶</a></p>
 <p id="section-3.8-4">The parameter "byday" specifies a list of days of the week, with an optional
    direction which indicates the nth occurrence of a specific day within
    the "monthly" or "yearly" frequency. For example, within a "monthly" rule,
    the "weekday" with a value of "monday" and the "direction" with a value of "-1"
    represents the last Monday of the month.<a href="#section-3.8-4" class="pilcrow">¶</a></p>
 <p id="section-3.8-5">An array of the "bymonthday" (or byyearday", "byyearweek", or "byyearmonth") specifies a list of
-   days of the month (or days of the year, weeks of the year, or months of the year).<a href="#section-3.8-5" class="pilcrow">¶</a></p>
+   days of the month (or days of the year, weeks of the year, or months of the year).
+   For example, within a "yearly" recurrence rule, the values of "byyearmonth"
+   instance "1" and "2" means the occurrences generates in January and February,
+   increasing the "yearly" recurrence from every year to every January and February
+   of the year.<a href="#section-3.8-5" class="pilcrow">¶</a></p>
 <p id="section-3.8-6">The "bysetpos" conveys a list of values that corresponds to the nth occurrence
    within the set of recurrence instances to be specified. For example, in a "monthly"
    recurrence rule, the "byday" data node specifies every Monday of the week, the
@@ -2851,6 +2860,10 @@ module ietf-schedule {
         <dd>
 <span class="refAuthor">Mealling, M.</span>, <span class="refTitle">"The IETF XML Registry"</span>, <span class="seriesInfo">BCP 81</span>, <span class="seriesInfo">RFC 3688</span>, <span class="seriesInfo">DOI 10.17487/RFC3688</span>, <time datetime="2004-01" class="refDate">January 2004</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3688">https://www.rfc-editor.org/rfc/rfc3688</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC5545">[RFC5545]</dt>
+        <dd>
+<span class="refAuthor">Desruisseaux, B., Ed.</span>, <span class="refTitle">"Internet Calendaring and Scheduling Core Object Specification (iCalendar)"</span>, <span class="seriesInfo">RFC 5545</span>, <span class="seriesInfo">DOI 10.17487/RFC5545</span>, <time datetime="2009-09" class="refDate">September 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5545">https://www.rfc-editor.org/rfc/rfc5545</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC6020">[RFC6020]</dt>
         <dd>
 <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"YANG - A Data Modeling Language for the Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6020</span>, <span class="seriesInfo">DOI 10.17487/RFC6020</span>, <time datetime="2010-10" class="refDate">October 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6020">https://www.rfc-editor.org/rfc/rfc6020</a>&gt;</span>. </dd>
@@ -2923,10 +2936,6 @@ module ietf-schedule {
 <dt id="RFC3339">[RFC3339]</dt>
         <dd>
 <span class="refAuthor">Klyne, G.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"Date and Time on the Internet: Timestamps"</span>, <span class="seriesInfo">RFC 3339</span>, <span class="seriesInfo">DOI 10.17487/RFC3339</span>, <time datetime="2002-07" class="refDate">July 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3339">https://www.rfc-editor.org/rfc/rfc3339</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC5545">[RFC5545]</dt>
-        <dd>
-<span class="refAuthor">Desruisseaux, B., Ed.</span>, <span class="refTitle">"Internet Calendaring and Scheduling Core Object Specification (iCalendar)"</span>, <span class="seriesInfo">RFC 5545</span>, <span class="seriesInfo">DOI 10.17487/RFC5545</span>, <time datetime="2009-09" class="refDate">September 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5545">https://www.rfc-editor.org/rfc/rfc5545</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7951">[RFC7951]</dt>
         <dd>

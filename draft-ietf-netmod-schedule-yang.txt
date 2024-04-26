@@ -504,7 +504,10 @@ Table of Contents
    The recurrence instances are specified by the union of occurrences
    defined by both the recurrence rule and "period-timeticks" list.
    Duplicate instances are ignored.  The value of the "period-start"
-   instance must not exceed the value of "frequency" instance.
+   instance must not exceed the value indicated by the value of
+   "frequency" instance, e.g., the timeticks value must not exceed 100
+   in a secondly recurrence rule, and it must not exceed 6000 in a
+   minutely recurrence rule, and so on.
 
 3.7.  The "recurrence-time-zone-with-date-times" Grouping
 
@@ -564,7 +567,8 @@ Table of Contents
    time-zone-with-date-times" grouping (Section 3.7) and define more
    data nodes to enrich the definition of recurrence.  The structure of
    the "icalendar-recurrence" grouping refers to the definition of
-   recurrence component defined in Section 3.8.5 of [RFC5545].
+   recurrence component defined in Sections 3.3.10 and 3.8.5 of
+   [RFC5545].
 
    module: ietf-schedule
 
@@ -622,7 +626,10 @@ Table of Contents
 
    An array of the "bysecond" (or "byminute", "byhour") specifies a list
    of seconds within a minute (or minutes within an hour, hours of the
-   day).
+   day).  For example, within a "minutely" recurrence rule, the values
+   of "byminute" node "10" and "20" means the occurrences generates at
+   the 10th and 20th minute within an hour, reducing the number of
+   recurrence instances from all minutes.
 
    The parameter "byday" specifies a list of days of the week, with an
    optional direction which indicates the nth occurrence of a specific
@@ -633,7 +640,11 @@ Table of Contents
 
    An array of the "bymonthday" (or byyearday", "byyearweek", or
    "byyearmonth") specifies a list of days of the month (or days of the
-   year, weeks of the year, or months of the year).
+   year, weeks of the year, or months of the year).  For example, within
+   a "yearly" recurrence rule, the values of "byyearmonth" instance "1"
+   and "2" means the occurrences generates in January and February,
+   increasing the "yearly" recurrence from every year to every January
+   and February of the year.
 
    The "bysetpos" conveys a list of values that corresponds to the nth
    occurrence within the set of recurrence instances to be specified.
@@ -1559,6 +1570,11 @@ Table of Contents
               DOI 10.17487/RFC3688, January 2004,
               <https://www.rfc-editor.org/rfc/rfc3688>.
 
+   [RFC5545]  Desruisseaux, B., Ed., "Internet Calendaring and
+              Scheduling Core Object Specification (iCalendar)",
+              RFC 5545, DOI 10.17487/RFC5545, September 2009,
+              <https://www.rfc-editor.org/rfc/rfc5545>.
+
    [RFC6020]  Bjorklund, M., Ed., "YANG - A Data Modeling Language for
               the Network Configuration Protocol (NETCONF)", RFC 6020,
               DOI 10.17487/RFC6020, October 2010,
@@ -1648,11 +1664,6 @@ Table of Contents
    [RFC3339]  Klyne, G. and C. Newman, "Date and Time on the Internet:
               Timestamps", RFC 3339, DOI 10.17487/RFC3339, July 2002,
               <https://www.rfc-editor.org/rfc/rfc3339>.
-
-   [RFC5545]  Desruisseaux, B., Ed., "Internet Calendaring and
-              Scheduling Core Object Specification (iCalendar)",
-              RFC 5545, DOI 10.17487/RFC5545, September 2009,
-              <https://www.rfc-editor.org/rfc/rfc5545>.
 
    [RFC7951]  Lhotka, L., "JSON Encoding of Data Modeled with YANG",
               RFC 7951, DOI 10.17487/RFC7951, August 2016,
