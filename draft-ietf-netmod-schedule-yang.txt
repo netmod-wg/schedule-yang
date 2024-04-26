@@ -1656,7 +1656,7 @@ A.1.  The "generic-schedule-params" Grouping
      "time-zone-identifier": "China/Beijing",
      "min-allowed-start": "2025-01-01T08:00:00",
      "max-allowed-end": "2025-01-31T20:00:00",
-   "discard-action": "ietf-schedule:silently-discard"
+      "discard-action": "ietf-schedule:silently-discard"
    }
 
            Figure 11: Generic Parameters for Schedule Validation
