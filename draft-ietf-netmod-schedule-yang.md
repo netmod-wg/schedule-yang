@@ -190,7 +190,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   within a daily recurrence rule, an interval value of "8" means every eight days.
   The default value is "1", meaning every second for a secondly recurrence rule,
   every minute for a minutely rule, every hour for an hourly rule, every day for a
-  daily rule, and so on.
+  daily rule, and so on. Note that per {{Section 4.13 of ?I-D.ietf-netmod-rfc8407bis}}, no "default" substatement is used here because there are cases (e.g., profiling) where the use of the default is problematic.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
   indicated by the "recurrence-bound" choice. The "date-time-start" value always counts
