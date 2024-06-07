@@ -145,52 +145,61 @@ module ietf-schedule {
     description
       "Base identity for frequency type.";
   }
+
   identity secondly {
     base frequency-type;
     description
       "Indicates a repeating rule based on an interval of
        a second or more.";
   }
+
   identity minutely {
     base frequency-type;
     description
       "Indicates a repeating rule based on an interval of
        a minute or more.";
   }
+
   identity hourly {
     base frequency-type;
     description
       "Indicates a repeating rule based on an interval of
        an hour or more.";
   }
+
   identity daily {
     base frequency-type;
     description
       "Indicates a repeating rule based on an interval of
        a day or more.";
   }
+
   identity weekly {
     base frequency-type;
     description
       "Indicates a repeating rule based on an interval of
        a week or more.";
   }
+
   identity monthly {
     base frequency-type;
     description
       "Indicates a repeating rule based on an interval of
        a month or more.";
   }
+
   identity yearly {
     base frequency-type;
     description
       "Indicates a repeating rule based on an interval of
        a year or more.";
   }
+
   identity schedule-type {
     description
       "Base identity for schedule type.";
   }
+
   identity period {
     base schedule-type;
     description
@@ -202,20 +211,24 @@ module ietf-schedule {
     description
       "Indicates a recurrence based schedule.";
   }
+
   identity schedule-state {
     description
       "Base identity for schedule state.";
   }
+
   identity enabled {
     base schedule-state;
     description
       "Indicates a recurrence with an enabled state.";
   }
+
   identity disabled {
     base schedule-state;
     description
       "Indicates a recurrence with a disabled state.";
   }
+
   identity out-of-date {
     base schedule-state;
     description
@@ -233,12 +246,14 @@ module ietf-schedule {
       "Indicates that a warning message is generated
        when a schedule is discarded.";
   }
+
   identity error {
     base discard-action;
     description
       "Indicates that an error message is generated
        when a schedule is discarded.";
   }
+
   identity silently-discard {
     base discard-action;
     description
@@ -248,7 +263,7 @@ module ietf-schedule {
 
   grouping generic-schedule-params {
     description
-      "Incldues a set of generic configuration parameters that are
+      "Includes a set of generic parameters that are
        followed by the entity that supports schedules.
 
        These parameters apply to all schedules.
@@ -667,8 +682,8 @@ module ietf-schedule {
     leaf schedule-id {
       type string;
       description
-        "The schedule identifier that globally identifies a
-         schedule in a device, controller, network, etc. 
+        "The schedule identifier that uniquely identifies a
+         schedule within a device, controller, network, etc. 
          The unicity scope depends on the implementation.";
     }
     leaf state {
