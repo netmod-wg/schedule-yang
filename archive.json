@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-06T00:53:26.732684+00:00",
+  "timestamp": "2024-06-09T00:58:48.391403+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -117,6 +117,22 @@
           "updatedAt": "2024-04-25T12:00:06Z"
         }
       ]
+    },
+    {
+      "number": 16,
+      "id": "I_kwDOLuooYM6Lh4x3",
+      "title": "Erik Kline Comment at IETF#119/TVR",
+      "url": "https://github.com/netmod-wg/schedule-yang/issues/16",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://datatracker.ietf.org/doc/minutes-119-tvr-202403200300/, especially the following:\r\n\r\n\r\n> Erik Kline: sldie 5, timezones makes everything worse. datetime start is\r\n> bad name. call it \"utc start time\". interval vs duration?\r\n> \r\n> possibly going to be removed, working with schedule authors for specific\r\n> grouping for tvr\r\n> \r\n> Erik Kline: If you want to recurr make the control system do it if want\r\n> to make truly simple. so remove that from model.\r\n> \r\n\r\n",
+      "createdAt": "2024-06-07T17:53:06Z",
+      "updatedAt": "2024-06-07T17:53:20Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -887,6 +903,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOLuooYM5xzuNW",
+      "title": "minor nits",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/15",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-07T14:42:23Z",
+      "updatedAt": "2024-06-07T14:42:23Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "c8112d90bef891fd359e6b4b32066f5e298838ec",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-9",
+      "headRefOid": "0ad9e5803f998f5c7a38720cc9f73abfb1063d49",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
