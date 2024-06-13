@@ -413,7 +413,8 @@ Table of Contents
 
    Note that the "interval" and "duration" cover two distinct properties
    of a schedule event.  The interval specifies when a schedule will
-   occure, while the duration indicates how long an occurence will last.
+   occur, combined with the frequency parameter; while the duration
+   indicates how long an occurence will last.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling
    contexts where machine readability is more desirable.
