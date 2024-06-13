@@ -218,7 +218,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    in units of seconds to specify the time period of the first occurrence. Unless specified otherwise, the "duration" also applies to subsequent recurrence instances.
 
 Note that the "interval" and "duration" cover two distinct properties of a schedule event.
-The interval specifies when a schedule will occure, while the duration indicates how long
+The interval specifies when a schedule will occur, combined with the frequency parameter; while the duration indicates how long
 an occurence will last.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling contexts
