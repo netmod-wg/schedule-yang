@@ -191,7 +191,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   The frequency ("frequency") which is mandatory, identifies the type of recurrence rule. For example,
   a "daily" frequency value specifies repeating events based on an interval of a day or more.
 
-  The interval ("interval") represents at which intervals the recurrence rule repeats. For example,
+  Consistent with {{Section 3.3.10 of !RFC5545}}, the interval ("interval") represents at which intervals the recurrence rule repeats. For example,
   within a daily recurrence rule, an interval value of "8" means every eight days.
   The default value is "1", meaning every second for a secondly recurrence rule,
   every minute for a minutely rule, every hour for an hourly rule, every day for a
@@ -214,9 +214,12 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    The "recurrence-utc" grouping refines the "recurrence" grouping to require
    that the date and time values to describe the recurrence be reported in UTC format.
 
-   It also augments the "recurrence-first" container with a parameter "duration"
-   in units of seconds to allow the time period of the first occurrence to be
-   specified. The "duration" also applies to subsequent recurrence instances.
+   It also augments the "recurrence-first" container with a "duration" parameter
+   in units of seconds to specify the time period of the first occurrence. Unless specified otherwise, the "duration" also applies to subsequent recurrence instances.
+
+Note that the "interval" and "duration" cover two distinct properties of a schedule event.
+The interval specifies when a schedule will occure, while the duration indicates how long
+an occurence will last.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling contexts
    where machine readability is more desirable.
@@ -237,10 +240,10 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    to UTC.
 
    It also augments the "recurrence-first" container with a parameter "duration"
-   to allow the time period of the first occurrence to be specified. The
+   to specify the time period of the first occurrence. Unless specified otherwise, the
    "duration" also applies to subsequent recurrence instances.
 
-   Unlike the definition of "recurrence-utc" grouping {{sec-rec-utc}},
+   Unlike the definition of "recurrence-utc" grouping ({{sec-rec-utc}}),
    "recurrence-with-time-zone" is intended to promote human readability over
    machine readability.
 
@@ -382,24 +385,24 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 #  Note and Restrictions
 
    There are some restrictions that need to be followed when using groupings defined
-   in "ietf-schedule" yang module:
+   in the "ietf-schedule" YANG module:
 
    *  The instant in time represented by "period-start" MUST be before the
-      "period-end" for "period-of-time" grouping
+      "period-end" for "period-of-time" grouping.
    *  The combination of the day, month, and year represented for date and time
       value MUST be valid. See {{Section 5.7 of ?RFC3339}} for the maxinum day
       number based on the month and year.
    *  The second MUST have the value "60" at the end of months in which a leap
-      second occurs for date and time value
+      second occurs for date and time value.
    *  Care must be taken when defining recurrence occurring very often and
       frequent that can be an additional source of attacks by keeping the system
-      permanently busy with the management of scheduling
+      permanently busy with the management of scheduling.
    *  Schedules received with a starting time in the past with respect to
-      current time SHOULD be ignored
+      current time SHOULD be ignored.
 
 #  The "ietf-schedule" YANG Module {#sec-schedule}
 
-   This module imports types defined in {{!RFC6991}}.
+   This module imports types defined in {{!RFC6991}} and {{!RFC7317}}.
 
 ~~~~
 <CODE BEGINS> file "ietf-schedule@2024-04-16.yang"
@@ -452,7 +455,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
         name:               ietf-schedule
         namespace:          urn:ietf:params:xml:ns:yang:ietf-schedule
         prefix:             schedule
-        maintained by IANA: N
+        maintained by IANA? N
         reference:          RFC XXXX
 ~~~~
 
@@ -461,10 +464,10 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 # Examples of Format Representation {#usage}
 
    This section provides some examples to illustrate the use of the
-   period and recurrence formats defined as YANG groupings. Note that "grouping"
-   does not define any data nodes in the schema tree, the examples illustrated are
-   just for the ease of understanding. Only the message body is provided with
-   JSON used for encoding {{?RFC7951}}.
+   period and recurrence formats defined in {{sec-schedule}}. Note that a "grouping"
+   does not define any data nodes in the schema tree; the examples illustrated are
+   thus for the ease of understanding. Only the message body is provided with
+   JSON used for encoding per the guidance in {{?RFC7951}}.
 
 ## The "generic-schedule-params" Grouping
 
@@ -484,8 +487,8 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ## The "period-of-time" Grouping
 
-   The example of a period that starts at 08:00:00 UTC, on January 1, 2025 and ends at 18:00:00 UTC
-   on December 31, 2027 is encoded as shown in {{ex-1}}.
+   {{ex-1}} shows an example of a period that starts at 08:00:00 UTC, on January 1, 2025 and ends at 18:00:00 UTC
+   on December 31, 2027.
 
 ~~~~
 {
@@ -766,3 +769,5 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
    Many thanks to the authors of {{?I-D.ietf-tvr-schedule-yang}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.ietf-netmod-eca-policy}}
    for the constructive discussion during IETF#118.
+
+   Other related efforts were explored in the past, e.g., {{?I-D.liu-netmod-yang-schedule}}.
