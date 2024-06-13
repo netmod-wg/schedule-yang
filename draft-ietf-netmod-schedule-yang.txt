@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 28 October 2024                               M. Boucadair, Ed.
+Expires: 15 December 2024                              M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                           26 April 2024
+                                                            13 June 2024
 
 
                 A Common YANG Data Model for Scheduling
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 October 2024.
+   This Internet-Draft will expire on 15 December 2024.
 
 Copyright Notice
 
@@ -933,52 +933,61 @@ Table of Contents
        description
          "Base identity for frequency type.";
      }
+
      identity secondly {
        base frequency-type;
        description
          "Indicates a repeating rule based on an interval of
           a second or more.";
      }
+
      identity minutely {
        base frequency-type;
        description
          "Indicates a repeating rule based on an interval of
           a minute or more.";
      }
+
      identity hourly {
        base frequency-type;
        description
          "Indicates a repeating rule based on an interval of
           an hour or more.";
      }
+
      identity daily {
        base frequency-type;
        description
          "Indicates a repeating rule based on an interval of
           a day or more.";
      }
+
      identity weekly {
        base frequency-type;
        description
          "Indicates a repeating rule based on an interval of
           a week or more.";
      }
+
      identity monthly {
        base frequency-type;
        description
          "Indicates a repeating rule based on an interval of
           a month or more.";
      }
+
      identity yearly {
        base frequency-type;
        description
          "Indicates a repeating rule based on an interval of
           a year or more.";
      }
+
      identity schedule-type {
        description
          "Base identity for schedule type.";
      }
+
      identity period {
        base schedule-type;
        description
@@ -990,20 +999,24 @@ Table of Contents
        description
          "Indicates a recurrence based schedule.";
      }
+
      identity schedule-state {
        description
          "Base identity for schedule state.";
      }
+
      identity enabled {
        base schedule-state;
        description
          "Indicates a recurrence with an enabled state.";
      }
+
      identity disabled {
        base schedule-state;
        description
          "Indicates a recurrence with a disabled state.";
      }
+
      identity out-of-date {
        base schedule-state;
        description
@@ -1021,12 +1034,14 @@ Table of Contents
          "Indicates that a warning message is generated
           when a schedule is discarded.";
      }
+
      identity error {
        base discard-action;
        description
          "Indicates that an error message is generated
           when a schedule is discarded.";
      }
+
      identity silently-discard {
        base discard-action;
        description
@@ -1036,7 +1051,7 @@ Table of Contents
 
      grouping generic-schedule-params {
        description
-         "Incldues a set of generic configuration parameters that are
+         "Includes a set of generic parameters that are
           followed by the entity that supports schedules.
 
           These parameters apply to all schedules.
@@ -1455,8 +1470,8 @@ Table of Contents
        leaf schedule-id {
          type string;
          description
-           "The schedule identifier that globally identifies a
-            schedule in a device, controller, network, etc.
+           "The schedule identifier that uniquely identifies a
+            schedule within a device, controller, network, etc.
             The unicity scope depends on the implementation.";
        }
        leaf state {
@@ -1648,9 +1663,9 @@ Table of Contents
               Ma, Q., Wu, Q., Boucadair, M., and D. King, "A YANG Data
               Model and RADIUS Extension for Policy-based Network Access
               Control", Work in Progress, Internet-Draft, draft-ietf-
-              opsawg-ucl-acl-03, 2 February 2024,
+              opsawg-ucl-acl-04, 6 June 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
-              ucl-acl-03>.
+              ucl-acl-04>.
 
    [I-D.ietf-tvr-schedule-yang]
               Qu, Y., Lindem, A., Kinzie, E., Fedyk, D., and M.
