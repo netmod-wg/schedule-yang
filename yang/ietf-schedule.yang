@@ -30,8 +30,8 @@ module ietf-schedule {
      Author:   Daniel King
                <mailto:d.king@lancaster.ac.uk>";
   description
-    "This YANG module defines a set of common groupings which
-     are applicable for scheduling purposes such as events,
+    "This YANG module defines a set of common types and groupings
+     which are applicable for scheduling purposes such as events,
      policy, services, or resources based on date and time.
 
      Copyright (c) 2024 IETF Trust and the persons identified
@@ -203,13 +203,13 @@ module ietf-schedule {
   identity period {
     base schedule-type;
     description
-      "Indicates a period based schedule.";
+      "Indicates a period-based schedule.";
   }
   
   identity recurrence {
     base schedule-type;
     description
-      "Indicates a recurrence based schedule.";
+      "Indicates a recurrence-based schedule.";
   }
 
   identity schedule-state {
@@ -237,7 +237,7 @@ module ietf-schedule {
   
   identity discard-action {
     description
-      "Indicates that schedule will be discarded.";
+      "Indicates that a schedule will be discarded.";
   }
   
   identity warning {
@@ -266,15 +266,12 @@ module ietf-schedule {
       "Includes a set of generic parameters that are
        followed by the entity that supports schedules.
 
-       These parameters apply to all schedules.
-
        Such parameters are used as guards to prevent, e.g., stale
        configuration.";
     leaf time-zone-identifier {
       type sys:timezone-name;
       description
-        "Indicates the identifier for the time zone in a time zone
-         database.";
+        "Indicates the identifier for the time zone.";
     }
     leaf validity {
       type yang:date-and-time;
@@ -287,21 +284,20 @@ module ietf-schedule {
     leaf max-allowed-start {
       type yang:date-and-time;
       description
-        "Specifies the maximum scheduled start date and time, a 
-         requested schedule instance whose first occurrence after 
+        "Specifies the maximum scheduled start date and time. 
+         A requested schedule whose first instance occurrs after 
          this value cannot be accepted by the entity. Specifically, 
          a requested schedule will be rejected if the first 
-         occurrence of that new schedule exceeds
-         'max-allowed-start'.";
+         occurrence of that schedule exceeds 'max-allowed-start'.";
     }
     leaf min-allowed-start {
       type yang:date-and-time;
       description
-        "Specifies the minimum scheduled start date and time, a 
-         requested schedule instance whose first occurrence before 
+        "Specifies the minimum scheduled start date and time. 
+         A requested schedule whose first instance occurrs before 
          this value cannot be accepted by the entity. Specifically, 
          a requested schedule will be rejected if the first  
-         occurrence of that new schedule is scheduled before 
+         occurrence of that schedule is scheduled before 
          'min-allowed-start'.";
     }
     leaf max-allowed-end {
@@ -343,7 +339,7 @@ module ietf-schedule {
     choice period-type {
       description
         "Indicates the type of the time period. Two types are
-          supported.";
+         supported.";
       case explicit {
         description
           "A period of time is identified by its start and its end.
@@ -362,8 +358,8 @@ module ietf-schedule {
       }
       case duration {
         description
-          "A period of time is defined by a start and a
-           positive duration of time.";
+          "A period of time is defined by a start and a positive
+           duration of time.";
         leaf duration {
           type duration {
             pattern 'P((([0-9]+)D)?(T(0[0-9]|1[0-9]|2[0-3])'
@@ -397,8 +393,7 @@ module ietf-schedule {
       }
       mandatory true;
       description
-        "This parameter is defined to identify the frequency type of
-         the recurrence rule.";
+        "Specifies the frequency type of the recurrence rule.";
     }
     leaf interval {
       type uint32;
@@ -470,9 +465,8 @@ module ietf-schedule {
           units "seconds";
           description
             "When specified, it refers to the duration of each 
-             occurrence. The duration is in units of seconds. The 
-             exact duration also applies to all the recurrence 
-             instance.";
+             occurrence. The exact duration also applies to all
+             the recurrence instance.";
         }      
       }
     }
@@ -512,14 +506,14 @@ module ietf-schedule {
     description
       "This grouping defines an aggregate set of repeating 
        occurrences with UTC time format. The recurrence instances 
-       are specified by the union of occurrences defined by both 
-       the recurrence rule and 'period-timeticks' list. Duplicate 
+       are specified by the occurrences defined by both the
+       recurrence rule and 'period-timeticks' list. Duplicate 
        instances are ignored.";
     uses recurrence-utc;
     list period-timeticks {
       key "period-start";
       description
-        "A list of period with timeticks formats.";      
+        "A list of periods with timeticks formats.";      
       leaf period-start {
         type yang:timeticks;
         must
@@ -556,40 +550,38 @@ module ietf-schedule {
     description
       "This grouping defines an aggregate set of repeating 
        occurrences with local time format and time zone specified. 
-       The recurrence instances are specified by the union of 
-       occurrences defined by both the recurrence rule and 'period' 
-       list. Duplicate instances are ignored.";  
+       The recurrence instances are specified by the occurrences
+       defined by both the recurrence rule and 'period' list. 
+       Duplicate instances are ignored.";  
     uses recurrence-with-time-zone;
     list period {
       key "period-start";
       description
-        "A list of period with date-and-time formats.";
+        "A list of periods with date-and-time formats.";
       uses period-of-time;
     }
   }
 
   grouping icalendar-recurrence {
     description
-      "This grouping is defined to identify properties that 
-       contain a recurrence rule.";
+      "This grouping specifies properties of a recurrence rule.";
     reference
-      "RFC 5545: Internet Calendaring and Scheduling
-                 Core Object Specification (iCalendar),
-                 Section 3.8.5";
+      "RFC 5545: Internet Calendaring and Scheduling Core Object
+                 Specification (iCalendar), Section 3.8.5";
     uses recurrence-time-zone-with-date-times;
     leaf-list bysecond {
       type uint32 {
         range "0..60";
       }
       description
-        "A list of seconds within a minute.";
+        "Specifies a list of seconds within a minute.";
     }
     leaf-list byminute {
       type uint32 {
         range "0..59";
       }
       description
-        "A list of minutes within an hour.";
+        "Specifies a list of minutes within an hour.";
     }
     leaf-list byhour {
       type uint32 {
@@ -677,8 +669,8 @@ module ietf-schedule {
   
   grouping schedule-status {
     description
-      "This grouping is defined to identify common properties of 
-       scheduling status.";
+      "This grouping defines common properties of scheduling
+       status.";
     leaf schedule-id {
       type string;
       description
@@ -691,12 +683,12 @@ module ietf-schedule {
         base schedule-state;
       }
       description
-        "The current state of the schedule.";
+        "Indicates the current state of the schedule.";
     }
     leaf version {
       type uint16;
       description
-        "The version number of the schedule.";
+        "Indicates the version number of the schedule.";
     }
     leaf schedule-type {
       type identityref {
@@ -704,13 +696,13 @@ module ietf-schedule {
       }
       config false;
       description
-        "The schedule type.";
+        "Reports the schedule type.";
     }
     leaf last-update {
       type yang:date-and-time;
       config false;
       description
-        "The timestamp that the schedule is last updated.";
+        "Reports the timestamp that the schedule is last updated.";
     }
     leaf counter {
       when "derived-from-or-self(../schedule-type, "
@@ -727,7 +719,7 @@ module ietf-schedule {
       type yang:date-and-time;
       config false;
       description
-        "The timestamp of last occurrence.";    
+        "Indicates the timestamp of last occurrence.";    
     }
     leaf upcoming-occurrence {
       when "derived-from-or-self(../schedule-type, "
@@ -736,7 +728,7 @@ module ietf-schedule {
       type yang:date-and-time;
       config false;
       description
-        "The timestamp of next occurrence.";
+        "Indicates the timestamp of next occurrence.";
     }    
   }
 }
