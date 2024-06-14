@@ -200,6 +200,14 @@ module ietf-schedule {
       "Base identity for schedule type.";
   }
 
+  identity one-shot {
+    base schedule-type;
+    description
+      "Indicates a one-shot schedule. That's a schedule that
+       will trigger an action and then the schedule will disable
+       itself.";
+  }
+
   identity period {
     base schedule-type;
     description
@@ -221,6 +229,13 @@ module ietf-schedule {
     base schedule-state;
     description
       "Indicates a recurrence with an enabled state.";
+  }
+
+  identity finished {
+    base schedule-state;
+    description
+      "Indicates a recurrence with a finished state.
+       The finished state indicates that the schedule has ended.";
   }
 
   identity disabled {
@@ -263,8 +278,8 @@ module ietf-schedule {
 
   grouping generic-schedule-params {
     description
-      "Includes a set of generic parameters that are
-       followed by the entity that supports schedules.
+      "Includes a set of generic parameters that are followed by
+       the entity that supports schedules.
 
        Such parameters are used as guards to prevent, e.g., stale
        configuration.";
