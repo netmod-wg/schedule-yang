@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 15 December 2024                              M. Boucadair, Ed.
+Expires: 20 December 2024                              M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                            13 June 2024
+                                                            18 June 2024
 
 
                 A Common YANG Data Model for Scheduling
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 December 2024.
+   This Internet-Draft will expire on 20 December 2024.
 
 Copyright Notice
 
@@ -1523,6 +1523,24 @@ Table of Contents
          config false;
          description
            "Indicates the timestamp of next occurrence.";
+       }
+       leaf last-failed-occurrence {
+         when "derived-from-or-self(../schedule-type, "
+            + "'schedule:recurrence')";
+         type yang:date-and-time;
+         config false;
+         description
+           "Indicates the timestamp of last failed action triggered by
+            the schedule.";
+       }
+       leaf failure-counter {
+         when "derived-from-or-self(../schedule-type, "
+            + "'schedule:recurrence')";
+         type uint32;
+         config false;
+         description
+           "Counts the number of failures while invoking the scheduled
+            action.";
        }
      }
    }
