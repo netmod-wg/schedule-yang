@@ -736,7 +736,7 @@ module ietf-schedule {
       type yang:date-and-time;
       config false;
       description
-        "Indicates the timestamp of last failed action trigegred by
+        "Indicates the timestamp of last failed action triggered by
          the schedule.";    
     }
     leaf failure-counter {
