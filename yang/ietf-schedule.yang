@@ -268,6 +268,11 @@ module ietf-schedule {
 
        Such parameters are used as guards to prevent, e.g., stale
        configuration.";
+    leaf description {
+      type string;
+      description
+        "Provides a description of the schedule.";
+    }
     leaf time-zone-identifier {
       type sys:timezone-name;
       description
@@ -323,6 +328,11 @@ module ietf-schedule {
     reference
       "RFC 5545: Internet Calendaring and Scheduling Core Object
                  Specification (iCalendar), Section 3.3.9";
+    leaf description {
+      type string;
+      description
+        "Provides a description of the period.";
+    }
     leaf period-start {
       type yang:date-and-time;
       description
@@ -386,6 +396,11 @@ module ietf-schedule {
           "Defines the instant date and time of the first instance 
            in the recurrence set.";
       }  
+    }
+    leaf description {
+      type string;
+      description
+        "Provides a description of the recurrence.";
     }
     leaf frequency {
       type identityref {
@@ -611,10 +626,9 @@ module ietf-schedule {
       leaf weekday {
         type schedule:weekday;
         description
-          "Corredponds to seven days of the week.";
+          "Corresponds to seven days of the week.";
       }
     }
-
     leaf-list bymonthday {
       type int32 {
         range "-31..-1|1..31";
