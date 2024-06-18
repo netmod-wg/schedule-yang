@@ -729,6 +729,24 @@ module ietf-schedule {
       config false;
       description
         "Indicates the timestamp of next occurrence.";
-    }    
+    }
+    leaf last-failed-occurrence {
+      when "derived-from-or-self(../schedule-type, "
+         + "'schedule:recurrence')";
+      type yang:date-and-time;
+      config false;
+      description
+        "Indicates the timestamp of last failed action triggered by
+         the schedule.";    
+    }
+    leaf failure-counter {
+      when "derived-from-or-self(../schedule-type, "
+         + "'schedule:recurrence')";
+      type uint32;
+      config false;
+      description
+        "Counts the number of failures while invoking the scheduled
+         action.";
+    }
   }
 }
