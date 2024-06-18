@@ -626,7 +626,7 @@ module ietf-schedule {
       leaf weekday {
         type schedule:weekday;
         description
-          "Corredponds to seven days of the week.";
+          "Corresponds to seven days of the week.";
       }
     }
     leaf-list bymonthday {
