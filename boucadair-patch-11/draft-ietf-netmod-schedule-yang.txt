@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 16 December 2024                              M. Boucadair, Ed.
+Expires: 20 December 2024                              M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                            14 June 2024
+                                                            18 June 2024
 
 
                 A Common YANG Data Model for Scheduling
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 December 2024.
+   This Internet-Draft will expire on 20 December 2024.
 
 Copyright Notice
 
@@ -1420,7 +1420,7 @@ Table of Contents
          leaf weekday {
            type schedule:weekday;
            description
-             "Corredponds to seven days of the week.";
+             "Corresponds to seven days of the week.";
          }
        }
        leaf-list bymonthday {
