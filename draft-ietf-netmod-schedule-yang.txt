@@ -218,6 +218,7 @@ Table of Contents
    module: ietf-schedule
 
      grouping generic-schedule-params:
+       +-- description?            string
        +-- time-zone-identifier?   sys:timezone-name
        +-- validity?               yang:date-and-time
        +-- max-allowed-start?      yang:date-and-time
