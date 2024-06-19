@@ -121,7 +121,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    {{augments}} demonstrates how additional parameters can be added to comply with specifc schedule needs.
 
   ##  Types and Identities
-  
+
    The "ietf-schedule" module (Section 7) defines the following identities:
 
    * "frequency-type": Characterizes the repeating interval rule of a schedule (per second, per minute, etc.).
@@ -134,7 +134,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    * "discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).
 
   ##  Groupings
-  
+
    The "ietf-schedule" module ({{sec-schedule}}) defines the following groupings:
 
    * "generic-schedule-params" ({{sec-gen}})
