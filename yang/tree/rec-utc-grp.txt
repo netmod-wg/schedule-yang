@@ -8,15 +8,16 @@ module: ietf-schedule
     ...
   grouping recurrence-utc:
     +-- recurrence-first
-    |  +-- date-time-start?   yang:date-and-time
-    |  +-- duration?          int32
+    |  +-- utc-start-time?   yang:date-and-time
+    |  +-- duration?         uint32
+    +-- (recurrence-bound)?
+    |  +--:(until)
+    |  |  +-- utc-until?    yang:date-and-time
+    |  +--:(count)
+    |     +-- count?        uint32
+    +-- description?        string
     +-- frequency           identityref
     +-- interval?           uint32
-    +-- (recurrence-bound)?
-       +--:(until)
-       |  +-- until?        yang:date-and-time
-       +--:(count)
-          +-- count?        uint32
   grouping recurrence-with-time-zone:
     ...
   grouping recurrence-utc-with-date-times:
