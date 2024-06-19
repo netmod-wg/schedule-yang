@@ -501,7 +501,7 @@ Table of Contents
        +-- frequency           identityref
        +-- interval?           uint32
        +-- period-timeticks* [period-start]
-          +-- period-start?   yang:timeticks
+          +-- period-start    yang:timeticks
           +-- period-end?     yang:timeticks
      grouping recurrence-time-zone-with-date-times:
        ...
