@@ -5,15 +5,9 @@ module: ietf-schedule
   grouping period-of-time:
     ...
   grouping recurrence:
-    +-- recurrence-first
-    |  +-- date-time-start?   yang:date-and-time
-    +-- frequency           identityref
-    +-- interval?           uint32
-    +-- (recurrence-bound)?
-       +--:(until)
-       |  +-- until?        yang:date-and-time
-       +--:(count)
-          +-- count?        uint32
+    +-- description?   string
+    +-- frequency      identityref
+    +-- interval?      uint32
   grouping recurrence-utc:
     ...
   grouping recurrence-with-time-zone:
