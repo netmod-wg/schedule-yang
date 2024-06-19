@@ -17,12 +17,15 @@ module: ietf-schedule
   grouping icalendar-recurrence:
     ...
   grouping schedule-status:
-    +-- schedule-id?           string
-    +-- state?                 identityref
-    +-- version?               uint16
-    +--ro schedule-type?         identityref
-    +--ro last-update?           yang:date-and-time
-    +--ro counter?               uint32
-    +--ro last-occurrence?       yang:date-and-time
-    +--ro upcoming-occurrence?   yang:date-and-time
+    +-- schedule-id?              string
+    +-- state?                    identityref
+    +-- version?                  uint16
+    +-- schedule-type?            identityref
+    +--ro local-time?               yang:date-and-time
+    +--ro last-update?              yang:date-and-time
+    +--ro counter?                  uint32
+    +--ro last-occurrence?          yang:date-and-time
+    +--ro upcoming-occurrence?      yang:date-and-time
+    +--ro last-failed-occurrence?   yang:date-and-time
+    +--ro failure-counter?          uint32
 
