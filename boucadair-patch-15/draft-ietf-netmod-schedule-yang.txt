@@ -825,7 +825,7 @@ Table of Contents
                +------------------+------------------------+
                | schedContextName | Not Supported          |
                +------------------+------------------------+
-               | schedAdminStatus |                        |
+               | schedAdminStatus | state                  |
                +------------------+------------------------+
                | schedOperStatus  |                        |
                +------------------+------------------------+
