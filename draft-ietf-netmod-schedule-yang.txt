@@ -284,7 +284,8 @@ Table of Contents
      grouping generic-schedule-params:
        ...
      grouping period-of-time:
-       +-- period-start?           yang:date-and-time
+       +-- description?            string
+       +-- period-start            yang:date-and-time
        +-- time-zone-identifier?   sys:timezone-name
        +-- (period-type)?
           +--:(explicit)
