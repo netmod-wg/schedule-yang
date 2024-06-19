@@ -422,7 +422,7 @@ can be mapped to YANG parameters.
 |schedHour|  byhour|
 |schedMinute| byminute  |
 |schedContextName| Not Supported   |
-|schedAdminStatus|   |
+|schedAdminStatus|   state|
 |schedOperStatus|  |
 |schedFailures| failure-counter |
 |schedLastFailure| Not Supported   |
