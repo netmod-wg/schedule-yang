@@ -708,9 +708,8 @@ module ietf-schedule {
       type identityref {
         base schedule-type;
       }
-      config false;
       description
-        "Reports the schedule type.";
+        "Indicates the schedule type.";
     }
     leaf last-update {
       type yang:date-and-time;
