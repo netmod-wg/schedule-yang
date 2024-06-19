@@ -428,6 +428,7 @@ can be mapped to YANG parameters.
 |schedLastFailure| Not Supported   |
 |schedLastFailed|  schedLastFailed|
 |schedStorageType|  Not Supported    |
+|schedValue|  Not Supported    |
 {: #mapping title="YANG/MIB Mapping"}
 
 #  The "ietf-schedule" YANG Module {#sec-schedule}
