@@ -400,6 +400,37 @@ an occurence will last.
    *  Schedules received with a starting time in the past with respect to
       current time SHOULD be ignored.
 
+# Relationship to the DISMAN-SCHEDULE-MIB
+
+{{!RFC3231}} specifies a Management Information Base (MIB) used to
+schedule management operations periodically or at specified dates and times.
+
+Despite no data nodes are defined in this document, {{mapping}} lists how main objects in the DISMAN-SCHEDULE-MIB
+can be mapped to YANG parameters.
+
+|MIB Object|	YANG|
+|----------|---|
+|schedLocalTime| local-time |
+|schedType | schedule-type|
+|schedName| schedule-id |
+|schedOwner| Not Supported  |
+|schedDescr| description |
+|schedInterval|interval   |
+|schedWeekDay| weekday  |
+|schedMonth|  byyearmonth |
+|schedDay| bymonthday  |
+|schedHour|  byhour|
+|schedMinute| byminute  |
+|schedContextName| Not Supported   |
+|schedAdminStatus|   state|
+|schedOperStatus|  state|
+|schedFailures| failure-counter |
+|schedLastFailure| Not Supported   |
+|schedLastFailed|   last-failed-occurrence|
+|schedStorageType|  Not Supported    |
+|schedValue|  Not Supported    |
+{: #mapping title="YANG/MIB Mapping"}
+
 #  The "ietf-schedule" YANG Module {#sec-schedule}
 
    This module imports types defined in {{!RFC6991}} and {{!RFC7317}}.
