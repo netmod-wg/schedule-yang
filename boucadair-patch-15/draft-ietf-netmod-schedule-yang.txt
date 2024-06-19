@@ -837,6 +837,8 @@ Table of Contents
                   +------------------+-----------------+
                   | schedStorageType | Not Supported   |
                   +------------------+-----------------+
+                  | schedValue       | Not Supported   |
+                  +------------------+-----------------+
 
                         Table 1: YANG/MIB Mapping
 
