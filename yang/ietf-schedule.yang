@@ -744,6 +744,13 @@ module ietf-schedule {
       description
         "Indicates the schedule type.";
     }
+    leaf local-time {
+      type yang:date-and-time;
+      config false;
+      description
+        "Reports the local time as used by the entity that
+         hosts the schedule.";
+    }
     leaf last-update {
       type yang:date-and-time;
       config false;
