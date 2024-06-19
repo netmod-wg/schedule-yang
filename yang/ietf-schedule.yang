@@ -203,15 +203,16 @@ module ietf-schedule {
   identity one-shot {
     base schedule-type;
     description
-      "Indicates a one-shot schedule. That's a schedule that
-       will trigger an action and then the schedule will disable
-       itself.";
+      "Indicates a one-shot schedule. That is a schedule that
+       will trigger an action without the duration/end time being
+       specified and then the schedule will disable itself.";
   }
 
   identity period {
     base schedule-type;
     description
-      "Indicates a period-based schedule.";
+      "Indicates a period-based schedule consisting either a
+       start and end or a start and positive duration of time.";
   }
   
   identity recurrence {
