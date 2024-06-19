@@ -102,6 +102,26 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 #  Module Overview
 
+##  Features and Augmentations
+
+   The "ietf-schedule" data model defines the recurrence related groupings using
+   a modular approach. Basic, intermediate, and advanced representation of recurrence
+   groupings are defined, with each reusing the previous one and adding more parameters.
+   To allow for different options, two features are defined in the data model:
+
+   *  "basic-recurrence-supported"
+   *  "icalendar-recurrence-supported"
+
+   {{features}} provides an example about how these features can be used. Implementations
+   may support a basic recurrence rule or an advanced one as needed, by declaring
+   different features. Whether only one or both features are supported is implementation
+   specific and depend on specific scheduling context.
+
+   The groupings defined in the document can also be augmented to support specific needs. As an example,
+   {{augments}} demonstrates how additional parameters can be added to comply with specifc schedule needs.
+
+  ##  Types and Identities
+  
    The "ietf-schedule" module (Section 7) defines the following identities:
 
    * "frequency-type": Characterizes the repeating interval rule of a schedule (per second, per minute, etc.).
@@ -113,6 +133,8 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    * "schedule-state": Indicates the status of a schedule (enabled, disabled, finished, etc.).
    * "discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).
 
+  ##  Groupings
+  
    The "ietf-schedule" module ({{sec-schedule}}) defines the following groupings:
 
    * "generic-schedule-params" ({{sec-gen}})
@@ -136,7 +158,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    Each of these groupings is presented in the following subsections. Examples
    are provided in {{usage}}.
 
-## The "generic-schedule-params" Grouping {#sec-gen}
+### The "generic-schedule-params" Grouping {#sec-gen}
 
    A system accepts and handles the schedule requests, which may help further
    automate the scheduling process of events, policy, services, or resources
@@ -175,7 +197,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    to provide guards against stale configuration, too short schedule requests
    that would prevent validation by admins of some critical systems, etc.
 
-## The "period-of-time" Grouping {#sec-period}
+### The "period-of-time" Grouping {#sec-period}
 
    The "period-of-time" grouping ({{pt-tree}}) represents a time period using
    either a start ("period-start") and end date and time ("period-end"), or a
@@ -191,7 +213,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 {: #pt-tree title="Period of Time Grouping Tree Structure"}
 
 
-## The "recurrence" Grouping {#sec-rec}
+### The "recurrence" Grouping {#sec-rec}
 
   The "recurrence" grouping ({{rec-grp-tree}}) specifies a simple recurrence rule.
 
@@ -210,7 +232,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   daily rule, and so on. Note that per {{Section 4.13 of ?I-D.ietf-netmod-rfc8407bis}}, no "default" substatement is used here because there are cases (e.g., profiling) where the use of the default is problematic.
 
 
-## The "recurrence-utc" Grouping {#sec-rec-utc}
+### The "recurrence-utc" Grouping {#sec-rec-utc}
 
    The "recurrence-utc" grouping ({{rec-utc-grp-tree}}) specifies a simple recurrence
    rule in UTC format.
@@ -235,7 +257,7 @@ an occurence will last.
    The "recurrence-utc" grouping is designed to be reused in scheduling contexts
    where machine readability is more desirable.
 
-## The "recurrence-with-time-zone" Grouping {#sec-rec-tz}
+### The "recurrence-with-time-zone" Grouping {#sec-rec-tz}
 
    The "recurrence-with-time-zone" grouping ({{rec-tz-grp-tree}}) specifies a simple recurrence
    rule with a time zone.
@@ -261,7 +283,7 @@ an occurence will last.
    "recurrence-with-time-zone" is intended to promote human readability over
    machine readability.
 
-## The "recurrence-utc-with-date-times" Grouping {#sec-rec-utc-dt}
+### The "recurrence-utc-with-date-times" Grouping {#sec-rec-utc-dt}
 
    The "recurrence-utc-with-date-times" grouping ({{rec-utc-dt-grp-tree}}) uses
    the "recurrence-utc" grouping ({{sec-rec-utc}}) and adds a "period-timeticks"
@@ -279,7 +301,7 @@ an occurence will last.
   value must not exceed 100 in a secondly recurrence rule, and it must not
   exceed 6000 in a minutely recurrence rule, and so on.
 
-## The "recurrence-time-zone-with-date-times" Grouping {#sec-rec-tz-dt}
+### The "recurrence-time-zone-with-date-times" Grouping {#sec-rec-tz-dt}
 
   The "recurrence-time-zone-with-date-times" grouping ({{rec-tz-dt-grp-tree}}) uses
   the "recurrence-with-time-zone" grouping ({{sec-rec-tz}}) and
@@ -294,7 +316,7 @@ an occurence will last.
   by both the recurrence rule and "period" list. Duplicate instances
   are ignored.
 
-## The "icalendar-recurrence" Grouping {#sec-ical-rec}
+### The "icalendar-recurrence" Grouping {#sec-ical-rec}
 
   The "icalendar-recurrence" grouping ({{ical-grp-tree}}) uses the
   "recurrence-time-zone-with-date-times" grouping ({{sec-rec-tz-dt}}) and define
@@ -342,7 +364,7 @@ an occurence will last.
    generated by any of the specified recurrence rule and date-times, and then
    excluding any start date and time values specified by "exception-dates" parameter.
 
-## The "schedule-status" Grouping {#sec-schedule-status}
+### The "schedule-status" Grouping {#sec-schedule-status}
 
    The "schedule-status" grouping ({{sche-status-tree}}) defines common parameters
    for scheduling management/status exposure.
@@ -383,24 +405,6 @@ an occurence will last.
    useful parameters as needed. For example, in a  scheduling context with multiple
    system sources to feed the schedules, the "source" and "precedence" parameters
    may be needed to reflect how schedules from different sources should be prioritised.
-
-#  Features and Augmentations
-
-   The "ietf-schedule" data model defines the recurrence related groupings using
-   a modular approach. Basic, intermediate, and advanced representation of recurrence
-   groupings are defined, with each reusing the previous one and adding more parameters.
-   To allow for different options, two features are defined in the data model:
-
-   *  'basic-recurrence-supported'
-   *  'icalendar-recurrence-supported'
-
-   {{features}} provides an example about how that could be used. Implementations
-   may support a basic recurrence rule or an advanced one as needed, by declaring
-   different features. Whether only one or both features are supported is implementation
-   specific and depend on specific scheduling context.
-
-   These groupings can also be augmented to support specific needs. As an example,
-   {{augments}} demonstrates how additional parameters can be added to comply with specifc schedule needs.
 
 #  Note and Restrictions
 
