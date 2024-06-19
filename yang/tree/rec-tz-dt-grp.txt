@@ -17,14 +17,16 @@ module: ietf-schedule
     |  +-- date-time-start?        yang:date-and-time
     |  +-- duration?               duration
     |  +-- time-zone-identifier?   sys:timezone-name
-    +-- frequency           identityref
-    +-- interval?           uint32
     +-- (recurrence-bound)?
     |  +--:(until)
     |  |  +-- until?        yang:date-and-time
     |  +--:(count)
     |     +-- count?        uint32
+    +-- description?        string
+    +-- frequency           identityref
+    +-- interval?           uint32
     +-- period* [period-start]
+       +-- description?            string
        +-- period-start            yang:date-and-time
        +-- time-zone-identifier?   sys:timezone-name
        +-- (period-type)?
