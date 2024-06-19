@@ -426,7 +426,7 @@ can be mapped to YANG parameters.
 |schedOperStatus|  |
 |schedFailures| failure-counter |
 |schedLastFailure| Not Supported   |
-|schedLastFailed|  schedLastFailed|
+|schedLastFailed|   last-failed-occurrence|
 |schedStorageType|  Not Supported    |
 |schedValue|  Not Supported    |
 {: #mapping title="YANG/MIB Mapping"}
