@@ -431,8 +431,8 @@ module ietf-schedule {
         units "seconds";
         description
           "When specified, it indicates how long the first occurrence
-           last. It also applies to all the other instances in the
-           recurrence set.";
+           last. Unless specified otherwise, it also applies to all
+           the other instances in the recurrence set.";
       }
     }
     choice recurrence-bound {
@@ -471,8 +471,8 @@ module ietf-schedule {
   
   grouping recurrence-with-time-zone {
     description
-      "A simple definition of recurrence that allows the time to
-       be specified with a local time and time zone. This grouping
+      "A simple definition of recurrence to specify the time
+       with a local time and time zone identifier. This grouping
        is intended to be human-friendly.";
     container recurrence-first {
       description
@@ -486,16 +486,17 @@ module ietf-schedule {
       leaf duration {
         type duration;
         description
-          "When specified, it indicates how long the first occurrence
-           last. It also applies to all the other instances in the
-           recurrence set.";
+          "When specified, it indicates how long the first
+           occurrence last. Unless specified otherwise, it also
+           applies to all the other instances in the recurrence
+           set.";
       }
       leaf time-zone-identifier {
         type sys:timezone-name;
         description
           "Indicates the identifier for the time zone in a time
            zone database. This parameter MUST be specified if
-           'date-time-start' and/or 'until' value is neither
+           'date-time-start' or 'until' value is neither
            reported in the format of UTC nor time zone offset to
            UTC.";
       }
@@ -507,22 +508,21 @@ module ietf-schedule {
          forever.";
       case until {
         description
-          "This case defines a way that bounds the recurrence
-           rule in an inclusive manner.";
+          "The end of the recurrene is indicated by a specific
+           date-and-time value.";
         leaf until {
           type yang:date-and-time;
           description
-            "This parameter specifies a date and time value to
-             bound the recurrence. If the value specified by this
-             parameter is synchronized with the specified
-             recurrence, it becomes the last instance of the
-             recurrence.";
+            "Specifies a date and time value to bound the
+             recurrence. If the value specified by this parameter
+             is synchronized with the specified recurrence, it
+             becomes the last instance of the recurrence.";
         }
       }
       case count {
         description
-          "This case defines the number of occurrences at which
-           to range-bound the recurrence.";
+          "The end of the recurrence is indicated by the number
+           of occurrences.";
         leaf count {
           type uint32;
           description
