@@ -827,7 +827,7 @@ Table of Contents
                +------------------+------------------------+
                | schedAdminStatus | state                  |
                +------------------+------------------------+
-               | schedOperStatus  |                        |
+               | schedOperStatus  | state                  |
                +------------------+------------------------+
                | schedFailures    | failure-counter        |
                +------------------+------------------------+
