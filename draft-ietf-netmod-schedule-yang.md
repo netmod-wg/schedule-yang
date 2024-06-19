@@ -102,6 +102,17 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 #  Module Overview
 
+   The "ietf-schedule" module (Section 7) defines the following identities:
+
+   * "frequency-type": Characterizes the repeating interval rule of a schedule (per second, per minute, etc.).
+   * "schedule-type": Indicates the type of a schedule. The following types are defined so far:
+      + one-shot: The schedule will trigger an action without the duration/end time being
+       specified and then the schedule will disable itself ({{Section 3.3 of !RFC3231}}).
+      + period: The schedule is a period-based schedule consisting either a start and end or a start and positive duration of time.
+      + recurrence: This type is used for a recurrence-based schedule
+   * "schedule-state": Indicates the status of a schedule (enabled, disabled, finished, etc.).
+   * "discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).
+
    The "ietf-schedule" module ({{sec-schedule}}) defines the following groupings:
 
    * "generic-schedule-params" ({{sec-gen}})
@@ -114,7 +125,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    * "icalendar-recurrence" ({{sec-ical-rec}})
    * "schedule-status" ({{sec-schedule-status}})
 
-   {{schedule-tree}} provides an overview of the tree structure {{?RFC8340}} of
+   {{schedule-tree}} provides an overview of the tree structure of
    the "ietf-schedule" module in terms of its groupings.
 
 ~~~~
@@ -137,6 +148,9 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 {::include ./yang/tree/sch-generic-params.txt}
 ~~~~
 {: #gsp-tree title="Generic Schedule Configuration Tree Structure"}
+
+   The "description" includes a description of the schedule. No constraint is imposed
+   on the structure nor the use of this parameter.
 
    The "time-zone-identifier" parameter, if provided, specifies the
    time zone reference of the date and time values with local time format.
@@ -168,6 +182,8 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    start ("period-start") and a positive time duration ("duration"). For the first
    format, the start of the period MUST be before the end of the period.
 
+   The "description" includes a description of the period. No constraint is imposed
+   on the structure nor the use of this parameter.
 
 ~~~~
 {::include ./yang/tree/period-grp.txt}
@@ -184,10 +200,6 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 ~~~~
 {: #rec-grp-tree title="recurrence Grouping Tree Structure"}
 
-  The "recurrence-first" container defines the first instance in the recurrence
-  set, and the "date-time-start" specifies the date and time at which the first
-  instance in the recurrence set occurs.
-
   The frequency ("frequency") which is mandatory, identifies the type of recurrence rule. For example,
   a "daily" frequency value specifies repeating events based on an interval of a day or more.
 
@@ -197,9 +209,6 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
   every minute for a minutely rule, every hour for an hourly rule, every day for a
   daily rule, and so on. Note that per {{Section 4.13 of ?I-D.ietf-netmod-rfc8407bis}}, no "default" substatement is used here because there are cases (e.g., profiling) where the use of the default is problematic.
 
-  The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-bound" choice. The "date-time-start" value always counts
-  as the first occurrence.
 
 ## The "recurrence-utc" Grouping {#sec-rec-utc}
 
@@ -211,15 +220,17 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 ~~~~
 {: #rec-utc-grp-tree title="recurrence-utc Grouping Tree Structure"}
 
-   The "recurrence-utc" grouping refines the "recurrence" grouping to require
-   that the date and time values to describe the recurrence be reported in UTC format.
+   The "utc-start-time" indicates the start time in UTC format.
 
-   It also augments the "recurrence-first" container with a "duration" parameter
-   in units of seconds to specify the time period of the first occurrence. Unless specified otherwise, the "duration" also applies to subsequent recurrence instances.
+   The "duration" parameter specifies, in units of seconds, the time period of the first occurrence. Unless specified otherwise, the "duration" also applies to subsequent recurrence instances.
 
 Note that the "interval" and "duration" cover two distinct properties of a schedule event.
 The interval specifies when a schedule will occur, combined with the frequency parameter; while the duration indicates how long
 an occurence will last.
+
+  The repetition can be scoped by a specified end time or by a count of occurrences,
+  indicated by the "recurrence-bound" choice. The "date-time-start" value always counts
+  as the first occurrence.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling contexts
    where machine readability is more desirable.
@@ -234,14 +245,17 @@ an occurence will last.
 ~~~~
 {: #rec-tz-grp-tree title="recurrence-with-time-zone Grouping Tree Structure"}
 
-   The "recurrence-with-time-zone" grouping augments the "recurrence-first" container
-   with the "time-zone-identifier" parameter which MUST be specified if the date
+   The "time-zone-identifier" parameter MUST be specified if the date
    and time value is neither reported in the format of UTC nor time zone offset
    to UTC.
 
-   It also augments the "recurrence-first" container with a parameter "duration"
+   The "recurrence-first" container includes a "duration" parameter
    to specify the time period of the first occurrence. Unless specified otherwise, the
    "duration" also applies to subsequent recurrence instances.
+
+  The repetition can be scoped by a specified end time or by a count of occurrences,
+  indicated by the "recurrence-bound" choice. The "date-time-start" value always counts
+  as the first occurrence.
 
    Unlike the definition of "recurrence-utc" grouping ({{sec-rec-utc}}),
    "recurrence-with-time-zone" is intended to promote human readability over
@@ -358,7 +372,13 @@ an occurence will last.
    The "counter", "last-occurrence", and "upcoming-occurrence" data nodes are
    only avaliable when the "schedule-type" is "recurrence".
 
-   The current grouping captures common parameters that is applicable
+   "local-time" reports the actual local time as seen by the entity that
+   host a schedule. This paramter can be used by a controller to infer the offset to UTC.
+
+   "last-failed-occurrence" and "failure-counter" report the last failure that occured and
+   the count of failures for this schedule.
+
+    The current grouping captures common parameters that are applicable
    to typical scheduling contexts known so far. Future modules can define other
    useful parameters as needed. For example, in a  scheduling context with multiple
    system sources to feed the schedules, the "source" and "precedence" parameters
