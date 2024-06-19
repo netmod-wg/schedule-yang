@@ -13,13 +13,14 @@ module: ietf-schedule
     |  +-- date-time-start?        yang:date-and-time
     |  +-- duration?               duration
     |  +-- time-zone-identifier?   sys:timezone-name
+    +-- (recurrence-bound)?
+    |  +--:(until)
+    |  |  +-- until?        yang:date-and-time
+    |  +--:(count)
+    |     +-- count?        uint32
+    +-- description?        string
     +-- frequency           identityref
     +-- interval?           uint32
-    +-- (recurrence-bound)?
-       +--:(until)
-       |  +-- until?        yang:date-and-time
-       +--:(count)
-          +-- count?        uint32
   grouping recurrence-utc-with-date-times:
     ...
   grouping recurrence-time-zone-with-date-times:
