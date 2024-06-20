@@ -1965,7 +1965,7 @@ A.4.  The "recurrence-utc" Grouping
 
    {
      "recurrence-first": {
-       "date-time-start": "2025-12-01T08:00:00Z",
+       "utc-start-time": "2025-12-01T08:00:00Z",
        "duration": 3600;
      },
      "frequency": "ietf-schedule:daily",
@@ -2002,7 +2002,7 @@ A.6.  The "recurrence-utc-with-date-times" Grouping
 
    {
      "recurrence-first": {
-       "date-time-start": "2025-06-01T09:00:00Z",
+       "utc-start-time": "2025-06-01T09:00:00Z",
      },
      "frequency": "ietf-schedule:daily",
      "interval": 2,
