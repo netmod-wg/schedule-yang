@@ -407,7 +407,7 @@ an occurence will last.
    "last-failed-occurrence" and "failure-counter" report the last failure that occured and
    the count of failures for this schedule.
 
-    The current grouping captures common parameters that are applicable
+   The current grouping captures common parameters that are applicable
    to typical scheduling contexts known so far. Future modules can define other
    useful parameters as needed. For example, in a  scheduling context with multiple
    system sources to feed the schedules, the "source" and "precedence" parameters
