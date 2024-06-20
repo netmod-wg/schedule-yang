@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 21 December 2024                              M. Boucadair, Ed.
+Expires: 22 December 2024                              M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                            19 June 2024
+                                                            20 June 2024
 
 
                 A Common YANG Data Model for Scheduling
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 December 2024.
+   This Internet-Draft will expire on 22 December 2024.
 
 Copyright Notice
 
@@ -72,7 +72,7 @@ Table of Contents
      1.1.  Editorial Note (To be removed by RFC Editor)
    2.  Conventions and Definitions
    3.  Module Overview
-     3.1.  Features and Augmentations
+     3.1.  Features
        3.1.1.  The "generic-schedule-params" Grouping
        3.1.2.  The "period-of-time" Grouping
        3.1.3.  The "recurrence" Grouping
@@ -82,7 +82,8 @@ Table of Contents
        3.1.7.  The "recurrence-time-zone-with-date-times" Grouping
        3.1.8.  The "icalendar-recurrence" Grouping
        3.1.9.  The "schedule-status" Grouping
-   4.  Note and Restrictions
+     3.2.  Features Uses and Augmentations
+   4.  Some Usage Restrictions
    5.  Relationship to the DISMAN-SCHEDULE-MIB
    6.  The "ietf-schedule" YANG Module
    7.  Security Considerations
@@ -120,10 +121,13 @@ Table of Contents
    groupings which are designed to be applicable for scheduling purposes
    such as event, policy, services or resources based on date and time.
 
-   Examples to illustrate the use of the common groupings are provided
-   in Appendix A.  Also, sample modules to exemplify how future modules
-   can use the extensibility provisions in "ietf-schedule" are provided
-   in Appendix B.
+   Section 5 discusses relationship with the managed objects defined in
+   [RFC3231].
+
+   Appendix A describes a set of examples to illustrate the use of the
+   common schedule groupings.  Also, Appendix B provides sample modules
+   to exemplify how future modules can use the extensibility provisions
+   in "ietf-schedule" (Section 6).
 
 1.1.  Editorial Note (To be removed by RFC Editor)
 
@@ -157,7 +161,7 @@ Table of Contents
 
 3.  Module Overview
 
-3.1.  Features and Augmentations
+3.1.  Features
 
    The "ietf-schedule" data model defines the recurrence related
    groupings using a modular approach.  Basic, intermediate, and
@@ -169,20 +173,11 @@ Table of Contents
 
    *  "icalendar-recurrence-supported"
 
-   Appendix B.1 provides an example about how these features can be
-   used.  Implementations may support a basic recurrence rule or an
-   advanced one as needed, by declaring different features.  Whether
-   only one or both features are supported is implementation specific
-   and depend on specific scheduling context.
+   Refer to Section 3.2 for the use of these features.
 
-   The groupings defined in the document can also be augmented to
-   support specific needs.  As an example, Appendix B.2 demonstrates how
-   additional parameters can be added to comply with specifc schedule
-   needs.
+   ## Types and Identities {#sec-types}
 
-   ## Types and Identities
-
-   The "ietf-schedule" module (Section 7) defines the following
+   The "ietf-schedule" module (Section 6) defines the following
    identities:
 
    *  "frequency-type": Characterizes the repeating interval rule of a
@@ -805,7 +800,20 @@ Table of Contents
 
 The current grouping captures common parameters that are applicable    to typical scheduling contexts known so far. Future modules can define other    useful parameters as needed. For example, in a  scheduling context with multiple    system sources to feed the schedules, the "source" and "precedence" parameters    may be needed to reflect how schedules from different sources should be prioritised.
 
-4.  Note and Restrictions
+3.2.  Features Uses and Augmentations
+
+   Appendix B.1 provides an example about how the features defined in
+   Section 3.1 can be used.  Implementations may support a basic
+   recurrence rule or an advanced one as needed, by declaring different
+   features.  Whether only one or both features are supported is
+   implementation specific and depend on specific scheduling context.
+
+   The common schedule groupings can also be augmented to support
+   specific needs.  As an example, Appendix B.2 demonstrates how
+   additional parameters can be added to comply with specifc schedule
+   needs.
+
+4.  Some Usage Restrictions
 
    There are some restrictions that need to be followed when using
    groupings defined in the "ietf-schedule" YANG module:

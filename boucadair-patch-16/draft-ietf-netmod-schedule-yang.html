@@ -1039,7 +1039,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Ma, et al.</td>
-<td class="center">Expires 21 December 2024</td>
+<td class="center">Expires 22 December 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1052,12 +1052,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-netmod-schedule-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-06-19" class="published">19 June 2024</time>
+<time datetime="2024-06-20" class="published">20 June 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-12-21">21 December 2024</time></dd>
+<dd class="expires"><time datetime="2024-12-22">22 December 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1120,7 +1120,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1164,7 +1164,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-module-overview" class="internal xref">Module Overview</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-features-and-augmentations" class="internal xref">Features and Augmentations</a></p>
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-features" class="internal xref">Features</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.1">
                     <p id="section-toc.1-1.3.2.1.2.1.1"><a href="#section-3.1.1" class="auto internal xref">3.1.1</a>.  <a href="#name-the-generic-schedule-params" class="internal xref">The "generic-schedule-params" Grouping</a></p>
@@ -1195,10 +1195,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
                 </ul>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-features-uses-and-augmentat" class="internal xref">Features Uses and Augmentations</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-note-and-restrictions" class="internal xref">Note and Restrictions</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-some-usage-restrictions" class="internal xref">Some Usage Restrictions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-relationship-to-the-disman-" class="internal xref">Relationship to the DISMAN-SCHEDULE-MIB</a></p>
@@ -1295,9 +1298,10 @@ be used in several scheduling contexts, e.g., (but not limited to)
 and <span>[<a href="#I-D.ietf-tvr-schedule-yang" class="cite xref">I-D.ietf-tvr-schedule-yang</a>]</span>. The module includes a set of reusable groupings which
 are designed to be applicable for scheduling purposes such as event, policy,
 services or resources based on date and time.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">Examples to illustrate the use of the common groupings are provided in <a href="#usage" class="auto internal xref">Appendix A</a>.
-Also, sample modules to exemplify how future modules can use the extensibility
-provisions in "ietf-schedule" are provided in <a href="#sec-ext" class="auto internal xref">Appendix B</a>.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-2"><a href="#sec-mib" class="auto internal xref">Section 5</a> discusses relationship with the managed objects defined in <span>[<a href="#RFC3231" class="cite xref">RFC3231</a>]</span>.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3"><a href="#usage" class="auto internal xref">Appendix A</a> describes a set of examples to illustrate the use of the common schedule groupings.
+Also, <a href="#sec-ext" class="auto internal xref">Appendix B</a> provides sample modules to exemplify how future modules can use the extensibility
+provisions in "ietf-schedule" (<a href="#sec-schedule" class="auto internal xref">Section 6</a>).<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="editorial-note-to-be-removed-by-rfc-editor">
 <section id="section-1.1">
         <h3 id="name-editorial-note-to-be-remove">
@@ -1335,15 +1339,15 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-2-3">Also, this document uses the YANG terminology defined in <span><a href="https://rfc-editor.org/rfc/rfc7950#section-3" class="relref">Section 3</a> of [<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="module-overview">
+<div id="sec-overview">
 <section id="section-3">
       <h2 id="name-module-overview">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-module-overview" class="section-name selfRef">Module Overview</a>
       </h2>
-<div id="features-and-augmentations">
+<div id="sec-features">
 <section id="section-3.1">
-        <h3 id="name-features-and-augmentations">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-features-and-augmentations" class="section-name selfRef">Features and Augmentations</a>
+        <h3 id="name-features">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-features" class="section-name selfRef">Features</a>
         </h3>
 <p id="section-3.1-1">The "ietf-schedule" data model defines the recurrence related groupings using
    a modular approach. Basic, intermediate, and advanced representation of recurrence
@@ -1357,76 +1361,71 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <p id="section-3.1-2.2.1">"icalendar-recurrence-supported"<a href="#section-3.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-3.1-3"><a href="#features" class="auto internal xref">Appendix B.1</a> provides an example about how these features can be used. Implementations
-   may support a basic recurrence rule or an advanced one as needed, by declaring
-   different features. Whether only one or both features are supported is implementation
-   specific and depend on specific scheduling context.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
-<p id="section-3.1-4">The groupings defined in the document can also be augmented to support specific needs. As an example,
-   <a href="#augments" class="auto internal xref">Appendix B.2</a> demonstrates how additional parameters can be added to comply with specifc schedule needs.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
-<p id="section-3.1-5">##  Types and Identities<a href="#section-3.1-5" class="pilcrow">¶</a></p>
-<p id="section-3.1-6">The "ietf-schedule" module (Section 7) defines the following identities:<a href="#section-3.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">Refer to <a href="#sec-aug" class="auto internal xref">Section 3.2</a> for the use of these features.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">##  Types and Identities {#sec-types}<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-5">The "ietf-schedule" module (<a href="#sec-schedule" class="auto internal xref">Section 6</a>) defines the following identities:<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.1-7.1">
-            <p id="section-3.1-7.1.1">"frequency-type": Characterizes the repeating interval rule of a schedule (per second, per minute, etc.).<a href="#section-3.1-7.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.1-6.1">
+            <p id="section-3.1-6.1.1">"frequency-type": Characterizes the repeating interval rule of a schedule (per second, per minute, etc.).<a href="#section-3.1-6.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.1-7.2">
-            <p id="section-3.1-7.2.1">"schedule-type": Indicates the type of a schedule. The following types are defined so far:<a href="#section-3.1-7.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.1-6.2">
+            <p id="section-3.1-6.2.1">"schedule-type": Indicates the type of a schedule. The following types are defined so far:<a href="#section-3.1-6.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.1-7.2.2.1">
-                <p id="section-3.1-7.2.2.1.1">one-shot: The schedule will trigger an action without the duration/end time being
-  specified and then the schedule will disable itself (<span><a href="https://rfc-editor.org/rfc/rfc3231#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC3231" class="cite xref">RFC3231</a>]</span>).<a href="#section-3.1-7.2.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.1-6.2.2.1">
+                <p id="section-3.1-6.2.2.1.1">one-shot: The schedule will trigger an action without the duration/end time being
+  specified and then the schedule will disable itself (<span><a href="https://rfc-editor.org/rfc/rfc3231#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC3231" class="cite xref">RFC3231</a>]</span>).<a href="#section-3.1-6.2.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-3.1-7.2.2.2">
-                <p id="section-3.1-7.2.2.2.1">period: The schedule is a period-based schedule consisting either a start and end or a start and positive duration of time.<a href="#section-3.1-7.2.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-3.1-6.2.2.2">
+                <p id="section-3.1-6.2.2.2.1">period: The schedule is a period-based schedule consisting either a start and end or a start and positive duration of time.<a href="#section-3.1-6.2.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-3.1-7.2.2.3">
-                <p id="section-3.1-7.2.2.3.1">recurrence: This type is used for a recurrence-based schedule<a href="#section-3.1-7.2.2.3.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-3.1-6.2.2.3">
+                <p id="section-3.1-6.2.2.3.1">recurrence: This type is used for a recurrence-based schedule<a href="#section-3.1-6.2.2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
-          <li class="normal" id="section-3.1-7.3">
-            <p id="section-3.1-7.3.1">"schedule-state": Indicates the status of a schedule (enabled, disabled, finished, etc.).<a href="#section-3.1-7.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.1-6.3">
+            <p id="section-3.1-6.3.1">"schedule-state": Indicates the status of a schedule (enabled, disabled, finished, etc.).<a href="#section-3.1-6.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.1-7.4">
-            <p id="section-3.1-7.4.1">"discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).<a href="#section-3.1-7.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.1-6.4">
+            <p id="section-3.1-6.4.1">"discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).<a href="#section-3.1-6.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-3.1-8">##  Groupings<a href="#section-3.1-8" class="pilcrow">¶</a></p>
-<p id="section-3.1-9">The "ietf-schedule" module (<a href="#sec-schedule" class="auto internal xref">Section 6</a>) defines the following groupings:<a href="#section-3.1-9" class="pilcrow">¶</a></p>
+<p id="section-3.1-7">##  Groupings<a href="#section-3.1-7" class="pilcrow">¶</a></p>
+<p id="section-3.1-8">The "ietf-schedule" module (<a href="#sec-schedule" class="auto internal xref">Section 6</a>) defines the following groupings:<a href="#section-3.1-8" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.1-10.1">
-            <p id="section-3.1-10.1.1">"generic-schedule-params" (<a href="#sec-gen" class="auto internal xref">Section 3.1.1</a>)<a href="#section-3.1-10.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.1-9.1">
+            <p id="section-3.1-9.1.1">"generic-schedule-params" (<a href="#sec-gen" class="auto internal xref">Section 3.1.1</a>)<a href="#section-3.1-9.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.1-10.2">
-            <p id="section-3.1-10.2.1">"period-of-time" (<a href="#sec-period" class="auto internal xref">Section 3.1.2</a>)<a href="#section-3.1-10.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.1-9.2">
+            <p id="section-3.1-9.2.1">"period-of-time" (<a href="#sec-period" class="auto internal xref">Section 3.1.2</a>)<a href="#section-3.1-9.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.1-10.3">
-            <p id="section-3.1-10.3.1">"recurrence" (<a href="#sec-rec" class="auto internal xref">Section 3.1.3</a>)<a href="#section-3.1-10.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.1-9.3">
+            <p id="section-3.1-9.3.1">"recurrence" (<a href="#sec-rec" class="auto internal xref">Section 3.1.3</a>)<a href="#section-3.1-9.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.1-10.4">
-            <p id="section-3.1-10.4.1">"recurrence-utc" (<a href="#sec-rec-utc" class="auto internal xref">Section 3.1.4</a>)<a href="#section-3.1-10.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.1-9.4">
+            <p id="section-3.1-9.4.1">"recurrence-utc" (<a href="#sec-rec-utc" class="auto internal xref">Section 3.1.4</a>)<a href="#section-3.1-9.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.1-10.5">
-            <p id="section-3.1-10.5.1">"recurrence-with-time-zone" (<a href="#sec-rec-tz" class="auto internal xref">Section 3.1.5</a>)<a href="#section-3.1-10.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.1-9.5">
+            <p id="section-3.1-9.5.1">"recurrence-with-time-zone" (<a href="#sec-rec-tz" class="auto internal xref">Section 3.1.5</a>)<a href="#section-3.1-9.5.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.1-10.6">
-            <p id="section-3.1-10.6.1">"recurrence-utc-with-date-times" (<a href="#sec-rec-utc-dt" class="auto internal xref">Section 3.1.6</a>)<a href="#section-3.1-10.6.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.1-9.6">
+            <p id="section-3.1-9.6.1">"recurrence-utc-with-date-times" (<a href="#sec-rec-utc-dt" class="auto internal xref">Section 3.1.6</a>)<a href="#section-3.1-9.6.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.1-10.7">
-            <p id="section-3.1-10.7.1">"recurrence-time-zone-with-date-times" (<a href="#sec-rec-tz-dt" class="auto internal xref">Section 3.1.7</a>)<a href="#section-3.1-10.7.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.1-9.7">
+            <p id="section-3.1-9.7.1">"recurrence-time-zone-with-date-times" (<a href="#sec-rec-tz-dt" class="auto internal xref">Section 3.1.7</a>)<a href="#section-3.1-9.7.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.1-10.8">
-            <p id="section-3.1-10.8.1">"icalendar-recurrence" (<a href="#sec-ical-rec" class="auto internal xref">Section 3.1.8</a>)<a href="#section-3.1-10.8.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.1-9.8">
+            <p id="section-3.1-9.8.1">"icalendar-recurrence" (<a href="#sec-ical-rec" class="auto internal xref">Section 3.1.8</a>)<a href="#section-3.1-9.8.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.1-10.9">
-            <p id="section-3.1-10.9.1">"schedule-status" (<a href="#sec-schedule-status" class="auto internal xref">Section 3.1.9</a>)<a href="#section-3.1-10.9.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.1-9.9">
+            <p id="section-3.1-9.9.1">"schedule-status" (<a href="#sec-schedule-status" class="auto internal xref">Section 3.1.9</a>)<a href="#section-3.1-9.9.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-3.1-11"><a href="#schedule-tree" class="auto internal xref">Figure 1</a> provides an overview of the tree structure of
-   the "ietf-schedule" module in terms of its groupings.<a href="#section-3.1-11" class="pilcrow">¶</a></p>
+<p id="section-3.1-10"><a href="#schedule-tree" class="auto internal xref">Figure 1</a> provides an overview of the tree structure of
+   the "ietf-schedule" module in terms of its groupings.<a href="#section-3.1-10" class="pilcrow">¶</a></p>
 <span id="name-overall-schedule-tree-struc"></span><div id="schedule-tree">
 <figure id="figure-1">
-          <div class="alignLeft art-text artwork" id="section-3.1-12.1">
+          <div class="alignLeft art-text artwork" id="section-3.1-11.1">
 <pre>
 module: ietf-schedule
 
@@ -1454,8 +1453,8 @@ module: ietf-schedule
 <a href="#name-overall-schedule-tree-struc" class="selfRef">Overall Schedule Tree Structure</a>
           </figcaption></figure>
 </div>
-<p id="section-3.1-13">Each of these groupings is presented in the following subsections. Examples
-   are provided in <a href="#usage" class="auto internal xref">Appendix A</a>.<a href="#section-3.1-13" class="pilcrow">¶</a></p>
+<p id="section-3.1-12">Each of these groupings is presented in the following subsections. Examples
+   are provided in <a href="#usage" class="auto internal xref">Appendix A</a>.<a href="#section-3.1-12" class="pilcrow">¶</a></p>
 <div id="sec-gen">
 <section id="section-3.1.1">
           <h4 id="name-the-generic-schedule-params">
@@ -2051,12 +2050,25 @@ The current grouping captures common parameters that are applicable    to typica
 </div>
 </section>
 </div>
+<div id="sec-aug">
+<section id="section-3.2">
+        <h3 id="name-features-uses-and-augmentat">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-features-uses-and-augmentat" class="section-name selfRef">Features Uses and Augmentations</a>
+        </h3>
+<p id="section-3.2-1"><a href="#features" class="auto internal xref">Appendix B.1</a> provides an example about how the features defined in <a href="#sec-features" class="auto internal xref">Section 3.1</a> can be used. Implementations
+   may support a basic recurrence rule or an advanced one as needed, by declaring
+   different features. Whether only one or both features are supported is implementation
+   specific and depend on specific scheduling context.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">The common schedule groupings can also be augmented to support specific needs. As an example,
+   <a href="#augments" class="auto internal xref">Appendix B.2</a> demonstrates how additional parameters can be added to comply with specifc schedule needs.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="note-and-restrictions">
+</section>
+</div>
+<div id="some-usage-restrictions">
 <section id="section-4">
-      <h2 id="name-note-and-restrictions">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-note-and-restrictions" class="section-name selfRef">Note and Restrictions</a>
+      <h2 id="name-some-usage-restrictions">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-some-usage-restrictions" class="section-name selfRef">Some Usage Restrictions</a>
       </h2>
 <p id="section-4-1">There are some restrictions that need to be followed when using groupings defined
    in the "ietf-schedule" YANG module:<a href="#section-4-1" class="pilcrow">¶</a></p>
@@ -2086,7 +2098,7 @@ current time <span class="bcp14">SHOULD</span> be ignored.<a href="#section-4-2.
       </ul>
 </section>
 </div>
-<div id="relationship-to-the-disman-schedule-mib">
+<div id="sec-mib">
 <section id="section-5">
       <h2 id="name-relationship-to-the-disman-">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-relationship-to-the-disman-" class="section-name selfRef">Relationship to the DISMAN-SCHEDULE-MIB</a>
