@@ -73,16 +73,18 @@ Table of Contents
    2.  Conventions and Definitions
    3.  Module Overview
      3.1.  Features
-       3.1.1.  The "generic-schedule-params" Grouping
-       3.1.2.  The "period-of-time" Grouping
-       3.1.3.  The "recurrence" Grouping
-       3.1.4.  The "recurrence-utc" Grouping
-       3.1.5.  The "recurrence-with-time-zone" Grouping
-       3.1.6.  The "recurrence-utc-with-date-times" Grouping
-       3.1.7.  The "recurrence-time-zone-with-date-times" Grouping
-       3.1.8.  The "icalendar-recurrence" Grouping
-       3.1.9.  The "schedule-status" Grouping
-     3.2.  Features Uses and Augmentations
+     3.2.  Types and Identities
+     3.3.  Groupings
+       3.3.1.  The "generic-schedule-params" Grouping
+       3.3.2.  The "period-of-time" Grouping
+       3.3.3.  The "recurrence" Grouping
+       3.3.4.  The "recurrence-utc" Grouping
+       3.3.5.  The "recurrence-with-time-zone" Grouping
+       3.3.6.  The "recurrence-utc-with-date-times" Grouping
+       3.3.7.  The "recurrence-time-zone-with-date-times" Grouping
+       3.3.8.  The "icalendar-recurrence" Grouping
+       3.3.9.  The "schedule-status" Grouping
+     3.4.  Features Use and Augmentations
    4.  Some Usage Restrictions
    5.  Relationship to the DISMAN-SCHEDULE-MIB
    6.  The "ietf-schedule" YANG Module
@@ -121,13 +123,16 @@ Table of Contents
    groupings which are designed to be applicable for scheduling purposes
    such as event, policy, services or resources based on date and time.
 
+   This document does not make any assumption about the nature of
+   actions that are triggered by the schedules.
+
    Section 5 discusses relationship with the managed objects defined in
    [RFC3231].
 
    Appendix A describes a set of examples to illustrate the use of the
-   common schedule groupings.  Also, Appendix B provides sample modules
-   to exemplify how future modules can use the extensibility provisions
-   in "ietf-schedule" (Section 6).
+   common schedule groupings (Section 3.3).  Also, Appendix B provides
+   sample modules to exemplify how future modules can use the
+   extensibility provisions in "ietf-schedule" (Section 6).
 
 1.1.  Editorial Note (To be removed by RFC Editor)
 
@@ -156,8 +161,15 @@ Table of Contents
    The meanings of the symbols in tree diagrams are defined in
    [RFC8340].
 
-   Also, this document uses the YANG terminology defined in Section 3 of
+   This document uses the YANG terminology defined in Section 3 of
    [RFC7950].
+
+   The document makes use of the following term:
+
+   icalendar:  Refers to Internet Calendaring per [RFC5545].
+
+   System:  Refers to an entity that host a schedule that is managed
+      using the YANG module defined in this document.
 
 3.  Module Overview
 
@@ -173,9 +185,9 @@ Table of Contents
 
    *  "icalendar-recurrence-supported"
 
-   Refer to Section 3.2 for the use of these features.
+   Refer to Section 3.4 for the use of these features.
 
-   ## Types and Identities {#sec-types}
+3.2.  Types and Identities
 
    The "ietf-schedule" module (Section 6) defines the following
    identities:
@@ -202,28 +214,28 @@ Table of Contents
    *  "discard-action": Specifies the action to perform when a schedule
       is discarded (e.g., generate a warning or an error message).
 
-   ## Groupings
+3.3.  Groupings
 
    The "ietf-schedule" module (Section 6) defines the following
    groupings:
 
-   *  "generic-schedule-params" (Section 3.1.1)
+   *  "generic-schedule-params" (Section 3.3.1)
 
-   *  "period-of-time" (Section 3.1.2)
+   *  "period-of-time" (Section 3.3.2)
 
-   *  "recurrence" (Section 3.1.3)
+   *  "recurrence" (Section 3.3.3)
 
-   *  "recurrence-utc" (Section 3.1.4)
+   *  "recurrence-utc" (Section 3.3.4)
 
-   *  "recurrence-with-time-zone" (Section 3.1.5)
+   *  "recurrence-with-time-zone" (Section 3.3.5)
 
-   *  "recurrence-utc-with-date-times" (Section 3.1.6)
+   *  "recurrence-utc-with-date-times" (Section 3.3.6)
 
-   *  "recurrence-time-zone-with-date-times" (Section 3.1.7)
+   *  "recurrence-time-zone-with-date-times" (Section 3.3.7)
 
-   *  "icalendar-recurrence" (Section 3.1.8)
+   *  "icalendar-recurrence" (Section 3.3.8)
 
-   *  "schedule-status" (Section 3.1.9)
+   *  "schedule-status" (Section 3.3.9)
 
    Figure 1 provides an overview of the tree structure of the "ietf-
    schedule" module in terms of its groupings.
@@ -254,7 +266,7 @@ Table of Contents
    Each of these groupings is presented in the following subsections.
    Examples are provided in Appendix A.
 
-3.1.1.  The "generic-schedule-params" Grouping
+3.3.1.  The "generic-schedule-params" Grouping
 
    A system accepts and handles the schedule requests, which may help
    further automate the scheduling process of events, policy, services,
@@ -321,7 +333,7 @@ Table of Contents
    requests that would prevent validation by admins of some critical
    systems, etc.
 
-3.1.2.  The "period-of-time" Grouping
+3.3.2.  The "period-of-time" Grouping
 
    The "period-of-time" grouping (Figure 3) represents a time period
    using either a start ("period-start") and end date and time ("period-
@@ -362,7 +374,7 @@ Table of Contents
 
               Figure 3: Period of Time Grouping Tree Structure
 
-3.1.3.  The "recurrence" Grouping
+3.3.3.  The "recurrence" Grouping
 
    The "recurrence" grouping (Figure 4) specifies a simple recurrence
    rule.
@@ -407,7 +419,7 @@ Table of Contents
    because there are cases (e.g., profiling) where the use of the
    default is problematic.
 
-3.1.4.  The "recurrence-utc" Grouping
+3.3.4.  The "recurrence-utc" Grouping
 
    The "recurrence-utc" grouping (Figure 5) specifies a simple
    recurrence rule in UTC format.
@@ -463,7 +475,7 @@ Table of Contents
    The "recurrence-utc" grouping is designed to be reused in scheduling
    contexts where machine readability is more desirable.
 
-3.1.5.  The "recurrence-with-time-zone" Grouping
+3.3.5.  The "recurrence-with-time-zone" Grouping
 
    The "recurrence-with-time-zone" grouping (Figure 6) specifies a
    simple recurrence rule with a time zone.
@@ -515,14 +527,14 @@ Table of Contents
    occurrences, indicated by the "recurrence-bound" choice.  The "date-
    time-start" value always counts as the first occurrence.
 
-   Unlike the definition of "recurrence-utc" grouping (Section 3.1.4),
+   Unlike the definition of "recurrence-utc" grouping (Section 3.3.4),
    "recurrence-with-time-zone" is intended to promote human readability
    over machine readability.
 
-3.1.6.  The "recurrence-utc-with-date-times" Grouping
+3.3.6.  The "recurrence-utc-with-date-times" Grouping
 
    The "recurrence-utc-with-date-times" grouping (Figure 7) uses the
-   "recurrence-utc" grouping (Section 3.1.4) and adds a "period-
+   "recurrence-utc" grouping (Section 3.3.4) and adds a "period-
    timeticks" list to define an aggregate set of repeating occurrences.
 
    module: ietf-schedule
@@ -569,10 +581,10 @@ Table of Contents
    in a secondly recurrence rule, and it must not exceed 6000 in a
    minutely recurrence rule, and so on.
 
-3.1.7.  The "recurrence-time-zone-with-date-times" Grouping
+3.3.7.  The "recurrence-time-zone-with-date-times" Grouping
 
    The "recurrence-time-zone-with-date-times" grouping (Figure 8) uses
-   the "recurrence-with-time-zone" grouping (Section 3.1.5) and adds a
+   the "recurrence-with-time-zone" grouping (Section 3.3.5) and adds a
    "period" list to define an aggregate set of repeating occurrences.
 
    module: ietf-schedule
@@ -623,10 +635,10 @@ Table of Contents
    defined by both the recurrence rule and "period" list.  Duplicate
    instances are ignored.
 
-3.1.8.  The "icalendar-recurrence" Grouping
+3.3.8.  The "icalendar-recurrence" Grouping
 
    The "icalendar-recurrence" grouping (Figure 9) uses the "recurrence-
-   time-zone-with-date-times" grouping (Section 3.1.7) and define more
+   time-zone-with-date-times" grouping (Section 3.3.7) and define more
    data nodes to enrich the definition of recurrence.  The structure of
    the "icalendar-recurrence" grouping refers to the definition of
    recurrence component defined in Sections 3.3.10 and 3.8.5 of
@@ -729,7 +741,7 @@ Table of Contents
    recurrence rule and date-times, and then excluding any start date and
    time values specified by "exception-dates" parameter.
 
-3.1.9.  The "schedule-status" Grouping
+3.3.9.  The "schedule-status" Grouping
 
    The "schedule-status" grouping (Figure 10) defines common parameters
    for scheduling management/status exposure.
@@ -800,7 +812,7 @@ Table of Contents
 
 The current grouping captures common parameters that are applicable    to typical scheduling contexts known so far. Future modules can define other    useful parameters as needed. For example, in a  scheduling context with multiple    system sources to feed the schedules, the "source" and "precedence" parameters    may be needed to reflect how schedules from different sources should be prioritised.
 
-3.2.  Features Uses and Augmentations
+3.4.  Features Use and Augmentations
 
    Appendix B.1 provides an example about how the features defined in
    Section 3.1 can be used.  Implementations may support a basic
@@ -808,30 +820,25 @@ The current grouping captures common parameters that are applicable    to typica
    features.  Whether only one or both features are supported is
    implementation specific and depend on specific scheduling context.
 
-   The common schedule groupings can also be augmented to support
-   specific needs.  As an example, Appendix B.2 demonstrates how
+   The common schedule groupings (Section 3.3) can also be augmented to
+   support specific needs.  As an example, Appendix B.2 demonstrates how
    additional parameters can be added to comply with specifc schedule
    needs.
 
 4.  Some Usage Restrictions
 
    There are some restrictions that need to be followed when using
-   groupings defined in the "ietf-schedule" YANG module:
+   groupings defined in the "ietf-schedule" YANG module (Section 3.3):
 
    *  The instant in time represented by "period-start" MUST be before
-      the "period-end" for "period-of-time" grouping.
+      the "period-end" for "period-of-time" grouping (Section 3.3.2).
 
    *  The combination of the day, month, and year represented for date
-      and time value MUST be valid.  See Section 5.7 of [RFC3339] for
+      and time values MUST be valid.  See Section 5.7 of [RFC3339] for
       the maxinum day number based on the month and year.
 
    *  The second MUST have the value "60" at the end of months in which
-      a leap second occurs for date and time value.
-
-   *  Care must be taken when defining recurrence occurring very often
-      and frequent that can be an additional source of attacks by
-      keeping the system permanently busy with the management of
-      scheduling.
+      a leap second occurs for date and time values.
 
    *  Schedules received with a starting time in the past with respect
       to current time SHOULD be ignored.
@@ -1726,6 +1733,10 @@ The current grouping captures common parameters that are applicable    to typica
    data nodes that contain read-only state, or RPCs.  As such, there are
    no additional security issues related to the "ietf- schedule" module
    that need to be considered.
+
+   Care must be taken when defining recurrences occurring very often and
+   frequent that can be an additional source of attacks by keeping the
+   system permanently busy with the management of scheduling.
 
 8.  IANA Considerations
 
