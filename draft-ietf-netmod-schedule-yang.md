@@ -73,9 +73,12 @@ and {{?I-D.ietf-tvr-schedule-yang}}. The module includes a set of reusable group
 are designed to be applicable for scheduling purposes such as event, policy,
 services or resources based on date and time.
 
+This document does not make any assumption about the nature of actions that are
+triggered by the schedules.
+
 {{sec-mib}} discusses relationship with the managed objects defined in {{!RFC3231}}.
 
-{{usage}} describes a set of examples to illustrate the use of the common schedule groupings.
+{{usage}} describes a set of examples to illustrate the use of the common schedule groupings ({{sec-grp}}).
 Also, {{sec-ext}} provides sample modules to exemplify how future modules can use the extensibility
 provisions in "ietf-schedule" ({{sec-schedule}}).
 
@@ -100,7 +103,15 @@ provisions in "ietf-schedule" ({{sec-schedule}}).
    The meanings of the symbols in tree diagrams are defined in
    {{?RFC8340}}.
 
-Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950}}.
+This document uses the YANG terminology defined in {{Section 3 of !RFC7950}}.
+
+The document makes use of the following term:
+
+icalendar:
+: Refers to Internet Calendaring per {{!RFC5545}}.
+
+System:
+: Refers to an entity that host a schedule that is managed using the YANG module defined in this document.
 
 #  Module Overview {#sec-overview}
 
@@ -116,7 +127,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
    Refer to {{sec-aug}} for the use of these features.
 
-  ##  Types and Identities {#sec-types}
+##  Types and Identities {#sec-types}
 
    The "ietf-schedule" module ({{sec-schedule}}) defines the following identities:
 
@@ -129,7 +140,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    * "schedule-state": Indicates the status of a schedule (enabled, disabled, finished, etc.).
    * "discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).
 
-  ##  Groupings
+##  Groupings {#sec-grp}
 
    The "ietf-schedule" module ({{sec-schedule}}) defines the following groupings:
 
@@ -402,31 +413,28 @@ an occurence will last.
    system sources to feed the schedules, the "source" and "precedence" parameters
    may be needed to reflect how schedules from different sources should be prioritised.
 
-##  Features Uses and Augmentations {#sec-aug}
+##  Features Use and Augmentations {#sec-aug}
 
    {{features}} provides an example about how the features defined in {{sec-features}} can be used. Implementations
    may support a basic recurrence rule or an advanced one as needed, by declaring
    different features. Whether only one or both features are supported is implementation
    specific and depend on specific scheduling context.
 
-   The common schedule groupings can also be augmented to support specific needs. As an example,
+   The common schedule groupings ({{sec-grp}}) can also be augmented to support specific needs. As an example,
    {{augments}} demonstrates how additional parameters can be added to comply with specifc schedule needs.
 
 #  Some Usage Restrictions
 
    There are some restrictions that need to be followed when using groupings defined
-   in the "ietf-schedule" YANG module:
+   in the "ietf-schedule" YANG module ({{sec-grp}}):
 
    *  The instant in time represented by "period-start" MUST be before the
-      "period-end" for "period-of-time" grouping.
+      "period-end" for "period-of-time" grouping ({{sec-period}}).
    *  The combination of the day, month, and year represented for date and time
-      value MUST be valid. See {{Section 5.7 of ?RFC3339}} for the maxinum day
+      values MUST be valid. See {{Section 5.7 of ?RFC3339}} for the maxinum day
       number based on the month and year.
    *  The second MUST have the value "60" at the end of months in which a leap
-      second occurs for date and time value.
-   *  Care must be taken when defining recurrence occurring very often and
-      frequent that can be an additional source of attacks by keeping the system
-      permanently busy with the management of scheduling.
+      second occurs for date and time values.
    *  Schedules received with a starting time in the past with respect to
       current time SHOULD be ignored.
 
@@ -494,6 +502,10 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
    are writable, data nodes that contain read-only state, or RPCs.  As
    such, there are no additional security issues related to the "ietf-
    schedule" module that need to be considered.
+
+   Care must be taken when defining recurrences occurring very often and
+   frequent that can be an additional source of attacks by keeping the system
+   permanently busy with the management of scheduling.
 
 #  IANA Considerations
 
