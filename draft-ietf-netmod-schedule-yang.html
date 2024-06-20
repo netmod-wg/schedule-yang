@@ -1039,7 +1039,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Ma, et al.</td>
-<td class="center">Expires 21 December 2024</td>
+<td class="center">Expires 22 December 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1052,12 +1052,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-netmod-schedule-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-06-19" class="published">19 June 2024</time>
+<time datetime="2024-06-20" class="published">20 June 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-12-21">21 December 2024</time></dd>
+<dd class="expires"><time datetime="2024-12-22">22 December 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1120,7 +1120,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2462,7 +2462,7 @@ module ietf-schedule {
       type yang:date-and-time;
       description
         "Specifies the date and time after which a schedule will
-         be considered as invalid. This paratemer takes precedence
+         be considered as invalid. This parameter takes precedence
          over similar attributes that are provided at the schedule
          instance itself.";
     }
@@ -2470,7 +2470,7 @@ module ietf-schedule {
       type yang:date-and-time;
       description
         "Specifies the maximum scheduled start date and time.
-         A requested schedule whose first instance occurrs after
+         A requested schedule whose first instance occurs after
          this value cannot be accepted by the entity. Specifically,
          a requested schedule will be rejected if the first
          occurrence of that schedule exceeds 'max-allowed-start'.";
@@ -2479,7 +2479,7 @@ module ietf-schedule {
       type yang:date-and-time;
       description
         "Specifies the minimum scheduled start date and time.
-         A requested schedule whose first instance occurrs before
+         A requested schedule whose first instance occurs before
          this value cannot be accepted by the entity. Specifically,
          a requested schedule will be rejected if the first
          occurrence of that schedule is scheduled before
@@ -2688,7 +2688,7 @@ module ietf-schedule {
          forever.";
       case until {
         description
-          "The end of the recurrene is indicated by a specific
+          "The end of the recurrence is indicated by a specific
            date-and-time value.";
         leaf until {
           type yang:date-and-time;
