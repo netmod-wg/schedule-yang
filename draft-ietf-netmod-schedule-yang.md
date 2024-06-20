@@ -75,7 +75,7 @@ services or resources based on date and time.
 
 {{sec-mib}} discusses relationship with the managed objects defined in {{!RFC3231}}.
 
-{{usage}} describes a set of examples to illustrate the use of the common schedule groupings ({{groupings}}).
+{{usage}} describes a set of examples to illustrate the use of the common schedule groupings.
 Also, {{sec-ext}} provides sample modules to exemplify how future modules can use the extensibility
 provisions in "ietf-schedule" ({{sec-schedule}}).
 
@@ -129,7 +129,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    * "schedule-state": Indicates the status of a schedule (enabled, disabled, finished, etc.).
    * "discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).
 
-  ##  Groupings {#groupings}
+  ##  Groupings
 
    The "ietf-schedule" module ({{sec-schedule}}) defines the following groupings:
 
@@ -409,7 +409,7 @@ an occurence will last.
    different features. Whether only one or both features are supported is implementation
    specific and depend on specific scheduling context.
 
-   The common schedule groupings ({{groupings}}) can also be augmented to support specific needs. As an example,
+   The common schedule groupings can also be augmented to support specific needs. As an example,
    {{augments}} demonstrates how additional parameters can be added to comply with specifc schedule needs.
 
 #  Some Usage Restrictions
