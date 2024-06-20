@@ -102,7 +102,7 @@ provisions in "ietf-schedule" ({{sec-schedule}}).
 
 Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950}}.
 
-#  Module Overview
+#  Module Overview {#sec-overview}
 
 ##  Features {#sec-features}
 
@@ -116,7 +116,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
    Refer to {{sec-aug}} for the use of these features.
 
-  ##  Types and Identities
+  ##  Types and Identities {#sec-types}
 
    The "ietf-schedule" module (Section 7) defines the following identities:
 
@@ -129,7 +129,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    * "schedule-state": Indicates the status of a schedule (enabled, disabled, finished, etc.).
    * "discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).
 
-  ##  Groupings {#sec-groupings}
+  ##  Groupings  {#sec-groupings}
 
    The "ietf-schedule" module ({{sec-schedule}}) defines the following groupings:
 
@@ -409,7 +409,7 @@ an occurence will last.
    different features. Whether only one or both features are supported is implementation
    specific and depend on specific scheduling context.
 
-   The groupings defined in {{sec-groupings}} can also be augmented to support specific needs. As an example,
+   The common schedule groupings ({{sec-groupings}}) can also be augmented to support specific needs. As an example,
    {{augments}} demonstrates how additional parameters can be added to comply with specifc schedule needs.
 
 #  Some Usage Restrictions
