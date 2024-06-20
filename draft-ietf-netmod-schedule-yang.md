@@ -402,7 +402,7 @@ an occurence will last.
    system sources to feed the schedules, the "source" and "precedence" parameters
    may be needed to reflect how schedules from different sources should be prioritised.
 
-##  Features Uses and  Augmentations {#sec-aug}
+##  Features Uses and Augmentations {#sec-aug}
 
    {{features}} provides an example about how the features defined in {{sec-features}} can be used. Implementations
    may support a basic recurrence rule or an advanced one as needed, by declaring
