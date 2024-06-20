@@ -524,7 +524,7 @@ module ietf-schedule {
          forever.";
       case until {
         description
-          "The end of the recurrene is indicated by a specific
+          "The end of the recurrence is indicated by a specific
            date-and-time value.";
         leaf until {
           type yang:date-and-time;
