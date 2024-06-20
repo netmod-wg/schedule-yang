@@ -607,7 +607,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2025-12-01T08:00:00Z",
+    "utc-start-time": "2025-12-01T08:00:00Z",
     "duration": 3600;
   },
   "frequency": "ietf-schedule:daily",
@@ -645,7 +645,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2025-06-01T09:00:00Z",
+    "utc-start-time": "2025-06-01T09:00:00Z",
   },
   "frequency": "ietf-schedule:daily",
   "interval": 2,
