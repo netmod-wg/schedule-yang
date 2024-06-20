@@ -298,7 +298,7 @@ module ietf-schedule {
       type yang:date-and-time;
       description
         "Specifies the date and time after which a schedule will
-         be considered as invalid. This paratemer takes precedence
+         be considered as invalid. This parameter takes precedence
          over similar attributes that are provided at the schedule
          instance itself.";
     }
@@ -306,7 +306,7 @@ module ietf-schedule {
       type yang:date-and-time;
       description
         "Specifies the maximum scheduled start date and time. 
-         A requested schedule whose first instance occurrs after 
+         A requested schedule whose first instance occurs after 
          this value cannot be accepted by the entity. Specifically, 
          a requested schedule will be rejected if the first 
          occurrence of that schedule exceeds 'max-allowed-start'.";
@@ -315,7 +315,7 @@ module ietf-schedule {
       type yang:date-and-time;
       description
         "Specifies the minimum scheduled start date and time. 
-         A requested schedule whose first instance occurrs before 
+         A requested schedule whose first instance occurs before 
          this value cannot be accepted by the entity. Specifically, 
          a requested schedule will be rejected if the first  
          occurrence of that schedule is scheduled before 
