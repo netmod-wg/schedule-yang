@@ -73,9 +73,11 @@ and {{?I-D.ietf-tvr-schedule-yang}}. The module includes a set of reusable group
 are designed to be applicable for scheduling purposes such as event, policy,
 services or resources based on date and time.
 
-Examples to illustrate the use of the common groupings are provided in {{usage}}.
-Also, sample modules to exemplify how future modules can use the extensibility
-provisions in "ietf-schedule" are provided in {{sec-ext}}.
+{{sec-mib}} discusses relationship with the managed objects defined in {{!RFC3231}}.
+
+{{usage}} describes a set of examples to illustrate the use of the common schedule groupings ({{sec-grp}}).
+Also, {{sec-ext}} provides sample modules to exemplify how future modules can use the extensibility
+provisions in "ietf-schedule" ({{sec-schedule}}).
 
 ## Editorial Note (To be removed by RFC Editor)
 
@@ -102,7 +104,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
 #  Module Overview
 
-##  Features and Augmentations
+##  Features {#sec-features}
 
    The "ietf-schedule" data model defines the recurrence related groupings using
    a modular approach. Basic, intermediate, and advanced representation of recurrence
@@ -112,13 +114,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    *  "basic-recurrence-supported"
    *  "icalendar-recurrence-supported"
 
-   {{features}} provides an example about how these features can be used. Implementations
-   may support a basic recurrence rule or an advanced one as needed, by declaring
-   different features. Whether only one or both features are supported is implementation
-   specific and depend on specific scheduling context.
-
-   The groupings defined in the document can also be augmented to support specific needs. As an example,
-   {{augments}} demonstrates how additional parameters can be added to comply with specifc schedule needs.
+   Refer to {{sec-aug}} for the use of these features.
 
   ##  Types and Identities
 
@@ -133,7 +129,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
    * "schedule-state": Indicates the status of a schedule (enabled, disabled, finished, etc.).
    * "discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).
 
-  ##  Groupings
+  ##  Groupings {#sec-grp}
 
    The "ietf-schedule" module ({{sec-schedule}}) defines the following groupings:
 
@@ -406,7 +402,17 @@ an occurence will last.
    system sources to feed the schedules, the "source" and "precedence" parameters
    may be needed to reflect how schedules from different sources should be prioritised.
 
-#  Note and Restrictions
+##  Features Uses and  Augmentations {#sec-aug}
+
+   {{features}} provides an example about how the features defined in {{sec-features}} can be used. Implementations
+   may support a basic recurrence rule or an advanced one as needed, by declaring
+   different features. Whether only one or both features are supported is implementation
+   specific and depend on specific scheduling context.
+
+   The groupings defined in {{sec-grp}} can also be augmented to support specific needs. As an example,
+   {{augments}} demonstrates how additional parameters can be added to comply with specifc schedule needs.
+
+#  Some Usage Restrictions
 
    There are some restrictions that need to be followed when using groupings defined
    in the "ietf-schedule" YANG module:
@@ -424,7 +430,7 @@ an occurence will last.
    *  Schedules received with a starting time in the past with respect to
       current time SHOULD be ignored.
 
-# Relationship to the DISMAN-SCHEDULE-MIB
+# Relationship to the DISMAN-SCHEDULE-MIB {#sec-mib}
 
 {{!RFC3231}} specifies a Management Information Base (MIB) used to
 schedule management operations periodically or at specified dates and times.
