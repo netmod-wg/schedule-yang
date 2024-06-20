@@ -118,7 +118,7 @@ Also, this document uses the YANG terminology defined in {{Section 3 of !RFC7950
 
   ##  Types and Identities {#sec-types}
 
-   The "ietf-schedule" module (Section 7) defines the following identities:
+   The "ietf-schedule" module ({{sec-schedule}}) defines the following identities:
 
    * "frequency-type": Characterizes the repeating interval rule of a schedule (per second, per minute, etc.).
    * "schedule-type": Indicates the type of a schedule. The following types are defined so far:
