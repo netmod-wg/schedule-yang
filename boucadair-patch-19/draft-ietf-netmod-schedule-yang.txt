@@ -752,7 +752,7 @@ Table of Contents
    The "schedule-status" and "schedule-status-with-name" groupings
    (Figure 10) define common parameters for scheduling management/status
    exposure.  The "schedule-status-with-name" grouping has the same
-   structure as "schedule-status" but with an additional paramter to
+   structure as "schedule-status" but with an additional parameter to
    identify a schedule "schedule-id".  Both structures are defined in
    the module to allow for better modularity and flexibility.
 
