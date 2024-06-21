@@ -376,7 +376,7 @@ an occurence will last.
 
    The "schedule-status" and "schedule-status-with-name" groupings ({{sche-status-tree}}) define common parameters
    for scheduling management/status exposure. The "schedule-status-with-name" grouping has the same
-   structure as "schedule-status" but with an additional paramter to identify a schedule "schedule-id". Both
+   structure as "schedule-status" but with an additional parameter to identify a schedule "schedule-id". Both
    structures are defined in the module to allow for better modularity and flexibility.
 
 ~~~~
