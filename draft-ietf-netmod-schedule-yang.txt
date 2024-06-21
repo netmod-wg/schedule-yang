@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 22 December 2024                              M. Boucadair, Ed.
+Expires: 23 December 2024                              M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                            20 June 2024
+                                                            21 June 2024
 
 
                 A Common YANG Data Model for Scheduling
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 December 2024.
+   This Internet-Draft will expire on 23 December 2024.
 
 Copyright Notice
 
@@ -164,7 +164,7 @@ Table of Contents
    This document uses the YANG terminology defined in Section 3 of
    [RFC7950].
 
-   The document makes use of the following term:
+   The document makes use of the following terms:
 
    icalendar:  Refers to Internet Calendaring per [RFC5545].
 
@@ -419,10 +419,13 @@ Table of Contents
    because there are cases (e.g., profiling) where the use of the
    default is problematic.
 
+   The "description" includes a description of the period.  No
+   constraint is imposed on the structure nor the use of this parameter.
+
 3.3.4.  The "recurrence-utc" Grouping
 
-   The "recurrence-utc" grouping (Figure 5) specifies a simple
-   recurrence rule in UTC format.
+   The "recurrence-utc" grouping (Figure 5) uses the "recurrence"
+   grouping and specifies a simple recurrence rule in UTC format.
 
    module: ietf-schedule
 
@@ -469,16 +472,17 @@ Table of Contents
    indicates how long an occurence will last.
 
    The repetition can be scoped by a specified end time or by a count of
-   occurrences, indicated by the "recurrence-bound" choice.  The "date-
-   time-start" value always counts as the first occurrence.
+   occurrences, indicated by the "recurrence-bound" choice.  The "utc-
+   start-time" value always counts as the first occurrence.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling
    contexts where machine readability is more desirable.
 
 3.3.5.  The "recurrence-with-time-zone" Grouping
 
-   The "recurrence-with-time-zone" grouping (Figure 6) specifies a
-   simple recurrence rule with a time zone.
+   The "recurrence-with-time-zone" grouping (Figure 6) uses the
+   "recurrence" grouping and specifies a simple recurrence rule with a
+   time zone.
 
    module: ietf-schedule
 
@@ -514,14 +518,13 @@ Table of Contents
 
         Figure 6: recurrence-with-time-zone Grouping Tree Structure
 
-   The "time-zone-identifier" parameter MUST be specified if the date
+   The "recurrence-first" container includes "date-time-start" and
+   "duration" parameters to specify the start time and period of the
+   first occurrence.  Unless specified otherwise, the "duration" also
+   applies to subsequent recurrence instances.  It also includes a
+   "time-zone-identifier" parameter which MUST be specified if the date
    and time value is neither reported in the format of UTC nor time zone
    offset to UTC.
-
-   The "recurrence-first" container includes a "duration" parameter to
-   specify the time period of the first occurrence.  Unless specified
-   otherwise, the "duration" also applies to subsequent recurrence
-   instances.
 
    The repetition can be scoped by a specified end time or by a count of
    occurrences, indicated by the "recurrence-bound" choice.  The "date-
@@ -1918,7 +1921,7 @@ A.1.  The "generic-schedule-params" Grouping
      "time-zone-identifier": "China/Beijing",
      "min-allowed-start": "2025-01-01T08:00:00",
      "max-allowed-end": "2025-01-31T20:00:00",
-      "discard-action": "ietf-schedule:silently-discard"
+     "discard-action": "ietf-schedule:silently-discard"
    }
 
            Figure 11: Generic Parameters for Schedule Validation
@@ -1959,17 +1962,13 @@ A.2.  The "period-of-time" Grouping
 
 A.3.  The "recurrence" Grouping
 
-   Figure 17 indicates a recurrence of every 2 days for 10 occurrences,
-   starting at 3 p.m. on December 1, 2025 with an offset of -8:00 from
-   UTC:
+   Figure 17 indicates a recurrence of every 2 days which starts
+   immediately and repeat forever:
 
    {
-     "recurrence-first": {
-       "date-time-start": "2025-12-01T15:00:00-08:00:00"
-     },
+     "description": "forever recurrence rule",
      "frequency": "ietf-schedule:daily",
      "interval": 2,
-     "count": 10
    }
 
                  Figure 15: Simple Schedule with Recurrence
@@ -1986,7 +1985,7 @@ A.4.  The "recurrence-utc" Grouping
      },
      "frequency": "ietf-schedule:daily",
      "interval": 1,
-     "until": "2025-12-31T23:59:59Z"
+     "utc-until": "2025-12-31T23:59:59Z"
    }
 
              Figure 16: Simple Schedule with Recurrence in UTC
@@ -2022,7 +2021,7 @@ A.6.  The "recurrence-utc-with-date-times" Grouping
      },
      "frequency": "ietf-schedule:daily",
      "interval": 2,
-     "until": "2025-06-30T23:59:59Z",
+     "utc-until": "2025-06-30T23:59:59Z",
      "period-timeticks": [
        {
          "period-start": "3240000",
@@ -2386,10 +2385,10 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
        <destination-node>ne2</destination-node>
        <default-bandwidth>1000</default-bandwidth>
        <recurrence-first>
-         <date-time-start>2025-12-01T01:00:00Z</date-time-start>
+         <utc-start-time>2025-12-01T01:00:00Z</utc-start-time>
        </recurrence-first>
        <frequency>schedule:daily</frequency>
-       <until>2025-12-31T23:59:59Z</until>
+       <utc-until>2025-12-31T23:59:59Z</utc-until>
        <period-timeticks>
          <period-start>360000</period-start>
          <period-end>2160000</period-end>
