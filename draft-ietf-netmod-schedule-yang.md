@@ -105,7 +105,7 @@ provisions in "ietf-schedule" ({{sec-schedule}}).
 
 This document uses the YANG terminology defined in {{Section 3 of !RFC7950}}.
 
-The document makes use of the following term:
+The document makes use of the following terms:
 
 icalendar:
 : Refers to Internet Calendaring per {{!RFC5545}}.
@@ -238,11 +238,13 @@ System:
   every minute for a minutely rule, every hour for an hourly rule, every day for a
   daily rule, and so on. Note that per {{Section 4.13 of ?I-D.ietf-netmod-rfc8407bis}}, no "default" substatement is used here because there are cases (e.g., profiling) where the use of the default is problematic.
 
+  The "description" includes a description of the period. No constraint is imposed
+  on the structure nor the use of this parameter.
 
 ### The "recurrence-utc" Grouping {#sec-rec-utc}
 
-   The "recurrence-utc" grouping ({{rec-utc-grp-tree}}) specifies a simple recurrence
-   rule in UTC format.
+   The "recurrence-utc" grouping ({{rec-utc-grp-tree}}) uses the "recurrence"
+   grouping and specifies a simple recurrence rule in UTC format.
 
 ~~~~
 {::include ./yang/tree/rec-utc-grp.txt}
@@ -258,7 +260,7 @@ The interval specifies when a schedule will occur, combined with the frequency p
 an occurence will last.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-bound" choice. The "date-time-start" value always counts
+  indicated by the "recurrence-bound" choice. The "utc-start-time" value always counts
   as the first occurrence.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling contexts
@@ -266,21 +268,20 @@ an occurence will last.
 
 ### The "recurrence-with-time-zone" Grouping {#sec-rec-tz}
 
-   The "recurrence-with-time-zone" grouping ({{rec-tz-grp-tree}}) specifies a simple recurrence
-   rule with a time zone.
+   The "recurrence-with-time-zone" grouping ({{rec-tz-grp-tree}}) uses the
+   "recurrence" grouping and specifies a simple recurrence rule with a time zone.
 
 ~~~~
 {::include ./yang/tree/rec-tz-grp.txt}
 ~~~~
 {: #rec-tz-grp-tree title="recurrence-with-time-zone Grouping Tree Structure"}
 
-   The "time-zone-identifier" parameter MUST be specified if the date
+   The "recurrence-first" container includes "date-time-start" and "duration" parameters
+   to specify the start time and period of the first occurrence. Unless specified otherwise, the
+   "duration" also applies to subsequent recurrence instances. It also includes a
+   "time-zone-identifier" parameter which MUST be specified if the date
    and time value is neither reported in the format of UTC nor time zone offset
    to UTC.
-
-   The "recurrence-first" container includes a "duration" parameter
-   to specify the time period of the first occurrence. Unless specified otherwise, the
-   "duration" also applies to subsequent recurrence instances.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
   indicated by the "recurrence-bound" choice. The "date-time-start" value always counts
@@ -553,7 +554,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
   "time-zone-identifier": "China/Beijing",
   "min-allowed-start": "2025-01-01T08:00:00",
   "max-allowed-end": "2025-01-31T20:00:00",
-   "discard-action": "ietf-schedule:silently-discard"
+  "discard-action": "ietf-schedule:silently-discard"
 }
 ~~~~
 {: #ex-0 title="Generic Parameters for Schedule Validation"}
@@ -596,17 +597,13 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ## The "recurrence" Grouping
 
-   {{ex-6}} indicates a recurrence of every 2 days for 10 occurrences, starting
-   at 3 p.m. on December 1, 2025 with an offset of -8:00 from UTC:
+   {{ex-6}} indicates a recurrence of every 2 days which starts immediately and repeat forever:
 
 ~~~~
 {
-  "recurrence-first": {
-    "date-time-start": "2025-12-01T15:00:00-08:00:00"
-  },
+  "description": "forever recurrence rule",
   "frequency": "ietf-schedule:daily",
   "interval": 2,
-  "count": 10
 }
 ~~~~
 {: #ex-4 title="Simple Schedule with Recurrence"}
@@ -624,7 +621,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
   },
   "frequency": "ietf-schedule:daily",
   "interval": 1,
-  "until": "2025-12-31T23:59:59Z"
+  "utc-until": "2025-12-31T23:59:59Z"
 }
 ~~~~
 {: #ex-5 title="Simple Schedule with Recurrence in UTC"}
@@ -661,7 +658,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
   },
   "frequency": "ietf-schedule:daily",
   "interval": 2,
-  "until": "2025-06-30T23:59:59Z",
+  "utc-until": "2025-06-30T23:59:59Z",
   "period-timeticks": [
     {
       "period-start": "3240000",
