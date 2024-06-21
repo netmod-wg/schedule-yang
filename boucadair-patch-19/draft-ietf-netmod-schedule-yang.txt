@@ -83,7 +83,8 @@ Table of Contents
        3.3.6.  The "recurrence-utc-with-date-times" Grouping
        3.3.7.  The "recurrence-time-zone-with-date-times" Grouping
        3.3.8.  The "icalendar-recurrence" Grouping
-       3.3.9.  The "schedule-status" Grouping
+       3.3.9.  The "schedule-status" and "schedule-status-with-name"
+               Groupings
      3.4.  Features Use and Augmentations
    4.  Some Usage Restrictions
    5.  Relationship to the DISMAN-SCHEDULE-MIB
@@ -235,7 +236,7 @@ Table of Contents
 
    *  "icalendar-recurrence" (Section 3.3.8)
 
-   *  "schedule-status" (Section 3.3.9)
+   *  "schedule-status" and "schedule-status-with-name" (Section 3.3.9)
 
    Figure 1 provides an overview of the tree structure of the "ietf-
    schedule" module in terms of its groupings.
@@ -746,10 +747,14 @@ Table of Contents
    recurrence rule and date-times, and then excluding any start date and
    time values specified by "exception-dates" parameter.
 
-3.3.9.  The "schedule-status" Grouping
+3.3.9.  The "schedule-status" and "schedule-status-with-name" Groupings
 
-   The "schedule-status" grouping (Figure 10) defines common parameters
-   for scheduling management/status exposure.
+   The "schedule-status" and "schedule-status-with-name" groupings
+   (Figure 10) define common parameters for scheduling management/status
+   exposure.  The "schedule-status-with-name" grouping has the same
+   structure as "schedule-status" but with an additional paramter to
+   identify a schedule "schedule-id".  Both structures are defined in
+   the module to allow for better modularity and flexibility.
 
    module: ietf-schedule
 
@@ -793,7 +798,8 @@ Table of Contents
        +--ro last-failed-occurrence?   yang:date-and-time
        +--ro failure-counter?          uint32
 
-             Figure 10: Schedule Status Grouping Tree Structure
+      Figure 10: Schedule Status with and without Name Groupings Tree
+                                 Structure
 
    The "schedule-id" parameter is useful to uniquely identify a schedule
    in a network device or controller if multiple scheduling contexts
@@ -826,7 +832,7 @@ Table of Contents
    "last-failed-occurrence" and "failure-counter" report the last
    failure that occured and the count of failures for this schedule.
 
-   The current grouping captures common parameters that are applicable
+   The current groupings capture common parameters that are applicable
    to typical scheduling contexts known so far.  Future modules can
    define other useful parameters as needed.  For example, in a
    scheduling context with multiple system sources to feed the
