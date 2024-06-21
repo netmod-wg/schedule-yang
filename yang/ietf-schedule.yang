@@ -713,18 +713,11 @@ module ietf-schedule {
         "Defines a list of exceptions for recurrence.";
     }
   }
-  
+
   grouping schedule-status {
     description
       "This grouping defines common properties of scheduling
        status.";
-    leaf schedule-id {
-      type string;
-      description
-        "The schedule identifier that uniquely identifies a
-         schedule within a device, controller, network, etc. 
-         The unicity scope depends on the implementation.";
-    }
     leaf state {
       type identityref {
         base schedule-state;
@@ -801,5 +794,19 @@ module ietf-schedule {
         "Counts the number of failures while invoking the scheduled
          action.";
     }
+  }
+
+  grouping schedule-status-with-name {
+    description
+      "This grouping defines common properties of scheduling
+       status.";
+    leaf schedule-id {
+      type string;
+      description
+        "The schedule identifier that uniquely identifies a
+         schedule within a device, controller, network, etc. 
+         The unicity scope depends on the implementation.";
+    }
+    uses schedule-status;
   }
 }
