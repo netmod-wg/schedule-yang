@@ -519,7 +519,7 @@ Table of Contents
        |  |  +-- until?        yang:date-and-time
        |  +--:(count)
        |     +-- count?        uint32
-       +-- description?        string
+       +-- recurrence-description?        string
        +-- frequency           identityref
        +-- interval?           uint32
      grouping recurrence-utc-with-date-times:
