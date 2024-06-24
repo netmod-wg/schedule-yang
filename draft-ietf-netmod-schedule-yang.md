@@ -829,6 +829,29 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {: #ex-13 title="Example of Scheduled Link's Bandwidth"}
 
+# Examples of Using "ietf-schedule" Module in scheduled based Framework
+
+   This section exemplifies how the architecture for supporting scheduled
+   reservation of TE resources in {{?RFC8413}} could leverage the "period-of-time"
+   grouping defined in the "ietf-schedule" module to implement scheduled use of
+   resources.
+
+   The following example module shows how a scheduled link capacity reservation
+   could be defined.
+
+~~~~
+{::include-fold ./yang/example-scheduled-capacity-reservation.yang}
+~~~~
+
+   {{Section 4 of ?RFC8413}} defines the reference architecture for scheduled use
+   of resources, the service requester sends a request to the PCE and includes the
+   parameters of the LSP that the requester wishes to supply, the configuration
+   example to provide the scheduled resource is shown in {{ex-14}}.
+
+~~~~
+{::include-fold ./examples/example-scheduled-capacity-reservation.xml}
+~~~~
+{: #ex-14 title="Example of Scheduled Link's Bandwidth Reservation"}
 
 # Acknowledgments
 {:numbered="false"}
