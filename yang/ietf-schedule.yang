@@ -753,7 +753,7 @@ module ietf-schedule {
     leaf counter {
       when "derived-from-or-self(../schedule-type, "
          + "'schedule:recurrence')";
-      type counter32;
+      type yang:counter32;
       config false;
       description
         "The counter of occurrences since the schedule was enabled.
@@ -788,7 +788,7 @@ module ietf-schedule {
     leaf failure-counter {
       when "derived-from-or-self(../schedule-type, "
          + "'schedule:recurrence')";
-      type counter32;
+      type yang:counter32;
       config false;
       description
         "Counts the number of failures while invoking the scheduled
