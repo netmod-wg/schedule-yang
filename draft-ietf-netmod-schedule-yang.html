@@ -1039,7 +1039,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Ma, et al.</td>
-<td class="center">Expires 23 December 2024</td>
+<td class="center">Expires 26 December 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1052,12 +1052,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-netmod-schedule-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-06-21" class="published">21 June 2024</time>
+<time datetime="2024-06-24" class="published">24 June 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-12-23">23 December 2024</time></dd>
+<dd class="expires"><time datetime="2024-12-26">26 December 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1120,7 +1120,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 23 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1653,7 +1653,7 @@ module: ietf-schedule
   within a daily recurrence rule, an interval value of "8" means every eight days.
   The default value is "1", meaning every second for a secondly recurrence rule,
   every minute for a minutely rule, every hour for an hourly rule, every day for a
-  daily rule, and so on. Note that per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-11#section-4.13" class="relref">Section 4.13</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>, no "default" substatement is used here because there are cases (e.g., profiling) where the use of the default is problematic.<a href="#section-3.3.3-4" class="pilcrow">¶</a></p>
+  daily rule, and so on. Note that per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-12#section-4.13" class="relref">Section 4.13</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>, no "default" substatement is used here because there are cases (e.g., profiling) where the use of the default is problematic.<a href="#section-3.3.3-4" class="pilcrow">¶</a></p>
 <p id="section-3.3.3-5">The "description" includes a description of the period. No constraint is imposed
   on the structure nor the use of this parameter.<a href="#section-3.3.3-5" class="pilcrow">¶</a></p>
 </section>
@@ -2047,11 +2047,11 @@ module: ietf-schedule
     +-- schedule-type?            identityref
     +--ro local-time?               yang:date-and-time
     +--ro last-update?              yang:date-and-time
-    +--ro counter?                  uint32
+    +--ro counter?                  yang:counter32
     +--ro last-occurrence?          yang:date-and-time
     +--ro upcoming-occurrence?      yang:date-and-time
     +--ro last-failed-occurrence?   yang:date-and-time
-    +--ro failure-counter?          uint32
+    +--ro failure-counter?          yang:counter32
   grouping schedule-status-with-name:
     +-- schedule-id?              string
     +-- state?                    identityref
@@ -2059,11 +2059,11 @@ module: ietf-schedule
     +-- schedule-type?            identityref
     +--ro local-time?               yang:date-and-time
     +--ro last-update?              yang:date-and-time
-    +--ro counter?                  uint32
+    +--ro counter?                  yang:counter32
     +--ro last-occurrence?          yang:date-and-time
     +--ro upcoming-occurrence?      yang:date-and-time
     +--ro last-failed-occurrence?   yang:date-and-time
-    +--ro failure-counter?          uint32
+    +--ro failure-counter?          yang:counter32
 </pre>
 </div>
 <figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
@@ -3009,7 +3009,7 @@ module ietf-schedule {
     leaf counter {
       when "derived-from-or-self(../schedule-type, "
          + "'schedule:recurrence')";
-      type uint32;
+      type yang:counter32;
       config false;
       description
         "The counter of occurrences since the schedule was enabled.
@@ -3044,7 +3044,7 @@ module ietf-schedule {
     leaf failure-counter {
       when "derived-from-or-self(../schedule-type, "
          + "'schedule:recurrence')";
-      type uint32;
+      type yang:counter32;
       config false;
       description
         "Counts the number of failures while invoking the scheduled
@@ -3076,7 +3076,7 @@ module ietf-schedule {
       <h2 id="name-security-considerations">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-7-1">This section uses the template described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-11#section-3.7" class="relref">Section 3.7</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">This section uses the template described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-12#section-3.7" class="relref">Section 3.7</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">The "ietf-schedule" YANG module specified in this document defines schema for data
    that is designed to be accessed via network management protocols such
    as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> or RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.  The lowest NETCONF layer
@@ -3224,7 +3224,7 @@ module ietf-schedule {
 <dd class="break"></dd>
 <dt id="I-D.ietf-netmod-rfc8407bis">[I-D.ietf-netmod-rfc8407bis]</dt>
         <dd>
-<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-11</span>, <time datetime="2024-04-18" class="refDate">18 April 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-11">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-11</a>&gt;</span>. </dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-12</span>, <time datetime="2024-06-21" class="refDate">21 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-12">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-opsawg-ucl-acl">[I-D.ietf-opsawg-ucl-acl]</dt>
         <dd>

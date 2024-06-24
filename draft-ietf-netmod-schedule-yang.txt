@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 23 December 2024                              M. Boucadair, Ed.
+Expires: 26 December 2024                              M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                            21 June 2024
+                                                            24 June 2024
 
 
                 A Common YANG Data Model for Scheduling
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 December 2024.
+   This Internet-Draft will expire on 26 December 2024.
 
 Copyright Notice
 
@@ -780,11 +780,11 @@ Table of Contents
        +-- schedule-type?            identityref
        +--ro local-time?               yang:date-and-time
        +--ro last-update?              yang:date-and-time
-       +--ro counter?                  uint32
+       +--ro counter?                  yang:counter32
        +--ro last-occurrence?          yang:date-and-time
        +--ro upcoming-occurrence?      yang:date-and-time
        +--ro last-failed-occurrence?   yang:date-and-time
-       +--ro failure-counter?          uint32
+       +--ro failure-counter?          yang:counter32
      grouping schedule-status-with-name:
        +-- schedule-id?              string
        +-- state?                    identityref
@@ -792,11 +792,11 @@ Table of Contents
        +-- schedule-type?            identityref
        +--ro local-time?               yang:date-and-time
        +--ro last-update?              yang:date-and-time
-       +--ro counter?                  uint32
+       +--ro counter?                  yang:counter32
        +--ro last-occurrence?          yang:date-and-time
        +--ro upcoming-occurrence?      yang:date-and-time
        +--ro last-failed-occurrence?   yang:date-and-time
-       +--ro failure-counter?          uint32
+       +--ro failure-counter?          yang:counter32
 
       Figure 10: Schedule Status with and without Name Groupings Tree
                                  Structure
@@ -1684,7 +1684,7 @@ Table of Contents
        leaf counter {
          when "derived-from-or-self(../schedule-type, "
             + "'schedule:recurrence')";
-         type uint32;
+         type yang:counter32;
          config false;
          description
            "The counter of occurrences since the schedule was enabled.
@@ -1719,7 +1719,7 @@ Table of Contents
        leaf failure-counter {
          when "derived-from-or-self(../schedule-type, "
             + "'schedule:recurrence')";
-         type uint32;
+         type yang:counter32;
          config false;
          description
            "Counts the number of failures while invoking the scheduled
@@ -1881,9 +1881,9 @@ Table of Contents
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
               Authors and Reviewers of Documents Containing YANG Data
               Models", Work in Progress, Internet-Draft, draft-ietf-
-              netmod-rfc8407bis-11, 18 April 2024,
+              netmod-rfc8407bis-12, 21 June 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              rfc8407bis-11>.
+              rfc8407bis-12>.
 
    [I-D.ietf-opsawg-ucl-acl]
               Ma, Q., Wu, Q., Boucadair, M., and D. King, "A YANG Data
