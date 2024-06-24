@@ -79,8 +79,9 @@ triggered by the schedules.
 {{sec-mib}} discusses relationship with the managed objects defined in {{!RFC3231}}.
 
 {{usage}} describes a set of examples to illustrate the use of the common schedule groupings ({{sec-grp}}).
-Also, {{sec-ext}} provides sample modules to exemplify how future modules can use the extensibility
-provisions in "ietf-schedule" ({{sec-schedule}}).
+And {{sec-ext}} provides sample modules to exemplify how future modules can use the extensibility
+provisions in "ietf-schedule" ({{sec-schedule}}). Also, {{ex-framework}} provides
+an example of using "ietf-schedule" module for scheduled use of resources framework (e.g., {{?RFC8413}}).
 
 ## Editorial Note (To be removed by RFC Editor)
 
@@ -829,6 +830,29 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {: #ex-13 title="Example of Scheduled Link's Bandwidth"}
 
+# Examples of Using "ietf-schedule" Module for Scheduled Use of Resources Framework {#ex-framework}
+
+   This section exemplifies how the architecture for supporting scheduled
+   reservation of Traffic Engineering (TE) resources in {{?RFC8413}} might leverage the "period-of-time"
+   grouping defined in the "ietf-schedule" module to implement scheduled use of
+   resources.
+
+   The following example module shows how a scheduled link capacity reservation
+   could be defined.
+
+~~~~
+{::include-fold ./yang/example-scheduled-capacity-reservation.yang}
+~~~~
+
+   {{Section 4 of ?RFC8413}} defines the reference architecture for scheduled use
+   of resources, the service requester sends a request to a Path Computation Element (PCE) and includes the
+   parameters of the Label Switched Path (LSP) that the requester wishes to supply, the configuration
+   example to provide the scheduled resource is shown in {{ex-14}}.
+
+~~~~
+{::include-fold ./examples/example-scheduled-capacity-reservation.xml}
+~~~~
+{: #ex-14 title="Example of Scheduled Link's Bandwidth Reservation"}
 
 # Acknowledgments
 {:numbered="false"}

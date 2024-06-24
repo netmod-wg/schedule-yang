@@ -1,0 +1,30 @@
+module example-scheduled-capacity-reservation {
+  yang-version 1.1;
+  namespace "http://example.com/example-scheduled-capacity-reservation";
+  prefix "ex-schecaparev";
+
+  import ietf-network-topology {
+    prefix "nt";
+  }
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  container link-capability-reservations {
+    list scheduled-link-capacity {
+      key "schedule-id";
+      leaf schedule-id {
+        type string;
+      }
+      leaf link-id {
+        type nt:link-id;
+      }
+      leaf reserved-capability {
+        type uint64;
+        units "Mbps";
+      }
+      uses schedule:period-of-time;
+    }
+  }
+}
