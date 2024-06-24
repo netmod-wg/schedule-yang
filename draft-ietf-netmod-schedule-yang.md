@@ -212,14 +212,13 @@ System:
    start ("period-start") and a positive time duration ("duration"). For the first
    format, the start of the period MUST be before the end of the period.
 
-   The "description" includes a description of the period. No constraint is imposed
+   The "period-description" includes a description of the period. No constraint is imposed
    on the structure nor the use of this parameter.
 
 ~~~~
 {::include ./yang/tree/period-grp.txt}
 ~~~~
 {: #pt-tree title="Period of Time Grouping Tree Structure"}
-
 
 ### The "recurrence" Grouping {#sec-rec}
 
@@ -239,7 +238,7 @@ System:
   every minute for a minutely rule, every hour for an hourly rule, every day for a
   daily rule, and so on. Note that per {{Section 4.13 of ?I-D.ietf-netmod-rfc8407bis}}, no "default" substatement is used here because there are cases (e.g., profiling) where the use of the default is problematic.
 
-  The "description" includes a description of the period. No constraint is imposed
+  The "recurrence-description" includes a description of the period. No constraint is imposed
   on the structure nor the use of this parameter.
 
 ### The "recurrence-utc" Grouping {#sec-rec-utc}
