@@ -79,8 +79,9 @@ triggered by the schedules.
 {{sec-mib}} discusses relationship with the managed objects defined in {{!RFC3231}}.
 
 {{usage}} describes a set of examples to illustrate the use of the common schedule groupings ({{sec-grp}}).
-Also, {{sec-ext}} provides sample modules to exemplify how future modules can use the extensibility
-provisions in "ietf-schedule" ({{sec-schedule}}).
+And {{sec-ext}} provides sample modules to exemplify how future modules can use the extensibility
+provisions in "ietf-schedule" ({{sec-schedule}}). Also, {{ex-framework}} provides
+examples of using "ietf-schedule" module for scheduled use of resources framework (e.g., {{?RFC8413}}).
 
 ## Editorial Note (To be removed by RFC Editor)
 
@@ -829,7 +830,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {: #ex-13 title="Example of Scheduled Link's Bandwidth"}
 
-# Examples of Using "ietf-schedule" Module for Scheduled Use of Resources Framework
+# Examples of Using "ietf-schedule" Module for Scheduled Use of Resources Framework {#ex-framework}
 
    This section exemplifies how the architecture for supporting scheduled
    reservation of Traffic Engineering (TE) resources in {{?RFC8413}} might leverage the "period-of-time"
