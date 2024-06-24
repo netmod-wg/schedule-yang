@@ -81,7 +81,7 @@ triggered by the schedules.
 {{usage}} describes a set of examples to illustrate the use of the common schedule groupings ({{sec-grp}}).
 And {{sec-ext}} provides sample modules to exemplify how future modules can use the extensibility
 provisions in "ietf-schedule" ({{sec-schedule}}). Also, {{ex-framework}} provides
-examples of using "ietf-schedule" module for scheduled use of resources framework (e.g., {{?RFC8413}}).
+an example of using "ietf-schedule" module for scheduled use of resources framework (e.g., {{?RFC8413}}).
 
 ## Editorial Note (To be removed by RFC Editor)
 
