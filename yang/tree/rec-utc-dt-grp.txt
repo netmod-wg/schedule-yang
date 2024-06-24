@@ -19,7 +19,7 @@ module: ietf-schedule
     |  |  +-- utc-until?    yang:date-and-time
     |  +--:(count)
     |     +-- count?        uint32
-    +-- description?        string
+    +-- recurrence-description?        string
     +-- frequency           identityref
     +-- interval?           uint32
     +-- period-timeticks* [period-start]
