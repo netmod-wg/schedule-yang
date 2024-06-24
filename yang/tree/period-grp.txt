@@ -3,7 +3,7 @@ module: ietf-schedule
   grouping generic-schedule-params:
     ...
   grouping period-of-time:
-    +-- description?            string
+    +-- period-description?     string
     +-- period-start            yang:date-and-time
     +-- time-zone-identifier?   sys:timezone-name
     +-- (period-type)?
