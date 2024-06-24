@@ -829,10 +829,10 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {: #ex-13 title="Example of Scheduled Link's Bandwidth"}
 
-# Examples of Using "ietf-schedule" Module in scheduled based Framework
+# Examples of Using "ietf-schedule" Module for Scheduled Use of Resources Framework
 
    This section exemplifies how the architecture for supporting scheduled
-   reservation of TE resources in {{?RFC8413}} could leverage the "period-of-time"
+   reservation of Traffic Engineering (TE) resources in {{?RFC8413}} might leverage the "period-of-time"
    grouping defined in the "ietf-schedule" module to implement scheduled use of
    resources.
 
@@ -844,8 +844,8 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 
    {{Section 4 of ?RFC8413}} defines the reference architecture for scheduled use
-   of resources, the service requester sends a request to the PCE and includes the
-   parameters of the LSP that the requester wishes to supply, the configuration
+   of resources, the service requester sends a request to a Path Computation Element (PCE) and includes the
+   parameters of the Label Switched Path (LSP) that the requester wishes to supply, the configuration
    example to provide the scheduled resource is shown in {{ex-14}}.
 
 ~~~~
