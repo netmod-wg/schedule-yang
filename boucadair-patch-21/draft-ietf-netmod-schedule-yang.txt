@@ -397,7 +397,7 @@ Table of Contents
      grouping period-of-time:
        ...
      grouping recurrence:
-       +-- description?   string
+       +-- recurrence-description?   string
        +-- frequency      identityref
        +-- interval?      uint32
      grouping recurrence-utc:
