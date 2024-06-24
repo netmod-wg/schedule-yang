@@ -111,6 +111,8 @@ Table of Contents
            Rule
      B.2.  Example: Schedule Network Properties to Change Based on
            Date and Time
+   Appendix C.  Examples of Using "ietf-schedule" Module for Scheduled
+           Use of Resources Framework
    Acknowledgments
    Authors' Addresses
 
@@ -131,9 +133,11 @@ Table of Contents
    [RFC3231].
 
    Appendix A describes a set of examples to illustrate the use of the
-   common schedule groupings (Section 3.3).  Also, Appendix B provides
+   common schedule groupings (Section 3.3).  And Appendix B provides
    sample modules to exemplify how future modules can use the
-   extensibility provisions in "ietf-schedule" (Section 6).
+   extensibility provisions in "ietf-schedule" (Section 6).  Also,
+   Appendix C provides an example of using "ietf-schedule" module for
+   scheduled use of resources framework (e.g., [RFC8413]).
 
 1.1.  Editorial Note (To be removed by RFC Editor)
 
@@ -1927,6 +1931,11 @@ Table of Contents
               BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,
               <https://www.rfc-editor.org/rfc/rfc8340>.
 
+   [RFC8413]  Zhuang, Y., Wu, Q., Chen, H., and A. Farrel, "Framework
+              for Scheduled Use of Resources", RFC 8413,
+              DOI 10.17487/RFC8413, July 2018,
+              <https://www.rfc-editor.org/rfc/rfc8413>.
+
 Appendix A.  Examples of Format Representation
 
    This section provides some examples to illustrate the use of the
@@ -2429,6 +2438,87 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
    </link-attributes>
 
               Figure 24: Example of Scheduled Link's Bandwidth
+
+Appendix C.  Examples of Using "ietf-schedule" Module for Scheduled Use
+             of Resources Framework
+
+   This section exemplifies how the architecture for supporting
+   scheduled reservation of Traffic Engineering (TE) resources in
+   [RFC8413] might leverage the "period-of-time" grouping defined in the
+   "ietf-schedule" module to implement scheduled use of resources.
+
+   The following example module shows how a scheduled link capacity
+   reservation could be defined.
+
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
+   module example-scheduled-capacity-reservation {
+     yang-version 1.1;
+     namespace "http://example.com/example-scheduled-capacity-\
+                                                           reservation";
+     prefix "ex-schecaparev";
+
+     import ietf-network-topology {
+       prefix "nt";
+     }
+
+     import ietf-schedule {
+       prefix "schedule";
+     }
+
+     container link-capability-reservations {
+       list scheduled-link-capacity {
+         key "schedule-id";
+         leaf schedule-id {
+           type string;
+         }
+         leaf link-id {
+           type nt:link-id;
+         }
+         leaf reserved-capability {
+           type uint64;
+           units "Mbps";
+         }
+         uses schedule:period-of-time;
+       }
+     }
+   }
+
+   Section 4 of [RFC8413] defines the reference architecture for
+   scheduled use of resources, the service requester sends a request to
+   a Path Computation Element (PCE) and includes the parameters of the
+   Label Switched Path (LSP) that the requester wishes to supply, the
+   configuration example to provide the scheduled resource is shown in
+   Figure 25.
+
+   <?xml version="1.0" encoding="utf-8"?>
+   <link-capability-reservations
+     xmlns="http://example.com/example-scheduled-capacity-reservation"
+     xmlns:schedule="urn:ietf:params:xml:ns:yang:ietf-schedule">
+   <scheduled-link-capacity>
+   <schedule-id>1</schedule-id>
+   <link-id>1-2-1</link-id>
+   <reserved-capability>500</reserved-capability>
+   <period-start>2025-03-10T08:00:00Z</period-start>
+   <period-end>2025-03-10T09:00:00Z</period-end>
+   </scheduled-link-capacity>
+   <scheduled-link-capacity>
+   <schedule-id>2</schedule-id>
+   <link-id>2-1-1</link-id>
+   <reserved-capability>400</reserved-capability>
+   <period-start>2025-04-01T00:00:00Z</period-start>
+   <duration>PT09:00:00</duration>
+   </scheduled-link-capacity>
+   <scheduled-link-capacity>
+   <schedule-id>3</schedule-id>
+   <link-id>2-1-1</link-id>
+   <reserved-capability>500</reserved-capability>
+   <period-start>2025-04-01T09:00:00Z</period-start>
+   <period-end>2025-04-01T23:59:59Z</period-end>
+   </scheduled-link-capacity>
+   </link-capability-reservations>
+
+        Figure 25: Example of Scheduled Link's Bandwidth Reservation
 
 Acknowledgments
 
