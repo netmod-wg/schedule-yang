@@ -780,11 +780,11 @@ Table of Contents
        +-- schedule-type?            identityref
        +--ro local-time?               yang:date-and-time
        +--ro last-update?              yang:date-and-time
-       +--ro counter?                  counter32
+       +--ro counter?                  yang:counter32
        +--ro last-occurrence?          yang:date-and-time
        +--ro upcoming-occurrence?      yang:date-and-time
        +--ro last-failed-occurrence?   yang:date-and-time
-       +--ro failure-counter?          counter32
+       +--ro failure-counter?          yang:counter32
      grouping schedule-status-with-name:
        +-- schedule-id?              string
        +-- state?                    identityref
@@ -792,11 +792,11 @@ Table of Contents
        +-- schedule-type?            identityref
        +--ro local-time?               yang:date-and-time
        +--ro last-update?              yang:date-and-time
-       +--ro counter?                  counter32
+       +--ro counter?                  yang:counter32
        +--ro last-occurrence?          yang:date-and-time
        +--ro upcoming-occurrence?      yang:date-and-time
        +--ro last-failed-occurrence?   yang:date-and-time
-       +--ro failure-counter?          counter32
+       +--ro failure-counter?          yang:counter32
 
       Figure 10: Schedule Status with and without Name Groupings Tree
                                  Structure
