@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-23T00:57:54.783995+00:00",
+  "timestamp": "2024-06-25T00:54:22.436145+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -1989,6 +1989,216 @@
           ]
         }
       ]
+    },
+    {
+      "number": 34,
+      "id": "PR_kwDOLuooYM5zUkSZ",
+      "title": "fix type for counters",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/34",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-24T06:54:04Z",
+      "updatedAt": "2024-06-24T08:57:24Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "7ad214981e64751777388f7aab79075c87bb6bba",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-20",
+      "headRefOid": "89589b0e7ddbfe996ee6806d70256ddbb56d0126",
+      "closedAt": "2024-06-24T08:57:23Z",
+      "mergedAt": "2024-06-24T08:57:23Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "df9e189b7c7a85888accdbed69d2340e9d66164a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5_Q3QE",
+          "commit": {
+            "abbreviatedOid": "89589b0"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-24T08:57:15Z",
+          "updatedAt": "2024-06-24T08:57:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "id": "PR_kwDOLuooYM5zVdow",
+      "title": "add example to support 8413 architecture",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/35",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "@boucadair related to issue #19 .Let me know if this is something in your mind.\r\n",
+      "createdAt": "2024-06-24T08:56:37Z",
+      "updatedAt": "2024-06-24T13:05:05Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "7ad214981e64751777388f7aab79075c87bb6bba",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "ddb60f2a65f5af1763f4a6283e2bc87377f62bbb",
+      "closedAt": "2024-06-24T13:05:05Z",
+      "mergedAt": "2024-06-24T13:05:05Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "bde1b578b7cddda942ba08a6411a28e91932f03c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5_RM5a",
+          "commit": {
+            "abbreviatedOid": "5ca72bd"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Looks good. Thanks",
+          "createdAt": "2024-06-24T09:36:49Z",
+          "updatedAt": "2024-06-24T09:40:34Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\n# Examples of Using \"ietf-schedule\" Module for Scheduled Use of Resources Framework\r\n```",
+              "createdAt": "2024-06-24T09:36:49Z",
+              "updatedAt": "2024-06-24T09:40:34Z"
+            },
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\n   reservation of Traffic Engineering (TE) resources in {{?RFC8413}} might leverage the \"period-of-time\"\r\n```",
+              "createdAt": "2024-06-24T09:37:28Z",
+              "updatedAt": "2024-06-24T09:40:34Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\n   of resources, the service requester sends a request to a Path Computation Element (PCE) and includes the\r\n```",
+              "createdAt": "2024-06-24T09:38:58Z",
+              "updatedAt": "2024-06-24T09:40:34Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\n   parameters of the Label Switched Path (LSP) that the requester wishes to supply, the configuration\r\n```",
+              "createdAt": "2024-06-24T09:39:32Z",
+              "updatedAt": "2024-06-24T09:40:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM5_TQxZ",
+          "commit": {
+            "abbreviatedOid": "0268859"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-24T13:03:25Z",
+          "updatedAt": "2024-06-24T13:03:25Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nan example of using \"ietf-schedule\" module for scheduled use of resources framework (e.g., {{?RFC8413}}).\r\n```",
+              "createdAt": "2024-06-24T13:03:25Z",
+              "updatedAt": "2024-06-24T13:03:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM5_TRLV",
+          "commit": {
+            "abbreviatedOid": "ddb60f2"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-24T13:04:01Z",
+          "updatedAt": "2024-06-24T13:04:01Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 36,
+      "id": "PR_kwDOLuooYM5zWfOQ",
+      "title": "add grouping schedule-status-with-name",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/36",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-24T11:05:38Z",
+      "updatedAt": "2024-06-24T13:05:37Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "df9e189b7c7a85888accdbed69d2340e9d66164a",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "Qiufang-branch-1",
+      "headRefOid": "8f1cc28303147238970d8f39d31bcdf147548475",
+      "closedAt": "2024-06-24T13:05:37Z",
+      "mergedAt": "2024-06-24T13:05:37Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "ded3e83f6b2caf1d72ecaa5e0df15c9a3f9db316"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5_TSCk",
+          "commit": {
+            "abbreviatedOid": "8f1cc28"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-24T13:05:32Z",
+          "updatedAt": "2024-06-24T13:05:32Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "id": "PR_kwDOLuooYM5zXd-X",
+      "title": "fix a naming conflict",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/37",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "for models where both period and recursion are used (e.g., within a same choice)",
+      "createdAt": "2024-06-24T13:13:31Z",
+      "updatedAt": "2024-06-24T13:19:24Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "ded3e83f6b2caf1d72ecaa5e0df15c9a3f9db316",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-21",
+      "headRefOid": "72835d6cb62015b212689cb5670b05a2aef36df8",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
