@@ -344,7 +344,7 @@ module ietf-schedule {
     reference
       "RFC 5545: Internet Calendaring and Scheduling Core Object
                  Specification (iCalendar), Section 3.3.9";
-    leaf description {
+    leaf period-description {
       type string;
       description
         "Provides a description of the period.";
@@ -404,7 +404,7 @@ module ietf-schedule {
   grouping recurrence {
     description
       "A simple definition of recurrence.";
-    leaf description {
+    leaf recurrence-description {
       type string;
       description
         "Provides a description of the recurrence.";
