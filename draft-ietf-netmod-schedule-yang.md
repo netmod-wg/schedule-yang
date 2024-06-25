@@ -603,7 +603,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "description": "forever recurrence rule",
+  "recurrence-description": "forever recurrence rule",
   "frequency": "ietf-schedule:daily",
   "interval": 2,
 }

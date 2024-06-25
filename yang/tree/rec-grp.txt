@@ -6,8 +6,8 @@ module: ietf-schedule
     ...
   grouping recurrence:
     +-- recurrence-description?   string
-    +-- frequency      identityref
-    +-- interval?      uint32
+    +-- frequency                 identityref
+    +-- interval?                 uint32
   grouping recurrence-utc:
     ...
   grouping recurrence-with-time-zone:

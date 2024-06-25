@@ -16,14 +16,14 @@ module: ietf-schedule
     |  +-- duration?         uint32
     +-- (recurrence-bound)?
     |  +--:(until)
-    |  |  +-- utc-until?    yang:date-and-time
+    |  |  +-- utc-until?          yang:date-and-time
     |  +--:(count)
-    |     +-- count?        uint32
-    +-- recurrence-description?        string
-    +-- frequency           identityref
-    +-- interval?           uint32
+    |     +-- count?              uint32
+    +-- recurrence-description?   string
+    +-- frequency                 identityref
+    +-- interval?                 uint32
     +-- period-timeticks* [period-start]
-       +-- period-start    yang:timeticks
+       +-- period-start?   yang:timeticks
        +-- period-end?     yang:timeticks
   grouping recurrence-time-zone-with-date-times:
     ...

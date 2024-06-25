@@ -19,14 +19,14 @@ module: ietf-schedule
     |  +-- time-zone-identifier?   sys:timezone-name
     +-- (recurrence-bound)?
     |  +--:(until)
-    |  |  +-- until?        yang:date-and-time
+    |  |  +-- until?              yang:date-and-time
     |  +--:(count)
-    |     +-- count?        uint32
-    +-- recurrence-description?        string
-    +-- frequency           identityref
-    +-- interval?           uint32
+    |     +-- count?              uint32
+    +-- recurrence-description?   string
+    +-- frequency                 identityref
+    +-- interval?                 uint32
     +-- period* [period-start]
-       +-- description?            string
+       +-- period-description?     string
        +-- period-start            yang:date-and-time
        +-- time-zone-identifier?   sys:timezone-name
        +-- (period-type)?
