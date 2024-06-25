@@ -1,6 +1,6 @@
-module example-scheduled-capacity-reservation {
+module example-sch-capacity-res {
   yang-version 1.1;
-  namespace "http://example.com/example-scheduled-capacity-reservation";
+  namespace "http://example.com/example-sch-capacity-res";
   prefix "ex-schecaparev";
 
   import ietf-network-topology {
