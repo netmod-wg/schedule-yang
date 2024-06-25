@@ -3932,12 +3932,9 @@ module example-scheduled-link-bandwidth {
    could be defined.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C-3">
 <pre>
-=============== NOTE: '\' line wrapping per RFC 8792 ================
-
-module example-scheduled-capacity-reservation {
+module example-sch-capacity-res {
   yang-version 1.1;
-  namespace "http://example.com/example-scheduled-capacity-\
-                                                        reservation";
+  namespace "http://example.com/example-sch-capacity-res";
   prefix "ex-schecaparev";
 
   import ietf-network-topology {
@@ -3977,29 +3974,29 @@ module example-scheduled-capacity-reservation {
 <pre>
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;link-capability-reservations
-  xmlns="http://example.com/example-scheduled-capacity-reservation"
+  xmlns="http://example.com/example-sch-capacity-res"
   xmlns:schedule="urn:ietf:params:xml:ns:yang:ietf-schedule"&gt;
-&lt;scheduled-link-capacity&gt;
-&lt;schedule-id&gt;1&lt;/schedule-id&gt;
-&lt;link-id&gt;1-2-1&lt;/link-id&gt;
-&lt;reserved-capability&gt;500&lt;/reserved-capability&gt;
-&lt;period-start&gt;2025-03-10T08:00:00Z&lt;/period-start&gt;
-&lt;period-end&gt;2025-03-10T09:00:00Z&lt;/period-end&gt;
-&lt;/scheduled-link-capacity&gt;
-&lt;scheduled-link-capacity&gt;
-&lt;schedule-id&gt;2&lt;/schedule-id&gt;
-&lt;link-id&gt;2-1-1&lt;/link-id&gt;
-&lt;reserved-capability&gt;400&lt;/reserved-capability&gt;
-&lt;period-start&gt;2025-04-01T00:00:00Z&lt;/period-start&gt;
-&lt;duration&gt;PT09:00:00&lt;/duration&gt;
-&lt;/scheduled-link-capacity&gt;
-&lt;scheduled-link-capacity&gt;
-&lt;schedule-id&gt;3&lt;/schedule-id&gt;
-&lt;link-id&gt;2-1-1&lt;/link-id&gt;
-&lt;reserved-capability&gt;500&lt;/reserved-capability&gt;
-&lt;period-start&gt;2025-04-01T09:00:00Z&lt;/period-start&gt;
-&lt;period-end&gt;2025-04-01T23:59:59Z&lt;/period-end&gt;
-&lt;/scheduled-link-capacity&gt;
+   &lt;scheduled-link-capacity&gt;
+      &lt;schedule-id&gt;1&lt;/schedule-id&gt;
+      &lt;link-id&gt;1-2-1&lt;/link-id&gt;
+      &lt;reserved-capability&gt;500&lt;/reserved-capability&gt;
+      &lt;period-start&gt;2025-03-10T08:00:00Z&lt;/period-start&gt;
+      &lt;period-end&gt;2025-03-10T09:00:00Z&lt;/period-end&gt;
+   &lt;/scheduled-link-capacity&gt;
+   &lt;scheduled-link-capacity&gt;
+      &lt;schedule-id&gt;2&lt;/schedule-id&gt;
+      &lt;link-id&gt;2-1-1&lt;/link-id&gt;
+      &lt;reserved-capability&gt;400&lt;/reserved-capability&gt;
+      &lt;period-start&gt;2025-04-01T00:00:00Z&lt;/period-start&gt;
+      &lt;duration&gt;PT09:00:00&lt;/duration&gt;
+   &lt;/scheduled-link-capacity&gt;
+   &lt;scheduled-link-capacity&gt;
+      &lt;schedule-id&gt;3&lt;/schedule-id&gt;
+      &lt;link-id&gt;2-1-1&lt;/link-id&gt;
+      &lt;reserved-capability&gt;500&lt;/reserved-capability&gt;
+      &lt;period-start&gt;2025-04-01T09:00:00Z&lt;/period-start&gt;
+      &lt;period-end&gt;2025-04-01T23:59:59Z&lt;/period-end&gt;
+   &lt;/scheduled-link-capacity&gt;
 &lt;/link-capability-reservations&gt;
 </pre>
 </div>
