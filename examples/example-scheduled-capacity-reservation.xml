@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <link-capability-reservations
-  xmlns="http://example.com/example-scheduled-capacity-reservation"
+  xmlns="http://example.com/example-sch-capacity-res"
   xmlns:schedule="urn:ietf:params:xml:ns:yang:ietf-schedule">
-<scheduled-link-capacity>
-<schedule-id>1</schedule-id>
-<link-id>1-2-1</link-id>
-<reserved-capability>500</reserved-capability>
-<period-start>2025-03-10T08:00:00Z</period-start>
-<period-end>2025-03-10T09:00:00Z</period-end>
-</scheduled-link-capacity>
-<scheduled-link-capacity>
-<schedule-id>2</schedule-id>
-<link-id>2-1-1</link-id>
-<reserved-capability>400</reserved-capability>
-<period-start>2025-04-01T00:00:00Z</period-start>
-<duration>PT09:00:00</duration>
-</scheduled-link-capacity>
-<scheduled-link-capacity>
-<schedule-id>3</schedule-id>
-<link-id>2-1-1</link-id>
-<reserved-capability>500</reserved-capability>
-<period-start>2025-04-01T09:00:00Z</period-start>
-<period-end>2025-04-01T23:59:59Z</period-end>
-</scheduled-link-capacity>
+   <scheduled-link-capacity>
+      <schedule-id>1</schedule-id>
+      <link-id>1-2-1</link-id>
+      <reserved-capability>500</reserved-capability>
+      <period-start>2025-03-10T08:00:00Z</period-start>
+      <period-end>2025-03-10T09:00:00Z</period-end>
+   </scheduled-link-capacity>
+   <scheduled-link-capacity>
+      <schedule-id>2</schedule-id>
+      <link-id>2-1-1</link-id>
+      <reserved-capability>400</reserved-capability>
+      <period-start>2025-04-01T00:00:00Z</period-start>
+      <duration>PT09:00:00</duration>
+   </scheduled-link-capacity>
+   <scheduled-link-capacity>
+      <schedule-id>3</schedule-id>
+      <link-id>2-1-1</link-id>
+      <reserved-capability>500</reserved-capability>
+      <period-start>2025-04-01T09:00:00Z</period-start>
+      <period-end>2025-04-01T23:59:59Z</period-end>
+   </scheduled-link-capacity>
 </link-capability-reservations>
