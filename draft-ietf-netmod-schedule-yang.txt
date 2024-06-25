@@ -398,8 +398,8 @@ Table of Contents
        ...
      grouping recurrence:
        +-- recurrence-description?   string
-       +-- frequency      identityref
-       +-- interval?      uint32
+       +-- frequency                 identityref
+       +-- interval?                 uint32
      grouping recurrence-utc:
        ...
      grouping recurrence-with-time-zone:
@@ -455,12 +455,12 @@ Table of Contents
        |  +-- duration?         uint32
        +-- (recurrence-bound)?
        |  +--:(until)
-       |  |  +-- utc-until?    yang:date-and-time
+       |  |  +-- utc-until?          yang:date-and-time
        |  +--:(count)
-       |     +-- count?        uint32
-       +-- recurrence-description?        string
-       +-- frequency           identityref
-       +-- interval?           uint32
+       |     +-- count?              uint32
+       +-- recurrence-description?   string
+       +-- frequency                 identityref
+       +-- interval?                 uint32
      grouping recurrence-with-time-zone:
        ...
      grouping recurrence-utc-with-date-times:
@@ -517,12 +517,12 @@ Table of Contents
        |  +-- time-zone-identifier?   sys:timezone-name
        +-- (recurrence-bound)?
        |  +--:(until)
-       |  |  +-- until?        yang:date-and-time
+       |  |  +-- until?              yang:date-and-time
        |  +--:(count)
-       |     +-- count?        uint32
-       +-- recurrence-description?        string
-       +-- frequency           identityref
-       +-- interval?           uint32
+       |     +-- count?              uint32
+       +-- recurrence-description?   string
+       +-- frequency                 identityref
+       +-- interval?                 uint32
      grouping recurrence-utc-with-date-times:
        ...
      grouping recurrence-time-zone-with-date-times:
@@ -576,12 +576,12 @@ Table of Contents
        |  +-- duration?         uint32
        +-- (recurrence-bound)?
        |  +--:(until)
-       |  |  +-- utc-until?    yang:date-and-time
+       |  |  +-- utc-until?          yang:date-and-time
        |  +--:(count)
-       |     +-- count?        uint32
-       +-- recurrence-description?        string
-       +-- frequency           identityref
-       +-- interval?           uint32
+       |     +-- count?              uint32
+       +-- recurrence-description?   string
+       +-- frequency                 identityref
+       +-- interval?                 uint32
        +-- period-timeticks* [period-start]
           +-- period-start    yang:timeticks
           +-- period-end?     yang:timeticks
@@ -631,14 +631,14 @@ Table of Contents
        |  +-- time-zone-identifier?   sys:timezone-name
        +-- (recurrence-bound)?
        |  +--:(until)
-       |  |  +-- until?        yang:date-and-time
+       |  |  +-- until?              yang:date-and-time
        |  +--:(count)
-       |     +-- count?        uint32
-       +-- recurrence-description?        string
-       +-- frequency           identityref
-       +-- interval?           uint32
+       |     +-- count?              uint32
+       +-- recurrence-description?   string
+       +-- frequency                 identityref
+       +-- interval?                 uint32
        +-- period* [period-start]
-          +-- description?            string
+          +-- period-description?     string
           +-- period-start            yang:date-and-time
           +-- time-zone-identifier?   sys:timezone-name
           +-- (period-type)?
@@ -692,14 +692,14 @@ Table of Contents
        |  +-- time-zone-identifier?   sys:timezone-name
        +-- (recurrence-bound)?
        |  +--:(until)
-       |  |  +-- until?        yang:date-and-time
+       |  |  +-- until?              yang:date-and-time
        |  +--:(count)
-       |     +-- count?        uint32
-       +-- description?        string
-       +-- frequency           identityref
-       +-- interval?           uint32
+       |     +-- count?              uint32
+       +-- recurrence-description?   string
+       +-- frequency                 identityref
+       +-- interval?                 uint32
        +-- period* [period-start]
-       |  +-- description             string
+       |  +-- period-description?     string
        |  +-- period-start            yang:date-and-time
        |  +-- time-zone-identifier?   sys:timezone-name
        |  +-- (period-type)?
@@ -707,19 +707,19 @@ Table of Contents
        |     |  +-- period-end?       yang:date-and-time
        |     +--:(duration)
        |        +-- duration?         duration
-       +-- bysecond*           uint32
-       +-- byminute*           uint32
-       +-- byhour*             uint32
+       +-- bysecond*                 uint32
+       +-- byminute*                 uint32
+       +-- byhour*                   uint32
        +-- byday* [weekday]
        |  +-- direction*   int32
        |  +-- weekday      schedule:weekday
-       +-- bymonthday*         int32
-       +-- byyearday*          int32
-       +-- byyearweek*         int32
-       +-- byyearmonth*        uint32
-       +-- bysetpos*           int32
-       +-- workweek-start?     schedule:weekday
-       +-- exception-dates*    yang:date-and-time
+       +-- bymonthday*               int32
+       +-- byyearday*                int32
+       +-- byyearweek*               int32
+       +-- byyearmonth*              uint32
+       +-- bysetpos*                 int32
+       +-- workweek-start?           schedule:weekday
+       +-- exception-dates*          yang:date-and-time
      grouping schedule-status:
        ...
      grouping schedule-status-with-name:
@@ -2018,7 +2018,7 @@ A.3.  The "recurrence" Grouping
    immediately and repeat forever:
 
    {
-     "description": "forever recurrence rule",
+     "recurrence-description": "forever recurrence rule",
      "frequency": "ietf-schedule:daily",
      "interval": 2,
    }
