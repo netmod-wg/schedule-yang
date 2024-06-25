@@ -12,12 +12,12 @@ module: ietf-schedule
     |  +-- duration?         uint32
     +-- (recurrence-bound)?
     |  +--:(until)
-    |  |  +-- utc-until?    yang:date-and-time
+    |  |  +-- utc-until?          yang:date-and-time
     |  +--:(count)
-    |     +-- count?        uint32
-    +-- recurrence-description?        string
-    +-- frequency           identityref
-    +-- interval?           uint32
+    |     +-- count?              uint32
+    +-- recurrence-description?   string
+    +-- frequency                 identityref
+    +-- interval?                 uint32
   grouping recurrence-with-time-zone:
     ...
   grouping recurrence-utc-with-date-times:

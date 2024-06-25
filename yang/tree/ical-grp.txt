@@ -21,14 +21,14 @@ module: ietf-schedule
     |  +-- time-zone-identifier?   sys:timezone-name
     +-- (recurrence-bound)?
     |  +--:(until)
-    |  |  +-- until?        yang:date-and-time
+    |  |  +-- until?              yang:date-and-time
     |  +--:(count)
-    |     +-- count?        uint32
-    +-- description?        string
-    +-- frequency           identityref
-    +-- interval?           uint32
+    |     +-- count?              uint32
+    +-- recurrence-description?   string
+    +-- frequency                 identityref
+    +-- interval?                 uint32
     +-- period* [period-start]
-    |  +-- description             string
+    |  +-- period-description?     string
     |  +-- period-start            yang:date-and-time
     |  +-- time-zone-identifier?   sys:timezone-name
     |  +-- (period-type)?
@@ -36,19 +36,19 @@ module: ietf-schedule
     |     |  +-- period-end?       yang:date-and-time
     |     +--:(duration)
     |        +-- duration?         duration
-    +-- bysecond*           uint32
-    +-- byminute*           uint32
-    +-- byhour*             uint32
+    +-- bysecond*                 uint32
+    +-- byminute*                 uint32
+    +-- byhour*                   uint32
     +-- byday* [weekday]
     |  +-- direction*   int32
     |  +-- weekday      schedule:weekday
-    +-- bymonthday*         int32
-    +-- byyearday*          int32
-    +-- byyearweek*         int32
-    +-- byyearmonth*        uint32
-    +-- bysetpos*           int32
-    +-- workweek-start?     schedule:weekday
-    +-- exception-dates*    yang:date-and-time
+    +-- bymonthday*               int32
+    +-- byyearday*                int32
+    +-- byyearweek*               int32
+    +-- byyearmonth*              uint32
+    +-- bysetpos*                 int32
+    +-- workweek-start?           schedule:weekday
+    +-- exception-dates*          yang:date-and-time
   grouping schedule-status:
     ...
   grouping schedule-status-with-name:
