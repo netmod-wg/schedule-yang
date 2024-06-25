@@ -1039,7 +1039,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Ma, et al.</td>
-<td class="center">Expires 26 December 2024</td>
+<td class="center">Expires 27 December 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1052,12 +1052,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-netmod-schedule-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-06-24" class="published">24 June 2024</time>
+<time datetime="2024-06-25" class="published">25 June 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-12-26">26 December 2024</time></dd>
+<dd class="expires"><time datetime="2024-12-27">27 December 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1120,7 +1120,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 27 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1572,7 +1572,7 @@ module: ietf-schedule
    either a start ("period-start") and end date and time ("period-end"), or a
    start ("period-start") and a positive time duration ("duration"). For the first
    format, the start of the period <span class="bcp14">MUST</span> be before the end of the period.<a href="#section-3.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.3.2-2">The "description" includes a description of the period. No constraint is imposed
+<p id="section-3.3.2-2">The "period-description" includes a description of the period. No constraint is imposed
    on the structure nor the use of this parameter.<a href="#section-3.3.2-2" class="pilcrow">¶</a></p>
 <span id="name-period-of-time-grouping-tre"></span><div id="pt-tree">
 <figure id="figure-3">
@@ -1583,7 +1583,7 @@ module: ietf-schedule
   grouping generic-schedule-params:
     ...
   grouping period-of-time:
-    +-- description?            string
+    +-- period-description?     string
     +-- period-start            yang:date-and-time
     +-- time-zone-identifier?   sys:timezone-name
     +-- (period-type)?
@@ -1632,7 +1632,7 @@ module: ietf-schedule
   grouping period-of-time:
     ...
   grouping recurrence:
-    +-- description?   string
+    +-- recurrence-description?   string
     +-- frequency      identityref
     +-- interval?      uint32
   grouping recurrence-utc:
@@ -1662,7 +1662,7 @@ module: ietf-schedule
   The default value is "1", meaning every second for a secondly recurrence rule,
   every minute for a minutely rule, every hour for an hourly rule, every day for a
   daily rule, and so on. Note that per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-12#section-4.13" class="relref">Section 4.13</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>, no "default" substatement is used here because there are cases (e.g., profiling) where the use of the default is problematic.<a href="#section-3.3.3-4" class="pilcrow">¶</a></p>
-<p id="section-3.3.3-5">The "description" includes a description of the period. No constraint is imposed
+<p id="section-3.3.3-5">The "recurrence-description" includes a description of the period. No constraint is imposed
   on the structure nor the use of this parameter.<a href="#section-3.3.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1694,7 +1694,7 @@ module: ietf-schedule
     |  |  +-- utc-until?    yang:date-and-time
     |  +--:(count)
     |     +-- count?        uint32
-    +-- description?        string
+    +-- recurrence-description?        string
     +-- frequency           identityref
     +-- interval?           uint32
   grouping recurrence-with-time-zone:
@@ -1758,7 +1758,7 @@ module: ietf-schedule
     |  |  +-- until?        yang:date-and-time
     |  +--:(count)
     |     +-- count?        uint32
-    +-- description?        string
+    +-- recurrence-description?        string
     +-- frequency           identityref
     +-- interval?           uint32
   grouping recurrence-utc-with-date-times:
@@ -1824,7 +1824,7 @@ module: ietf-schedule
     |  |  +-- utc-until?    yang:date-and-time
     |  +--:(count)
     |     +-- count?        uint32
-    +-- description?        string
+    +-- recurrence-description?        string
     +-- frequency           identityref
     +-- interval?           uint32
     +-- period-timeticks* [period-start]
@@ -1888,7 +1888,7 @@ module: ietf-schedule
     |  |  +-- until?        yang:date-and-time
     |  +--:(count)
     |     +-- count?        uint32
-    +-- description?        string
+    +-- recurrence-description?        string
     +-- frequency           identityref
     +-- interval?           uint32
     +-- period* [period-start]
@@ -2613,7 +2613,7 @@ module ietf-schedule {
     reference
       "RFC 5545: Internet Calendaring and Scheduling Core Object
                  Specification (iCalendar), Section 3.3.9";
-    leaf description {
+    leaf period-description {
       type string;
       description
         "Provides a description of the period.";
@@ -2673,7 +2673,7 @@ module ietf-schedule {
   grouping recurrence {
     description
       "A simple definition of recurrence.";
-    leaf description {
+    leaf recurrence-description {
       type string;
       description
         "Provides a description of the recurrence.";
