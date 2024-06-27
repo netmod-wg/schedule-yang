@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-25T00:54:22.436145+00:00",
+  "timestamp": "2024-06-27T00:54:42.786550+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -141,15 +141,15 @@
       "id": "I_kwDOLuooYM6MOT2S",
       "title": "Add an RFC8413-like example",
       "url": "https://github.com/netmod-wg/schedule-yang/issues/19",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "boucadair",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "https://datatracker.ietf.org/doc/html/rfc8413",
       "createdAt": "2024-06-14T05:43:12Z",
-      "updatedAt": "2024-06-21T08:18:18Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-25T04:05:36Z",
+      "closedAt": "2024-06-25T04:05:36Z",
       "comments": [
         {
           "author": "QiufangMa",
@@ -178,6 +178,13 @@
           "body": "What we need to show is that how the simple period structure is sufficient for this case. ",
           "createdAt": "2024-06-21T08:18:17Z",
           "updatedAt": "2024-06-21T08:18:17Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "fixed in #35 ",
+          "createdAt": "2024-06-25T04:05:36Z",
+          "updatedAt": "2024-06-25T04:05:36Z"
         }
       ]
     },
@@ -2179,26 +2186,134 @@
       "id": "PR_kwDOLuooYM5zXd-X",
       "title": "fix a naming conflict",
       "url": "https://github.com/netmod-wg/schedule-yang/pull/37",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "boucadair",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "for models where both period and recursion are used (e.g., within a same choice)",
       "createdAt": "2024-06-24T13:13:31Z",
-      "updatedAt": "2024-06-24T13:19:24Z",
+      "updatedAt": "2024-06-25T01:31:13Z",
       "baseRepository": "netmod-wg/schedule-yang",
       "baseRefName": "main",
       "baseRefOid": "ded3e83f6b2caf1d72ecaa5e0df15c9a3f9db316",
       "headRepository": "netmod-wg/schedule-yang",
       "headRefName": "boucadair-patch-21",
       "headRefOid": "72835d6cb62015b212689cb5670b05a2aef36df8",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-06-25T01:31:13Z",
+      "mergedAt": "2024-06-25T01:31:13Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "a8777ab81a312bc50eaa99199ab12d9dbd645817"
+      },
+      "comments": [
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "\r\n\r\n\r\n\r\n> for models where both period and recursion are used (e.g., within a same choice)\r\n\r\nYes, this is needed, thanks.",
+          "createdAt": "2024-06-25T01:29:50Z",
+          "updatedAt": "2024-06-25T01:29:50Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5_Yand",
+          "commit": {
+            "abbreviatedOid": "72835d6"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-25T01:30:45Z",
+          "updatedAt": "2024-06-25T01:30:45Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "id": "PR_kwDOLuooYM5zbyrb",
+      "title": "formatting & fix example to use \"recurrence-description\"",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/38",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-25T02:18:08Z",
+      "updatedAt": "2024-06-25T04:05:07Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "a8777ab81a312bc50eaa99199ab12d9dbd645817",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "8bd03842a50f71820c993f179f7ad4f0be87ac17",
+      "closedAt": "2024-06-25T04:05:07Z",
+      "mergedAt": "2024-06-25T04:05:07Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "7921e1d4f63f1a71669605fd138a4ab4b4bdd74b"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5_ZGIf",
+          "commit": {
+            "abbreviatedOid": "8bd0384"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-25T04:05:02Z",
+          "updatedAt": "2024-06-25T04:05:02Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 39,
+      "id": "PR_kwDOLuooYM5zcMtH",
+      "title": "avoid folding; too long names",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/39",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-25T04:15:39Z",
+      "updatedAt": "2024-06-25T05:57:28Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "7921e1d4f63f1a71669605fd138a4ab4b4bdd74b",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-22",
+      "headRefOid": "2529b6f9cc470b01a1120d262d529ebb03b49927",
+      "closedAt": "2024-06-25T05:57:28Z",
+      "mergedAt": "2024-06-25T05:57:28Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "6727fee6a5eb066039686de1c3c87a413a741ca6"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5_ZicF",
+          "commit": {
+            "abbreviatedOid": "2529b6f"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-25T05:57:22Z",
+          "updatedAt": "2024-06-25T05:57:22Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
