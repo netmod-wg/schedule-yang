@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 27 December 2024                              M. Boucadair, Ed.
+Expires: 4 January 2025                                M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                            25 June 2024
+                                                             3 July 2024
 
 
                 A Common YANG Data Model for Scheduling
@@ -33,7 +33,7 @@ Discussion Venues
    https://mailarchive.ietf.org/arch/browse/opsawg/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/boucadair/policy-based-network-acl.
+   https://github.com/netmod-wg/schedule-yang.
 
 Status of This Memo
 
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 December 2024.
+   This Internet-Draft will expire on 4 January 2025.
 
 Copyright Notice
 
@@ -1902,17 +1902,17 @@ Table of Contents
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
               Authors and Reviewers of Documents Containing YANG Data
               Models", Work in Progress, Internet-Draft, draft-ietf-
-              netmod-rfc8407bis-12, 21 June 2024,
+              netmod-rfc8407bis-13, 2 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              rfc8407bis-12>.
+              rfc8407bis-13>.
 
    [I-D.ietf-opsawg-ucl-acl]
               Ma, Q., Wu, Q., Boucadair, M., and D. King, "A YANG Data
               Model and RADIUS Extension for Policy-based Network Access
               Control", Work in Progress, Internet-Draft, draft-ietf-
-              opsawg-ucl-acl-04, 6 June 2024,
+              opsawg-ucl-acl-05, 25 June 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
-              ucl-acl-04>.
+              ucl-acl-05>.
 
    [I-D.ietf-tvr-schedule-yang]
               Qu, Y., Lindem, A., Kinzie, E., Fedyk, D., and M.
