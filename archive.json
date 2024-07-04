@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-02T00:55:13.037306+00:00",
+  "timestamp": "2024-07-04T00:55:08.245272+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -202,6 +202,22 @@
       "createdAt": "2024-06-14T05:45:56Z",
       "updatedAt": "2024-06-19T09:30:36Z",
       "closedAt": "2024-06-19T09:30:36Z",
+      "comments": []
+    },
+    {
+      "number": 40,
+      "id": "I_kwDOLuooYM6OR8dl",
+      "title": "Updated text for Discussion Venues",
+      "url": "https://github.com/netmod-wg/schedule-yang/issues/40",
+      "state": "OPEN",
+      "author": "danielkinguk",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Current text in \"Discussion Venues\" section was left over from policy-based-network-acl.\r\n\r\nSuggested text: \r\n\r\nThis note is to be removed before publishing as an RFC.\r\n\r\nDiscussion of this document takes place on the Network Modeling (NETMOD) Working Group mailing list (netmod@ietf.org), which is archived at https://mailarchive.ietf.org/arch/browse/netmod/.\r\n\r\nSource for this draft and an issue tracker can be found at https://github.com/netmod-wg/schedule-yang.\r\n\r\n",
+      "createdAt": "2024-07-02T20:07:54Z",
+      "updatedAt": "2024-07-02T20:08:59Z",
+      "closedAt": null,
       "comments": []
     }
   ],
