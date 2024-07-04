@@ -1,0 +1,2335 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2024-07-04T00:55:08.245272+00:00",
+  "repo": "netmod-wg/schedule-yang",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 2,
+      "id": "I_kwDOLuooYM6G3qZc",
+      "title": "diff link is not working to track changes",
+      "url": "https://github.com/netmod-wg/schedule-yang/issues/2",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "QiufangMa"
+      ],
+      "labels": [],
+      "body": "[Compare Editor's Copy to Individual Draft](https://netmod-wg.github.io/schedule-yang/#go.draft-ietf-netmod-schedule-yang.diff)",
+      "createdAt": "2024-04-25T05:59:50Z",
+      "updatedAt": "2024-04-25T07:27:42Z",
+      "closedAt": "2024-04-25T07:27:41Z",
+      "comments": [
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "It works now.",
+          "createdAt": "2024-04-25T07:27:41Z",
+          "updatedAt": "2024-04-25T07:27:41Z"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOLuooYM6G31Ar",
+      "title": "Comments from Dhruv",
+      "url": "https://github.com/netmod-wg/schedule-yang/issues/5",
+      "state": "CLOSED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "QiufangMa"
+      ],
+      "labels": [],
+      "body": "Some are already fixed by Med:\r\nhttps://github.com/boucadair/policy-based-network-acl/pull/90",
+      "createdAt": "2024-04-25T06:29:45Z",
+      "updatedAt": "2024-04-26T06:41:05Z",
+      "closedAt": "2024-04-26T06:41:05Z",
+      "comments": []
+    },
+    {
+      "number": 11,
+      "id": "I_kwDOLuooYM6G5_DK",
+      "title": "The validity VS. max-allowed-end parameter in generic-schedule-params grouping",
+      "url": "https://github.com/netmod-wg/schedule-yang/issues/11",
+      "state": "CLOSED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "How to understand the difference between the validity and max-allowed-end? Both seem refer to a maximum time upper limit.\r\nhttps://github.com/netmod-wg/schedule-yang/blob/main/yang/ietf-schedule.yang#L240\r\nhttps://github.com/netmod-wg/schedule-yang/blob/main/yang/ietf-schedule.yang#L268",
+      "createdAt": "2024-04-25T11:28:06Z",
+      "updatedAt": "2024-04-26T09:41:06Z",
+      "closedAt": "2024-04-26T09:41:06Z",
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "As indicated in the text, what takes precedence is the validity. \r\n\r\nValidity controls when a schedule can be executed independent of when that a schedule ends. The other one is more specific as it reasons about  when a scheduled event will ends. Having both is still OK as soon as we are clear about the one that takes precedence (which we do). This provides more flexibility to the \"consumers\" of the common model. \r\n\r\nThanks",
+          "createdAt": "2024-04-25T12:00:06Z",
+          "updatedAt": "2024-04-25T12:00:06Z"
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "I_kwDOLuooYM6Lh4x3",
+      "title": "Erik Kline Comment at IETF#119/TVR",
+      "url": "https://github.com/netmod-wg/schedule-yang/issues/16",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "QiufangMa"
+      ],
+      "labels": [],
+      "body": "https://datatracker.ietf.org/doc/minutes-119-tvr-202403200300/, especially the following:\r\n\r\n\r\n> Erik Kline: sldie 5, timezones makes everything worse. datetime start is\r\n> bad name. call it \"utc start time\". interval vs duration?\r\n> \r\n> possibly going to be removed, working with schedule authors for specific\r\n> grouping for tvr\r\n> \r\n> Erik Kline: If you want to recurr make the control system do it if want\r\n> to make truly simple. so remove that from model.\r\n> \r\n\r\n",
+      "createdAt": "2024-06-07T17:53:06Z",
+      "updatedAt": "2024-06-19T08:13:54Z",
+      "closedAt": "2024-06-19T08:13:54Z",
+      "comments": []
+    },
+    {
+      "number": 19,
+      "id": "I_kwDOLuooYM6MOT2S",
+      "title": "Add an RFC8413-like example",
+      "url": "https://github.com/netmod-wg/schedule-yang/issues/19",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://datatracker.ietf.org/doc/html/rfc8413",
+      "createdAt": "2024-06-14T05:43:12Z",
+      "updatedAt": "2024-06-25T04:05:36Z",
+      "closedAt": "2024-06-25T04:05:36Z",
+      "comments": [
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Can you give me the section number in 8413 where the examples we can imitate?",
+          "createdAt": "2024-06-18T07:27:54Z",
+          "updatedAt": "2024-06-18T07:27:54Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The example can be drawn with a ref to this part: this is a simple start/end time schedule.\r\n\r\n[4.1](https://datatracker.ietf.org/doc/html/rfc8413#section-4.1).  Service Request\r\n\r\n   As shown in Figure 2, some component in the network requests a\r\n   service.  This may be an application, an NMS, an LSR, or any\r\n   component that qualifies as a Path Computation Client (PCC).  We show\r\n   this on the figure as the \"Service Requester\", and it sends a request\r\n   to the PCE for an LSP to be set up at some time (either now or in the\r\n   future).  The request, indicated on Figure 2 by the arrow (a),\r\n   includes all of the parameters of the LSP that the requester wishes\r\n   to supply, such as priority, bandwidth, start time, and end time.\r\n   Note that the requester in this case may be the LSR shown in the\r\n   figure or may be a distinct system.\r\n\r\n",
+          "createdAt": "2024-06-18T07:42:54Z",
+          "updatedAt": "2024-06-18T07:42:54Z"
+        },
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This seems about how the scheduling could be managed/implemented, but I am not sure if this falls within our scope.",
+          "createdAt": "2024-06-21T03:27:08Z",
+          "updatedAt": "2024-06-21T03:27:08Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "What we need to show is that how the simple period structure is sufficient for this case. ",
+          "createdAt": "2024-06-21T08:18:17Z",
+          "updatedAt": "2024-06-21T08:18:17Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "fixed in #35 ",
+          "createdAt": "2024-06-25T04:05:36Z",
+          "updatedAt": "2024-06-25T04:05:36Z"
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "id": "I_kwDOLuooYM6MOUqo",
+      "title": "Add relationship with RFC3231 MIB",
+      "url": "https://github.com/netmod-wg/schedule-yang/issues/20",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-14T05:45:56Z",
+      "updatedAt": "2024-06-19T09:30:36Z",
+      "closedAt": "2024-06-19T09:30:36Z",
+      "comments": []
+    },
+    {
+      "number": 40,
+      "id": "I_kwDOLuooYM6OR8dl",
+      "title": "Updated text for Discussion Venues",
+      "url": "https://github.com/netmod-wg/schedule-yang/issues/40",
+      "state": "OPEN",
+      "author": "danielkinguk",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Current text in \"Discussion Venues\" section was left over from policy-based-network-acl.\r\n\r\nSuggested text: \r\n\r\nThis note is to be removed before publishing as an RFC.\r\n\r\nDiscussion of this document takes place on the Network Modeling (NETMOD) Working Group mailing list (netmod@ietf.org), which is archived at https://mailarchive.ietf.org/arch/browse/netmod/.\r\n\r\nSource for this draft and an issue tracker can be found at https://github.com/netmod-wg/schedule-yang.\r\n\r\n",
+      "createdAt": "2024-07-02T20:07:54Z",
+      "updatedAt": "2024-07-02T20:08:59Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOLuooYM5tU3KM",
+      "title": "update MD file and tree structures to reflect YANG model update",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/1",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-04-22T09:41:36Z",
+      "updatedAt": "2024-04-25T02:55:44Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "abf94e15b3106829321b81effc2d0a6c8408c2ca",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "3d2310261e30e2a7855dcba6c21db1935b4a8349",
+      "closedAt": "2024-04-25T02:55:44Z",
+      "mergedAt": "2024-04-25T02:55:44Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "569585ff53b53431b12746ebd098089f56ce2dee"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM54FCY4",
+          "commit": {
+            "abbreviatedOid": "4b871c0"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "some broken pyang trees (I think this is a bug in pyang)",
+          "createdAt": "2024-04-22T12:11:56Z",
+          "updatedAt": "2024-04-22T12:13:46Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "```suggestion\r\n    |  +-- weekday     schedule:weekday\r\n```\r\n\r\nThis is a mandatory leaf",
+              "createdAt": "2024-04-22T12:11:56Z",
+              "updatedAt": "2024-04-22T12:13:46Z"
+            },
+            {
+              "originalPosition": 30,
+              "body": "```suggestion\r\n    |  +-- period-start            yang:date-and-time\r\n```\r\n\r\nThis is a list key.",
+              "createdAt": "2024-04-22T12:12:24Z",
+              "updatedAt": "2024-04-22T12:13:46Z"
+            },
+            {
+              "originalPosition": 28,
+              "body": "```suggestion\r\n       +-- period-start            yang:date-and-time\r\n```\r\n\r\nThis one is mandatory",
+              "createdAt": "2024-04-22T12:13:02Z",
+              "updatedAt": "2024-04-22T12:13:46Z"
+            },
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\r\n       +-- period-start    yang:timeticks\r\n```",
+              "createdAt": "2024-04-22T12:13:18Z",
+              "updatedAt": "2024-04-22T12:13:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM54FlFy",
+          "commit": {
+            "abbreviatedOid": "4b871c0"
+          },
+          "author": "kwatsen",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-04-22T13:13:42Z",
+          "updatedAt": "2024-04-22T13:13:42Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "https://github.com/mbj4668/pyang/issues/902",
+              "createdAt": "2024-04-22T13:13:42Z",
+              "updatedAt": "2024-04-22T13:13:42Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDOLuooYM5trjXc",
+      "title": "unified-tvr-yang is now adopted by TVR WG",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/3",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-04-25T06:02:39Z",
+      "updatedAt": "2024-04-25T06:31:29Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "569585ff53b53431b12746ebd098089f56ce2dee",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-5",
+      "headRefOid": "3ec0ca9ceee5c7942c23f45398a787d1b4c8f390",
+      "closedAt": "2024-04-25T06:31:29Z",
+      "mergedAt": "2024-04-25T06:31:29Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "44e0b322a7a4d47576e948de9017a7992648b0e9"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOLuooYM5trldB",
+      "title": "avoid dependency on draft-ietf-netmod-rfc6991-bis",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/4",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "as it is not clear how that one will progress",
+      "createdAt": "2024-04-25T06:10:16Z",
+      "updatedAt": "2024-04-25T06:33:28Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "569585ff53b53431b12746ebd098089f56ce2dee",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "no-bis",
+      "headRefOid": "6a7ea9a4662cf444c2138a2eab222fcb0d9d50ea",
+      "closedAt": "2024-04-25T06:33:28Z",
+      "mergedAt": "2024-04-25T06:33:28Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "82744f8d90718fd5c0759bb8c60666a069b0f9ba"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOLuooYM5trvCo",
+      "title": "align trees with the module",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/6",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-04-25T06:39:20Z",
+      "updatedAt": "2024-04-25T07:22:54Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "82744f8d90718fd5c0759bb8c60666a069b0f9ba",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-6",
+      "headRefOid": "4d53fcdcd72a9aefffbebf92b97281cbd3603932",
+      "closedAt": "2024-04-25T07:22:54Z",
+      "mergedAt": "2024-04-25T07:22:54Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "442976e21b0a2b98e52b7a794ea4a909dce6472b"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOLuooYM5trxxU",
+      "title": "fix long lines",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/7",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-04-25T06:43:59Z",
+      "updatedAt": "2024-04-25T07:23:27Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "82744f8d90718fd5c0759bb8c60666a069b0f9ba",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-7",
+      "headRefOid": "f147f8103cc2c9f3f7a08ad5c0e304cad897a7d6",
+      "closedAt": "2024-04-25T07:23:26Z",
+      "mergedAt": "2024-04-25T07:23:26Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "efef035b9b7a9f140947b19dd40611a4a6a7cf3f"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOLuooYM5tsEoN",
+      "title": "default values may be problematic in some usages",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/8",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-04-25T07:34:23Z",
+      "updatedAt": "2024-04-25T14:00:38Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "8ae79940fce2cc87657f7e1e87ac82cb6ace6d1b",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-8",
+      "headRefOid": "a2dee19d590d0cf71dd31e147d2b35f679fe2115",
+      "closedAt": "2024-04-25T14:00:38Z",
+      "mergedAt": "2024-04-25T14:00:38Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "7861eb9e8a340c617d715df30538ad4b9e76caf9"
+      },
+      "comments": [
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "These are the nodes that should be mandatory to have values, otherwise, the recurrence behavior is unclear.\r\ne.g., when it is a \"daily\" recurrence, it is unknown whether it is everyday or every N days.\r\nwe could have \"everyday\" by default (default interval value is 1), but could also be \"every three days\" by explicitly setting the \"interval\" value as 3.",
+          "createdAt": "2024-04-25T08:59:58Z",
+          "updatedAt": "2024-04-25T08:59:58Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> These are the nodes that should be mandatory to have values, otherwise, the recurrence behavior is unclear.\r\n\r\nI think we just need to indicate the default value as part of the description not as a yang statement. The narrative text can explain the implication of not supplying interval, for example.\r\n\r\nThe concern I'm seeing with having a default is that if we define some profile that uses the grouping, and the same grouping is used by a router (for example) in addition to the profile, the default value will override what is in the profile.",
+          "createdAt": "2024-04-25T09:07:28Z",
+          "updatedAt": "2024-04-25T09:08:40Z"
+        },
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "\r\n> The concern I'm seeing with having a default is that if we define some profile that uses the grouping, and the same grouping is used by a router (for example) in addition to the profile, the default value will override what is in the profile.\r\n\r\nIs the profile intended to use another value for default? I am assuming the default value defined here is applicable for all cases, but i also agree no one could stop a default value being refined when \"uses\" the groupings...",
+          "createdAt": "2024-04-25T09:29:03Z",
+          "updatedAt": "2024-04-25T09:29:03Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Is the profile intended to use another value for default?\r\n\r\nYes. \r\n\r\nHowever, the key comment is that we should be careful to not impact how the grps will be reused.",
+          "createdAt": "2024-04-25T09:58:16Z",
+          "updatedAt": "2024-04-25T09:58:16Z"
+        },
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> However, the key comment is that we should be careful to not impact how the grps will be reused.\r\n\r\nSure. While I see no difference to describe the default value in the desc compared with using the \"default\" statement, if two consumers have different understandings of the default behavior (e.g., the profile refine the description with another default  value). \r\nMaybe define as \"mandatory true\"?",
+          "createdAt": "2024-04-25T11:41:10Z",
+          "updatedAt": "2024-04-25T11:41:10Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I would soften the constraints and have in the description as much guidance. So, no mandatory/default is still my preference here.\r\n",
+          "createdAt": "2024-04-25T11:45:44Z",
+          "updatedAt": "2024-04-25T11:45:44Z"
+        },
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I would soften the constraints and have in the description as much guidance.\r\n\r\nokay, let's proceed with this way for now, and see if there is any objection from others in the future.",
+          "createdAt": "2024-04-25T11:57:38Z",
+          "updatedAt": "2024-04-25T11:57:38Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > I would soften the constraints and have in the description as much guidance.\r\n> \r\n> okay, let's proceed with this way for now, and see if there is any objection from others in the future.\r\n\r\nThanks. ",
+          "createdAt": "2024-04-25T12:00:44Z",
+          "updatedAt": "2024-04-25T12:00:44Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOLuooYM5tsqnt",
+      "title": "add examples for generic-schedule-params and schedule-status groupings",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/9",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-04-25T09:04:39Z",
+      "updatedAt": "2024-04-26T05:02:47Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "8ae79940fce2cc87657f7e1e87ac82cb6ace6d1b",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "9e34ad6eeee8757562be115d7fe1729adf48d3bf",
+      "closedAt": "2024-04-26T05:02:47Z",
+      "mergedAt": "2024-04-26T05:02:47Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "c020ba34cde5dd90386beb2cdfc0405073ee4c93"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM54iW-2",
+          "commit": {
+            "abbreviatedOid": "512ac3a"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Thanks.",
+          "createdAt": "2024-04-25T11:47:06Z",
+          "updatedAt": "2024-04-25T11:50:43Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\n   Schedule requests that fail to meet the requirements are ignored by the system.\r\n```\r\n\r\nAlso, define what's a \"system\".",
+              "createdAt": "2024-04-25T11:47:06Z",
+              "updatedAt": "2024-04-25T11:50:43Z"
+            },
+            {
+              "originalPosition": 58,
+              "body": "```suggestion\r\n   {{ex-11}} indicates a recurrence that occurs every 20\r\n```",
+              "createdAt": "2024-04-25T11:47:29Z",
+              "updatedAt": "2024-04-25T11:50:43Z"
+            },
+            {
+              "originalPosition": 77,
+              "body": "```suggestion\r\n  \"schedule-type\": \"ietf-schedule:recurrence\",\r\n```",
+              "createdAt": "2024-04-25T11:50:01Z",
+              "updatedAt": "2024-04-25T11:50:43Z"
+            },
+            {
+              "originalPosition": 75,
+              "body": "```suggestion\r\n  \"state\": \"ietf-schedule:enabled\",\r\n```",
+              "createdAt": "2024-04-25T11:50:25Z",
+              "updatedAt": "2024-04-25T11:50:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM54iuuS",
+          "commit": {
+            "abbreviatedOid": "512ac3a"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-04-25T12:34:21Z",
+          "updatedAt": "2024-04-25T12:34:21Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "> Also, define what's a \"system\".\r\n\r\nI think it is a familiar comment, but I couldn't find where we also used the \"system\" and then defined it properly. My poor memory ;-) \r\nWould the following text be okay to add into the document where the word \"system\" is first used:\r\nA system accepts and handles the schedule requests, which may help further automate the scheduling process of events, policy, services, or resources based on date and time.",
+              "createdAt": "2024-04-25T12:34:21Z",
+              "updatedAt": "2024-04-25T12:34:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM54jnAX",
+          "commit": {
+            "abbreviatedOid": "512ac3a"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-04-25T14:00:16Z",
+          "updatedAt": "2024-04-25T14:00:17Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "Looks good. Thanks.",
+              "createdAt": "2024-04-25T14:00:16Z",
+              "updatedAt": "2024-04-25T14:00:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM54peQr",
+          "commit": {
+            "abbreviatedOid": "9e34ad6"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-04-26T05:02:42Z",
+          "updatedAt": "2024-04-26T05:02:42Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOLuooYM5ttjxu",
+      "title": "update description and change discard-action type as identityref",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/10",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In the abstract, I was not sure how to parse \"..scheduling information such as event, policy, services, or resources..\", are these examples well known and established as scheduling information?\r\nMed: Fixed/\r\n\r\nThe introduction made sense as a motivation for the document initially, but it should be rephrased esp that the referenced modules are expected to be updated to use this common module going forward. You may create an appendix with this historical context if needed.\r\nMed: Fixed\r\n\r\nSection 3.1, the description is a bit sparse; also there are no examples that use this grouping. Please expand.\r\nQiufang: Fixed in https://github.com/netmod-wg/schedule-yang/pull/9.\r\n\r\nThe description inside the YANG module is old and incorrect, it says 2 groupings and focused only on iCalendar.\r\nQiufang: Fixed.\r\n\r\ns/RFC XXXX: A YANG Data Model for Scheduling/RFC XXXX: A Common YANG Data Model for Scheduling/\r\nMed: Fixed\r\n\r\nfor discard-action, is there a possibility for creating new actions in future or these two are the only ones? I am asking to make sure that the choice of modeling this as enum is correct or not.\r\nQiufang: Fixed\r\n\r\nIn these lists \"leaf-list date-times\" and \"leaf-list dates\", is there any ordering constraint that should be added explicitly in text?\r\nQiufang: No leaf-list date-times and dates definition in the current module anymore; I don't think ordering affects the recurrence rules\r\n\r\nSection 3.4 needs more descriptive text for period and timeticks. The yang module has a long must statement for verification that should be explained here in text.\r\n\r\nSection 3.5 needs more descriptive text for by* leaves -> \"An array of the \"bysecond\" (or \"byminut\", \"byhour\") specifies a list of seconds within a minute (or minutes within an hour, hours of the day).\" The examples in the appendix gave some hints but the description should be clearer.\r\n\r\ns/byminut/byminute/\r\nMed: Fixed\r\n\r\nAppendix A.1, the text says end date is Dec 31, 2027 but the JSON says 1st Dec - \"2027-12-01T18:00:00Z\"\r\nMed: Fixed\r\n\r\nAppendix A.2, the text says Dec 1, 2025 but the example says 1st Nov - \"2025-11-01T15:00:00\"\r\nMed: Fixed",
+      "createdAt": "2024-04-25T11:19:27Z",
+      "updatedAt": "2024-04-26T06:41:04Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "934c1ccc8ba3ba95734c1571f31c0560119b719b",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "patch-1",
+      "headRefOid": "6f191b2c5d0b17c4ea43dda45673a7c9697d39df",
+      "closedAt": "2024-04-26T06:41:04Z",
+      "mergedAt": "2024-04-26T06:41:04Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "5a821dfc938a7d293740ca68550ac91bd96c116c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM54iZKy",
+          "commit": {
+            "abbreviatedOid": "3699f2c"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-04-25T11:51:51Z",
+          "updatedAt": "2024-04-25T11:55:03Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\n    \"This YANG module defines a set of common groupings\r\n```",
+              "createdAt": "2024-04-25T11:51:51Z",
+              "updatedAt": "2024-04-25T11:55:03Z"
+            },
+            {
+              "originalPosition": 44,
+              "body": "```suggestion\r\n      \"Indicates that a warning message is generated\r\n```",
+              "createdAt": "2024-04-25T11:53:14Z",
+              "updatedAt": "2024-04-25T11:55:03Z"
+            },
+            {
+              "originalPosition": 50,
+              "body": "```suggestion\r\n      \"Indicates that an error message is generated\r\n```",
+              "createdAt": "2024-04-25T11:53:30Z",
+              "updatedAt": "2024-04-25T11:55:03Z"
+            },
+            {
+              "originalPosition": 56,
+              "body": "```suggestion\r\n      \"Indicates that an invalid schedule is silently discarded.\";\r\n```",
+              "createdAt": "2024-04-25T11:54:23Z",
+              "updatedAt": "2024-04-25T11:55:03Z"
+            },
+            {
+              "originalPosition": 57,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-04-25T11:54:32Z",
+              "updatedAt": "2024-04-25T11:55:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM54pebS",
+          "commit": {
+            "abbreviatedOid": "711f97d"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-04-26T05:03:41Z",
+          "updatedAt": "2024-04-26T05:05:59Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "```suggestion\r\n      \"Indicates a recurrence with an enabled state.\";\r\n```",
+              "createdAt": "2024-04-26T05:03:41Z",
+              "updatedAt": "2024-04-26T05:05:59Z"
+            },
+            {
+              "originalPosition": 27,
+              "body": "```suggestion\r\n      \"Indicates a recurrence with a disabled state.\";\r\n```",
+              "createdAt": "2024-04-26T05:03:57Z",
+              "updatedAt": "2024-04-26T05:05:59Z"
+            },
+            {
+              "originalPosition": 38,
+              "body": "```suggestion\r\n      \"Indicates that schedule will be discarded.\";\r\n```",
+              "createdAt": "2024-04-26T05:05:25Z",
+              "updatedAt": "2024-04-26T05:05:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM54pz6p",
+          "commit": {
+            "abbreviatedOid": "6f191b2"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-04-26T06:37:01Z",
+          "updatedAt": "2024-04-26T06:38:24Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOLuooYM5tyxn4",
+      "title": "specify the default behavior in the YANG desc and draft",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/12",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-04-26T02:41:54Z",
+      "updatedAt": "2024-04-26T06:34:57Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "7861eb9e8a340c617d715df30538ad4b9e76caf9",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "patch-2",
+      "headRefOid": "2bee3eb4f3b1b70ed9b3949e8cf7343f0bb882b9",
+      "closedAt": "2024-04-26T06:34:57Z",
+      "mergedAt": "2024-04-26T06:34:57Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "934c1ccc8ba3ba95734c1571f31c0560119b719b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM54pd8p",
+          "commit": {
+            "abbreviatedOid": "d6637c5"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-04-26T05:00:52Z",
+          "updatedAt": "2024-04-26T05:00:52Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\n  daily rule, and so on. Note that per {{Section 4.13 of ?I-D.ietf-netmod-rfc8407bis}}, no \"default\" substatement is used here because there are cases (e.g., profiling) where the use of the default is problematic.\r\n```",
+              "createdAt": "2024-04-26T05:00:52Z",
+              "updatedAt": "2024-04-26T05:00:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM54pzRK",
+          "commit": {
+            "abbreviatedOid": "2bee3eb"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-04-26T06:34:50Z",
+          "updatedAt": "2024-04-26T06:34:50Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOLuooYM5tzWxt",
+      "title": "add explanation and examples to help understand the parameters",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/13",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "All comments made by Dhruv should have been fixed now.",
+      "createdAt": "2024-04-26T06:05:12Z",
+      "updatedAt": "2024-04-26T06:43:53Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "5a821dfc938a7d293740ca68550ac91bd96c116c",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "patch-3",
+      "headRefOid": "bf14cacc8716a7b237908d73898070b5ce4b74f9",
+      "closedAt": "2024-04-26T06:43:19Z",
+      "mergedAt": "2024-04-26T06:43:19Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "277a75d38673f3c9aa159b8018087eff4b6a9bbc"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM54pw2c",
+          "commit": {
+            "abbreviatedOid": "d4d06de"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-04-26T06:26:42Z",
+          "updatedAt": "2024-04-26T06:26:43Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\n  component defined in {{Sections 3.3.10 and 3.8.5 of !RFC5545}}.\r\n```",
+              "createdAt": "2024-04-26T06:26:42Z",
+              "updatedAt": "2024-04-26T06:27:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM54pxKi",
+          "commit": {
+            "abbreviatedOid": "d4d06de"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "RFC5545  is normative",
+          "createdAt": "2024-04-26T06:27:46Z",
+          "updatedAt": "2024-04-26T06:27:46Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLuooYM54p17y",
+          "commit": {
+            "abbreviatedOid": "bf14cac"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-04-26T06:43:02Z",
+          "updatedAt": "2024-04-26T06:43:02Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOLuooYM5tz0dP",
+      "title": "add explanation about validity and max-allowed-end parameters",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/14",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-04-26T07:42:50Z",
+      "updatedAt": "2024-04-26T09:40:48Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "277a75d38673f3c9aa159b8018087eff4b6a9bbc",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "38136b076ce74a9df4caffd0b5187ecb64195bd9",
+      "closedAt": "2024-04-26T09:40:48Z",
+      "mergedAt": "2024-04-26T09:40:48Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "c8112d90bef891fd359e6b4b32066f5e298838ec"
+      },
+      "comments": [
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "close #11 ",
+          "createdAt": "2024-04-26T07:44:23Z",
+          "updatedAt": "2024-04-26T07:45:49Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM54qTNs",
+          "commit": {
+            "abbreviatedOid": "4ce4839"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "For the end thing, we need to reason as a function of the duration.",
+          "createdAt": "2024-04-26T07:50:12Z",
+          "updatedAt": "2024-04-26T07:54:32Z",
+          "comments": [
+            {
+              "originalPosition": 38,
+              "body": "```suggestion\r\n          \"Adds a parameter indicating how long the occurrence \r\n```",
+              "createdAt": "2024-04-26T07:50:12Z",
+              "updatedAt": "2024-04-26T07:54:32Z"
+            },
+            {
+              "originalPosition": 29,
+              "body": "```suggestion\r\n         the last occurrence exceeds 'max-allowed-end'.\";\r\n```",
+              "createdAt": "2024-04-26T07:52:08Z",
+              "updatedAt": "2024-04-26T07:54:32Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\r\n   the last occurrence. A requested schedule will be rejected if the duration of the last\r\n```",
+              "createdAt": "2024-04-26T07:53:50Z",
+              "updatedAt": "2024-04-26T07:54:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM54qgO8",
+          "commit": {
+            "abbreviatedOid": "4ce4839"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-04-26T08:18:05Z",
+          "updatedAt": "2024-04-26T08:18:05Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "I think you mean the schedule needs to finish before the max-allowed-end. Would this be better:\r\nA requested schedule will be rejected if the end time of last occurrence is later than the configured \"max-allowed-end\" value.",
+              "createdAt": "2024-04-26T08:18:05Z",
+              "updatedAt": "2024-04-26T08:18:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM54rCnz",
+          "commit": {
+            "abbreviatedOid": "4ce4839"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-04-26T09:25:23Z",
+          "updatedAt": "2024-04-26T09:25:23Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "deal! Thanks/",
+              "createdAt": "2024-04-26T09:25:23Z",
+              "updatedAt": "2024-04-26T09:25:23Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOLuooYM5xzuNW",
+      "title": "minor nits",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/15",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-07T14:42:23Z",
+      "updatedAt": "2024-06-13T01:32:03Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "c8112d90bef891fd359e6b4b32066f5e298838ec",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-9",
+      "headRefOid": "0ad9e5803f998f5c7a38720cc9f73abfb1063d49",
+      "closedAt": "2024-06-13T01:32:03Z",
+      "mergedAt": "2024-06-13T01:32:03Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "93d0212d410956995f79d636b801c3bad9559b0e"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5-CNPq",
+          "commit": {
+            "abbreviatedOid": "0ad9e58"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-13T01:31:57Z",
+          "updatedAt": "2024-06-13T01:31:57Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOLuooYM5yUaI4",
+      "title": "consistency checks and few cleanup",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/17",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-13T06:49:30Z",
+      "updatedAt": "2024-06-13T11:35:57Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "93d0212d410956995f79d636b801c3bad9559b0e",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "consistency-checks-and-few-cleanup",
+      "headRefOid": "0e15484706c81f8893bb18704e8f3e7d3d3457f5",
+      "closedAt": "2024-06-13T11:35:57Z",
+      "mergedAt": "2024-06-13T11:35:57Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "8c4432c9864abb0bb3d31c116c1913bec6b9df96"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5-GIKD",
+          "commit": {
+            "abbreviatedOid": "0e15484"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-13T11:35:51Z",
+          "updatedAt": "2024-06-13T11:35:51Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOLuooYM5yUnLJ",
+      "title": "clarifications + cite an OLD draft + clean up",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/18",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-13T07:20:59Z",
+      "updatedAt": "2024-06-13T13:01:16Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "93d0212d410956995f79d636b801c3bad9559b0e",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "clarifications-+-cite-an-OLD-draft-+-clean-up",
+      "headRefOid": "f673efb05d7d788edeaeffccf14d94a8a75504dc",
+      "closedAt": "2024-06-13T13:01:16Z",
+      "mergedAt": "2024-06-13T13:01:16Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "7a37599ab52ecfa975ff464947a49dddceadf29d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5-GL4u",
+          "commit": {
+            "abbreviatedOid": "dc85367"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-13T11:44:01Z",
+          "updatedAt": "2024-06-13T11:47:22Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\nThe interval specifies when a schedule will occur, combined with the frequency parameter; while the duration indicates how long\r\n```",
+              "createdAt": "2024-06-13T11:44:01Z",
+              "updatedAt": "2024-06-13T11:47:22Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOLuooYM5ye9ck",
+      "title": "one-shot + finished support",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/21",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-14T13:32:17Z",
+      "updatedAt": "2024-06-19T08:20:16Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "7a37599ab52ecfa975ff464947a49dddceadf29d",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-10",
+      "headRefOid": "bb1d2fbcc352a83428f2b20f49143b7bb19e1ef7",
+      "closedAt": "2024-06-19T08:20:16Z",
+      "mergedAt": "2024-06-19T08:20:16Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "b96d2723f01ebb0f412e16fd470cf3ae27b4f27a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5-nojw",
+          "commit": {
+            "abbreviatedOid": "db323e4"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-18T02:47:17Z",
+          "updatedAt": "2024-06-18T02:47:40Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "What is the difference between one-shot and period? One-shot starts at a specific instant time without indicating the duration/end?",
+              "createdAt": "2024-06-18T02:47:17Z",
+              "updatedAt": "2024-06-18T02:47:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM5-oZpI",
+          "commit": {
+            "abbreviatedOid": "db323e4"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-18T05:43:59Z",
+          "updatedAt": "2024-06-18T05:44:00Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "This is no periodicity/recurrence at all in a one-shot schedule. We need to this type to ease mapping with the MIB in [RFC 3231](https://www.rfc-editor.org/rfc/rfc3231)",
+              "createdAt": "2024-06-18T05:43:59Z",
+              "updatedAt": "2024-06-18T05:44:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM5-o9pM",
+          "commit": {
+            "abbreviatedOid": "db323e4"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-18T07:01:43Z",
+          "updatedAt": "2024-06-18T07:01:44Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "Okay, I don't know the existence of RFC 3231 before, thanks for the info. While I found RFC 3231 defines three types of schedules that cannot be directly mapped to ours according to the naming rules:\r\n1. Periodic schedules, defined by specifying **the number of seconds** between two initiations, I understand this as a recurrence rule like every 4 seconds to trigger the action. This is very different from the period-of-time grouping we have defined, which describes a specific duration of time; but instead kind of a recurrence definition.\r\n2. Calendar Schedules, trigger scheduled actions at specified days of the week and days of the month. similar to our recurrence related definition, no issues.\r\n3. One-shot Schedules, automatically disable itself once an action has been invoked, this is actually the one I feel like similar to period-of-time.\r\n\r\nIMO it is confusing to have both this one-shot identity and the period (different from periodic) as schedule-types, though the only difference might be, by specifying one-shot, the users are not allowed to provide the duration/end time of the trigger. but it is not mandatory to specify duration/period-end in the period-of-time grouping.",
+              "createdAt": "2024-06-18T07:01:44Z",
+              "updatedAt": "2024-06-18T07:01:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM5-ywW3",
+          "commit": {
+            "abbreviatedOid": "db323e4"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-19T07:01:21Z",
+          "updatedAt": "2024-06-19T07:01:21Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "The main difference I see between a one-shot and period of time is that the end time is not required to be configured but determined by the action. The end will be a read-only while this can be configured for a period.",
+              "createdAt": "2024-06-19T07:01:21Z",
+              "updatedAt": "2024-06-19T07:01:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM5-zQEJ",
+          "commit": {
+            "abbreviatedOid": "db323e4"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-19T07:49:01Z",
+          "updatedAt": "2024-06-19T07:49:01Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "I agree with that, could the difference be stated in the description? e.g., \r\ndescription for one-shot identity:\r\n      \"Indicates a one-shot schedule. That's a schedule that\r\n       will trigger an action without the duration/end time being\r\n       specified and then the schedule will disable itself.\";\r\n\r\ndescription for period identity:\r\n      \"Indicates a period-based schedule consisting either a \r\n        start and end or a start and positive duration of time.\";\r\n\r\nJust want to make sure there is no overlap between two identities.\r\n",
+              "createdAt": "2024-06-19T07:49:01Z",
+              "updatedAt": "2024-06-19T07:49:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM5-zqH5",
+          "commit": {
+            "abbreviatedOid": "db323e4"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-19T08:17:37Z",
+          "updatedAt": "2024-06-19T08:17:37Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "Fair enough. Done.",
+              "createdAt": "2024-06-19T08:17:37Z",
+              "updatedAt": "2024-06-19T08:17:37Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOLuooYM5ye_Vc",
+      "title": "add description data nodes",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/22",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-14T13:36:58Z",
+      "updatedAt": "2024-06-18T07:36:04Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "7a37599ab52ecfa975ff464947a49dddceadf29d",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-11",
+      "headRefOid": "08af36b3b731cbc8a31c371e13b96b0b0236155d",
+      "closedAt": "2024-06-18T07:36:04Z",
+      "mergedAt": "2024-06-18T07:36:04Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "354d6806702c42cb3624bce193b9eb3b2c7287d8"
+      },
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Adding the description node into generic-schedule-params might be good (as this is the common and generic parameter), but that way i don't feel it necessary to also be defined in the period and recurrence. Thoughts?\r\n\r\nFrom an ops standpoint, description fields are very useful as this is a placeholder for recording contexts, etc. Parent \"description\" field might not be sufficient in all contexts.",
+          "createdAt": "2024-06-18T05:47:01Z",
+          "updatedAt": "2024-06-18T05:47:01Z"
+        },
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "\r\n\r\n\r\n\r\n> > Adding the description node into generic-schedule-params might be good (as this is the common and generic parameter), but that way i don't feel it necessary to also be defined in the period and recurrence. Thoughts?\r\n> \r\n> From an ops standpoint, description fields are very useful as this is a placeholder for recording contexts, etc. Parent \"description\" field might not be sufficient in all contexts.\r\n\r\nAre you referring to description for each single recurrence/period entry? It seems okay to me then. I worry slightly that we are making the schedule yang definition huger and huger;-\uff09",
+          "createdAt": "2024-06-18T07:14:38Z",
+          "updatedAt": "2024-06-18T07:14:38Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5-nirT",
+          "commit": {
+            "abbreviatedOid": "db45241"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Adding the description node into generic-schedule-params might be good (as this is the common and generic parameter), but that way i don't feel it necessary to also be defined in the period and recurrence. Thoughts?",
+          "createdAt": "2024-06-18T02:37:21Z",
+          "updatedAt": "2024-06-18T02:41:05Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "```suggestion\r\n          \"Corresponds to seven days of the week.\";\r\n```",
+              "createdAt": "2024-06-18T02:37:21Z",
+              "updatedAt": "2024-06-18T02:41:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM5-pDzZ",
+          "commit": {
+            "abbreviatedOid": "08af36b"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-18T07:14:57Z",
+          "updatedAt": "2024-06-18T07:14:57Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "id": "PR_kwDOLuooYM5yfDBv",
+      "title": "schedule failure parameters",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/23",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-14T13:45:41Z",
+      "updatedAt": "2024-06-18T02:43:53Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "7a37599ab52ecfa975ff464947a49dddceadf29d",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-12",
+      "headRefOid": "1d347c8707484db70ddcd5413b5fde140143a9a0",
+      "closedAt": "2024-06-18T02:43:52Z",
+      "mergedAt": "2024-06-18T02:43:52Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "e0ccf293ca2b3a2003fc32aa5a0818e2ac9506a5"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5-nf4J",
+          "commit": {
+            "abbreviatedOid": "3dc72b4"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-18T02:33:50Z",
+          "updatedAt": "2024-06-18T02:34:12Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "```suggestion\r\n        \"Indicates the timestamp of last failed action triggered by\r\n```",
+              "createdAt": "2024-06-18T02:33:50Z",
+              "updatedAt": "2024-06-18T02:34:12Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOLuooYM5y5ojq",
+      "title": "rename date-time-start as utc-start-time, move it out of basic recurrence grouping",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/24",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "issue #16 ",
+      "createdAt": "2024-06-19T03:49:06Z",
+      "updatedAt": "2024-06-19T08:13:53Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "354d6806702c42cb3624bce193b9eb3b2c7287d8",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "8f4f0b2fe458ed89858ad4a96e5584525dd71fc2",
+      "closedAt": "2024-06-19T08:13:53Z",
+      "mergedAt": "2024-06-19T08:13:53Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "cf0fab6c6b2405e9ae94bdc4fbc0ae2e618d7bfe"
+      },
+      "comments": [
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": " need to update the text and tree diagram accordingly once merged.",
+          "createdAt": "2024-06-19T03:50:10Z",
+          "updatedAt": "2024-06-19T03:50:28Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5-ywk9",
+          "commit": {
+            "abbreviatedOid": "1a3ff49"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-06-19T07:01:53Z",
+          "updatedAt": "2024-06-19T07:07:46Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "```suggestion\r\n           lasts. Unless specified otherwise, it also applies to all the other instances in the\r\n```",
+              "createdAt": "2024-06-19T07:01:54Z",
+              "updatedAt": "2024-06-19T07:07:46Z"
+            },
+            {
+              "originalPosition": 91,
+              "body": "```suggestion\r\n      \"A simple definition of recurrence to specify the time\r\n```",
+              "createdAt": "2024-06-19T07:03:15Z",
+              "updatedAt": "2024-06-19T07:07:46Z"
+            },
+            {
+              "originalPosition": 92,
+              "body": "```suggestion\r\n       with a local time and time zone. This grouping\r\n```",
+              "createdAt": "2024-06-19T07:03:24Z",
+              "updatedAt": "2024-06-19T07:07:46Z"
+            },
+            {
+              "originalPosition": 114,
+              "body": "```suggestion\r\n           lasts. Unless specified otherwise, it also applies to all the other instances in the\r\n```",
+              "createdAt": "2024-06-19T07:03:45Z",
+              "updatedAt": "2024-06-19T07:07:46Z"
+            },
+            {
+              "originalPosition": 133,
+              "body": "```suggestion\r\n           'date-time-start' or 'until' value is neither\r\n```",
+              "createdAt": "2024-06-19T07:05:55Z",
+              "updatedAt": "2024-06-19T07:07:46Z"
+            },
+            {
+              "originalPosition": 159,
+              "body": "I would update the description as it is not clear enough. Thanks",
+              "createdAt": "2024-06-19T07:06:49Z",
+              "updatedAt": "2024-06-19T07:07:46Z"
+            },
+            {
+              "originalPosition": 177,
+              "body": "```suggestion\r\n          \"Defines the number of occurrences at which\r\n```",
+              "createdAt": "2024-06-19T07:07:10Z",
+              "updatedAt": "2024-06-19T07:07:46Z"
+            },
+            {
+              "originalPosition": 166,
+              "body": "```suggestion\r\n            \"Specifies a date and time value to\r\n```",
+              "createdAt": "2024-06-19T07:07:20Z",
+              "updatedAt": "2024-06-19T07:07:46Z"
+            },
+            {
+              "originalPosition": 158,
+              "body": "```suggestion\r\n          \"Defines a way that bounds the recurrence\r\n```",
+              "createdAt": "2024-06-19T07:07:31Z",
+              "updatedAt": "2024-06-19T07:07:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM5-zl7n",
+          "commit": {
+            "abbreviatedOid": "8f4f0b2"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-19T08:13:47Z",
+          "updatedAt": "2024-06-19T08:13:47Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "id": "PR_kwDOLuooYM5y6tZx",
+      "title": "cover contexts where the grouping is used in a schedule request",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/25",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The type/state can be tweaked in a request.",
+      "createdAt": "2024-06-19T07:11:55Z",
+      "updatedAt": "2024-06-19T08:10:36Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "354d6806702c42cb3624bce193b9eb3b2c7287d8",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-13",
+      "headRefOid": "791053de80cd3ba60bf9405e90e6ed5897a708bb",
+      "closedAt": "2024-06-19T08:10:35Z",
+      "mergedAt": "2024-06-19T08:10:35Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "0617e9b6a2dee276de8949cb6df04651828df11a"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 26,
+      "id": "PR_kwDOLuooYM5y7eaf",
+      "title": "report local time",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/26",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "   schedLocalTime OBJECT-TYPE\r\n       SYNTAX      DateAndTime (SIZE (11))\r\n       MAX-ACCESS  read-only\r\n       STATUS      current\r\n       DESCRIPTION\r\n           \"The local time used by the scheduler.  Schedules which\r\n            refer to calendar time will use the local time indicated\r\n            by this object.  An implementation MUST return all 11 bytes\r\n            of the DateAndTime textual-convention so that a manager\r\n            may retrieve the offset from GMT time.\"\r\n       ::= { schedObjects 1 }",
+      "createdAt": "2024-06-19T08:36:44Z",
+      "updatedAt": "2024-06-19T12:36:21Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "b96d2723f01ebb0f412e16fd470cf3ae27b4f27a",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-14",
+      "headRefOid": "0a5f8cbe2bda93c0acbfb9823e4f4479220bbde6",
+      "closedAt": "2024-06-19T12:36:20Z",
+      "mergedAt": "2024-06-19T12:36:20Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "738cdf1fa6cbe83f0b67a0fe769f358acb3c9c20"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5-0H3K",
+          "commit": {
+            "abbreviatedOid": "0a5f8cb"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-19T09:04:20Z",
+          "updatedAt": "2024-06-19T09:04:20Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\n         hosts the schedule. This parameter is only reported if schedule is expressed in local time format.\";\r\n```\r\nNote that 3231 requires calendar schedules are always expressed in local time. I think if the schedule is using UTC time, no need to know the local time info.\r\nI guess I don't really understand what time is reported by this parameter? The time when this value is retrieved? or the time when the schedule is managed?\r\n\r\n",
+              "createdAt": "2024-06-19T09:04:20Z",
+              "updatedAt": "2024-06-19T09:04:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM5-0XJ0",
+          "commit": {
+            "abbreviatedOid": "0a5f8cb"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-19T09:27:44Z",
+          "updatedAt": "2024-06-19T09:27:44Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "You are right for calendar schedules, but other types do not have such restriction. \r\n\r\nThis will report the actual local-time as seen by the entity. \r\n\r\nNo need to restrict the attribute to non UTC but leave that the manager to infer whatever useful from the parameter.",
+              "createdAt": "2024-06-19T09:27:44Z",
+              "updatedAt": "2024-06-19T09:27:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM5-0ebb",
+          "commit": {
+            "abbreviatedOid": "0a5f8cb"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-19T09:36:38Z",
+          "updatedAt": "2024-06-19T09:36:38Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "Sure, I think I can live with that.",
+              "createdAt": "2024-06-19T09:36:38Z",
+              "updatedAt": "2024-06-19T09:36:38Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "id": "PR_kwDOLuooYM5y7lpu",
+      "title": "current mapping to RFC3231 objects (non-exhaustive)",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/27",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-19T08:53:25Z",
+      "updatedAt": "2024-06-19T09:30:35Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "b96d2723f01ebb0f412e16fd470cf3ae27b4f27a",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-15",
+      "headRefOid": "e65b7519a3b617a341287265555c1df67b2d60ed",
+      "closedAt": "2024-06-19T09:30:35Z",
+      "mergedAt": "2024-06-19T09:30:35Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "8689dfe02bd5f3b6f2558969b5c7ad795e014254"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5-0K1r",
+          "commit": {
+            "abbreviatedOid": "0b53329"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-19T09:08:57Z",
+          "updatedAt": "2024-06-19T09:16:29Z",
+          "comments": [
+            {
+              "originalPosition": 30,
+              "body": "```suggestion\r\n|schedLastFailed|   last-failed-occurrence|\r\n```",
+              "createdAt": "2024-06-19T09:08:57Z",
+              "updatedAt": "2024-06-19T09:16:29Z"
+            },
+            {
+              "originalPosition": 26,
+              "body": "```suggestion\r\n|schedAdminStatus|   state|\r\n```",
+              "createdAt": "2024-06-19T09:11:02Z",
+              "updatedAt": "2024-06-19T09:16:29Z"
+            },
+            {
+              "originalPosition": 27,
+              "body": "```suggestion\r\n|schedOperStatus|  state|\r\n```\r\nWe don't restrict state to be rw or ro.\r\n",
+              "createdAt": "2024-06-19T09:14:38Z",
+              "updatedAt": "2024-06-19T09:16:29Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "id": "PR_kwDOLuooYM5y95X9",
+      "title": "update the narrative text to align with the YANG changes",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/28",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-19T13:47:08Z",
+      "updatedAt": "2024-06-20T09:03:21Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "bfdcdc30d6038d1006448244c9563031ad4ab450",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-16",
+      "headRefOid": "cb4b0edf31ccd8f07f3371fc1c439c438c1e632b",
+      "closedAt": "2024-06-20T09:03:21Z",
+      "mergedAt": "2024-06-20T09:03:21Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "e4453cac97e7c7c1f22f5672c56a95c8f25b7284"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5-7hfR",
+          "commit": {
+            "abbreviatedOid": "72de9c0"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-20T06:32:26Z",
+          "updatedAt": "2024-06-20T06:40:30Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\n   The \"ietf-schedule\" module ({{sec-schedule}}) defines the following identities:\r\n```",
+              "createdAt": "2024-06-20T06:32:26Z",
+              "updatedAt": "2024-06-20T06:40:30Z"
+            },
+            {
+              "originalPosition": 24,
+              "body": "I am thinking whether it would be better for features, types and identities come first as a subsection, and future augmentation separated as the section after module overview (augmentation itself doesn't seem like a part of the module).",
+              "createdAt": "2024-06-20T06:40:26Z",
+              "updatedAt": "2024-06-20T06:40:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM5-8pOm",
+          "commit": {
+            "abbreviatedOid": "72de9c0"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-20T08:46:01Z",
+          "updatedAt": "2024-06-20T08:46:01Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "Looks good to me. Please check the updated text. Thanks",
+              "createdAt": "2024-06-20T08:46:01Z",
+              "updatedAt": "2024-06-20T08:46:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM5-8uXA",
+          "commit": {
+            "abbreviatedOid": "c724f52"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-20T08:54:44Z",
+          "updatedAt": "2024-06-20T08:54:44Z",
+          "comments": [
+            {
+              "originalPosition": 236,
+              "body": "```suggestion\r\n##  Features Uses and Augmentations {#sec-aug}\r\n```",
+              "createdAt": "2024-06-20T08:54:44Z",
+              "updatedAt": "2024-06-20T08:54:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM5-8vci",
+          "commit": {
+            "abbreviatedOid": "0629298"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-20T08:56:37Z",
+          "updatedAt": "2024-06-20T08:56:37Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "id": "PR_kwDOLuooYM5zCAaQ",
+      "title": "fix typo",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/29",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-20T06:44:43Z",
+      "updatedAt": "2024-06-20T08:49:28Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "bfdcdc30d6038d1006448244c9563031ad4ab450",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "556da0244201fd7675f90dc29e4a467fb61b4aa0",
+      "closedAt": "2024-06-20T08:49:28Z",
+      "mergedAt": "2024-06-20T08:49:28Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "1016399397e83347f593995fca4fe17c45254878"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5-8ra2",
+          "commit": {
+            "abbreviatedOid": "556da02"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-20T08:49:23Z",
+          "updatedAt": "2024-06-20T08:49:23Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "id": "PR_kwDOLuooYM5zC9wd",
+      "title": "utc-start-time updates to example",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/30",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-20T09:08:42Z",
+      "updatedAt": "2024-06-20T10:17:31Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "e4453cac97e7c7c1f22f5672c56a95c8f25b7284",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-17",
+      "headRefOid": "3016a8ccbe9aeeb998ce2302090aa6ed118b9960",
+      "closedAt": "2024-06-20T10:17:31Z",
+      "mergedAt": "2024-06-20T10:17:31Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "0d400f48a2fd29f0644b946f604d29fcbdc76b8f"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 31,
+      "id": "PR_kwDOLuooYM5zD87W",
+      "title": "terminology + group secu cons",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/31",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-20T11:34:26Z",
+      "updatedAt": "2024-06-20T12:06:32Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "0d400f48a2fd29f0644b946f604d29fcbdc76b8f",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-18",
+      "headRefOid": "d5b624c388de7fc9d383d362a8b78b4263acbf45",
+      "closedAt": "2024-06-20T12:06:32Z",
+      "mergedAt": "2024-06-20T12:06:32Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "854b928d63876ae77820fff34f468030781c2eec"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5--LwX",
+          "commit": {
+            "abbreviatedOid": "d5b624c"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-20T11:59:18Z",
+          "updatedAt": "2024-06-20T11:59:18Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "id": "PR_kwDOLuooYM5zIigx",
+      "title": "editorial changes & reflect module update",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/32",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-21T02:11:39Z",
+      "updatedAt": "2024-06-21T08:15:53Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "4b62d060e880357b69a8b56a3c88b55eeea31ad2",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "76f1884cf5fb42ec96c49dcc4a3755223e4c9f22",
+      "closedAt": "2024-06-21T08:15:53Z",
+      "mergedAt": "2024-06-21T08:15:53Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "c83bf4dc05c38311c68a1f0e1c4b761023476da5"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5_FMIH",
+          "commit": {
+            "abbreviatedOid": "76f1884"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-21T08:15:46Z",
+          "updatedAt": "2024-06-21T08:15:46Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "id": "PR_kwDOLuooYM5zJ_-Z",
+      "title": "schedule-status-with and without name",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/33",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "in case the the grp is called in a structure that already have an id. this allows for more modularity",
+      "createdAt": "2024-06-21T08:23:41Z",
+      "updatedAt": "2024-06-21T09:43:56Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "c83bf4dc05c38311c68a1f0e1c4b761023476da5",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-19",
+      "headRefOid": "0f9f060027e23eff7794be9aeb465ad44e418c75",
+      "closedAt": "2024-06-21T09:43:55Z",
+      "mergedAt": "2024-06-21T09:43:55Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "7ad214981e64751777388f7aab79075c87bb6bba"
+      },
+      "comments": [
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> in case the the grp is called in a structure that already have an id. this allows for more modularity\r\n\r\nI think this is fine, thank you for this update.",
+          "createdAt": "2024-06-21T09:23:47Z",
+          "updatedAt": "2024-06-21T09:23:47Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5_Ftbn",
+          "commit": {
+            "abbreviatedOid": "b831fc5"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-21T09:22:05Z",
+          "updatedAt": "2024-06-21T09:23:07Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\n   structure as \"schedule-status\" but with an additional parameter to identify a schedule \"schedule-id\". Both\r\n```",
+              "createdAt": "2024-06-21T09:22:06Z",
+              "updatedAt": "2024-06-21T09:23:07Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "id": "PR_kwDOLuooYM5zUkSZ",
+      "title": "fix type for counters",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/34",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-24T06:54:04Z",
+      "updatedAt": "2024-06-24T08:57:24Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "7ad214981e64751777388f7aab79075c87bb6bba",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-20",
+      "headRefOid": "89589b0e7ddbfe996ee6806d70256ddbb56d0126",
+      "closedAt": "2024-06-24T08:57:23Z",
+      "mergedAt": "2024-06-24T08:57:23Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "df9e189b7c7a85888accdbed69d2340e9d66164a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5_Q3QE",
+          "commit": {
+            "abbreviatedOid": "89589b0"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-24T08:57:15Z",
+          "updatedAt": "2024-06-24T08:57:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "id": "PR_kwDOLuooYM5zVdow",
+      "title": "add example to support 8413 architecture",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/35",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "@boucadair related to issue #19 .Let me know if this is something in your mind.\r\n",
+      "createdAt": "2024-06-24T08:56:37Z",
+      "updatedAt": "2024-06-24T13:05:05Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "7ad214981e64751777388f7aab79075c87bb6bba",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "ddb60f2a65f5af1763f4a6283e2bc87377f62bbb",
+      "closedAt": "2024-06-24T13:05:05Z",
+      "mergedAt": "2024-06-24T13:05:05Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "bde1b578b7cddda942ba08a6411a28e91932f03c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5_RM5a",
+          "commit": {
+            "abbreviatedOid": "5ca72bd"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Looks good. Thanks",
+          "createdAt": "2024-06-24T09:36:49Z",
+          "updatedAt": "2024-06-24T09:40:34Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\n# Examples of Using \"ietf-schedule\" Module for Scheduled Use of Resources Framework\r\n```",
+              "createdAt": "2024-06-24T09:36:49Z",
+              "updatedAt": "2024-06-24T09:40:34Z"
+            },
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\n   reservation of Traffic Engineering (TE) resources in {{?RFC8413}} might leverage the \"period-of-time\"\r\n```",
+              "createdAt": "2024-06-24T09:37:28Z",
+              "updatedAt": "2024-06-24T09:40:34Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\n   of resources, the service requester sends a request to a Path Computation Element (PCE) and includes the\r\n```",
+              "createdAt": "2024-06-24T09:38:58Z",
+              "updatedAt": "2024-06-24T09:40:34Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\n   parameters of the Label Switched Path (LSP) that the requester wishes to supply, the configuration\r\n```",
+              "createdAt": "2024-06-24T09:39:32Z",
+              "updatedAt": "2024-06-24T09:40:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM5_TQxZ",
+          "commit": {
+            "abbreviatedOid": "0268859"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-24T13:03:25Z",
+          "updatedAt": "2024-06-24T13:03:25Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nan example of using \"ietf-schedule\" module for scheduled use of resources framework (e.g., {{?RFC8413}}).\r\n```",
+              "createdAt": "2024-06-24T13:03:25Z",
+              "updatedAt": "2024-06-24T13:03:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM5_TRLV",
+          "commit": {
+            "abbreviatedOid": "ddb60f2"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-24T13:04:01Z",
+          "updatedAt": "2024-06-24T13:04:01Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 36,
+      "id": "PR_kwDOLuooYM5zWfOQ",
+      "title": "add grouping schedule-status-with-name",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/36",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-24T11:05:38Z",
+      "updatedAt": "2024-06-24T13:05:37Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "df9e189b7c7a85888accdbed69d2340e9d66164a",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "Qiufang-branch-1",
+      "headRefOid": "8f1cc28303147238970d8f39d31bcdf147548475",
+      "closedAt": "2024-06-24T13:05:37Z",
+      "mergedAt": "2024-06-24T13:05:37Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "ded3e83f6b2caf1d72ecaa5e0df15c9a3f9db316"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5_TSCk",
+          "commit": {
+            "abbreviatedOid": "8f1cc28"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-24T13:05:32Z",
+          "updatedAt": "2024-06-24T13:05:32Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "id": "PR_kwDOLuooYM5zXd-X",
+      "title": "fix a naming conflict",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/37",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "for models where both period and recursion are used (e.g., within a same choice)",
+      "createdAt": "2024-06-24T13:13:31Z",
+      "updatedAt": "2024-06-25T01:31:13Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "ded3e83f6b2caf1d72ecaa5e0df15c9a3f9db316",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-21",
+      "headRefOid": "72835d6cb62015b212689cb5670b05a2aef36df8",
+      "closedAt": "2024-06-25T01:31:13Z",
+      "mergedAt": "2024-06-25T01:31:13Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "a8777ab81a312bc50eaa99199ab12d9dbd645817"
+      },
+      "comments": [
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "\r\n\r\n\r\n\r\n> for models where both period and recursion are used (e.g., within a same choice)\r\n\r\nYes, this is needed, thanks.",
+          "createdAt": "2024-06-25T01:29:50Z",
+          "updatedAt": "2024-06-25T01:29:50Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5_Yand",
+          "commit": {
+            "abbreviatedOid": "72835d6"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-25T01:30:45Z",
+          "updatedAt": "2024-06-25T01:30:45Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "id": "PR_kwDOLuooYM5zbyrb",
+      "title": "formatting & fix example to use \"recurrence-description\"",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/38",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-25T02:18:08Z",
+      "updatedAt": "2024-06-25T04:05:07Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "a8777ab81a312bc50eaa99199ab12d9dbd645817",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "8bd03842a50f71820c993f179f7ad4f0be87ac17",
+      "closedAt": "2024-06-25T04:05:07Z",
+      "mergedAt": "2024-06-25T04:05:07Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "7921e1d4f63f1a71669605fd138a4ab4b4bdd74b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5_ZGIf",
+          "commit": {
+            "abbreviatedOid": "8bd0384"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-25T04:05:02Z",
+          "updatedAt": "2024-06-25T04:05:02Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 39,
+      "id": "PR_kwDOLuooYM5zcMtH",
+      "title": "avoid folding; too long names",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/39",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-25T04:15:39Z",
+      "updatedAt": "2024-06-25T05:57:28Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "7921e1d4f63f1a71669605fd138a4ab4b4bdd74b",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "boucadair-patch-22",
+      "headRefOid": "2529b6f9cc470b01a1120d262d529ebb03b49927",
+      "closedAt": "2024-06-25T05:57:28Z",
+      "mergedAt": "2024-06-25T05:57:28Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "6727fee6a5eb066039686de1c3c87a413a741ca6"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM5_ZicF",
+          "commit": {
+            "abbreviatedOid": "2529b6f"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-25T05:57:22Z",
+          "updatedAt": "2024-06-25T05:57:22Z",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}
