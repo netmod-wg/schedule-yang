@@ -469,7 +469,7 @@ can be mapped to YANG parameters.
 |schedLastFailure| Not Supported   |
 |schedLastFailed|   last-failed-occurrence|
 |schedStorageType|  Not Supported    |
-|schedValue|  Not Supported    |
+|schedTriggers|  counter    |
 {: #mapping title="YANG/MIB Mapping"}
 
 #  The "ietf-schedule" YANG Module {#sec-schedule}
