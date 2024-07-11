@@ -471,7 +471,7 @@ can be mapped to YANG parameters.
 |schedStorageType|  Not Supported    |
 |schedVariable| not applicable |
 |schedValue| not applicable |
-|schedTriggers|  failure-counter + counter   |
+|schedTriggers|  counter/failure-counter   |
 {: #mapping title="YANG/MIB Mapping"}
 
 #  The "ietf-schedule" YANG Module {#sec-schedule}
