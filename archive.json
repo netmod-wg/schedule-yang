@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-09T00:55:50.478139+00:00",
+  "timestamp": "2024-07-11T00:56:32.010073+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -209,16 +209,64 @@
       "id": "I_kwDOLuooYM6OR8dl",
       "title": "Updated text for Discussion Venues",
       "url": "https://github.com/netmod-wg/schedule-yang/issues/40",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "danielkinguk",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Current text in \"Discussion Venues\" section was left over from policy-based-network-acl.\r\n\r\nSuggested text: \r\n\r\nThis note is to be removed before publishing as an RFC.\r\n\r\nDiscussion of this document takes place on the Network Modeling (NETMOD) Working Group mailing list (netmod@ietf.org), which is archived at https://mailarchive.ietf.org/arch/browse/netmod/.\r\n\r\nSource for this draft and an issue tracker can be found at https://github.com/netmod-wg/schedule-yang.\r\n\r\n",
       "createdAt": "2024-07-02T20:07:54Z",
-      "updatedAt": "2024-07-02T20:08:59Z",
-      "closedAt": null,
+      "updatedAt": "2024-07-09T05:10:18Z",
+      "closedAt": "2024-07-09T05:10:18Z",
       "comments": []
+    },
+    {
+      "number": 42,
+      "id": "I_kwDOLuooYM6O5BtD",
+      "title": "too many recurrence-related groupings?",
+      "url": "https://github.com/netmod-wg/schedule-yang/issues/42",
+      "state": "OPEN",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I feel that there are too many recurrence related groupings (6 of them):\r\nrecurrence\r\nrecurrence-utc\r\nrecurrence-with-time-zone\r\nrecurrence-utc-with-date-times\r\nrecurrence-time-zone-with-date-times\r\nicalendar-recurrence\r\n\r\nmaybe remove recurrence-XX-with-date-times ones as I assume they are less useful than others?\r\n",
+      "createdAt": "2024-07-09T06:57:19Z",
+      "updatedAt": "2024-07-09T07:08:27Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I don't see that as an issue. That's even a feature as it allows for better modularity and adaptability to future uses. ",
+          "createdAt": "2024-07-09T07:08:26Z",
+          "updatedAt": "2024-07-09T07:08:26Z"
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "id": "I_kwDOLuooYM6O5HQJ",
+      "title": "schedule-status vs. schedule-status-with-name",
+      "url": "https://github.com/netmod-wg/schedule-yang/issues/43",
+      "state": "OPEN",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "compared to \u201cschedule-status\u201d, \"schedule-status-with-name\" grouping has an additional para named \"schedule-id\", which is needed in cases with multiple scheduling definition. But it is probably also needed for grouping generic-schedule-params. \r\nI am thinking a more concise representation, maybe we can define a feature called, e..g, multiple-schedule. and we can have the following:\r\n     grouping schedule-status-with-name:\r\n       **+-- schedule-id?         string {multiple-schedule}?**       \r\n         ...\r\n      grouping generic-schedule-params:\r\n       **+-- schedule-id?         string {multiple-schedule}?**       \r\n         ...\r\nand also remove the schedule-status grouping. \r\nWould this be better?",
+      "createdAt": "2024-07-09T07:09:22Z",
+      "updatedAt": "2024-07-09T07:15:37Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "That's possible, but assumes a refine statement to strip the id for uses which does not require such parameter.\r\n\r\nI still prefer simple reuses rather than conditional (although perfect) compact groupings.\r\n\r\n",
+          "createdAt": "2024-07-09T07:15:36Z",
+          "updatedAt": "2024-07-09T07:15:36Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -2327,6 +2375,48 @@
           "body": "",
           "createdAt": "2024-06-25T05:57:22Z",
           "updatedAt": "2024-06-25T05:57:22Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 41,
+      "id": "PR_kwDOLuooYM50xG8y",
+      "title": "update text for discussion venues",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/41",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "fix #40 ",
+      "createdAt": "2024-07-09T02:55:16Z",
+      "updatedAt": "2024-07-09T05:10:17Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "6499156de509e0ff4fb825b5d5a9afb1c02e6191",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "2b661a9a1b02852ceacb1bdad00472321df854f8",
+      "closedAt": "2024-07-09T05:10:17Z",
+      "mergedAt": "2024-07-09T05:10:17Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "43704beec7fe9a65474f838133ccdb3e9c9f1cb4"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM6BC7-x",
+          "commit": {
+            "abbreviatedOid": "2b661a9"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-09T05:10:09Z",
+          "updatedAt": "2024-07-09T05:10:09Z",
           "comments": []
         }
       ]
