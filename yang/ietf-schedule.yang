@@ -756,8 +756,9 @@ module ietf-schedule {
       type yang:counter32;
       config false;
       description
-        "The counter of occurrences since the schedule was enabled.
-         The count wraps around when it reaches the maximum value.";
+        "The number of occurrences while invoking the scheduled 
+         action successfully. The count wraps around when it reaches
+         the maximum value.";
     }
     leaf last-occurrence {
       when "derived-from-or-self(../schedule-type, "
