@@ -939,9 +939,9 @@ Table of Contents
               +------------------+-------------------------+
               | schedStorageType | Not Supported           |
               +------------------+-------------------------+
-              | schedVariable    | not applicable          |
+              | schedVariable    | Not applicable          |
               +------------------+-------------------------+
-              | schedValue       | not applicable          |
+              | schedValue       | Not applicable          |
               +------------------+-------------------------+
               | schedTriggers    | counter/failure-counter |
               +------------------+-------------------------+
