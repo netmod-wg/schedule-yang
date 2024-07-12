@@ -469,8 +469,8 @@ can be mapped to YANG parameters.
 |schedLastFailure| Not Supported   |
 |schedLastFailed|   last-failed-occurrence|
 |schedStorageType|  Not Supported    |
-|schedVariable| not applicable |
-|schedValue| not applicable |
+|schedVariable| Not applicable |
+|schedValue| Not applicable |
 |schedTriggers|  counter/failure-counter   |
 {: #mapping title="YANG/MIB Mapping"}
 
