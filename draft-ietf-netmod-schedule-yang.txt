@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 10 January 2025                               M. Boucadair, Ed.
+Expires: 13 January 2025                               M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                             9 July 2024
+                                                            12 July 2024
 
 
                 A Common YANG Data Model for Scheduling
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 January 2025.
+   This Internet-Draft will expire on 13 January 2025.
 
 Copyright Notice
 
@@ -900,49 +900,53 @@ Table of Contents
    main objects in the DISMAN-SCHEDULE-MIB can be mapped to YANG
    parameters.
 
-               +==================+========================+
-               | MIB Object       | YANG                   |
-               +==================+========================+
-               | schedLocalTime   | local-time             |
-               +------------------+------------------------+
-               | schedType        | schedule-type          |
-               +------------------+------------------------+
-               | schedName        | schedule-id            |
-               +------------------+------------------------+
-               | schedOwner       | Not Supported          |
-               +------------------+------------------------+
-               | schedDescr       | description            |
-               +------------------+------------------------+
-               | schedInterval    | interval               |
-               +------------------+------------------------+
-               | schedWeekDay     | weekday                |
-               +------------------+------------------------+
-               | schedMonth       | byyearmonth            |
-               +------------------+------------------------+
-               | schedDay         | bymonthday             |
-               +------------------+------------------------+
-               | schedHour        | byhour                 |
-               +------------------+------------------------+
-               | schedMinute      | byminute               |
-               +------------------+------------------------+
-               | schedContextName | Not Supported          |
-               +------------------+------------------------+
-               | schedAdminStatus | state                  |
-               +------------------+------------------------+
-               | schedOperStatus  | state                  |
-               +------------------+------------------------+
-               | schedFailures    | failure-counter        |
-               +------------------+------------------------+
-               | schedLastFailure | Not Supported          |
-               +------------------+------------------------+
-               | schedLastFailed  | last-failed-occurrence |
-               +------------------+------------------------+
-               | schedStorageType | Not Supported          |
-               +------------------+------------------------+
-               | schedValue       | Not Supported          |
-               +------------------+------------------------+
+              +==================+=========================+
+              | MIB Object       | YANG                    |
+              +==================+=========================+
+              | schedLocalTime   | local-time              |
+              +------------------+-------------------------+
+              | schedType        | schedule-type           |
+              +------------------+-------------------------+
+              | schedName        | schedule-id             |
+              +------------------+-------------------------+
+              | schedOwner       | Not Supported           |
+              +------------------+-------------------------+
+              | schedDescr       | description             |
+              +------------------+-------------------------+
+              | schedInterval    | interval                |
+              +------------------+-------------------------+
+              | schedWeekDay     | weekday                 |
+              +------------------+-------------------------+
+              | schedMonth       | byyearmonth             |
+              +------------------+-------------------------+
+              | schedDay         | bymonthday              |
+              +------------------+-------------------------+
+              | schedHour        | byhour                  |
+              +------------------+-------------------------+
+              | schedMinute      | byminute                |
+              +------------------+-------------------------+
+              | schedContextName | Not Supported           |
+              +------------------+-------------------------+
+              | schedAdminStatus | state                   |
+              +------------------+-------------------------+
+              | schedOperStatus  | state                   |
+              +------------------+-------------------------+
+              | schedFailures    | failure-counter         |
+              +------------------+-------------------------+
+              | schedLastFailure | Not Supported           |
+              +------------------+-------------------------+
+              | schedLastFailed  | last-failed-occurrence  |
+              +------------------+-------------------------+
+              | schedStorageType | Not Supported           |
+              +------------------+-------------------------+
+              | schedVariable    | not applicable          |
+              +------------------+-------------------------+
+              | schedValue       | not applicable          |
+              +------------------+-------------------------+
+              | schedTriggers    | counter/failure-counter |
+              +------------------+-------------------------+
 
-                         Table 1: YANG/MIB Mapping
+                        Table 1: YANG/MIB Mapping
 
 6.  The "ietf-schedule" YANG Module
 
@@ -1707,8 +1711,9 @@ Table of Contents
          type yang:counter32;
          config false;
          description
-           "The counter of occurrences since the schedule was enabled.
-            The count wraps around when it reaches the maximum value.";
+           "The number of occurrences while invoking the scheduled
+            action successfully. The count wraps around when it reaches
+            the maximum value.";
        }
        leaf last-occurrence {
          when "derived-from-or-self(../schedule-type, "
