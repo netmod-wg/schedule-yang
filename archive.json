@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-11T00:56:32.010073+00:00",
+  "timestamp": "2024-07-14T01:00:23.521721+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -225,15 +225,15 @@
       "id": "I_kwDOLuooYM6O5BtD",
       "title": "too many recurrence-related groupings?",
       "url": "https://github.com/netmod-wg/schedule-yang/issues/42",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "QiufangMa",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "I feel that there are too many recurrence related groupings (6 of them):\r\nrecurrence\r\nrecurrence-utc\r\nrecurrence-with-time-zone\r\nrecurrence-utc-with-date-times\r\nrecurrence-time-zone-with-date-times\r\nicalendar-recurrence\r\n\r\nmaybe remove recurrence-XX-with-date-times ones as I assume they are less useful than others?\r\n",
       "createdAt": "2024-07-09T06:57:19Z",
-      "updatedAt": "2024-07-09T07:08:27Z",
-      "closedAt": null,
+      "updatedAt": "2024-07-11T11:35:54Z",
+      "closedAt": "2024-07-11T11:35:54Z",
       "comments": [
         {
           "author": "boucadair",
@@ -253,10 +253,12 @@
       "author": "QiufangMa",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "wontfix"
+      ],
       "body": "compared to \u201cschedule-status\u201d, \"schedule-status-with-name\" grouping has an additional para named \"schedule-id\", which is needed in cases with multiple scheduling definition. But it is probably also needed for grouping generic-schedule-params. \r\nI am thinking a more concise representation, maybe we can define a feature called, e..g, multiple-schedule. and we can have the following:\r\n     grouping schedule-status-with-name:\r\n       **+-- schedule-id?         string {multiple-schedule}?**       \r\n         ...\r\n      grouping generic-schedule-params:\r\n       **+-- schedule-id?         string {multiple-schedule}?**       \r\n         ...\r\nand also remove the schedule-status grouping. \r\nWould this be better?",
       "createdAt": "2024-07-09T07:09:22Z",
-      "updatedAt": "2024-07-09T07:15:37Z",
+      "updatedAt": "2024-07-11T11:35:08Z",
       "closedAt": null,
       "comments": [
         {
@@ -2417,6 +2419,90 @@
           "body": "",
           "createdAt": "2024-07-09T05:10:09Z",
           "updatedAt": "2024-07-09T05:10:09Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 44,
+      "id": "PR_kwDOLuooYM51FXXd",
+      "title": "add schedTriggers",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/44",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "schedValue is \"The value which is written to the MIB object pointed to by\r\n            schedVariable when the scheduler invokes an action.\"\r\nschedVariable is \"An object identifier pointing to a local MIB variable\r\n            which resolves to an ASN.1 primitive type of INTEGER.\"\r\nboth seem parameters specific to SNMP, and thus may be omitted from the mapping?\r\n\r\nMeanwhile, schedTriggers : \"This variable counts the number of attempts (either\r\n            successful or failed) to invoke the scheduled action.\" this seems to be related to leaf \"counter\" inside schedule-status grouping...",
+      "createdAt": "2024-07-11T11:32:19Z",
+      "updatedAt": "2024-07-12T01:14:23Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "43704beec7fe9a65474f838133ccdb3e9c9f1cb4",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "14877b767c8a84fd09e59f6e26421cce220d353a",
+      "closedAt": "2024-07-12T01:14:04Z",
+      "mergedAt": "2024-07-12T01:14:04Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "ead862a21bb29594fb4aeed02bf9974351b049cd"
+      },
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree that schedValue is not applicable in our context. This is why we had it \"not supported\" in the table. Instead of deleting the entry, we may s/not supported/not applicable.\r\n\r\nFor schedTriggers, we do have both successful and failures in separate counters. Don't see the value to support this as a separate parameter. We may indicate in the table that it is covered by failure-counter + counter.",
+          "createdAt": "2024-07-11T11:52:43Z",
+          "updatedAt": "2024-07-11T11:52:43Z"
+        },
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I agree that schedValue is not applicable in our context. This is why we had it \"not supported\" in the table. Instead of deleting the entry, we may s/not supported/not applicable.\r\n\r\nIf this is the case, then i guess schedVariable should also be added in the table?\r\n\r\n",
+          "createdAt": "2024-07-11T12:03:22Z",
+          "updatedAt": "2024-07-11T12:03:43Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> schedVariable\r\n\r\nAgree, assuming we say not applicable.",
+          "createdAt": "2024-07-11T12:22:53Z",
+          "updatedAt": "2024-07-11T12:22:53Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM6BcTC4",
+          "commit": {
+            "abbreviatedOid": "48e946c"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-11T11:53:49Z",
+          "updatedAt": "2024-07-11T11:53:50Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n|schedValue|  Not Applicable|\r\n|schedTriggers|  counter/failure-counter   |\r\n```",
+              "createdAt": "2024-07-11T11:53:50Z",
+              "updatedAt": "2024-07-11T11:53:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM6Bcirp",
+          "commit": {
+            "abbreviatedOid": "14877b7"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks.",
+          "createdAt": "2024-07-11T12:23:46Z",
+          "updatedAt": "2024-07-11T12:23:46Z",
           "comments": []
         }
       ]
