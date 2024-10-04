@@ -868,3 +868,5 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
    for the constructive discussion during IETF#118.
 
    Other related efforts were explored in the past, e.g., {{?I-D.liu-netmod-yang-schedule}}.
+
+   Thanks to Reshad Rahman for the great YANGDOCTORS review.
