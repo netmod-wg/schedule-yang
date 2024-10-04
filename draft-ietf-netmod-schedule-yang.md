@@ -276,7 +276,7 @@ an occurence will last.
 ~~~~
 {: #rec-tz-grp-tree title="recurrence-with-time-zone Grouping Tree Structure"}
 
-   The "recurrence-first" container includes "date-time-start" and "duration" parameters
+   The "recurrence-first" container includes "start-time" and "duration" parameters
    to specify the start time and period of the first occurrence. Unless specified otherwise, the
    "duration" also applies to subsequent recurrence instances. It also includes a
    "time-zone-identifier" parameter which MUST be specified if the date
@@ -284,7 +284,7 @@ an occurence will last.
    to UTC.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-bound" choice. The "date-time-start" value always counts
+  indicated by the "recurrence-bound" choice. The "start-time" value always counts
   as the first occurrence.
 
    Unlike the definition of "recurrence-utc" grouping ({{sec-rec-utc}}),
@@ -638,7 +638,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2025-12-01T15:00:00",
+    "start-time": "2025-12-01T15:00:00",
     "duration": "PT00:10:00",
     "time-zone-identifier": "America/New_York"
   },
@@ -686,7 +686,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2025-12-01T09:00:00",
+    "start-time": "2025-12-01T09:00:00",
     "duration": "PT00:15:00",
     "time-zone-identifier": "America/New_York"
   },
@@ -715,7 +715,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2024-01-27T08:00:00",
+    "start-time": "2024-01-27T08:00:00",
     "time-zone-identifier": "America/New_York"
   },
   "frequency": "ietf-schedule:monthly",
@@ -736,7 +736,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-  "date-time-start": "2025-01-01"
+  "start-time": "2025-01-01"
   },
   "frequency": "ietf-schedule:monthly",
   "until": "2025-12-25",
@@ -759,7 +759,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2025-12-01T09:00:00Z"
+    "start-time": "2025-12-01T09:00:00Z"
   },
   "until": "2025-12-01T16:40:00Z",
   "frequency": "ietf-schedule:minutely",
