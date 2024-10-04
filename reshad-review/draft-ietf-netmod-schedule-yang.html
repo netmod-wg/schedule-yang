@@ -2677,7 +2677,7 @@ module ietf-schedule {
     }
   }
 
-  grouping recurrence {
+  grouping recurrence-basic {
     description
       "A simple definition of recurrence.";
     leaf recurrence-description {
@@ -2758,7 +2758,7 @@ module ietf-schedule {
         }
       }
     }
-    uses recurrence;
+    uses recurrence-basic;
   }
 
   grouping recurrence-with-time-zone {
@@ -2822,7 +2822,7 @@ module ietf-schedule {
         }
       }
     }
-    uses recurrence;
+    uses recurrence-basic;
   }
 
   grouping recurrence-utc-with-date-times {

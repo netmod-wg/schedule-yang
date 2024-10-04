@@ -1357,7 +1357,7 @@ Table of Contents
        }
      }
 
-     grouping recurrence {
+     grouping recurrence-basic {
        description
          "A simple definition of recurrence.";
        leaf recurrence-description {
@@ -1438,7 +1438,7 @@ Table of Contents
            }
          }
        }
-       uses recurrence;
+       uses recurrence-basic;
      }
 
      grouping recurrence-with-time-zone {
@@ -1502,7 +1502,7 @@ Table of Contents
            }
          }
        }
-       uses recurrence;
+       uses recurrence-basic;
      }
 
      grouping recurrence-utc-with-date-times {
