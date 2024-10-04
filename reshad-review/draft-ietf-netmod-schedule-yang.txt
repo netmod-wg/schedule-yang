@@ -2299,7 +2299,7 @@ B.1.  Example: Schedule Tasks to Execute Based on a Recurrence Rule
              description
                "The schedule identifier for this recurrence rule.";
            }
-           uses schedule:recurrence;
+           uses schedule:recurrence-basic;
           }
 
          container icalendar-recurrence-schedules {
