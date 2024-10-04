@@ -542,16 +542,20 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 # Examples of Format Representation {#usage}
 
    This section provides some examples to illustrate the use of the
-   period and recurrence formats defined in {{sec-schedule}}. Note that a "grouping"
-   does not define any data nodes in the schema tree; the examples illustrated are
-   thus for the ease of understanding. Only the message body is provided with
+   period and recurrence formats defined in {{sec-schedule}}.
+
+   Note that a "grouping" does not define any data nodes in the schema tree;
+   the examples illustrated are thus for the ease of understanding.
+
+   For each example, only the message body is provided with
    JSON used for encoding per the guidance in {{?RFC7951}}.
 
 ## The "generic-schedule-params" Grouping
 
-   {{ex-0}} indicates the example of a requested schedule that needs to start no earlier than
+   {{ex-0}} illustrates the example of a requested schedule that needs to start no earlier than
    08:00 AM, January 1, 2025 and end no later than 8:00 PM, January 31, 2025 (Beijing time).
-   Schedule requests that fail to meet the requirements are ignored by the system.
+   Schedule requests that fail to meet the requirements are ignored by the system as indicates by
+   "discard-action".
 
 ~~~~
 {
