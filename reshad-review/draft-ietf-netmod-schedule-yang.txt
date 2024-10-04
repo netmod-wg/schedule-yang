@@ -1449,7 +1449,7 @@ Table of Contents
        container recurrence-first {
          description
            "Specifies the first instance of the recurrence.";
-         leaf date-time-start {
+         leaf start-time {
            type yang:date-and-time;
            description
              "Defines the instant date and time of the first instance
@@ -1468,9 +1468,8 @@ Table of Contents
            description
              "Indicates the identifier for the time zone in a time
               zone database. This parameter MUST be specified if
-              'date-time-start' or 'until' value is neither
-              reported in the format of UTC nor time zone offset to
-              UTC.";
+              'start-time' or 'until' value is neither reported in
+              the format of UTC nor time zone offset to UTC.";
          }
        }
        choice recurrence-bound {
