@@ -1776,14 +1776,14 @@ module: ietf-schedule
 <a href="#name-recurrence-with-time-zone-g" class="selfRef">recurrence-with-time-zone Grouping Tree Structure</a>
             </figcaption></figure>
 </div>
-<p id="section-3.3.5-3">The "recurrence-first" container includes "date-time-start" and "duration" parameters
+<p id="section-3.3.5-3">The "recurrence-first" container includes "start-time" and "duration" parameters
    to specify the start time and period of the first occurrence. Unless specified otherwise, the
    "duration" also applies to subsequent recurrence instances. It also includes a
    "time-zone-identifier" parameter which <span class="bcp14">MUST</span> be specified if the date
    and time value is neither reported in the format of UTC nor time zone offset
    to UTC.<a href="#section-3.3.5-3" class="pilcrow">¶</a></p>
 <p id="section-3.3.5-4">The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-bound" choice. The "date-time-start" value always counts
+  indicated by the "recurrence-bound" choice. The "start-time" value always counts
   as the first occurrence.<a href="#section-3.3.5-4" class="pilcrow">¶</a></p>
 <p id="section-3.3.5-5">Unlike the definition of "recurrence-utc" grouping (<a href="#sec-rec-utc" class="auto internal xref">Section 3.3.4</a>),
    "recurrence-with-time-zone" is intended to promote human readability over
@@ -3440,7 +3440,7 @@ module ietf-schedule {
 <pre>
 {
   "recurrence-first": {
-    "date-time-start": "2025-12-01T15:00:00",
+    "start-time": "2025-12-01T15:00:00",
     "duration": "PT00:10:00",
     "time-zone-identifier": "America/New_York"
   },
@@ -3508,7 +3508,7 @@ module ietf-schedule {
 <pre>
 {
   "recurrence-first": {
-    "date-time-start": "2025-12-01T09:00:00",
+    "start-time": "2025-12-01T09:00:00",
     "duration": "PT00:15:00",
     "time-zone-identifier": "America/New_York"
   },
@@ -3547,7 +3547,7 @@ module ietf-schedule {
 <pre>
 {
   "recurrence-first": {
-    "date-time-start": "2024-01-27T08:00:00",
+    "start-time": "2024-01-27T08:00:00",
     "time-zone-identifier": "America/New_York"
   },
   "frequency": "ietf-schedule:monthly",
@@ -3573,7 +3573,7 @@ module ietf-schedule {
 <pre>
 {
   "recurrence-first": {
-  "date-time-start": "2025-01-01"
+  "start-time": "2025-01-01"
   },
   "frequency": "ietf-schedule:monthly",
   "until": "2025-12-25",
@@ -3601,7 +3601,7 @@ module ietf-schedule {
 <pre>
 {
   "recurrence-first": {
-    "date-time-start": "2025-12-01T09:00:00Z"
+    "start-time": "2025-12-01T09:00:00Z"
   },
   "until": "2025-12-01T16:40:00Z",
   "frequency": "ietf-schedule:minutely",
