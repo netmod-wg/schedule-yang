@@ -251,7 +251,7 @@ System:
 ~~~~
 {: #rec-utc-grp-tree title="recurrence-utc Grouping Tree Structure"}
 
-   The "utc-start-time" indicates the start time in UTC format.
+   The "start-time-utc" indicates the start time in UTC format.
 
    The "duration" parameter specifies, in units of seconds, the time period of the first occurrence. Unless specified otherwise, the "duration" also applies to subsequent recurrence instances.
 
@@ -260,7 +260,7 @@ The interval specifies when a schedule will occur, combined with the frequency p
 an occurence will last.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-bound" choice. The "utc-start-time" value always counts
+  indicated by the "recurrence-bound" choice. The "start-time-utc" value always counts
   as the first occurrence.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling contexts
@@ -620,7 +620,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-    "utc-start-time": "2025-12-01T08:00:00Z",
+    "start-time-utc": "2025-12-01T08:00:00Z",
     "duration": 3600;
   },
   "frequency": "ietf-schedule:daily",
@@ -658,7 +658,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-    "utc-start-time": "2025-06-01T09:00:00Z",
+    "start-time-utc": "2025-06-01T09:00:00Z",
   },
   "frequency": "ietf-schedule:daily",
   "interval": 2,
