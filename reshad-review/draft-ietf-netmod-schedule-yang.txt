@@ -1392,7 +1392,7 @@ Table of Contents
        container recurrence-first {
          description
            "Specifies the first instance of the recurrence.";
-         leaf utc-start-time {
+         leaf start-time-utc {
            type yang:date-and-time;
            description
              "Defines the instant date and time of the first instance
