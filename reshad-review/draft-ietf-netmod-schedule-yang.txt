@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 22 December 2024                              M. Boucadair, Ed.
+Expires: 7 April 2025                                  M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                            20 June 2024
+                                                          4 October 2024
 
 
                 A Common YANG Data Model for Scheduling
@@ -20,20 +20,20 @@ Abstract
    This document defines a common schedule YANG module which is designed
    to be applicable for scheduling purposes such as event, policy,
    services, or resources based on date and time.  For the sake of
-   better modularity, the module includes basic, intermediate, and
-   advanced versions of recurrence related groupings.
+   better modularity, the module includes a set of recurrence related
+   groupings with varying granularity levels (i.e., from basic to
+   advanced).
 
 Discussion Venues
 
    This note is to be removed before publishing as an RFC.
 
-   Discussion of this document takes place on the Operations and
-   Management Area Working Group Working Group mailing list
-   (opsawg@ietf.org), which is archived at
-   https://mailarchive.ietf.org/arch/browse/opsawg/.
+   Discussion of this document takes place on the Network Modeling
+   (NETMOD) Working Group mailing list (netmod@ietf.org), which is
+   archived at https://mailarchive.ietf.org/arch/browse/netmod/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/boucadair/policy-based-network-acl.
+   https://github.com/netmod-wg/schedule-yang.
 
 Status of This Memo
 
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 December 2024.
+   This Internet-Draft will expire on 7 April 2025.
 
 Copyright Notice
 
@@ -73,16 +73,19 @@ Table of Contents
    2.  Conventions and Definitions
    3.  Module Overview
      3.1.  Features
-       3.1.1.  The "generic-schedule-params" Grouping
-       3.1.2.  The "period-of-time" Grouping
-       3.1.3.  The "recurrence" Grouping
-       3.1.4.  The "recurrence-utc" Grouping
-       3.1.5.  The "recurrence-with-time-zone" Grouping
-       3.1.6.  The "recurrence-utc-with-date-times" Grouping
-       3.1.7.  The "recurrence-time-zone-with-date-times" Grouping
-       3.1.8.  The "icalendar-recurrence" Grouping
-       3.1.9.  The "schedule-status" Grouping
-     3.2.  Features Uses and Augmentations
+     3.2.  Types and Identities
+     3.3.  Groupings
+       3.3.1.  The "generic-schedule-params" Grouping
+       3.3.2.  The "period-of-time" Grouping
+       3.3.3.  The "recurrence" Grouping
+       3.3.4.  The "recurrence-utc" Grouping
+       3.3.5.  The "recurrence-with-time-zone" Grouping
+       3.3.6.  The "recurrence-utc-with-date-times" Grouping
+       3.3.7.  The "recurrence-time-zone-with-date-times" Grouping
+       3.3.8.  The "icalendar-recurrence" Grouping
+       3.3.9.  The "schedule-status" and "schedule-status-with-name"
+               Groupings
+     3.4.  Features Use and Augmentations
    4.  Some Usage Restrictions
    5.  Relationship to the DISMAN-SCHEDULE-MIB
    6.  The "ietf-schedule" YANG Module
@@ -108,6 +111,8 @@ Table of Contents
            Rule
      B.2.  Example: Schedule Network Properties to Change Based on
            Date and Time
+   Appendix C.  Examples of Using "ietf-schedule" Module for Scheduled
+           Use of Resources Framework
    Acknowledgments
    Authors' Addresses
 
@@ -121,13 +126,18 @@ Table of Contents
    groupings which are designed to be applicable for scheduling purposes
    such as event, policy, services or resources based on date and time.
 
+   This document does not make any assumption about the nature of
+   actions that are triggered by the schedules.
+
    Section 5 discusses relationship with the managed objects defined in
    [RFC3231].
 
    Appendix A describes a set of examples to illustrate the use of the
-   common schedule groupings.  Also, Appendix B provides sample modules
-   to exemplify how future modules can use the extensibility provisions
-   in "ietf-schedule" (Section 6).
+   common schedule groupings (Section 3.3).  And Appendix B provides
+   sample modules to exemplify how future modules can use the
+   extensibility provisions in "ietf-schedule" (Section 6).  Also,
+   Appendix C provides an example of using "ietf-schedule" module for
+   scheduled use of resources framework (e.g., [RFC8413]).
 
 1.1.  Editorial Note (To be removed by RFC Editor)
 
@@ -156,26 +166,33 @@ Table of Contents
    The meanings of the symbols in tree diagrams are defined in
    [RFC8340].
 
-   Also, this document uses the YANG terminology defined in Section 3 of
+   This document uses the YANG terminology defined in Section 3 of
    [RFC7950].
+
+   The document makes use of the following terms:
+
+   icalendar:  Refers to Internet Calendaring per [RFC5545].
+
+   System:  Refers to an entity that host a schedule that is managed
+      using the YANG module defined in this document.
 
 3.  Module Overview
 
 3.1.  Features
 
    The "ietf-schedule" data model defines the recurrence related
-   groupings using a modular approach.  Basic, intermediate, and
-   advanced representation of recurrence groupings are defined, with
-   each reusing the previous one and adding more parameters.  To allow
-   for different options, two features are defined in the data model:
+   groupings using a modular approach.  To that aim, a variety of
+   representations of recurrence groupings ranging from basic to
+   advanced (iclander like) are defined.  To allow for different
+   options, two features are defined in the data model:
 
-   *  "basic-recurrence-supported"
+   *  "basic-recurrence"
 
-   *  "icalendar-recurrence-supported"
+   *  "icalendar-recurrence"
 
-   Refer to Section 3.2 for the use of these features.
+   Refer to Section 3.4 for the use of these features.
 
-   ## Types and Identities {#sec-types}
+3.2.  Types and Identities
 
    The "ietf-schedule" module (Section 6) defines the following
    identities:
@@ -202,28 +219,28 @@ Table of Contents
    *  "discard-action": Specifies the action to perform when a schedule
       is discarded (e.g., generate a warning or an error message).
 
-   ## Groupings
+3.3.  Groupings
 
    The "ietf-schedule" module (Section 6) defines the following
    groupings:
 
-   *  "generic-schedule-params" (Section 3.1.1)
+   *  "generic-schedule-params" (Section 3.3.1)
 
-   *  "period-of-time" (Section 3.1.2)
+   *  "period-of-time" (Section 3.3.2)
 
-   *  "recurrence" (Section 3.1.3)
+   *  "recurrence" (Section 3.3.3)
 
-   *  "recurrence-utc" (Section 3.1.4)
+   *  "recurrence-utc" (Section 3.3.4)
 
-   *  "recurrence-with-time-zone" (Section 3.1.5)
+   *  "recurrence-with-time-zone" (Section 3.3.5)
 
-   *  "recurrence-utc-with-date-times" (Section 3.1.6)
+   *  "recurrence-utc-with-date-times" (Section 3.3.6)
 
-   *  "recurrence-time-zone-with-date-times" (Section 3.1.7)
+   *  "recurrence-time-zone-with-date-times" (Section 3.3.7)
 
-   *  "icalendar-recurrence" (Section 3.1.8)
+   *  "icalendar-recurrence" (Section 3.3.8)
 
-   *  "schedule-status" (Section 3.1.9)
+   *  "schedule-status" and "schedule-status-with-name" (Section 3.3.9)
 
    Figure 1 provides an overview of the tree structure of the "ietf-
    schedule" module in terms of its groupings.
@@ -248,13 +265,15 @@ Table of Contents
        ...
      grouping schedule-status:
        ...
+     grouping schedule-status-with-name:
+       ...
 
                  Figure 1: Overall Schedule Tree Structure
 
    Each of these groupings is presented in the following subsections.
    Examples are provided in Appendix A.
 
-3.1.1.  The "generic-schedule-params" Grouping
+3.3.1.  The "generic-schedule-params" Grouping
 
    A system accepts and handles the schedule requests, which may help
    further automate the scheduling process of events, policy, services,
@@ -287,6 +306,8 @@ Table of Contents
      grouping icalendar-recurrence:
        ...
      grouping schedule-status:
+       ...
+     grouping schedule-status-with-name:
        ...
 
           Figure 2: Generic Schedule Configuration Tree Structure
@@ -321,7 +342,7 @@ Table of Contents
    requests that would prevent validation by admins of some critical
    systems, etc.
 
-3.1.2.  The "period-of-time" Grouping
+3.3.2.  The "period-of-time" Grouping
 
    The "period-of-time" grouping (Figure 3) represents a time period
    using either a start ("period-start") and end date and time ("period-
@@ -329,7 +350,7 @@ Table of Contents
    ("duration").  For the first format, the start of the period MUST be
    before the end of the period.
 
-   The "description" includes a description of the period.  No
+   The "period-description" includes a description of the period.  No
    constraint is imposed on the structure nor the use of this parameter.
 
    module: ietf-schedule
@@ -337,7 +358,7 @@ Table of Contents
      grouping generic-schedule-params:
        ...
      grouping period-of-time:
-       +-- description?            string
+       +-- period-description?     string
        +-- period-start            yang:date-and-time
        +-- time-zone-identifier?   sys:timezone-name
        +-- (period-type)?
@@ -359,10 +380,12 @@ Table of Contents
        ...
      grouping schedule-status:
        ...
+     grouping schedule-status-with-name:
+       ...
 
               Figure 3: Period of Time Grouping Tree Structure
 
-3.1.3.  The "recurrence" Grouping
+3.3.3.  The "recurrence" Grouping
 
    The "recurrence" grouping (Figure 4) specifies a simple recurrence
    rule.
@@ -374,9 +397,9 @@ Table of Contents
      grouping period-of-time:
        ...
      grouping recurrence:
-       +-- description?   string
-       +-- frequency      identityref
-       +-- interval?      uint32
+       +-- recurrence-description?   string
+       +-- frequency                 identityref
+       +-- interval?                 uint32
      grouping recurrence-utc:
        ...
      grouping recurrence-with-time-zone:
@@ -388,6 +411,8 @@ Table of Contents
      grouping icalendar-recurrence:
        ...
      grouping schedule-status:
+       ...
+     grouping schedule-status-with-name:
        ...
 
                 Figure 4: recurrence Grouping Tree Structure
@@ -407,10 +432,14 @@ Table of Contents
    because there are cases (e.g., profiling) where the use of the
    default is problematic.
 
-3.1.4.  The "recurrence-utc" Grouping
+   The "recurrence-description" includes a description of the period.
+   No constraint is imposed on the structure nor the use of this
+   parameter.
 
-   The "recurrence-utc" grouping (Figure 5) specifies a simple
-   recurrence rule in UTC format.
+3.3.4.  The "recurrence-utc" Grouping
+
+   The "recurrence-utc" grouping (Figure 5) uses the "recurrence"
+   grouping and specifies a simple recurrence rule in UTC format.
 
    module: ietf-schedule
 
@@ -426,12 +455,12 @@ Table of Contents
        |  +-- duration?         uint32
        +-- (recurrence-bound)?
        |  +--:(until)
-       |  |  +-- utc-until?    yang:date-and-time
+       |  |  +-- utc-until?          yang:date-and-time
        |  +--:(count)
-       |     +-- count?        uint32
-       +-- description?        string
-       +-- frequency           identityref
-       +-- interval?           uint32
+       |     +-- count?              uint32
+       +-- recurrence-description?   string
+       +-- frequency                 identityref
+       +-- interval?                 uint32
      grouping recurrence-with-time-zone:
        ...
      grouping recurrence-utc-with-date-times:
@@ -441,6 +470,8 @@ Table of Contents
      grouping icalendar-recurrence:
        ...
      grouping schedule-status:
+       ...
+     grouping schedule-status-with-name:
        ...
 
               Figure 5: recurrence-utc Grouping Tree Structure
@@ -457,16 +488,17 @@ Table of Contents
    indicates how long an occurence will last.
 
    The repetition can be scoped by a specified end time or by a count of
-   occurrences, indicated by the "recurrence-bound" choice.  The "date-
-   time-start" value always counts as the first occurrence.
+   occurrences, indicated by the "recurrence-bound" choice.  The "utc-
+   start-time" value always counts as the first occurrence.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling
    contexts where machine readability is more desirable.
 
-3.1.5.  The "recurrence-with-time-zone" Grouping
+3.3.5.  The "recurrence-with-time-zone" Grouping
 
-   The "recurrence-with-time-zone" grouping (Figure 6) specifies a
-   simple recurrence rule with a time zone.
+   The "recurrence-with-time-zone" grouping (Figure 6) uses the
+   "recurrence" grouping and specifies a simple recurrence rule with a
+   time zone.
 
    module: ietf-schedule
 
@@ -485,12 +517,12 @@ Table of Contents
        |  +-- time-zone-identifier?   sys:timezone-name
        +-- (recurrence-bound)?
        |  +--:(until)
-       |  |  +-- until?        yang:date-and-time
+       |  |  +-- until?              yang:date-and-time
        |  +--:(count)
-       |     +-- count?        uint32
-       +-- description?        string
-       +-- frequency           identityref
-       +-- interval?           uint32
+       |     +-- count?              uint32
+       +-- recurrence-description?   string
+       +-- frequency                 identityref
+       +-- interval?                 uint32
      grouping recurrence-utc-with-date-times:
        ...
      grouping recurrence-time-zone-with-date-times:
@@ -499,30 +531,31 @@ Table of Contents
        ...
      grouping schedule-status:
        ...
+     grouping schedule-status-with-name:
+       ...
 
         Figure 6: recurrence-with-time-zone Grouping Tree Structure
 
-   The "time-zone-identifier" parameter MUST be specified if the date
+   The "recurrence-first" container includes "date-time-start" and
+   "duration" parameters to specify the start time and period of the
+   first occurrence.  Unless specified otherwise, the "duration" also
+   applies to subsequent recurrence instances.  It also includes a
+   "time-zone-identifier" parameter which MUST be specified if the date
    and time value is neither reported in the format of UTC nor time zone
    offset to UTC.
-
-   The "recurrence-first" container includes a "duration" parameter to
-   specify the time period of the first occurrence.  Unless specified
-   otherwise, the "duration" also applies to subsequent recurrence
-   instances.
 
    The repetition can be scoped by a specified end time or by a count of
    occurrences, indicated by the "recurrence-bound" choice.  The "date-
    time-start" value always counts as the first occurrence.
 
-   Unlike the definition of "recurrence-utc" grouping (Section 3.1.4),
+   Unlike the definition of "recurrence-utc" grouping (Section 3.3.4),
    "recurrence-with-time-zone" is intended to promote human readability
    over machine readability.
 
-3.1.6.  The "recurrence-utc-with-date-times" Grouping
+3.3.6.  The "recurrence-utc-with-date-times" Grouping
 
    The "recurrence-utc-with-date-times" grouping (Figure 7) uses the
-   "recurrence-utc" grouping (Section 3.1.4) and adds a "period-
+   "recurrence-utc" grouping (Section 3.3.4) and adds a "period-
    timeticks" list to define an aggregate set of repeating occurrences.
 
    module: ietf-schedule
@@ -543,12 +576,12 @@ Table of Contents
        |  +-- duration?         uint32
        +-- (recurrence-bound)?
        |  +--:(until)
-       |  |  +-- utc-until?    yang:date-and-time
+       |  |  +-- utc-until?          yang:date-and-time
        |  +--:(count)
-       |     +-- count?        uint32
-       +-- description?        string
-       +-- frequency           identityref
-       +-- interval?           uint32
+       |     +-- count?              uint32
+       +-- recurrence-description?   string
+       +-- frequency                 identityref
+       +-- interval?                 uint32
        +-- period-timeticks* [period-start]
           +-- period-start    yang:timeticks
           +-- period-end?     yang:timeticks
@@ -557,6 +590,8 @@ Table of Contents
      grouping icalendar-recurrence:
        ...
      grouping schedule-status:
+       ...
+     grouping schedule-status-with-name:
        ...
 
       Figure 7: recurrence-utc-with-date-times Grouping Tree Structure
@@ -569,10 +604,10 @@ Table of Contents
    in a secondly recurrence rule, and it must not exceed 6000 in a
    minutely recurrence rule, and so on.
 
-3.1.7.  The "recurrence-time-zone-with-date-times" Grouping
+3.3.7.  The "recurrence-time-zone-with-date-times" Grouping
 
    The "recurrence-time-zone-with-date-times" grouping (Figure 8) uses
-   the "recurrence-with-time-zone" grouping (Section 3.1.5) and adds a
+   the "recurrence-with-time-zone" grouping (Section 3.3.5) and adds a
    "period" list to define an aggregate set of repeating occurrences.
 
    module: ietf-schedule
@@ -596,14 +631,14 @@ Table of Contents
        |  +-- time-zone-identifier?   sys:timezone-name
        +-- (recurrence-bound)?
        |  +--:(until)
-       |  |  +-- until?        yang:date-and-time
+       |  |  +-- until?              yang:date-and-time
        |  +--:(count)
-       |     +-- count?        uint32
-       +-- description?        string
-       +-- frequency           identityref
-       +-- interval?           uint32
+       |     +-- count?              uint32
+       +-- recurrence-description?   string
+       +-- frequency                 identityref
+       +-- interval?                 uint32
        +-- period* [period-start]
-          +-- description?            string
+          +-- period-description?     string
           +-- period-start            yang:date-and-time
           +-- time-zone-identifier?   sys:timezone-name
           +-- (period-type)?
@@ -615,6 +650,8 @@ Table of Contents
        ...
      grouping schedule-status:
        ...
+     grouping schedule-status-with-name:
+       ...
 
         Figure 8: recurrence-time-zone-with-date-times Grouping Tree
                                  Structure
@@ -623,10 +660,10 @@ Table of Contents
    defined by both the recurrence rule and "period" list.  Duplicate
    instances are ignored.
 
-3.1.8.  The "icalendar-recurrence" Grouping
+3.3.8.  The "icalendar-recurrence" Grouping
 
    The "icalendar-recurrence" grouping (Figure 9) uses the "recurrence-
-   time-zone-with-date-times" grouping (Section 3.1.7) and define more
+   time-zone-with-date-times" grouping (Section 3.3.7) and define more
    data nodes to enrich the definition of recurrence.  The structure of
    the "icalendar-recurrence" grouping refers to the definition of
    recurrence component defined in Sections 3.3.10 and 3.8.5 of
@@ -655,14 +692,14 @@ Table of Contents
        |  +-- time-zone-identifier?   sys:timezone-name
        +-- (recurrence-bound)?
        |  +--:(until)
-       |  |  +-- until?        yang:date-and-time
+       |  |  +-- until?              yang:date-and-time
        |  +--:(count)
-       |     +-- count?        uint32
-       +-- description?        string
-       +-- frequency           identityref
-       +-- interval?           uint32
+       |     +-- count?              uint32
+       +-- recurrence-description?   string
+       +-- frequency                 identityref
+       +-- interval?                 uint32
        +-- period* [period-start]
-       |  +-- description             string
+       |  +-- period-description?     string
        |  +-- period-start            yang:date-and-time
        |  +-- time-zone-identifier?   sys:timezone-name
        |  +-- (period-type)?
@@ -670,20 +707,22 @@ Table of Contents
        |     |  +-- period-end?       yang:date-and-time
        |     +--:(duration)
        |        +-- duration?         duration
-       +-- bysecond*           uint32
-       +-- byminute*           uint32
-       +-- byhour*             uint32
+       +-- bysecond*                 uint32
+       +-- byminute*                 uint32
+       +-- byhour*                   uint32
        +-- byday* [weekday]
        |  +-- direction*   int32
        |  +-- weekday      schedule:weekday
-       +-- bymonthday*         int32
-       +-- byyearday*          int32
-       +-- byyearweek*         int32
-       +-- byyearmonth*        uint32
-       +-- bysetpos*           int32
-       +-- workweek-start?     schedule:weekday
-       +-- exception-dates*    yang:date-and-time
+       +-- bymonthday*               int32
+       +-- byyearday*                int32
+       +-- byyearweek*               int32
+       +-- byyearmonth*              uint32
+       +-- bysetpos*                 int32
+       +-- workweek-start?           schedule:weekday
+       +-- exception-dates*          yang:date-and-time
      grouping schedule-status:
+       ...
+     grouping schedule-status-with-name:
        ...
 
            Figure 9: icalendar-recurrence Grouping Tree Structure
@@ -729,10 +768,14 @@ Table of Contents
    recurrence rule and date-times, and then excluding any start date and
    time values specified by "exception-dates" parameter.
 
-3.1.9.  The "schedule-status" Grouping
+3.3.9.  The "schedule-status" and "schedule-status-with-name" Groupings
 
-   The "schedule-status" grouping (Figure 10) defines common parameters
-   for scheduling management/status exposure.
+   The "schedule-status" and "schedule-status-with-name" groupings
+   (Figure 10) define common parameters for scheduling management/status
+   exposure.  The "schedule-status-with-name" grouping has the same
+   structure as "schedule-status" but with an additional parameter to
+   identify a schedule "schedule-id".  Both structures are defined in
+   the module to allow for better modularity and flexibility.
 
    module: ietf-schedule
 
@@ -753,19 +796,31 @@ Table of Contents
      grouping icalendar-recurrence:
        ...
      grouping schedule-status:
+       +-- state?                    identityref
+       +-- version?                  uint16
+       +-- schedule-type?            identityref
+       +--ro local-time?               yang:date-and-time
+       +--ro last-update?              yang:date-and-time
+       +--ro counter?                  yang:counter32
+       +--ro last-occurrence?          yang:date-and-time
+       +--ro upcoming-occurrence?      yang:date-and-time
+       +--ro last-failed-occurrence?   yang:date-and-time
+       +--ro failure-counter?          yang:counter32
+     grouping schedule-status-with-name:
        +-- schedule-id?              string
        +-- state?                    identityref
        +-- version?                  uint16
        +-- schedule-type?            identityref
        +--ro local-time?               yang:date-and-time
        +--ro last-update?              yang:date-and-time
-       +--ro counter?                  uint32
+       +--ro counter?                  yang:counter32
        +--ro last-occurrence?          yang:date-and-time
        +--ro upcoming-occurrence?      yang:date-and-time
        +--ro last-failed-occurrence?   yang:date-and-time
-       +--ro failure-counter?          uint32
+       +--ro failure-counter?          yang:counter32
 
-             Figure 10: Schedule Status Grouping Tree Structure
+      Figure 10: Schedule Status with and without Name Groupings Tree
+                                 Structure
 
    The "schedule-id" parameter is useful to uniquely identify a schedule
    in a network device or controller if multiple scheduling contexts
@@ -798,9 +853,14 @@ Table of Contents
    "last-failed-occurrence" and "failure-counter" report the last
    failure that occured and the count of failures for this schedule.
 
-The current grouping captures common parameters that are applicable    to typical scheduling contexts known so far. Future modules can define other    useful parameters as needed. For example, in a  scheduling context with multiple    system sources to feed the schedules, the "source" and "precedence" parameters    may be needed to reflect how schedules from different sources should be prioritised.
+   The current groupings capture common parameters that are applicable
+   to typical scheduling contexts known so far.  Future modules can
+   define other useful parameters as needed.  For example, in a
+   scheduling context with multiple system sources to feed the
+   schedules, the "source" and "precedence" parameters may be needed to
+   reflect how schedules from different sources should be prioritised.
 
-3.2.  Features Uses and Augmentations
+3.4.  Features Use and Augmentations
 
    Appendix B.1 provides an example about how the features defined in
    Section 3.1 can be used.  Implementations may support a basic
@@ -808,30 +868,25 @@ The current grouping captures common parameters that are applicable    to typica
    features.  Whether only one or both features are supported is
    implementation specific and depend on specific scheduling context.
 
-   The common schedule groupings can also be augmented to support
-   specific needs.  As an example, Appendix B.2 demonstrates how
+   The common schedule groupings (Section 3.3) can also be augmented to
+   support specific needs.  As an example, Appendix B.2 demonstrates how
    additional parameters can be added to comply with specifc schedule
    needs.
 
 4.  Some Usage Restrictions
 
    There are some restrictions that need to be followed when using
-   groupings defined in the "ietf-schedule" YANG module:
+   groupings defined in the "ietf-schedule" YANG module (Section 3.3):
 
    *  The instant in time represented by "period-start" MUST be before
-      the "period-end" for "period-of-time" grouping.
+      the "period-end" for "period-of-time" grouping (Section 3.3.2).
 
    *  The combination of the day, month, and year represented for date
-      and time value MUST be valid.  See Section 5.7 of [RFC3339] for
+      and time values MUST be valid.  See Section 5.7 of [RFC3339] for
       the maxinum day number based on the month and year.
 
    *  The second MUST have the value "60" at the end of months in which
-      a leap second occurs for date and time value.
-
-   *  Care must be taken when defining recurrence occurring very often
-      and frequent that can be an additional source of attacks by
-      keeping the system permanently busy with the management of
-      scheduling.
+      a leap second occurs for date and time values.
 
    *  Schedules received with a starting time in the past with respect
       to current time SHOULD be ignored.
@@ -846,49 +901,53 @@ The current grouping captures common parameters that are applicable    to typica
    main objects in the DISMAN-SCHEDULE-MIB can be mapped to YANG
    parameters.
 
-               +==================+========================+
-               | MIB Object       | YANG                   |
-               +==================+========================+
-               | schedLocalTime   | local-time             |
-               +------------------+------------------------+
-               | schedType        | schedule-type          |
-               +------------------+------------------------+
-               | schedName        | schedule-id            |
-               +------------------+------------------------+
-               | schedOwner       | Not Supported          |
-               +------------------+------------------------+
-               | schedDescr       | description            |
-               +------------------+------------------------+
-               | schedInterval    | interval               |
-               +------------------+------------------------+
-               | schedWeekDay     | weekday                |
-               +------------------+------------------------+
-               | schedMonth       | byyearmonth            |
-               +------------------+------------------------+
-               | schedDay         | bymonthday             |
-               +------------------+------------------------+
-               | schedHour        | byhour                 |
-               +------------------+------------------------+
-               | schedMinute      | byminute               |
-               +------------------+------------------------+
-               | schedContextName | Not Supported          |
-               +------------------+------------------------+
-               | schedAdminStatus | state                  |
-               +------------------+------------------------+
-               | schedOperStatus  | state                  |
-               +------------------+------------------------+
-               | schedFailures    | failure-counter        |
-               +------------------+------------------------+
-               | schedLastFailure | Not Supported          |
-               +------------------+------------------------+
-               | schedLastFailed  | last-failed-occurrence |
-               +------------------+------------------------+
-               | schedStorageType | Not Supported          |
-               +------------------+------------------------+
-               | schedValue       | Not Supported          |
-               +------------------+------------------------+
+              +==================+=========================+
+              | MIB Object       | YANG                    |
+              +==================+=========================+
+              | schedLocalTime   | local-time              |
+              +------------------+-------------------------+
+              | schedType        | schedule-type           |
+              +------------------+-------------------------+
+              | schedName        | schedule-id             |
+              +------------------+-------------------------+
+              | schedOwner       | Not Supported           |
+              +------------------+-------------------------+
+              | schedDescr       | description             |
+              +------------------+-------------------------+
+              | schedInterval    | interval                |
+              +------------------+-------------------------+
+              | schedWeekDay     | weekday                 |
+              +------------------+-------------------------+
+              | schedMonth       | byyearmonth             |
+              +------------------+-------------------------+
+              | schedDay         | bymonthday              |
+              +------------------+-------------------------+
+              | schedHour        | byhour                  |
+              +------------------+-------------------------+
+              | schedMinute      | byminute                |
+              +------------------+-------------------------+
+              | schedContextName | Not Supported           |
+              +------------------+-------------------------+
+              | schedAdminStatus | state                   |
+              +------------------+-------------------------+
+              | schedOperStatus  | state                   |
+              +------------------+-------------------------+
+              | schedFailures    | failure-counter         |
+              +------------------+-------------------------+
+              | schedLastFailure | Not Supported           |
+              +------------------+-------------------------+
+              | schedLastFailed  | last-failed-occurrence  |
+              +------------------+-------------------------+
+              | schedStorageType | Not Supported           |
+              +------------------+-------------------------+
+              | schedVariable    | Not applicable          |
+              +------------------+-------------------------+
+              | schedValue       | Not applicable          |
+              +------------------+-------------------------+
+              | schedTriggers    | counter/failure-counter |
+              +------------------+-------------------------+
 
-                         Table 1: YANG/MIB Mapping
+                        Table 1: YANG/MIB Mapping
 
 6.  The "ietf-schedule" YANG Module
 
@@ -1195,7 +1254,7 @@ The current grouping captures common parameters that are applicable    to typica
          type yang:date-and-time;
          description
            "Specifies the date and time after which a schedule will
-            be considered as invalid. This paratemer takes precedence
+            be considered as invalid. This parameter takes precedence
             over similar attributes that are provided at the schedule
             instance itself.";
        }
@@ -1203,7 +1262,7 @@ The current grouping captures common parameters that are applicable    to typica
          type yang:date-and-time;
          description
            "Specifies the maximum scheduled start date and time.
-            A requested schedule whose first instance occurrs after
+            A requested schedule whose first instance occurs after
             this value cannot be accepted by the entity. Specifically,
             a requested schedule will be rejected if the first
             occurrence of that schedule exceeds 'max-allowed-start'.";
@@ -1212,7 +1271,7 @@ The current grouping captures common parameters that are applicable    to typica
          type yang:date-and-time;
          description
            "Specifies the minimum scheduled start date and time.
-            A requested schedule whose first instance occurrs before
+            A requested schedule whose first instance occurs before
             this value cannot be accepted by the entity. Specifically,
             a requested schedule will be rejected if the first
             occurrence of that schedule is scheduled before
@@ -1241,7 +1300,7 @@ The current grouping captures common parameters that are applicable    to typica
        reference
          "RFC 5545: Internet Calendaring and Scheduling Core Object
                     Specification (iCalendar), Section 3.3.9";
-       leaf description {
+       leaf period-description {
          type string;
          description
            "Provides a description of the period.";
@@ -1301,7 +1360,7 @@ The current grouping captures common parameters that are applicable    to typica
      grouping recurrence {
        description
          "A simple definition of recurrence.";
-       leaf description {
+       leaf recurrence-description {
          type string;
          description
            "Provides a description of the recurrence.";
@@ -1421,7 +1480,7 @@ The current grouping captures common parameters that are applicable    to typica
             forever.";
          case until {
            description
-             "The end of the recurrene is indicated by a specific
+             "The end of the recurrence is indicated by a specific
               date-and-time value.";
            leaf until {
              type yang:date-and-time;
@@ -1615,13 +1674,6 @@ The current grouping captures common parameters that are applicable    to typica
        description
          "This grouping defines common properties of scheduling
           status.";
-       leaf schedule-id {
-         type string;
-         description
-           "The schedule identifier that uniquely identifies a
-            schedule within a device, controller, network, etc.
-            The unicity scope depends on the implementation.";
-       }
        leaf state {
          type identityref {
            base schedule-state;
@@ -1657,11 +1709,12 @@ The current grouping captures common parameters that are applicable    to typica
        leaf counter {
          when "derived-from-or-self(../schedule-type, "
             + "'schedule:recurrence')";
-         type uint32;
+         type yang:counter32;
          config false;
          description
-           "The counter of occurrences since the schedule was enabled.
-            The count wraps around when it reaches the maximum value.";
+           "The number of occurrences while invoking the scheduled
+            action successfully. The count wraps around when it reaches
+            the maximum value.";
        }
        leaf last-occurrence {
          when "derived-from-or-self(../schedule-type, "
@@ -1692,12 +1745,26 @@ The current grouping captures common parameters that are applicable    to typica
        leaf failure-counter {
          when "derived-from-or-self(../schedule-type, "
             + "'schedule:recurrence')";
-         type uint32;
+         type yang:counter32;
          config false;
          description
            "Counts the number of failures while invoking the scheduled
             action.";
        }
+     }
+
+     grouping schedule-status-with-name {
+       description
+         "This grouping defines common properties of scheduling
+          status.";
+       leaf schedule-id {
+         type string;
+         description
+           "The schedule identifier that uniquely identifies a
+            schedule within a device, controller, network, etc.
+            The unicity scope depends on the implementation.";
+       }
+       uses schedule-status;
      }
    }
    <CODE ENDS>
@@ -1726,6 +1793,10 @@ The current grouping captures common parameters that are applicable    to typica
    data nodes that contain read-only state, or RPCs.  As such, there are
    no additional security issues related to the "ietf- schedule" module
    that need to be considered.
+
+   Care must be taken when defining recurrences occurring very often and
+   frequent that can be an additional source of attacks by keeping the
+   system permanently busy with the management of scheduling.
 
 8.  IANA Considerations
 
@@ -1819,11 +1890,11 @@ The current grouping captures common parameters that are applicable    to typica
 
    [I-D.contreras-opsawg-scheduling-oam-tests]
               Contreras, L. M. and V. Lopez, "A YANG Data Model for
-              Network Diagnosis by scheduling sequences of OAM tests",
+              Network Diagnosis by Scheduling Sequences of OAM Tests",
               Work in Progress, Internet-Draft, draft-contreras-opsawg-
-              scheduling-oam-tests-01, 10 July 2023,
+              scheduling-oam-tests-02, 8 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-contreras-
-              opsawg-scheduling-oam-tests-01>.
+              opsawg-scheduling-oam-tests-02>.
 
    [I-D.ietf-netmod-eca-policy]
               Wu, Q., Bryskin, I., Birkholz, H., Liu, X., and B. Claise,
@@ -1836,24 +1907,24 @@ The current grouping captures common parameters that are applicable    to typica
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
               Authors and Reviewers of Documents Containing YANG Data
               Models", Work in Progress, Internet-Draft, draft-ietf-
-              netmod-rfc8407bis-11, 18 April 2024,
+              netmod-rfc8407bis-17, 27 September 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              rfc8407bis-11>.
+              rfc8407bis-17>.
 
    [I-D.ietf-opsawg-ucl-acl]
               Ma, Q., Wu, Q., Boucadair, M., and D. King, "A YANG Data
               Model and RADIUS Extension for Policy-based Network Access
               Control", Work in Progress, Internet-Draft, draft-ietf-
-              opsawg-ucl-acl-04, 6 June 2024,
+              opsawg-ucl-acl-05, 25 June 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
-              ucl-acl-04>.
+              ucl-acl-05>.
 
    [I-D.ietf-tvr-schedule-yang]
               Qu, Y., Lindem, A., Kinzie, E., Fedyk, D., and M.
               Blanchet, "YANG Data Model for Scheduled Attributes", Work
               in Progress, Internet-Draft, draft-ietf-tvr-schedule-yang-
-              00, 16 April 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-tvr-schedule-yang-00>.
+              02, 22 July 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-tvr-schedule-yang-02>.
 
    [I-D.ietf-tvr-use-cases]
               Birrane, E. J., Kuhn, N., Qu, Y., Taylor, R., and L.
@@ -1882,6 +1953,11 @@ The current grouping captures common parameters that are applicable    to typica
               BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,
               <https://www.rfc-editor.org/rfc/rfc8340>.
 
+   [RFC8413]  Zhuang, Y., Wu, Q., Chen, H., and A. Farrel, "Framework
+              for Scheduled Use of Resources", RFC 8413,
+              DOI 10.17487/RFC8413, July 2018,
+              <https://www.rfc-editor.org/rfc/rfc8413>.
+
 Appendix A.  Examples of Format Representation
 
    This section provides some examples to illustrate the use of the
@@ -1902,7 +1978,7 @@ A.1.  The "generic-schedule-params" Grouping
      "time-zone-identifier": "China/Beijing",
      "min-allowed-start": "2025-01-01T08:00:00",
      "max-allowed-end": "2025-01-31T20:00:00",
-      "discard-action": "ietf-schedule:silently-discard"
+     "discard-action": "ietf-schedule:silently-discard"
    }
 
            Figure 11: Generic Parameters for Schedule Validation
@@ -1943,17 +2019,13 @@ A.2.  The "period-of-time" Grouping
 
 A.3.  The "recurrence" Grouping
 
-   Figure 17 indicates a recurrence of every 2 days for 10 occurrences,
-   starting at 3 p.m. on December 1, 2025 with an offset of -8:00 from
-   UTC:
+   Figure 17 indicates a recurrence of every 2 days which starts
+   immediately and repeat forever:
 
    {
-     "recurrence-first": {
-       "date-time-start": "2025-12-01T15:00:00-08:00:00"
-     },
+     "recurrence-description": "forever recurrence rule",
      "frequency": "ietf-schedule:daily",
      "interval": 2,
-     "count": 10
    }
 
                  Figure 15: Simple Schedule with Recurrence
@@ -1965,12 +2037,12 @@ A.4.  The "recurrence-utc" Grouping
 
    {
      "recurrence-first": {
-       "date-time-start": "2025-12-01T08:00:00Z",
+       "utc-start-time": "2025-12-01T08:00:00Z",
        "duration": 3600;
      },
      "frequency": "ietf-schedule:daily",
      "interval": 1,
-     "until": "2025-12-31T23:59:59Z"
+     "utc-until": "2025-12-31T23:59:59Z"
    }
 
              Figure 16: Simple Schedule with Recurrence in UTC
@@ -2002,11 +2074,11 @@ A.6.  The "recurrence-utc-with-date-times" Grouping
 
    {
      "recurrence-first": {
-       "date-time-start": "2025-06-01T09:00:00Z",
+       "utc-start-time": "2025-06-01T09:00:00Z",
      },
      "frequency": "ietf-schedule:daily",
      "interval": 2,
-     "until": "2025-06-30T23:59:59Z",
+     "utc-until": "2025-06-30T23:59:59Z",
      "period-timeticks": [
        {
          "period-start": "3240000",
@@ -2370,10 +2442,10 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
        <destination-node>ne2</destination-node>
        <default-bandwidth>1000</default-bandwidth>
        <recurrence-first>
-         <date-time-start>2025-12-01T01:00:00Z</date-time-start>
+         <utc-start-time>2025-12-01T01:00:00Z</utc-start-time>
        </recurrence-first>
        <frequency>schedule:daily</frequency>
-       <until>2025-12-31T23:59:59Z</until>
+       <utc-until>2025-12-31T23:59:59Z</utc-until>
        <period-timeticks>
          <period-start>360000</period-start>
          <period-end>2160000</period-end>
@@ -2388,6 +2460,84 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
    </link-attributes>
 
               Figure 24: Example of Scheduled Link's Bandwidth
+
+Appendix C.  Examples of Using "ietf-schedule" Module for Scheduled Use
+             of Resources Framework
+
+   This section exemplifies how the architecture for supporting
+   scheduled reservation of Traffic Engineering (TE) resources in
+   [RFC8413] might leverage the "period-of-time" grouping defined in the
+   "ietf-schedule" module to implement scheduled use of resources.
+
+   The following example module shows how a scheduled link capacity
+   reservation could be defined.
+
+   module example-sch-capacity-res {
+     yang-version 1.1;
+     namespace "http://example.com/example-sch-capacity-res";
+     prefix "ex-schecaparev";
+
+     import ietf-network-topology {
+       prefix "nt";
+     }
+
+     import ietf-schedule {
+       prefix "schedule";
+     }
+
+     container link-capability-reservations {
+       list scheduled-link-capacity {
+         key "schedule-id";
+         leaf schedule-id {
+           type string;
+         }
+         leaf link-id {
+           type nt:link-id;
+         }
+         leaf reserved-capability {
+           type uint64;
+           units "Mbps";
+         }
+         uses schedule:period-of-time;
+       }
+     }
+   }
+
+   Section 4 of [RFC8413] defines the reference architecture for
+   scheduled use of resources, the service requester sends a request to
+   a Path Computation Element (PCE) and includes the parameters of the
+   Label Switched Path (LSP) that the requester wishes to supply, the
+   configuration example to provide the scheduled resource is shown in
+   Figure 25.
+
+   <?xml version="1.0" encoding="utf-8"?>
+   <link-capability-reservations
+     xmlns="http://example.com/example-sch-capacity-res"
+     xmlns:schedule="urn:ietf:params:xml:ns:yang:ietf-schedule">
+      <scheduled-link-capacity>
+         <schedule-id>1</schedule-id>
+         <link-id>1-2-1</link-id>
+         <reserved-capability>500</reserved-capability>
+         <period-start>2025-03-10T08:00:00Z</period-start>
+         <period-end>2025-03-10T09:00:00Z</period-end>
+      </scheduled-link-capacity>
+      <scheduled-link-capacity>
+         <schedule-id>2</schedule-id>
+         <link-id>2-1-1</link-id>
+         <reserved-capability>400</reserved-capability>
+         <period-start>2025-04-01T00:00:00Z</period-start>
+         <duration>PT09:00:00</duration>
+      </scheduled-link-capacity>
+      <scheduled-link-capacity>
+         <schedule-id>3</schedule-id>
+         <link-id>2-1-1</link-id>
+         <reserved-capability>500</reserved-capability>
+         <period-start>2025-04-01T09:00:00Z</period-start>
+         <period-end>2025-04-01T23:59:59Z</period-end>
+      </scheduled-link-capacity>
+   </link-capability-reservations>
+
+        Figure 25: Example of Scheduled Link's Bandwidth Reservation
 
 Acknowledgments
 

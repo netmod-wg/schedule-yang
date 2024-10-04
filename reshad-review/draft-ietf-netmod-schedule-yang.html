@@ -13,29 +13,28 @@
        This document defines a common schedule YANG module which is
    designed to be applicable for scheduling purposes such as event, policy,
    services, or resources based on date and time. For the sake of better modularity,
-   the module includes basic, intermediate, and advanced versions of recurrence
-   related groupings. 
+   the module includes a set of recurrence related groupings with varying granularity levels
+   (i.e., from basic to advanced). 
     " name="description">
-<meta content="xml2rfc 3.21.0" name="generator">
+<meta content="xml2rfc 3.23.2" name="generator">
 <meta content="calendaring" name="keyword">
 <meta content="scheduling" name="keyword">
 <meta content="YANG" name="keyword">
 <meta content="groupings" name="keyword">
 <meta content="draft-ietf-netmod-schedule-yang-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.21.0
-    Python 3.12.3
+  xml2rfc 3.23.2
+    Python 3.12.6
     ConfigArgParse 1.7
-    google-i18n-address 3.1.0
+    google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.4
     lxml 4.9.4
-    platformdirs 4.2.2
+    platformdirs 4.3.6
     pycountry 22.3.5
     PyYAML 6.0.1
-    requests 2.31.0
-    setuptools 69.5.1
-    six 1.16.0
+    requests 2.32.3
+    setuptools 70.3.0
     wcwidth 0.2.13
 -->
 <link href="draft-ietf-netmod-schedule-yang.xml" rel="alternate" type="application/rfc+xml">
@@ -1035,11 +1034,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Common Schedule YANG</td>
-<td class="right">June 2024</td>
+<td class="right">October 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Ma, et al.</td>
-<td class="center">Expires 26 December 2024</td>
+<td class="center">Expires 7 April 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1052,12 +1051,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-netmod-schedule-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-06-24" class="published">24 June 2024</time>
+<time datetime="2024-10-04" class="published">4 October 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-12-26">26 December 2024</time></dd>
+<dd class="expires"><time datetime="2025-04-07">7 April 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1087,8 +1086,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-abstract-1">This document defines a common schedule YANG module which is
    designed to be applicable for scheduling purposes such as event, policy,
    services, or resources based on date and time. For the sake of better modularity,
-   the module includes basic, intermediate, and advanced versions of recurrence
-   related groupings.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+   the module includes a set of recurrence related groupings with varying granularity levels
+   (i.e., from basic to advanced).<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1096,10 +1095,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
       </h2>
 <p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
 <p id="section-note.1-2">Discussion of this document takes place on the
-    Operations and Management Area Working Group Working Group mailing list (opsawg@ietf.org),
-    which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/opsawg/">https://mailarchive.ietf.org/arch/browse/opsawg/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+    Network Modeling (NETMOD) Working Group mailing list (netmod@ietf.org),
+    which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/netmod/">https://mailarchive.ietf.org/arch/browse/netmod/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 <p id="section-note.1-3">Source for this draft and an issue tracker can be found at
-    <span><a href="https://github.com/boucadair/policy-based-network-acl">https://github.com/boucadair/policy-based-network-acl</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+    <span><a href="https://github.com/netmod-wg/schedule-yang">https://github.com/netmod-wg/schedule-yang</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1120,7 +1119,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 April 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1284,10 +1283,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-examples-of-using-ietf-sche" class="internal xref">Examples of Using "ietf-schedule" Module for Scheduled Use of Resources Framework</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1308,8 +1310,9 @@ services or resources based on date and time.<a href="#section-1-1" class="pilcr
 triggered by the schedules.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3"><a href="#sec-mib" class="auto internal xref">Section 5</a> discusses relationship with the managed objects defined in <span>[<a href="#RFC3231" class="cite xref">RFC3231</a>]</span>.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4"><a href="#usage" class="auto internal xref">Appendix A</a> describes a set of examples to illustrate the use of the common schedule groupings (<a href="#sec-grp" class="auto internal xref">Section 3.3</a>).
-Also, <a href="#sec-ext" class="auto internal xref">Appendix B</a> provides sample modules to exemplify how future modules can use the extensibility
-provisions in "ietf-schedule" (<a href="#sec-schedule" class="auto internal xref">Section 6</a>).<a href="#section-1-4" class="pilcrow">¶</a></p>
+And <a href="#sec-ext" class="auto internal xref">Appendix B</a> provides sample modules to exemplify how future modules can use the extensibility
+provisions in "ietf-schedule" (<a href="#sec-schedule" class="auto internal xref">Section 6</a>). Also, <a href="#ex-framework" class="auto internal xref">Appendix C</a> provides
+an example of using "ietf-schedule" module for scheduled use of resources framework (e.g., <span>[<a href="#RFC8413" class="cite xref">RFC8413</a>]</span>).<a href="#section-1-4" class="pilcrow">¶</a></p>
 <div id="editorial-note-to-be-removed-by-rfc-editor">
 <section id="section-1.1">
         <h3 id="name-editorial-note-to-be-remove">
@@ -1371,15 +1374,15 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-features" class="section-name selfRef">Features</a>
         </h3>
 <p id="section-3.1-1">The "ietf-schedule" data model defines the recurrence related groupings using
-   a modular approach. Basic, intermediate, and advanced representation of recurrence
-   groupings are defined, with each reusing the previous one and adding more parameters.
+   a modular approach. To that aim, a variety of representations of recurrence
+   groupings ranging from basic to advanced (iclander like) are defined.
    To allow for different options, two features are defined in the data model:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.1-2.1">
-            <p id="section-3.1-2.1.1">"basic-recurrence-supported"<a href="#section-3.1-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-2.1.1">"basic-recurrence"<a href="#section-3.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.1-2.2">
-            <p id="section-3.1-2.2.1">"icalendar-recurrence-supported"<a href="#section-3.1-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-2.2.1">"icalendar-recurrence"<a href="#section-3.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-3.1-3">Refer to <a href="#sec-aug" class="auto internal xref">Section 3.4</a> for the use of these features.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
@@ -1568,7 +1571,7 @@ module: ietf-schedule
    either a start ("period-start") and end date and time ("period-end"), or a
    start ("period-start") and a positive time duration ("duration"). For the first
    format, the start of the period <span class="bcp14">MUST</span> be before the end of the period.<a href="#section-3.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.3.2-2">The "description" includes a description of the period. No constraint is imposed
+<p id="section-3.3.2-2">The "period-description" includes a description of the period. No constraint is imposed
    on the structure nor the use of this parameter.<a href="#section-3.3.2-2" class="pilcrow">¶</a></p>
 <span id="name-period-of-time-grouping-tre"></span><div id="pt-tree">
 <figure id="figure-3">
@@ -1579,7 +1582,7 @@ module: ietf-schedule
   grouping generic-schedule-params:
     ...
   grouping period-of-time:
-    +-- description?            string
+    +-- period-description?     string
     +-- period-start            yang:date-and-time
     +-- time-zone-identifier?   sys:timezone-name
     +-- (period-type)?
@@ -1628,9 +1631,9 @@ module: ietf-schedule
   grouping period-of-time:
     ...
   grouping recurrence:
-    +-- description?   string
-    +-- frequency      identityref
-    +-- interval?      uint32
+    +-- recurrence-description?   string
+    +-- frequency                 identityref
+    +-- interval?                 uint32
   grouping recurrence-utc:
     ...
   grouping recurrence-with-time-zone:
@@ -1657,8 +1660,8 @@ module: ietf-schedule
   within a daily recurrence rule, an interval value of "8" means every eight days.
   The default value is "1", meaning every second for a secondly recurrence rule,
   every minute for a minutely rule, every hour for an hourly rule, every day for a
-  daily rule, and so on. Note that per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-12#section-4.13" class="relref">Section 4.13</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>, no "default" substatement is used here because there are cases (e.g., profiling) where the use of the default is problematic.<a href="#section-3.3.3-4" class="pilcrow">¶</a></p>
-<p id="section-3.3.3-5">The "description" includes a description of the period. No constraint is imposed
+  daily rule, and so on. Note that per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-17#section-4.13" class="relref">Section 4.13</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>, no "default" substatement is used here because there are cases (e.g., profiling) where the use of the default is problematic.<a href="#section-3.3.3-4" class="pilcrow">¶</a></p>
+<p id="section-3.3.3-5">The "recurrence-description" includes a description of the period. No constraint is imposed
   on the structure nor the use of this parameter.<a href="#section-3.3.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1687,12 +1690,12 @@ module: ietf-schedule
     |  +-- duration?         uint32
     +-- (recurrence-bound)?
     |  +--:(until)
-    |  |  +-- utc-until?    yang:date-and-time
+    |  |  +-- utc-until?          yang:date-and-time
     |  +--:(count)
-    |     +-- count?        uint32
-    +-- description?        string
-    +-- frequency           identityref
-    +-- interval?           uint32
+    |     +-- count?              uint32
+    +-- recurrence-description?   string
+    +-- frequency                 identityref
+    +-- interval?                 uint32
   grouping recurrence-with-time-zone:
     ...
   grouping recurrence-utc-with-date-times:
@@ -1751,12 +1754,12 @@ module: ietf-schedule
     |  +-- time-zone-identifier?   sys:timezone-name
     +-- (recurrence-bound)?
     |  +--:(until)
-    |  |  +-- until?        yang:date-and-time
+    |  |  +-- until?              yang:date-and-time
     |  +--:(count)
-    |     +-- count?        uint32
-    +-- description?        string
-    +-- frequency           identityref
-    +-- interval?           uint32
+    |     +-- count?              uint32
+    +-- recurrence-description?   string
+    +-- frequency                 identityref
+    +-- interval?                 uint32
   grouping recurrence-utc-with-date-times:
     ...
   grouping recurrence-time-zone-with-date-times:
@@ -1817,12 +1820,12 @@ module: ietf-schedule
     |  +-- duration?         uint32
     +-- (recurrence-bound)?
     |  +--:(until)
-    |  |  +-- utc-until?    yang:date-and-time
+    |  |  +-- utc-until?          yang:date-and-time
     |  +--:(count)
-    |     +-- count?        uint32
-    +-- description?        string
-    +-- frequency           identityref
-    +-- interval?           uint32
+    |     +-- count?              uint32
+    +-- recurrence-description?   string
+    +-- frequency                 identityref
+    +-- interval?                 uint32
     +-- period-timeticks* [period-start]
        +-- period-start    yang:timeticks
        +-- period-end?     yang:timeticks
@@ -1881,14 +1884,14 @@ module: ietf-schedule
     |  +-- time-zone-identifier?   sys:timezone-name
     +-- (recurrence-bound)?
     |  +--:(until)
-    |  |  +-- until?        yang:date-and-time
+    |  |  +-- until?              yang:date-and-time
     |  +--:(count)
-    |     +-- count?        uint32
-    +-- description?        string
-    +-- frequency           identityref
-    +-- interval?           uint32
+    |     +-- count?              uint32
+    +-- recurrence-description?   string
+    +-- frequency                 identityref
+    +-- interval?                 uint32
     +-- period* [period-start]
-       +-- description?            string
+       +-- period-description?     string
        +-- period-start            yang:date-and-time
        +-- time-zone-identifier?   sys:timezone-name
        +-- (period-type)?
@@ -1950,14 +1953,14 @@ module: ietf-schedule
     |  +-- time-zone-identifier?   sys:timezone-name
     +-- (recurrence-bound)?
     |  +--:(until)
-    |  |  +-- until?        yang:date-and-time
+    |  |  +-- until?              yang:date-and-time
     |  +--:(count)
-    |     +-- count?        uint32
-    +-- description?        string
-    +-- frequency           identityref
-    +-- interval?           uint32
+    |     +-- count?              uint32
+    +-- recurrence-description?   string
+    +-- frequency                 identityref
+    +-- interval?                 uint32
     +-- period* [period-start]
-    |  +-- description             string
+    |  +-- period-description?     string
     |  +-- period-start            yang:date-and-time
     |  +-- time-zone-identifier?   sys:timezone-name
     |  +-- (period-type)?
@@ -1965,19 +1968,19 @@ module: ietf-schedule
     |     |  +-- period-end?       yang:date-and-time
     |     +--:(duration)
     |        +-- duration?         duration
-    +-- bysecond*           uint32
-    +-- byminute*           uint32
-    +-- byhour*             uint32
+    +-- bysecond*                 uint32
+    +-- byminute*                 uint32
+    +-- byhour*                   uint32
     +-- byday* [weekday]
     |  +-- direction*   int32
     |  +-- weekday      schedule:weekday
-    +-- bymonthday*         int32
-    +-- byyearday*          int32
-    +-- byyearweek*         int32
-    +-- byyearmonth*        uint32
-    +-- bysetpos*           int32
-    +-- workweek-start?     schedule:weekday
-    +-- exception-dates*    yang:date-and-time
+    +-- bymonthday*               int32
+    +-- byyearday*                int32
+    +-- byyearweek*               int32
+    +-- byyearmonth*              uint32
+    +-- bysetpos*                 int32
+    +-- workweek-start?           schedule:weekday
+    +-- exception-dates*          yang:date-and-time
   grouping schedule-status:
     ...
   grouping schedule-status-with-name:
@@ -2246,8 +2249,16 @@ can be mapped to YANG parameters.<a href="#section-5-2" class="pilcrow">¶</a></
             <td class="text-left" rowspan="1" colspan="1">Not Supported</td>
           </tr>
           <tr>
+            <td class="text-left" rowspan="1" colspan="1">schedVariable</td>
+            <td class="text-left" rowspan="1" colspan="1">Not applicable</td>
+          </tr>
+          <tr>
             <td class="text-left" rowspan="1" colspan="1">schedValue</td>
-            <td class="text-left" rowspan="1" colspan="1">Not Supported</td>
+            <td class="text-left" rowspan="1" colspan="1">Not applicable</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">schedTriggers</td>
+            <td class="text-left" rowspan="1" colspan="1">counter/failure-counter</td>
           </tr>
         </tbody>
       </table>
@@ -2609,7 +2620,7 @@ module ietf-schedule {
     reference
       "RFC 5545: Internet Calendaring and Scheduling Core Object
                  Specification (iCalendar), Section 3.3.9";
-    leaf description {
+    leaf period-description {
       type string;
       description
         "Provides a description of the period.";
@@ -2669,7 +2680,7 @@ module ietf-schedule {
   grouping recurrence {
     description
       "A simple definition of recurrence.";
-    leaf description {
+    leaf recurrence-description {
       type string;
       description
         "Provides a description of the recurrence.";
@@ -3021,8 +3032,9 @@ module ietf-schedule {
       type yang:counter32;
       config false;
       description
-        "The counter of occurrences since the schedule was enabled.
-         The count wraps around when it reaches the maximum value.";
+        "The number of occurrences while invoking the scheduled
+         action successfully. The count wraps around when it reaches
+         the maximum value.";
     }
     leaf last-occurrence {
       when "derived-from-or-self(../schedule-type, "
@@ -3085,7 +3097,7 @@ module ietf-schedule {
       <h2 id="name-security-considerations">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-7-1">This section uses the template described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-12#section-3.7" class="relref">Section 3.7</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">This section uses the template described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-17#section-3.7" class="relref">Section 3.7</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">The "ietf-schedule" YANG module specified in this document defines schema for data
    that is designed to be accessed via network management protocols such
    as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> or RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.  The lowest NETCONF layer
@@ -3148,6 +3160,7 @@ module ietf-schedule {
 </div>
 </section>
 </div>
+<div id="sec-combined-references">
 <section id="section-9">
       <h2 id="name-references">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
@@ -3225,7 +3238,7 @@ module ietf-schedule {
 <dl class="references">
 <dt id="I-D.contreras-opsawg-scheduling-oam-tests">[I-D.contreras-opsawg-scheduling-oam-tests]</dt>
         <dd>
-<span class="refAuthor">Contreras, L. M.</span> and <span class="refAuthor">V. Lopez</span>, <span class="refTitle">"A YANG Data Model for Network Diagnosis by scheduling sequences of OAM tests"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-contreras-opsawg-scheduling-oam-tests-01</span>, <time datetime="2023-07-10" class="refDate">10 July 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-contreras-opsawg-scheduling-oam-tests-01">https://datatracker.ietf.org/doc/html/draft-contreras-opsawg-scheduling-oam-tests-01</a>&gt;</span>. </dd>
+<span class="refAuthor">Contreras, L. M.</span> and <span class="refAuthor">V. Lopez</span>, <span class="refTitle">"A YANG Data Model for Network Diagnosis by Scheduling Sequences of OAM Tests"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-contreras-opsawg-scheduling-oam-tests-02</span>, <time datetime="2024-07-08" class="refDate">8 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-contreras-opsawg-scheduling-oam-tests-02">https://datatracker.ietf.org/doc/html/draft-contreras-opsawg-scheduling-oam-tests-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-netmod-eca-policy">[I-D.ietf-netmod-eca-policy]</dt>
         <dd>
@@ -3233,15 +3246,15 @@ module ietf-schedule {
 <dd class="break"></dd>
 <dt id="I-D.ietf-netmod-rfc8407bis">[I-D.ietf-netmod-rfc8407bis]</dt>
         <dd>
-<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-12</span>, <time datetime="2024-06-21" class="refDate">21 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-12">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-12</a>&gt;</span>. </dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-17</span>, <time datetime="2024-09-27" class="refDate">27 September 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-17">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-17</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-opsawg-ucl-acl">[I-D.ietf-opsawg-ucl-acl]</dt>
         <dd>
-<span class="refAuthor">Ma, Q.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">D. King</span>, <span class="refTitle">"A YANG Data Model and RADIUS Extension for Policy-based Network Access Control"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-ucl-acl-04</span>, <time datetime="2024-06-06" class="refDate">6 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ucl-acl-04">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ucl-acl-04</a>&gt;</span>. </dd>
+<span class="refAuthor">Ma, Q.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">D. King</span>, <span class="refTitle">"A YANG Data Model and RADIUS Extension for Policy-based Network Access Control"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-ucl-acl-05</span>, <time datetime="2024-06-25" class="refDate">25 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ucl-acl-05">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ucl-acl-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-tvr-schedule-yang">[I-D.ietf-tvr-schedule-yang]</dt>
         <dd>
-<span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Lindem, A.</span>, <span class="refAuthor">Kinzie, E.</span>, <span class="refAuthor">Fedyk, D.</span>, and <span class="refAuthor">M. Blanchet</span>, <span class="refTitle">"YANG Data Model for Scheduled Attributes"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tvr-schedule-yang-00</span>, <time datetime="2024-04-16" class="refDate">16 April 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tvr-schedule-yang-00">https://datatracker.ietf.org/doc/html/draft-ietf-tvr-schedule-yang-00</a>&gt;</span>. </dd>
+<span class="refAuthor">Qu, Y.</span>, <span class="refAuthor">Lindem, A.</span>, <span class="refAuthor">Kinzie, E.</span>, <span class="refAuthor">Fedyk, D.</span>, and <span class="refAuthor">M. Blanchet</span>, <span class="refTitle">"YANG Data Model for Scheduled Attributes"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tvr-schedule-yang-02</span>, <time datetime="2024-07-22" class="refDate">22 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tvr-schedule-yang-02">https://datatracker.ietf.org/doc/html/draft-ietf-tvr-schedule-yang-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-tvr-use-cases">[I-D.ietf-tvr-use-cases]</dt>
         <dd>
@@ -3260,13 +3273,18 @@ module ietf-schedule {
 <span class="refAuthor">Lhotka, L.</span>, <span class="refTitle">"JSON Encoding of Data Modeled with YANG"</span>, <span class="seriesInfo">RFC 7951</span>, <span class="seriesInfo">DOI 10.17487/RFC7951</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7951">https://www.rfc-editor.org/rfc/rfc7951</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8340">[RFC8340]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Bjorklund, M.</span> and <span class="refAuthor">L. Berger, Ed.</span>, <span class="refTitle">"YANG Tree Diagrams"</span>, <span class="seriesInfo">BCP 215</span>, <span class="seriesInfo">RFC 8340</span>, <span class="seriesInfo">DOI 10.17487/RFC8340</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8340">https://www.rfc-editor.org/rfc/rfc8340</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8413">[RFC8413]</dt>
+      <dd>
+<span class="refAuthor">Zhuang, Y.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Chen, H.</span>, and <span class="refAuthor">A. Farrel</span>, <span class="refTitle">"Framework for Scheduled Use of Resources"</span>, <span class="seriesInfo">RFC 8413</span>, <span class="seriesInfo">DOI 10.17487/RFC8413</span>, <time datetime="2018-07" class="refDate">July 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8413">https://www.rfc-editor.org/rfc/rfc8413</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
 </div>
 </section>
+</div>
 <div id="usage">
 <section id="appendix-A">
       <h2 id="name-examples-of-format-represen">
@@ -3370,7 +3388,7 @@ module ietf-schedule {
           <div class="alignLeft art-text artwork" id="appendix-A.3-2.1">
 <pre>
 {
-  "description": "forever recurrence rule",
+  "recurrence-description": "forever recurrence rule",
   "frequency": "ietf-schedule:daily",
   "interval": 2,
 }
@@ -3911,22 +3929,109 @@ module example-scheduled-link-bandwidth {
 </div>
 </section>
 </div>
-<div id="acknowledgments">
+<div id="ex-framework">
 <section id="appendix-C">
+      <h2 id="name-examples-of-using-ietf-sche">
+<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-examples-of-using-ietf-sche" class="section-name selfRef">Examples of Using "ietf-schedule" Module for Scheduled Use of Resources Framework</a>
+      </h2>
+<p id="appendix-C-1">This section exemplifies how the architecture for supporting scheduled
+   reservation of Traffic Engineering (TE) resources in <span>[<a href="#RFC8413" class="cite xref">RFC8413</a>]</span> might leverage the "period-of-time"
+   grouping defined in the "ietf-schedule" module to implement scheduled use of
+   resources.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<p id="appendix-C-2">The following example module shows how a scheduled link capacity reservation
+   could be defined.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C-3">
+<pre>
+module example-sch-capacity-res {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-capacity-res";
+  prefix "ex-schecaparev";
+
+  import ietf-network-topology {
+    prefix "nt";
+  }
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  container link-capability-reservations {
+    list scheduled-link-capacity {
+      key "schedule-id";
+      leaf schedule-id {
+        type string;
+      }
+      leaf link-id {
+        type nt:link-id;
+      }
+      leaf reserved-capability {
+        type uint64;
+        units "Mbps";
+      }
+      uses schedule:period-of-time;
+    }
+  }
+}
+</pre><a href="#appendix-C-3" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C-4"><span><a href="https://rfc-editor.org/rfc/rfc8413#section-4" class="relref">Section 4</a> of [<a href="#RFC8413" class="cite xref">RFC8413</a>]</span> defines the reference architecture for scheduled use
+   of resources, the service requester sends a request to a Path Computation Element (PCE) and includes the
+   parameters of the Label Switched Path (LSP) that the requester wishes to supply, the configuration
+   example to provide the scheduled resource is shown in <a href="#ex-14" class="auto internal xref">Figure 25</a>.<a href="#appendix-C-4" class="pilcrow">¶</a></p>
+<span id="name-example-of-scheduled-links-b"></span><div id="ex-14">
+<figure id="figure-25">
+        <div class="alignLeft art-text artwork" id="appendix-C-5.1">
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;link-capability-reservations
+  xmlns="http://example.com/example-sch-capacity-res"
+  xmlns:schedule="urn:ietf:params:xml:ns:yang:ietf-schedule"&gt;
+   &lt;scheduled-link-capacity&gt;
+      &lt;schedule-id&gt;1&lt;/schedule-id&gt;
+      &lt;link-id&gt;1-2-1&lt;/link-id&gt;
+      &lt;reserved-capability&gt;500&lt;/reserved-capability&gt;
+      &lt;period-start&gt;2025-03-10T08:00:00Z&lt;/period-start&gt;
+      &lt;period-end&gt;2025-03-10T09:00:00Z&lt;/period-end&gt;
+   &lt;/scheduled-link-capacity&gt;
+   &lt;scheduled-link-capacity&gt;
+      &lt;schedule-id&gt;2&lt;/schedule-id&gt;
+      &lt;link-id&gt;2-1-1&lt;/link-id&gt;
+      &lt;reserved-capability&gt;400&lt;/reserved-capability&gt;
+      &lt;period-start&gt;2025-04-01T00:00:00Z&lt;/period-start&gt;
+      &lt;duration&gt;PT09:00:00&lt;/duration&gt;
+   &lt;/scheduled-link-capacity&gt;
+   &lt;scheduled-link-capacity&gt;
+      &lt;schedule-id&gt;3&lt;/schedule-id&gt;
+      &lt;link-id&gt;2-1-1&lt;/link-id&gt;
+      &lt;reserved-capability&gt;500&lt;/reserved-capability&gt;
+      &lt;period-start&gt;2025-04-01T09:00:00Z&lt;/period-start&gt;
+      &lt;period-end&gt;2025-04-01T23:59:59Z&lt;/period-end&gt;
+   &lt;/scheduled-link-capacity&gt;
+&lt;/link-capability-reservations&gt;
+</pre>
+</div>
+<figcaption><a href="#figure-25" class="selfRef">Figure 25</a>:
+<a href="#name-example-of-scheduled-links-b" class="selfRef">Example of Scheduled Link's Bandwidth Reservation</a>
+        </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="appendix-D">
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-C-1">This work is derived from the <span>[<a href="#I-D.ietf-opsawg-ucl-acl" class="cite xref">I-D.ietf-opsawg-ucl-acl</a>]</span>. There is a desire
-   from the OPSAWG to see this model be separately defined for wide use in scheduling context.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
-<p id="appendix-C-2">Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, and Dhruv Dhody
-   for their valuable comments and inputs to this work.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
-<p id="appendix-C-3">Many thanks to the authors of <span>[<a href="#I-D.ietf-tvr-schedule-yang" class="cite xref">I-D.ietf-tvr-schedule-yang</a>]</span>, <span>[<a href="#I-D.contreras-opsawg-scheduling-oam-tests" class="cite xref">I-D.contreras-opsawg-scheduling-oam-tests</a>]</span>, and <span>[<a href="#I-D.ietf-netmod-eca-policy" class="cite xref">I-D.ietf-netmod-eca-policy</a>]</span>
-   for the constructive discussion during IETF#118.<a href="#appendix-C-3" class="pilcrow">¶</a></p>
-<p id="appendix-C-4">Other related efforts were explored in the past, e.g., <span>[<a href="#I-D.liu-netmod-yang-schedule" class="cite xref">I-D.liu-netmod-yang-schedule</a>]</span>.<a href="#appendix-C-4" class="pilcrow">¶</a></p>
+<p id="appendix-D-1">This work is derived from the <span>[<a href="#I-D.ietf-opsawg-ucl-acl" class="cite xref">I-D.ietf-opsawg-ucl-acl</a>]</span>. There is a desire
+   from the OPSAWG to see this model be separately defined for wide use in scheduling context.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+<p id="appendix-D-2">Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, and Dhruv Dhody
+   for their valuable comments and inputs to this work.<a href="#appendix-D-2" class="pilcrow">¶</a></p>
+<p id="appendix-D-3">Many thanks to the authors of <span>[<a href="#I-D.ietf-tvr-schedule-yang" class="cite xref">I-D.ietf-tvr-schedule-yang</a>]</span>, <span>[<a href="#I-D.contreras-opsawg-scheduling-oam-tests" class="cite xref">I-D.contreras-opsawg-scheduling-oam-tests</a>]</span>, and <span>[<a href="#I-D.ietf-netmod-eca-policy" class="cite xref">I-D.ietf-netmod-eca-policy</a>]</span>
+   for the constructive discussion during IETF#118.<a href="#appendix-D-3" class="pilcrow">¶</a></p>
+<p id="appendix-D-4">Other related efforts were explored in the past, e.g., <span>[<a href="#I-D.liu-netmod-yang-schedule" class="cite xref">I-D.liu-netmod-yang-schedule</a>]</span>.<a href="#appendix-D-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-D">
+<section id="appendix-E">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
