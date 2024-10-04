@@ -80,7 +80,7 @@ module example-scheduled-backup {
           description
             "The schedule identifier for this recurrence rule.";
         }            
-        uses schedule:recurrence;
+        uses schedule:recurrence-basic;
        }
 
       container icalendar-recurrence-schedules {
