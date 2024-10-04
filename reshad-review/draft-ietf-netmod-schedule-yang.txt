@@ -512,7 +512,7 @@ Table of Contents
        ...
      grouping recurrence-with-time-zone:
        +-- recurrence-first
-       |  +-- date-time-start?        yang:date-and-time
+       |  +-- start-time?             yang:date-and-time
        |  +-- duration?               duration
        |  +-- time-zone-identifier?   sys:timezone-name
        +-- (recurrence-bound)?
