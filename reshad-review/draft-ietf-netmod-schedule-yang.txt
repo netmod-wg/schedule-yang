@@ -2290,10 +2290,10 @@ B.1.  Example: Schedule Tasks to Execute Based on a Recurrence Rule
          }
 
          container basic-recurrence-schedules {
-           if-feature schedule:basic-recurrence-supported;
+           if-feature schedule:basic-recurrence;
            description
              "Basic recurrence schedule specification, only applies when
-              schedule:basic-recurrence-supported feaure is supported.";
+              schedule:basic-recurrence feaure is supported.";
            leaf schedule-id {
              type string;
              description
@@ -2303,11 +2303,10 @@ B.1.  Example: Schedule Tasks to Execute Based on a Recurrence Rule
           }
 
          container icalendar-recurrence-schedules {
-           if-feature schedule:icalendar-recurrence-supported;
+           if-feature schedule:icalendar-recurrence;
            description
              "Basic recurrence schedule specification, only applies when
-              schedule:icalendar-recurrence-supported feaure is
-              supported.";
+              schedule:icalendar-recurrence feaure is supported.";
            leaf schedule-id {
              type string;
              description
