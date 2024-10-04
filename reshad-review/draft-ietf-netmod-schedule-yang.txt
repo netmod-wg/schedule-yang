@@ -2554,6 +2554,8 @@ Acknowledgments
    Other related efforts were explored in the past, e.g.,
    [I-D.liu-netmod-yang-schedule].
 
+   Thanks to Reshad Rahman for the great YANGDOCTORS review.
+
 Authors' Addresses
 
    Qiufang Ma (editor)
