@@ -59,8 +59,8 @@ informative:
    This document defines a common schedule YANG module which is
    designed to be applicable for scheduling purposes such as event, policy,
    services, or resources based on date and time. For the sake of better modularity,
-   the module includes basic, intermediate, and advanced versions of recurrence
-   related groupings.
+   the module includes a set of recurrence related groupings with varying granularity levels
+   (i.e., from basic to advanced).
 
 --- middle
 
@@ -119,12 +119,12 @@ System:
 ##  Features {#sec-features}
 
    The "ietf-schedule" data model defines the recurrence related groupings using
-   a modular approach. Basic, intermediate, and advanced representation of recurrence
-   groupings are defined, with each reusing the previous one and adding more parameters.
+   a modular approach. To that aim, a variety of representations of recurrence
+   groupings ranging from basic to advanced (iclander like) are defined.
    To allow for different options, two features are defined in the data model:
 
-   *  "basic-recurrence-supported"
-   *  "icalendar-recurrence-supported"
+   *  "basic-recurrence"
+   *  "icalendar-recurrence"
 
    Refer to {{sec-aug}} for the use of these features.
 
