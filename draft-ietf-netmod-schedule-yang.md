@@ -147,7 +147,7 @@ System:
 
    * "generic-schedule-params" ({{sec-gen}})
    * "period-of-time" ({{sec-period}})
-   * "recurrence" ({{sec-rec}})
+   * "recurrence-basic" ({{sec-rec}})
    * "recurrence-utc" ({{sec-rec-utc}})
    * "recurrence-with-time-zone" ({{sec-rec-tz}})
    * "recurrence-utc-with-date-times" ({{sec-rec-utc-dt}})
@@ -220,9 +220,9 @@ System:
 ~~~~
 {: #pt-tree title="Period of Time Grouping Tree Structure"}
 
-### The "recurrence" Grouping {#sec-rec}
+### The "recurrence-basic" Grouping {#sec-rec}
 
-  The "recurrence" grouping ({{rec-grp-tree}}) specifies a simple recurrence rule.
+  The "recurrence-basic" grouping ({{rec-grp-tree}}) specifies a simple recurrence rule.
 
 ~~~~
 {::include ./yang/tree/rec-grp.txt}
@@ -243,7 +243,7 @@ System:
 
 ### The "recurrence-utc" Grouping {#sec-rec-utc}
 
-   The "recurrence-utc" grouping ({{rec-utc-grp-tree}}) uses the "recurrence"
+   The "recurrence-utc" grouping ({{rec-utc-grp-tree}}) uses the "recurrence-basic"
    grouping and specifies a simple recurrence rule in UTC format.
 
 ~~~~
@@ -269,7 +269,7 @@ an occurence will last.
 ### The "recurrence-with-time-zone" Grouping {#sec-rec-tz}
 
    The "recurrence-with-time-zone" grouping ({{rec-tz-grp-tree}}) uses the
-   "recurrence" grouping and specifies a simple recurrence rule with a time zone.
+   "recurrence-basic" grouping and specifies a simple recurrence rule with a time zone.
 
 ~~~~
 {::include ./yang/tree/rec-tz-grp.txt}
@@ -599,7 +599,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {: #ex-3 title="Simple Schedule with Time Zone Indication"}
 
-## The "recurrence" Grouping
+## The "recurrence-basic" Grouping
 
    {{ex-6}} indicates a recurrence of every 2 days which starts immediately and repeat forever:
 
