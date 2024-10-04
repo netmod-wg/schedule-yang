@@ -1960,18 +1960,22 @@ Table of Contents
 Appendix A.  Examples of Format Representation
 
    This section provides some examples to illustrate the use of the
-   period and recurrence formats defined in Section 6.  Note that a
-   "grouping" does not define any data nodes in the schema tree; the
-   examples illustrated are thus for the ease of understanding.  Only
-   the message body is provided with JSON used for encoding per the
-   guidance in [RFC7951].
+   period and recurrence formats defined in Section 6.
+
+   Note that a "grouping" does not define any data nodes in the schema
+   tree; the examples illustrated are thus for the ease of
+   understanding.
+
+   For each example, only the message body is provided with JSON used
+   for encoding per the guidance in [RFC7951].
 
 A.1.  The "generic-schedule-params" Grouping
 
-   Figure 11 indicates the example of a requested schedule that needs to
-   start no earlier than 08:00 AM, January 1, 2025 and end no later than
-   8:00 PM, January 31, 2025 (Beijing time).  Schedule requests that
-   fail to meet the requirements are ignored by the system.
+   Figure 11 illustrates the example of a requested schedule that needs
+   to start no earlier than 08:00 AM, January 1, 2025 and end no later
+   than 8:00 PM, January 31, 2025 (Beijing time).  Schedule requests
+   that fail to meet the requirements are ignored by the system as
+   indicates by "discard-action".
 
    {
      "time-zone-identifier": "China/Beijing",

@@ -3290,18 +3290,20 @@ module ietf-schedule {
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-examples-of-format-represen" class="section-name selfRef">Examples of Format Representation</a>
       </h2>
 <p id="appendix-A-1">This section provides some examples to illustrate the use of the
-   period and recurrence formats defined in <a href="#sec-schedule" class="auto internal xref">Section 6</a>. Note that a "grouping"
-   does not define any data nodes in the schema tree; the examples illustrated are
-   thus for the ease of understanding. Only the message body is provided with
-   JSON used for encoding per the guidance in <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span>.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+   period and recurrence formats defined in <a href="#sec-schedule" class="auto internal xref">Section 6</a>.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">Note that a "grouping" does not define any data nodes in the schema tree;
+   the examples illustrated are thus for the ease of understanding.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-A-3">For each example, only the message body is provided with
+   JSON used for encoding per the guidance in <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span>.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
 <div id="the-generic-schedule-params-grouping">
 <section id="appendix-A.1">
         <h3 id="name-the-generic-schedule-params-">
 <a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-the-generic-schedule-params-" class="section-name selfRef">The "generic-schedule-params" Grouping</a>
         </h3>
-<p id="appendix-A.1-1"><a href="#ex-0" class="auto internal xref">Figure 11</a> indicates the example of a requested schedule that needs to start no earlier than
+<p id="appendix-A.1-1"><a href="#ex-0" class="auto internal xref">Figure 11</a> illustrates the example of a requested schedule that needs to start no earlier than
    08:00 AM, January 1, 2025 and end no later than 8:00 PM, January 31, 2025 (Beijing time).
-   Schedule requests that fail to meet the requirements are ignored by the system.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
+   Schedule requests that fail to meet the requirements are ignored by the system as indicates by
+   "discard-action".<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
 <span id="name-generic-parameters-for-sche"></span><div id="ex-0">
 <figure id="figure-11">
           <div class="alignLeft art-text artwork" id="appendix-A.1-2.1">
