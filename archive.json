@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-03T01:03:41.328760+00:00",
+  "timestamp": "2024-10-06T01:08:42.255759+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -2506,6 +2506,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 45,
+      "id": "PR_kwDOLuooYM59lK-K",
+      "title": "Reshard-review",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/45",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-04T06:40:49Z",
+      "updatedAt": "2024-10-04T13:05:46Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "5c6d8ba72ab0eb650c151cd02feb76578c1d2b7d",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "reshad-review",
+      "headRefOid": "1c641293a395860f11d2c0df4ef1322ba50899fa",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
