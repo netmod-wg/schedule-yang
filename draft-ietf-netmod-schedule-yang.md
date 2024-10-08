@@ -75,7 +75,7 @@ services or resources based on date and time.
 
 This document does not make any assumption about the nature of actions that are
 triggered by the schedules. Detection and resolution of any schedule conflicts
-is beyond the scope of this document.
+are beyond the scope of this document.
 
 {{sec-mib}} discusses relationship with the managed objects defined in {{!RFC3231}}.
 
@@ -859,7 +859,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
    This work is derived from the {{?I-D.ietf-opsawg-ucl-acl}}. There is a desire
    from the OPSAWG to see this model be separately defined for wide use in scheduling context.
 
-   Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, and Dhruv Dhody
+   Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, Steve Baillargeon, and Dhruv Dhody
    for their valuable comments and inputs to this work.
 
    Many thanks to the authors of {{?I-D.ietf-tvr-schedule-yang}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.ietf-netmod-eca-policy}}
