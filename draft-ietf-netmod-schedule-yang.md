@@ -74,7 +74,8 @@ are designed to be applicable for scheduling purposes such as event, policy,
 services or resources based on date and time.
 
 This document does not make any assumption about the nature of actions that are
-triggered by the schedules.
+triggered by the schedules. Detection and resolution of any schedule conflicts
+is beyond the scope of this document.
 
 {{sec-mib}} discusses relationship with the managed objects defined in {{!RFC3231}}.
 
@@ -389,10 +390,7 @@ an occurence will last.
 
    The "state" parameter is defined to configure/expose the scheduling state,
    depending on the use of the grouping. The "identityref" type is used for this
-   parameter to allow extensibility in future modules. For example, a "conflict"
-   state is valid in scheduling contexts where multiple systems struggle for the
-   scheduling of the same property. The conflict may be induced by, e.g., multiple
-   entities managing the schedules for the same target component.
+   parameter to allow extensibility in future modules.
 
    The "version" parameter is used to track the current schedule version
    information. The version can be bumped by the entity who create the schedule.
