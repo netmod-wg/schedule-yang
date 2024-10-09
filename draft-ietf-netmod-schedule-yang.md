@@ -556,7 +556,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {::include-fold ./yang/example-sch-usage}
-~~~~   
+~~~~
 
    For each example, only the message body is provided with
    JSON used for encoding per the guidance in {{?RFC7951}}.
