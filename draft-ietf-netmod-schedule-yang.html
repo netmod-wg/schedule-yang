@@ -3318,9 +3318,122 @@ module ietf-schedule {
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-examples-of-format-represen" class="section-name selfRef">Examples of Format Representation</a>
       </h2>
 <p id="appendix-A-1">This section provides some examples to illustrate the use of the
-   period and recurrence formats defined in <a href="#sec-schedule" class="auto internal xref">Section 6</a>.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<p id="appendix-A-2">Note that a "grouping" does not define any data nodes in the schema tree;
-   the examples illustrated are thus for the ease of understanding.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+   period and recurrence formats defined in <a href="#sec-schedule" class="auto internal xref">Section 6</a>. The following
+   modules used for illustration purposes:<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A-2">
+<pre>
+module example-sch-usage-1 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-1";
+  prefix "ex-schu-1";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  container generic-schedule-params {
+    uses schedule:generic-schedule-params;
+  }
+  container schedule-status {
+    uses schedule:schedule-status;
+  }
+}
+
+module example-sch-usage-2 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-2";
+  prefix "ex-schu2";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  container period-of-time {
+    uses schedule:period-of-time;
+  }
+}
+
+module example-sch-usage-3 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-3";
+  prefix "ex-schu-3";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  container recurrence-basic {
+    uses schedule:recurrence-basic;
+  }
+}
+
+module example-sch-usage-4 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-4";
+  prefix "ex-schu-4";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  container recurrence-utc {
+    uses schedule:recurrence-utc;
+  }
+}
+
+module example-sch-usage-5 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-5";
+  prefix "ex-schu-5";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  container recurrence-with-time-zone {
+    uses schedule:recurrence-with-time-zone;
+  }
+}
+
+module example-sch-usage-6 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-6";
+  prefix "ex-schu-6";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  container recurrence-utc-with-date-times {
+    uses schedule:recurrence-utc-with-date-times;
+  }
+}
+
+module example-sch-usage-7 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-7";
+  prefix "ex-schu-8";
+
+  import ietf-schedule {
+    prefix "schedule";
+
+  container recurrence-time-zone-with-date-times {
+    uses schedule:recurrence-time-zone-with-date-times;
+  }
+}
+
+module example-sch-usage-8 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-8";
+  prefix "ex-schu-8";
+
+  container icalendar-recurrence {
+    uses schedule:icalendar-recurrence;
+  }
+}
+
+</pre><a href="#appendix-A-2" class="pilcrow">¶</a>
+</div>
 <p id="appendix-A-3">For each example, only the message body is provided with
    JSON used for encoding per the guidance in <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span>.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
 <div id="the-generic-schedule-params-grouping">
@@ -3337,10 +3450,12 @@ module ietf-schedule {
           <div class="alignLeft art-text artwork" id="appendix-A.1-2.1">
 <pre>
 {
-  "time-zone-identifier": "China/Beijing",
-  "min-allowed-start": "2025-01-01T08:00:00",
-  "max-allowed-end": "2025-01-31T20:00:00",
-  "discard-action": "ietf-schedule:silently-discard"
+  "example-sch-usage-1:generic-schedule-params": {
+    "time-zone-identifier": "China/Beijing",
+    "min-allowed-start": "2025-01-01T08:00:00",
+    "max-allowed-end": "2025-01-31T20:00:00",
+    "discard-action": "ietf-schedule:silently-discard"
+  }
 }
 </pre>
 </div>
@@ -3362,8 +3477,10 @@ module ietf-schedule {
           <div class="alignLeft art-text artwork" id="appendix-A.2-2.1">
 <pre>
 {
-  "period-start": "2025-01-01T08:00:00Z",
-  "period-end": "2027-12-31T18:00:00Z"
+  "example-sch-usage-2:period-of-time": {
+    "period-start": "2025-01-01T08:00:00Z",
+    "period-end": "2027-12-31T18:00:00Z"
+  }
 }
 </pre>
 </div>
@@ -3378,8 +3495,10 @@ module ietf-schedule {
           <div class="alignLeft art-text artwork" id="appendix-A.2-4.1">
 <pre>
 {
-  "period-start": "2025-01-01T08:00:00Z",
-  "duration": "P15DT05:20:00"
+  "example-sch-usage-2:period-of-time": {
+    "period-start": "2025-01-01T08:00:00Z",
+    "duration": "P15DT05:20:00"
+  }
 }
 </pre>
 </div>
@@ -3394,9 +3513,11 @@ module ietf-schedule {
           <div class="alignLeft art-text artwork" id="appendix-A.2-6.1">
 <pre>
 {
-  "period-start": "2025-11-19T02:00:00",
-  "time-zone-identifier": "America/Los_Angeles",
-  "duration": "P20W"
+  "example-sch-usage-2:period-of-time": {
+    "period-start": "2025-11-19T02:00:00",
+    "time-zone-identifier": "America/Los_Angeles",
+    "duration": "P20W"
+  }
 }
 </pre>
 </div>
@@ -3417,9 +3538,11 @@ module ietf-schedule {
           <div class="alignLeft art-text artwork" id="appendix-A.3-2.1">
 <pre>
 {
-  "recurrence-description": "forever recurrence rule",
-  "frequency": "ietf-schedule:daily",
-  "interval": 2,
+  "example-sch-usage-3:recurrence-basic": {
+    "recurrence-description": "forever recurrence rule",
+    "frequency": "ietf-schedule:daily",
+    "interval": 2
+  }
 }
 </pre>
 </div>
@@ -3441,13 +3564,15 @@ module ietf-schedule {
           <div class="alignLeft art-text artwork" id="appendix-A.4-2.1">
 <pre>
 {
-  "recurrence-first": {
-    "start-time-utc": "2025-12-01T08:00:00Z",
-    "duration": 3600;
-  },
-  "frequency": "ietf-schedule:daily",
-  "interval": 1,
-  "utc-until": "2025-12-31T23:59:59Z"
+  "example-sch-usage-4:recurrence-utc": {
+    "recurrence-first": {
+      "start-time-utc": "2025-12-01T08:00:00Z",
+      "duration": 3600
+    },
+    "frequency": "ietf-schedule:daily",
+    "interval": 1,
+    "utc-until": "2025-12-31T23:59:59Z"
+  }
 }
 </pre>
 </div>
@@ -3469,14 +3594,16 @@ module ietf-schedule {
           <div class="alignLeft art-text artwork" id="appendix-A.5-2.1">
 <pre>
 {
-  "recurrence-first": {
-    "start-time": "2025-12-01T15:00:00",
-    "duration": "PT00:10:00",
-    "time-zone-identifier": "America/New_York"
-  },
-  "frequency": "ietf-schedule:hourly",
-  "interval": 2,
-  "count": 10
+  "example-sch-usage-5:recurrence-with-time-zone": {
+    "recurrence-first": {
+      "start-time": "2025-12-01T15:00:00",
+      "duration": "PT00:10:00",
+      "time-zone-identifier": "America/New_York"
+    },
+    "frequency": "ietf-schedule:hourly",
+    "interval": 2,
+    "count": 10
+  }
 }
 </pre>
 </div>
@@ -3499,22 +3626,24 @@ module ietf-schedule {
           <div class="alignLeft art-text artwork" id="appendix-A.6-2.1">
 <pre>
 {
-  "recurrence-first": {
-    "start-time-utc": "2025-06-01T09:00:00Z",
-  },
-  "frequency": "ietf-schedule:daily",
-  "interval": 2,
-  "utc-until": "2025-06-30T23:59:59Z",
-  "period-timeticks": [
-    {
-      "period-start": "3240000",
-      "period-end": "3420000"
-     },
-     {
-      "period-start": "5400000",
-      "period-end": "5640000"
-     }
-   ]
+  "example-sch-usage-6:recurrence-utc-with-date-times": {
+    "recurrence-first": {
+      "start-time-utc": "2025-06-01T09:00:00Z"
+    },
+    "frequency": "ietf-schedule:daily",
+    "interval": 2,
+    "utc-until": "2025-06-30T23:59:59Z",
+    "period-timeticks": [
+      {
+        "period-start": "3240000",
+        "period-end": "3420000"
+      },
+      {
+        "period-start": "5400000",
+        "period-end": "5640000"
+      }
+    ]
+  }
 }
 </pre>
 </div>
@@ -3537,24 +3666,26 @@ module ietf-schedule {
           <div class="alignLeft art-text artwork" id="appendix-A.7-2.1">
 <pre>
 {
-  "recurrence-first": {
-    "start-time": "2025-12-01T09:00:00",
-    "duration": "PT00:15:00",
-    "time-zone-identifier": "America/New_York"
-  },
-  "frequency": "ietf-schedule:minutely",
-  "interval": 30,
-  "until": "2025-12-01T17:00:00Z",
-  "period": [
-    {
-      "period-start": "2025-12-01T18:00:00",
-      "duration": "PT00:20:00"
+  "example-sch-usage-7:recurrence-time-zone-with-date-times": {
+    "recurrence-first": {
+      "start-time": "2025-12-01T09:00:00",
+      "duration": "PT00:15:00",
+      "time-zone-identifier": "America/New_York"
     },
-    {
-      "period-start": "2025-12-01T18:30:00",
-      "duration": "PT00:20:00"
-    }
-   ]
+    "frequency": "ietf-schedule:minutely",
+    "interval": 30,
+    "until": "2025-12-01T17:00:00Z",
+    "period": [
+      {
+        "period-start": "2025-12-01T18:00:00",
+        "duration": "PT00:20:00"
+      },
+      {
+        "period-start": "2025-12-01T18:30:00",
+        "duration": "PT00:20:00"
+      }
+    ]
+  }
 }
 </pre>
 </div>
@@ -3576,18 +3707,22 @@ module ietf-schedule {
           <div class="alignLeft art-text artwork" id="appendix-A.8-2.1">
 <pre>
 {
-  "recurrence-first": {
-    "start-time": "2024-01-27T08:00:00",
-    "time-zone-identifier": "America/New_York"
-  },
-  "frequency": "ietf-schedule:monthly",
-  "count": 10,
-  "byday": [
-    {
-      "direction": [-1],
-      "weekday": "saturday"
-    }
-  ]
+  "example-sch-usage-8:icalendar-recurrence": {
+    "recurrence-first": {
+      "start-time": "2024-01-27T08:00:00",
+      "time-zone-identifier": "America/New_York"
+    },
+    "frequency": "ietf-schedule:monthly",
+    "count": 10,
+    "byday": [
+      {
+        "direction": [
+          -1
+        ],
+        "weekday": "saturday"
+      }
+    ]
+  }
 }
 </pre>
 </div>
@@ -3602,19 +3737,33 @@ module ietf-schedule {
           <div class="alignLeft art-text artwork" id="appendix-A.8-4.1">
 <pre>
 {
-  "recurrence-first": {
-  "start-time": "2025-01-01"
-  },
-  "frequency": "ietf-schedule:monthly",
-  "until": "2025-12-25",
-  "byday": [
-    { "weekday": "monday"},
-    { "weekday": "tuesday"},
-    { "weekday": "wednesday"},
-    { "weekday": "thursday"},
-    { "weekday": "friday"}
-  ],
-  "bysetpos": [-1]
+  "example-sch-usage-8:icalendar-recurrence": {
+    "recurrence-first": {
+      "start-time": "2025-01-01"
+    },
+    "frequency": "ietf-schedule:monthly",
+    "until": "2025-12-25",
+    "byday": [
+      {
+        "weekday": "monday"
+      },
+      {
+        "weekday": "tuesday"
+      },
+      {
+        "weekday": "wednesday"
+      },
+      {
+        "weekday": "thursday"
+      },
+      {
+        "weekday": "friday"
+      }
+    ],
+    "bysetpos": [
+      -1
+    ]
+  }
 }
 </pre>
 </div>
@@ -3630,14 +3779,31 @@ module ietf-schedule {
           <div class="alignLeft art-text artwork" id="appendix-A.8-6.1">
 <pre>
 {
-  "recurrence-first": {
-    "start-time": "2025-12-01T09:00:00Z"
-  },
-  "until": "2025-12-01T16:40:00Z",
-  "frequency": "ietf-schedule:minutely",
-  "byminute": [0, 20, 40],
-  "byhour": [9, 10, 11, 12, 13, 14, 15, 16],
-  "exception-dates": ["2025-12-01T10:20:00Z"]
+  "example-sch-usage-8:icalendar-recurrence": {
+    "recurrence-first": {
+      "start-time": "2025-12-01T09:00:00Z"
+    },
+    "until": "2025-12-01T16:40:00Z",
+    "frequency": "ietf-schedule:minutely",
+    "byminute": [
+      0,
+      20,
+      40
+    ],
+    "byhour": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "exception-dates": [
+      "2025-12-01T10:20:00Z"
+    ]
+  }
 }
 </pre>
 </div>
@@ -3659,12 +3825,18 @@ module ietf-schedule {
           <div class="alignLeft art-text artwork" id="appendix-A.9-2.1">
 <pre>
 {
-  "state": "ietf-schedule:enabled",
-  "version": 1,
-  "schedule-type": "ietf-schedule:recurrence",
-  "counter": 9,
-  "last-occurrence": ["2025-12-01T12:00:00Z"],
-  "upcoming-occurrence": ["2025-12-01T12:20:00Z"]
+  "example-sch-usage-1:schedule-status": {
+    "state": "ietf-schedule:enabled",
+    "version": 1,
+    "schedule-type": "ietf-schedule:recurrence",
+    "counter": 9,
+    "last-occurrence": [
+      "2025-12-01T12:00:00Z"
+    ],
+    "upcoming-occurrence": [
+      "2025-12-01T12:20:00Z"
+    ]
+  }
 }
 </pre>
 </div>
