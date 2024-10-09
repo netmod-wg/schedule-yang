@@ -4,7 +4,7 @@ module: ietf-schedule
     ...
   grouping period-of-time:
     ...
-  grouping recurrence:
+  grouping recurrence-basic:
     ...
   grouping recurrence-utc:
     ...
@@ -16,10 +16,10 @@ module: ietf-schedule
     ...
   grouping icalendar-recurrence:
     +-- recurrence-first
-    |  +-- date-time-start?        yang:date-and-time
+    |  +-- start-time?             yang:date-and-time
     |  +-- duration?               duration
     |  +-- time-zone-identifier?   sys:timezone-name
-    +-- (recurrence-bound)?
+    +-- (recurrence-end)?
     |  +--:(until)
     |  |  +-- until?              yang:date-and-time
     |  +--:(count)

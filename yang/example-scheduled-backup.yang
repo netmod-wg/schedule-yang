@@ -71,24 +71,23 @@ module example-scheduled-backup {
       }
 
       container basic-recurrence-schedules {
-        if-feature schedule:basic-recurrence-supported;
+        if-feature schedule:basic-recurrence;
         description
           "Basic recurrence schedule specification, only applies when
-           schedule:basic-recurrence-supported feaure is supported.";
+           schedule:basic-recurrence feaure is supported.";
         leaf schedule-id {
           type string;
           description
             "The schedule identifier for this recurrence rule.";
         }            
-        uses schedule:recurrence;
+        uses schedule:recurrence-basic;
        }
 
       container icalendar-recurrence-schedules {
-        if-feature schedule:icalendar-recurrence-supported;
+        if-feature schedule:icalendar-recurrence;
         description
           "Basic recurrence schedule specification, only applies when
-           schedule:icalendar-recurrence-supported feaure is
-           supported.";
+           schedule:icalendar-recurrence feaure is supported.";
         leaf schedule-id {
           type string;
           description

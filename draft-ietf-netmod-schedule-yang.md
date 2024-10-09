@@ -59,8 +59,8 @@ informative:
    This document defines a common schedule YANG module which is
    designed to be applicable for scheduling purposes such as event, policy,
    services, or resources based on date and time. For the sake of better modularity,
-   the module includes basic, intermediate, and advanced versions of recurrence
-   related groupings.
+   the module includes a set of recurrence related groupings with varying granularity levels
+   (i.e., from basic to advanced).
 
 --- middle
 
@@ -109,8 +109,17 @@ This document uses the YANG terminology defined in {{Section 3 of !RFC7950}}.
 
 The document makes use of the following terms:
 
+Frequency:
+: Characterizes the type of a recurrence rule. Values are taken from "FREQ" rule in {{Section 3.3.10 of !RFC5545}}.
+: For example, repeating events based on an interval of a second or more are
+  classified as recurrence with a frequency value of "secondly".
+
 icalendar:
 : Refers to Internet Calendaring per {{!RFC5545}}.
+
+Interval:
+: Refers to an integer that specifies at which intervals a recurrence rule repeats. Values are taken from "INTERVAL" rule in {{Section 3.3.10 of !RFC5545}}.
+: For example, "1", means every second for a secondly rule, every minute for a minutely rule, every hour for an hourly rule, etc.
 
 System:
 : Refers to an entity that host a schedule that is managed using the YANG module defined in this document.
@@ -120,12 +129,12 @@ System:
 ##  Features {#sec-features}
 
    The "ietf-schedule" data model defines the recurrence related groupings using
-   a modular approach. Basic, intermediate, and advanced representation of recurrence
-   groupings are defined, with each reusing the previous one and adding more parameters.
+   a modular approach. To that aim, a variety of representations of recurrence
+   groupings ranging from basic to advanced (iclander like) are defined.
    To allow for different options, two features are defined in the data model:
 
-   *  "basic-recurrence-supported"
-   *  "icalendar-recurrence-supported"
+   *  "basic-recurrence"
+   *  "icalendar-recurrence"
 
    Refer to {{sec-aug}} for the use of these features.
 
@@ -148,7 +157,7 @@ System:
 
    * "generic-schedule-params" ({{sec-gen}})
    * "period-of-time" ({{sec-period}})
-   * "recurrence" ({{sec-rec}})
+   * "recurrence-basic" ({{sec-rec}})
    * "recurrence-utc" ({{sec-rec-utc}})
    * "recurrence-with-time-zone" ({{sec-rec-tz}})
    * "recurrence-utc-with-date-times" ({{sec-rec-utc-dt}})
@@ -221,9 +230,9 @@ System:
 ~~~~
 {: #pt-tree title="Period of Time Grouping Tree Structure"}
 
-### The "recurrence" Grouping {#sec-rec}
+### The "recurrence-basic" Grouping {#sec-rec}
 
-  The "recurrence" grouping ({{rec-grp-tree}}) specifies a simple recurrence rule.
+  The "recurrence-basic" grouping ({{rec-grp-tree}}) specifies a simple recurrence rule.
 
 ~~~~
 {::include ./yang/tree/rec-grp.txt}
@@ -244,7 +253,7 @@ System:
 
 ### The "recurrence-utc" Grouping {#sec-rec-utc}
 
-   The "recurrence-utc" grouping ({{rec-utc-grp-tree}}) uses the "recurrence"
+   The "recurrence-utc" grouping ({{rec-utc-grp-tree}}) uses the "recurrence-basic"
    grouping and specifies a simple recurrence rule in UTC format.
 
 ~~~~
@@ -252,7 +261,7 @@ System:
 ~~~~
 {: #rec-utc-grp-tree title="recurrence-utc Grouping Tree Structure"}
 
-   The "utc-start-time" indicates the start time in UTC format.
+   The "start-time-utc" indicates the start time in UTC format.
 
    The "duration" parameter specifies, in units of seconds, the time period of the first occurrence. Unless specified otherwise, the "duration" also applies to subsequent recurrence instances.
 
@@ -261,7 +270,7 @@ The interval specifies when a schedule will occur, combined with the frequency p
 an occurence will last.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-bound" choice. The "utc-start-time" value always counts
+  indicated by the "recurrence-end" choice. The "start-time-utc" value always counts
   as the first occurrence.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling contexts
@@ -270,14 +279,14 @@ an occurence will last.
 ### The "recurrence-with-time-zone" Grouping {#sec-rec-tz}
 
    The "recurrence-with-time-zone" grouping ({{rec-tz-grp-tree}}) uses the
-   "recurrence" grouping and specifies a simple recurrence rule with a time zone.
+   "recurrence-basic" grouping and specifies a simple recurrence rule with a time zone.
 
 ~~~~
 {::include ./yang/tree/rec-tz-grp.txt}
 ~~~~
 {: #rec-tz-grp-tree title="recurrence-with-time-zone Grouping Tree Structure"}
 
-   The "recurrence-first" container includes "date-time-start" and "duration" parameters
+   The "recurrence-first" container includes "start-time" and "duration" parameters
    to specify the start time and period of the first occurrence. Unless specified otherwise, the
    "duration" also applies to subsequent recurrence instances. It also includes a
    "time-zone-identifier" parameter which MUST be specified if the date
@@ -285,7 +294,7 @@ an occurence will last.
    to UTC.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-bound" choice. The "date-time-start" value always counts
+  indicated by the "recurrence-end" choice. The "start-time" value always counts
   as the first occurrence.
 
    Unlike the definition of "recurrence-utc" grouping ({{sec-rec-utc}}),
@@ -541,16 +550,20 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 # Examples of Format Representation {#usage}
 
    This section provides some examples to illustrate the use of the
-   period and recurrence formats defined in {{sec-schedule}}. Note that a "grouping"
-   does not define any data nodes in the schema tree; the examples illustrated are
-   thus for the ease of understanding. Only the message body is provided with
+   period and recurrence formats defined in {{sec-schedule}}.
+
+   Note that a "grouping" does not define any data nodes in the schema tree;
+   the examples illustrated are thus for the ease of understanding.
+
+   For each example, only the message body is provided with
    JSON used for encoding per the guidance in {{?RFC7951}}.
 
 ## The "generic-schedule-params" Grouping
 
-   {{ex-0}} indicates the example of a requested schedule that needs to start no earlier than
+   {{ex-0}} illustrates the example of a requested schedule that needs to start no earlier than
    08:00 AM, January 1, 2025 and end no later than 8:00 PM, January 31, 2025 (Beijing time).
-   Schedule requests that fail to meet the requirements are ignored by the system.
+   Schedule requests that fail to meet the requirements are ignored by the system as indicates by
+   "discard-action".
 
 ~~~~
 {
@@ -598,7 +611,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {: #ex-3 title="Simple Schedule with Time Zone Indication"}
 
-## The "recurrence" Grouping
+## The "recurrence-basic" Grouping
 
    {{ex-6}} indicates a recurrence of every 2 days which starts immediately and repeat forever:
 
@@ -619,7 +632,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-    "utc-start-time": "2025-12-01T08:00:00Z",
+    "start-time-utc": "2025-12-01T08:00:00Z",
     "duration": 3600;
   },
   "frequency": "ietf-schedule:daily",
@@ -637,7 +650,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2025-12-01T15:00:00",
+    "start-time": "2025-12-01T15:00:00",
     "duration": "PT00:10:00",
     "time-zone-identifier": "America/New_York"
   },
@@ -657,7 +670,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-    "utc-start-time": "2025-06-01T09:00:00Z",
+    "start-time-utc": "2025-06-01T09:00:00Z",
   },
   "frequency": "ietf-schedule:daily",
   "interval": 2,
@@ -685,7 +698,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2025-12-01T09:00:00",
+    "start-time": "2025-12-01T09:00:00",
     "duration": "PT00:15:00",
     "time-zone-identifier": "America/New_York"
   },
@@ -714,7 +727,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2024-01-27T08:00:00",
+    "start-time": "2024-01-27T08:00:00",
     "time-zone-identifier": "America/New_York"
   },
   "frequency": "ietf-schedule:monthly",
@@ -735,7 +748,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-  "date-time-start": "2025-01-01"
+  "start-time": "2025-01-01"
   },
   "frequency": "ietf-schedule:monthly",
   "until": "2025-12-25",
@@ -758,7 +771,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {
   "recurrence-first": {
-    "date-time-start": "2025-12-01T09:00:00Z"
+    "start-time": "2025-12-01T09:00:00Z"
   },
   "until": "2025-12-01T16:40:00Z",
   "frequency": "ietf-schedule:minutely",
@@ -867,3 +880,5 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
    for the constructive discussion during IETF#118.
 
    Other related efforts were explored in the past, e.g., {{?I-D.liu-netmod-yang-schedule}}.
+
+   Thanks to Reshad Rahman for the great YANGDOCTORS review.
