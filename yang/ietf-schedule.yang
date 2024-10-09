@@ -229,26 +229,33 @@ module ietf-schedule {
   identity enabled {
     base schedule-state;
     description
-      "Indicates a recurrence with an enabled state.";
+      "Indicates a schedule with an enabled state.";
   }
 
   identity finished {
     base schedule-state;
     description
-      "Indicates a recurrence with a finished state.
+      "Indicates a schedule with a finished state.
        The finished state indicates that the schedule has ended.";
   }
 
   identity disabled {
     base schedule-state;
     description
-      "Indicates a recurrence with a disabled state.";
+      "Indicates a schedule with a disabled state.";
   }
 
   identity out-of-date {
     base schedule-state;
     description
-      "Indicates a recurrence with an out-of-date state.";
+      "Indicates a schedule with an out-of-date state.";
+  }
+
+  identity conflicted {
+    base schedule-state;
+    description
+      "Indicates a schedule with a conflicted state with other 
+       schedules.";
   }
   
   identity discard-action {

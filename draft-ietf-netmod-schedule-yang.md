@@ -74,7 +74,8 @@ are designed to be applicable for scheduling purposes such as event, policy,
 services or resources based on date and time.
 
 This document does not make any assumption about the nature of actions that are
-triggered by the schedules.
+triggered by the schedules. Detection and resolution of any schedule conflicts
+are beyond the scope of this document.
 
 {{sec-mib}} discusses relationship with the managed objects defined in {{!RFC3231}}.
 
@@ -138,7 +139,7 @@ System:
        specified and then the schedule will disable itself ({{Section 3.3 of !RFC3231}}).
       + period: The schedule is a period-based schedule consisting either a start and end or a start and positive duration of time.
       + recurrence: This type is used for a recurrence-based schedule
-   * "schedule-state": Indicates the status of a schedule (enabled, disabled, finished, etc.).
+   * "schedule-state": Indicates the status of a schedule (enabled, disabled, finished, conflicted, etc.).
    * "discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).
 
 ##  Groupings {#sec-grp}
@@ -388,11 +389,9 @@ an occurence will last.
    a network device or controller if multiple scheduling contexts exists.
 
    The "state" parameter is defined to configure/expose the scheduling state,
-   depending on the use of the grouping. The "identityref" type is used for this
-   parameter to allow extensibility in future modules. For example, a "conflict"
-   state is valid in scheduling contexts where multiple systems struggle for the
-   scheduling of the same property. The conflict may be induced by, e.g., multiple
-   entities managing the schedules for the same target component.
+   depending on the use of the grouping. For a recurrence-based schedule, it
+   represents the state of the overall recurrence. The "identityref" type is used for this
+   parameter to allow extensibility in future modules.
 
    The "version" parameter is used to track the current schedule version
    information. The version can be bumped by the entity who create the schedule.
@@ -865,7 +864,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
    This work is derived from the {{?I-D.ietf-opsawg-ucl-acl}}. There is a desire
    from the OPSAWG to see this model be separately defined for wide use in scheduling context.
 
-   Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, and Dhruv Dhody
+   Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, Steve Baillargeon, and Dhruv Dhody
    for their valuable comments and inputs to this work.
 
    Many thanks to the authors of {{?I-D.ietf-tvr-schedule-yang}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.ietf-netmod-eca-policy}}
