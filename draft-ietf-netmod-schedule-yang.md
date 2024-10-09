@@ -552,7 +552,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
    This section provides some examples to illustrate the use of the
    period and recurrence formats defined in {{sec-schedule}}. The following
-   modules used for illustration purposes:
+   modules are used for illustration purposes:
 
 ~~~~
 {::include-fold ./yang/example-sch-usage.yang}
