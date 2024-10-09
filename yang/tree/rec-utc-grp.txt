@@ -4,11 +4,11 @@ module: ietf-schedule
     ...
   grouping period-of-time:
     ...
-  grouping recurrence:
+  grouping recurrence-basic:
     ...
   grouping recurrence-utc:
     +-- recurrence-first
-    |  +-- utc-start-time?   yang:date-and-time
+    |  +-- start-time-utc?   yang:date-and-time
     |  +-- duration?         uint32
     +-- (recurrence-bound)?
     |  +--:(until)

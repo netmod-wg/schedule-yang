@@ -11,7 +11,7 @@ module: ietf-schedule
        |  +-- period-end?       yang:date-and-time
        +--:(duration)
           +-- duration?         duration
-  grouping recurrence:
+  grouping recurrence-basic:
     ...
   grouping recurrence-utc:
     ...

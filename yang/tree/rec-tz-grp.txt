@@ -4,13 +4,13 @@ module: ietf-schedule
     ...
   grouping period-of-time:
     ...
-  grouping recurrence:
+  grouping recurrence-basic:
     ...
   grouping recurrence-utc:
     ...
   grouping recurrence-with-time-zone:
     +-- recurrence-first
-    |  +-- date-time-start?        yang:date-and-time
+    |  +-- start-time?             yang:date-and-time
     |  +-- duration?               duration
     |  +-- time-zone-identifier?   sys:timezone-name
     +-- (recurrence-bound)?
