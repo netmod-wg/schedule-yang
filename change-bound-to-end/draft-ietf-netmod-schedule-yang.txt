@@ -576,7 +576,7 @@ Table of Contents
        +-- recurrence-first
        |  +-- start-time-utc?   yang:date-and-time
        |  +-- duration?         uint32
-       +-- (recurrence-bound)?
+       +-- (recurrence-end)?
        |  +--:(until)
        |  |  +-- utc-until?          yang:date-and-time
        |  +--:(count)
