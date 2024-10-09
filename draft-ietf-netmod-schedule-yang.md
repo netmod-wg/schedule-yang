@@ -552,7 +552,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
    This section provides some examples to illustrate the use of the
    period and recurrence formats defined in {{sec-schedule}}. The following
-   module used for illustration purposes:
+   modules used for illustration purposes:
 
 ~~~~
 {::include-fold ./yang/example-sch-usage.yang}
@@ -570,7 +570,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "example-sch-usage:generic-schedule-params": {
+  "example-sch-usage-1:generic-schedule-params": {
     "time-zone-identifier": "China/Beijing",
     "min-allowed-start": "2025-01-01T08:00:00",
     "max-allowed-end": "2025-01-31T20:00:00",
@@ -587,7 +587,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "example-sch-usage:period-of-time": {
+  "example-sch-usage-2:period-of-time": {
     "period-start": "2025-01-01T08:00:00Z",
     "period-end": "2027-12-31T18:00:00Z"
   }
@@ -600,7 +600,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "example-sch-usage:period-of-time": {
+  "example-sch-usage-2:period-of-time": {
     "period-start": "2025-01-01T08:00:00Z",
     "duration": "P15DT05:20:00"
   }
@@ -613,7 +613,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "example-sch-usage:period-of-time": {
+  "example-sch-usage-2:period-of-time": {
     "period-start": "2025-11-19T02:00:00",
     "time-zone-identifier": "America/Los_Angeles",
     "duration": "P20W"
@@ -628,7 +628,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "example-sch-usage:recurrence-basic": {
+  "example-sch-usage-3:recurrence-basic": {
     "recurrence-description": "forever recurrence rule",
     "frequency": "ietf-schedule:daily",
     "interval": 2
@@ -644,7 +644,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "example-sch-usage:recurrence-utc": {
+  "example-sch-usage-4:recurrence-utc": {
     "recurrence-first": {
       "start-time-utc": "2025-12-01T08:00:00Z",
       "duration": 3600
@@ -664,7 +664,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "example-sch-usage:recurrence-with-time-zone": {
+  "example-sch-usage-5:recurrence-with-time-zone": {
     "recurrence-first": {
       "start-time": "2025-12-01T15:00:00",
       "duration": "PT00:10:00",
@@ -686,7 +686,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "example-sch-usage:recurrence-utc-with-date-times": {
+  "example-sch-usage-6:recurrence-utc-with-date-times": {
     "recurrence-first": {
       "start-time-utc": "2025-06-01T09:00:00Z"
     },
@@ -716,7 +716,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "example-sch-usage:recurrence-time-zone-with-date-times": {
+  "example-sch-usage-7:recurrence-time-zone-with-date-times": {
     "recurrence-first": {
       "start-time": "2025-12-01T09:00:00",
       "duration": "PT00:15:00",
@@ -747,7 +747,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "example-sch-usage:icalendar-recurrence": {
+  "example-sch-usage-8:icalendar-recurrence": {
     "recurrence-first": {
       "start-time": "2024-01-27T08:00:00",
       "time-zone-identifier": "America/New_York"
@@ -772,7 +772,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "example-sch-usage:icalendar-recurrence": {
+  "example-sch-usage-8:icalendar-recurrence": {
     "recurrence-first": {
       "start-time": "2025-01-01"
     },
@@ -809,7 +809,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "example-sch-usage:icalendar-recurrence": {
+  "example-sch-usage-8:icalendar-recurrence": {
     "recurrence-first": {
       "start-time": "2025-12-01T09:00:00Z"
     },
@@ -845,7 +845,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "example-sch-usage:schedule-status": {
+  "example-sch-usage-1:schedule-status": {
     "state": "ietf-schedule:enabled",
     "version": 1,
     "schedule-type": "ietf-schedule:recurrence",
