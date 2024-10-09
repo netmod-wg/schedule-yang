@@ -109,8 +109,17 @@ This document uses the YANG terminology defined in {{Section 3 of !RFC7950}}.
 
 The document makes use of the following terms:
 
+Frequency:
+: Characterizes the type of a recurrence rule. Values are taken from "FREQ" rule in {{Section 3.3.10 of !RFC5545}}.
+: For example, repeating events based on an interval of a second or more are
+  classified as recurrence with a frequency value of "secondly".
+
 icalendar:
 : Refers to Internet Calendaring per {{!RFC5545}}.
+
+Interval:
+: Refers to an integer that specifies at which intervals a recurrence rule repeats. Values are taken from "INTERVAL" rule in {{Section 3.3.10 of !RFC5545}}.
+: For example, "1", means every second for a secondly rule, every minute for a minutely rule, every hour for an hourly rule, etc.
 
 System:
 : Refers to an entity that host a schedule that is managed using the YANG module defined in this document.
@@ -139,7 +148,8 @@ System:
        specified and then the schedule will disable itself ({{Section 3.3 of !RFC3231}}).
       + period: The schedule is a period-based schedule consisting either a start and end or a start and positive duration of time.
       + recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period, e.g., every five minutes) or not (i.e., repeat in a non-regular manner, e.g., every day at 8 and 9 AM).
-   * "schedule-state": Indicates the status of a schedule (enabled, disabled, finished, conflicted, etc.).
+   * "schedule-state": Indicates the status of a schedule (enabled, disabled, conflicted, finished, etc.). This identity can also be used
+     to manage the state of individual instances of a recurrence-based schedule.
    * "discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).
 
 ##  Groupings {#sec-grp}
@@ -261,7 +271,7 @@ The interval specifies when a schedule will occur, combined with the frequency p
 an occurence will last.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-bound" choice. The "start-time-utc" value always counts
+  indicated by the "recurrence-end" choice. The "start-time-utc" value always counts
   as the first occurrence.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling contexts
@@ -285,7 +295,7 @@ an occurence will last.
    to UTC.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-bound" choice. The "start-time" value always counts
+  indicated by the "recurrence-end" choice. The "start-time" value always counts
   as the first occurrence.
 
    Unlike the definition of "recurrence-utc" grouping ({{sec-rec-utc}}),
