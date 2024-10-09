@@ -490,7 +490,7 @@ Table of Contents
    indicates how long an occurence will last.
 
    The repetition can be scoped by a specified end time or by a count of
-   occurrences, indicated by the "recurrence-bound" choice.  The "start-
+   occurrences, indicated by the "recurrence-end" choice.  The "start-
    time-utc" value always counts as the first occurrence.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling
@@ -547,7 +547,7 @@ Table of Contents
    to UTC.
 
    The repetition can be scoped by a specified end time or by a count of
-   occurrences, indicated by the "recurrence-bound" choice.  The "start-
+   occurrences, indicated by the "recurrence-end" choice.  The "start-
    time" value always counts as the first occurrence.
 
    Unlike the definition of "recurrence-utc" grouping (Section 3.3.4),
