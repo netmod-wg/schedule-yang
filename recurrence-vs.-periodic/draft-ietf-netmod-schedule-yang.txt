@@ -173,7 +173,21 @@ Table of Contents
 
    The document makes use of the following terms:
 
+   Frequency:  Characterizes the type of a recurrence rule.  Values are
+      taken from "FREQ" rule in Section 3.3.10 of [RFC5545].
+
+      For example, repeating events based on an interval of a second or
+      more are classified as recurrence with a frequency value of
+      "secondly".
+
    icalendar:  Refers to Internet Calendaring per [RFC5545].
+
+   Interval:  Refers to an integer that specifies at which intervals a
+      recurrence rule repeats.  Values are taken from "INTERVAL" rule in
+      Section 3.3.10 of [RFC5545].
+
+      For example, "1", means every second for a secondly rule, every
+      minute for a minutely rule, every hour for an hourly rule, etc.
 
    System:  Refers to an entity that host a schedule that is managed
       using the YANG module defined in this document.
@@ -219,7 +233,9 @@ Table of Contents
          non-regular manner, e.g., every day at 8 and 9 AM).
 
    *  "schedule-state": Indicates the status of a schedule (enabled,
-      disabled, finished, conflicted, etc.).
+      disabled, conflicted, finished, etc.).  This identity can also be
+      used to manage the state of individual instances of a recurrence-
+      based schedule.
 
    *  "discard-action": Specifies the action to perform when a schedule
       is discarded (e.g., generate a warning or an error message).
@@ -458,7 +474,7 @@ Table of Contents
        +-- recurrence-first
        |  +-- start-time-utc?   yang:date-and-time
        |  +-- duration?         uint32
-       +-- (recurrence-bound)?
+       +-- (recurrence-end)?
        |  +--:(until)
        |  |  +-- utc-until?          yang:date-and-time
        |  +--:(count)
@@ -493,7 +509,7 @@ Table of Contents
    indicates how long an occurence will last.
 
    The repetition can be scoped by a specified end time or by a count of
-   occurrences, indicated by the "recurrence-bound" choice.  The "start-
+   occurrences, indicated by the "recurrence-end" choice.  The "start-
    time-utc" value always counts as the first occurrence.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling
@@ -520,7 +536,7 @@ Table of Contents
        |  +-- start-time?             yang:date-and-time
        |  +-- duration?               duration
        |  +-- time-zone-identifier?   sys:timezone-name
-       +-- (recurrence-bound)?
+       +-- (recurrence-end)?
        |  +--:(until)
        |  |  +-- until?              yang:date-and-time
        |  +--:(count)
@@ -550,7 +566,7 @@ Table of Contents
    to UTC.
 
    The repetition can be scoped by a specified end time or by a count of
-   occurrences, indicated by the "recurrence-bound" choice.  The "start-
+   occurrences, indicated by the "recurrence-end" choice.  The "start-
    time" value always counts as the first occurrence.
 
    Unlike the definition of "recurrence-utc" grouping (Section 3.3.4),
@@ -579,7 +595,7 @@ Table of Contents
        +-- recurrence-first
        |  +-- start-time-utc?   yang:date-and-time
        |  +-- duration?         uint32
-       +-- (recurrence-bound)?
+       +-- (recurrence-end)?
        |  +--:(until)
        |  |  +-- utc-until?          yang:date-and-time
        |  +--:(count)
@@ -695,7 +711,7 @@ Table of Contents
        |  +-- start-time?             yang:date-and-time
        |  +-- duration?               duration
        |  +-- time-zone-identifier?   sys:timezone-name
-       +-- (recurrence-bound)?
+       +-- (recurrence-end)?
        |  +--:(until)
        |  |  +-- until?              yang:date-and-time
        |  +--:(count)
@@ -1417,20 +1433,20 @@ Table of Contents
               the other instances in the recurrence set.";
          }
        }
-       choice recurrence-bound {
+       choice recurrence-end {
          description
-           "Modes to bound the recurrence rule. If no choice is
-            indicated, the recurrence rule is considered to repeat
-            forever.";
+           "Modes to control the end of a recurrence rule. If no
+            choice is indicated, the recurrence rule is considered
+            to repeat forever.";
          case until {
            description
-             "This case defines a way that bounds the recurrence
-              rule in an inclusive manner.";
+             "This case defines a way that limits the end of a
+              recurrence rule in an inclusive manner.";
            leaf utc-until {
              type yang:date-and-time;
              description
                "This parameter specifies a date and time value to
-                inclusively bound the recurrence in UTC format. If
+                inclusively terminate the recurrence in UTC format. If
                 the value specified by this parameter is synchronized
                 with the specified recurrence, it becomes the last
                 instance of the recurrence.";
@@ -1439,12 +1455,12 @@ Table of Contents
          case count {
            description
              "This case defines the number of occurrences at which
-              to range-bound the recurrence.";
+              to terminate the recurrence.";
            leaf count {
              type uint32;
              description
                "The positive number of occurrences at which to
-                range-bound the recurrence.";
+                terminate the recurrence.";
            }
          }
        }
@@ -1482,9 +1498,9 @@ Table of Contents
               the format of UTC nor time zone offset to UTC.";
          }
        }
-       choice recurrence-bound {
+       choice recurrence-end {
          description
-           "Modes to bound the recurrence rule. If no choice is
+           "Modes to terminate the recurrence rule. If no choice is
             indicated, the recurrence rule is considered to repeat
             forever.";
          case until {
@@ -1494,7 +1510,7 @@ Table of Contents
            leaf until {
              type yang:date-and-time;
              description
-               "Specifies a date and time value to bound the
+               "Specifies a date and time value to terminate the
                 recurrence. If the value specified by this parameter
                 is synchronized with the specified recurrence, it
                 becomes the last instance of the recurrence.";
@@ -1508,7 +1524,7 @@ Table of Contents
              type uint32;
              description
                "The positive number of occurrences at which to
-                range-bound the recurrence.";
+                terminate the recurrence.";
            }
          }
        }

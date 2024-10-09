@@ -1351,14 +1351,35 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-2-3">This document uses the YANG terminology defined in <span><a href="https://rfc-editor.org/rfc/rfc7950#section-3" class="relref">Section 3</a> of [<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4">The document makes use of the following terms:<a href="#section-2-4" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-2-5">
-        <dt id="section-2-5.1">icalendar:</dt>
+        <dt id="section-2-5.1">Frequency:</dt>
         <dd style="margin-left: 1.5em" id="section-2-5.2">
-          <p id="section-2-5.2.1">Refers to Internet Calendaring per <span>[<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.2.1">Characterizes the type of a recurrence rule. Values are taken from "FREQ" rule in <span><a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.10" class="relref">Section 3.3.10</a> of [<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-5.3">System:</dt>
+<dt id="section-2-5.3"></dt>
         <dd style="margin-left: 1.5em" id="section-2-5.4">
-          <p id="section-2-5.4.1">Refers to an entity that host a schedule that is managed using the YANG module defined in this document.<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.4.1">For example, repeating events based on an interval of a second or more are
+classified as recurrence with a frequency value of "secondly".<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-5.5">icalendar:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-5.6">
+          <p id="section-2-5.6.1">Refers to Internet Calendaring per <span>[<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#section-2-5.6.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-5.7">Interval:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-5.8">
+          <p id="section-2-5.8.1">Refers to an integer that specifies at which intervals a recurrence rule repeats. Values are taken from "INTERVAL" rule in <span><a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.10" class="relref">Section 3.3.10</a> of [<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#section-2-5.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-5.9"></dt>
+        <dd style="margin-left: 1.5em" id="section-2-5.10">
+          <p id="section-2-5.10.1">For example, "1", means every second for a secondly rule, every minute for a minutely rule, every hour for an hourly rule, etc.<a href="#section-2-5.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-5.11">System:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-5.12">
+          <p id="section-2-5.12.1">Refers to an entity that host a schedule that is managed using the YANG module defined in this document.<a href="#section-2-5.12.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1415,7 +1436,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             </ul>
 </li>
           <li class="normal" id="section-3.2-2.3">
-            <p id="section-3.2-2.3.1">"schedule-state": Indicates the status of a schedule (enabled, disabled, finished, conflicted, etc.).<a href="#section-3.2-2.3.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-2.3.1">"schedule-state": Indicates the status of a schedule (enabled, disabled, conflicted, finished, etc.). This identity can also be used
+to manage the state of individual instances of a recurrence-based schedule.<a href="#section-3.2-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-2.4">
             <p id="section-3.2-2.4.1">"discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).<a href="#section-3.2-2.4.1" class="pilcrow">¶</a></p>
@@ -1689,7 +1711,7 @@ module: ietf-schedule
     +-- recurrence-first
     |  +-- start-time-utc?   yang:date-and-time
     |  +-- duration?         uint32
-    +-- (recurrence-bound)?
+    +-- (recurrence-end)?
     |  +--:(until)
     |  |  +-- utc-until?          yang:date-and-time
     |  +--:(count)
@@ -1721,7 +1743,7 @@ module: ietf-schedule
 The interval specifies when a schedule will occur, combined with the frequency parameter; while the duration indicates how long
 an occurence will last.<a href="#section-3.3.4-5" class="pilcrow">¶</a></p>
 <p id="section-3.3.4-6">The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-bound" choice. The "start-time-utc" value always counts
+  indicated by the "recurrence-end" choice. The "start-time-utc" value always counts
   as the first occurrence.<a href="#section-3.3.4-6" class="pilcrow">¶</a></p>
 <p id="section-3.3.4-7">The "recurrence-utc" grouping is designed to be reused in scheduling contexts
    where machine readability is more desirable.<a href="#section-3.3.4-7" class="pilcrow">¶</a></p>
@@ -1753,7 +1775,7 @@ module: ietf-schedule
     |  +-- start-time?             yang:date-and-time
     |  +-- duration?               duration
     |  +-- time-zone-identifier?   sys:timezone-name
-    +-- (recurrence-bound)?
+    +-- (recurrence-end)?
     |  +--:(until)
     |  |  +-- until?              yang:date-and-time
     |  +--:(count)
@@ -1784,7 +1806,7 @@ module: ietf-schedule
    and time value is neither reported in the format of UTC nor time zone offset
    to UTC.<a href="#section-3.3.5-3" class="pilcrow">¶</a></p>
 <p id="section-3.3.5-4">The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-bound" choice. The "start-time" value always counts
+  indicated by the "recurrence-end" choice. The "start-time" value always counts
   as the first occurrence.<a href="#section-3.3.5-4" class="pilcrow">¶</a></p>
 <p id="section-3.3.5-5">Unlike the definition of "recurrence-utc" grouping (<a href="#sec-rec-utc" class="auto internal xref">Section 3.3.4</a>),
    "recurrence-with-time-zone" is intended to promote human readability over
@@ -1819,7 +1841,7 @@ module: ietf-schedule
     +-- recurrence-first
     |  +-- start-time-utc?   yang:date-and-time
     |  +-- duration?         uint32
-    +-- (recurrence-bound)?
+    +-- (recurrence-end)?
     |  +--:(until)
     |  |  +-- utc-until?          yang:date-and-time
     |  +--:(count)
@@ -1952,7 +1974,7 @@ module: ietf-schedule
     |  +-- start-time?             yang:date-and-time
     |  +-- duration?               duration
     |  +-- time-zone-identifier?   sys:timezone-name
-    +-- (recurrence-bound)?
+    +-- (recurrence-end)?
     |  +--:(until)
     |  |  +-- until?              yang:date-and-time
     |  +--:(count)
@@ -2733,20 +2755,20 @@ module ietf-schedule {
            the other instances in the recurrence set.";
       }
     }
-    choice recurrence-bound {
+    choice recurrence-end {
       description
-        "Modes to bound the recurrence rule. If no choice is
-         indicated, the recurrence rule is considered to repeat
-         forever.";
+        "Modes to control the end of a recurrence rule. If no
+         choice is indicated, the recurrence rule is considered
+         to repeat forever.";
       case until {
         description
-          "This case defines a way that bounds the recurrence
-           rule in an inclusive manner.";
+          "This case defines a way that limits the end of a
+           recurrence rule in an inclusive manner.";
         leaf utc-until {
           type yang:date-and-time;
           description
             "This parameter specifies a date and time value to
-             inclusively bound the recurrence in UTC format. If
+             inclusively terminate the recurrence in UTC format. If
              the value specified by this parameter is synchronized
              with the specified recurrence, it becomes the last
              instance of the recurrence.";
@@ -2755,12 +2777,12 @@ module ietf-schedule {
       case count {
         description
           "This case defines the number of occurrences at which
-           to range-bound the recurrence.";
+           to terminate the recurrence.";
         leaf count {
           type uint32;
           description
             "The positive number of occurrences at which to
-             range-bound the recurrence.";
+             terminate the recurrence.";
         }
       }
     }
@@ -2798,9 +2820,9 @@ module ietf-schedule {
            the format of UTC nor time zone offset to UTC.";
       }
     }
-    choice recurrence-bound {
+    choice recurrence-end {
       description
-        "Modes to bound the recurrence rule. If no choice is
+        "Modes to terminate the recurrence rule. If no choice is
          indicated, the recurrence rule is considered to repeat
          forever.";
       case until {
@@ -2810,7 +2832,7 @@ module ietf-schedule {
         leaf until {
           type yang:date-and-time;
           description
-            "Specifies a date and time value to bound the
+            "Specifies a date and time value to terminate the
              recurrence. If the value specified by this parameter
              is synchronized with the specified recurrence, it
              becomes the last instance of the recurrence.";
@@ -2824,7 +2846,7 @@ module ietf-schedule {
           type uint32;
           description
             "The positive number of occurrences at which to
-             range-bound the recurrence.";
+             terminate the recurrence.";
         }
       }
     }
