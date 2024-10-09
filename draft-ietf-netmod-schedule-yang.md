@@ -555,7 +555,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
    module used for illustration purposes:
 
 ~~~~
-{::include-fold ./yang/example-sch-usage}
+{::include-fold ./yang/example-sch-usage.yang}
 ~~~~
 
    For each example, only the message body is provided with
