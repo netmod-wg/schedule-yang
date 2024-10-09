@@ -110,7 +110,7 @@ This document uses the YANG terminology defined in {{Section 3 of !RFC7950}}.
 The document makes use of the following terms:
 
 Frequency:
-: Characterizes the type of a recurrence rule. Values are taken from {{Section 3.3.10 of !RFC5545}}.
+: Characterizes the type of a recurrence rule. Values are taken from "FREQ" rule in {{Section 3.3.10 of !RFC5545}}.
 : For example, repeating events based on an interval of a second or more are
   classified as recurrence with a frequency value of "secondly".
 
