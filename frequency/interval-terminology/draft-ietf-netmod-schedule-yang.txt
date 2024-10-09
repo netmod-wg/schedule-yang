@@ -183,8 +183,8 @@ Table of Contents
    icalendar:  Refers to Internet Calendaring per [RFC5545].
 
    Interval:  Refers to an integer that specifies at which intervals a
-      recurrence rule repeats.  Values are taken from Section 3.3.10 of
-      [RFC5545].
+      recurrence rule repeats.  Values are taken from "INTERVAL" rule in
+      Section 3.3.10 of [RFC5545].
 
       For example, "1", means every second for a secondly rule, every
       minute for a minutely rule, every hour for an hourly rule, etc.
