@@ -1689,7 +1689,7 @@ module: ietf-schedule
     +-- recurrence-first
     |  +-- start-time-utc?   yang:date-and-time
     |  +-- duration?         uint32
-    +-- (recurrence-bound)?
+    +-- (recurrence-end)?
     |  +--:(until)
     |  |  +-- utc-until?          yang:date-and-time
     |  +--:(count)
@@ -1721,7 +1721,7 @@ module: ietf-schedule
 The interval specifies when a schedule will occur, combined with the frequency parameter; while the duration indicates how long
 an occurence will last.<a href="#section-3.3.4-5" class="pilcrow">¶</a></p>
 <p id="section-3.3.4-6">The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-bound" choice. The "start-time-utc" value always counts
+  indicated by the "recurrence-end" choice. The "start-time-utc" value always counts
   as the first occurrence.<a href="#section-3.3.4-6" class="pilcrow">¶</a></p>
 <p id="section-3.3.4-7">The "recurrence-utc" grouping is designed to be reused in scheduling contexts
    where machine readability is more desirable.<a href="#section-3.3.4-7" class="pilcrow">¶</a></p>
@@ -1753,7 +1753,7 @@ module: ietf-schedule
     |  +-- start-time?             yang:date-and-time
     |  +-- duration?               duration
     |  +-- time-zone-identifier?   sys:timezone-name
-    +-- (recurrence-bound)?
+    +-- (recurrence-end)?
     |  +--:(until)
     |  |  +-- until?              yang:date-and-time
     |  +--:(count)
@@ -1784,7 +1784,7 @@ module: ietf-schedule
    and time value is neither reported in the format of UTC nor time zone offset
    to UTC.<a href="#section-3.3.5-3" class="pilcrow">¶</a></p>
 <p id="section-3.3.5-4">The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-bound" choice. The "start-time" value always counts
+  indicated by the "recurrence-end" choice. The "start-time" value always counts
   as the first occurrence.<a href="#section-3.3.5-4" class="pilcrow">¶</a></p>
 <p id="section-3.3.5-5">Unlike the definition of "recurrence-utc" grouping (<a href="#sec-rec-utc" class="auto internal xref">Section 3.3.4</a>),
    "recurrence-with-time-zone" is intended to promote human readability over
@@ -1819,7 +1819,7 @@ module: ietf-schedule
     +-- recurrence-first
     |  +-- start-time-utc?   yang:date-and-time
     |  +-- duration?         uint32
-    +-- (recurrence-bound)?
+    +-- (recurrence-end)?
     |  +--:(until)
     |  |  +-- utc-until?          yang:date-and-time
     |  +--:(count)
@@ -1952,7 +1952,7 @@ module: ietf-schedule
     |  +-- start-time?             yang:date-and-time
     |  +-- duration?               duration
     |  +-- time-zone-identifier?   sys:timezone-name
-    +-- (recurrence-bound)?
+    +-- (recurrence-end)?
     |  +--:(until)
     |  |  +-- until?              yang:date-and-time
     |  +--:(count)
@@ -2733,20 +2733,20 @@ module ietf-schedule {
            the other instances in the recurrence set.";
       }
     }
-    choice recurrence-bound {
+    choice recurrence-end {
       description
-        "Modes to bound the recurrence rule. If no choice is
-         indicated, the recurrence rule is considered to repeat
-         forever.";
+        "Modes to control the end of a recurrence rule. If no
+         choice is indicated, the recurrence rule is considered
+         to repeat forever.";
       case until {
         description
-          "This case defines a way that bounds the recurrence
-           rule in an inclusive manner.";
+          "This case defines a way that limits the end of a
+           recurrence rule in an inclusive manner.";
         leaf utc-until {
           type yang:date-and-time;
           description
             "This parameter specifies a date and time value to
-             inclusively bound the recurrence in UTC format. If
+             inclusively terminate the recurrence in UTC format. If
              the value specified by this parameter is synchronized
              with the specified recurrence, it becomes the last
              instance of the recurrence.";
@@ -2755,12 +2755,12 @@ module ietf-schedule {
       case count {
         description
           "This case defines the number of occurrences at which
-           to range-bound the recurrence.";
+           to terminate the recurrence.";
         leaf count {
           type uint32;
           description
             "The positive number of occurrences at which to
-             range-bound the recurrence.";
+             terminate the recurrence.";
         }
       }
     }
@@ -2798,9 +2798,9 @@ module ietf-schedule {
            the format of UTC nor time zone offset to UTC.";
       }
     }
-    choice recurrence-bound {
+    choice recurrence-end {
       description
-        "Modes to bound the recurrence rule. If no choice is
+        "Modes to terminate the recurrence rule. If no choice is
          indicated, the recurrence rule is considered to repeat
          forever.";
       case until {
@@ -2810,7 +2810,7 @@ module ietf-schedule {
         leaf until {
           type yang:date-and-time;
           description
-            "Specifies a date and time value to bound the
+            "Specifies a date and time value to terminate the
              recurrence. If the value specified by this parameter
              is synchronized with the specified recurrence, it
              becomes the last instance of the recurrence.";
@@ -2824,7 +2824,7 @@ module ietf-schedule {
           type uint32;
           description
             "The positive number of occurrences at which to
-             range-bound the recurrence.";
+             terminate the recurrence.";
         }
       }
     }
