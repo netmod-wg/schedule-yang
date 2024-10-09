@@ -230,7 +230,9 @@ Table of Contents
       -  recurrence: This type is used for a recurrence-based schedule
 
    *  "schedule-state": Indicates the status of a schedule (enabled,
-      disabled, finished, conflicted, etc.).
+      disabled, conflicted, finished, etc.).  This identity can also be
+      used to manage the state of individual instances of a recurrence-
+      based schedule.
 
    *  "discard-action": Specifies the action to perform when a schedule
       is discarded (e.g., generate a warning or an error message).
