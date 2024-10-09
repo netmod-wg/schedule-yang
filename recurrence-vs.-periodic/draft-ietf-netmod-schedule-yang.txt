@@ -215,7 +215,8 @@ Table of Contents
 
       -  recurrence: This type is used for a recurrence-based schedule.
          A recurrence may be periodic (i.e., repeat over the same
-         period) or not (i.e., repeat in a non regular manner).
+         period, e.g., every five minutes) or not (i.e., repeat in a
+         non-regular manner, e.g., every day at 8 and 9 AM).
 
    *  "schedule-state": Indicates the status of a schedule (enabled,
       disabled, finished, conflicted, etc.).
