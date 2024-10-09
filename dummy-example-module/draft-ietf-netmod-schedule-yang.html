@@ -3322,10 +3322,10 @@ module ietf-schedule {
    module used for illustration purposes:<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A-2">
 <pre>
-module example-sch-usage {
+module example-sch-usage-1 {
   yang-version 1.1;
-  namespace "http://example.com/example-sch-usage";
-  prefix "ex-schu";
+  namespace "http://example.com/example-sch-usage-1";
+  prefix "ex-schu-1";
 
   import ietf-schedule {
     prefix "schedule";
@@ -3334,31 +3334,104 @@ module example-sch-usage {
   container generic-schedule-params {
     uses schedule:generic-schedule-params;
   }
-  container period-of-time {
-    uses schedule:period-of-time;
-  }
-  container recurrence-basic {
-    uses schedule:recurrence-basic;
-  }
-  container recurrence-utc {
-    uses schedule:recurrence-utc;
-  }
-  container recurrence-with-time-zone {
-    uses schedule:recurrence-with-time-zone;
-  }
-  container recurrence-utc-with-date-times {
-    uses schedule:recurrence-utc-with-date-times;
-  }
-  container recurrence-time-zone-with-date-times {
-    uses schedule:recurrence-time-zone-with-date-times;
-  }
-  container icalendar-recurrence {
-    uses schedule:icalendar-recurrence;
-  }
   container schedule-status {
     uses schedule:schedule-status;
   }
 }
+
+module example-sch-usage-2 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-2";
+  prefix "ex-schu2";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  container period-of-time {
+    uses schedule:period-of-time;
+  }
+}
+
+module example-sch-usage-3 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-3";
+  prefix "ex-schu-3";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  container recurrence-basic {
+    uses schedule:recurrence-basic;
+  }
+}
+
+module example-sch-usage-4 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-4";
+  prefix "ex-schu-4";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  container recurrence-utc {
+    uses schedule:recurrence-utc;
+  }
+}
+
+module example-sch-usage-5 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-5";
+  prefix "ex-schu-5";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  container recurrence-with-time-zone {
+    uses schedule:recurrence-with-time-zone;
+  }
+}
+
+module example-sch-usage-6 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-6";
+  prefix "ex-schu-6";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  container recurrence-utc-with-date-times {
+    uses schedule:recurrence-utc-with-date-times;
+  }
+}
+
+module example-sch-usage-7 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-7";
+  prefix "ex-schu-8";
+
+  import ietf-schedule {
+    prefix "schedule";
+
+  container recurrence-time-zone-with-date-times {
+    uses schedule:recurrence-time-zone-with-date-times;
+  }
+}
+
+module example-sch-usage-8 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-8";
+  prefix "ex-schu-8";
+
+  container icalendar-recurrence {
+    uses schedule:icalendar-recurrence;
+  }
+}
+
 </pre><a href="#appendix-A-2" class="pilcrow">¶</a>
 </div>
 <p id="appendix-A-3">For each example, only the message body is provided with
