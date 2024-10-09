@@ -138,7 +138,7 @@ System:
       + one-shot: The schedule will trigger an action without the duration/end time being
        specified and then the schedule will disable itself ({{Section 3.3 of !RFC3231}}).
       + period: The schedule is a period-based schedule consisting either a start and end or a start and positive duration of time.
-      + recurrence: This type is used for a recurrence-based schedule
+      + recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period) or not (i.e., repeat in a non regular manner).
    * "schedule-state": Indicates the status of a schedule (enabled, disabled, finished, conflicted, etc.).
    * "discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).
 
