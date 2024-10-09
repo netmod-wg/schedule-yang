@@ -19,7 +19,7 @@ module: ietf-schedule
     |  +-- start-time?             yang:date-and-time
     |  +-- duration?               duration
     |  +-- time-zone-identifier?   sys:timezone-name
-    +-- (recurrence-bound)?
+    +-- (recurrence-end)?
     |  +--:(until)
     |  |  +-- until?              yang:date-and-time
     |  +--:(count)
