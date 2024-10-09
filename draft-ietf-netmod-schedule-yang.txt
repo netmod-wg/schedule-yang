@@ -1987,7 +1987,7 @@ Appendix A.  Examples of Format Representation
 
    This section provides some examples to illustrate the use of the
    period and recurrence formats defined in Section 6.  The following
-   modules used for illustration purposes:
+   modules are used for illustration purposes:
 
    module example-sch-usage-1 {
      yang-version 1.1;
