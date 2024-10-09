@@ -261,7 +261,7 @@ The interval specifies when a schedule will occur, combined with the frequency p
 an occurence will last.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-bound" choice. The "start-time-utc" value always counts
+  indicated by the "recurrence-end" choice. The "start-time-utc" value always counts
   as the first occurrence.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling contexts
@@ -285,7 +285,7 @@ an occurence will last.
    to UTC.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-bound" choice. The "start-time" value always counts
+  indicated by the "recurrence-end" choice. The "start-time" value always counts
   as the first occurrence.
 
    Unlike the definition of "recurrence-utc" grouping ({{sec-rec-utc}}),
