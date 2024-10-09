@@ -139,7 +139,7 @@ System:
        specified and then the schedule will disable itself ({{Section 3.3 of !RFC3231}}).
       + period: The schedule is a period-based schedule consisting either a start and end or a start and positive duration of time.
       + recurrence: This type is used for a recurrence-based schedule
-   * "schedule-state": Indicates the status of a schedule (enabled, disabled, finished, etc.).
+   * "schedule-state": Indicates the status of a schedule (enabled, disabled, finished, conflicted, etc.).
    * "discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).
 
 ##  Groupings {#sec-grp}
@@ -389,7 +389,8 @@ an occurence will last.
    a network device or controller if multiple scheduling contexts exists.
 
    The "state" parameter is defined to configure/expose the scheduling state,
-   depending on the use of the grouping. The "identityref" type is used for this
+   depending on the use of the grouping. For a recurrence-based schedule, it
+   represents the state of the overall recurrence. The "identityref" type is used for this
    parameter to allow extensibility in future modules.
 
    The "version" parameter is used to track the current schedule version
