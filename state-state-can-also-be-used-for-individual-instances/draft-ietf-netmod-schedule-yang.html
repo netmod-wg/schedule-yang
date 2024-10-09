@@ -1307,7 +1307,8 @@ and <span>[<a href="#I-D.ietf-tvr-schedule-yang" class="cite xref">I-D.ietf-tvr-
 are designed to be applicable for scheduling purposes such as event, policy,
 services or resources based on date and time.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">This document does not make any assumption about the nature of actions that are
-triggered by the schedules.<a href="#section-1-2" class="pilcrow">¶</a></p>
+triggered by the schedules. Detection and resolution of any schedule conflicts
+are beyond the scope of this document.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3"><a href="#sec-mib" class="auto internal xref">Section 5</a> discusses relationship with the managed objects defined in <span>[<a href="#RFC3231" class="cite xref">RFC3231</a>]</span>.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4"><a href="#usage" class="auto internal xref">Appendix A</a> describes a set of examples to illustrate the use of the common schedule groupings (<a href="#sec-grp" class="auto internal xref">Section 3.3</a>).
 And <a href="#sec-ext" class="auto internal xref">Appendix B</a> provides sample modules to exemplify how future modules can use the extensibility
@@ -2086,11 +2087,9 @@ module: ietf-schedule
 <p id="section-3.3.9-3">The "schedule-id" parameter is useful to uniquely identify a schedule in
    a network device or controller if multiple scheduling contexts exists.<a href="#section-3.3.9-3" class="pilcrow">¶</a></p>
 <p id="section-3.3.9-4">The "state" parameter is defined to configure/expose the scheduling state,
-   depending on the use of the grouping. The "identityref" type is used for this
-   parameter to allow extensibility in future modules. For example, a "conflict"
-   state is valid in scheduling contexts where multiple systems struggle for the
-   scheduling of the same property. The conflict may be induced by, e.g., multiple
-   entities managing the schedules for the same target component.<a href="#section-3.3.9-4" class="pilcrow">¶</a></p>
+   depending on the use of the grouping. For a recurrence-based schedule, it
+   represents the state of the overall recurrence. The "identityref" type is used for this
+   parameter to allow extensibility in future modules.<a href="#section-3.3.9-4" class="pilcrow">¶</a></p>
 <p id="section-3.3.9-5">The "version" parameter is used to track the current schedule version
    information. The version can be bumped by the entity who create the schedule.
    The "last-update" parameter identifies when the schedule was last modified.
@@ -2506,26 +2505,33 @@ module ietf-schedule {
   identity enabled {
     base schedule-state;
     description
-      "Indicates a recurrence with an enabled state.";
+      "Indicates a schedule with an enabled state.";
   }
 
   identity finished {
     base schedule-state;
     description
-      "Indicates a recurrence with a finished state.
+      "Indicates a schedule with a finished state.
        The finished state indicates that the schedule has ended.";
   }
 
   identity disabled {
     base schedule-state;
     description
-      "Indicates a recurrence with a disabled state.";
+      "Indicates a schedule with a disabled state.";
   }
 
   identity out-of-date {
     base schedule-state;
     description
-      "Indicates a recurrence with an out-of-date state.";
+      "Indicates a schedule with an out-of-date state.";
+  }
+
+  identity conflicted {
+    base schedule-state;
+    description
+      "Indicates a schedule with a conflicted state with other
+       schedules.";
   }
 
   identity discard-action {
@@ -4024,7 +4030,7 @@ module example-sch-capacity-res {
       </h2>
 <p id="appendix-D-1">This work is derived from the <span>[<a href="#I-D.ietf-opsawg-ucl-acl" class="cite xref">I-D.ietf-opsawg-ucl-acl</a>]</span>. There is a desire
    from the OPSAWG to see this model be separately defined for wide use in scheduling context.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
-<p id="appendix-D-2">Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, and Dhruv Dhody
+<p id="appendix-D-2">Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, Steve Baillargeon, and Dhruv Dhody
    for their valuable comments and inputs to this work.<a href="#appendix-D-2" class="pilcrow">¶</a></p>
 <p id="appendix-D-3">Many thanks to the authors of <span>[<a href="#I-D.ietf-tvr-schedule-yang" class="cite xref">I-D.ietf-tvr-schedule-yang</a>]</span>, <span>[<a href="#I-D.contreras-opsawg-scheduling-oam-tests" class="cite xref">I-D.contreras-opsawg-scheduling-oam-tests</a>]</span>, and <span>[<a href="#I-D.ietf-netmod-eca-policy" class="cite xref">I-D.ietf-netmod-eca-policy</a>]</span>
    for the constructive discussion during IETF#118.<a href="#appendix-D-3" class="pilcrow">¶</a></p>
