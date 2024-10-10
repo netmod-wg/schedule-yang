@@ -3442,9 +3442,9 @@ module example-sch-usage-8 {
 <a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-the-generic-schedule-params-" class="section-name selfRef">The "generic-schedule-params" Grouping</a>
         </h3>
 <p id="appendix-A.1-1"><a href="#ex-0" class="auto internal xref">Figure 11</a> illustrates the example of a requested schedule that needs to start no earlier than
-   08:00 AM, January 1, 2025 and end no later than 8:00 PM, January 31, 2025 (Beijing time).
-   Schedule requests that fail to meet the requirements are ignored by the system as indicates by
-   "discard-action".<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
+08:00 AM, January 1, 2025 and end no later than 8:00 PM, January 31, 2025 (Beijing time).
+Schedule requests that fail to meet the requirements are ignored by the system as indicates by
+"discard-action".<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
 <span id="name-generic-parameters-with-max"></span><div id="ex-0">
 <figure id="figure-11">
           <div class="alignLeft art-text artwork" id="appendix-A.1-2.1">
@@ -3463,23 +3463,19 @@ module example-sch-usage-8 {
 <a href="#name-generic-parameters-with-max" class="selfRef">Generic Parameters with "max-allowed-end</a>
           </figcaption></figure>
 </div>
-<div class="alignLeft art-text artwork" id="appendix-A.1-3">
-<pre>
-To illustrate the difference between "max-allowed-end" and "validity" parameters,
-{{ex-00}} shows the example of a requested schedule that needs to start no earlier than
-08:00 AM, January 1, 2025 (Beijing time). Schedule requests that fail to meet the
+<p id="appendix-A.1-3">To illustrate the difference between "max-allowed-end" and "validity" parameters,
+<a href="#ex-00" class="auto internal xref">Figure 12</a> shows the example of a requested schedule that needs to start no earlier than
+08:00 AM, January 1, 2025 (Paris time). Schedule requests that fail to meet the
 requirements are discarded with warning messages. The requested schedule may end
 after 8:00 PM, January 31, 2025, but any occurrences that are generated
-after that time would be considered as invalid.
-</pre><a href="#appendix-A.1-3" class="pilcrow">¶</a>
-</div>
+after that time would be considered as invalid.<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
 <span id="name-generic-parameters-with-val"></span><div id="ex-00">
 <figure id="figure-12">
           <div class="alignLeft art-text artwork" id="appendix-A.1-4.1">
 <pre>
 {
   "example-sch-usage-1:generic-schedule-params": {
-    "time-zone-identifier": "China/Beijing",
+    "time-zone-identifier": "France/Paris",
     "validity": "2025-01-31T20:00:00",
     "min-allowed-start": "2025-01-01T08:00:00",
     "discard-action": "ietf-schedule:warning"
