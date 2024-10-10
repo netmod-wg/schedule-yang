@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-08T01:03:33.008034+00:00",
+  "timestamp": "2024-10-10T01:03:08.751592+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -269,6 +269,42 @@
           "updatedAt": "2024-07-09T07:15:36Z"
         }
       ]
+    },
+    {
+      "number": 50,
+      "id": "I_kwDOLuooYM6Zelvo",
+      "title": "Add an example to illustrate the difference between validity and max-allowed-end",
+      "url": "https://github.com/netmod-wg/schedule-yang/issues/50",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "QiufangMa"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-09T06:46:06Z",
+      "updatedAt": "2024-10-09T07:54:10Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 51,
+      "id": "I_kwDOLuooYM6Zemcg",
+      "title": "update grouping examples so that they can be validated",
+      "url": "https://github.com/netmod-wg/schedule-yang/issues/51",
+      "state": "CLOSED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "QiufangMa"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-09T06:46:39Z",
+      "updatedAt": "2024-10-09T11:39:55Z",
+      "closedAt": "2024-10-09T11:39:55Z",
+      "comments": []
     }
   ],
   "pulls": [
@@ -2512,26 +2548,468 @@
       "id": "PR_kwDOLuooYM59lK-K",
       "title": "Reshard-review",
       "url": "https://github.com/netmod-wg/schedule-yang/pull/45",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "boucadair",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-10-04T06:40:49Z",
-      "updatedAt": "2024-10-04T13:05:46Z",
+      "updatedAt": "2024-10-09T05:12:55Z",
       "baseRepository": "netmod-wg/schedule-yang",
       "baseRefName": "main",
       "baseRefOid": "5c6d8ba72ab0eb650c151cd02feb76578c1d2b7d",
       "headRepository": "netmod-wg/schedule-yang",
       "headRefName": "reshad-review",
       "headRefOid": "1c641293a395860f11d2c0df4ef1322ba50899fa",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-10-09T05:12:55Z",
+      "mergedAt": "2024-10-09T05:12:55Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "36d16eac5ac6184d662d3b2287c0419fac34ee53"
+      },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 46,
+      "id": "PR_kwDOLuooYM596W12",
+      "title": "clarify schedule conflicts detection and resolution are out of scope; define conflicted state identity",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/46",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-08T08:03:03Z",
+      "updatedAt": "2024-10-09T05:19:22Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "5c6d8ba72ab0eb650c151cd02feb76578c1d2b7d",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "d31d53597067e8c4f2604540d54f41bf388ae32f",
+      "closedAt": "2024-10-09T05:19:22Z",
+      "mergedAt": "2024-10-09T05:19:22Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "26607853c85ebda62017d3a0b3a370ee297f945c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM6MS01Y",
+          "commit": {
+            "abbreviatedOid": "f5cc4a6"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Thanks. \r\n\r\nI would ACK Steve as this was triggered by a comment from him. \r\n\r\nsee the comment below about individual recurrence state.",
+          "createdAt": "2024-10-08T08:17:32Z",
+          "updatedAt": "2024-10-08T08:24:58Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nare beyond the scope of this document.\r\n```",
+              "createdAt": "2024-10-08T08:17:32Z",
+              "updatedAt": "2024-10-08T08:24:58Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "This change is consistent with the use in the draft. However, there might be cases where we may need to track the state of a recurrence. For example, a global schedule can be enabled but a given occurrence skipped/disabled/conflict/etc. The use of distinct identities would allow to customize allowed values.",
+              "createdAt": "2024-10-08T08:23:48Z",
+              "updatedAt": "2024-10-08T08:24:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM6MTKyE",
+          "commit": {
+            "abbreviatedOid": "f5cc4a6"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-08T08:47:35Z",
+          "updatedAt": "2024-10-08T08:47:35Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Yes, agree. but this might be indicated by the value of \"schedule-type\" sibling parameter: if the schedule-type is recurrence, then  the state parameter indicates the state of recurrence instances, otherwise, it indicates the state of a particular single period. Make sense? ",
+              "createdAt": "2024-10-08T08:47:35Z",
+              "updatedAt": "2024-10-08T08:47:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM6MTTfq",
+          "commit": {
+            "abbreviatedOid": "f5cc4a6"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-08T09:00:19Z",
+          "updatedAt": "2024-10-08T09:00:20Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "That would work unless we find a case where the state value of recurrence do not apply for schedules (and vice versa). On the other hand, having distinct identities (although same set values are defined in the doc) allows for better flexibility and future uses where state may deviate between the two. \r\n\r\nIf we maintain one single id, then we need to update the description to call this out. Also, update the narrative text to describe the intended behavior.\r\n\r\nThe approach you will pick, will be mine :-)",
+              "createdAt": "2024-10-08T09:00:19Z",
+              "updatedAt": "2024-10-08T09:00:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM6MUyAr",
+          "commit": {
+            "abbreviatedOid": "e0fd5b6"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-08T11:52:20Z",
+          "updatedAt": "2024-10-08T11:52:21Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "So the question is, for a recurrence rule with a set of occurrences, whether the state parameter indicates the existing occurrence status or the entire schedule status\u2014they are not always the same.\r\n\r\nFor a whole enabled schedule with a couple of conflicted/disabled/etc. occurrences cases, I am thinking there are some other parameters like failure-counter to indicate (but only a numeric value, not which of them).\r\n\r\nJust make sure we are on the same page:\r\nWhen you say \"having distinct identities\", are you referring to have another parameter like existing-occurrence-state definition? What if you're in the gap between two occurrences?\r\n\r\nWhen you say \"update the description to call this out\", are you referring to describe the state of global recurrence only?\r\n",
+              "createdAt": "2024-10-08T11:52:20Z",
+              "updatedAt": "2024-10-08T11:52:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM6MVaIl",
+          "commit": {
+            "abbreviatedOid": "f5cc4a6"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-08T13:00:10Z",
+          "updatedAt": "2024-10-08T13:00:10Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "> When you say \"having distinct identities\", are you referring to have another parameter like existing-occurrence-state definition? What if you're in the gap between two occurrences?\r\n\r\nYes for the first question. \r\nFor the second question, the same concern applies independent of whether the same or distinct state values are used.\r\n\r\n> When you say \"update the description to call this out\", are you referring to describe the state of global recurrence only?\r\n\r\nI meant, update the description to mention \"schedule (or recurrence)\"",
+              "createdAt": "2024-10-08T13:00:10Z",
+              "updatedAt": "2024-10-08T13:00:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM6Ma2MJ",
+          "commit": {
+            "abbreviatedOid": "e0fd5b6"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-09T02:50:32Z",
+          "updatedAt": "2024-10-09T02:50:32Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "> I meant, update the description to mention \"schedule (or recurrence)\"\r\n\r\nJust checked the existing description and narrative text, all are speaking about schedule already, which I think should be fine now.\r\n",
+              "createdAt": "2024-10-09T02:50:32Z",
+              "updatedAt": "2024-10-09T02:50:41Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 47,
+      "id": "PR_kwDOLuooYM5-BncH",
+      "title": "state-state can also be used for individual instances",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/47",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-09T05:17:47Z",
+      "updatedAt": "2024-10-09T07:55:44Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "26607853c85ebda62017d3a0b3a370ee297f945c",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "state-state-can-also-be-used-for-individual-instances",
+      "headRefOid": "17eccc0fb7759d7b5a816e5740119398184dc006",
+      "closedAt": "2024-10-09T07:55:44Z",
+      "mergedAt": "2024-10-09T07:55:44Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "99637d8e3e410c1bb94bb57dd8932c8984217d35"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM6Mcqc3",
+          "commit": {
+            "abbreviatedOid": "bbc1d19"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-09T07:44:24Z",
+          "updatedAt": "2024-10-09T07:44:25Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n   * \"schedule-state\": Indicates the status of a schedule (enabled, disabled, conflicted, finished, etc.). This identity can also be used\r\n```",
+              "createdAt": "2024-10-09T07:44:24Z",
+              "updatedAt": "2024-10-09T07:44:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM6Mcqhb",
+          "commit": {
+            "abbreviatedOid": "bbc1d19"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-09T07:44:33Z",
+          "updatedAt": "2024-10-09T07:44:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 48,
+      "id": "PR_kwDOLuooYM5-B4Sg",
+      "title": "change bound to end",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/48",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-09T06:18:14Z",
+      "updatedAt": "2024-10-09T07:42:19Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "26607853c85ebda62017d3a0b3a370ee297f945c",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "change-bound-to-end",
+      "headRefOid": "f09e4e4d19c2a08846f2af13121c0a9d534cdabc",
+      "closedAt": "2024-10-09T07:42:19Z",
+      "mergedAt": "2024-10-09T07:42:19Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "14c83a5ce7de68673771326234e2a03df644c66f"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM6McpAl",
+          "commit": {
+            "abbreviatedOid": "f09e4e4"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-09T07:41:41Z",
+          "updatedAt": "2024-10-09T07:41:41Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 49,
+      "id": "PR_kwDOLuooYM5-CDMJ",
+      "title": "recurrence vs. periodic",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/49",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-09T06:43:40Z",
+      "updatedAt": "2024-10-09T07:58:53Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "99637d8e3e410c1bb94bb57dd8932c8984217d35",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "recurrence-vs.-periodic",
+      "headRefOid": "a5b2312edd465e571505604543ec9d9f4b64dbf1",
+      "closedAt": "2024-10-09T07:58:53Z",
+      "mergedAt": "2024-10-09T07:58:53Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "494108345361da01a4689e4a03ccf8dc0dab8e11"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM6McnuB",
+          "commit": {
+            "abbreviatedOid": "d97970a"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-09T07:39:30Z",
+          "updatedAt": "2024-10-09T07:39:30Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n      + recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period, e.g., every five minutes) or not (i.e., repeat in a non-regular manner, e.g., every day at 8 and 9 AM).\r\n```\r\nI am trying to clarify what is a non-regular manner, better?",
+              "createdAt": "2024-10-09T07:39:30Z",
+              "updatedAt": "2024-10-09T07:39:30Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 52,
+      "id": "PR_kwDOLuooYM5-COk_",
+      "title": "frequency/interval terminology",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/52",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-09T07:04:15Z",
+      "updatedAt": "2024-10-09T07:43:03Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "26607853c85ebda62017d3a0b3a370ee297f945c",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "frequency/interval-terminology",
+      "headRefOid": "b4b11e4a7e107eebf8b4914b313eb67e821e9f7e",
+      "closedAt": "2024-10-09T07:43:02Z",
+      "mergedAt": "2024-10-09T07:43:02Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "2f529312ff6ea816727a1c19f6535254d88885ea"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM6Mchyk",
+          "commit": {
+            "abbreviatedOid": "40eb205"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-09T07:30:54Z",
+          "updatedAt": "2024-10-09T07:34:03Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n: Characterizes the type of a recurrence rule. Values are taken from \"FREQ\" rule in {{Section 3.3.10 of !RFC5545}}.\r\n```",
+              "createdAt": "2024-10-09T07:30:54Z",
+              "updatedAt": "2024-10-09T07:34:03Z"
+            },
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\n: Refers to an integer that specifies at which intervals a recurrence rule repeats. Values are taken from \"INTERVAL\" rule in {{Section 3.3.10 of !RFC5545}}.\r\n```",
+              "createdAt": "2024-10-09T07:33:42Z",
+              "updatedAt": "2024-10-09T07:34:03Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 53,
+      "id": "PR_kwDOLuooYM5-DRaZ",
+      "title": "dummy example module for examples",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/53",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-09T09:18:37Z",
+      "updatedAt": "2024-10-09T11:39:54Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "494108345361da01a4689e4a03ccf8dc0dab8e11",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "dummy-example-module",
+      "headRefOid": "ed3d62591130adde47e7f80400e4b517ff74d859",
+      "closedAt": "2024-10-09T11:39:54Z",
+      "mergedAt": "2024-10-09T11:39:54Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "c7f7a1060bf5334ed7f307e9ad01e84e65f9bfb1"
+      },
+      "comments": [
+        {
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Thanks Med! ! I was making very similar changes locally, but the validation failed when I tested the generic-schedule-params grouping use, the error message was: libyang err : Mandatory node \"period-start\" instance does not exist. (Schema location \"/example-schedule-use:period-of-time/period-start\", line number 8.)\r\n\r\nEasy fix is to remove the mandatory true statement in the ietf-schedule-yang module. Otherwise use each grouping in separate example modules.",
+          "createdAt": "2024-10-09T10:27:48Z",
+          "updatedAt": "2024-10-09T10:27:48Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > Thanks Med! ! I was making very similar changes locally, but the validation failed when I tested the generic-schedule-params grouping use, the error message was: libyang err : Mandatory node \"period-start\" instance does not exist. (Schema location \"/example-schedule-use:period-of-time/period-start\", line number 8.)\r\n> \r\n> Easy fix is to remove the mandatory true statement in the ietf-schedule-yang module. Otherwise use each grouping in separate example modules.\r\n\r\nWent with separate modules.",
+          "createdAt": "2024-10-09T11:37:41Z",
+          "updatedAt": "2024-10-09T11:37:41Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM6MeBUf",
+          "commit": {
+            "abbreviatedOid": "27449f8"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Thanks Med! ! I was making very similar changes locally, but the validation failed when I tested the generic-schedule-params grouping use, the error message was:\r\nlibyang err : Mandatory node \"period-start\" instance does not exist. (Schema location \"/example-schedule-use:period-of-time/period-start\", line number 8.)",
+          "createdAt": "2024-10-09T10:04:19Z",
+          "updatedAt": "2024-10-09T10:04:19Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLuooYM6MeO4K",
+          "commit": {
+            "abbreviatedOid": "27449f8"
+          },
+          "author": "QiufangMa",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-09T10:29:53Z",
+          "updatedAt": "2024-10-09T10:29:53Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\r\n{::include-fold ./yang/example-sch-usage.yang}\r\n```\r\nFix the compile errors.",
+              "createdAt": "2024-10-09T10:29:53Z",
+              "updatedAt": "2024-10-09T10:29:54Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
