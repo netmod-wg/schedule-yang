@@ -885,7 +885,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ## Example: Schedule Network Properties to Change Based on Date and Time {#augments}
 
    Network properties may change over a specific period of time or based on a
-   recurrence rule, e.g., {{?I-D.ietf-tvr-use-cases}}.
+   recurrence rule, e.g., {{?RFC9657}}.
    The following example module which augments the "recurrence-utc-with-date-times"
    grouping from "ietf-schedule" module shows how a scheduled based attribute
    could be defined.
