@@ -580,12 +580,12 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 ~~~~
 {: #ex-0 title="Generic Parameters with "max-allowed-end" for Schedule Validation"}
 
-    To illustrate the subtle difference between "max-allowed-end" and "validity" parameters,
-    {{ex-00}} illustrates the example of a requested schedule that needs to start no earlier than
-    08:00 AM, January 1, 2025 (Beijing time), schedule requests that fail to meet the
+    To illustrate the difference between "max-allowed-end" and "validity" parameters,
+    {{ex-00}} shows the example of a requested schedule that needs to start no earlier than
+    08:00 AM, January 1, 2025 (Beijing time). Schedule requests that fail to meet the
     requirements are discarded with warning messages. The requested schedule may end
-    after 8:00 PM, January 31, 2025, but any occurrences generating
-    after that time would be considered invalid.
+    after 8:00 PM, January 31, 2025, but any occurrences that are generated
+    after that time would be considered as invalid.
 
 ~~~~
 {
