@@ -147,8 +147,9 @@ System:
       + one-shot: The schedule will trigger an action without the duration/end time being
        specified and then the schedule will disable itself ({{Section 3.3 of !RFC3231}}).
       + period: The schedule is a period-based schedule consisting either a start and end or a start and positive duration of time.
-      + recurrence: This type is used for a recurrence-based schedule
-   * "schedule-state": Indicates the status of a schedule (enabled, disabled, finished, conflicted, etc.).
+      + recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period, e.g., every five minutes) or not (i.e., repeat in a non-regular manner, e.g., every day at 8 and 9 AM).
+   * "schedule-state": Indicates the status of a schedule (enabled, disabled, conflicted, finished, etc.). This identity can also be used
+     to manage the state of individual instances of a recurrence-based schedule.
    * "discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).
 
 ##  Groupings {#sec-grp}
@@ -550,10 +551,12 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 # Examples of Format Representation {#usage}
 
    This section provides some examples to illustrate the use of the
-   period and recurrence formats defined in {{sec-schedule}}.
+   period and recurrence formats defined in {{sec-schedule}}. The following
+   modules are used for illustration purposes:
 
-   Note that a "grouping" does not define any data nodes in the schema tree;
-   the examples illustrated are thus for the ease of understanding.
+~~~~
+{::include-fold ./yang/example-sch-usage.yang}
+~~~~
 
    For each example, only the message body is provided with
    JSON used for encoding per the guidance in {{?RFC7951}}.
@@ -567,10 +570,12 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "time-zone-identifier": "China/Beijing",
-  "min-allowed-start": "2025-01-01T08:00:00",
-  "max-allowed-end": "2025-01-31T20:00:00",
-  "discard-action": "ietf-schedule:silently-discard"
+  "example-sch-usage-1:generic-schedule-params": {
+    "time-zone-identifier": "China/Beijing",
+    "min-allowed-start": "2025-01-01T08:00:00",
+    "max-allowed-end": "2025-01-31T20:00:00",
+    "discard-action": "ietf-schedule:silently-discard"
+  }
 }
 ~~~~
 {: #ex-0 title="Generic Parameters for Schedule Validation"}
@@ -582,8 +587,10 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "period-start": "2025-01-01T08:00:00Z",
-  "period-end": "2027-12-31T18:00:00Z"
+  "example-sch-usage-2:period-of-time": {
+    "period-start": "2025-01-01T08:00:00Z",
+    "period-end": "2027-12-31T18:00:00Z"
+  }
 }
 ~~~~
 {: #ex-1 title="Simple Start/End Schedule"}
@@ -593,8 +600,10 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "period-start": "2025-01-01T08:00:00Z",
-  "duration": "P15DT05:20:00"
+  "example-sch-usage-2:period-of-time": {
+    "period-start": "2025-01-01T08:00:00Z",
+    "duration": "P15DT05:20:00"
+  }
 }
 ~~~~
 {: #ex-2 title="Simple Schedule with Duration"}
@@ -604,9 +613,11 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "period-start": "2025-11-19T02:00:00",
-  "time-zone-identifier": "America/Los_Angeles",
-  "duration": "P20W"
+  "example-sch-usage-2:period-of-time": {
+    "period-start": "2025-11-19T02:00:00",
+    "time-zone-identifier": "America/Los_Angeles",
+    "duration": "P20W"
+  }
 }
 ~~~~
 {: #ex-3 title="Simple Schedule with Time Zone Indication"}
@@ -617,9 +628,11 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "recurrence-description": "forever recurrence rule",
-  "frequency": "ietf-schedule:daily",
-  "interval": 2,
+  "example-sch-usage-3:recurrence-basic": {
+    "recurrence-description": "forever recurrence rule",
+    "frequency": "ietf-schedule:daily",
+    "interval": 2
+  }
 }
 ~~~~
 {: #ex-4 title="Simple Schedule with Recurrence"}
@@ -631,13 +644,15 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "recurrence-first": {
-    "start-time-utc": "2025-12-01T08:00:00Z",
-    "duration": 3600;
-  },
-  "frequency": "ietf-schedule:daily",
-  "interval": 1,
-  "utc-until": "2025-12-31T23:59:59Z"
+  "example-sch-usage-4:recurrence-utc": {
+    "recurrence-first": {
+      "start-time-utc": "2025-12-01T08:00:00Z",
+      "duration": 3600
+    },
+    "frequency": "ietf-schedule:daily",
+    "interval": 1,
+    "utc-until": "2025-12-31T23:59:59Z"
+  }
 }
 ~~~~
 {: #ex-5 title="Simple Schedule with Recurrence in UTC"}
@@ -649,14 +664,16 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "recurrence-first": {
-    "start-time": "2025-12-01T15:00:00",
-    "duration": "PT00:10:00",
-    "time-zone-identifier": "America/New_York"
-  },
-  "frequency": "ietf-schedule:hourly",
-  "interval": 2,
-  "count": 10
+  "example-sch-usage-5:recurrence-with-time-zone": {
+    "recurrence-first": {
+      "start-time": "2025-12-01T15:00:00",
+      "duration": "PT00:10:00",
+      "time-zone-identifier": "America/New_York"
+    },
+    "frequency": "ietf-schedule:hourly",
+    "interval": 2,
+    "count": 10
+  }
 }
 ~~~~
 {: #ex-6 title="Simple Schedule with Recurrence with Time Zone Indication"}
@@ -669,22 +686,24 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "recurrence-first": {
-    "start-time-utc": "2025-06-01T09:00:00Z",
-  },
-  "frequency": "ietf-schedule:daily",
-  "interval": 2,
-  "utc-until": "2025-06-30T23:59:59Z",
-  "period-timeticks": [
-    {
-      "period-start": "3240000",
-      "period-end": "3420000"
-     },
-     {
-      "period-start": "5400000",
-      "period-end": "5640000"
-     }
-   ]
+  "example-sch-usage-6:recurrence-utc-with-date-times": {
+    "recurrence-first": {
+      "start-time-utc": "2025-06-01T09:00:00Z"
+    },
+    "frequency": "ietf-schedule:daily",
+    "interval": 2,
+    "utc-until": "2025-06-30T23:59:59Z",
+    "period-timeticks": [
+      {
+        "period-start": "3240000",
+        "period-end": "3420000"
+      },
+      {
+        "period-start": "5400000",
+        "period-end": "5640000"
+      }
+    ]
+  }
 }
 ~~~~
 {: #ex-7 title="Example of Recurrence With Date Times"}
@@ -697,24 +716,26 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "recurrence-first": {
-    "start-time": "2025-12-01T09:00:00",
-    "duration": "PT00:15:00",
-    "time-zone-identifier": "America/New_York"
-  },
-  "frequency": "ietf-schedule:minutely",
-  "interval": 30,
-  "until": "2025-12-01T17:00:00Z",
-  "period": [
-    {
-      "period-start": "2025-12-01T18:00:00",
-      "duration": "PT00:20:00"
+  "example-sch-usage-7:recurrence-time-zone-with-date-times": {
+    "recurrence-first": {
+      "start-time": "2025-12-01T09:00:00",
+      "duration": "PT00:15:00",
+      "time-zone-identifier": "America/New_York"
     },
-    {
-      "period-start": "2025-12-01T18:30:00",
-      "duration": "PT00:20:00"
-    }
-   ]
+    "frequency": "ietf-schedule:minutely",
+    "interval": 30,
+    "until": "2025-12-01T17:00:00Z",
+    "period": [
+      {
+        "period-start": "2025-12-01T18:00:00",
+        "duration": "PT00:20:00"
+      },
+      {
+        "period-start": "2025-12-01T18:30:00",
+        "duration": "PT00:20:00"
+      }
+    ]
+  }
 }
 ~~~~
 {: #ex-8 title="Example of Advanced Recurrence Schedule"}
@@ -726,18 +747,22 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "recurrence-first": {
-    "start-time": "2024-01-27T08:00:00",
-    "time-zone-identifier": "America/New_York"
-  },
-  "frequency": "ietf-schedule:monthly",
-  "count": 10,
-  "byday": [
-    {
-      "direction": [-1],
-      "weekday": "saturday"
-    }
-  ]
+  "example-sch-usage-8:icalendar-recurrence": {
+    "recurrence-first": {
+      "start-time": "2024-01-27T08:00:00",
+      "time-zone-identifier": "America/New_York"
+    },
+    "frequency": "ietf-schedule:monthly",
+    "count": 10,
+    "byday": [
+      {
+        "direction": [
+          -1
+        ],
+        "weekday": "saturday"
+      }
+    ]
+  }
 }
 ~~~~
 {: #ex-9 title="Simple iCalendar Recurrence"}
@@ -747,19 +772,33 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "recurrence-first": {
-  "start-time": "2025-01-01"
-  },
-  "frequency": "ietf-schedule:monthly",
-  "until": "2025-12-25",
-  "byday": [
-    { "weekday": "monday"},
-    { "weekday": "tuesday"},
-    { "weekday": "wednesday"},
-    { "weekday": "thursday"},
-    { "weekday": "friday"}
-  ],
-  "bysetpos": [-1]
+  "example-sch-usage-8:icalendar-recurrence": {
+    "recurrence-first": {
+      "start-time": "2025-01-01"
+    },
+    "frequency": "ietf-schedule:monthly",
+    "until": "2025-12-25",
+    "byday": [
+      {
+        "weekday": "monday"
+      },
+      {
+        "weekday": "tuesday"
+      },
+      {
+        "weekday": "wednesday"
+      },
+      {
+        "weekday": "thursday"
+      },
+      {
+        "weekday": "friday"
+      }
+    ],
+    "bysetpos": [
+      -1
+    ]
+  }
 }
 ~~~~
 {: #ex-10 title="Example of Advanced iCalendar Recurrence"}
@@ -770,14 +809,31 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "recurrence-first": {
-    "start-time": "2025-12-01T09:00:00Z"
-  },
-  "until": "2025-12-01T16:40:00Z",
-  "frequency": "ietf-schedule:minutely",
-  "byminute": [0, 20, 40],
-  "byhour": [9, 10, 11, 12, 13, 14, 15, 16],
-  "exception-dates": ["2025-12-01T10:20:00Z"]
+  "example-sch-usage-8:icalendar-recurrence": {
+    "recurrence-first": {
+      "start-time": "2025-12-01T09:00:00Z"
+    },
+    "until": "2025-12-01T16:40:00Z",
+    "frequency": "ietf-schedule:minutely",
+    "byminute": [
+      0,
+      20,
+      40
+    ],
+    "byhour": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "exception-dates": [
+      "2025-12-01T10:20:00Z"
+    ]
+  }
 }
 ~~~~
 {: #ex-11 title="Example of Advanced iCalendar Recurrence with Exceptions"}
@@ -789,12 +845,18 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 ~~~~
 {
-  "state": "ietf-schedule:enabled",
-  "version": 1,
-  "schedule-type": "ietf-schedule:recurrence",
-  "counter": 9,
-  "last-occurrence": ["2025-12-01T12:00:00Z"],
-  "upcoming-occurrence": ["2025-12-01T12:20:00Z"]
+  "example-sch-usage-1:schedule-status": {
+    "state": "ietf-schedule:enabled",
+    "version": 1,
+    "schedule-type": "ietf-schedule:recurrence",
+    "counter": 9,
+    "last-occurrence": [
+      "2025-12-01T12:00:00Z"
+    ],
+    "upcoming-occurrence": [
+      "2025-12-01T12:20:00Z"
+    ]
+  }
 }
 ~~~~
 {: #ex-12 title="Example of a Schedule Status"}
