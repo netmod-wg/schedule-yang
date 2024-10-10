@@ -578,7 +578,7 @@ Schedule requests that fail to meet the requirements are ignored by the system a
   }
 }
 ~~~~
-{: #ex-0 title="Generic Parameters with "max-allowed-end" for Schedule Validation"}
+{: #ex-0 title="Generic Parameters with 'max-allowed-end' for Schedule Validation"}
 
 To illustrate the difference between "max-allowed-end" and "validity" parameters,
 {{ex-00}} shows the example of a requested schedule that needs to start no earlier than
@@ -597,7 +597,7 @@ after that time would be considered as invalid.
   }
 }
 ~~~~
-{: #ex-00 title="Generic Parameters with "validity" for Schedule Validation"}
+{: #ex-00 title="Generic Parameters with 'validity' for Schedule Validation"}
 
 ## The "period-of-time" Grouping
 
