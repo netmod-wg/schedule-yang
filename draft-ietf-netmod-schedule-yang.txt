@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 12 April 2025                                 M. Boucadair, Ed.
+Expires: 13 April 2025                                 M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                          9 October 2024
+                                                         10 October 2024
 
 
                 A Common YANG Data Model for Scheduling
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 April 2025.
+   This Internet-Draft will expire on 13 April 2025.
 
 Copyright Notice
 
@@ -1951,13 +1951,6 @@ Table of Contents
               02, 22 July 2024, <https://datatracker.ietf.org/doc/html/
               draft-ietf-tvr-schedule-yang-02>.
 
-   [I-D.ietf-tvr-use-cases]
-              Birrane, E. J., Kuhn, N., Qu, Y., Taylor, R., and L.
-              Zhang, "TVR (Time-Variant Routing) Use Cases", Work in
-              Progress, Internet-Draft, draft-ietf-tvr-use-cases-09, 29
-              February 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-tvr-use-cases-09>.
-
    [I-D.liu-netmod-yang-schedule]
               Liu, X., Bryskin, I., Beeram, V. P., Saad, T., Shah, H.
               C., and O. G. de Dios, "A YANG Data Model for
@@ -1982,6 +1975,11 @@ Table of Contents
               for Scheduled Use of Resources", RFC 8413,
               DOI 10.17487/RFC8413, July 2018,
               <https://www.rfc-editor.org/rfc/rfc8413>.
+
+   [RFC9657]  Birrane III, E., Kuhn, N., Qu, Y., Taylor, R., and L.
+              Zhang, "Time-Variant Routing (TVR) Use Cases", RFC 9657,
+              DOI 10.17487/RFC9657, October 2024,
+              <https://www.rfc-editor.org/rfc/rfc9657>.
 
 Appendix A.  Examples of Format Representation
 
@@ -2525,10 +2523,10 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
       Time
 
    Network properties may change over a specific period of time or based
-   on a recurrence rule, e.g., [I-D.ietf-tvr-use-cases].  The following
-   example module which augments the "recurrence-utc-with-date-times"
-   grouping from "ietf-schedule" module shows how a scheduled based
-   attribute could be defined.
+   on a recurrence rule, e.g., [RFC9657].  The following example module
+   which augments the "recurrence-utc-with-date-times" grouping from
+   "ietf-schedule" module shows how a scheduled based attribute could be
+   defined.
 
    module example-scheduled-link-bandwidth {
      yang-version 1.1;
