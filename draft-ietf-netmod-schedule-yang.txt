@@ -2117,7 +2117,8 @@ A.1.  The "generic-schedule-params" Grouping
      }
    }
 
-            Figure 11: Generic Parameters with "max-allowed-end
+     Figure 11: Generic Parameters with 'max-allowed-end' for Schedule
+                                 Validation
 
    To illustrate the difference between "max-allowed-end" and "validity"
    parameters, Figure 12 shows the example of a requested schedule that
@@ -2136,7 +2137,7 @@ A.1.  The "generic-schedule-params" Grouping
      }
    }
 
-                Figure 12: Generic Parameters with "validity
+   Figure 12: Generic Parameters with 'validity' for Schedule Validation
 
 A.2.  The "period-of-time" Grouping
 
