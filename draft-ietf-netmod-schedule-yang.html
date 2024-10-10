@@ -3445,7 +3445,7 @@ module example-sch-usage-8 {
    08:00 AM, January 1, 2025 and end no later than 8:00 PM, January 31, 2025 (Beijing time).
    Schedule requests that fail to meet the requirements are ignored by the system as indicates by
    "discard-action".<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
-<span id="name-generic-parameters-for-sche"></span><div id="ex-0">
+<span id="name-generic-parameters-with-max"></span><div id="ex-0">
 <figure id="figure-11">
           <div class="alignLeft art-text artwork" id="appendix-A.1-2.1">
 <pre>
@@ -3460,7 +3460,35 @@ module example-sch-usage-8 {
 </pre>
 </div>
 <figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
-<a href="#name-generic-parameters-for-sche" class="selfRef">Generic Parameters for Schedule Validation</a>
+<a href="#name-generic-parameters-with-max" class="selfRef">Generic Parameters with "max-allowed-end</a>
+          </figcaption></figure>
+</div>
+<div class="alignLeft art-text artwork" id="appendix-A.1-3">
+<pre>
+To illustrate the difference between "max-allowed-end" and "validity" parameters,
+{{ex-00}} shows the example of a requested schedule that needs to start no earlier than
+08:00 AM, January 1, 2025 (Beijing time). Schedule requests that fail to meet the
+requirements are discarded with warning messages. The requested schedule may end
+after 8:00 PM, January 31, 2025, but any occurrences that are generated
+after that time would be considered as invalid.
+</pre><a href="#appendix-A.1-3" class="pilcrow">¶</a>
+</div>
+<span id="name-generic-parameters-with-val"></span><div id="ex-00">
+<figure id="figure-12">
+          <div class="alignLeft art-text artwork" id="appendix-A.1-4.1">
+<pre>
+{
+  "example-sch-usage-1:generic-schedule-params": {
+    "time-zone-identifier": "China/Beijing",
+    "validity": "2025-01-31T20:00:00",
+    "min-allowed-start": "2025-01-01T08:00:00",
+    "discard-action": "ietf-schedule:warning"
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
+<a href="#name-generic-parameters-with-val" class="selfRef">Generic Parameters with "validity</a>
           </figcaption></figure>
 </div>
 </section>
@@ -3470,10 +3498,10 @@ module example-sch-usage-8 {
         <h3 id="name-the-period-of-time-grouping-2">
 <a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-the-period-of-time-grouping-2" class="section-name selfRef">The "period-of-time" Grouping</a>
         </h3>
-<p id="appendix-A.2-1"><a href="#ex-1" class="auto internal xref">Figure 12</a> shows an example of a period that starts at 08:00:00 UTC, on January 1, 2025 and ends at 18:00:00 UTC
+<p id="appendix-A.2-1"><a href="#ex-1" class="auto internal xref">Figure 13</a> shows an example of a period that starts at 08:00:00 UTC, on January 1, 2025 and ends at 18:00:00 UTC
    on December 31, 2027.<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
 <span id="name-simple-start-end-schedule"></span><div id="ex-1">
-<figure id="figure-12">
+<figure id="figure-13">
           <div class="alignLeft art-text artwork" id="appendix-A.2-2.1">
 <pre>
 {
@@ -3484,14 +3512,14 @@ module example-sch-usage-8 {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
+<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
 <a href="#name-simple-start-end-schedule" class="selfRef">Simple Start/End Schedule</a>
           </figcaption></figure>
 </div>
 <p id="appendix-A.2-3">An example of a period that starts at 08:00:00 UTC, on January 1, 2025 and lasts 15 days and
-   5 hours and 20 minutes is encoded as shown in <a href="#ex-2" class="auto internal xref">Figure 13</a>.<a href="#appendix-A.2-3" class="pilcrow">¶</a></p>
+   5 hours and 20 minutes is encoded as shown in <a href="#ex-2" class="auto internal xref">Figure 14</a>.<a href="#appendix-A.2-3" class="pilcrow">¶</a></p>
 <span id="name-simple-schedule-with-durati"></span><div id="ex-2">
-<figure id="figure-13">
+<figure id="figure-14">
           <div class="alignLeft art-text artwork" id="appendix-A.2-4.1">
 <pre>
 {
@@ -3502,14 +3530,14 @@ module example-sch-usage-8 {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
+<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
 <a href="#name-simple-schedule-with-durati" class="selfRef">Simple Schedule with Duration</a>
           </figcaption></figure>
 </div>
 <p id="appendix-A.2-5">An example of a period that starts at 2:00 A.M. in Los Angeles on November 19,
-   2025 and lasts 20 weeks is depicted in <a href="#ex-3" class="auto internal xref">Figure 14</a>.<a href="#appendix-A.2-5" class="pilcrow">¶</a></p>
+   2025 and lasts 20 weeks is depicted in <a href="#ex-3" class="auto internal xref">Figure 15</a>.<a href="#appendix-A.2-5" class="pilcrow">¶</a></p>
 <span id="name-simple-schedule-with-time-z"></span><div id="ex-3">
-<figure id="figure-14">
+<figure id="figure-15">
           <div class="alignLeft art-text artwork" id="appendix-A.2-6.1">
 <pre>
 {
@@ -3521,7 +3549,7 @@ module example-sch-usage-8 {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
+<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
 <a href="#name-simple-schedule-with-time-z" class="selfRef">Simple Schedule with Time Zone Indication</a>
           </figcaption></figure>
 </div>
@@ -3532,9 +3560,9 @@ module example-sch-usage-8 {
         <h3 id="name-the-recurrence-basic-groupin">
 <a href="#appendix-A.3" class="section-number selfRef">A.3. </a><a href="#name-the-recurrence-basic-groupin" class="section-name selfRef">The "recurrence-basic" Grouping</a>
         </h3>
-<p id="appendix-A.3-1"><a href="#ex-6" class="auto internal xref">Figure 17</a> indicates a recurrence of every 2 days which starts immediately and repeat forever:<a href="#appendix-A.3-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.3-1"><a href="#ex-6" class="auto internal xref">Figure 18</a> indicates a recurrence of every 2 days which starts immediately and repeat forever:<a href="#appendix-A.3-1" class="pilcrow">¶</a></p>
 <span id="name-simple-schedule-with-recurr"></span><div id="ex-4">
-<figure id="figure-15">
+<figure id="figure-16">
           <div class="alignLeft art-text artwork" id="appendix-A.3-2.1">
 <pre>
 {
@@ -3546,7 +3574,7 @@ module example-sch-usage-8 {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
+<figcaption><a href="#figure-16" class="selfRef">Figure 16</a>:
 <a href="#name-simple-schedule-with-recurr" class="selfRef">Simple Schedule with Recurrence</a>
           </figcaption></figure>
 </div>
@@ -3557,10 +3585,10 @@ module example-sch-usage-8 {
         <h3 id="name-the-recurrence-utc-grouping-2">
 <a href="#appendix-A.4" class="section-number selfRef">A.4. </a><a href="#name-the-recurrence-utc-grouping-2" class="section-name selfRef">The "recurrence-utc" Grouping</a>
         </h3>
-<p id="appendix-A.4-1"><a href="#ex-5" class="auto internal xref">Figure 16</a> indicates a recurrence from 8:00 AM to 9:00 AM every day, from
+<p id="appendix-A.4-1"><a href="#ex-5" class="auto internal xref">Figure 17</a> indicates a recurrence from 8:00 AM to 9:00 AM every day, from
    December 1 to December 31, 2025 in UTC:<a href="#appendix-A.4-1" class="pilcrow">¶</a></p>
 <span id="name-simple-schedule-with-recurre"></span><div id="ex-5">
-<figure id="figure-16">
+<figure id="figure-17">
           <div class="alignLeft art-text artwork" id="appendix-A.4-2.1">
 <pre>
 {
@@ -3576,7 +3604,7 @@ module example-sch-usage-8 {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-16" class="selfRef">Figure 16</a>:
+<figcaption><a href="#figure-17" class="selfRef">Figure 17</a>:
 <a href="#name-simple-schedule-with-recurre" class="selfRef">Simple Schedule with Recurrence in UTC</a>
           </figcaption></figure>
 </div>
@@ -3587,10 +3615,10 @@ module example-sch-usage-8 {
         <h3 id="name-the-recurrence-with-time-zon">
 <a href="#appendix-A.5" class="section-number selfRef">A.5. </a><a href="#name-the-recurrence-with-time-zon" class="section-name selfRef">The "recurrence-with-time-zone" Grouping</a>
         </h3>
-<p id="appendix-A.5-1"><a href="#ex-6" class="auto internal xref">Figure 17</a> indicates a recurrence of every 2 hours for 10 occurrences, lasting
+<p id="appendix-A.5-1"><a href="#ex-6" class="auto internal xref">Figure 18</a> indicates a recurrence of every 2 hours for 10 occurrences, lasting
    10 minutes, and starting at 3 p.m. on December 1, 2025 in New York:<a href="#appendix-A.5-1" class="pilcrow">¶</a></p>
 <span id="name-simple-schedule-with-recurren"></span><div id="ex-6">
-<figure id="figure-17">
+<figure id="figure-18">
           <div class="alignLeft art-text artwork" id="appendix-A.5-2.1">
 <pre>
 {
@@ -3607,7 +3635,7 @@ module example-sch-usage-8 {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-17" class="selfRef">Figure 17</a>:
+<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
 <a href="#name-simple-schedule-with-recurren" class="selfRef">Simple Schedule with Recurrence with Time Zone Indication</a>
           </figcaption></figure>
 </div>
@@ -3618,11 +3646,11 @@ module example-sch-usage-8 {
         <h3 id="name-the-recurrence-utc-with-date">
 <a href="#appendix-A.6" class="section-number selfRef">A.6. </a><a href="#name-the-recurrence-utc-with-date" class="section-name selfRef">The "recurrence-utc-with-date-times" Grouping</a>
         </h3>
-<p id="appendix-A.6-1"><a href="#ex-7" class="auto internal xref">Figure 18</a> indicates a recurrence that occurs every two days starting at 9:00 AM
+<p id="appendix-A.6-1"><a href="#ex-7" class="auto internal xref">Figure 19</a> indicates a recurrence that occurs every two days starting at 9:00 AM
    and 3:00 PM for a duration of 30 minutes and 40 minutes respectively,
    from 2025-06-01 to 2025-06-30 in UTC:<a href="#appendix-A.6-1" class="pilcrow">¶</a></p>
 <span id="name-example-of-recurrence-with-"></span><div id="ex-7">
-<figure id="figure-18">
+<figure id="figure-19">
           <div class="alignLeft art-text artwork" id="appendix-A.6-2.1">
 <pre>
 {
@@ -3647,7 +3675,7 @@ module example-sch-usage-8 {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
+<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
 <a href="#name-example-of-recurrence-with-" class="selfRef">Example of Recurrence With Date Times</a>
           </figcaption></figure>
 </div>
@@ -3658,11 +3686,11 @@ module example-sch-usage-8 {
         <h3 id="name-the-recurrence-time-zone-wit">
 <a href="#appendix-A.7" class="section-number selfRef">A.7. </a><a href="#name-the-recurrence-time-zone-wit" class="section-name selfRef">The "recurrence-time-zone-with-date-times" Grouping</a>
         </h3>
-<p id="appendix-A.7-1"><a href="#ex-8" class="auto internal xref">Figure 19</a> indicates a recurrence that occurs every
+<p id="appendix-A.7-1"><a href="#ex-8" class="auto internal xref">Figure 20</a> indicates a recurrence that occurs every
    30 minutes and last for 15 minutes from 9:00 AM to 5:00 PM, and extra two occurrences
    at 6:00 PM and 6:30 PM with each lasting for 20 minutes on 2025-12-01 (New York):<a href="#appendix-A.7-1" class="pilcrow">¶</a></p>
 <span id="name-example-of-advanced-recurre"></span><div id="ex-8">
-<figure id="figure-19">
+<figure id="figure-20">
           <div class="alignLeft art-text artwork" id="appendix-A.7-2.1">
 <pre>
 {
@@ -3689,7 +3717,7 @@ module example-sch-usage-8 {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
+<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
 <a href="#name-example-of-advanced-recurre" class="selfRef">Example of Advanced Recurrence Schedule</a>
           </figcaption></figure>
 </div>
@@ -3700,10 +3728,10 @@ module example-sch-usage-8 {
         <h3 id="name-the-icalendar-recurrence-gro">
 <a href="#appendix-A.8" class="section-number selfRef">A.8. </a><a href="#name-the-icalendar-recurrence-gro" class="section-name selfRef">The "icalendar-recurrence" Grouping</a>
         </h3>
-<p id="appendix-A.8-1"><a href="#ex-9" class="auto internal xref">Figure 20</a> indicates 10 occurrences that occur at
+<p id="appendix-A.8-1"><a href="#ex-9" class="auto internal xref">Figure 21</a> indicates 10 occurrences that occur at
    8:00 AM (EST), every last Saturday of the month starting in January 2024:<a href="#appendix-A.8-1" class="pilcrow">¶</a></p>
 <span id="name-simple-icalendar-recurrence"></span><div id="ex-9">
-<figure id="figure-20">
+<figure id="figure-21">
           <div class="alignLeft art-text artwork" id="appendix-A.8-2.1">
 <pre>
 {
@@ -3726,14 +3754,14 @@ module example-sch-usage-8 {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
+<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
 <a href="#name-simple-icalendar-recurrence" class="selfRef">Simple iCalendar Recurrence</a>
           </figcaption></figure>
 </div>
-<p id="appendix-A.8-3"><a href="#ex-10" class="auto internal xref">Figure 21</a> is an example of a recurrence that occurs on the last
+<p id="appendix-A.8-3"><a href="#ex-10" class="auto internal xref">Figure 22</a> is an example of a recurrence that occurs on the last
    workday of the month until December 25, 2025, from January 1, 2025:<a href="#appendix-A.8-3" class="pilcrow">¶</a></p>
 <span id="name-example-of-advanced-icalend"></span><div id="ex-10">
-<figure id="figure-21">
+<figure id="figure-22">
           <div class="alignLeft art-text artwork" id="appendix-A.8-4.1">
 <pre>
 {
@@ -3767,15 +3795,15 @@ module example-sch-usage-8 {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
+<figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
 <a href="#name-example-of-advanced-icalend" class="selfRef">Example of Advanced iCalendar Recurrence</a>
           </figcaption></figure>
 </div>
-<p id="appendix-A.8-5"><a href="#ex-11" class="auto internal xref">Figure 22</a> indicates a recurrence that occurs every 20
+<p id="appendix-A.8-5"><a href="#ex-11" class="auto internal xref">Figure 23</a> indicates a recurrence that occurs every 20
    minutes from 9:00 AM to 4:40 PM (UTC), with the occurrence starting at 10:20 AM
    being excluded on 2025-12-01:<a href="#appendix-A.8-5" class="pilcrow">¶</a></p>
 <span id="name-example-of-advanced-icalenda"></span><div id="ex-11">
-<figure id="figure-22">
+<figure id="figure-23">
           <div class="alignLeft art-text artwork" id="appendix-A.8-6.1">
 <pre>
 {
@@ -3807,7 +3835,7 @@ module example-sch-usage-8 {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
+<figcaption><a href="#figure-23" class="selfRef">Figure 23</a>:
 <a href="#name-example-of-advanced-icalenda" class="selfRef">Example of Advanced iCalendar Recurrence with Exceptions</a>
           </figcaption></figure>
 </div>
@@ -3818,10 +3846,10 @@ module example-sch-usage-8 {
         <h3 id="name-the-schedule-status-groupin">
 <a href="#appendix-A.9" class="section-number selfRef">A.9. </a><a href="#name-the-schedule-status-groupin" class="section-name selfRef">The "schedule-status" Grouping</a>
         </h3>
-<p id="appendix-A.9-1"><a href="#ex-12" class="auto internal xref">Figure 23</a> indicates the scheduled recurrence status of <a href="#ex-11" class="auto internal xref">Figure 22</a> at the time
+<p id="appendix-A.9-1"><a href="#ex-12" class="auto internal xref">Figure 24</a> indicates the scheduled recurrence status of <a href="#ex-11" class="auto internal xref">Figure 23</a> at the time
    of 12:15 PM, 2025-12-01 (UTC):<a href="#appendix-A.9-1" class="pilcrow">¶</a></p>
 <span id="name-example-of-a-schedule-statu"></span><div id="ex-12">
-<figure id="figure-23">
+<figure id="figure-24">
           <div class="alignLeft art-text artwork" id="appendix-A.9-2.1">
 <pre>
 {
@@ -3840,7 +3868,7 @@ module example-sch-usage-8 {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-23" class="selfRef">Figure 23</a>:
+<figcaption><a href="#figure-24" class="selfRef">Figure 24</a>:
 <a href="#name-example-of-a-schedule-statu" class="selfRef">Example of a Schedule Status</a>
           </figcaption></figure>
 </div>
@@ -4085,13 +4113,13 @@ module example-scheduled-link-bandwidth {
 
 </pre><a href="#appendix-B.2-2" class="pilcrow">¶</a>
 </div>
-<p id="appendix-B.2-3"><a href="#ex-13" class="auto internal xref">Figure 24</a> shows a configuration example of a link's bandwidth that is
+<p id="appendix-B.2-3"><a href="#ex-13" class="auto internal xref">Figure 25</a> shows a configuration example of a link's bandwidth that is
   scheduled between 2025-12-01 0:00 UTC to the end of 2025-12-31 with a daily
   schedule. In each day, the bandwidth value is scheduled to be 500 Kbps between
   1:00 AM to 6:00 AM and 800 Kbps between 10:00 PM to 11:00 PM. The bandwidth
   value that's not covered by the period above is 1000 Kbps by default.<a href="#appendix-B.2-3" class="pilcrow">¶</a></p>
 <span id="name-example-of-scheduled-links-"></span><div id="ex-13">
-<figure id="figure-24">
+<figure id="figure-25">
           <div class="alignLeft art-text artwork" id="appendix-B.2-4.1">
 <pre>
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -4121,7 +4149,7 @@ module example-scheduled-link-bandwidth {
 &lt;/link-attributes&gt;
 </pre>
 </div>
-<figcaption><a href="#figure-24" class="selfRef">Figure 24</a>:
+<figcaption><a href="#figure-25" class="selfRef">Figure 25</a>:
 <a href="#name-example-of-scheduled-links-" class="selfRef">Example of Scheduled Link's Bandwidth</a>
           </figcaption></figure>
 </div>
@@ -4177,9 +4205,9 @@ module example-sch-capacity-res {
 <p id="appendix-C-4"><span><a href="https://rfc-editor.org/rfc/rfc8413#section-4" class="relref">Section 4</a> of [<a href="#RFC8413" class="cite xref">RFC8413</a>]</span> defines the reference architecture for scheduled use
    of resources, the service requester sends a request to a Path Computation Element (PCE) and includes the
    parameters of the Label Switched Path (LSP) that the requester wishes to supply, the configuration
-   example to provide the scheduled resource is shown in <a href="#ex-14" class="auto internal xref">Figure 25</a>.<a href="#appendix-C-4" class="pilcrow">¶</a></p>
+   example to provide the scheduled resource is shown in <a href="#ex-14" class="auto internal xref">Figure 26</a>.<a href="#appendix-C-4" class="pilcrow">¶</a></p>
 <span id="name-example-of-scheduled-links-b"></span><div id="ex-14">
-<figure id="figure-25">
+<figure id="figure-26">
         <div class="alignLeft art-text artwork" id="appendix-C-5.1">
 <pre>
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -4210,7 +4238,7 @@ module example-sch-capacity-res {
 &lt;/link-capability-reservations&gt;
 </pre>
 </div>
-<figcaption><a href="#figure-25" class="selfRef">Figure 25</a>:
+<figcaption><a href="#figure-26" class="selfRef">Figure 26</a>:
 <a href="#name-example-of-scheduled-links-b" class="selfRef">Example of Scheduled Link's Bandwidth Reservation</a>
         </figcaption></figure>
 </div>

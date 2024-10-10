@@ -2117,11 +2117,29 @@ A.1.  The "generic-schedule-params" Grouping
      }
    }
 
-           Figure 11: Generic Parameters for Schedule Validation
+            Figure 11: Generic Parameters with "max-allowed-end
+
+To illustrate the difference between "max-allowed-end" and "validity" parameters,
+{{ex-00}} shows the example of a requested schedule that needs to start no earlier than
+08:00 AM, January 1, 2025 (Beijing time). Schedule requests that fail to meet the
+requirements are discarded with warning messages. The requested schedule may end
+after 8:00 PM, January 31, 2025, but any occurrences that are generated
+after that time would be considered as invalid.
+
+   {
+     "example-sch-usage-1:generic-schedule-params": {
+       "time-zone-identifier": "China/Beijing",
+       "validity": "2025-01-31T20:00:00",
+       "min-allowed-start": "2025-01-01T08:00:00",
+       "discard-action": "ietf-schedule:warning"
+     }
+   }
+
+                Figure 12: Generic Parameters with "validity
 
 A.2.  The "period-of-time" Grouping
 
-   Figure 12 shows an example of a period that starts at 08:00:00 UTC,
+   Figure 13 shows an example of a period that starts at 08:00:00 UTC,
    on January 1, 2025 and ends at 18:00:00 UTC on December 31, 2027.
 
    {
@@ -2131,11 +2149,11 @@ A.2.  The "period-of-time" Grouping
      }
    }
 
-                    Figure 12: Simple Start/End Schedule
+                    Figure 13: Simple Start/End Schedule
 
    An example of a period that starts at 08:00:00 UTC, on January 1,
    2025 and lasts 15 days and 5 hours and 20 minutes is encoded as shown
-   in Figure 13.
+   in Figure 14.
 
    {
      "example-sch-usage-2:period-of-time": {
@@ -2144,10 +2162,10 @@ A.2.  The "period-of-time" Grouping
      }
    }
 
-                  Figure 13: Simple Schedule with Duration
+                  Figure 14: Simple Schedule with Duration
 
    An example of a period that starts at 2:00 A.M. in Los Angeles on
-   November 19, 2025 and lasts 20 weeks is depicted in Figure 14.
+   November 19, 2025 and lasts 20 weeks is depicted in Figure 15.
 
    {
      "example-sch-usage-2:period-of-time": {
@@ -2157,11 +2175,11 @@ A.2.  The "period-of-time" Grouping
      }
    }
 
-            Figure 14: Simple Schedule with Time Zone Indication
+            Figure 15: Simple Schedule with Time Zone Indication
 
 A.3.  The "recurrence-basic" Grouping
 
-   Figure 17 indicates a recurrence of every 2 days which starts
+   Figure 18 indicates a recurrence of every 2 days which starts
    immediately and repeat forever:
 
    {
@@ -2172,11 +2190,11 @@ A.3.  The "recurrence-basic" Grouping
      }
    }
 
-                 Figure 15: Simple Schedule with Recurrence
+                 Figure 16: Simple Schedule with Recurrence
 
 A.4.  The "recurrence-utc" Grouping
 
-   Figure 16 indicates a recurrence from 8:00 AM to 9:00 AM every day,
+   Figure 17 indicates a recurrence from 8:00 AM to 9:00 AM every day,
    from December 1 to December 31, 2025 in UTC:
 
    {
@@ -2191,11 +2209,11 @@ A.4.  The "recurrence-utc" Grouping
      }
    }
 
-             Figure 16: Simple Schedule with Recurrence in UTC
+             Figure 17: Simple Schedule with Recurrence in UTC
 
 A.5.  The "recurrence-with-time-zone" Grouping
 
-   Figure 17 indicates a recurrence of every 2 hours for 10 occurrences,
+   Figure 18 indicates a recurrence of every 2 hours for 10 occurrences,
    lasting 10 minutes, and starting at 3 p.m. on December 1, 2025 in New
    York:
 
@@ -2212,11 +2230,11 @@ A.5.  The "recurrence-with-time-zone" Grouping
      }
    }
 
-    Figure 17: Simple Schedule with Recurrence with Time Zone Indication
+    Figure 18: Simple Schedule with Recurrence with Time Zone Indication
 
 A.6.  The "recurrence-utc-with-date-times" Grouping
 
-   Figure 18 indicates a recurrence that occurs every two days starting
+   Figure 19 indicates a recurrence that occurs every two days starting
    at 9:00 AM and 3:00 PM for a duration of 30 minutes and 40 minutes
    respectively, from 2025-06-01 to 2025-06-30 in UTC:
 
@@ -2241,11 +2259,11 @@ A.6.  The "recurrence-utc-with-date-times" Grouping
      }
    }
 
-              Figure 18: Example of Recurrence With Date Times
+              Figure 19: Example of Recurrence With Date Times
 
 A.7.  The "recurrence-time-zone-with-date-times" Grouping
 
-   Figure 19 indicates a recurrence that occurs every 30 minutes and
+   Figure 20 indicates a recurrence that occurs every 30 minutes and
    last for 15 minutes from 9:00 AM to 5:00 PM, and extra two
    occurrences at 6:00 PM and 6:30 PM with each lasting for 20 minutes
    on 2025-12-01 (New York):
@@ -2273,11 +2291,11 @@ A.7.  The "recurrence-time-zone-with-date-times" Grouping
      }
    }
 
-             Figure 19: Example of Advanced Recurrence Schedule
+             Figure 20: Example of Advanced Recurrence Schedule
 
 A.8.  The "icalendar-recurrence" Grouping
 
-   Figure 20 indicates 10 occurrences that occur at 8:00 AM (EST), every
+   Figure 21 indicates 10 occurrences that occur at 8:00 AM (EST), every
    last Saturday of the month starting in January 2024:
 
    {
@@ -2299,9 +2317,9 @@ A.8.  The "icalendar-recurrence" Grouping
      }
    }
 
-                   Figure 20: Simple iCalendar Recurrence
+                   Figure 21: Simple iCalendar Recurrence
 
-   Figure 21 is an example of a recurrence that occurs on the last
+   Figure 22 is an example of a recurrence that occurs on the last
    workday of the month until December 25, 2025, from January 1, 2025:
 
    {
@@ -2334,9 +2352,9 @@ A.8.  The "icalendar-recurrence" Grouping
      }
    }
 
-            Figure 21: Example of Advanced iCalendar Recurrence
+            Figure 22: Example of Advanced iCalendar Recurrence
 
-   Figure 22 indicates a recurrence that occurs every 20 minutes from
+   Figure 23 indicates a recurrence that occurs every 20 minutes from
    9:00 AM to 4:40 PM (UTC), with the occurrence starting at 10:20 AM
    being excluded on 2025-12-01:
 
@@ -2368,11 +2386,11 @@ A.8.  The "icalendar-recurrence" Grouping
      }
    }
 
-    Figure 22: Example of Advanced iCalendar Recurrence with Exceptions
+    Figure 23: Example of Advanced iCalendar Recurrence with Exceptions
 
 A.9.  The "schedule-status" Grouping
 
-   Figure 23 indicates the scheduled recurrence status of Figure 22 at
+   Figure 24 indicates the scheduled recurrence status of Figure 23 at
    the time of 12:15 PM, 2025-12-01 (UTC):
 
    {
@@ -2390,7 +2408,7 @@ A.9.  The "schedule-status" Grouping
      }
    }
 
-                  Figure 23: Example of a Schedule Status
+                  Figure 24: Example of a Schedule Status
 
    At the time of 12:15 PM, 2025-12-01 (UTC), the recurring event
    occurred at (note that occurrence at 10:20 AM is excluded): 9:00,
@@ -2618,7 +2636,7 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
      }
    }
 
-   Figure 24 shows a configuration example of a link's bandwidth that is
+   Figure 25 shows a configuration example of a link's bandwidth that is
    scheduled between 2025-12-01 0:00 UTC to the end of 2025-12-31 with a
    daily schedule.  In each day, the bandwidth value is scheduled to be
    500 Kbps between 1:00 AM to 6:00 AM and 800 Kbps between 10:00 PM to
@@ -2651,7 +2669,7 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
      </link>
    </link-attributes>
 
-              Figure 24: Example of Scheduled Link's Bandwidth
+              Figure 25: Example of Scheduled Link's Bandwidth
 
 Appendix C.  Examples of Using "ietf-schedule" Module for Scheduled Use
              of Resources Framework
@@ -2700,7 +2718,7 @@ Appendix C.  Examples of Using "ietf-schedule" Module for Scheduled Use
    a Path Computation Element (PCE) and includes the parameters of the
    Label Switched Path (LSP) that the requester wishes to supply, the
    configuration example to provide the scheduled resource is shown in
-   Figure 25.
+   Figure 26.
 
    <?xml version="1.0" encoding="utf-8"?>
    <link-capability-reservations
@@ -2729,7 +2747,7 @@ Appendix C.  Examples of Using "ietf-schedule" Module for Scheduled Use
       </scheduled-link-capacity>
    </link-capability-reservations>
 
-        Figure 25: Example of Scheduled Link's Bandwidth Reservation
+        Figure 26: Example of Scheduled Link's Bandwidth Reservation
 
 Acknowledgments
 
