@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-10T01:03:08.751592+00:00",
+  "timestamp": "2024-10-13T01:08:10.035397+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -275,7 +275,7 @@
       "id": "I_kwDOLuooYM6Zelvo",
       "title": "Add an example to illustrate the difference between validity and max-allowed-end",
       "url": "https://github.com/netmod-wg/schedule-yang/issues/50",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "boucadair",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -284,8 +284,8 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-10-09T06:46:06Z",
-      "updatedAt": "2024-10-09T07:54:10Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-10T07:22:38Z",
+      "closedAt": "2024-10-10T07:22:38Z",
       "comments": []
     },
     {
@@ -2253,7 +2253,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-06-24T11:05:38Z",
-      "updatedAt": "2024-06-24T13:05:37Z",
+      "updatedAt": "2024-10-10T02:38:46Z",
       "baseRepository": "netmod-wg/schedule-yang",
       "baseRefName": "main",
       "baseRefOid": "df9e189b7c7a85888accdbed69d2340e9d66164a",
@@ -3010,6 +3010,156 @@
           ]
         }
       ]
+    },
+    {
+      "number": 54,
+      "id": "PR_kwDOLuooYM5-JrSl",
+      "title": "add another example to clarify the difference between \"validity\" and \"max-allowed-end\" ",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/54",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "close #50.",
+      "createdAt": "2024-10-10T02:36:50Z",
+      "updatedAt": "2024-10-10T07:22:37Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "96245c644bf725ab753c270946530b61627150e7",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "131a285886ecaaead449a79ca8c4c941d5761f20",
+      "closedAt": "2024-10-10T07:22:37Z",
+      "mergedAt": "2024-10-10T07:22:37Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "c5c59b726a6f4c4c4e4b3a3a6edc588e8d559366"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM6MmrJC",
+          "commit": {
+            "abbreviatedOid": "473dfa7"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-10-10T04:54:15Z",
+          "updatedAt": "2024-10-10T04:56:15Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\n    To illustrate the difference between \"max-allowed-end\" and \"validity\" parameters,\r\n```",
+              "createdAt": "2024-10-10T04:54:15Z",
+              "updatedAt": "2024-10-10T04:56:15Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\n    08:00 AM, January 1, 2025 (Beijing time). Schedule requests that fail to meet the\r\n```",
+              "createdAt": "2024-10-10T04:55:10Z",
+              "updatedAt": "2024-10-10T04:56:15Z"
+            },
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\r\n    after 8:00 PM, January 31, 2025, but any occurrences that are generated\r\n```",
+              "createdAt": "2024-10-10T04:55:52Z",
+              "updatedAt": "2024-10-10T04:56:15Z"
+            },
+            {
+              "originalPosition": 12,
+              "body": "```suggestion\r\n    after that time would be considered as invalid.\r\n```",
+              "createdAt": "2024-10-10T04:56:03Z",
+              "updatedAt": "2024-10-10T04:56:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM6Mn8Ki",
+          "commit": {
+            "abbreviatedOid": "131a285"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-10T07:22:31Z",
+          "updatedAt": "2024-10-10T07:22:31Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 55,
+      "id": "PR_kwDOLuooYM5-JvqJ",
+      "title": "tvr-use-cases published as RFC9657",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/55",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-10T02:48:01Z",
+      "updatedAt": "2024-10-10T06:34:34Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "96245c644bf725ab753c270946530b61627150e7",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "Qiufang-branch-1",
+      "headRefOid": "70c606067ad4c72538793371abcfa2e444566d32",
+      "closedAt": "2024-10-10T06:34:29Z",
+      "mergedAt": "2024-10-10T06:34:29Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "33c1a512cec34f2131dbf722a5b30e9927b84362"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM6MmsvV",
+          "commit": {
+            "abbreviatedOid": "70c6060"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-10T04:56:35Z",
+          "updatedAt": "2024-10-10T04:56:35Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 56,
+      "id": "PR_kwDOLuooYM5-LRUj",
+      "title": "fix formatting issue + more diversity in examples",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/56",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-10T07:28:42Z",
+      "updatedAt": "2024-10-10T07:58:28Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "c5c59b726a6f4c4c4e4b3a3a6edc588e8d559366",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "fix-formatting-issue-+-more-diversity-in-examples",
+      "headRefOid": "658ab059acf0f1c856a7d6b27b77bd912d6bf22c",
+      "closedAt": "2024-10-10T07:58:28Z",
+      "mergedAt": "2024-10-10T07:58:28Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "d6b4756334e37c945675a3e9e82a3e003860aec2"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
