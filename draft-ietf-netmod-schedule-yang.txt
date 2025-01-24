@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 2 May 2025                                    M. Boucadair, Ed.
+Expires: 28 July 2025                                  M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                         29 October 2024
+                                                         24 January 2025
 
 
                 A Common YANG Data Model for Scheduling
@@ -50,11 +50,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 May 2025.
+   This Internet-Draft will expire on 28 July 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -173,6 +173,10 @@ Table of Contents
 
    The document makes use of the following terms:
 
+   Recurrence Rule:  Refers to a rule or repeating pattern for recurring
+      events.  See also Section 3.8.5.3 of [RFC5545] for a comprehensive
+      iCalendar recurrence rule specification.
+
    Frequency:  Characterizes the type of a recurrence rule.  Values are
       taken from "FREQ" rule in Section 3.3.10 of [RFC5545].
 
@@ -180,7 +184,7 @@ Table of Contents
       more are classified as recurrence with a frequency value of
       "secondly".
 
-   icalendar:  Refers to Internet Calendaring per [RFC5545].
+   iCalendar:  Refers to Internet Calendaring per [RFC5545].
 
    Interval:  Refers to an integer that specifies at which intervals a
       recurrence rule repeats.  Values are taken from "INTERVAL" rule in
@@ -1348,7 +1352,8 @@ Table of Contents
        choice period-type {
          description
            "Indicates the type of the time period. Two types are
-            supported.";
+            supported. If no choice is indicated, the period is
+            considered to last forever or as a one-shot schedule.";
          case explicit {
            description
              "A period of time is identified by its start and its end.
@@ -1417,7 +1422,10 @@ Table of Contents
           UTC. This grouping is intended to be machine-friendly.";
        container recurrence-first {
          description
-           "Specifies the first instance of the recurrence.";
+           "Specifies the first instance of the recurrence. If
+            unspecified, the recurrence is considered to start from
+            the date and time when the recurrence pattern is first
+            satisfied.";
          leaf start-time-utc {
            type yang:date-and-time;
            description
@@ -1474,7 +1482,10 @@ Table of Contents
           is intended to be human-friendly.";
        container recurrence-first {
          description
-           "Specifies the first instance of the recurrence.";
+           "Specifies the first instance of the recurrence. If
+            unspecified, the recurrence is considered to start from
+            the date and time when the recurrence pattern is first
+            satisfied.";
          leaf start-time {
            type yang:date-and-time;
            description
@@ -1917,9 +1928,9 @@ Table of Contents
               Contreras, L. M. and V. Lopez, "A YANG Data Model for
               Network Diagnosis using Scheduled Sequences of OAM Tests",
               Work in Progress, Internet-Draft, draft-contreras-opsawg-
-              scheduling-oam-tests-03, 21 October 2024,
+              scheduling-oam-tests-04, 18 November 2024,
               <https://datatracker.ietf.org/doc/html/draft-contreras-
-              opsawg-scheduling-oam-tests-03>.
+              opsawg-scheduling-oam-tests-04>.
 
    [I-D.ietf-netmod-eca-policy]
               Wu, Q., Bryskin, I., Birkholz, H., Liu, X., and B. Claise,
@@ -1932,9 +1943,9 @@ Table of Contents
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
               Authors and Reviewers of Documents Containing YANG Data
               Models", Work in Progress, Internet-Draft, draft-ietf-
-              netmod-rfc8407bis-20, 21 October 2024,
+              netmod-rfc8407bis-22, 14 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              rfc8407bis-20>.
+              rfc8407bis-22>.
 
    [I-D.ietf-opsawg-ucl-acl]
               Ma, Q., Wu, Q., Boucadair, M., and D. King, "A YANG Data
@@ -1977,7 +1988,7 @@ Table of Contents
               DOI 10.17487/RFC8413, July 2018,
               <https://www.rfc-editor.org/rfc/rfc8413>.
 
-   [RFC9657]  Birrane III, E., Kuhn, N., Qu, Y., Taylor, R., and L.
+   [RFC9657]  Birrane, III, E., Kuhn, N., Qu, Y., Taylor, R., and L.
               Zhang, "Time-Variant Routing (TVR) Use Cases", RFC 9657,
               DOI 10.17487/RFC9657, October 2024,
               <https://www.rfc-editor.org/rfc/rfc9657>.
