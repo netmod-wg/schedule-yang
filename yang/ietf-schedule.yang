@@ -373,7 +373,8 @@ module ietf-schedule {
     choice period-type {
       description
         "Indicates the type of the time period. Two types are
-         supported.";
+         supported. If no choice is indicated, the period is 
+         considered to last forever or as a one-shot schedule.";
       case explicit {
         description
           "A period of time is identified by its start and its end.
@@ -442,7 +443,10 @@ module ietf-schedule {
        UTC. This grouping is intended to be machine-friendly.";
     container recurrence-first {
       description
-        "Specifies the first instance of the recurrence.";
+        "Specifies the first instance of the recurrence. If 
+         unspecified, the recurrence is considered to start from
+         the date and time when the recurrence pattern is first 
+         satisfied.";
       leaf start-time-utc {
         type yang:date-and-time;
         description
@@ -499,7 +503,10 @@ module ietf-schedule {
        is intended to be human-friendly.";
     container recurrence-first {
       description
-        "Specifies the first instance of the recurrence.";
+        "Specifies the first instance of the recurrence. If 
+         unspecified, the recurrence is considered to start from
+         the date and time when the recurrence pattern is first 
+         satisfied.";
       leaf start-time {
         type yang:date-and-time;
         description
