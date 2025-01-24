@@ -444,8 +444,8 @@ module ietf-schedule {
     container recurrence-first {
       description
         "Specifies the first instance of the recurrence. If 
-         unspecified, the recurrence is considered to start from the
-         date and time when the recurrence pattern is first 
+         unspecified, the recurrence is considered to start from
+         the date and time when the recurrence pattern is first 
          satisfied.";
       leaf start-time-utc {
         type yang:date-and-time;
@@ -504,8 +504,8 @@ module ietf-schedule {
     container recurrence-first {
       description
         "Specifies the first instance of the recurrence. If 
-         unspecified, the recurrence is considered to start from the
-         date and time when the recurrence pattern is first 
+         unspecified, the recurrence is considered to start from
+         the date and time when the recurrence pattern is first 
          satisfied.";
       leaf start-time {
         type yang:date-and-time;
