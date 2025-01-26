@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-23T01:02:52.418646+00:00",
+  "timestamp": "2025-01-26T01:04:50.536448+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -249,7 +249,7 @@
       "id": "I_kwDOLuooYM6O5HQJ",
       "title": "schedule-status vs. schedule-status-with-name",
       "url": "https://github.com/netmod-wg/schedule-yang/issues/43",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "QiufangMa",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -258,8 +258,8 @@
       ],
       "body": "compared to \u201cschedule-status\u201d, \"schedule-status-with-name\" grouping has an additional para named \"schedule-id\", which is needed in cases with multiple scheduling definition. But it is probably also needed for grouping generic-schedule-params. \r\nI am thinking a more concise representation, maybe we can define a feature called, e..g, multiple-schedule. and we can have the following:\r\n     grouping schedule-status-with-name:\r\n       **+-- schedule-id?         string {multiple-schedule}?**       \r\n         ...\r\n      grouping generic-schedule-params:\r\n       **+-- schedule-id?         string {multiple-schedule}?**       \r\n         ...\r\nand also remove the schedule-status grouping. \r\nWould this be better?",
       "createdAt": "2024-07-09T07:09:22Z",
-      "updatedAt": "2024-07-11T11:35:08Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-24T03:37:10Z",
+      "closedAt": "2025-01-24T03:37:10Z",
       "comments": [
         {
           "author": "boucadair",
@@ -3160,6 +3160,79 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 57,
+      "id": "PR_kwDOLuooYM6I1_NA",
+      "title": "YANG DOCTOR LC review ",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/57",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-01-24T03:36:08Z",
+      "updatedAt": "2025-01-24T09:11:39Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "119014b9ba6b7e7676ff1b0ad45045ef4cd471af",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "44c23cf07d4aca681db53dc6ba4d6ef411ba56e4",
+      "closedAt": "2025-01-24T09:11:39Z",
+      "mergedAt": "2025-01-24T09:11:39Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "c6cfa70e88f09e546ad7a18e3a0da9a31bcd4e1e"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM6ZSj_6",
+          "commit": {
+            "abbreviatedOid": "d035760"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks. Looks good. ",
+          "createdAt": "2025-01-24T06:58:37Z",
+          "updatedAt": "2025-01-24T07:01:50Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n: Refers to a rule or repeating pattern for recurring events. See also {{Section 3.8.5.3 of !RFC5545}} for a comprehensive iCalendar recurrence rule specification.\r\n```",
+              "createdAt": "2025-01-24T06:58:37Z",
+              "updatedAt": "2025-01-24T07:01:50Z"
+            },
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\n         unspecified, the recurrence is considered to start from\r\n```",
+              "createdAt": "2025-01-24T07:00:48Z",
+              "updatedAt": "2025-01-24T07:01:50Z"
+            },
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\r\n         the date and time when the recurrence pattern is first \r\n```",
+              "createdAt": "2025-01-24T07:00:57Z",
+              "updatedAt": "2025-01-24T07:01:50Z"
+            },
+            {
+              "originalPosition": 28,
+              "body": "```suggestion\r\n         unspecified, the recurrence is considered to start from\r\n```",
+              "createdAt": "2025-01-24T07:01:09Z",
+              "updatedAt": "2025-01-24T07:01:50Z"
+            },
+            {
+              "originalPosition": 29,
+              "body": "```suggestion\r\n         the date and time when the recurrence pattern is first \r\n```",
+              "createdAt": "2025-01-24T07:01:16Z",
+              "updatedAt": "2025-01-24T07:01:50Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
