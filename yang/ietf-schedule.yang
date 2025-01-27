@@ -342,7 +342,7 @@ module ietf-schedule {
       }
       description
         "Specifies the behavior when a schedule is discarded for
-         any reason, e.g., failing to satisfying the guards in this
+         any reason, e.g., failing to satisfy the guards in this
          grouping or it is received out-of-date.";    
     }
   }
