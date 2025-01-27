@@ -154,7 +154,7 @@ System:
        specified and then the schedule will disable itself ({{Section 3.3 of !RFC3231}}).
       + period: The schedule is a period-based schedule consisting either a start and end or a start and positive duration of time.
       + recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period, e.g., every five minutes) or not (i.e., repeat in a non-regular manner, e.g., every day at 8 and 9 AM).
-   * "frequency-type": Characterizes the repeating interval rule of a recurrence schedule (secondly, minutely, etc.).   
+   * "frequency-type": Characterizes the repeating interval rule of a recurrence schedule (secondly, minutely, etc.).
    * "schedule-state": Indicates the status of a schedule (enabled, disabled, conflicted, finished, etc.). This identity can also be used
      to manage the state of individual instances of a recurrence-based schedule.
    * "discard-action-type": Specifies the action for the responder to take (e.g., generate a warning or an error message) when
