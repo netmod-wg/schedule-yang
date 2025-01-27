@@ -59,8 +59,9 @@ informative:
    This document defines a common schedule YANG module which is
    designed to be applicable for scheduling purposes such as event, policy,
    services, or resources based on date and time. For the sake of better modularity,
-   the module includes a set of recurrence related groupings with varying granularity levels
-   (i.e., from basic to advanced).
+   the module includes a set of recurrence related groupings with varying levels of complexity
+   (i.e., from basic to advanced). It also defines groupings for validating requested
+   schedules and reporting scheduling status.
 
 --- middle
 
@@ -71,13 +72,15 @@ be used in several scheduling contexts, e.g., (but not limited to)
 {{?I-D.ietf-opsawg-ucl-acl}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}},
 and {{?I-D.ietf-tvr-schedule-yang}}. The module includes a set of reusable groupings which
 are designed to be applicable for scheduling purposes such as event, policy,
-services or resources based on date and time.
+services or resources based on date and time. It also defines groupings for validating
+requested schedules and reporting scheduling status.
 
 This document does not make any assumption about the nature of actions that are
 triggered by the schedules. Detection and resolution of any schedule conflicts
 are beyond the scope of this document.
 
-{{sec-mib}} discusses relationship with the managed objects defined in {{!RFC3231}}.
+{{sec-mib}} discusses the relationship with the Management Information Base (MIB)
+managed objects for scheduling management operations defined in {{!RFC3231}}.
 
 {{usage}} describes a set of examples to illustrate the use of the common schedule groupings ({{sec-grp}}).
 And {{sec-ext}} provides sample modules to exemplify how future modules can use the extensibility
@@ -96,7 +99,7 @@ an example of using "ietf-schedule" module for scheduled use of resources framew
    Please apply the following replacements:
 
    * XXXX --> the assigned RFC number for this draft
-   * 2024-04-16 --> the actual date of the publication of this document
+   * 2025-01-27 --> the actual date of the publication of this document
 
 # Conventions and Definitions
 
@@ -115,7 +118,8 @@ Recurrence Rule:
 Frequency:
 : Characterizes the type of a recurrence rule. Values are taken from "FREQ" rule in {{Section 3.3.10 of !RFC5545}}.
 : For example, repeating events based on an interval of a second or more are
-  classified as recurrence with a frequency value of "secondly".
+  classified as recurrence with a frequency value of "SECONDLY". Frequency values defined as identities
+  in the YANG module are used in lowercase.
 
 iCalendar:
 : Refers to Internet Calendaring per {{!RFC5545}}.
@@ -139,23 +143,24 @@ System:
    *  "basic-recurrence"
    *  "icalendar-recurrence"
 
-   Refer to {{sec-aug}} for the use of these features.
+   Refer to {{sec-aug}} and {{features}} for the use of these features.
 
 ##  Types and Identities {#sec-types}
 
    The "ietf-schedule" module ({{sec-schedule}}) defines the following identities:
 
-   * "frequency-type": Characterizes the repeating interval rule of a schedule (per second, per minute, etc.).
    * "schedule-type": Indicates the type of a schedule. The following types are defined so far:
       + one-shot: The schedule will trigger an action without the duration/end time being
        specified and then the schedule will disable itself ({{Section 3.3 of !RFC3231}}).
       + period: The schedule is a period-based schedule consisting either a start and end or a start and positive duration of time.
       + recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period, e.g., every five minutes) or not (i.e., repeat in a non-regular manner, e.g., every day at 8 and 9 AM).
+   * "frequency-type": Characterizes the repeating interval rule of a recurrence schedule (secondly, minutely, etc.).      
    * "schedule-state": Indicates the status of a schedule (enabled, disabled, conflicted, finished, etc.). This identity can also be used
      to manage the state of individual instances of a recurrence-based schedule.
-   * "discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).
+   * "discard-action-type": Specifies the action for the responder to take (e.g., generate a warning or an error message) when
+     a requested schedule cannot be accepted for any reason and is discarded.
 
-##  Groupings {#sec-grp}
+##  Scheduling Groupings {#sec-grp}
 
    The "ietf-schedule" module ({{sec-schedule}}) defines the following groupings:
 
@@ -213,7 +218,9 @@ System:
    of last occurrence is later than the configured "max-allowed-end" value.
 
    The "discard-action" parameter specifies the action if a requested schedule
-   is considered inactive or out-of-date.
+   cannot be accepted for any reason and is discarded. Possible reasons include,
+   but are not limited to, the requested schedule failing to satisfy the guards in this grouping,
+   conflicting with existing schedules, or being out-of-date.
 
    These parameters apply to all schedules on a system and are meant
    to provide guards against stale configuration, too short schedule requests
@@ -243,7 +250,7 @@ System:
 ~~~~
 {: #rec-grp-tree title="recurrence Grouping Tree Structure"}
 
-  The frequency ("frequency") which is mandatory, identifies the type of recurrence rule. For example,
+  The frequency parameter ("frequency") which is mandatory, identifies the type of recurrence rule. For example,
   a "daily" frequency value specifies repeating events based on an interval of a day or more.
 
   Consistent with {{Section 3.3.10 of !RFC5545}}, the interval ("interval") represents at which intervals the recurrence rule repeats. For example,
@@ -359,7 +366,7 @@ an occurence will last.
 
    The parameter "byday" specifies a list of days of the week, with an optional
    direction which indicates the nth occurrence of a specific day within
-   the "monthly" or "yearly" frequency. For example, within a "monthly" rule,
+   the "monthly" or "yearly" frequency instance. For example, within a "monthly" rule,
    the "weekday" with a value of "monday" and the "direction" with a value of "-1"
    represents the last Monday of the month.
 
@@ -551,7 +558,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 --- back
 
-# Examples of Format Representation {#usage}
+# Examples of Scheduling Format Representation {#usage}
 
    This section provides some examples to illustrate the use of the
    period and recurrence formats defined in {{sec-schedule}}. The following

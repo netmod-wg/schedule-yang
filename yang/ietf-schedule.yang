@@ -34,7 +34,7 @@ module ietf-schedule {
      which are applicable for scheduling purposes such as events,
      policy, services, or resources based on date and time.
 
-     Copyright (c) 2024 IETF Trust and the persons identified
+     Copyright (c) 2025 IETF Trust and the persons identified
      as authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with
@@ -54,7 +54,7 @@ module ietf-schedule {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.";
 
-  revision 2024-04-16 {
+  revision 2025-01-27 {
     description
       "Initial revision.";
     reference
@@ -141,6 +141,32 @@ module ietf-schedule {
                  3.8.6.3";
   }
 
+  identity schedule-type {
+    description
+      "Base identity for schedule type.";
+  }
+
+  identity one-shot {
+    base schedule-type;
+    description
+      "Indicates a one-shot schedule. That is a schedule that
+       will trigger an action without the duration/end time being
+       specified and then the schedule will disable itself.";
+  }
+
+  identity period {
+    base schedule-type;
+    description
+      "Indicates a period-based schedule consisting either a
+       start and end or a start and positive duration of time.";
+  }
+  
+  identity recurrence {
+    base schedule-type;
+    description
+      "Indicates a recurrence-based schedule.";
+  }
+
   identity frequency-type {
     description
       "Base identity for frequency type.";
@@ -195,32 +221,6 @@ module ietf-schedule {
        a year or more.";
   }
 
-  identity schedule-type {
-    description
-      "Base identity for schedule type.";
-  }
-
-  identity one-shot {
-    base schedule-type;
-    description
-      "Indicates a one-shot schedule. That is a schedule that
-       will trigger an action without the duration/end time being
-       specified and then the schedule will disable itself.";
-  }
-
-  identity period {
-    base schedule-type;
-    description
-      "Indicates a period-based schedule consisting either a
-       start and end or a start and positive duration of time.";
-  }
-  
-  identity recurrence {
-    base schedule-type;
-    description
-      "Indicates a recurrence-based schedule.";
-  }
-
   identity schedule-state {
     description
       "Base identity for schedule state.";
@@ -258,27 +258,29 @@ module ietf-schedule {
        schedules.";
   }
   
-  identity discard-action {
+  identity discard-action-type {
     description
-      "Indicates that a schedule will be discarded.";
+      "Indicates the action for the responder to take when a
+       requested schedule cannot be accepted for any reason
+       and is discarded.";
   }
   
   identity warning {
-    base discard-action;
+    base discard-action-type;
     description
       "Indicates that a warning message is generated
        when a schedule is discarded.";
   }
 
   identity error {
-    base discard-action;
+    base discard-action-type;
     description
       "Indicates that an error message is generated
        when a schedule is discarded.";
   }
 
   identity silently-discard {
-    base discard-action;
+    base discard-action-type;
     description
       "Indicates that an invalid schedule is silently 
        discarded.";
@@ -336,12 +338,12 @@ module ietf-schedule {
     }
     leaf discard-action {
       type identityref {
-        base discard-action;
+        base discard-action-type;
       }
       description
-        "Specifies the behavior when a schedule is discarded when
-         enforcing the guards in this grouping or it is received
-         out-of-date.";    
+        "Specifies the behavior when a schedule is discarded for
+         any reason, e.g., failing to satisfying the guards in this
+         grouping or it is received out-of-date.";    
     }
   }
 
