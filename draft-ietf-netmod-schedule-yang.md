@@ -202,20 +202,20 @@ System:
    on the structure nor the use of this parameter.
 
    The "time-zone-identifier" parameter, if provided, specifies the
-   time zone reference of the date and time values with local time format.
+   time zone reference {{!RFC7317}} of the local date and time values.
 
    The "validity" parameter specifies the date and time after which a schedule
    will be considered as invalid. It determines the latest time that a schedule
-   can be executed by a system and takes precedence over similar attributes
+   can be started to execute by a system and takes precedence over similar attributes
    that are provided at the schedule instance itself.
 
    The "max/min-allowed-start" parameters specify the maximum/minimum scheduled
    start date and time, a requested schedule will be rejected if the first
-   occurrence of the schedule is later/earlier than the configured values.
+   occurrence of the schedule starts later/earlier than the configured values.
 
    The "max-allowed-end" parameter specifies the maximum allowed end time of
    the last occurrence. A requested schedule will be rejected if the end time
-   of last occurrence is later than the configured "max-allowed-end" value.
+   of last occurrence starts later than the configured "max-allowed-end" value.
 
    The "discard-action" parameter specifies the action if a requested schedule
    cannot be accepted for any reason and is discarded. Possible reasons include,
@@ -229,9 +229,10 @@ System:
 ### The "period-of-time" Grouping {#sec-period}
 
    The "period-of-time" grouping ({{pt-tree}}) represents a time period using
-   either a start ("period-start") and end date and time ("period-end"), or a
-   start ("period-start") and a positive time duration ("duration"). For the first
-   format, the start of the period MUST be before the end of the period.
+   either a start date and time ("period-start") and end date and time ("period-end"), or a
+   start date and time ("period-start") and a positive time duration ("duration"). For the first
+   format, the start of the period MUST be before the end of the period. If neither an end date and time
+   nor a duration is indicated, the period is considered to last forever or as a one-shot schedule.
 
    The "period-description" includes a description of the period. No constraint is imposed
    on the structure nor the use of this parameter.
