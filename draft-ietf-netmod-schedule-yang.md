@@ -230,8 +230,8 @@ System:
 
    The "period-of-time" grouping ({{pt-tree}}) represents a time period using
    either a start date and time ("period-start") and end date and time ("period-end"), or a
-   start date and time ("period-start") and a positive time duration ("duration"). For the first
-   format, the start of the period MUST be before the end of the period. If neither an end date and time
+   start date and time ("period-start") and a non-negative time duration ("duration"). For the first
+   format, the start of the period MUST be no later the end of the period. If neither an end date and time
    nor a duration is indicated, the period is considered to last forever or as a one-shot schedule.
 
    The "period-description" includes a description of the period. No constraint is imposed
