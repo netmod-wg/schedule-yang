@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-26T01:04:50.536448+00:00",
+  "timestamp": "2025-01-28T01:02:58.385852+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -3229,6 +3229,53 @@
               "body": "```suggestion\r\n         the date and time when the recurrence pattern is first \r\n```",
               "createdAt": "2025-01-24T07:01:16Z",
               "updatedAt": "2025-01-24T07:01:50Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 58,
+      "id": "PR_kwDOLuooYM6JDVZE",
+      "title": "incorporate Adrian's comments",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/58",
+      "state": "OPEN",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Just partial of them, probably would finish this when coming back from the Chinese new year holiday.",
+      "createdAt": "2025-01-27T08:45:44Z",
+      "updatedAt": "2025-01-27T16:40:13Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "c6cfa70e88f09e546ad7a18e3a0da9a31bcd4e1e",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "fc33c8e256c1f251123e3ea0ad9ab23a811da50b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM6ZffAw",
+          "commit": {
+            "abbreviatedOid": "66b45b0"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-27T11:21:30Z",
+          "updatedAt": "2025-01-27T16:21:34Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "```suggestion\r\n   Refer to Sections {{>sec-aug}} and {{>features}} for the use of these features.\r\n```",
+              "createdAt": "2025-01-27T11:21:30Z",
+              "updatedAt": "2025-01-27T16:21:34Z"
             }
           ]
         }
