@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T01:01:53.935159+00:00",
+  "timestamp": "2025-02-04T01:03:06.092059+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -3280,6 +3280,34 @@
           ]
         }
       ]
+    },
+    {
+      "number": 59,
+      "id": "PR_kwDOLuooYM6J242i",
+      "title": "update actions to v4",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/59",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-02-03T14:22:07Z",
+      "updatedAt": "2025-02-03T14:24:24Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "c6cfa70e88f09e546ad7a18e3a0da9a31bcd4e1e",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "update-actions-to-v4",
+      "headRefOid": "e58b059185e4b7270d2fe672486214d5d3a9b7b9",
+      "closedAt": "2025-02-03T14:24:24Z",
+      "mergedAt": "2025-02-03T14:24:24Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "21ee764b3131eea45a7d289faf655b0bc37a2e92"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
