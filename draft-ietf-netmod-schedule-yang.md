@@ -143,7 +143,7 @@ System:
    *  "basic-recurrence"
    *  "icalendar-recurrence"
 
-   Refer to Sections {{>sec-aug}} and {{>features}} for the use of these features.
+   Refer to Sections {{sec-aug}} and {{features}} for the use of these features.
 
 ##  Types and Identities {#sec-types}
 
@@ -506,14 +506,15 @@ can be mapped to YANG parameters.
 
 # Security Considerations
 
-This section is modeled after the template described in {{Section 3.7 of ?I-D.ietf-netmod-rfc8407bis}}.
+This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rfc8407bis}}.
 
-   The "ietf-schedule" YANG module defines data
-   models that are designed to be accessed via YANG-based management
-   protocols, such as NETCONF {{?RFC6241}} and RESTCONF {{?RFC8040}}.  These
-   protocols have to use a secure transport layer (e.g., SSH {{?RFC4252}},
-   TLS {{?RFC8446}}, and QUIC {{?RFC9000}}) and have to use mutual
-   authentication.
+   The "ietf-schedule" YANG module specified in this document defines schema for data
+   that is designed to be accessed via network management protocols such
+   as NETCONF {{!RFC6241}} or RESTCONF {{!RFC8040}}.  The lowest NETCONF layer
+   is the secure transport layer, and the mandatory-to-implement secure
+   transport is Secure Shell (SSH) {{!RFC6242}}.  The lowest RESTCONF layer
+   is HTTPS, and the mandatory-to-implement secure transport is TLS
+   {{!RFC8446}}.
 
    The Network Configuration Access Control Model (NACM) {{!RFC8341}}
    provides the means to restrict access for particular NETCONF or
