@@ -143,7 +143,7 @@ System:
    *  "basic-recurrence"
    *  "icalendar-recurrence"
 
-   Refer to Sections {{sec-aug}} and {{features}} for the use of these features.
+   Refer to Sections {{<sec-aug}} and {{<features}} for the use of these features.
 
 ##  Types and Identities {#sec-types}
 
