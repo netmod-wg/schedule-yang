@@ -521,15 +521,15 @@ module ietf-schedule {
            applies to all the other instances in the recurrence
            set.";
       }
-      leaf time-zone-identifier {
-        type sys:timezone-name;
-        description
-          "Indicates the identifier for the time zone in a time
-           zone database. This parameter MUST be specified if
-           'start-time' or 'until' value is neither reported in
-           the format of UTC nor time zone offset to UTC.";
-      }
     }
+    leaf time-zone-identifier {
+      type sys:timezone-name;
+      description
+        "Indicates the identifier for the time zone in a time
+         zone database. This parameter MUST be specified if
+         'start-time' or 'until' value is neither reported in
+         the format of UTC nor time zone offset to UTC.";
+    }    
     choice recurrence-end {
       description
         "Modes to terminate the recurrence rule. If no choice is
@@ -563,7 +563,7 @@ module ietf-schedule {
     uses recurrence-basic;
   }
 
-  grouping recurrence-utc-with-date-times {
+  grouping recurrence-utc-with-periods {
     description
       "This grouping defines an aggregate set of repeating 
        occurrences with UTC time format. The recurrence instances 
@@ -607,7 +607,7 @@ module ietf-schedule {
     }
   }
   
-  grouping recurrence-time-zone-with-date-times {
+  grouping recurrence-time-zone-with-periods {
     description
       "This grouping defines an aggregate set of repeating 
        occurrences with local time format and time zone specified. 
@@ -629,7 +629,7 @@ module ietf-schedule {
     reference
       "RFC 5545: Internet Calendaring and Scheduling Core Object
                  Specification (iCalendar), Section 3.8.5";
-    uses recurrence-time-zone-with-date-times;
+    uses recurrence-time-zone-with-periods;
     leaf-list bysecond {
       type uint32 {
         range "0..60";
