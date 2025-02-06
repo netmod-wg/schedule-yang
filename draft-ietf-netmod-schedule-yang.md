@@ -197,7 +197,10 @@ System:
    on the structure nor the use of this parameter.
 
    The "time-zone-identifier" parameter, if provided, specifies the
-   time zone reference of the date and time values with local time format.
+   time zone reference of the date and time values with local time format. This parameter
+   MUST be specified if any of the date and time values are in the format of local time.
+   It MUST NOT be applied to date and time values which are specified in the format
+   of UTC or time zone offset to UTC.
 
    The "validity" parameter specifies the date and time after which a schedule
    will be considered as invalid. It determines the latest time that a schedule
@@ -225,6 +228,11 @@ System:
    either a start ("period-start") and end date and time ("period-end"), or a
    start ("period-start") and a positive time duration ("duration"). For the first
    format, the start of the period MUST be before the end of the period.
+
+   The "time-zone-identifier" parameter indicates the identifier for the
+   time zone. This parameter MUST be specified if either the "period-start" or "period-end"
+   value is reported in local time format. It MUST NOT be applied to date and time
+   values which are specified in the format of UTC or time zone offset to UTC.
 
    The "period-description" includes a description of the period. No constraint is imposed
    on the structure nor the use of this parameter.
@@ -293,9 +301,9 @@ an occurence will last.
    The "recurrence-first" container includes "start-time" and "duration" parameters
    to specify the start time and period of the first occurrence. Unless specified otherwise, the
    "duration" also applies to subsequent recurrence instances. It also includes a
-   "time-zone-identifier" parameter which MUST be specified if the date
-   and time value is neither reported in the format of UTC nor time zone offset
-   to UTC.
+   "time-zone-identifier" parameter which MUST be specified if either the "start-time" or "until"
+   value is reported in local time format. It MUST NOT be applied to date and time
+   values which are specified in the format of UTC or time zone offset to UTC.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
   indicated by the "recurrence-end" choice. The "start-time" value always counts

@@ -299,7 +299,11 @@ module ietf-schedule {
     leaf time-zone-identifier {
       type sys:timezone-name;
       description
-        "Indicates the identifier for the time zone.";
+        "Indicates the identifier for the time zone. This parameter
+         MUST be specified if any of the date and time values are
+         in the format of local time. It MUST NOT be applied to
+         date and time values which are specified in the format of
+         UTC or time zone offset to UTC.";
     }
     leaf validity {
       type yang:date-and-time;
@@ -366,9 +370,11 @@ module ietf-schedule {
       type sys:timezone-name;
       description
         "Indicates the identifier for the time zone in a time zone
-         database. This parameter MUST be specified if 'period-start'
-         value is neither reported in the format of UTC nor time zone
-         offset to UTC.";
+         database. This parameter MUST be specified if either the
+         'period-start' or 'period-end' value is reported in local
+         time format. It MUST NOT be applied to date and time
+         values which are specified in the format of UTC or time
+         zone offset to UTC.";
     }
     choice period-type {
       description
@@ -382,13 +388,8 @@ module ietf-schedule {
         leaf period-end {
           type yang:date-and-time;
           description
-            "Period end time. The start MUST be before the end. If a
-             local time without time zone offset to UTC time is
-             specified, it MUST use the same time zone reference as
-             'period-start' parameter. If 'period-start' also uses a
-             local time without time zone offset to UTC, it MUST use
-             the time zone as specified by the
-             'time-zone-identifier' parameter.";
+            "A period of time is defined by a start and end time.
+             The start MUST be before the end.";
         }
       }
       case duration {
@@ -440,7 +441,7 @@ module ietf-schedule {
   grouping recurrence-utc {
     description
       "A simple definition of recurrence with time specified in
-       UTC. This grouping is intended to be machine-friendly.";
+       UTC format.";
     container recurrence-first {
       description
         "Specifies the first instance of the recurrence. If 
@@ -498,9 +499,8 @@ module ietf-schedule {
   
   grouping recurrence-with-time-zone {
     description
-      "A simple definition of recurrence to specify the time
-       with a local time and time zone identifier. This grouping
-       is intended to be human-friendly.";
+      "A simple definition of recurrence to specify a recurrence
+       rule with a time zone.";
     container recurrence-first {
       description
         "Specifies the first instance of the recurrence. If 
@@ -526,9 +526,11 @@ module ietf-schedule {
       type sys:timezone-name;
       description
         "Indicates the identifier for the time zone in a time
-         zone database. This parameter MUST be specified if
-         'start-time' or 'until' value is neither reported in
-         the format of UTC nor time zone offset to UTC.";
+         zone database. This parameter MUST be specified if either
+         the 'start-time' or 'until' value is reported in local
+         time format. It MUST NOT be applied to date and time
+         values which are specified in the format of UTC or time
+         zone offset to UTC.";
     }    
     choice recurrence-end {
       description
