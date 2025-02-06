@@ -254,7 +254,7 @@ System:
 ~~~~
 {: #rec-grp-tree title="recurrence Grouping Tree Structure"}
 
-  The frequency parameter ("frequency") which is mandatory, identifies the type of recurrence rule. For example,
+  The frequency parameter ("frequency"), which is mandatory, identifies the type of recurrence rule. For example,
   a "daily" frequency value specifies repeating events based on an interval of a day or more.
 
   Consistent with {{Section 3.3.10 of !RFC5545}}, the interval ("interval") represents at which interval the recurrence rule repeats. For example,
@@ -284,7 +284,7 @@ System:
 
 Note that the "interval" and "duration" cover two distinct properties of a schedule event.
 The interval specifies when a schedule will occur, combined with the frequency parameter; while the duration indicates how long
-an occurrence will last. This document allows the interval between occurrences is shorter than the duration of each occurrence, e.g., a recurring event is scheduled to start every day for a duration of 2 days.
+an occurrence will last. This document allows the interval between occurrences to be shorter than the duration of each occurrence (e.g., a recurring event is scheduled to start every day for a duration of 2 days).
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
   indicated by the "recurrence-end" choice. The value of the "count" node MUST be greater than 1, the "start-time-utc" value always counts
@@ -466,7 +466,7 @@ an occurrence will last. This document allows the interval between occurrences i
    *  The second for date and time values MUST have the value "60" at the end of months in which a leap
       second occurs.
    *  Schedules received with a starting time in the past with respect to
-      current time SHOULD be ignored. Some implementation MAY omit the past occurrences and
+      current time SHOULD be ignored. When a local policy is provided, an implementation MAY omit the past occurrences and
       start immediately (e.g., for a period-based schedule) or starts from the
       date and time when the recurrence pattern is first satisfied from the current time (e.g., for a recurrence-based schedule).
 
@@ -517,8 +517,6 @@ parameters.
 
 # Security Considerations
 
-   This section is modeled after the template described in Section 3.7 of {{?I-D.ietf-netmod-rfc8407bis}}.
-
    The "ietf-schedule" YANG module specified in this document defines schema for data
    that is designed to be accessed via YANG-based management protocols, such
    as NETCONF {{?RFC6241}} or RESTCONF {{?RFC8040}}.  These protocols have to use
@@ -534,17 +532,22 @@ parameters.
    groupings.  These nodes are intended to be reused by other YANG
    modules.  The module by itself does not expose any data nodes that
    are writable, data nodes that contain read-only state, or RPCs.  As
-   such, there are no additional security issues related to the "ietf-
-   schedule" module that need to be considered.
+   such, there are no additional security issues related to the "ietf-schedule"
+   module that need to be considered.
 
    Modules that use the groupings that are defined in this document
-   should identify the corresponding security considerations. For
-   example, reusing some of these groupings will expose privacy-related
-   information (e.g., 'node-example').
+   should identify the corresponding security considerations, e.g.,:
 
-   Care must be taken when defining recurrences occurring very often and
-   frequent that can be an additional source of attacks by keeping the system
-   permanently busy with the management of scheduling.
+   * Scheduling depends on reliable and accurate time synchronization. Inaccurate date
+     and time setting can lead to scheduling events being triggered at incorrect
+     intervals, potentially causing system failures or security vulnerabilities.
+   * Recurring events may conceal abnormal behavior or security threats, which
+     may be drowned out by normal events, especially when they are triggered frequently.
+   * The absence of detailed logs and audit records of each occurrence trigger time
+     and action results, and so on, may make security incidents difficient to trace.
+   * Care must be taken when defining recurrences occurring very often and
+     frequent that can be an additional source of attacks by keeping the system
+     permanently busy with the management of scheduling.
 
 #  IANA Considerations
 
