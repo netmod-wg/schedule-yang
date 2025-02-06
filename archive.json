@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-04T01:03:06.092059+00:00",
+  "timestamp": "2025-02-06T01:04:11.446794+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -3246,13 +3246,13 @@
       "labels": [],
       "body": "Just partial of them, probably would finish this when coming back from the Chinese new year holiday.",
       "createdAt": "2025-01-27T08:45:44Z",
-      "updatedAt": "2025-01-27T16:40:13Z",
+      "updatedAt": "2025-02-05T13:58:28Z",
       "baseRepository": "netmod-wg/schedule-yang",
       "baseRefName": "main",
-      "baseRefOid": "c6cfa70e88f09e546ad7a18e3a0da9a31bcd4e1e",
+      "baseRefOid": "21ee764b3131eea45a7d289faf655b0bc37a2e92",
       "headRepository": "QiufangMa/schedule-yang",
       "headRefName": "main",
-      "headRefOid": "fc33c8e256c1f251123e3ea0ad9ab23a811da50b",
+      "headRefOid": "948a830a0902b8a547a3fc937d72318b565c38c9",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -3276,6 +3276,62 @@
               "body": "```suggestion\r\n   Refer to Sections {{>sec-aug}} and {{>features}} for the use of these features.\r\n```",
               "createdAt": "2025-01-27T11:21:30Z",
               "updatedAt": "2025-01-27T16:21:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLuooYM6auU-Z",
+          "commit": {
+            "abbreviatedOid": "948a830"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-05T13:48:36Z",
+          "updatedAt": "2025-02-05T13:58:28Z",
+          "comments": [
+            {
+              "originalPosition": 70,
+              "body": "```suggestion\r\n   Refer to Sections {{>sec-aug}} and {{>features}} for the use of these features.\r\n```",
+              "createdAt": "2025-02-05T13:48:36Z",
+              "updatedAt": "2025-02-05T13:58:28Z"
+            },
+            {
+              "originalPosition": 179,
+              "body": "```suggestion\r\n  The frequency parameter (\"frequency\"), which is mandatory, identifies the type of recurrence rule. For example,\r\n```",
+              "createdAt": "2025-02-05T13:52:00Z",
+              "updatedAt": "2025-02-05T13:58:28Z"
+            },
+            {
+              "originalPosition": 199,
+              "body": "```suggestion\r\nan occurrence will last. This document allows the interval between occurrences to be shorter than the duration of each occurrence (e.g., a recurring event is scheduled to start every day for a duration of 2 days).\r\n```",
+              "createdAt": "2025-02-05T13:53:21Z",
+              "updatedAt": "2025-02-05T13:58:28Z"
+            },
+            {
+              "originalPosition": 273,
+              "body": "```suggestion\r\n      current time SHOULD be ignored. When a local policy is provided, an implementation MAY omit the past occurrences and\r\n```",
+              "createdAt": "2025-02-05T13:55:43Z",
+              "updatedAt": "2025-02-05T13:58:28Z"
+            },
+            {
+              "originalPosition": 319,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2025-02-05T13:57:36Z",
+              "updatedAt": "2025-02-05T13:58:28Z"
+            },
+            {
+              "originalPosition": 318,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2025-02-05T13:57:44Z",
+              "updatedAt": "2025-02-05T13:58:28Z"
+            },
+            {
+              "originalPosition": 317,
+              "body": "```suggestion\r\n   should identify the corresponding security considerations.\r\n```",
+              "createdAt": "2025-02-05T13:57:53Z",
+              "updatedAt": "2025-02-05T13:58:28Z"
             }
           ]
         }
