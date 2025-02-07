@@ -21,9 +21,10 @@ Abstract
    to be applicable for scheduling purposes such as event, policy,
    services, or resources based on date and time.  For the sake of
    better modularity, the module includes a set of recurrence related
-   groupings with varying levels of complexity (i.e., from basic to
-   advanced).  It also defines groupings for validating requested
-   schedules and reporting scheduling status.
+   groupings with varying levels of representation (i.e., from basic to
+   advanced) to accommodate a variety of requirements.  It also defines
+   groupings for validating requested schedules and reporting scheduling
+   status.
 
 Discussion Venues
 
@@ -226,8 +227,10 @@ Table of Contents
       types are defined so far:
 
       -  one-shot: The schedule will trigger an action without the
-         duration/end time being specified and then the schedule will
-         disable itself (Section 3.3 of [RFC3231]).
+         duration/end time being specified or the duration being
+         specified as 0/end time being specified the same as start time,
+         and then the schedule will disable itself (Section 3.3 of
+         [RFC3231]).
 
       -  period: The schedule is a period-based schedule consisting
          either a start and end or a start and positive duration of
@@ -359,8 +362,12 @@ Table of Contents
    time ("period-end"), or a start date and time ("period-start") and a
    non-negative time duration ("duration").  For the first format, the
    start of the period MUST be no later the end of the period.  If
-   neither an end date and time nor a duration is indicated, the period
-   is considered to last forever or as a one-shot schedule.
+   neither an end date and time ("period-end") nor a duration
+   ("duration") is indicated, the period is considered to last forever
+   or as a one-shot schedule.  If the duration ("duration") value is 0
+   or the end time ("period-end") is the same as the start time
+   ("period-start"), the period is also considered as a one-shot
+   schedule.
 
    The "time-zone-identifier" parameter indicates the identifier for the
    time zone.  This parameter MUST be specified if either the "period-
@@ -1146,7 +1153,9 @@ Table of Contents
        description
          "Indicates a one-shot schedule. That is a schedule that
           will trigger an action without the duration/end time being
-          specified and then the schedule will disable itself.";
+          specified or the duration being specified as 0/end time being
+          specified the same as start time, and then the schedule will
+          disable itself.";
      }
 
      identity period {
@@ -1386,12 +1395,14 @@ Table of Contents
              type yang:date-and-time;
              description
                "A period of time is defined by a start and end time.
-                The start MUST be before the end.";
+                The start MUST be no later than the end. The period
+                is considered as a one-shot schedule if the end time
+                is the same as the start time.";
            }
          }
          case duration {
            description
-             "A period of time is defined by a start and a positive
+             "A period of time is defined by a start and a non-negative
               duration of time.";
            leaf duration {
              type duration {
@@ -1399,9 +1410,10 @@ Table of Contents
                      + ':[0-5][0-9]:[0-5][0-9]))|P([0-9]+)W';
              }
              description
-               "A positive duration of the time. This value is
+               "A non-negative duration of the time. This value is
                 equivalent to the format of duration type except that
-                the value cannot be negative.";
+                the value cannot be negative. The period is considered
+                as a one-shot schedule if the value is 0";
            }
          }
        }
@@ -1426,7 +1438,7 @@ Table of Contents
        leaf interval {
          type uint32;
          description
-           "A positive integer representing at which intervals the
+           "A positive integer representing at which interval the
             recurrence rule repeats. For example, within a 'daily'
             recurrence rule, a value of '8' means every eight days.
             The default value is '1', means every second for a
