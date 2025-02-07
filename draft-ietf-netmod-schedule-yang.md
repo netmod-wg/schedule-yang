@@ -237,9 +237,9 @@ System:
    The "period-of-time" grouping ({{pt-tree}}) represents a time period using
    either a start date and time ("period-start") and end date and time ("period-end"), or a
    start date and time ("period-start") and a non-negative time duration ("duration"). For the first
-   format, the start of the period MUST be no later the end of the period. If neither an end date and time
-   nor a duration is indicated, the period is considered to last forever or as a one-shot schedule.
-   If the duration value is 0 or the end time is the same as the start time, the period
+   format, the start of the period MUST be no later the end of the period. If neither an end date and time ("period-end")
+   nor a duration ("duration") is indicated, the period is considered to last forever or as a one-shot schedule.
+   If the duration ("duration") value is 0 or the end time ("period-end") is the same as the start time ("period-start"), the period
    is also considered as a one-shot schedule.
 
    The "time-zone-identifier" parameter indicates the identifier for the
