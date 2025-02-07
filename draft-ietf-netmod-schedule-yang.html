@@ -13,8 +13,9 @@
        This document defines a common schedule YANG module which is
    designed to be applicable for scheduling purposes such as event, policy,
    services, or resources based on date and time. For the sake of better modularity,
-   the module includes a set of recurrence related groupings with varying granularity levels
-   (i.e., from basic to advanced). 
+   the module includes a set of recurrence related groupings with varying levels of complexity
+   (i.e., from basic to advanced). It also defines groupings for validating requested
+   schedules and reporting scheduling status. 
     " name="description">
 <meta content="xml2rfc 3.26.0" name="generator">
 <meta content="calendaring" name="keyword">
@@ -1058,7 +1059,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Ma, et al.</td>
-<td class="center">Expires 7 August 2025</td>
+<td class="center">Expires 11 August 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1072,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-netmod-schedule-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-02-03" class="published">3 February 2025</time>
+<time datetime="2025-02-07" class="published">7 February 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-08-07">7 August 2025</time></dd>
+<dd class="expires"><time datetime="2025-08-11">11 August 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1106,8 +1107,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-abstract-1">This document defines a common schedule YANG module which is
    designed to be applicable for scheduling purposes such as event, policy,
    services, or resources based on date and time. For the sake of better modularity,
-   the module includes a set of recurrence related groupings with varying granularity levels
-   (i.e., from basic to advanced).<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+   the module includes a set of recurrence related groupings with varying levels of complexity
+   (i.e., from basic to advanced). It also defines groupings for validating requested
+   schedules and reporting scheduling status.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1139,7 +1141,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1189,7 +1191,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-types-and-identities" class="internal xref">Types and Identities</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-groupings" class="internal xref">Groupings</a></p>
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-scheduling-groupings" class="internal xref">Scheduling Groupings</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.1">
                     <p id="section-toc.1-1.3.2.3.2.1.1"><a href="#section-3.3.1" class="auto internal xref">3.3.1</a>.  <a href="#name-the-generic-schedule-params" class="internal xref">The "generic-schedule-params" Grouping</a></p>
@@ -1260,7 +1262,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-examples-of-format-represen" class="internal xref">Examples of Format Representation</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-examples-of-scheduling-form" class="internal xref">Examples of Scheduling Format Representation</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
                 <p id="section-toc.1-1.10.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-the-generic-schedule-params-" class="internal xref">The "generic-schedule-params" Grouping</a></p>
@@ -1322,14 +1324,16 @@ svg :is([fill="white"], [fill^="#fff"]) {
       </h2>
 <p id="section-1-1">This document defines a common schedule YANG module ("ietf-schedule") that can
 be used in several scheduling contexts, e.g., (but not limited to)
-<span>[<a href="#I-D.ietf-opsawg-ucl-acl" class="cite xref">I-D.ietf-opsawg-ucl-acl</a>]</span>, <span>[<a href="#I-D.contreras-opsawg-scheduling-oam-tests" class="cite xref">I-D.contreras-opsawg-scheduling-oam-tests</a>]</span>,
+<span>[<a href="#I-D.ietf-opsawg-ucl-acl" class="cite xref">I-D.ietf-opsawg-ucl-acl</a>]</span>, <span>[<a href="#I-D.ietf-opsawg-scheduling-oam-tests" class="cite xref">I-D.ietf-opsawg-scheduling-oam-tests</a>]</span>,
 and <span>[<a href="#I-D.ietf-tvr-schedule-yang" class="cite xref">I-D.ietf-tvr-schedule-yang</a>]</span>. The module includes a set of reusable groupings which
 are designed to be applicable for scheduling purposes such as event, policy,
-services or resources based on date and time.<a href="#section-1-1" class="pilcrow">¶</a></p>
+services or resources based on date and time. It also defines groupings for validating
+requested schedules and reporting scheduling status.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">This document does not make any assumption about the nature of actions that are
 triggered by the schedules. Detection and resolution of any schedule conflicts
 are beyond the scope of this document.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3"><a href="#sec-mib" class="auto internal xref">Section 5</a> discusses relationship with the managed objects defined in <span>[<a href="#RFC3231" class="cite xref">RFC3231</a>]</span>.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-3"><a href="#sec-mib" class="auto internal xref">Section 5</a> discusses the relationship with the Management Information Base (MIB)
+managed objects for scheduling management operations defined in <span>[<a href="#RFC3231" class="cite xref">RFC3231</a>]</span>.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4"><a href="#usage" class="auto internal xref">Appendix A</a> describes a set of examples to illustrate the use of the common schedule groupings (<a href="#sec-grp" class="auto internal xref">Section 3.3</a>).
 And <a href="#sec-ext" class="auto internal xref">Appendix B</a> provides sample modules to exemplify how future modules can use the extensibility
 provisions in "ietf-schedule" (<a href="#sec-schedule" class="auto internal xref">Section 6</a>). Also, <a href="#ex-framework" class="auto internal xref">Appendix C</a> provides
@@ -1350,7 +1354,7 @@ an example of using "ietf-schedule" module for scheduled use of resources framew
             <p id="section-1.1-4.1.1">XXXX --&gt; the assigned RFC number for this draft<a href="#section-1.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-4.2">
-            <p id="section-1.1-4.2.1">2024-04-16 --&gt; the actual date of the publication of this document<a href="#section-1.1-4.2.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-4.2.1">2025-01-27 --&gt; the actual date of the publication of this document<a href="#section-1.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1384,7 +1388,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <dt id="section-2-5.5"></dt>
         <dd style="margin-left: 1.5em" id="section-2-5.6">
           <p id="section-2-5.6.1">For example, repeating events based on an interval of a second or more are
-classified as recurrence with a frequency value of "secondly".<a href="#section-2-5.6.1" class="pilcrow">¶</a></p>
+classified as recurrence with a frequency value of "SECONDLY". Frequency values defined as identities
+in the YANG module are used in lowercase.<a href="#section-2-5.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-2-5.7">iCalendar:</dt>
@@ -1394,7 +1399,7 @@ classified as recurrence with a frequency value of "secondly".<a href="#section-
         <dd class="break"></dd>
 <dt id="section-2-5.9">Interval:</dt>
         <dd style="margin-left: 1.5em" id="section-2-5.10">
-          <p id="section-2-5.10.1">Refers to an integer that specifies at which intervals a recurrence rule repeats. Values are taken from "INTERVAL" rule in <span><a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.10" class="relref">Section 3.3.10</a> of [<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#section-2-5.10.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.10.1">Refers to an integer that specifies at which interval a recurrence rule repeats. Values are taken from "INTERVAL" rule in <span><a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.10" class="relref">Section 3.3.10</a> of [<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#section-2-5.10.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-2-5.11"></dt>
@@ -1404,7 +1409,7 @@ classified as recurrence with a frequency value of "secondly".<a href="#section-
         <dd class="break"></dd>
 <dt id="section-2-5.13">System:</dt>
         <dd style="margin-left: 1.5em" id="section-2-5.14">
-          <p id="section-2-5.14.1">Refers to an entity that host a schedule that is managed using the YANG module defined in this document.<a href="#section-2-5.14.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.14.1">Refers to an entity that hosts a schedule that is managed using the YANG module defined in this document.<a href="#section-2-5.14.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1432,7 +1437,7 @@ classified as recurrence with a frequency value of "secondly".<a href="#section-
             <p id="section-3.1-2.2.1">"icalendar-recurrence"<a href="#section-3.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-3.1-3">Refer to <a href="#sec-aug" class="auto internal xref">Section 3.4</a> for the use of these features.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">Refer to Sections <a href="#sec-aug" class="auto internal xref">3.4</a> and <a href="#features" class="auto internal xref">B.1</a> for the use of these features.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-types">
@@ -1443,37 +1448,38 @@ classified as recurrence with a frequency value of "secondly".<a href="#section-
 <p id="section-3.2-1">The "ietf-schedule" module (<a href="#sec-schedule" class="auto internal xref">Section 6</a>) defines the following identities:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2-2.1">
-            <p id="section-3.2-2.1.1">"frequency-type": Characterizes the repeating interval rule of a schedule (per second, per minute, etc.).<a href="#section-3.2-2.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.2-2.2">
-            <p id="section-3.2-2.2.1">"schedule-type": Indicates the type of a schedule. The following types are defined so far:<a href="#section-3.2-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-2.1.1">"schedule-type": Indicates the type of a schedule. The following types are defined so far:<a href="#section-3.2-2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.2-2.2.2.1">
-                <p id="section-3.2-2.2.2.1.1">one-shot: The schedule will trigger an action without the duration/end time being
-  specified and then the schedule will disable itself (<span><a href="https://rfc-editor.org/rfc/rfc3231#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC3231" class="cite xref">RFC3231</a>]</span>).<a href="#section-3.2-2.2.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.2-2.1.2.1">
+                <p id="section-3.2-2.1.2.1.1">one-shot: The schedule will trigger an action without the duration/end time being
+  specified and then the schedule will disable itself (<span><a href="https://rfc-editor.org/rfc/rfc3231#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC3231" class="cite xref">RFC3231</a>]</span>).<a href="#section-3.2-2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-3.2-2.2.2.2">
-                <p id="section-3.2-2.2.2.2.1">period: The schedule is a period-based schedule consisting either a start and end or a start and positive duration of time.<a href="#section-3.2-2.2.2.2.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-3.2-2.1.2.2">
+                <p id="section-3.2-2.1.2.2.1">period: The schedule is a period-based schedule consisting either a start and end or a start and positive duration of time.<a href="#section-3.2-2.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="normal" id="section-3.2-2.2.2.3">
-                <p id="section-3.2-2.2.2.3.1">recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period, e.g., every five minutes) or not (i.e., repeat in a non-regular manner, e.g., every day at 8 and 9 AM).<a href="#section-3.2-2.2.2.3.1" class="pilcrow">¶</a></p>
+              <li class="normal" id="section-3.2-2.1.2.3">
+                <p id="section-3.2-2.1.2.3.1">recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period, e.g., every five minutes) or not (i.e., repeat in a non-regular manner, e.g., every day at 8 and 9 AM).<a href="#section-3.2-2.1.2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
+</li>
+          <li class="normal" id="section-3.2-2.2">
+            <p id="section-3.2-2.2.1">"frequency-type": Characterizes the repeating interval rule of a recurrence schedule (secondly, minutely, etc.).<a href="#section-3.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-2.3">
             <p id="section-3.2-2.3.1">"schedule-state": Indicates the status of a schedule (enabled, disabled, conflicted, finished, etc.). This identity can also be used
 to manage the state of individual instances of a recurrence-based schedule.<a href="#section-3.2-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-2.4">
-            <p id="section-3.2-2.4.1">"discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).<a href="#section-3.2-2.4.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-2.4.1">"discard-action-type": Specifies the action for the responder to take (e.g., generate a warning or an error message) when
+a requested schedule cannot be accepted for any reason and is discarded.<a href="#section-3.2-2.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="sec-grp">
 <section id="section-3.3">
-        <h3 id="name-groupings">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-groupings" class="section-name selfRef">Groupings</a>
+        <h3 id="name-scheduling-groupings">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-scheduling-groupings" class="section-name selfRef">Scheduling Groupings</a>
         </h3>
 <p id="section-3.3-1">The "ietf-schedule" module (<a href="#sec-schedule" class="auto internal xref">Section 6</a>) defines the following groupings:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1505,54 +1511,19 @@ to manage the state of individual instances of a recurrence-based schedule.<a hr
             <p id="section-3.3-2.9.1">"schedule-status" and "schedule-status-with-name" (<a href="#sec-schedule-status" class="auto internal xref">Section 3.3.9</a>)<a href="#section-3.3-2.9.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-3.3-3"><a href="#schedule-tree" class="auto internal xref">Figure 1</a> provides an overview of the tree structure of
-   the "ietf-schedule" module in terms of its groupings.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
-<span id="name-overall-schedule-tree-struc"></span><div id="schedule-tree">
-<figure id="figure-1">
-          <div class="alignLeft art-text artwork" id="section-3.3-4.1">
-<pre>
-module: ietf-schedule
-
-  grouping generic-schedule-params:
-    ...
-  grouping period-of-time:
-    ...
-  grouping recurrence-basic:
-    ...
-  grouping recurrence-utc:
-    ...
-  grouping recurrence-with-time-zone:
-    ...
-  grouping recurrence-utc-with-date-times:
-    ...
-  grouping recurrence-time-zone-with-date-times:
-    ...
-  grouping icalendar-recurrence:
-    ...
-  grouping schedule-status:
-    ...
-  grouping schedule-status-with-name:
-    ...
-</pre>
-</div>
-<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-overall-schedule-tree-struc" class="selfRef">Overall Schedule Tree Structure</a>
-          </figcaption></figure>
-</div>
-<p id="section-3.3-5">Each of these groupings is presented in the following subsections. Examples
-   are provided in <a href="#usage" class="auto internal xref">Appendix A</a>.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.3-3">Examples are provided in <a href="#usage" class="auto internal xref">Appendix A</a>.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <div id="sec-gen">
 <section id="section-3.3.1">
           <h4 id="name-the-generic-schedule-params">
 <a href="#section-3.3.1" class="section-number selfRef">3.3.1. </a><a href="#name-the-generic-schedule-params" class="section-name selfRef">The "generic-schedule-params" Grouping</a>
           </h4>
-<p id="section-3.3.1-1">A system accepts and handles the schedule requests, which may help further
+<p id="section-3.3.1-1">A system accepts and handles schedule requests, which may help further
    automate the scheduling process of events, policy, services, or resources
-   based on date and time. The "generic-schedule-params" grouping (<a href="#gsp-tree" class="auto internal xref">Figure 2</a>)
+   based on date and time. The "generic-schedule-params" grouping (<a href="#gsp-tree" class="auto internal xref">Figure 1</a>)
    specifies a set of configuration parameters that are used by a system for
    validating requested schedules.<a href="#section-3.3.1-1" class="pilcrow">¶</a></p>
 <span id="name-generic-schedule-configurat"></span><div id="gsp-tree">
-<figure id="figure-2">
+<figure id="figure-1">
             <div class="alignLeft art-text artwork" id="section-3.3.1-2.1">
 <pre>
 module: ietf-schedule
@@ -1585,26 +1556,28 @@ module: ietf-schedule
     ...
 </pre>
 </div>
-<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
 <a href="#name-generic-schedule-configurat" class="selfRef">Generic Schedule Configuration Tree Structure</a>
             </figcaption></figure>
 </div>
 <p id="section-3.3.1-3">The "description" includes a description of the schedule. No constraint is imposed
    on the structure nor the use of this parameter.<a href="#section-3.3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.3.1-4">The "time-zone-identifier" parameter, if provided, specifies the
-   time zone reference of the date and time values with local time format.<a href="#section-3.3.1-4" class="pilcrow">¶</a></p>
+   time zone reference <span>[<a href="#RFC7317" class="cite xref">RFC7317</a>]</span> of the local date and time values.<a href="#section-3.3.1-4" class="pilcrow">¶</a></p>
 <p id="section-3.3.1-5">The "validity" parameter specifies the date and time after which a schedule
-   will be considered as invalid. It determines the latest time that a schedule
-   can be executed by a system and takes precedence over similar attributes
+   will not be considered as valid. It determines the latest time that a schedule
+   can be started to execute by a system and takes precedence over similar attributes
    that are provided at the schedule instance itself.<a href="#section-3.3.1-5" class="pilcrow">¶</a></p>
 <p id="section-3.3.1-6">The "max/min-allowed-start" parameters specify the maximum/minimum scheduled
    start date and time, a requested schedule will be rejected if the first
-   occurrence of the schedule is later/earlier than the configured values.<a href="#section-3.3.1-6" class="pilcrow">¶</a></p>
+   occurrence of the schedule starts later/earlier than the configured values.<a href="#section-3.3.1-6" class="pilcrow">¶</a></p>
 <p id="section-3.3.1-7">The "max-allowed-end" parameter specifies the maximum allowed end time of
    the last occurrence. A requested schedule will be rejected if the end time
-   of last occurrence is later than the configured "max-allowed-end" value.<a href="#section-3.3.1-7" class="pilcrow">¶</a></p>
+   of last occurrence starts later than the configured "max-allowed-end" value.<a href="#section-3.3.1-7" class="pilcrow">¶</a></p>
 <p id="section-3.3.1-8">The "discard-action" parameter specifies the action if a requested schedule
-   is considered inactive or out-of-date.<a href="#section-3.3.1-8" class="pilcrow">¶</a></p>
+   cannot be accepted for any reason and is discarded. Possible reasons include,
+   but are not limited to, the requested schedule failing to satisfy the guards in this grouping,
+   conflicting with existing schedules, or being out-of-date.<a href="#section-3.3.1-8" class="pilcrow">¶</a></p>
 <p id="section-3.3.1-9">These parameters apply to all schedules on a system and are meant
    to provide guards against stale configuration, too short schedule requests
    that would prevent validation by admins of some critical systems, etc.<a href="#section-3.3.1-9" class="pilcrow">¶</a></p>
@@ -1615,14 +1588,15 @@ module: ietf-schedule
           <h4 id="name-the-period-of-time-grouping">
 <a href="#section-3.3.2" class="section-number selfRef">3.3.2. </a><a href="#name-the-period-of-time-grouping" class="section-name selfRef">The "period-of-time" Grouping</a>
           </h4>
-<p id="section-3.3.2-1">The "period-of-time" grouping (<a href="#pt-tree" class="auto internal xref">Figure 3</a>) represents a time period using
-   either a start ("period-start") and end date and time ("period-end"), or a
-   start ("period-start") and a positive time duration ("duration"). For the first
-   format, the start of the period <span class="bcp14">MUST</span> be before the end of the period.<a href="#section-3.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.2-1">The "period-of-time" grouping (<a href="#pt-tree" class="auto internal xref">Figure 2</a>) represents a time period using
+   either a start date and time ("period-start") and end date and time ("period-end"), or a
+   start date and time ("period-start") and a non-negative time duration ("duration"). For the first
+   format, the start of the period <span class="bcp14">MUST</span> be no later the end of the period. If neither an end date and time
+   nor a duration is indicated, the period is considered to last forever or as a one-shot schedule.<a href="#section-3.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.3.2-2">The "period-description" includes a description of the period. No constraint is imposed
    on the structure nor the use of this parameter.<a href="#section-3.3.2-2" class="pilcrow">¶</a></p>
 <span id="name-period-of-time-grouping-tre"></span><div id="pt-tree">
-<figure id="figure-3">
+<figure id="figure-2">
             <div class="alignLeft art-text artwork" id="section-3.3.2-3.1">
 <pre>
 module: ietf-schedule
@@ -1656,7 +1630,7 @@ module: ietf-schedule
     ...
 </pre>
 </div>
-<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
 <a href="#name-period-of-time-grouping-tre" class="selfRef">Period of Time Grouping Tree Structure</a>
             </figcaption></figure>
 </div>
@@ -1667,9 +1641,9 @@ module: ietf-schedule
           <h4 id="name-the-recurrence-basic-groupi">
 <a href="#section-3.3.3" class="section-number selfRef">3.3.3. </a><a href="#name-the-recurrence-basic-groupi" class="section-name selfRef">The "recurrence-basic" Grouping</a>
           </h4>
-<p id="section-3.3.3-1">The "recurrence-basic" grouping (<a href="#rec-grp-tree" class="auto internal xref">Figure 4</a>) specifies a simple recurrence rule.<a href="#section-3.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.3-1">The "recurrence-basic" grouping (<a href="#rec-grp-tree" class="auto internal xref">Figure 3</a>) specifies a simple recurrence rule which starts immediately and repeats forever.<a href="#section-3.3.3-1" class="pilcrow">¶</a></p>
 <span id="name-recurrence-grouping-tree-st"></span><div id="rec-grp-tree">
-<figure id="figure-4">
+<figure id="figure-3">
             <div class="alignLeft art-text artwork" id="section-3.3.3-2.1">
 <pre>
 module: ietf-schedule
@@ -1698,13 +1672,13 @@ module: ietf-schedule
     ...
 </pre>
 </div>
-<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
 <a href="#name-recurrence-grouping-tree-st" class="selfRef">recurrence Grouping Tree Structure</a>
             </figcaption></figure>
 </div>
-<p id="section-3.3.3-3">The frequency ("frequency") which is mandatory, identifies the type of recurrence rule. For example,
+<p id="section-3.3.3-3">The frequency parameter ("frequency"), which is mandatory, identifies the type of recurrence rule. For example,
   a "daily" frequency value specifies repeating events based on an interval of a day or more.<a href="#section-3.3.3-3" class="pilcrow">¶</a></p>
-<p id="section-3.3.3-4">Consistent with <span><a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.10" class="relref">Section 3.3.10</a> of [<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>, the interval ("interval") represents at which intervals the recurrence rule repeats. For example,
+<p id="section-3.3.3-4">Consistent with <span><a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.10" class="relref">Section 3.3.10</a> of [<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>, the interval ("interval") represents at which interval the recurrence rule repeats. For example,
   within a daily recurrence rule, an interval value of "8" means every eight days.
   The default value is "1", meaning every second for a secondly recurrence rule,
   every minute for a minutely rule, every hour for an hourly rule, every day for a
@@ -1718,10 +1692,10 @@ module: ietf-schedule
           <h4 id="name-the-recurrence-utc-grouping">
 <a href="#section-3.3.4" class="section-number selfRef">3.3.4. </a><a href="#name-the-recurrence-utc-grouping" class="section-name selfRef">The "recurrence-utc" Grouping</a>
           </h4>
-<p id="section-3.3.4-1">The "recurrence-utc" grouping (<a href="#rec-utc-grp-tree" class="auto internal xref">Figure 5</a>) uses the "recurrence-basic"
+<p id="section-3.3.4-1">The "recurrence-utc" grouping (<a href="#rec-utc-grp-tree" class="auto internal xref">Figure 4</a>) uses the "recurrence-basic"
    grouping and specifies a simple recurrence rule in UTC format.<a href="#section-3.3.4-1" class="pilcrow">¶</a></p>
 <span id="name-recurrence-utc-grouping-tre"></span><div id="rec-utc-grp-tree">
-<figure id="figure-5">
+<figure id="figure-4">
             <div class="alignLeft art-text artwork" id="section-3.3.4-2.1">
 <pre>
 module: ietf-schedule
@@ -1758,17 +1732,18 @@ module: ietf-schedule
     ...
 </pre>
 </div>
-<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
 <a href="#name-recurrence-utc-grouping-tre" class="selfRef">recurrence-utc Grouping Tree Structure</a>
             </figcaption></figure>
 </div>
 <p id="section-3.3.4-3">The "start-time-utc" indicates the start time in UTC format.<a href="#section-3.3.4-3" class="pilcrow">¶</a></p>
-<p id="section-3.3.4-4">The "duration" parameter specifies, in units of seconds, the time period of the first occurrence. Unless specified otherwise, the "duration" also applies to subsequent recurrence instances.<a href="#section-3.3.4-4" class="pilcrow">¶</a></p>
+<p id="section-3.3.4-4">The "duration" parameter specifies, in units of seconds, the time period of the first occurrence. Unless specified otherwise (e.g., described in the "description" statement), the "duration" also applies to subsequent recurrence instances. When unspecified, each occurrence is considered as
+   immediate completion or hard to compute an exact duration.<a href="#section-3.3.4-4" class="pilcrow">¶</a></p>
 <p id="section-3.3.4-5">Note that the "interval" and "duration" cover two distinct properties of a schedule event.
 The interval specifies when a schedule will occur, combined with the frequency parameter; while the duration indicates how long
-an occurence will last.<a href="#section-3.3.4-5" class="pilcrow">¶</a></p>
+an occurrence will last. This document allows the interval between occurrences to be shorter than the duration of each occurrence (e.g., a recurring event is scheduled to start every day for a duration of 2 days).<a href="#section-3.3.4-5" class="pilcrow">¶</a></p>
 <p id="section-3.3.4-6">The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-end" choice. The "start-time-utc" value always counts
+  indicated by the "recurrence-end" choice. The value of the "count" node <span class="bcp14">MUST</span> be greater than 1, the "start-time-utc" value always counts
   as the first occurrence.<a href="#section-3.3.4-6" class="pilcrow">¶</a></p>
 <p id="section-3.3.4-7">The "recurrence-utc" grouping is designed to be reused in scheduling contexts
    where machine readability is more desirable.<a href="#section-3.3.4-7" class="pilcrow">¶</a></p>
@@ -1779,10 +1754,10 @@ an occurence will last.<a href="#section-3.3.4-5" class="pilcrow">¶</a></p>
           <h4 id="name-the-recurrence-with-time-zo">
 <a href="#section-3.3.5" class="section-number selfRef">3.3.5. </a><a href="#name-the-recurrence-with-time-zo" class="section-name selfRef">The "recurrence-with-time-zone" Grouping</a>
           </h4>
-<p id="section-3.3.5-1">The "recurrence-with-time-zone" grouping (<a href="#rec-tz-grp-tree" class="auto internal xref">Figure 6</a>) uses the
+<p id="section-3.3.5-1">The "recurrence-with-time-zone" grouping (<a href="#rec-tz-grp-tree" class="auto internal xref">Figure 5</a>) uses the
    "recurrence-basic" grouping and specifies a simple recurrence rule with a time zone.<a href="#section-3.3.5-1" class="pilcrow">¶</a></p>
 <span id="name-recurrence-with-time-zone-g"></span><div id="rec-tz-grp-tree">
-<figure id="figure-6">
+<figure id="figure-5">
             <div class="alignLeft art-text artwork" id="section-3.3.5-2.1">
 <pre>
 module: ietf-schedule
@@ -1820,18 +1795,19 @@ module: ietf-schedule
     ...
 </pre>
 </div>
-<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
 <a href="#name-recurrence-with-time-zone-g" class="selfRef">recurrence-with-time-zone Grouping Tree Structure</a>
             </figcaption></figure>
 </div>
 <p id="section-3.3.5-3">The "recurrence-first" container includes "start-time" and "duration" parameters
-   to specify the start time and period of the first occurrence. Unless specified otherwise, the
-   "duration" also applies to subsequent recurrence instances. It also includes a
+   to specify the start time and period of the first occurrence. Unless specified otherwise (e.g., described in the "description" statement), the
+   "duration" also applies to subsequent recurrence instances. When unspecified, each occurrence is considered as
+   immediate completion or hard to compute an exact duration. It also includes a
    "time-zone-identifier" parameter which <span class="bcp14">MUST</span> be specified if the date
    and time value is neither reported in the format of UTC nor time zone offset
    to UTC.<a href="#section-3.3.5-3" class="pilcrow">¶</a></p>
 <p id="section-3.3.5-4">The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-end" choice. The "start-time" value always counts
+  indicated by the "recurrence-end" choice. The value of the "count" node <span class="bcp14">MUST</span> be greater than 1, the "start-time" value always counts
   as the first occurrence.<a href="#section-3.3.5-4" class="pilcrow">¶</a></p>
 <p id="section-3.3.5-5">Unlike the definition of "recurrence-utc" grouping (<a href="#sec-rec-utc" class="auto internal xref">Section 3.3.4</a>),
    "recurrence-with-time-zone" is intended to promote human readability over
@@ -1843,11 +1819,11 @@ module: ietf-schedule
           <h4 id="name-the-recurrence-utc-with-dat">
 <a href="#section-3.3.6" class="section-number selfRef">3.3.6. </a><a href="#name-the-recurrence-utc-with-dat" class="section-name selfRef">The "recurrence-utc-with-date-times" Grouping</a>
           </h4>
-<p id="section-3.3.6-1">The "recurrence-utc-with-date-times" grouping (<a href="#rec-utc-dt-grp-tree" class="auto internal xref">Figure 7</a>) uses
+<p id="section-3.3.6-1">The "recurrence-utc-with-date-times" grouping (<a href="#rec-utc-dt-grp-tree" class="auto internal xref">Figure 6</a>) uses
    the "recurrence-utc" grouping (<a href="#sec-rec-utc" class="auto internal xref">Section 3.3.4</a>) and adds a "period-timeticks"
    list to define an aggregate set of repeating occurrences.<a href="#section-3.3.6-1" class="pilcrow">¶</a></p>
 <span id="name-recurrence-utc-with-date-ti"></span><div id="rec-utc-dt-grp-tree">
-<figure id="figure-7">
+<figure id="figure-6">
             <div class="alignLeft art-text artwork" id="section-3.3.6-2.1">
 <pre>
 module: ietf-schedule
@@ -1887,14 +1863,14 @@ module: ietf-schedule
     ...
 </pre>
 </div>
-<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
 <a href="#name-recurrence-utc-with-date-ti" class="selfRef">recurrence-utc-with-date-times Grouping Tree Structure</a>
             </figcaption></figure>
 </div>
 <p id="section-3.3.6-3">The recurrence instances are specified by the union of occurrences defined
   by both the recurrence rule and "period-timeticks" list. Duplicate instances
-  are ignored. The value of the "period-start" instance must not exceed the
-  value indicated by the value of "frequency" instance, e.g., the timeticks
+  are ignored. The value of the "period-start" instance <span class="bcp14">MUST NOT</span> exceed the
+  value indicated by the value of "frequency" instance, i.e., the timeticks
   value must not exceed 100 in a secondly recurrence rule, and it must not
   exceed 6000 in a minutely recurrence rule, and so on.<a href="#section-3.3.6-3" class="pilcrow">¶</a></p>
 </section>
@@ -1904,11 +1880,11 @@ module: ietf-schedule
           <h4 id="name-the-recurrence-time-zone-wi">
 <a href="#section-3.3.7" class="section-number selfRef">3.3.7. </a><a href="#name-the-recurrence-time-zone-wi" class="section-name selfRef">The "recurrence-time-zone-with-date-times" Grouping</a>
           </h4>
-<p id="section-3.3.7-1">The "recurrence-time-zone-with-date-times" grouping (<a href="#rec-tz-dt-grp-tree" class="auto internal xref">Figure 8</a>) uses
+<p id="section-3.3.7-1">The "recurrence-time-zone-with-date-times" grouping (<a href="#rec-tz-dt-grp-tree" class="auto internal xref">Figure 7</a>) uses
   the "recurrence-with-time-zone" grouping (<a href="#sec-rec-tz" class="auto internal xref">Section 3.3.5</a>) and
   adds a "period" list to define an aggregate set of repeating occurrences.<a href="#section-3.3.7-1" class="pilcrow">¶</a></p>
 <span id="name-recurrence-time-zone-with-d"></span><div id="rec-tz-dt-grp-tree">
-<figure id="figure-8">
+<figure id="figure-7">
             <div class="alignLeft art-text artwork" id="section-3.3.7-2.1">
 <pre>
 module: ietf-schedule
@@ -1955,7 +1931,7 @@ module: ietf-schedule
     ...
 </pre>
 </div>
-<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
 <a href="#name-recurrence-time-zone-with-d" class="selfRef">recurrence-time-zone-with-date-times Grouping Tree Structure</a>
             </figcaption></figure>
 </div>
@@ -1969,13 +1945,13 @@ module: ietf-schedule
           <h4 id="name-the-icalendar-recurrence-gr">
 <a href="#section-3.3.8" class="section-number selfRef">3.3.8. </a><a href="#name-the-icalendar-recurrence-gr" class="section-name selfRef">The "icalendar-recurrence" Grouping</a>
           </h4>
-<p id="section-3.3.8-1">The "icalendar-recurrence" grouping (<a href="#ical-grp-tree" class="auto internal xref">Figure 9</a>) uses the
+<p id="section-3.3.8-1">The "icalendar-recurrence" grouping (<a href="#ical-grp-tree" class="auto internal xref">Figure 8</a>) uses the
   "recurrence-time-zone-with-date-times" grouping (<a href="#sec-rec-tz-dt" class="auto internal xref">Section 3.3.7</a>) and define
   more data nodes to enrich the definition of recurrence. The structure of the
   "icalendar-recurrence" grouping refers to the definition of recurrence
   component defined in Sections <a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.10" class="relref">3.3.10</a> and <a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.5" class="relref">3.8.5</a> of <span>[<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#section-3.3.8-1" class="pilcrow">¶</a></p>
 <span id="name-icalendar-recurrence-groupi"></span><div id="ical-grp-tree">
-<figure id="figure-9">
+<figure id="figure-8">
             <div class="alignLeft art-text artwork" id="section-3.3.8-2.1">
 <pre>
 module: ietf-schedule
@@ -2035,7 +2011,7 @@ module: ietf-schedule
     ...
 </pre>
 </div>
-<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
 <a href="#name-icalendar-recurrence-groupi" class="selfRef">icalendar-recurrence Grouping Tree Structure</a>
             </figcaption></figure>
 </div>
@@ -2046,7 +2022,7 @@ module: ietf-schedule
    within an hour, reducing the number of recurrence instances from all minutes.<a href="#section-3.3.8-3" class="pilcrow">¶</a></p>
 <p id="section-3.3.8-4">The parameter "byday" specifies a list of days of the week, with an optional
    direction which indicates the nth occurrence of a specific day within
-   the "monthly" or "yearly" frequency. For example, within a "monthly" rule,
+   the "monthly" or "yearly" frequency instance. Valid values of "direction" are 1 to 5 or -5 to -1 within a "monthly" recurrence rule; and 1 to 53 or -53 to -1 within a "yearly" recurrence rule. For example, within a "monthly" rule,
    the "weekday" with a value of "monday" and the "direction" with a value of "-1"
    represents the last Monday of the month.<a href="#section-3.3.8-4" class="pilcrow">¶</a></p>
 <p id="section-3.3.8-5">An array of the "bymonthday" (or byyearday", "byyearweek", or "byyearmonth") specifies a list of
@@ -2075,12 +2051,12 @@ module: ietf-schedule
           <h4 id="name-the-schedule-status-and-sch">
 <a href="#section-3.3.9" class="section-number selfRef">3.3.9. </a><a href="#name-the-schedule-status-and-sch" class="section-name selfRef">The "schedule-status" and "schedule-status-with-name" Groupings</a>
           </h4>
-<p id="section-3.3.9-1">The "schedule-status" and "schedule-status-with-name" groupings (<a href="#sche-status-tree" class="auto internal xref">Figure 10</a>) define common parameters
+<p id="section-3.3.9-1">The "schedule-status" and "schedule-status-with-name" groupings (<a href="#sche-status-tree" class="auto internal xref">Figure 9</a>) define common parameters
    for scheduling management/status exposure. The "schedule-status-with-name" grouping has the same
    structure as "schedule-status" but with an additional parameter to identify a schedule "schedule-id". Both
    structures are defined in the module to allow for better modularity and flexibility.<a href="#section-3.3.9-1" class="pilcrow">¶</a></p>
 <span id="name-schedule-status-with-and-wi"></span><div id="sche-status-tree">
-<figure id="figure-10">
+<figure id="figure-9">
             <div class="alignLeft art-text artwork" id="section-3.3.9-2.1">
 <pre>
 module: ietf-schedule
@@ -2126,7 +2102,7 @@ module: ietf-schedule
     +--ro failure-counter?          yang:counter32
 </pre>
 </div>
-<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
 <a href="#name-schedule-status-with-and-wi" class="selfRef">Schedule Status with and without Name Groupings Tree Structure</a>
             </figcaption></figure>
 </div>
@@ -2146,11 +2122,12 @@ module: ietf-schedule
    only avaliable when the "schedule-type" is "recurrence".<a href="#section-3.3.9-6" class="pilcrow">¶</a></p>
 <p id="section-3.3.9-7">"local-time" reports the actual local time as seen by the entity that
    host a schedule. This paramter can be used by a controller to infer the offset to UTC.<a href="#section-3.3.9-7" class="pilcrow">¶</a></p>
-<p id="section-3.3.9-8">"last-failed-occurrence" and "failure-counter" report the last failure that occured and
-   the count of failures for this schedule.<a href="#section-3.3.9-8" class="pilcrow">¶</a></p>
+<p id="section-3.3.9-8">"last-failed-occurrence" and "failure-counter" report the last failure that occurred and
+   the count of failures for this schedule. Unless new parameters/operations are defined to allow the count of failures to be reset,
+   "failure-counter" is reset by default only when the schedule starts.<a href="#section-3.3.9-8" class="pilcrow">¶</a></p>
 <p id="section-3.3.9-9">The current groupings capture common parameters that are applicable
    to typical scheduling contexts known so far. Future modules can define other
-   useful parameters as needed. For example, in a  scheduling context with multiple
+   useful parameters as needed. For example, in a scheduling context with multiple
    system sources to feed the schedules, the "source" and "precedence" parameters
    may be needed to reflect how schedules from different sources should be prioritised.<a href="#section-3.3.9-9" class="pilcrow">¶</a></p>
 </section>
@@ -2190,12 +2167,14 @@ values <span class="bcp14">MUST</span> be valid. See <span><a href="https://rfc-
 number based on the month and year.<a href="#section-4-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-2.3">
-          <p id="section-4-2.3.1">The second <span class="bcp14">MUST</span> have the value "60" at the end of months in which a leap
-second occurs for date and time values.<a href="#section-4-2.3.1" class="pilcrow">¶</a></p>
+          <p id="section-4-2.3.1">The second for date and time values <span class="bcp14">MUST</span> have the value "60" at the end of months in which a leap
+second occurs.<a href="#section-4-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-2.4">
           <p id="section-4-2.4.1">Schedules received with a starting time in the past with respect to
-current time <span class="bcp14">SHOULD</span> be ignored.<a href="#section-4-2.4.1" class="pilcrow">¶</a></p>
+current time <span class="bcp14">SHOULD</span> be ignored. When a local policy is provided, an implementation <span class="bcp14">MAY</span> omit the past occurrences and
+start immediately (e.g., for a period-based schedule) or starts from the
+date and time when the recurrence pattern is first satisfied from the current time (e.g., for a recurrence-based schedule).<a href="#section-4-2.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
@@ -2207,8 +2186,9 @@ current time <span class="bcp14">SHOULD</span> be ignored.<a href="#section-4-2.
       </h2>
 <p id="section-5-1"><span>[<a href="#RFC3231" class="cite xref">RFC3231</a>]</span> specifies a Management Information Base (MIB) used to
 schedule management operations periodically or at specified dates and times.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">Despite no data nodes are defined in this document, <a href="#mapping" class="auto internal xref">Table 1</a> lists how main objects in the DISMAN-SCHEDULE-MIB
-can be mapped to YANG parameters.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-2">Although no data nodes are defined in this document, <a href="#mapping" class="auto internal xref">Table 1</a> lists
+how the main objects in the DISMAN-SCHEDULE-MIB can be mapped to YANG
+parameters.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <span id="name-yang-mib-mapping"></span><div id="mapping">
 <table class="center" id="table-1">
         <caption>
@@ -2356,7 +2336,7 @@ module ietf-schedule {
      which are applicable for scheduling purposes such as events,
      policy, services, or resources based on date and time.
 
-     Copyright (c) 2024 IETF Trust and the persons identified
+     Copyright (c) 2025 IETF Trust and the persons identified
      as authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with
@@ -2376,7 +2356,7 @@ module ietf-schedule {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.";
 
-  revision 2024-04-16 {
+  revision 2025-01-27 {
     description
       "Initial revision.";
     reference
@@ -2463,6 +2443,32 @@ module ietf-schedule {
                  3.8.6.3";
   }
 
+  identity schedule-type {
+    description
+      "Base identity for schedule type.";
+  }
+
+  identity one-shot {
+    base schedule-type;
+    description
+      "Indicates a one-shot schedule. That is a schedule that
+       will trigger an action without the duration/end time being
+       specified and then the schedule will disable itself.";
+  }
+
+  identity period {
+    base schedule-type;
+    description
+      "Indicates a period-based schedule consisting either a
+       start and end or a start and positive duration of time.";
+  }
+
+  identity recurrence {
+    base schedule-type;
+    description
+      "Indicates a recurrence-based schedule.";
+  }
+
   identity frequency-type {
     description
       "Base identity for frequency type.";
@@ -2517,32 +2523,6 @@ module ietf-schedule {
        a year or more.";
   }
 
-  identity schedule-type {
-    description
-      "Base identity for schedule type.";
-  }
-
-  identity one-shot {
-    base schedule-type;
-    description
-      "Indicates a one-shot schedule. That is a schedule that
-       will trigger an action without the duration/end time being
-       specified and then the schedule will disable itself.";
-  }
-
-  identity period {
-    base schedule-type;
-    description
-      "Indicates a period-based schedule consisting either a
-       start and end or a start and positive duration of time.";
-  }
-
-  identity recurrence {
-    base schedule-type;
-    description
-      "Indicates a recurrence-based schedule.";
-  }
-
   identity schedule-state {
     description
       "Base identity for schedule state.";
@@ -2580,29 +2560,31 @@ module ietf-schedule {
        schedules.";
   }
 
-  identity discard-action {
+  identity discard-action-type {
     description
-      "Indicates that a schedule will be discarded.";
+      "Indicates the action for the responder to take when a
+       requested schedule cannot be accepted for any reason
+       and is discarded.";
   }
 
   identity warning {
-    base discard-action;
+    base discard-action-type;
     description
       "Indicates that a warning message is generated
        when a schedule is discarded.";
   }
 
   identity error {
-    base discard-action;
+    base discard-action-type;
     description
       "Indicates that an error message is generated
        when a schedule is discarded.";
   }
 
   identity silently-discard {
-    base discard-action;
+    base discard-action-type;
     description
-      "Indicates that an invalid schedule is silently
+      "Indicates that a schedule that is not valid is silently
        discarded.";
   }
 
@@ -2626,8 +2608,8 @@ module ietf-schedule {
     leaf validity {
       type yang:date-and-time;
       description
-        "Specifies the date and time after which a schedule will
-         be considered as invalid. This parameter takes precedence
+        "Specifies the date and time after which a schedule will not
+         be considered as valid. This parameter takes precedence
          over similar attributes that are provided at the schedule
          instance itself.";
     }
@@ -2658,12 +2640,12 @@ module ietf-schedule {
     }
     leaf discard-action {
       type identityref {
-        base discard-action;
+        base discard-action-type;
       }
       description
-        "Specifies the behavior when a schedule is discarded when
-         enforcing the guards in this grouping or it is received
-         out-of-date.";
+        "Specifies the behavior when a schedule is discarded for
+         any reason, e.g., failing to satisfy the guards in this
+         grouping or it is received out-of-date.";
     }
   }
 
@@ -3156,27 +3138,43 @@ module ietf-schedule {
       <h2 id="name-security-considerations">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-7-1">This section uses the template described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-22#section-3.7" class="relref">Section 3.7</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2">The "ietf-schedule" YANG module specified in this document defines schema for data
-   that is designed to be accessed via network management protocols such
-   as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> or RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.  The lowest NETCONF layer
-   is the secure transport layer, and the mandatory-to-implement secure
-   transport is Secure Shell (SSH) <span>[<a href="#RFC6242" class="cite xref">RFC6242</a>]</span>.  The lowest RESTCONF layer
-   is HTTPS, and the mandatory-to-implement secure transport is TLS
-   <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>.<a href="#section-7-2" class="pilcrow">¶</a></p>
-<p id="section-7-3">The Network Configuration Access Control Model (NACM) <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span>
+<p id="section-7-1">The "ietf-schedule" YANG module specified in this document defines schema for data
+   that is designed to be accessed via YANG-based management protocols, such
+   as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> or RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.  These protocols have to use
+   a secure transport layer (e.g., SSH <span>[<a href="#RFC4252" class="cite xref">RFC4252</a>]</span>, TLS <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, and QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>)
+   and have to use mutual authentication.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">The Network Configuration Access Control Model (NACM) <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span>
    provides the means to restrict access for particular NETCONF or
    RESTCONF users to a preconfigured subset of all available NETCONF or
-   RESTCONF protocol operations and content.<a href="#section-7-3" class="pilcrow">¶</a></p>
-<p id="section-7-4">The "ietf-schedule" module defines a set of types and
+   RESTCONF protocol operations and content.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">The "ietf-schedule" module defines a set of types and
    groupings.  These nodes are intended to be reused by other YANG
    modules.  The module by itself does not expose any data nodes that
    are writable, data nodes that contain read-only state, or RPCs.  As
-   such, there are no additional security issues related to the "ietf-
-   schedule" module that need to be considered.<a href="#section-7-4" class="pilcrow">¶</a></p>
-<p id="section-7-5">Care must be taken when defining recurrences occurring very often and
-   frequent that can be an additional source of attacks by keeping the system
-   permanently busy with the management of scheduling.<a href="#section-7-5" class="pilcrow">¶</a></p>
+   such, there are no additional security issues related to the "ietf-schedule"
+   module that need to be considered.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-4">Modules that use the groupings that are defined in this document
+   should identify the corresponding security considerations, e.g.,:<a href="#section-7-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7-5.1">
+          <p id="section-7-5.1.1">Scheduling depends on reliable and accurate time synchronization. Inaccurate date
+and time setting can lead to scheduling events being triggered at incorrect
+intervals, potentially causing system failures or security vulnerabilities.<a href="#section-7-5.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-7-5.2">
+          <p id="section-7-5.2.1">Recurring events may conceal abnormal behavior or security threats, which
+may be drowned out by normal events, especially when they are triggered frequently.<a href="#section-7-5.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-7-5.3">
+          <p id="section-7-5.3.1">The absence of detailed logs and audit records of each occurrence trigger time
+and action results, and so on, may make security incidents difficient to trace.<a href="#section-7-5.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-7-5.4">
+          <p id="section-7-5.4.1">Care must be taken when defining recurrences occurring very often and
+frequent that can be an additional source of attacks by keeping the system
+permanently busy with the management of scheduling.<a href="#section-7-5.4.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
 </section>
 </div>
 <div id="iana-considerations">
@@ -3250,14 +3248,6 @@ module ietf-schedule {
         <dd>
 <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"YANG - A Data Modeling Language for the Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6020</span>, <span class="seriesInfo">DOI 10.17487/RFC6020</span>, <time datetime="2010-10" class="refDate">October 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6020">https://www.rfc-editor.org/rfc/rfc6020</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC6241">[RFC6241]</dt>
-        <dd>
-<span class="refAuthor">Enns, R., Ed.</span>, <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refAuthor">Schoenwaelder, J., Ed.</span>, and <span class="refAuthor">A. Bierman, Ed.</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6241</span>, <span class="seriesInfo">DOI 10.17487/RFC6241</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6241">https://www.rfc-editor.org/rfc/rfc6241</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC6242">[RFC6242]</dt>
-        <dd>
-<span class="refAuthor">Wasserman, M.</span>, <span class="refTitle">"Using the NETCONF Protocol over Secure Shell (SSH)"</span>, <span class="seriesInfo">RFC 6242</span>, <span class="seriesInfo">DOI 10.17487/RFC6242</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6242">https://www.rfc-editor.org/rfc/rfc6242</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC6991">[RFC6991]</dt>
         <dd>
 <span class="refAuthor">Schoenwaelder, J., Ed.</span>, <span class="refTitle">"Common YANG Data Types"</span>, <span class="seriesInfo">RFC 6991</span>, <span class="seriesInfo">DOI 10.17487/RFC6991</span>, <time datetime="2013-07" class="refDate">July 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6991">https://www.rfc-editor.org/rfc/rfc6991</a>&gt;</span>. </dd>
@@ -3270,21 +3260,13 @@ module ietf-schedule {
         <dd>
 <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"The YANG 1.1 Data Modeling Language"</span>, <span class="seriesInfo">RFC 7950</span>, <span class="seriesInfo">DOI 10.17487/RFC7950</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7950">https://www.rfc-editor.org/rfc/rfc7950</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC8040">[RFC8040]</dt>
-        <dd>
-<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8040">https://www.rfc-editor.org/rfc/rfc8040</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8341">[RFC8341]</dt>
-        <dd>
-<span class="refAuthor">Bierman, A.</span> and <span class="refAuthor">M. Bjorklund</span>, <span class="refTitle">"Network Configuration Access Control Model"</span>, <span class="seriesInfo">STD 91</span>, <span class="seriesInfo">RFC 8341</span>, <span class="seriesInfo">DOI 10.17487/RFC8341</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8341">https://www.rfc-editor.org/rfc/rfc8341</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC8446">[RFC8446]</dt>
       <dd>
-<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8446">https://www.rfc-editor.org/rfc/rfc8446</a>&gt;</span>. </dd>
+<span class="refAuthor">Bierman, A.</span> and <span class="refAuthor">M. Bjorklund</span>, <span class="refTitle">"Network Configuration Access Control Model"</span>, <span class="seriesInfo">STD 91</span>, <span class="seriesInfo">RFC 8341</span>, <span class="seriesInfo">DOI 10.17487/RFC8341</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8341">https://www.rfc-editor.org/rfc/rfc8341</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -3295,10 +3277,6 @@ module ietf-schedule {
 <a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
-<dt id="I-D.contreras-opsawg-scheduling-oam-tests">[I-D.contreras-opsawg-scheduling-oam-tests]</dt>
-        <dd>
-<span class="refAuthor">Contreras, L. M.</span> and <span class="refAuthor">V. Lopez</span>, <span class="refTitle">"A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM Tests"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-contreras-opsawg-scheduling-oam-tests-04</span>, <time datetime="2024-11-18" class="refDate">18 November 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-contreras-opsawg-scheduling-oam-tests-04">https://datatracker.ietf.org/doc/html/draft-contreras-opsawg-scheduling-oam-tests-04</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="I-D.ietf-netmod-eca-policy">[I-D.ietf-netmod-eca-policy]</dt>
         <dd>
 <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Bryskin, I.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Liu, X.</span>, and <span class="refAuthor">B. Claise</span>, <span class="refTitle">"A YANG Data model for ECA Policy Management"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-eca-policy-01</span>, <time datetime="2021-02-19" class="refDate">19 February 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-eca-policy-01">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-eca-policy-01</a>&gt;</span>. </dd>
@@ -3306,6 +3284,10 @@ module ietf-schedule {
 <dt id="I-D.ietf-netmod-rfc8407bis">[I-D.ietf-netmod-rfc8407bis]</dt>
         <dd>
 <span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-22</span>, <time datetime="2025-01-14" class="refDate">14 January 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-22">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-22</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-opsawg-scheduling-oam-tests">[I-D.ietf-opsawg-scheduling-oam-tests]</dt>
+        <dd>
+<span class="refAuthor">Contreras, L. M.</span> and <span class="refAuthor">V. Lopez</span>, <span class="refTitle">"A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM Tests"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-scheduling-oam-tests-00</span>, <time datetime="2025-01-29" class="refDate">29 January 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-scheduling-oam-tests-00">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-scheduling-oam-tests-00</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-opsawg-ucl-acl">[I-D.ietf-opsawg-ucl-acl]</dt>
         <dd>
@@ -3323,9 +3305,21 @@ module ietf-schedule {
         <dd>
 <span class="refAuthor">Klyne, G.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"Date and Time on the Internet: Timestamps"</span>, <span class="seriesInfo">RFC 3339</span>, <span class="seriesInfo">DOI 10.17487/RFC3339</span>, <time datetime="2002-07" class="refDate">July 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3339">https://www.rfc-editor.org/rfc/rfc3339</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC4252">[RFC4252]</dt>
+        <dd>
+<span class="refAuthor">Ylonen, T.</span> and <span class="refAuthor">C. Lonvick, Ed.</span>, <span class="refTitle">"The Secure Shell (SSH) Authentication Protocol"</span>, <span class="seriesInfo">RFC 4252</span>, <span class="seriesInfo">DOI 10.17487/RFC4252</span>, <time datetime="2006-01" class="refDate">January 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4252">https://www.rfc-editor.org/rfc/rfc4252</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6241">[RFC6241]</dt>
+        <dd>
+<span class="refAuthor">Enns, R., Ed.</span>, <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refAuthor">Schoenwaelder, J., Ed.</span>, and <span class="refAuthor">A. Bierman, Ed.</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6241</span>, <span class="seriesInfo">DOI 10.17487/RFC6241</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6241">https://www.rfc-editor.org/rfc/rfc6241</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC7951">[RFC7951]</dt>
         <dd>
 <span class="refAuthor">Lhotka, L.</span>, <span class="refTitle">"JSON Encoding of Data Modeled with YANG"</span>, <span class="seriesInfo">RFC 7951</span>, <span class="seriesInfo">DOI 10.17487/RFC7951</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7951">https://www.rfc-editor.org/rfc/rfc7951</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8040">[RFC8040]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8040">https://www.rfc-editor.org/rfc/rfc8040</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8340">[RFC8340]</dt>
         <dd>
@@ -3334,6 +3328,14 @@ module ietf-schedule {
 <dt id="RFC8413">[RFC8413]</dt>
         <dd>
 <span class="refAuthor">Zhuang, Y.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Chen, H.</span>, and <span class="refAuthor">A. Farrel</span>, <span class="refTitle">"Framework for Scheduled Use of Resources"</span>, <span class="seriesInfo">RFC 8413</span>, <span class="seriesInfo">DOI 10.17487/RFC8413</span>, <time datetime="2018-07" class="refDate">July 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8413">https://www.rfc-editor.org/rfc/rfc8413</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8446">[RFC8446]</dt>
+        <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8446">https://www.rfc-editor.org/rfc/rfc8446</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9000">[RFC9000]</dt>
+        <dd>
+<span class="refAuthor">Iyengar, J., Ed.</span> and <span class="refAuthor">M. Thomson, Ed.</span>, <span class="refTitle">"QUIC: A UDP-Based Multiplexed and Secure Transport"</span>, <span class="seriesInfo">RFC 9000</span>, <span class="seriesInfo">DOI 10.17487/RFC9000</span>, <time datetime="2021-05" class="refDate">May 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9000">https://www.rfc-editor.org/rfc/rfc9000</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9657">[RFC9657]</dt>
       <dd>
@@ -3346,8 +3348,8 @@ module ietf-schedule {
 </div>
 <div id="usage">
 <section id="appendix-A">
-      <h2 id="name-examples-of-format-represen">
-<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-examples-of-format-represen" class="section-name selfRef">Examples of Format Representation</a>
+      <h2 id="name-examples-of-scheduling-form">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-examples-of-scheduling-form" class="section-name selfRef">Examples of Scheduling Format Representation</a>
       </h2>
 <p id="appendix-A-1">This section provides some examples to illustrate the use of the
    period and recurrence formats defined in <a href="#sec-schedule" class="auto internal xref">Section 6</a>. The following
@@ -3473,12 +3475,12 @@ module example-sch-usage-8 {
         <h3 id="name-the-generic-schedule-params-">
 <a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-the-generic-schedule-params-" class="section-name selfRef">The "generic-schedule-params" Grouping</a>
         </h3>
-<p id="appendix-A.1-1"><a href="#ex-0" class="auto internal xref">Figure 11</a> illustrates the example of a requested schedule that needs to start no earlier than
+<p id="appendix-A.1-1"><a href="#ex-0" class="auto internal xref">Figure 10</a> illustrates the example of a requested schedule that needs to start no earlier than
 08:00 AM, January 1, 2025 and end no later than 8:00 PM, January 31, 2025 (Beijing time).
 Schedule requests that fail to meet the requirements are ignored by the system as indicates by
 "discard-action".<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
 <span id="name-generic-parameters-with-max"></span><div id="ex-0">
-<figure id="figure-11">
+<figure id="figure-10">
           <div class="alignLeft art-text artwork" id="appendix-A.1-2.1">
 <pre>
 {
@@ -3491,18 +3493,18 @@ Schedule requests that fail to meet the requirements are ignored by the system a
 }
 </pre>
 </div>
-<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
 <a href="#name-generic-parameters-with-max" class="selfRef">Generic Parameters with 'max-allowed-end' for Schedule Validation</a>
           </figcaption></figure>
 </div>
 <p id="appendix-A.1-3">To illustrate the difference between "max-allowed-end" and "validity" parameters,
-<a href="#ex-00" class="auto internal xref">Figure 12</a> shows the example of a requested schedule that needs to start no earlier than
+<a href="#ex-00" class="auto internal xref">Figure 11</a> shows the example of a requested schedule that needs to start no earlier than
 08:00 AM, January 1, 2025 (Paris time). Schedule requests that fail to meet the
 requirements are discarded with warning messages. The requested schedule may end
 after 8:00 PM, January 31, 2025, but any occurrences that are generated
-after that time would be considered as invalid.<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
+after that time would not be considered as valid.<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
 <span id="name-generic-parameters-with-val"></span><div id="ex-00">
-<figure id="figure-12">
+<figure id="figure-11">
           <div class="alignLeft art-text artwork" id="appendix-A.1-4.1">
 <pre>
 {
@@ -3515,7 +3517,7 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
 }
 </pre>
 </div>
-<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
+<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
 <a href="#name-generic-parameters-with-val" class="selfRef">Generic Parameters with 'validity' for Schedule Validation</a>
           </figcaption></figure>
 </div>
@@ -3526,10 +3528,10 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
         <h3 id="name-the-period-of-time-grouping-2">
 <a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-the-period-of-time-grouping-2" class="section-name selfRef">The "period-of-time" Grouping</a>
         </h3>
-<p id="appendix-A.2-1"><a href="#ex-1" class="auto internal xref">Figure 13</a> shows an example of a period that starts at 08:00:00 UTC, on January 1, 2025 and ends at 18:00:00 UTC
+<p id="appendix-A.2-1"><a href="#ex-1" class="auto internal xref">Figure 12</a> shows an example of a period that starts at 08:00:00 UTC, on January 1, 2025 and ends at 18:00:00 UTC
    on December 31, 2027.<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
 <span id="name-simple-start-end-schedule"></span><div id="ex-1">
-<figure id="figure-13">
+<figure id="figure-12">
           <div class="alignLeft art-text artwork" id="appendix-A.2-2.1">
 <pre>
 {
@@ -3540,14 +3542,14 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
 }
 </pre>
 </div>
-<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
+<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
 <a href="#name-simple-start-end-schedule" class="selfRef">Simple Start/End Schedule</a>
           </figcaption></figure>
 </div>
 <p id="appendix-A.2-3">An example of a period that starts at 08:00:00 UTC, on January 1, 2025 and lasts 15 days and
-   5 hours and 20 minutes is encoded as shown in <a href="#ex-2" class="auto internal xref">Figure 14</a>.<a href="#appendix-A.2-3" class="pilcrow">¶</a></p>
+   5 hours and 20 minutes is encoded as shown in <a href="#ex-2" class="auto internal xref">Figure 13</a>.<a href="#appendix-A.2-3" class="pilcrow">¶</a></p>
 <span id="name-simple-schedule-with-durati"></span><div id="ex-2">
-<figure id="figure-14">
+<figure id="figure-13">
           <div class="alignLeft art-text artwork" id="appendix-A.2-4.1">
 <pre>
 {
@@ -3558,14 +3560,14 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
 }
 </pre>
 </div>
-<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
+<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
 <a href="#name-simple-schedule-with-durati" class="selfRef">Simple Schedule with Duration</a>
           </figcaption></figure>
 </div>
 <p id="appendix-A.2-5">An example of a period that starts at 2:00 A.M. in Los Angeles on November 19,
-   2025 and lasts 20 weeks is depicted in <a href="#ex-3" class="auto internal xref">Figure 15</a>.<a href="#appendix-A.2-5" class="pilcrow">¶</a></p>
+   2025 and lasts 20 weeks is depicted in <a href="#ex-3" class="auto internal xref">Figure 14</a>.<a href="#appendix-A.2-5" class="pilcrow">¶</a></p>
 <span id="name-simple-schedule-with-time-z"></span><div id="ex-3">
-<figure id="figure-15">
+<figure id="figure-14">
           <div class="alignLeft art-text artwork" id="appendix-A.2-6.1">
 <pre>
 {
@@ -3577,7 +3579,7 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
 }
 </pre>
 </div>
-<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
+<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
 <a href="#name-simple-schedule-with-time-z" class="selfRef">Simple Schedule with Time Zone Indication</a>
           </figcaption></figure>
 </div>
@@ -3588,9 +3590,9 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
         <h3 id="name-the-recurrence-basic-groupin">
 <a href="#appendix-A.3" class="section-number selfRef">A.3. </a><a href="#name-the-recurrence-basic-groupin" class="section-name selfRef">The "recurrence-basic" Grouping</a>
         </h3>
-<p id="appendix-A.3-1"><a href="#ex-6" class="auto internal xref">Figure 18</a> indicates a recurrence of every 2 days which starts immediately and repeat forever:<a href="#appendix-A.3-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.3-1"><a href="#ex-6" class="auto internal xref">Figure 17</a> indicates a recurrence of every 2 days which starts immediately and repeats forever:<a href="#appendix-A.3-1" class="pilcrow">¶</a></p>
 <span id="name-simple-schedule-with-recurr"></span><div id="ex-4">
-<figure id="figure-16">
+<figure id="figure-15">
           <div class="alignLeft art-text artwork" id="appendix-A.3-2.1">
 <pre>
 {
@@ -3602,7 +3604,7 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
 }
 </pre>
 </div>
-<figcaption><a href="#figure-16" class="selfRef">Figure 16</a>:
+<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
 <a href="#name-simple-schedule-with-recurr" class="selfRef">Simple Schedule with Recurrence</a>
           </figcaption></figure>
 </div>
@@ -3613,10 +3615,10 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
         <h3 id="name-the-recurrence-utc-grouping-2">
 <a href="#appendix-A.4" class="section-number selfRef">A.4. </a><a href="#name-the-recurrence-utc-grouping-2" class="section-name selfRef">The "recurrence-utc" Grouping</a>
         </h3>
-<p id="appendix-A.4-1"><a href="#ex-5" class="auto internal xref">Figure 17</a> indicates a recurrence from 8:00 AM to 9:00 AM every day, from
+<p id="appendix-A.4-1"><a href="#ex-5" class="auto internal xref">Figure 16</a> indicates a recurrence from 8:00 AM to 9:00 AM every day, from
    December 1 to December 31, 2025 in UTC:<a href="#appendix-A.4-1" class="pilcrow">¶</a></p>
 <span id="name-simple-schedule-with-recurre"></span><div id="ex-5">
-<figure id="figure-17">
+<figure id="figure-16">
           <div class="alignLeft art-text artwork" id="appendix-A.4-2.1">
 <pre>
 {
@@ -3632,7 +3634,7 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
 }
 </pre>
 </div>
-<figcaption><a href="#figure-17" class="selfRef">Figure 17</a>:
+<figcaption><a href="#figure-16" class="selfRef">Figure 16</a>:
 <a href="#name-simple-schedule-with-recurre" class="selfRef">Simple Schedule with Recurrence in UTC</a>
           </figcaption></figure>
 </div>
@@ -3643,10 +3645,10 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
         <h3 id="name-the-recurrence-with-time-zon">
 <a href="#appendix-A.5" class="section-number selfRef">A.5. </a><a href="#name-the-recurrence-with-time-zon" class="section-name selfRef">The "recurrence-with-time-zone" Grouping</a>
         </h3>
-<p id="appendix-A.5-1"><a href="#ex-6" class="auto internal xref">Figure 18</a> indicates a recurrence of every 2 hours for 10 occurrences, lasting
+<p id="appendix-A.5-1"><a href="#ex-6" class="auto internal xref">Figure 17</a> indicates a recurrence of every 2 hours for 10 occurrences, lasting
    10 minutes, and starting at 3 p.m. on December 1, 2025 in New York:<a href="#appendix-A.5-1" class="pilcrow">¶</a></p>
 <span id="name-simple-schedule-with-recurren"></span><div id="ex-6">
-<figure id="figure-18">
+<figure id="figure-17">
           <div class="alignLeft art-text artwork" id="appendix-A.5-2.1">
 <pre>
 {
@@ -3663,7 +3665,7 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
 }
 </pre>
 </div>
-<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
+<figcaption><a href="#figure-17" class="selfRef">Figure 17</a>:
 <a href="#name-simple-schedule-with-recurren" class="selfRef">Simple Schedule with Recurrence with Time Zone Indication</a>
           </figcaption></figure>
 </div>
@@ -3674,11 +3676,11 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
         <h3 id="name-the-recurrence-utc-with-date">
 <a href="#appendix-A.6" class="section-number selfRef">A.6. </a><a href="#name-the-recurrence-utc-with-date" class="section-name selfRef">The "recurrence-utc-with-date-times" Grouping</a>
         </h3>
-<p id="appendix-A.6-1"><a href="#ex-7" class="auto internal xref">Figure 19</a> indicates a recurrence that occurs every two days starting at 9:00 AM
+<p id="appendix-A.6-1"><a href="#ex-7" class="auto internal xref">Figure 18</a> indicates a recurrence that occurs every two days starting at 9:00 AM
    and 3:00 PM for a duration of 30 minutes and 40 minutes respectively,
    from 2025-06-01 to 2025-06-30 in UTC:<a href="#appendix-A.6-1" class="pilcrow">¶</a></p>
 <span id="name-example-of-recurrence-with-"></span><div id="ex-7">
-<figure id="figure-19">
+<figure id="figure-18">
           <div class="alignLeft art-text artwork" id="appendix-A.6-2.1">
 <pre>
 {
@@ -3703,7 +3705,7 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
 }
 </pre>
 </div>
-<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
+<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
 <a href="#name-example-of-recurrence-with-" class="selfRef">Example of Recurrence With Date Times</a>
           </figcaption></figure>
 </div>
@@ -3714,11 +3716,11 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
         <h3 id="name-the-recurrence-time-zone-wit">
 <a href="#appendix-A.7" class="section-number selfRef">A.7. </a><a href="#name-the-recurrence-time-zone-wit" class="section-name selfRef">The "recurrence-time-zone-with-date-times" Grouping</a>
         </h3>
-<p id="appendix-A.7-1"><a href="#ex-8" class="auto internal xref">Figure 20</a> indicates a recurrence that occurs every
+<p id="appendix-A.7-1"><a href="#ex-8" class="auto internal xref">Figure 19</a> indicates a recurrence that occurs every
    30 minutes and last for 15 minutes from 9:00 AM to 5:00 PM, and extra two occurrences
    at 6:00 PM and 6:30 PM with each lasting for 20 minutes on 2025-12-01 (New York):<a href="#appendix-A.7-1" class="pilcrow">¶</a></p>
 <span id="name-example-of-advanced-recurre"></span><div id="ex-8">
-<figure id="figure-20">
+<figure id="figure-19">
           <div class="alignLeft art-text artwork" id="appendix-A.7-2.1">
 <pre>
 {
@@ -3745,7 +3747,7 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
 }
 </pre>
 </div>
-<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
+<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
 <a href="#name-example-of-advanced-recurre" class="selfRef">Example of Advanced Recurrence Schedule</a>
           </figcaption></figure>
 </div>
@@ -3756,10 +3758,10 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
         <h3 id="name-the-icalendar-recurrence-gro">
 <a href="#appendix-A.8" class="section-number selfRef">A.8. </a><a href="#name-the-icalendar-recurrence-gro" class="section-name selfRef">The "icalendar-recurrence" Grouping</a>
         </h3>
-<p id="appendix-A.8-1"><a href="#ex-9" class="auto internal xref">Figure 21</a> indicates 10 occurrences that occur at
+<p id="appendix-A.8-1"><a href="#ex-9" class="auto internal xref">Figure 20</a> indicates 10 occurrences that occur at
    8:00 AM (EST), every last Saturday of the month starting in January 2024:<a href="#appendix-A.8-1" class="pilcrow">¶</a></p>
 <span id="name-simple-icalendar-recurrence"></span><div id="ex-9">
-<figure id="figure-21">
+<figure id="figure-20">
           <div class="alignLeft art-text artwork" id="appendix-A.8-2.1">
 <pre>
 {
@@ -3782,14 +3784,14 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
 }
 </pre>
 </div>
-<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
+<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
 <a href="#name-simple-icalendar-recurrence" class="selfRef">Simple iCalendar Recurrence</a>
           </figcaption></figure>
 </div>
-<p id="appendix-A.8-3"><a href="#ex-10" class="auto internal xref">Figure 22</a> is an example of a recurrence that occurs on the last
+<p id="appendix-A.8-3"><a href="#ex-10" class="auto internal xref">Figure 21</a> is an example of a recurrence that occurs on the last
    workday of the month until December 25, 2025, from January 1, 2025:<a href="#appendix-A.8-3" class="pilcrow">¶</a></p>
 <span id="name-example-of-advanced-icalend"></span><div id="ex-10">
-<figure id="figure-22">
+<figure id="figure-21">
           <div class="alignLeft art-text artwork" id="appendix-A.8-4.1">
 <pre>
 {
@@ -3823,15 +3825,15 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
 }
 </pre>
 </div>
-<figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
+<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
 <a href="#name-example-of-advanced-icalend" class="selfRef">Example of Advanced iCalendar Recurrence</a>
           </figcaption></figure>
 </div>
-<p id="appendix-A.8-5"><a href="#ex-11" class="auto internal xref">Figure 23</a> indicates a recurrence that occurs every 20
+<p id="appendix-A.8-5"><a href="#ex-11" class="auto internal xref">Figure 22</a> indicates a recurrence that occurs every 20
    minutes from 9:00 AM to 4:40 PM (UTC), with the occurrence starting at 10:20 AM
    being excluded on 2025-12-01:<a href="#appendix-A.8-5" class="pilcrow">¶</a></p>
 <span id="name-example-of-advanced-icalenda"></span><div id="ex-11">
-<figure id="figure-23">
+<figure id="figure-22">
           <div class="alignLeft art-text artwork" id="appendix-A.8-6.1">
 <pre>
 {
@@ -3863,7 +3865,7 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
 }
 </pre>
 </div>
-<figcaption><a href="#figure-23" class="selfRef">Figure 23</a>:
+<figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
 <a href="#name-example-of-advanced-icalenda" class="selfRef">Example of Advanced iCalendar Recurrence with Exceptions</a>
           </figcaption></figure>
 </div>
@@ -3874,10 +3876,10 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
         <h3 id="name-the-schedule-status-groupin">
 <a href="#appendix-A.9" class="section-number selfRef">A.9. </a><a href="#name-the-schedule-status-groupin" class="section-name selfRef">The "schedule-status" Grouping</a>
         </h3>
-<p id="appendix-A.9-1"><a href="#ex-12" class="auto internal xref">Figure 24</a> indicates the scheduled recurrence status of <a href="#ex-11" class="auto internal xref">Figure 23</a> at the time
+<p id="appendix-A.9-1"><a href="#ex-12" class="auto internal xref">Figure 23</a> indicates the scheduled recurrence status of <a href="#ex-11" class="auto internal xref">Figure 22</a> at the time
    of 12:15 PM, 2025-12-01 (UTC):<a href="#appendix-A.9-1" class="pilcrow">¶</a></p>
 <span id="name-example-of-a-schedule-statu"></span><div id="ex-12">
-<figure id="figure-24">
+<figure id="figure-23">
           <div class="alignLeft art-text artwork" id="appendix-A.9-2.1">
 <pre>
 {
@@ -3896,7 +3898,7 @@ after that time would be considered as invalid.<a href="#appendix-A.1-3" class="
 }
 </pre>
 </div>
-<figcaption><a href="#figure-24" class="selfRef">Figure 24</a>:
+<figcaption><a href="#figure-23" class="selfRef">Figure 23</a>:
 <a href="#name-example-of-a-schedule-statu" class="selfRef">Example of a Schedule Status</a>
           </figcaption></figure>
 </div>
@@ -4141,13 +4143,13 @@ module example-scheduled-link-bandwidth {
 
 </pre><a href="#appendix-B.2-2" class="pilcrow">¶</a>
 </div>
-<p id="appendix-B.2-3"><a href="#ex-13" class="auto internal xref">Figure 25</a> shows a configuration example of a link's bandwidth that is
+<p id="appendix-B.2-3"><a href="#ex-13" class="auto internal xref">Figure 24</a> shows a configuration example of a link's bandwidth that is
   scheduled between 2025-12-01 0:00 UTC to the end of 2025-12-31 with a daily
   schedule. In each day, the bandwidth value is scheduled to be 500 Kbps between
   1:00 AM to 6:00 AM and 800 Kbps between 10:00 PM to 11:00 PM. The bandwidth
   value that's not covered by the period above is 1000 Kbps by default.<a href="#appendix-B.2-3" class="pilcrow">¶</a></p>
 <span id="name-example-of-scheduled-links-"></span><div id="ex-13">
-<figure id="figure-25">
+<figure id="figure-24">
           <div class="alignLeft art-text artwork" id="appendix-B.2-4.1">
 <pre>
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -4177,7 +4179,7 @@ module example-scheduled-link-bandwidth {
 &lt;/link-attributes&gt;
 </pre>
 </div>
-<figcaption><a href="#figure-25" class="selfRef">Figure 25</a>:
+<figcaption><a href="#figure-24" class="selfRef">Figure 24</a>:
 <a href="#name-example-of-scheduled-links-" class="selfRef">Example of Scheduled Link's Bandwidth</a>
           </figcaption></figure>
 </div>
@@ -4233,9 +4235,9 @@ module example-sch-capacity-res {
 <p id="appendix-C-4"><span><a href="https://rfc-editor.org/rfc/rfc8413#section-4" class="relref">Section 4</a> of [<a href="#RFC8413" class="cite xref">RFC8413</a>]</span> defines the reference architecture for scheduled use
    of resources, the service requester sends a request to a Path Computation Element (PCE) and includes the
    parameters of the Label Switched Path (LSP) that the requester wishes to supply, the configuration
-   example to provide the scheduled resource is shown in <a href="#ex-14" class="auto internal xref">Figure 26</a>.<a href="#appendix-C-4" class="pilcrow">¶</a></p>
+   example to provide the scheduled resource is shown in <a href="#ex-14" class="auto internal xref">Figure 25</a>.<a href="#appendix-C-4" class="pilcrow">¶</a></p>
 <span id="name-example-of-scheduled-links-b"></span><div id="ex-14">
-<figure id="figure-26">
+<figure id="figure-25">
         <div class="alignLeft art-text artwork" id="appendix-C-5.1">
 <pre>
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -4266,7 +4268,7 @@ module example-sch-capacity-res {
 &lt;/link-capability-reservations&gt;
 </pre>
 </div>
-<figcaption><a href="#figure-26" class="selfRef">Figure 26</a>:
+<figcaption><a href="#figure-25" class="selfRef">Figure 25</a>:
 <a href="#name-example-of-scheduled-links-b" class="selfRef">Example of Scheduled Link's Bandwidth Reservation</a>
         </figcaption></figure>
 </div>
@@ -4281,7 +4283,7 @@ module example-sch-capacity-res {
    from the OPSAWG to see this model be separately defined for wide use in scheduling context.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
 <p id="appendix-D-2">Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, Steve Baillargeon, and Dhruv Dhody
    for their valuable comments and inputs to this work.<a href="#appendix-D-2" class="pilcrow">¶</a></p>
-<p id="appendix-D-3">Many thanks to the authors of <span>[<a href="#I-D.ietf-tvr-schedule-yang" class="cite xref">I-D.ietf-tvr-schedule-yang</a>]</span>, <span>[<a href="#I-D.contreras-opsawg-scheduling-oam-tests" class="cite xref">I-D.contreras-opsawg-scheduling-oam-tests</a>]</span>, and <span>[<a href="#I-D.ietf-netmod-eca-policy" class="cite xref">I-D.ietf-netmod-eca-policy</a>]</span>
+<p id="appendix-D-3">Many thanks to the authors of <span>[<a href="#I-D.ietf-tvr-schedule-yang" class="cite xref">I-D.ietf-tvr-schedule-yang</a>]</span>, <span>[<a href="#I-D.ietf-opsawg-scheduling-oam-tests" class="cite xref">I-D.ietf-opsawg-scheduling-oam-tests</a>]</span>, and <span>[<a href="#I-D.ietf-netmod-eca-policy" class="cite xref">I-D.ietf-netmod-eca-policy</a>]</span>
    for the constructive discussion during IETF#118.<a href="#appendix-D-3" class="pilcrow">¶</a></p>
 <p id="appendix-D-4">Other related efforts were explored in the past, e.g., <span>[<a href="#I-D.liu-netmod-yang-schedule" class="cite xref">I-D.liu-netmod-yang-schedule</a>]</span>.<a href="#appendix-D-4" class="pilcrow">¶</a></p>
 <p id="appendix-D-5">Thanks to Reshad Rahman for the great YANGDOCTORS review.<a href="#appendix-D-5" class="pilcrow">¶</a></p>
