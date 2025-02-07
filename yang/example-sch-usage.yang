@@ -81,7 +81,7 @@ module example-sch-usage-6 {
   }
 
   container recurrence-utc-with-date-times {
-    uses schedule:recurrence-utc-with-date-times;
+    uses schedule:recurrence-utc-with-periods;
   }  
 }
 
@@ -94,7 +94,7 @@ module example-sch-usage-7 {
     prefix "schedule";
 
   container recurrence-time-zone-with-date-times {
-    uses schedule:recurrence-time-zone-with-date-times;
+    uses schedule:recurrence-time-zone-with-periods;
   }  
 }
 
@@ -107,4 +107,3 @@ module example-sch-usage-8 {
     uses schedule:icalendar-recurrence;
   }
 }
-

@@ -169,8 +169,8 @@ System:
    * "recurrence-basic" ({{sec-rec}})
    * "recurrence-utc" ({{sec-rec-utc}})
    * "recurrence-with-time-zone" ({{sec-rec-tz}})
-   * "recurrence-utc-with-date-times" ({{sec-rec-utc-dt}})
-   * "recurrence-time-zone-with-date-times" ({{sec-rec-tz-dt}})
+   * "recurrence-utc-with-periods" ({{sec-rec-utc-dt}})
+   * "recurrence-time-zone-with-periods" ({{sec-rec-tz-dt}})
    * "icalendar-recurrence" ({{sec-ical-rec}})
    * "schedule-status" and "schedule-status-with-name" ({{sec-schedule-status}})
 
@@ -329,16 +329,16 @@ an occurrence will last. This document allows the interval between occurrences t
    "recurrence-with-time-zone" is intended to promote human readability over
    machine readability.
 
-### The "recurrence-utc-with-date-times" Grouping {#sec-rec-utc-dt}
+### The "recurrence-utc-with-periods" Grouping {#sec-rec-utc-dt}
 
-   The "recurrence-utc-with-date-times" grouping ({{rec-utc-dt-grp-tree}}) uses
+   The "recurrence-utc-with-periods" grouping ({{rec-utc-dt-grp-tree}}) uses
    the "recurrence-utc" grouping ({{sec-rec-utc}}) and adds a "period-timeticks"
    list to define an aggregate set of repeating occurrences.
 
 ~~~~
 {::include ./yang/tree/rec-utc-dt-grp.txt}
 ~~~~
-{: #rec-utc-dt-grp-tree title="recurrence-utc-with-date-times Grouping Tree Structure"}
+{: #rec-utc-dt-grp-tree title="recurrence-utc-with-periods Grouping Tree Structure"}
 
   The recurrence instances are specified by the union of occurrences defined
   by both the recurrence rule and "period-timeticks" list. Duplicate instances
@@ -347,16 +347,16 @@ an occurrence will last. This document allows the interval between occurrences t
   value must not exceed 100 in a secondly recurrence rule, and it must not
   exceed 6000 in a minutely recurrence rule, and so on.
 
-### The "recurrence-time-zone-with-date-times" Grouping {#sec-rec-tz-dt}
+### The "recurrence-time-zone-with-periods" Grouping {#sec-rec-tz-dt}
 
-  The "recurrence-time-zone-with-date-times" grouping ({{rec-tz-dt-grp-tree}}) uses
+  The "recurrence-time-zone-with-periods" grouping ({{rec-tz-dt-grp-tree}}) uses
   the "recurrence-with-time-zone" grouping ({{sec-rec-tz}}) and
   adds a "period" list to define an aggregate set of repeating occurrences.
 
 ~~~~
 {::include ./yang/tree/rec-tz-dt-grp.txt}
 ~~~~
-{: #rec-tz-dt-grp-tree title="recurrence-time-zone-with-date-times Grouping Tree Structure"}
+{: #rec-tz-dt-grp-tree title="recurrence-time-zone-with-periods Grouping Tree Structure"}
 
   The recurrence instances are specified by the union of occurrences defined
   by both the recurrence rule and "period" list. Duplicate instances
@@ -365,7 +365,7 @@ an occurrence will last. This document allows the interval between occurrences t
 ### The "icalendar-recurrence" Grouping {#sec-ical-rec}
 
   The "icalendar-recurrence" grouping ({{ical-grp-tree}}) uses the
-  "recurrence-time-zone-with-date-times" grouping ({{sec-rec-tz-dt}}) and define
+  "recurrence-time-zone-with-periods" grouping ({{sec-rec-tz-dt}}) and define
   more data nodes to enrich the definition of recurrence. The structure of the
   "icalendar-recurrence" grouping refers to the definition of recurrence
   component defined in {{Sections 3.3.10 and 3.8.5 of !RFC5545}}.
@@ -735,7 +735,7 @@ after that time would not be considered as valid.
 ~~~~
 {: #ex-6 title="Simple Schedule with Recurrence with Time Zone Indication"}
 
-## The "recurrence-utc-with-date-times" Grouping
+## The "recurrence-utc-with-periods" Grouping
 
    {{ex-7}} indicates a recurrence that occurs every two days starting at 9:00 AM
    and 3:00 PM for a duration of 30 minutes and 40 minutes respectively,
@@ -743,7 +743,7 @@ after that time would not be considered as valid.
 
 ~~~~
 {
-  "example-sch-usage-6:recurrence-utc-with-date-times": {
+  "example-sch-usage-6:recurrence-utc-with-periods": {
     "recurrence-first": {
       "start-time-utc": "2025-06-01T09:00:00Z"
     },
@@ -765,7 +765,7 @@ after that time would not be considered as valid.
 ~~~~
 {: #ex-7 title="Example of Recurrence With Date Times"}
 
-## The "recurrence-time-zone-with-date-times" Grouping
+## The "recurrence-time-zone-with-periods" Grouping
 
    {{ex-8}} indicates a recurrence that occurs every
    30 minutes and last for 15 minutes from 9:00 AM to 5:00 PM, and extra two occurrences
@@ -773,7 +773,7 @@ after that time would not be considered as valid.
 
 ~~~~
 {
-  "example-sch-usage-7:recurrence-time-zone-with-date-times": {
+  "example-sch-usage-7:recurrence-time-zone-with-periods": {
     "recurrence-first": {
       "start-time": "2025-12-01T09:00:00",
       "duration": "PT00:15:00",
@@ -943,8 +943,8 @@ after that time would not be considered as valid.
 
    Network properties may change over a specific period of time or based on a
    recurrence rule, e.g., {{?RFC9657}}.
-   The following example module which augments the "recurrence-utc-with-date-times"
-   grouping from "ietf-schedule" module shows how a scheduled based attribute
+   The following example module which augments the "recurrence-utc-with-periods"
+   grouping from "ietf-schedule" module shows how a scheduled attribute
    could be defined.
 
 ~~~~
@@ -992,7 +992,7 @@ after that time would not be considered as valid.
    This work is derived from the {{?I-D.ietf-opsawg-ucl-acl}}. There is a desire
    from the OPSAWG to see this model be separately defined for wide use in scheduling context.
 
-   Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, Steve Baillargeon, and Dhruv Dhody
+   Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, Steve Baillargeon, Dhruv Dhody, and Robert Wilton
    for their valuable comments and inputs to this work.
 
    Many thanks to the authors of {{?I-D.ietf-tvr-schedule-yang}}, {{?I-D.ietf-opsawg-scheduling-oam-tests}}, and {{?I-D.ietf-netmod-eca-policy}}
