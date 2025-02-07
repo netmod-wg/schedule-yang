@@ -2,11 +2,6 @@
 
 This is the working area for the NETMOD Internet-Draft, "A Common YANG Data Model for Scheduling".
 
-
-# A YANG Data Model for Scheduling 
-
-This is the working area for the NETMOD WG Internet-Draft, "A YANG Data Model for Scheduling".
-
 * [Editor's Copy](https://netmod-wg.github.io/schedule-yang/#go.draft-ietf-netmod-schedule-yang.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-netmod-schedule-yang)
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-netmod-schedule-yang)

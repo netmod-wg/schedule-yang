@@ -529,6 +529,8 @@ parameters.
 
 # Security Considerations
 
+This section uses the template described in {{Section 3.7 of	?I-D.ietf-netmod-rfc8407bis}}.
+
    The "ietf-schedule" YANG module specified in this document defines schema for data
    that is designed to be accessed via YANG-based management protocols, such
    as NETCONF {{?RFC6241}} or RESTCONF {{?RFC8040}}.  These protocols have to use
