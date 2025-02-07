@@ -10,15 +10,15 @@ module: ietf-schedule
     ...
   grouping recurrence-with-time-zone:
     ...
-  grouping recurrence-utc-with-date-times:
+  grouping recurrence-utc-with-periods:
     ...
-  grouping recurrence-time-zone-with-date-times:
+  grouping recurrence-time-zone-with-periods:
     ...
   grouping icalendar-recurrence:
     +-- recurrence-first
-    |  +-- start-time?             yang:date-and-time
-    |  +-- duration?               duration
-    |  +-- time-zone-identifier?   sys:timezone-name
+    |  +-- start-time?   yang:date-and-time
+    |  +-- duration?     duration
+    +-- time-zone-identifier?     sys:timezone-name
     +-- (recurrence-end)?
     |  +--:(until)
     |  |  +-- until?              yang:date-and-time

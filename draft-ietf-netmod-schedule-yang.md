@@ -205,7 +205,10 @@ System:
    on the structure nor the use of this parameter.
 
    The "time-zone-identifier" parameter, if provided, specifies the
-   time zone reference {{!RFC7317}} of the local date and time values.
+   time zone reference {{!RFC7317}} of the local date and time values. This parameter
+   MUST be specified if any of the date and time values are in the format of local time.
+   It MUST NOT be applied to date and time values which are specified in the format
+   of UTC or time zone offset to UTC.
 
    The "validity" parameter specifies the date and time after which a schedule
    will not be considered as valid. It determines the latest time that a schedule
@@ -236,6 +239,11 @@ System:
    start date and time ("period-start") and a non-negative time duration ("duration"). For the first
    format, the start of the period MUST be no later the end of the period. If neither an end date and time
    nor a duration is indicated, the period is considered to last forever or as a one-shot schedule.
+
+   The "time-zone-identifier" parameter indicates the identifier for the
+   time zone. This parameter MUST be specified if either the "period-start" or "period-end"
+   value is reported in local time format. It MUST NOT be applied to date and time
+   values which are specified in the format of UTC or time zone offset to UTC.
 
    The "period-description" includes a description of the period. No constraint is imposed
    on the structure nor the use of this parameter.
@@ -306,10 +314,12 @@ an occurrence will last. This document allows the interval between occurrences t
    The "recurrence-first" container includes "start-time" and "duration" parameters
    to specify the start time and period of the first occurrence. Unless specified otherwise (e.g., described in the "description" statement), the
    "duration" also applies to subsequent recurrence instances. When unspecified, each occurrence is considered as
-   immediate completion or hard to compute an exact duration. It also includes a
-   "time-zone-identifier" parameter which MUST be specified if the date
-   and time value is neither reported in the format of UTC nor time zone offset
-   to UTC.
+   immediate completion or hard to compute an exact duration.
+
+   The grouping also includes a
+   "time-zone-identifier" parameter which MUST be specified if either the "start-time" or "until"
+   value is reported in local time format. It MUST NOT be applied to date and time
+   values which are specified in the format of UTC or time zone offset to UTC.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
   indicated by the "recurrence-end" choice. The value of the "count" node MUST be greater than 1, the "start-time" value always counts

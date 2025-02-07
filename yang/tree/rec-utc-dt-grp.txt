@@ -5,12 +5,12 @@ module: ietf-schedule
   grouping period-of-time:
     ...
   grouping recurrence-basic:
-    ...
+    ...               
   grouping recurrence-utc:
     ...
   grouping recurrence-with-time-zone:
     ...
-  grouping recurrence-utc-with-date-times:
+  grouping recurrence-utc-with-periods:
     +-- recurrence-first
     |  +-- start-time-utc?   yang:date-and-time
     |  +-- duration?         uint32
@@ -25,7 +25,7 @@ module: ietf-schedule
     +-- period-timeticks* [period-start]
        +-- period-start    yang:timeticks
        +-- period-end?     yang:timeticks
-  grouping recurrence-time-zone-with-date-times:
+  grouping recurrence-time-zone-with-periods:
     ...
   grouping icalendar-recurrence:
     ...
