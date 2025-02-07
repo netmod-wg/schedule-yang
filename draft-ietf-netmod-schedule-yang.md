@@ -59,8 +59,9 @@ informative:
    This document defines a common schedule YANG module which is
    designed to be applicable for scheduling purposes such as event, policy,
    services, or resources based on date and time. For the sake of better modularity,
-   the module includes a set of recurrence related groupings with varying granularity levels
-   (i.e., from basic to advanced).
+   the module includes a set of recurrence related groupings with varying levels of complexity
+   (i.e., from basic to advanced). It also defines groupings for validating requested
+   schedules and reporting scheduling status.
 
 --- middle
 
@@ -68,16 +69,18 @@ informative:
 
 This document defines a common schedule YANG module ("ietf-schedule") that can
 be used in several scheduling contexts, e.g., (but not limited to)
-{{?I-D.ietf-opsawg-ucl-acl}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}},
+{{?I-D.ietf-opsawg-ucl-acl}}, {{?I-D.ietf-opsawg-scheduling-oam-tests}},
 and {{?I-D.ietf-tvr-schedule-yang}}. The module includes a set of reusable groupings which
 are designed to be applicable for scheduling purposes such as event, policy,
-services or resources based on date and time.
+services or resources based on date and time. It also defines groupings for validating
+requested schedules and reporting scheduling status.
 
 This document does not make any assumption about the nature of actions that are
 triggered by the schedules. Detection and resolution of any schedule conflicts
 are beyond the scope of this document.
 
-{{sec-mib}} discusses relationship with the managed objects defined in {{!RFC3231}}.
+{{sec-mib}} discusses the relationship with the Management Information Base (MIB)
+managed objects for scheduling management operations defined in {{!RFC3231}}.
 
 {{usage}} describes a set of examples to illustrate the use of the common schedule groupings ({{sec-grp}}).
 And {{sec-ext}} provides sample modules to exemplify how future modules can use the extensibility
@@ -96,7 +99,7 @@ an example of using "ietf-schedule" module for scheduled use of resources framew
    Please apply the following replacements:
 
    * XXXX --> the assigned RFC number for this draft
-   * 2024-04-16 --> the actual date of the publication of this document
+   * 2025-01-27 --> the actual date of the publication of this document
 
 # Conventions and Definitions
 
@@ -115,17 +118,18 @@ Recurrence Rule:
 Frequency:
 : Characterizes the type of a recurrence rule. Values are taken from "FREQ" rule in {{Section 3.3.10 of !RFC5545}}.
 : For example, repeating events based on an interval of a second or more are
-  classified as recurrence with a frequency value of "secondly".
+  classified as recurrence with a frequency value of "SECONDLY". Frequency values defined as identities
+  in the YANG module are used in lowercase.
 
 iCalendar:
 : Refers to Internet Calendaring per {{!RFC5545}}.
 
 Interval:
-: Refers to an integer that specifies at which intervals a recurrence rule repeats. Values are taken from "INTERVAL" rule in {{Section 3.3.10 of !RFC5545}}.
+: Refers to an integer that specifies at which interval a recurrence rule repeats. Values are taken from "INTERVAL" rule in {{Section 3.3.10 of !RFC5545}}.
 : For example, "1", means every second for a secondly rule, every minute for a minutely rule, every hour for an hourly rule, etc.
 
 System:
-: Refers to an entity that host a schedule that is managed using the YANG module defined in this document.
+: Refers to an entity that hosts a schedule that is managed using the YANG module defined in this document.
 
 #  Module Overview {#sec-overview}
 
@@ -139,23 +143,24 @@ System:
    *  "basic-recurrence"
    *  "icalendar-recurrence"
 
-   Refer to {{sec-aug}} for the use of these features.
+   Refer to Sections {{<sec-aug}} and {{<features}} for the use of these features.
 
 ##  Types and Identities {#sec-types}
 
    The "ietf-schedule" module ({{sec-schedule}}) defines the following identities:
 
-   * "frequency-type": Characterizes the repeating interval rule of a schedule (per second, per minute, etc.).
    * "schedule-type": Indicates the type of a schedule. The following types are defined so far:
       + one-shot: The schedule will trigger an action without the duration/end time being
        specified and then the schedule will disable itself ({{Section 3.3 of !RFC3231}}).
       + period: The schedule is a period-based schedule consisting either a start and end or a start and positive duration of time.
       + recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period, e.g., every five minutes) or not (i.e., repeat in a non-regular manner, e.g., every day at 8 and 9 AM).
+   * "frequency-type": Characterizes the repeating interval rule of a recurrence schedule (secondly, minutely, etc.).
    * "schedule-state": Indicates the status of a schedule (enabled, disabled, conflicted, finished, etc.). This identity can also be used
      to manage the state of individual instances of a recurrence-based schedule.
-   * "discard-action": Specifies the action to perform when a schedule is discarded (e.g., generate a warning or an error message).
+   * "discard-action-type": Specifies the action for the responder to take (e.g., generate a warning or an error message) when
+     a requested schedule cannot be accepted for any reason and is discarded.
 
-##  Groupings {#sec-grp}
+##  Scheduling Groupings {#sec-grp}
 
    The "ietf-schedule" module ({{sec-schedule}}) defines the following groupings:
 
@@ -169,6 +174,7 @@ System:
    * "icalendar-recurrence" ({{sec-ical-rec}})
    * "schedule-status" and "schedule-status-with-name" ({{sec-schedule-status}})
 
+<!--
    {{schedule-tree}} provides an overview of the tree structure of
    the "ietf-schedule" module in terms of its groupings.
 
@@ -177,12 +183,14 @@ System:
 ~~~~
 {: #schedule-tree title="Overall Schedule Tree Structure"}
 
-   Each of these groupings is presented in the following subsections. Examples
-   are provided in {{usage}}.
+   Each of these groupings is presented in the following subsections.
+-->
+
+   Examples are provided in {{usage}}.
 
 ### The "generic-schedule-params" Grouping {#sec-gen}
 
-   A system accepts and handles the schedule requests, which may help further
+   A system accepts and handles schedule requests, which may help further
    automate the scheduling process of events, policy, services, or resources
    based on date and time. The "generic-schedule-params" grouping ({{gsp-tree}})
    specifies a set of configuration parameters that are used by a system for
@@ -197,26 +205,28 @@ System:
    on the structure nor the use of this parameter.
 
    The "time-zone-identifier" parameter, if provided, specifies the
-   time zone reference of the date and time values with local time format. This parameter
+   time zone reference {{!RFC7317}} of the local date and time values. This parameter
    MUST be specified if any of the date and time values are in the format of local time.
    It MUST NOT be applied to date and time values which are specified in the format
    of UTC or time zone offset to UTC.
 
    The "validity" parameter specifies the date and time after which a schedule
-   will be considered as invalid. It determines the latest time that a schedule
-   can be executed by a system and takes precedence over similar attributes
+   will not be considered as valid. It determines the latest time that a schedule
+   can be started to execute by a system and takes precedence over similar attributes
    that are provided at the schedule instance itself.
 
    The "max/min-allowed-start" parameters specify the maximum/minimum scheduled
    start date and time, a requested schedule will be rejected if the first
-   occurrence of the schedule is later/earlier than the configured values.
+   occurrence of the schedule starts later/earlier than the configured values.
 
    The "max-allowed-end" parameter specifies the maximum allowed end time of
    the last occurrence. A requested schedule will be rejected if the end time
-   of last occurrence is later than the configured "max-allowed-end" value.
+   of last occurrence starts later than the configured "max-allowed-end" value.
 
    The "discard-action" parameter specifies the action if a requested schedule
-   is considered inactive or out-of-date.
+   cannot be accepted for any reason and is discarded. Possible reasons include,
+   but are not limited to, the requested schedule failing to satisfy the guards in this grouping,
+   conflicting with existing schedules, or being out-of-date.
 
    These parameters apply to all schedules on a system and are meant
    to provide guards against stale configuration, too short schedule requests
@@ -225,9 +235,10 @@ System:
 ### The "period-of-time" Grouping {#sec-period}
 
    The "period-of-time" grouping ({{pt-tree}}) represents a time period using
-   either a start ("period-start") and end date and time ("period-end"), or a
-   start ("period-start") and a positive time duration ("duration"). For the first
-   format, the start of the period MUST be before the end of the period.
+   either a start date and time ("period-start") and end date and time ("period-end"), or a
+   start date and time ("period-start") and a non-negative time duration ("duration"). For the first
+   format, the start of the period MUST be no later the end of the period. If neither an end date and time
+   nor a duration is indicated, the period is considered to last forever or as a one-shot schedule.
 
    The "time-zone-identifier" parameter indicates the identifier for the
    time zone. This parameter MUST be specified if either the "period-start" or "period-end"
@@ -244,17 +255,17 @@ System:
 
 ### The "recurrence-basic" Grouping {#sec-rec}
 
-  The "recurrence-basic" grouping ({{rec-grp-tree}}) specifies a simple recurrence rule.
+  The "recurrence-basic" grouping ({{rec-grp-tree}}) specifies a simple recurrence rule which starts immediately and repeats forever.
 
 ~~~~
 {::include ./yang/tree/rec-grp.txt}
 ~~~~
 {: #rec-grp-tree title="recurrence Grouping Tree Structure"}
 
-  The frequency ("frequency") which is mandatory, identifies the type of recurrence rule. For example,
+  The frequency parameter ("frequency"), which is mandatory, identifies the type of recurrence rule. For example,
   a "daily" frequency value specifies repeating events based on an interval of a day or more.
 
-  Consistent with {{Section 3.3.10 of !RFC5545}}, the interval ("interval") represents at which intervals the recurrence rule repeats. For example,
+  Consistent with {{Section 3.3.10 of !RFC5545}}, the interval ("interval") represents at which interval the recurrence rule repeats. For example,
   within a daily recurrence rule, an interval value of "8" means every eight days.
   The default value is "1", meaning every second for a secondly recurrence rule,
   every minute for a minutely rule, every hour for an hourly rule, every day for a
@@ -275,14 +286,16 @@ System:
 
    The "start-time-utc" indicates the start time in UTC format.
 
-   The "duration" parameter specifies, in units of seconds, the time period of the first occurrence. Unless specified otherwise, the "duration" also applies to subsequent recurrence instances.
+   The "duration" parameter specifies, in units of seconds, the time period of the first occurrence. Unless specified otherwise (e.g., described in the "description" statement), the "duration" also applies to subsequent recurrence instances. When unspecified, each occurrence is considered as
+   immediate completion or hard to compute an exact duration.
+
 
 Note that the "interval" and "duration" cover two distinct properties of a schedule event.
 The interval specifies when a schedule will occur, combined with the frequency parameter; while the duration indicates how long
-an occurence will last.
+an occurrence will last. This document allows the interval between occurrences to be shorter than the duration of each occurrence (e.g., a recurring event is scheduled to start every day for a duration of 2 days).
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-end" choice. The "start-time-utc" value always counts
+  indicated by the "recurrence-end" choice. The value of the "count" node MUST be greater than 1, the "start-time-utc" value always counts
   as the first occurrence.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling contexts
@@ -299,14 +312,17 @@ an occurence will last.
 {: #rec-tz-grp-tree title="recurrence-with-time-zone Grouping Tree Structure"}
 
    The "recurrence-first" container includes "start-time" and "duration" parameters
-   to specify the start time and period of the first occurrence. Unless specified otherwise, the
-   "duration" also applies to subsequent recurrence instances. It also includes a
+   to specify the start time and period of the first occurrence. Unless specified otherwise (e.g., described in the "description" statement), the
+   "duration" also applies to subsequent recurrence instances. When unspecified, each occurrence is considered as
+   immediate completion or hard to compute an exact duration. 
+   
+   The grouping also includes a
    "time-zone-identifier" parameter which MUST be specified if either the "start-time" or "until"
    value is reported in local time format. It MUST NOT be applied to date and time
    values which are specified in the format of UTC or time zone offset to UTC.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-end" choice. The "start-time" value always counts
+  indicated by the "recurrence-end" choice. The value of the "count" node MUST be greater than 1, the "start-time" value always counts
   as the first occurrence.
 
    Unlike the definition of "recurrence-utc" grouping ({{sec-rec-utc}}),
@@ -326,8 +342,8 @@ an occurence will last.
 
   The recurrence instances are specified by the union of occurrences defined
   by both the recurrence rule and "period-timeticks" list. Duplicate instances
-  are ignored. The value of the "period-start" instance must not exceed the
-  value indicated by the value of "frequency" instance, e.g., the timeticks
+  are ignored. The value of the "period-start" instance MUST NOT exceed the
+  value indicated by the value of "frequency" instance, i.e., the timeticks
   value must not exceed 100 in a secondly recurrence rule, and it must not
   exceed 6000 in a minutely recurrence rule, and so on.
 
@@ -367,7 +383,7 @@ an occurence will last.
 
    The parameter "byday" specifies a list of days of the week, with an optional
    direction which indicates the nth occurrence of a specific day within
-   the "monthly" or "yearly" frequency. For example, within a "monthly" rule,
+   the "monthly" or "yearly" frequency instance. Valid values of "direction" are 1 to 5 or -5 to -1 within a "monthly" recurrence rule; and 1 to 53 or -53 to -1 within a "yearly" recurrence rule. For example, within a "monthly" rule,
    the "weekday" with a value of "monday" and the "direction" with a value of "-1"
    represents the last Monday of the month.
 
@@ -427,12 +443,13 @@ an occurence will last.
    "local-time" reports the actual local time as seen by the entity that
    host a schedule. This paramter can be used by a controller to infer the offset to UTC.
 
-   "last-failed-occurrence" and "failure-counter" report the last failure that occured and
-   the count of failures for this schedule.
+   "last-failed-occurrence" and "failure-counter" report the last failure that occurred and
+   the count of failures for this schedule. Unless new parameters/operations are defined to allow the count of failures to be reset,
+   "failure-counter" is reset by default only when the schedule starts.
 
    The current groupings capture common parameters that are applicable
    to typical scheduling contexts known so far. Future modules can define other
-   useful parameters as needed. For example, in a  scheduling context with multiple
+   useful parameters as needed. For example, in a scheduling context with multiple
    system sources to feed the schedules, the "source" and "precedence" parameters
    may be needed to reflect how schedules from different sources should be prioritised.
 
@@ -456,18 +473,22 @@ an occurence will last.
    *  The combination of the day, month, and year represented for date and time
       values MUST be valid. See {{Section 5.7 of ?RFC3339}} for the maxinum day
       number based on the month and year.
-   *  The second MUST have the value "60" at the end of months in which a leap
-      second occurs for date and time values.
+   *  The second for date and time values MUST have the value "60" at the end of months in which a leap
+      second occurs.
    *  Schedules received with a starting time in the past with respect to
-      current time SHOULD be ignored.
+      current time SHOULD be ignored. When a local policy is provided, an implementation MAY omit the past occurrences and
+      start immediately (e.g., for a period-based schedule) or starts from the
+      date and time when the recurrence pattern is first satisfied from the current time (e.g., for a recurrence-based schedule).
 
 # Relationship to the DISMAN-SCHEDULE-MIB {#sec-mib}
 
 {{!RFC3231}} specifies a Management Information Base (MIB) used to
 schedule management operations periodically or at specified dates and times.
 
-Despite no data nodes are defined in this document, {{mapping}} lists how main objects in the DISMAN-SCHEDULE-MIB
-can be mapped to YANG parameters.
+Although no data nodes are defined in this document, {{mapping}} lists
+how the main objects in the DISMAN-SCHEDULE-MIB can be mapped to YANG
+parameters.
+
 
 |MIB Object|	YANG|
 |----------|---|
@@ -506,15 +527,11 @@ can be mapped to YANG parameters.
 
 # Security Considerations
 
-This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rfc8407bis}}.
-
    The "ietf-schedule" YANG module specified in this document defines schema for data
-   that is designed to be accessed via network management protocols such
-   as NETCONF {{!RFC6241}} or RESTCONF {{!RFC8040}}.  The lowest NETCONF layer
-   is the secure transport layer, and the mandatory-to-implement secure
-   transport is Secure Shell (SSH) {{!RFC6242}}.  The lowest RESTCONF layer
-   is HTTPS, and the mandatory-to-implement secure transport is TLS
-   {{!RFC8446}}.
+   that is designed to be accessed via YANG-based management protocols, such
+   as NETCONF {{?RFC6241}} or RESTCONF {{?RFC8040}}.  These protocols have to use
+   a secure transport layer (e.g., SSH {{?RFC4252}}, TLS {{?RFC8446}}, and QUIC {{?RFC9000}})
+   and have to use mutual authentication.
 
    The Network Configuration Access Control Model (NACM) {{!RFC8341}}
    provides the means to restrict access for particular NETCONF or
@@ -525,12 +542,22 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
    groupings.  These nodes are intended to be reused by other YANG
    modules.  The module by itself does not expose any data nodes that
    are writable, data nodes that contain read-only state, or RPCs.  As
-   such, there are no additional security issues related to the "ietf-
-   schedule" module that need to be considered.
+   such, there are no additional security issues related to the "ietf-schedule"
+   module that need to be considered.
 
-   Care must be taken when defining recurrences occurring very often and
-   frequent that can be an additional source of attacks by keeping the system
-   permanently busy with the management of scheduling.
+   Modules that use the groupings that are defined in this document
+   should identify the corresponding security considerations, e.g.,:
+
+   * Scheduling depends on reliable and accurate time synchronization. Inaccurate date
+     and time setting can lead to scheduling events being triggered at incorrect
+     intervals, potentially causing system failures or security vulnerabilities.
+   * Recurring events may conceal abnormal behavior or security threats, which
+     may be drowned out by normal events, especially when they are triggered frequently.
+   * The absence of detailed logs and audit records of each occurrence trigger time
+     and action results, and so on, may make security incidents difficient to trace.
+   * Care must be taken when defining recurrences occurring very often and
+     frequent that can be an additional source of attacks by keeping the system
+     permanently busy with the management of scheduling.
 
 #  IANA Considerations
 
@@ -559,7 +586,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
 --- back
 
-# Examples of Format Representation {#usage}
+# Examples of Scheduling Format Representation {#usage}
 
    This section provides some examples to illustrate the use of the
    period and recurrence formats defined in {{sec-schedule}}. The following
@@ -596,7 +623,7 @@ To illustrate the difference between "max-allowed-end" and "validity" parameters
 08:00 AM, January 1, 2025 (Paris time). Schedule requests that fail to meet the
 requirements are discarded with warning messages. The requested schedule may end
 after 8:00 PM, January 31, 2025, but any occurrences that are generated
-after that time would be considered as invalid.
+after that time would not be considered as valid.
 
 ~~~~
 {
@@ -654,7 +681,7 @@ after that time would be considered as invalid.
 
 ## The "recurrence-basic" Grouping
 
-   {{ex-6}} indicates a recurrence of every 2 days which starts immediately and repeat forever:
+   {{ex-6}} indicates a recurrence of every 2 days which starts immediately and repeats forever:
 
 ~~~~
 {
@@ -968,7 +995,7 @@ after that time would be considered as invalid.
    Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, Steve Baillargeon, and Dhruv Dhody
    for their valuable comments and inputs to this work.
 
-   Many thanks to the authors of {{?I-D.ietf-tvr-schedule-yang}}, {{?I-D.contreras-opsawg-scheduling-oam-tests}}, and {{?I-D.ietf-netmod-eca-policy}}
+   Many thanks to the authors of {{?I-D.ietf-tvr-schedule-yang}}, {{?I-D.ietf-opsawg-scheduling-oam-tests}}, and {{?I-D.ietf-netmod-eca-policy}}
    for the constructive discussion during IETF#118.
 
    Other related efforts were explored in the past, e.g., {{?I-D.liu-netmod-yang-schedule}}.
