@@ -74,7 +74,7 @@ module example-scheduled-link-bandwidth {
           uses schedule:period-of-time;
         }
         case recurrence {
-          uses schedule:recurrence-utc-with-date-times {
+          uses schedule:recurrence-utc-with-periods {
             augment "period-timeticks" {
               description
                 "Specifies the attributes inside each 
@@ -87,4 +87,3 @@ module example-scheduled-link-bandwidth {
     }
   }
 }
-
