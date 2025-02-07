@@ -151,7 +151,9 @@ module ietf-schedule {
     description
       "Indicates a one-shot schedule. That is a schedule that
        will trigger an action without the duration/end time being
-       specified and then the schedule will disable itself.";
+       specified or the duration being specified as 0/end time being
+       specified the same as start time, and then the schedule will
+       disable itself.";
   }
 
   identity period {
@@ -391,12 +393,14 @@ module ietf-schedule {
           type yang:date-and-time;
           description
             "A period of time is defined by a start and end time.
-             The start MUST be before the end.";
+             The start MUST be no later than the end. The period
+             is considered as a one-shot schedule if the end time
+             is the same as the start time.";
         }
       }
       case duration {
         description
-          "A period of time is defined by a start and a positive
+          "A period of time is defined by a start and a non-negative
            duration of time.";
         leaf duration {
           type duration {
@@ -404,9 +408,10 @@ module ietf-schedule {
                   + ':[0-5][0-9]:[0-5][0-9]))|P([0-9]+)W';
           }
           description
-            "A positive duration of the time. This value is
+            "A non-negative duration of the time. This value is
              equivalent to the format of duration type except that
-             the value cannot be negative.";
+             the value cannot be negative. The period is considered
+             as a one-shot schedule if the value is 0";
         }
       }
     }
@@ -431,7 +436,7 @@ module ietf-schedule {
     leaf interval {
       type uint32;
       description
-        "A positive integer representing at which intervals the
+        "A positive integer representing at which interval the
          recurrence rule repeats. For example, within a 'daily'
          recurrence rule, a value of '8' means every eight days.
          The default value is '1', means every second for a 

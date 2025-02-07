@@ -59,8 +59,8 @@ informative:
    This document defines a common schedule YANG module which is
    designed to be applicable for scheduling purposes such as event, policy,
    services, or resources based on date and time. For the sake of better modularity,
-   the module includes a set of recurrence related groupings with varying levels of complexity
-   (i.e., from basic to advanced). It also defines groupings for validating requested
+   the module includes a set of recurrence related groupings with varying levels of representation
+   (i.e., from basic to advanced) to accommodate a variety of requirements. It also defines groupings for validating requested
    schedules and reporting scheduling status.
 
 --- middle
@@ -151,7 +151,7 @@ System:
 
    * "schedule-type": Indicates the type of a schedule. The following types are defined so far:
       + one-shot: The schedule will trigger an action without the duration/end time being
-       specified and then the schedule will disable itself ({{Section 3.3 of !RFC3231}}).
+       specified or the duration being specified as 0/end time being specified the same as start time, and then the schedule will disable itself ({{Section 3.3 of !RFC3231}}).
       + period: The schedule is a period-based schedule consisting either a start and end or a start and positive duration of time.
       + recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period, e.g., every five minutes) or not (i.e., repeat in a non-regular manner, e.g., every day at 8 and 9 AM).
    * "frequency-type": Characterizes the repeating interval rule of a recurrence schedule (secondly, minutely, etc.).
@@ -237,8 +237,10 @@ System:
    The "period-of-time" grouping ({{pt-tree}}) represents a time period using
    either a start date and time ("period-start") and end date and time ("period-end"), or a
    start date and time ("period-start") and a non-negative time duration ("duration"). For the first
-   format, the start of the period MUST be no later the end of the period. If neither an end date and time
-   nor a duration is indicated, the period is considered to last forever or as a one-shot schedule.
+   format, the start of the period MUST be no later the end of the period. If neither an end date and time ("period-end")
+   nor a duration ("duration") is indicated, the period is considered to last forever or as a one-shot schedule.
+   If the duration ("duration") value is 0 or the end time ("period-end") is the same as the start time ("period-start"), the period
+   is also considered as a one-shot schedule.
 
    The "time-zone-identifier" parameter indicates the identifier for the
    time zone. This parameter MUST be specified if either the "period-start" or "period-end"
