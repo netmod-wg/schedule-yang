@@ -81,8 +81,8 @@ Table of Contents
        3.3.3.  The "recurrence-basic" Grouping
        3.3.4.  The "recurrence-utc" Grouping
        3.3.5.  The "recurrence-with-time-zone" Grouping
-       3.3.6.  The "recurrence-utc-with-date-times" Grouping
-       3.3.7.  The "recurrence-time-zone-with-date-times" Grouping
+       3.3.6.  The "recurrence-utc-with-periods" Grouping
+       3.3.7.  The "recurrence-time-zone-with-periods" Grouping
        3.3.8.  The "icalendar-recurrence" Grouping
        3.3.9.  The "schedule-status" and "schedule-status-with-name"
                Groupings
@@ -103,8 +103,8 @@ Table of Contents
      A.3.  The "recurrence-basic" Grouping
      A.4.  The "recurrence-utc" Grouping
      A.5.  The "recurrence-with-time-zone" Grouping
-     A.6.  The "recurrence-utc-with-date-times" Grouping
-     A.7.  The "recurrence-time-zone-with-date-times" Grouping
+     A.6.  The "recurrence-utc-with-periods" Grouping
+     A.7.  The "recurrence-time-zone-with-periods" Grouping
      A.8.  The "icalendar-recurrence" Grouping
      A.9.  The "schedule-status" Grouping
    Appendix B.  Examples of Using/Extending the "ietf-schedule" Module
@@ -266,9 +266,9 @@ Table of Contents
 
    *  "recurrence-with-time-zone" (Section 3.3.5)
 
-   *  "recurrence-utc-with-date-times" (Section 3.3.6)
+   *  "recurrence-utc-with-periods" (Section 3.3.6)
 
-   *  "recurrence-time-zone-with-date-times" (Section 3.3.7)
+   *  "recurrence-time-zone-with-periods" (Section 3.3.7)
 
    *  "icalendar-recurrence" (Section 3.3.8)
 
@@ -584,9 +584,9 @@ Table of Contents
    "recurrence-with-time-zone" is intended to promote human readability
    over machine readability.
 
-3.3.6.  The "recurrence-utc-with-date-times" Grouping
+3.3.6.  The "recurrence-utc-with-periods" Grouping
 
-   The "recurrence-utc-with-date-times" grouping (Figure 6) uses the
+   The "recurrence-utc-with-periods" grouping (Figure 6) uses the
    "recurrence-utc" grouping (Section 3.3.4) and adds a "period-
    timeticks" list to define an aggregate set of repeating occurrences.
 
@@ -626,7 +626,7 @@ Table of Contents
      grouping schedule-status-with-name:
        ...
 
-      Figure 6: recurrence-utc-with-date-times Grouping Tree Structure
+       Figure 6: recurrence-utc-with-periods Grouping Tree Structure
 
    The recurrence instances are specified by the union of occurrences
    defined by both the recurrence rule and "period-timeticks" list.
@@ -636,10 +636,10 @@ Table of Contents
    in a secondly recurrence rule, and it must not exceed 6000 in a
    minutely recurrence rule, and so on.
 
-3.3.7.  The "recurrence-time-zone-with-date-times" Grouping
+3.3.7.  The "recurrence-time-zone-with-periods" Grouping
 
-   The "recurrence-time-zone-with-date-times" grouping (Figure 7) uses
-   the "recurrence-with-time-zone" grouping (Section 3.3.5) and adds a
+   The "recurrence-time-zone-with-periods" grouping (Figure 7) uses the
+   "recurrence-with-time-zone" grouping (Section 3.3.5) and adds a
    "period" list to define an aggregate set of repeating occurrences.
 
    module: ietf-schedule
@@ -685,8 +685,7 @@ Table of Contents
      grouping schedule-status-with-name:
        ...
 
-        Figure 7: recurrence-time-zone-with-date-times Grouping Tree
-                                 Structure
+    Figure 7: recurrence-time-zone-with-periods Grouping Tree Structure
 
    The recurrence instances are specified by the union of occurrences
    defined by both the recurrence rule and "period" list.  Duplicate
@@ -695,9 +694,9 @@ Table of Contents
 3.3.8.  The "icalendar-recurrence" Grouping
 
    The "icalendar-recurrence" grouping (Figure 8) uses the "recurrence-
-   time-zone-with-date-times" grouping (Section 3.3.7) and define more
-   data nodes to enrich the definition of recurrence.  The structure of
-   the "icalendar-recurrence" grouping refers to the definition of
+   time-zone-with-periods" grouping (Section 3.3.7) and define more data
+   nodes to enrich the definition of recurrence.  The structure of the
+   "icalendar-recurrence" grouping refers to the definition of
    recurrence component defined in Sections 3.3.10 and 3.8.5 of
    [RFC5545].
 
@@ -2121,7 +2120,7 @@ Appendix A.  Examples of Scheduling Format Representation
      }
 
      container recurrence-utc-with-date-times {
-       uses schedule:recurrence-utc-with-date-times;
+       uses schedule:recurrence-utc-with-periods;
      }
    }
 
@@ -2134,7 +2133,7 @@ Appendix A.  Examples of Scheduling Format Representation
        prefix "schedule";
 
      container recurrence-time-zone-with-date-times {
-       uses schedule:recurrence-time-zone-with-date-times;
+       uses schedule:recurrence-time-zone-with-periods;
      }
    }
 
@@ -2285,14 +2284,14 @@ A.5.  The "recurrence-with-time-zone" Grouping
 
     Figure 17: Simple Schedule with Recurrence with Time Zone Indication
 
-A.6.  The "recurrence-utc-with-date-times" Grouping
+A.6.  The "recurrence-utc-with-periods" Grouping
 
    Figure 18 indicates a recurrence that occurs every two days starting
    at 9:00 AM and 3:00 PM for a duration of 30 minutes and 40 minutes
    respectively, from 2025-06-01 to 2025-06-30 in UTC:
 
    {
-     "example-sch-usage-6:recurrence-utc-with-date-times": {
+     "example-sch-usage-6:recurrence-utc-with-periods": {
        "recurrence-first": {
          "start-time-utc": "2025-06-01T09:00:00Z"
        },
@@ -2314,7 +2313,7 @@ A.6.  The "recurrence-utc-with-date-times" Grouping
 
               Figure 18: Example of Recurrence With Date Times
 
-A.7.  The "recurrence-time-zone-with-date-times" Grouping
+A.7.  The "recurrence-time-zone-with-periods" Grouping
 
    Figure 19 indicates a recurrence that occurs every 30 minutes and
    last for 15 minutes from 9:00 AM to 5:00 PM, and extra two
@@ -2322,7 +2321,7 @@ A.7.  The "recurrence-time-zone-with-date-times" Grouping
    on 2025-12-01 (New York):
 
    {
-     "example-sch-usage-7:recurrence-time-zone-with-date-times": {
+     "example-sch-usage-7:recurrence-time-zone-with-periods": {
        "recurrence-first": {
          "start-time": "2025-12-01T09:00:00",
          "duration": "PT00:15:00",
@@ -2595,9 +2594,8 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
 
    Network properties may change over a specific period of time or based
    on a recurrence rule, e.g., [RFC9657].  The following example module
-   which augments the "recurrence-utc-with-date-times" grouping from
-   "ietf-schedule" module shows how a scheduled based attribute could be
-   defined.
+   which augments the "recurrence-utc-with-periods" grouping from "ietf-
+   schedule" module shows how a scheduled attribute could be defined.
 
    module example-scheduled-link-bandwidth {
      yang-version 1.1;
@@ -2675,7 +2673,7 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
              uses schedule:period-of-time;
            }
            case recurrence {
-             uses schedule:recurrence-utc-with-date-times {
+             uses schedule:recurrence-utc-with-periods {
                augment "period-timeticks" {
                  description
                    "Specifies the attributes inside each
@@ -2809,8 +2807,8 @@ Acknowledgments
    wide use in scheduling context.
 
    Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, Steve
-   Baillargeon, and Dhruv Dhody for their valuable comments and inputs
-   to this work.
+   Baillargeon, Dhruv Dhody, and Robert Wilton for their valuable
+   comments and inputs to this work.
 
    Many thanks to the authors of [I-D.ietf-tvr-schedule-yang],
    [I-D.ietf-opsawg-scheduling-oam-tests], and
