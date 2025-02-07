@@ -314,7 +314,7 @@ an occurrence will last. This document allows the interval between occurrences t
    The "recurrence-first" container includes "start-time" and "duration" parameters
    to specify the start time and period of the first occurrence. Unless specified otherwise (e.g., described in the "description" statement), the
    "duration" also applies to subsequent recurrence instances. When unspecified, each occurrence is considered as
-   immediate completion or hard to compute an exact duration. 
+   immediate completion or hard to compute an exact duration.
 
    The grouping also includes a
    "time-zone-identifier" parameter which MUST be specified if either the "start-time" or "until"
