@@ -302,9 +302,9 @@ Table of Contents
        ...
      grouping recurrence-with-time-zone:
        ...
-     grouping recurrence-utc-with-date-times:
+     grouping recurrence-utc-with-periods:
        ...
-     grouping recurrence-time-zone-with-date-times:
+     grouping recurrence-time-zone-with-periods:
        ...
      grouping icalendar-recurrence:
        ...
@@ -319,7 +319,11 @@ Table of Contents
    constraint is imposed on the structure nor the use of this parameter.
 
    The "time-zone-identifier" parameter, if provided, specifies the time
-   zone reference [RFC7317] of the local date and time values.
+   zone reference [RFC7317] of the local date and time values.  This
+   parameter MUST be specified if any of the date and time values are in
+   the format of local time.  It MUST NOT be applied to date and time
+   values which are specified in the format of UTC or time zone offset
+   to UTC.
 
    The "validity" parameter specifies the date and time after which a
    schedule will not be considered as valid.  It determines the latest
@@ -358,6 +362,12 @@ Table of Contents
    neither an end date and time nor a duration is indicated, the period
    is considered to last forever or as a one-shot schedule.
 
+   The "time-zone-identifier" parameter indicates the identifier for the
+   time zone.  This parameter MUST be specified if either the "period-
+   start" or "period-end" value is reported in local time format.  It
+   MUST NOT be applied to date and time values which are specified in
+   the format of UTC or time zone offset to UTC.
+
    The "period-description" includes a description of the period.  No
    constraint is imposed on the structure nor the use of this parameter.
 
@@ -380,9 +390,9 @@ Table of Contents
        ...
      grouping recurrence-with-time-zone:
        ...
-     grouping recurrence-utc-with-date-times:
+     grouping recurrence-utc-with-periods:
        ...
-     grouping recurrence-time-zone-with-date-times:
+     grouping recurrence-time-zone-with-periods:
        ...
      grouping icalendar-recurrence:
        ...
@@ -412,9 +422,9 @@ Table of Contents
        ...
      grouping recurrence-with-time-zone:
        ...
-     grouping recurrence-utc-with-date-times:
+     grouping recurrence-utc-with-periods:
        ...
-     grouping recurrence-time-zone-with-date-times:
+     grouping recurrence-time-zone-with-periods:
        ...
      grouping icalendar-recurrence:
        ...
@@ -471,9 +481,9 @@ Table of Contents
        +-- interval?                 uint32
      grouping recurrence-with-time-zone:
        ...
-     grouping recurrence-utc-with-date-times:
+     grouping recurrence-utc-with-periods:
        ...
-     grouping recurrence-time-zone-with-date-times:
+     grouping recurrence-time-zone-with-periods:
        ...
      grouping icalendar-recurrence:
        ...
@@ -527,9 +537,9 @@ Table of Contents
        ...
      grouping recurrence-with-time-zone:
        +-- recurrence-first
-       |  +-- start-time?             yang:date-and-time
-       |  +-- duration?               duration
-       |  +-- time-zone-identifier?   sys:timezone-name
+       |  +-- start-time?   yang:date-and-time
+       |  +-- duration?     duration
+       +-- time-zone-identifier?     sys:timezone-name
        +-- (recurrence-end)?
        |  +--:(until)
        |  |  +-- until?              yang:date-and-time
@@ -538,9 +548,9 @@ Table of Contents
        +-- recurrence-description?   string
        +-- frequency                 identityref
        +-- interval?                 uint32
-     grouping recurrence-utc-with-date-times:
+     grouping recurrence-utc-with-periods:
        ...
-     grouping recurrence-time-zone-with-date-times:
+     grouping recurrence-time-zone-with-periods:
        ...
      grouping icalendar-recurrence:
        ...
@@ -557,9 +567,13 @@ Table of Contents
    "description" statement), the "duration" also applies to subsequent
    recurrence instances.  When unspecified, each occurrence is
    considered as immediate completion or hard to compute an exact
-   duration.  It also includes a "time-zone-identifier" parameter which
-   MUST be specified if the date and time value is neither reported in
-   the format of UTC nor time zone offset to UTC.
+   duration.
+
+   The grouping also includes a "time-zone-identifier" parameter which
+   MUST be specified if either the "start-time" or "until" value is
+   reported in local time format.  It MUST NOT be applied to date and
+   time values which are specified in the format of UTC or time zone
+   offset to UTC.
 
    The repetition can be scoped by a specified end time or by a count of
    occurrences, indicated by the "recurrence-end" choice.  The value of
@@ -588,7 +602,7 @@ Table of Contents
        ...
      grouping recurrence-with-time-zone:
        ...
-     grouping recurrence-utc-with-date-times:
+     grouping recurrence-utc-with-periods:
        +-- recurrence-first
        |  +-- start-time-utc?   yang:date-and-time
        |  +-- duration?         uint32
@@ -603,7 +617,7 @@ Table of Contents
        +-- period-timeticks* [period-start]
           +-- period-start    yang:timeticks
           +-- period-end?     yang:timeticks
-     grouping recurrence-time-zone-with-date-times:
+     grouping recurrence-time-zone-with-periods:
        ...
      grouping icalendar-recurrence:
        ...
@@ -640,14 +654,14 @@ Table of Contents
        ...
      grouping recurrence-with-time-zone:
        ...
-     grouping recurrence-utc-with-date-times:
+     grouping recurrence-utc-with-periods:
        ...
-     grouping recurrence-time-zone-with-date-times:
+     grouping recurrence-time-zone-with-periods:
        +-- recurrence-first
-       |  +-- start-time?             yang:date-and-time
-       |  +-- duration?               duration
-       |  +-- time-zone-identifier?   sys:timezone-name
-       +-- (recurrence-bound)?
+       |  +-- start-time?   yang:date-and-time
+       |  +-- duration?     duration
+       +-- time-zone-identifier?     sys:timezone-name
+       +-- (recurrence-end)?
        |  +--:(until)
        |  |  +-- until?              yang:date-and-time
        |  +--:(count)
@@ -699,15 +713,15 @@ Table of Contents
        ...
      grouping recurrence-with-time-zone:
        ...
-     grouping recurrence-utc-with-date-times:
+     grouping recurrence-utc-with-periods:
        ...
-     grouping recurrence-time-zone-with-date-times:
+     grouping recurrence-time-zone-with-periods:
        ...
      grouping icalendar-recurrence:
        +-- recurrence-first
-       |  +-- start-time?             yang:date-and-time
-       |  +-- duration?               duration
-       |  +-- time-zone-identifier?   sys:timezone-name
+       |  +-- start-time?   yang:date-and-time
+       |  +-- duration?     duration
+       +-- time-zone-identifier?     sys:timezone-name
        +-- (recurrence-end)?
        |  +--:(until)
        |  |  +-- until?              yang:date-and-time
@@ -809,9 +823,9 @@ Table of Contents
        ...
      grouping recurrence-with-time-zone:
        ...
-     grouping recurrence-utc-with-date-times:
+     grouping recurrence-utc-with-periods:
        ...
-     grouping recurrence-time-zone-with-date-times:
+     grouping recurrence-time-zone-with-periods:
        ...
      grouping icalendar-recurrence:
        ...
@@ -1283,7 +1297,11 @@ Table of Contents
        leaf time-zone-identifier {
          type sys:timezone-name;
          description
-           "Indicates the identifier for the time zone.";
+           "Indicates the identifier for the time zone. This parameter
+            MUST be specified if any of the date and time values are
+            in the format of local time. It MUST NOT be applied to
+            date and time values which are specified in the format of
+            UTC or time zone offset to UTC.";
        }
        leaf validity {
          type yang:date-and-time;
@@ -1350,9 +1368,11 @@ Table of Contents
          type sys:timezone-name;
          description
            "Indicates the identifier for the time zone in a time zone
-            database. This parameter MUST be specified if 'period-start'
-            value is neither reported in the format of UTC nor time zone
-            offset to UTC.";
+            database. This parameter MUST be specified if either the
+            'period-start' or 'period-end' value is reported in local
+            time format. It MUST NOT be applied to date and time
+            values which are specified in the format of UTC or time
+            zone offset to UTC.";
        }
        choice period-type {
          description
@@ -1366,13 +1386,8 @@ Table of Contents
            leaf period-end {
              type yang:date-and-time;
              description
-               "Period end time. The start MUST be before the end. If a
-                local time without time zone offset to UTC time is
-                specified, it MUST use the same time zone reference as
-                'period-start' parameter. If 'period-start' also uses a
-                local time without time zone offset to UTC, it MUST use
-                the time zone as specified by the
-                'time-zone-identifier' parameter.";
+               "A period of time is defined by a start and end time.
+                The start MUST be before the end.";
            }
          }
          case duration {
@@ -1424,7 +1439,7 @@ Table of Contents
      grouping recurrence-utc {
        description
          "A simple definition of recurrence with time specified in
-          UTC. This grouping is intended to be machine-friendly.";
+          UTC format.";
        container recurrence-first {
          description
            "Specifies the first instance of the recurrence. If
@@ -1482,9 +1497,8 @@ Table of Contents
 
      grouping recurrence-with-time-zone {
        description
-         "A simple definition of recurrence to specify the time
-          with a local time and time zone identifier. This grouping
-          is intended to be human-friendly.";
+         "A simple definition of recurrence to specify a recurrence
+          rule with a time zone.";
        container recurrence-first {
          description
            "Specifies the first instance of the recurrence. If
@@ -1505,14 +1519,16 @@ Table of Contents
               applies to all the other instances in the recurrence
               set.";
          }
-         leaf time-zone-identifier {
-           type sys:timezone-name;
-           description
-             "Indicates the identifier for the time zone in a time
-              zone database. This parameter MUST be specified if
-              'start-time' or 'until' value is neither reported in
-              the format of UTC nor time zone offset to UTC.";
-         }
+       }
+       leaf time-zone-identifier {
+         type sys:timezone-name;
+         description
+           "Indicates the identifier for the time zone in a time
+            zone database. This parameter MUST be specified if either
+            the 'start-time' or 'until' value is reported in local
+            time format. It MUST NOT be applied to date and time
+            values which are specified in the format of UTC or time
+            zone offset to UTC.";
        }
        choice recurrence-end {
          description
@@ -1547,7 +1563,7 @@ Table of Contents
        uses recurrence-basic;
      }
 
-     grouping recurrence-utc-with-date-times {
+     grouping recurrence-utc-with-periods {
        description
          "This grouping defines an aggregate set of repeating
           occurrences with UTC time format. The recurrence instances
@@ -1591,7 +1607,7 @@ Table of Contents
        }
      }
 
-     grouping recurrence-time-zone-with-date-times {
+     grouping recurrence-time-zone-with-periods {
        description
          "This grouping defines an aggregate set of repeating
           occurrences with local time format and time zone specified.
@@ -1613,7 +1629,7 @@ Table of Contents
        reference
          "RFC 5545: Internet Calendaring and Scheduling Core Object
                     Specification (iCalendar), Section 3.8.5";
-       uses recurrence-time-zone-with-date-times;
+       uses recurrence-time-zone-with-periods;
        leaf-list bysecond {
          type uint32 {
            range "0..60";

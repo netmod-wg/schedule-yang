@@ -1544,9 +1544,9 @@ module: ietf-schedule
     ...
   grouping recurrence-with-time-zone:
     ...
-  grouping recurrence-utc-with-date-times:
+  grouping recurrence-utc-with-periods:
     ...
-  grouping recurrence-time-zone-with-date-times:
+  grouping recurrence-time-zone-with-periods:
     ...
   grouping icalendar-recurrence:
     ...
@@ -1563,7 +1563,10 @@ module: ietf-schedule
 <p id="section-3.3.1-3">The "description" includes a description of the schedule. No constraint is imposed
    on the structure nor the use of this parameter.<a href="#section-3.3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.3.1-4">The "time-zone-identifier" parameter, if provided, specifies the
-   time zone reference <span>[<a href="#RFC7317" class="cite xref">RFC7317</a>]</span> of the local date and time values.<a href="#section-3.3.1-4" class="pilcrow">¶</a></p>
+   time zone reference <span>[<a href="#RFC7317" class="cite xref">RFC7317</a>]</span> of the local date and time values. This parameter
+   <span class="bcp14">MUST</span> be specified if any of the date and time values are in the format of local time.
+   It <span class="bcp14">MUST NOT</span> be applied to date and time values which are specified in the format
+   of UTC or time zone offset to UTC.<a href="#section-3.3.1-4" class="pilcrow">¶</a></p>
 <p id="section-3.3.1-5">The "validity" parameter specifies the date and time after which a schedule
    will not be considered as valid. It determines the latest time that a schedule
    can be started to execute by a system and takes precedence over similar attributes
@@ -1593,11 +1596,15 @@ module: ietf-schedule
    start date and time ("period-start") and a non-negative time duration ("duration"). For the first
    format, the start of the period <span class="bcp14">MUST</span> be no later the end of the period. If neither an end date and time
    nor a duration is indicated, the period is considered to last forever or as a one-shot schedule.<a href="#section-3.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.3.2-2">The "period-description" includes a description of the period. No constraint is imposed
-   on the structure nor the use of this parameter.<a href="#section-3.3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.3.2-2">The "time-zone-identifier" parameter indicates the identifier for the
+   time zone. This parameter <span class="bcp14">MUST</span> be specified if either the "period-start" or "period-end"
+   value is reported in local time format. It <span class="bcp14">MUST NOT</span> be applied to date and time
+   values which are specified in the format of UTC or time zone offset to UTC.<a href="#section-3.3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.3.2-3">The "period-description" includes a description of the period. No constraint is imposed
+   on the structure nor the use of this parameter.<a href="#section-3.3.2-3" class="pilcrow">¶</a></p>
 <span id="name-period-of-time-grouping-tre"></span><div id="pt-tree">
 <figure id="figure-2">
-            <div class="alignLeft art-text artwork" id="section-3.3.2-3.1">
+            <div class="alignLeft art-text artwork" id="section-3.3.2-4.1">
 <pre>
 module: ietf-schedule
 
@@ -1618,9 +1625,9 @@ module: ietf-schedule
     ...
   grouping recurrence-with-time-zone:
     ...
-  grouping recurrence-utc-with-date-times:
+  grouping recurrence-utc-with-periods:
     ...
-  grouping recurrence-time-zone-with-date-times:
+  grouping recurrence-time-zone-with-periods:
     ...
   grouping icalendar-recurrence:
     ...
@@ -1660,9 +1667,9 @@ module: ietf-schedule
     ...
   grouping recurrence-with-time-zone:
     ...
-  grouping recurrence-utc-with-date-times:
+  grouping recurrence-utc-with-periods:
     ...
-  grouping recurrence-time-zone-with-date-times:
+  grouping recurrence-time-zone-with-periods:
     ...
   grouping icalendar-recurrence:
     ...
@@ -1720,9 +1727,9 @@ module: ietf-schedule
     +-- interval?                 uint32
   grouping recurrence-with-time-zone:
     ...
-  grouping recurrence-utc-with-date-times:
+  grouping recurrence-utc-with-periods:
     ...
-  grouping recurrence-time-zone-with-date-times:
+  grouping recurrence-time-zone-with-periods:
     ...
   grouping icalendar-recurrence:
     ...
@@ -1772,9 +1779,9 @@ module: ietf-schedule
     ...
   grouping recurrence-with-time-zone:
     +-- recurrence-first
-    |  +-- start-time?             yang:date-and-time
-    |  +-- duration?               duration
-    |  +-- time-zone-identifier?   sys:timezone-name
+    |  +-- start-time?   yang:date-and-time
+    |  +-- duration?     duration
+    +-- time-zone-identifier?     sys:timezone-name
     +-- (recurrence-end)?
     |  +--:(until)
     |  |  +-- until?              yang:date-and-time
@@ -1783,9 +1790,9 @@ module: ietf-schedule
     +-- recurrence-description?   string
     +-- frequency                 identityref
     +-- interval?                 uint32
-  grouping recurrence-utc-with-date-times:
+  grouping recurrence-utc-with-periods:
     ...
-  grouping recurrence-time-zone-with-date-times:
+  grouping recurrence-time-zone-with-periods:
     ...
   grouping icalendar-recurrence:
     ...
@@ -1802,16 +1809,17 @@ module: ietf-schedule
 <p id="section-3.3.5-3">The "recurrence-first" container includes "start-time" and "duration" parameters
    to specify the start time and period of the first occurrence. Unless specified otherwise (e.g., described in the "description" statement), the
    "duration" also applies to subsequent recurrence instances. When unspecified, each occurrence is considered as
-   immediate completion or hard to compute an exact duration. It also includes a
-   "time-zone-identifier" parameter which <span class="bcp14">MUST</span> be specified if the date
-   and time value is neither reported in the format of UTC nor time zone offset
-   to UTC.<a href="#section-3.3.5-3" class="pilcrow">¶</a></p>
-<p id="section-3.3.5-4">The repetition can be scoped by a specified end time or by a count of occurrences,
+   immediate completion or hard to compute an exact duration.<a href="#section-3.3.5-3" class="pilcrow">¶</a></p>
+<p id="section-3.3.5-4">The grouping also includes a
+   "time-zone-identifier" parameter which <span class="bcp14">MUST</span> be specified if either the "start-time" or "until"
+   value is reported in local time format. It <span class="bcp14">MUST NOT</span> be applied to date and time
+   values which are specified in the format of UTC or time zone offset to UTC.<a href="#section-3.3.5-4" class="pilcrow">¶</a></p>
+<p id="section-3.3.5-5">The repetition can be scoped by a specified end time or by a count of occurrences,
   indicated by the "recurrence-end" choice. The value of the "count" node <span class="bcp14">MUST</span> be greater than 1, the "start-time" value always counts
-  as the first occurrence.<a href="#section-3.3.5-4" class="pilcrow">¶</a></p>
-<p id="section-3.3.5-5">Unlike the definition of "recurrence-utc" grouping (<a href="#sec-rec-utc" class="auto internal xref">Section 3.3.4</a>),
+  as the first occurrence.<a href="#section-3.3.5-5" class="pilcrow">¶</a></p>
+<p id="section-3.3.5-6">Unlike the definition of "recurrence-utc" grouping (<a href="#sec-rec-utc" class="auto internal xref">Section 3.3.4</a>),
    "recurrence-with-time-zone" is intended to promote human readability over
-   machine readability.<a href="#section-3.3.5-5" class="pilcrow">¶</a></p>
+   machine readability.<a href="#section-3.3.5-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-rec-utc-dt">
@@ -1838,7 +1846,7 @@ module: ietf-schedule
     ...
   grouping recurrence-with-time-zone:
     ...
-  grouping recurrence-utc-with-date-times:
+  grouping recurrence-utc-with-periods:
     +-- recurrence-first
     |  +-- start-time-utc?   yang:date-and-time
     |  +-- duration?         uint32
@@ -1853,7 +1861,7 @@ module: ietf-schedule
     +-- period-timeticks* [period-start]
        +-- period-start    yang:timeticks
        +-- period-end?     yang:timeticks
-  grouping recurrence-time-zone-with-date-times:
+  grouping recurrence-time-zone-with-periods:
     ...
   grouping icalendar-recurrence:
     ...
@@ -1899,14 +1907,14 @@ module: ietf-schedule
     ...
   grouping recurrence-with-time-zone:
     ...
-  grouping recurrence-utc-with-date-times:
+  grouping recurrence-utc-with-periods:
     ...
-  grouping recurrence-time-zone-with-date-times:
+  grouping recurrence-time-zone-with-periods:
     +-- recurrence-first
-    |  +-- start-time?             yang:date-and-time
-    |  +-- duration?               duration
-    |  +-- time-zone-identifier?   sys:timezone-name
-    +-- (recurrence-bound)?
+    |  +-- start-time?   yang:date-and-time
+    |  +-- duration?     duration
+    +-- time-zone-identifier?     sys:timezone-name
+    +-- (recurrence-end)?
     |  +--:(until)
     |  |  +-- until?              yang:date-and-time
     |  +--:(count)
@@ -1966,15 +1974,15 @@ module: ietf-schedule
     ...
   grouping recurrence-with-time-zone:
     ...
-  grouping recurrence-utc-with-date-times:
+  grouping recurrence-utc-with-periods:
     ...
-  grouping recurrence-time-zone-with-date-times:
+  grouping recurrence-time-zone-with-periods:
     ...
   grouping icalendar-recurrence:
     +-- recurrence-first
-    |  +-- start-time?             yang:date-and-time
-    |  +-- duration?               duration
-    |  +-- time-zone-identifier?   sys:timezone-name
+    |  +-- start-time?   yang:date-and-time
+    |  +-- duration?     duration
+    +-- time-zone-identifier?     sys:timezone-name
     +-- (recurrence-end)?
     |  +--:(until)
     |  |  +-- until?              yang:date-and-time
@@ -2071,9 +2079,9 @@ module: ietf-schedule
     ...
   grouping recurrence-with-time-zone:
     ...
-  grouping recurrence-utc-with-date-times:
+  grouping recurrence-utc-with-periods:
     ...
-  grouping recurrence-time-zone-with-date-times:
+  grouping recurrence-time-zone-with-periods:
     ...
   grouping icalendar-recurrence:
     ...
@@ -2603,7 +2611,11 @@ module ietf-schedule {
     leaf time-zone-identifier {
       type sys:timezone-name;
       description
-        "Indicates the identifier for the time zone.";
+        "Indicates the identifier for the time zone. This parameter
+         MUST be specified if any of the date and time values are
+         in the format of local time. It MUST NOT be applied to
+         date and time values which are specified in the format of
+         UTC or time zone offset to UTC.";
     }
     leaf validity {
       type yang:date-and-time;
@@ -2670,9 +2682,11 @@ module ietf-schedule {
       type sys:timezone-name;
       description
         "Indicates the identifier for the time zone in a time zone
-         database. This parameter MUST be specified if 'period-start'
-         value is neither reported in the format of UTC nor time zone
-         offset to UTC.";
+         database. This parameter MUST be specified if either the
+         'period-start' or 'period-end' value is reported in local
+         time format. It MUST NOT be applied to date and time
+         values which are specified in the format of UTC or time
+         zone offset to UTC.";
     }
     choice period-type {
       description
@@ -2686,13 +2700,8 @@ module ietf-schedule {
         leaf period-end {
           type yang:date-and-time;
           description
-            "Period end time. The start MUST be before the end. If a
-             local time without time zone offset to UTC time is
-             specified, it MUST use the same time zone reference as
-             'period-start' parameter. If 'period-start' also uses a
-             local time without time zone offset to UTC, it MUST use
-             the time zone as specified by the
-             'time-zone-identifier' parameter.";
+            "A period of time is defined by a start and end time.
+             The start MUST be before the end.";
         }
       }
       case duration {
@@ -2744,7 +2753,7 @@ module ietf-schedule {
   grouping recurrence-utc {
     description
       "A simple definition of recurrence with time specified in
-       UTC. This grouping is intended to be machine-friendly.";
+       UTC format.";
     container recurrence-first {
       description
         "Specifies the first instance of the recurrence. If
@@ -2802,9 +2811,8 @@ module ietf-schedule {
 
   grouping recurrence-with-time-zone {
     description
-      "A simple definition of recurrence to specify the time
-       with a local time and time zone identifier. This grouping
-       is intended to be human-friendly.";
+      "A simple definition of recurrence to specify a recurrence
+       rule with a time zone.";
     container recurrence-first {
       description
         "Specifies the first instance of the recurrence. If
@@ -2825,14 +2833,16 @@ module ietf-schedule {
            applies to all the other instances in the recurrence
            set.";
       }
-      leaf time-zone-identifier {
-        type sys:timezone-name;
-        description
-          "Indicates the identifier for the time zone in a time
-           zone database. This parameter MUST be specified if
-           'start-time' or 'until' value is neither reported in
-           the format of UTC nor time zone offset to UTC.";
-      }
+    }
+    leaf time-zone-identifier {
+      type sys:timezone-name;
+      description
+        "Indicates the identifier for the time zone in a time
+         zone database. This parameter MUST be specified if either
+         the 'start-time' or 'until' value is reported in local
+         time format. It MUST NOT be applied to date and time
+         values which are specified in the format of UTC or time
+         zone offset to UTC.";
     }
     choice recurrence-end {
       description
@@ -2867,7 +2877,7 @@ module ietf-schedule {
     uses recurrence-basic;
   }
 
-  grouping recurrence-utc-with-date-times {
+  grouping recurrence-utc-with-periods {
     description
       "This grouping defines an aggregate set of repeating
        occurrences with UTC time format. The recurrence instances
@@ -2911,7 +2921,7 @@ module ietf-schedule {
     }
   }
 
-  grouping recurrence-time-zone-with-date-times {
+  grouping recurrence-time-zone-with-periods {
     description
       "This grouping defines an aggregate set of repeating
        occurrences with local time format and time zone specified.
@@ -2933,7 +2943,7 @@ module ietf-schedule {
     reference
       "RFC 5545: Internet Calendaring and Scheduling Core Object
                  Specification (iCalendar), Section 3.8.5";
-    uses recurrence-time-zone-with-date-times;
+    uses recurrence-time-zone-with-periods;
     leaf-list bysecond {
       type uint32 {
         range "0..60";
