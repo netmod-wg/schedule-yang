@@ -3148,41 +3148,42 @@ module ietf-schedule {
       <h2 id="name-security-considerations">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-7-1">The "ietf-schedule" YANG module specified in this document defines schema for data
+<p id="section-7-1">This section uses the template described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-22#section-3.7" class="relref">Section 3.7</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">The "ietf-schedule" YANG module specified in this document defines schema for data
    that is designed to be accessed via YANG-based management protocols, such
    as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> or RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.  These protocols have to use
    a secure transport layer (e.g., SSH <span>[<a href="#RFC4252" class="cite xref">RFC4252</a>]</span>, TLS <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, and QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>)
-   and have to use mutual authentication.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2">The Network Configuration Access Control Model (NACM) <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span>
+   and have to use mutual authentication.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">The Network Configuration Access Control Model (NACM) <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span>
    provides the means to restrict access for particular NETCONF or
    RESTCONF users to a preconfigured subset of all available NETCONF or
-   RESTCONF protocol operations and content.<a href="#section-7-2" class="pilcrow">¶</a></p>
-<p id="section-7-3">The "ietf-schedule" module defines a set of types and
+   RESTCONF protocol operations and content.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-4">The "ietf-schedule" module defines a set of types and
    groupings.  These nodes are intended to be reused by other YANG
    modules.  The module by itself does not expose any data nodes that
    are writable, data nodes that contain read-only state, or RPCs.  As
    such, there are no additional security issues related to the "ietf-schedule"
-   module that need to be considered.<a href="#section-7-3" class="pilcrow">¶</a></p>
-<p id="section-7-4">Modules that use the groupings that are defined in this document
-   should identify the corresponding security considerations, e.g.,:<a href="#section-7-4" class="pilcrow">¶</a></p>
+   module that need to be considered.<a href="#section-7-4" class="pilcrow">¶</a></p>
+<p id="section-7-5">Modules that use the groupings that are defined in this document
+   should identify the corresponding security considerations, e.g.,:<a href="#section-7-5" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-7-5.1">
-          <p id="section-7-5.1.1">Scheduling depends on reliable and accurate time synchronization. Inaccurate date
+<li class="normal" id="section-7-6.1">
+          <p id="section-7-6.1.1">Scheduling depends on reliable and accurate time synchronization. Inaccurate date
 and time setting can lead to scheduling events being triggered at incorrect
-intervals, potentially causing system failures or security vulnerabilities.<a href="#section-7-5.1.1" class="pilcrow">¶</a></p>
+intervals, potentially causing system failures or security vulnerabilities.<a href="#section-7-6.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-7-5.2">
-          <p id="section-7-5.2.1">Recurring events may conceal abnormal behavior or security threats, which
-may be drowned out by normal events, especially when they are triggered frequently.<a href="#section-7-5.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-7-6.2">
+          <p id="section-7-6.2.1">Recurring events may conceal abnormal behavior or security threats, which
+may be drowned out by normal events, especially when they are triggered frequently.<a href="#section-7-6.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-7-5.3">
-          <p id="section-7-5.3.1">The absence of detailed logs and audit records of each occurrence trigger time
-and action results, and so on, may make security incidents difficient to trace.<a href="#section-7-5.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-7-6.3">
+          <p id="section-7-6.3.1">The absence of detailed logs and audit records of each occurrence trigger time
+and action results, and so on, may make security incidents difficient to trace.<a href="#section-7-6.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-7-5.4">
-          <p id="section-7-5.4.1">Care must be taken when defining recurrences occurring very often and
+        <li class="normal" id="section-7-6.4">
+          <p id="section-7-6.4.1">Care must be taken when defining recurrences occurring very often and
 frequent that can be an additional source of attacks by keeping the system
-permanently busy with the management of scheduling.<a href="#section-7-5.4.1" class="pilcrow">¶</a></p>
+permanently busy with the management of scheduling.<a href="#section-7-6.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
