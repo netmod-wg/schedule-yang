@@ -522,7 +522,7 @@ parameters.
    This module imports types defined in {{!RFC6991}} and {{!RFC7317}}.
 
 ~~~~
-<CODE BEGINS> file "ietf-schedule@2024-04-16.yang"
+<CODE BEGINS> file "ietf-schedule@2025-01-27.yang"
 {::include-fold ./yang/ietf-schedule.yang}
 <CODE ENDS>
 ~~~~
