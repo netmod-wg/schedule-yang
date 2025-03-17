@@ -54,7 +54,7 @@ module ietf-schedule {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.";
 
-  revision 2025-01-27 {
+  revision 2025-03-17 {
     description
       "Initial revision.";
     reference
