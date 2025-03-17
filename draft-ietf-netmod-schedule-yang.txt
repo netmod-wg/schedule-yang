@@ -160,7 +160,7 @@ Table of Contents
 
    *  XXXX --> the assigned RFC number for this draft
 
-   *  2025-01-27 --> the actual date of the publication of this document
+   *  2025-03-17 --> the actual date of the publication of this document
 
 2.  Conventions and Definitions
 
@@ -999,7 +999,7 @@ Table of Contents
 
    This module imports types defined in [RFC6991] and [RFC7317].
 
-   <CODE BEGINS> file "ietf-schedule@2025-01-27.yang"
+   <CODE BEGINS> file "ietf-schedule@2025-03-17.yang"
    module ietf-schedule {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-schedule";
