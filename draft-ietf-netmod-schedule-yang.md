@@ -635,7 +635,7 @@ after that time would not be considered as valid.
     "time-zone-identifier": "China/Beijing",
     "validity": "2025-01-31T20:00:00",
     "min-allowed-start": "2025-01-01T08:00:00",
-    "discard-action": "ietf-schedule:warning"
+    "discard-action": "ietf-schedule:silently-discard"
   }
 }
 ~~~~
