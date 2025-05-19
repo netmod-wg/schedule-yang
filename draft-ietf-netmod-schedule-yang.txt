@@ -431,7 +431,7 @@ Table of Contents
    immediate command that is considered to complete quickly) or hard to
    compute an exact duration (e.g., run a data analysis script whose
    execution time may depend on the data volume and computation resource
-   avaliability).
+   availability).
 
    Note that the "interval" and "duration" cover two distinct properties
    of a schedule event.  The interval specifies when a schedule will
@@ -479,7 +479,7 @@ Table of Contents
    considered as immediate completion (e.g., execute an immediate
    command that is considered to complete quickly) or hard to compute an
    exact duration (e.g., run a data analysis script whose execution time
-   may depend on the data volume and computation resource avaliability).
+   may depend on the data volume and computation resource availability).
 
    The grouping also includes a "time-zone-identifier" parameter which
    MUST be specified if either the "start-time" or "until" value is
