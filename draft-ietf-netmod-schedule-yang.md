@@ -174,18 +174,6 @@ System:
    * "icalendar-recurrence" ({{sec-ical-rec}})
    * "schedule-status" and "schedule-status-with-id" ({{sec-schedule-status}})
 
-<!--
-   {{schedule-tree}} provides an overview of the tree structure of
-   the "ietf-schedule" module in terms of its groupings.
-
-~~~~
-{::include ./yang/tree/overall.txt}
-~~~~
-{: #schedule-tree title="Overall Schedule Tree Structure"}
-
-   Each of these groupings is presented in the following subsections.
--->
-
    Examples are provided in {{usage}}.
 
 ### The "generic-schedule-params" Grouping {#sec-gen}
