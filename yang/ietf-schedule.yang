@@ -54,7 +54,7 @@ module ietf-schedule {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.";
 
-  revision 2025-03-17 {
+  revision 2025-05-19 {
     description
       "Initial revision.";
     reference
@@ -150,17 +150,18 @@ module ietf-schedule {
     base schedule-type;
     description
       "Indicates a one-shot schedule. That is a schedule that
-       will trigger an action without the duration/end time being
-       specified or the duration being specified as 0/end time being
-       specified the same as start time, and then the schedule will
-       disable itself.";
+       will trigger an action with the duration being specified as
+       0/end time being specified the same as start time, and then
+       the schedule will disable itself.";
   }
 
   identity period {
     base schedule-type;
     description
       "Indicates a period-based schedule consisting either a
-       start and end or a start and positive duration of time.";
+       start and end or a start and positive duration of time. If
+       neither an end nor a duration is indicated, the period is
+       considered to last forever.";
   }
   
   identity recurrence {
@@ -384,7 +385,7 @@ module ietf-schedule {
       description
         "Indicates the type of the time period. Two types are
          supported. If no choice is indicated, the period is 
-         considered to last forever or as a one-shot schedule.";
+         considered to last forever.";
       case explicit {
         description
           "A period of time is identified by its start and its end.
@@ -434,7 +435,9 @@ module ietf-schedule {
         "Specifies the frequency type of the recurrence rule.";
     }
     leaf interval {
-      type uint32;
+      type uint32 {
+        range "1..max";
+      }
       description
         "A positive integer representing at which interval the
          recurrence rule repeats. For example, within a 'daily'
@@ -494,7 +497,9 @@ module ietf-schedule {
           "This case defines the number of occurrences at which
            to terminate the recurrence.";
         leaf count {
-          type uint32;
+          type uint32 {
+            range "1..max";
+          }
           description
             "The positive number of occurrences at which to
              terminate the recurrence.";
@@ -562,7 +567,9 @@ module ietf-schedule {
           "The end of the recurrence is indicated by the number
            of occurrences.";
         leaf count {
-          type uint32;
+          type uint32 {
+            range "1..max";        
+          }
           description
             "The positive number of occurrences at which to
              terminate the recurrence.";

@@ -56,12 +56,12 @@ informative:
 
 --- abstract
 
-   This document defines a common schedule YANG module which is
-   designed to be applicable for scheduling purposes such as event, policy,
-   services, or resources based on date and time. For the sake of better modularity,
-   the module includes a set of recurrence related groupings with varying levels of representation
-   (i.e., from basic to advanced) to accommodate a variety of requirements. It also defines groupings for validating requested
-   schedules and reporting scheduling status.
+   This document defines common types and groupings that are meant to be used
+   for scheduling purposes such as event, policy, services, or resources based on
+   date and time. For the sake of better modularity, the YANG module includes a
+   set of recurrence related groupings with varying levels of representation
+   (i.e., from basic to advanced) to accommodate a variety of requirements.
+   It also defines groupings for validating requested schedules and reporting scheduling status.
 
 --- middle
 
@@ -99,7 +99,7 @@ an example of using "ietf-schedule" module for scheduled use of resources framew
    Please apply the following replacements:
 
    * XXXX --> the assigned RFC number for this draft
-   * 2025-03-17 --> the actual date of the publication of this document
+   * 2025-05-19 --> the actual date of the publication of this document
 
 # Conventions and Definitions
 
@@ -150,9 +150,9 @@ System:
    The "ietf-schedule" module ({{sec-schedule}}) defines the following identities:
 
    * "schedule-type": Indicates the type of a schedule. The following types are defined so far:
-      + one-shot: The schedule will trigger an action without the duration/end time being
-       specified or the duration being specified as 0/end time being specified the same as start time, and then the schedule will disable itself ({{Section 3.3 of !RFC3231}}).
-      + period: The schedule is a period-based schedule consisting either a start and end or a start and positive duration of time.
+      + one-shot: The schedule will trigger an action with the duration being specified as 0/end time being specified the same as start time, and then the schedule will disable itself ({{Section 3.3 of !RFC3231}}).
+      + period: The schedule is a period-based schedule consisting either a start and end or a start and positive duration of time. If neither an
+      end nor a duration is indicated, the period is considered to last forever.
       + recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period, e.g., every five minutes) or not (i.e., repeat in a non-regular manner, e.g., every day at 8 and 9 AM).
    * "frequency-type": Characterizes the repeating interval rule of a recurrence schedule (secondly, minutely, etc.).
    * "schedule-state": Indicates the status of a schedule (enabled, disabled, conflicted, finished, etc.). This identity can also be used
@@ -172,7 +172,7 @@ System:
    * "recurrence-utc-with-periods" ({{sec-rec-utc-dt}})
    * "recurrence-time-zone-with-periods" ({{sec-rec-tz-dt}})
    * "icalendar-recurrence" ({{sec-ical-rec}})
-   * "schedule-status" and "schedule-status-with-name" ({{sec-schedule-status}})
+   * "schedule-status" and "schedule-status-with-id" ({{sec-schedule-status}})
 
 <!--
    {{schedule-tree}} provides an overview of the tree structure of
@@ -212,16 +212,18 @@ System:
 
    The "validity" parameter specifies the date and time after which a schedule
    will not be considered as valid. It determines the latest time that a schedule
-   can be started to execute by a system and takes precedence over similar attributes
-   that are provided at the schedule instance itself.
+   can be started to execute independent of when it ends and takes precedence over
+   similar attributes that are provided at the schedule instance itself. A requested
+   schedule may still be accepted but only not have its occurrences that starts
+   later than the configured value to be executed.
 
    The "max/min-allowed-start" parameters specify the maximum/minimum scheduled
-   start date and time, a requested schedule will be rejected if the first
+   start date and time. A requested schedule will be rejected if the first
    occurrence of the schedule starts later/earlier than the configured values.
 
    The "max-allowed-end" parameter specifies the maximum allowed end time of
    the last occurrence. A requested schedule will be rejected if the end time
-   of last occurrence starts later than the configured "max-allowed-end" value.
+   of last occurrence is later than the configured "max-allowed-end" value.
 
    The "discard-action" parameter specifies the action if a requested schedule
    cannot be accepted for any reason and is discarded. Possible reasons include,
@@ -238,9 +240,9 @@ System:
    either a start date and time ("period-start") and end date and time ("period-end"), or a
    start date and time ("period-start") and a non-negative time duration ("duration"). For the first
    format, the start of the period MUST be no later the end of the period. If neither an end date and time ("period-end")
-   nor a duration ("duration") is indicated, the period is considered to last forever or as a one-shot schedule.
+   nor a duration ("duration") is indicated, the period is considered to last forever.
    If the duration ("duration") value is 0 or the end time ("period-end") is the same as the start time ("period-start"), the period
-   is also considered as a one-shot schedule.
+   is considered as a one-shot schedule.
 
    The "time-zone-identifier" parameter indicates the identifier for the
    time zone. This parameter MUST be specified if either the "period-start" or "period-end"
@@ -288,8 +290,14 @@ System:
 
    The "start-time-utc" indicates the start time in UTC format.
 
-   The "duration" parameter specifies, in units of seconds, the time period of the first occurrence. Unless specified otherwise (e.g., described in the "description" statement), the "duration" also applies to subsequent recurrence instances. When unspecified, each occurrence is considered as
-   immediate completion or hard to compute an exact duration.
+   The "duration" parameter specifies, in units of seconds, the time period of
+   the first occurrence. Unless specified otherwise (e.g., through additional
+   augmented parameters), the "duration" also applies to subsequent recurrence
+   instances. When unspecified, each occurrence is considered as
+   immediate completion (e.g., execute an immediate command that is considered
+   to complete quickly) or hard to compute an exact duration (e.g., run a data
+   analysis script whose execution time may depend on the data volume and
+   computation resource avaliability).
 
 
 Note that the "interval" and "duration" cover two distinct properties of a schedule event.
@@ -314,9 +322,12 @@ an occurrence will last. This document allows the interval between occurrences t
 {: #rec-tz-grp-tree title="recurrence-with-time-zone Grouping Tree Structure"}
 
    The "recurrence-first" container includes "start-time" and "duration" parameters
-   to specify the start time and period of the first occurrence. Unless specified otherwise (e.g., described in the "description" statement), the
-   "duration" also applies to subsequent recurrence instances. When unspecified, each occurrence is considered as
-   immediate completion or hard to compute an exact duration.
+   to specify the start time and period of the first occurrence. Unless specified otherwise (e.g., through additional
+   augmented parameters), the "duration" also applies to subsequent recurrence instances. When unspecified, each occurrence is considered as
+   immediate completion (e.g., execute an immediate command that is considered
+   to complete quickly) or hard to compute an exact duration (e.g., run a data
+   analysis script whose execution time may depend on the data volume and
+   computation resource avaliability).
 
    The grouping also includes a
    "time-zone-identifier" parameter which MUST be specified if either the "start-time" or "until"
@@ -412,10 +423,10 @@ an occurrence will last. This document allows the interval between occurrences t
    generated by any of the specified recurrence rule and date-times, and then
    excluding any start date and time values specified by "exception-dates" parameter.
 
-### The "schedule-status" and "schedule-status-with-name" Groupings {#sec-schedule-status}
+### The "schedule-status" and "schedule-status-with-id" Groupings {#sec-schedule-status}
 
-   The "schedule-status" and "schedule-status-with-name" groupings ({{sche-status-tree}}) define common parameters
-   for scheduling management/status exposure. The "schedule-status-with-name" grouping has the same
+   The "schedule-status" and "schedule-status-with-id" groupings ({{sche-status-tree}}) define common parameters
+   for scheduling management/status exposure. The "schedule-status-with-id" grouping has the same
    structure as "schedule-status" but with an additional parameter to identify a schedule "schedule-id". Both
    structures are defined in the module to allow for better modularity and flexibility.
 
@@ -522,14 +533,14 @@ parameters.
    This module imports types defined in {{!RFC6991}} and {{!RFC7317}}.
 
 ~~~~
-<CODE BEGINS> file "ietf-schedule@2025-03-17.yang"
+<CODE BEGINS> file "ietf-schedule@2025-05-19.yang"
 {::include-fold ./yang/ietf-schedule.yang}
 <CODE ENDS>
 ~~~~
 
 # Security Considerations
 
-This section uses the template described in {{Section 3.7 of	?I-D.ietf-netmod-rfc8407bis}}.
+This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rfc8407bis}}.
 
    The "ietf-schedule" YANG module specified in this document defines schema for data
    that is designed to be accessed via YANG-based management protocols, such
@@ -594,20 +605,20 @@ This section uses the template described in {{Section 3.7 of	?I-D.ietf-netmod-rf
 
    This section provides some examples to illustrate the use of the
    period and recurrence formats defined in {{sec-schedule}}. The following
-   modules are used for illustration purposes:
+   modules are used for illustration purposes and make examples verifiable:
 
 ~~~~
 {::include-fold ./yang/example-sch-usage.yang}
 ~~~~
 
-   For each example, only the message body is provided with
+   For each example below, only the message body is provided with
    JSON used for encoding per the guidance in {{?RFC7951}}.
 
 ## The "generic-schedule-params" Grouping
 
 {{ex-0}} illustrates the example of a requested schedule that needs to start no earlier than
 08:00 AM, January 1, 2025 and end no later than 8:00 PM, January 31, 2025 (Beijing time).
-Schedule requests that fail to meet the requirements are ignored by the system as indicates by
+Schedule requests that fail to meet the requirements are ignored by the system as indicated by
 "discard-action".
 
 ~~~~
@@ -624,15 +635,15 @@ Schedule requests that fail to meet the requirements are ignored by the system a
 
 To illustrate the difference between "max-allowed-end" and "validity" parameters,
 {{ex-00}} shows the example of a requested schedule that needs to start no earlier than
-08:00 AM, January 1, 2025 (Paris time). Schedule requests that fail to meet the
-requirements are discarded with warning messages. The requested schedule may end
-after 8:00 PM, January 31, 2025, but any occurrences that are generated
+08:00 AM, January 1, 2025 (Beijing time), schedule requests that fail to meet the
+requirements are ignored by the system as indicated by "discard-action". The
+requested schedule may end after 8:00 PM, January 31, 2025, but any occurrences that are generated
 after that time would not be considered as valid.
 
 ~~~~
 {
   "example-sch-usage-1:generic-schedule-params": {
-    "time-zone-identifier": "France/Paris",
+    "time-zone-identifier": "China/Beijing",
     "validity": "2025-01-31T20:00:00",
     "min-allowed-start": "2025-01-01T08:00:00",
     "discard-action": "ietf-schedule:warning"

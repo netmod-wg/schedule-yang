@@ -1,21 +1,3 @@
-module: ietf-schedule
-
-  grouping generic-schedule-params:
-    ...
-  grouping period-of-time:
-    ...
-  grouping recurrence-basic:
-    ...               
-  grouping recurrence-utc:
-    ...
-  grouping recurrence-with-time-zone:
-    ...
-  grouping recurrence-utc-with-periods:
-    ...
-  grouping recurrence-time-zone-with-periods:
-    ...
-  grouping icalendar-recurrence:
-    ...
   grouping schedule-status:
     +-- state?                    identityref
     +-- version?                  uint16
@@ -27,7 +9,7 @@ module: ietf-schedule
     +--ro upcoming-occurrence?      yang:date-and-time
     +--ro last-failed-occurrence?   yang:date-and-time
     +--ro failure-counter?          yang:counter32
-  grouping schedule-status-with-name:
+  grouping schedule-status-with-id:
     +-- schedule-id?              string
     +-- state?                    identityref
     +-- version?                  uint16
