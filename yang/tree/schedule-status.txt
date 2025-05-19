@@ -9,8 +9,8 @@
     +--ro upcoming-occurrence?      yang:date-and-time
     +--ro last-failed-occurrence?   yang:date-and-time
     +--ro failure-counter?          yang:counter32
-  grouping schedule-status-with-id:
-    +-- schedule-id?              string
+  grouping schedule-status-with-name:
+    +-- schedule-name?            string
     +-- state?                    identityref
     +-- version?                  uint16
     +-- schedule-type?            identityref

@@ -830,7 +830,7 @@ module ietf-schedule {
     description
       "This grouping defines common properties of scheduling
        status.";
-    leaf schedule-id {
+    leaf schedule-name {
       type string;
       description
         "The schedule identifier that uniquely identifies a
