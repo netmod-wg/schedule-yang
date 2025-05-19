@@ -18,7 +18,7 @@ module example-scheduled-backup {
     "Support at example.com";
 
   description
-    "Example of a module defining an scheduled based backup
+    "Example of a module defining a scheduled based backup
      operation.";
 
   revision "2023-01-19" {
