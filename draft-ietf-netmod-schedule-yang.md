@@ -286,7 +286,7 @@ System:
    immediate completion (e.g., execute an immediate command that is considered
    to complete quickly) or hard to compute an exact duration (e.g., run a data
    analysis script whose execution time may depend on the data volume and
-   computation resource avaliability).
+   computation resource availability).
 
 
 Note that the "interval" and "duration" cover two distinct properties of a schedule event.
@@ -316,7 +316,7 @@ an occurrence will last. This document allows the interval between occurrences t
    immediate completion (e.g., execute an immediate command that is considered
    to complete quickly) or hard to compute an exact duration (e.g., run a data
    analysis script whose execution time may depend on the data volume and
-   computation resource avaliability).
+   computation resource availability).
 
    The grouping also includes a
    "time-zone-identifier" parameter which MUST be specified if either the "start-time" or "until"
