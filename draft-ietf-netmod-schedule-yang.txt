@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 20 November 2025                              M. Boucadair, Ed.
+Expires: 28 November 2025                              M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                             19 May 2025
+                                                             27 May 2025
 
 
                 A Common YANG Data Model for Scheduling
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 November 2025.
+   This Internet-Draft will expire on 28 November 2025.
 
 Copyright Notice
 
@@ -347,7 +347,9 @@ Table of Contents
    ("duration") is indicated, the period is considered to last forever.
    If the duration ("duration") value is 0 or the end time ("period-
    end") is the same as the start time ("period-start"), the period is
-   considered as a one-shot schedule.
+   considered as a one-shot schedule.  If no start date and time
+   ("period-start") is specified, the period is considered to start
+   immediately.
 
    The "time-zone-identifier" parameter indicates the identifier for the
    time zone.  This parameter MUST be specified if either the "period-
@@ -360,7 +362,7 @@ Table of Contents
 
      grouping period-of-time:
        +-- period-description?     string
-       +-- period-start            yang:date-and-time
+       +-- period-start?           yang:date-and-time
        +-- time-zone-identifier?   sys:timezone-name
        +-- (period-type)?
           +--:(explicit)
@@ -377,25 +379,28 @@ Table of Contents
 
      grouping recurrence-basic:
        +-- recurrence-description?   string
-       +-- frequency                 identityref
+       +-- frequency?                identityref
        +-- interval?                 uint32
 
                 Figure 3: recurrence Grouping Tree Structure
 
-   The frequency parameter ("frequency"), which is mandatory, identifies
-   the type of recurrence rule.  For example, a "daily" frequency value
-   specifies repeating events based on an interval of a day or more.
+   The frequency parameter ("frequency") identifies the type of a
+   recurrence rule.  For example, a "daily" frequency value specifies
+   repeating events based on an interval of a day or more.
 
    Consistent with Section 3.3.10 of [RFC5545], the interval
    ("interval") represents at which interval the recurrence rule
-   repeats.  For example, within a daily recurrence rule, an interval
-   value of "8" means every eight days.  The default value is "1",
-   meaning every second for a secondly recurrence rule, every minute for
-   a minutely rule, every hour for an hourly rule, every day for a daily
-   rule, and so on.  Note that per Section 4.13 of
-   [I-D.ietf-netmod-rfc8407bis], no "default" substatement is used here
-   because there are cases (e.g., profiling) where the use of the
-   default is problematic.
+   repeats.  For example, within a "daily" recurrence rule, an interval
+   value of "8" means every eight days.
+
+   Note that per Section 4.13 of [I-D.ietf-netmod-rfc8407bis], neither a
+   "default" nor a "mandatory" substatement is defined here for both
+   "frequency" and "interval" parameters because there are cases (e.g.,
+   profiling) where using these statements is problematic.  YANG modules
+   using this grouping SHOULD refine these two nodes with either a
+   "mandatory" or a "default" statement, if they always need to be
+   configured or have default values.  This MAY be ignored in cases such
+   as when this grouping is used by another grouping.
 
    The "recurrence-description" includes a description of the period.
    No constraint is imposed on the structure nor the use of this
@@ -416,7 +421,7 @@ Table of Contents
        |  +--:(count)
        |     +-- count?              uint32
        +-- recurrence-description?   string
-       +-- frequency                 identityref
+       +-- frequency?                identityref
        +-- interval?                 uint32
 
               Figure 4: recurrence-utc Grouping Tree Structure
@@ -466,7 +471,7 @@ Table of Contents
        |  +--:(count)
        |     +-- count?              uint32
        +-- recurrence-description?   string
-       +-- frequency                 identityref
+       +-- frequency?                identityref
        +-- interval?                 uint32
 
         Figure 5: recurrence-with-time-zone Grouping Tree Structure
@@ -512,7 +517,7 @@ Table of Contents
        |  +--:(count)
        |     +-- count?              uint32
        +-- recurrence-description?   string
-       +-- frequency                 identityref
+       +-- frequency?                identityref
        +-- interval?                 uint32
        +-- period-timeticks* [period-start]
           +-- period-start    yang:timeticks
@@ -545,7 +550,7 @@ Table of Contents
        |  +--:(count)
        |     +-- count?              uint32
        +-- recurrence-description?   string
-       +-- frequency                 identityref
+       +-- frequency?                identityref
        +-- interval?                 uint32
        +-- period* [period-start]
           +-- period-description?     string
@@ -583,7 +588,7 @@ Table of Contents
        |  +--:(count)
        |     +-- count?              uint32
        +-- recurrence-description?   string
-       +-- frequency                 identityref
+       +-- frequency?                identityref
        +-- interval?                 uint32
        +-- period* [period-start]
        |  +-- period-description?     string
@@ -645,7 +650,14 @@ Table of Contents
    starts.  This is significant when a "weekly" recurrence rule has an
    interval greater than 1, and a "byday" data node is specified.  This
    is also significant when in a "yearly" rule and a "byyearweek" is
-   specified.  The default value is "monday".
+   specified.  Note that per Section 4.13 of
+   [I-D.ietf-netmod-rfc8407bis], neither a "default" nor a "mandatory"
+   substatement is defined here because there are cases (e.g.,
+   profiling) where using these statements is problematic.  YANG modules
+   using this grouping SHOULD refine the "workweek-start" node with
+   either a "mandatory" or a "default" statement, if it always needs to
+   be configured or has a default value.  This MAY be ignored in cases
+   such as when this grouping is used by another grouping.
 
    The "exception-dates" data node specifies a list of exceptions for
    recurrence.  The final recurrence set is generated by gathering all
@@ -689,9 +701,9 @@ Table of Contents
        Figure 9: Schedule Status with and without Name Groupings Tree
                                  Structure
 
-   The "schedule-id" parameter is useful to uniquely identify a schedule
-   in a network device or controller if multiple scheduling contexts
-   exists.
+   The "schedule-name" parameter is useful to uniquely identify a
+   schedule in a network device or controller if multiple scheduling
+   contexts exists.
 
    The "state" parameter is defined to configure/expose the scheduling
    state, depending on the use of the grouping.  For a recurrence-based
@@ -781,7 +793,7 @@ Table of Contents
               +------------------+-------------------------+
               | schedType        | schedule-type           |
               +------------------+-------------------------+
-              | schedName        | schedule-id             |
+              | schedName        | schedule-name           |
               +------------------+-------------------------+
               | schedOwner       | Not Supported           |
               +------------------+-------------------------+
@@ -1196,7 +1208,6 @@ Table of Contents
        }
        leaf period-start {
          type yang:date-and-time;
-         mandatory true;
          description
            "Period start time.";
        }
@@ -1259,7 +1270,6 @@ Table of Contents
          type identityref {
            base frequency-type;
          }
-         mandatory true;
          description
            "Specifies the frequency type of the recurrence rule.";
        }
@@ -1270,10 +1280,7 @@ Table of Contents
          description
            "A positive integer representing at which interval the
             recurrence rule repeats. For example, within a 'daily'
-            recurrence rule, a value of '8' means every eight days.
-            The default value is '1', means every second for a
-            'secondly' recurrence rule, every minute for a 'minutely'
-            rule, and so on.";
+            recurrence rule, a value of '8' means every eight days.";
        }
      }
 
@@ -1562,8 +1569,7 @@ Table of Contents
        leaf workweek-start {
          type schedule:weekday;
          description
-           "Specifies the day on which the workweek starts. The
-            default value is 'monday'.";
+           "Specifies the day on which the workweek starts.";
        }
        leaf-list exception-dates {
          type yang:date-and-time;
@@ -1927,7 +1933,14 @@ Appendix A.  Examples of Scheduling Format Representation
      }
 
      container recurrence-basic {
-       uses schedule:recurrence-basic;
+       uses schedule:recurrence-basic {
+         refine frequency {
+           mandatory true;
+         }
+         refine interval {
+           default 1;
+         }
+       }
      }
    }
 
@@ -1992,7 +2005,11 @@ Appendix A.  Examples of Scheduling Format Representation
      prefix "ex-schu-8";
 
      container icalendar-recurrence {
-       uses schedule:icalendar-recurrence;
+       uses schedule:icalendar-recurrence {
+         refine workweek-start {
+           default monday;
+         }
+       }
      }
    }
 
@@ -2413,8 +2430,15 @@ B.1.  Example: Schedule Tasks to Execute Based on a Recurrence Rule
              description
                "The schedule identifier for this recurrence rule.";
            }
-           uses schedule:recurrence-basic;
-          }
+           uses schedule:recurrence-basic {
+             refine frequency {
+               mandatory true;
+             }
+             refine interval {
+               default 1;
+             }
+           }
+         }
 
          container icalendar-recurrence-schedules {
            if-feature schedule:icalendar-recurrence;
@@ -2426,15 +2450,19 @@ B.1.  Example: Schedule Tasks to Execute Based on a Recurrence Rule
              description
                "The schedule identifier for this recurrence rule.";
            }
-           uses schedule:icalendar-recurrence;
+           uses schedule:icalendar-recurrence {
+             refine workweek-start {
+               default monday;
+             }
+           }
          }
        }
 
        list schedule-set {
-         key "schedule-id";
+         key "schedule-name";
          description
            "The list of schedule status for the backup tasks.";
-         uses schedule:schedule-status;
+         uses schedule:schedule-status-with-name;
        }
      }
    }
