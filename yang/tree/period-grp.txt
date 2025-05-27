@@ -1,6 +1,6 @@
   grouping period-of-time:
     +-- period-description?     string
-    +-- period-start            yang:date-and-time
+    +-- period-start?           yang:date-and-time
     +-- time-zone-identifier?   sys:timezone-name
     +-- (period-type)?
        +--:(explicit)

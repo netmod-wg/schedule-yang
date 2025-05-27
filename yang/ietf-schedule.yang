@@ -367,7 +367,6 @@ module ietf-schedule {
     }
     leaf period-start {
       type yang:date-and-time;
-      mandatory true;
       description
         "Period start time.";
     }
@@ -430,7 +429,6 @@ module ietf-schedule {
       type identityref {
         base frequency-type;
       }
-      mandatory true;
       description
         "Specifies the frequency type of the recurrence rule.";
     }
@@ -441,10 +439,7 @@ module ietf-schedule {
       description
         "A positive integer representing at which interval the
          recurrence rule repeats. For example, within a 'daily'
-         recurrence rule, a value of '8' means every eight days.
-         The default value is '1', means every second for a 
-         'secondly' recurrence rule, every minute for a 'minutely'
-         rule, and so on.";
+         recurrence rule, a value of '8' means every eight days.";
     }
   }
 
@@ -733,8 +728,7 @@ module ietf-schedule {
     leaf workweek-start {
       type schedule:weekday;
       description
-        "Specifies the day on which the workweek starts. The 
-         default value is 'monday'.";
+        "Specifies the day on which the workweek starts.";
     }
     leaf-list exception-dates {
       type yang:date-and-time;

@@ -39,7 +39,14 @@ module example-sch-usage-3 {
   }
 
   container recurrence-basic {
-    uses schedule:recurrence-basic;
+    uses schedule:recurrence-basic {
+      refine frequency {
+        mandatory true;
+      }
+      refine interval {
+        default 1;
+      }
+    }
   }
 }
 
@@ -104,6 +111,10 @@ module example-sch-usage-8 {
   prefix "ex-schu-8";
 
   container icalendar-recurrence {
-    uses schedule:icalendar-recurrence;
+    uses schedule:icalendar-recurrence {
+      refine workweek-start {
+        default monday;
+      }
+    }
   }
 }

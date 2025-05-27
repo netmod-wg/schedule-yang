@@ -8,7 +8,7 @@
     |  +--:(count)
     |     +-- count?              uint32
     +-- recurrence-description?   string
-    +-- frequency                 identityref
+    +-- frequency?                identityref
     +-- interval?                 uint32
     +-- period-timeticks* [period-start]
        +-- period-start    yang:timeticks

@@ -80,8 +80,15 @@ module example-scheduled-backup {
           description
             "The schedule identifier for this recurrence rule.";
         }            
-        uses schedule:recurrence-basic;
-       }
+        uses schedule:recurrence-basic {
+          refine frequency {
+            mandatory true;
+          }
+          refine interval {
+            default 1;
+          }
+        }
+      }
 
       container icalendar-recurrence-schedules {
         if-feature schedule:icalendar-recurrence;
@@ -93,15 +100,19 @@ module example-scheduled-backup {
           description
             "The schedule identifier for this recurrence rule.";
         }           
-        uses schedule:icalendar-recurrence;
+        uses schedule:icalendar-recurrence {
+          refine workweek-start {
+            default monday;
+          }
+        }
       }      
     }
   
     list schedule-set {
-      key "schedule-id";
+      key "schedule-name";
       description
         "The list of schedule status for the backup tasks.";
-      uses schedule:schedule-status;
+      uses schedule:schedule-status-with-name;
     }
   }
 }
