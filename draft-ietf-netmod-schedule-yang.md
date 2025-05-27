@@ -987,7 +987,7 @@ after that time would not be considered as valid.
    could be defined.
 
 ~~~~
-{::include-fold ./yang/example-scheduled-capacity-reservation.yang}
+{::include-fold ./yang/example-sch-capacity-res.yang}
 ~~~~
 
    {{Section 4 of ?RFC8413}} defines the reference architecture for scheduled use
