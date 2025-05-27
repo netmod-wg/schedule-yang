@@ -1,4 +1,4 @@
   grouping recurrence-basic:
     +-- recurrence-description?   string
-    +-- frequency                 identityref
+    +-- frequency?                identityref
     +-- interval?                 uint32
