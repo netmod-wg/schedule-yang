@@ -264,7 +264,7 @@ System:
 
   Note that per {{Section 4.13 of ?I-D.ietf-netmod-rfc8407bis}}, neither a "default"
   nor a "mandatory" substatement is defined here for both "frequency" and "interval"
-  parameters because there are cases (e.g., profiling) where the use of them is problematic.
+  parameters because there are cases (e.g., profiling) where using these statements is problematic.
   YANG modules using this grouping SHOULD refine these two nodes with either a
   "mandatory" or a "default" statement, if they always need to be configured or have default values.
   This MAY be ignored in cases such as when this grouping is used by another grouping.
@@ -412,7 +412,7 @@ an occurrence will last. This document allows the interval between occurrences t
    a "byday" data node is specified. This is also significant when in a "yearly" rule
    and a "byyearweek" is specified. Note that per {{Section 4.13 of ?I-D.ietf-netmod-rfc8407bis}}, neither a "default"
    nor a "mandatory" substatement is defined here because there are cases (e.g., profiling)
-   where the use of them is problematic.
+   where using these statements is problematic.
    YANG modules using this grouping SHOULD refine the "workweek-start" node with either a
    "mandatory" or a "default" statement, if it always needs to be configured or has a default value.
    This MAY be ignored in cases such as when this grouping is used by another grouping.
