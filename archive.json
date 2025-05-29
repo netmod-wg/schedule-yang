@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-20T01:15:31.860907+00:00",
+  "timestamp": "2025-05-29T01:15:04.948338+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -4029,6 +4029,55 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 70,
+      "id": "PR_kwDOLuooYM6Xs_tb",
+      "title": "remove mandatory statement & remove default value in description statement",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/70",
+      "state": "MERGED",
+      "author": "QiufangMa",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-27T03:09:39Z",
+      "updatedAt": "2025-05-27T06:02:20Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "0fad64f58b6c8c55079f8775bf3f0dd84c665355",
+      "headRepository": "QiufangMa/schedule-yang",
+      "headRefName": "main",
+      "headRefOid": "19e103ecf5ee8bb743201314aeefaea0e1eeb1a6",
+      "closedAt": "2025-05-27T06:02:19Z",
+      "mergedAt": "2025-05-27T06:02:19Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "332c487cf871e585ef44dc5f6fda7c04ac18bff4"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLuooYM6rChO1",
+          "commit": {
+            "abbreviatedOid": "cee76a4"
+          },
+          "author": "boucadair",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-27T04:51:10Z",
+          "updatedAt": "2025-05-27T04:52:33Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "```suggestion\r\n   where using these statements is problematic.\r\n```",
+              "createdAt": "2025-05-27T04:51:10Z",
+              "updatedAt": "2025-05-27T04:52:33Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
