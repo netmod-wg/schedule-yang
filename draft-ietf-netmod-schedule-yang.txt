@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 28 November 2025                              M. Boucadair, Ed.
+Expires: 1 December 2025                               M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                             27 May 2025
+                                                             30 May 2025
 
 
                 A Common YANG Data Model for Scheduling
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 November 2025.
+   This Internet-Draft will expire on 1 December 2025.
 
 Copyright Notice
 
@@ -159,7 +159,7 @@ Table of Contents
 
    *  XXXX --> the assigned RFC number for this draft
 
-   *  2025-05-19 --> the actual date of the publication of this document
+   *  2025-05-30 --> the actual date of the publication of this document
 
 2.  Conventions and Definitions
 
@@ -838,7 +838,7 @@ Table of Contents
 
    This module imports types defined in [RFC6991] and [RFC7317].
 
-   <CODE BEGINS> file "ietf-schedule@2025-05-19.yang"
+   <CODE BEGINS> file "ietf-schedule@2025-05-30.yang"
    module ietf-schedule {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-schedule";
