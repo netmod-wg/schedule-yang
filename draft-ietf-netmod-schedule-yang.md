@@ -99,7 +99,7 @@ an example of using "ietf-schedule" module for scheduled use of resources framew
    Please apply the following replacements:
 
    * XXXX --> the assigned RFC number for this draft
-   * 2025-05-19 --> the actual date of the publication of this document
+   * 2025-05-30 --> the actual date of the publication of this document
 
 # Conventions and Definitions
 
@@ -532,7 +532,7 @@ parameters.
    This module imports types defined in {{!RFC6991}} and {{!RFC7317}}.
 
 ~~~~
-<CODE BEGINS> file "ietf-schedule@2025-05-19.yang"
+<CODE BEGINS> file "ietf-schedule@2025-05-30.yang"
 {::include-fold ./yang/ietf-schedule.yang}
 <CODE ENDS>
 ~~~~
