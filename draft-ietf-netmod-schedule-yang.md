@@ -151,8 +151,7 @@ System:
 
    * "schedule-type": Indicates the type of a schedule. The following types are defined so far:
       + one-shot: The schedule will trigger an action that has either the duration specified as 0 or the end time specified the same as start time, and then the schedule will disable itself ({{Section 3.3 of !RFC3231}}).
-      (2) a start and positive duration of time. If neither an
-      end nor a duration is indicated, the period is considered to last forever.
+      + period: The schedule is a period-based schedule consisting either (1) a start and end or (2) a start and positive duration of time. If neither an end nor a duration is indicated, the period is considered to last forever.
       + recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period, e.g., every five minutes) or not (i.e., repeat in a non-regular manner, e.g., every day at 8 and 9 AM).
    * "frequency-type": Characterizes the repeating interval rule of a recurrence schedule (secondly, minutely, etc.).
    * "schedule-state": Indicates the status of a schedule (enabled, disabled, conflicted, finished, etc.). This identity can also be used
