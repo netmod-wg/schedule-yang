@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 1 December 2025                               M. Boucadair, Ed.
+Expires: 14 December 2025                              M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                             30 May 2025
+                                                            12 June 2025
 
 
                 A Common YANG Data Model for Scheduling
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 December 2025.
+   This Internet-Draft will expire on 14 December 2025.
 
 Copyright Notice
 
@@ -312,8 +312,8 @@ Table of Contents
    time that a schedule can be started to execute independent of when it
    ends and takes precedence over similar attributes that are provided
    at the schedule instance itself.  A requested schedule may still be
-   accepted but only not have its occurrences that starts later than the
-   configured value to be executed.
+   accepted but any occurences that start later than the configured
+   value will not be executed.
 
    The "max/min-allowed-start" parameters specify the maximum/minimum
    scheduled start date and time.  A requested schedule will be rejected
@@ -399,8 +399,9 @@ Table of Contents
    profiling) where using these statements is problematic.  YANG modules
    using this grouping SHOULD refine these two nodes with either a
    "mandatory" or a "default" statement, if they always need to be
-   configured or have default values.  This MAY be ignored in cases such
-   as when this grouping is used by another grouping.
+   configured or have default values.  This recommendation MAY be
+   ignored in cases such as when this grouping is used by another
+   grouping.
 
    The "recurrence-description" includes a description of the period.
    No constraint is imposed on the structure nor the use of this
@@ -436,7 +437,9 @@ Table of Contents
    immediate command that is considered to complete quickly) or hard to
    compute an exact duration (e.g., run a data analysis script whose
    execution time may depend on the data volume and computation resource
-   availability).
+   availability).  The behavior to follow when a task takes more time
+   than specified by the "duration" is out of scope.  Such
+   considerations belong to task management, not schedule management.
 
    Note that the "interval" and "duration" cover two distinct properties
    of a schedule event.  The interval specifies when a schedule will
@@ -1277,6 +1280,10 @@ Table of Contents
          type uint32 {
            range "1..max";
          }
+         must '../frequency' {
+           error-message
+             "Frequency must be provided.";
+         }
          description
            "A positive integer representing at which interval the
             recurrence rule repeats. For example, within a 'daily'
@@ -1806,9 +1813,9 @@ Table of Contents
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
               Authors and Reviewers of Documents Containing YANG Data
               Models", Work in Progress, Internet-Draft, draft-ietf-
-              netmod-rfc8407bis-25, 5 May 2025,
+              netmod-rfc8407bis-28, 5 June 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              rfc8407bis-25>.
+              rfc8407bis-28>.
 
    [I-D.ietf-opsawg-scheduling-oam-tests]
               Contreras, L. M. and V. Lopez, "A YANG Data Model for
