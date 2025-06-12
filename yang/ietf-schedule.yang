@@ -436,6 +436,10 @@ module ietf-schedule {
       type uint32 {
         range "1..max";
       }
+      must '../frequency' {
+        error-message
+          "Frequency must be provided.";
+      }
       description
         "A positive integer representing at which interval the
          recurrence rule repeats. For example, within a 'daily'
