@@ -151,7 +151,6 @@ System:
 
    * "schedule-type": Indicates the type of a schedule. The following types are defined so far:
       + one-shot: The schedule will trigger an action that has either the duration specified as 0 or the end time specified the same as start time, and then the schedule will disable itself ({{Section 3.3 of !RFC3231}}).
-      + period: The schedule is a period-based schedule consisting either (1) a start and end or
       (2) a start and positive duration of time. If neither an
       end nor a duration is indicated, the period is considered to last forever.
       + recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period, e.g., every five minutes) or not (i.e., repeat in a non-regular manner, e.g., every day at 8 and 9 AM).
@@ -203,8 +202,7 @@ System:
    will not be considered as valid. It determines the latest time that a schedule
    can be started to execute independent of when it ends and takes precedence over
    similar attributes that are provided at the schedule instance itself. A requested
-   schedule may still be accepted but only not have its occurrences that starts
-   later than the configured value to be executed.
+   schedule may still be accepted but any occurences that start later than the configured value will not be executed.
 
    The "max/min-allowed-start" parameters specify the maximum/minimum scheduled
    start date and time. A requested schedule will be rejected if the first
@@ -267,7 +265,7 @@ System:
   parameters because there are cases (e.g., profiling) where using these statements is problematic.
   YANG modules using this grouping SHOULD refine these two nodes with either a
   "mandatory" or a "default" statement, if they always need to be configured or have default values.
-  This MAY be ignored in cases such as when this grouping is used by another grouping.
+  This recommendation MAY be ignored in cases such as when this grouping is used by another grouping.
 
   The "recurrence-description" includes a description of the period. No constraint is imposed
   on the structure nor the use of this parameter.
@@ -291,8 +289,9 @@ System:
    immediate completion (e.g., execute an immediate command that is considered
    to complete quickly) or hard to compute an exact duration (e.g., run a data
    analysis script whose execution time may depend on the data volume and
-   computation resource availability).
-
+   computation resource availability). The behavior to follow when a task takes
+   more time than specified by the "duration" is out of scope. Such considerations
+   belong to task management, not schedule management.
 
 Note that the "interval" and "duration" cover two distinct properties of a schedule event.
 The interval specifies when a schedule will occur, combined with the frequency parameter; while the duration indicates how long
