@@ -228,7 +228,10 @@ Table of Contents
       -  one-shot: The schedule will trigger an action that has either
          the duration specified as 0 or the end time specified the same
          as start time, and then the schedule will disable itself
-         (Section 3.3 of [RFC3231]).  (2) a start and positive duration
+         (Section 3.3 of [RFC3231]).
+
+      -  period: The schedule is a period-based schedule consisting
+         either (1) a start and end or (2) a start and positive duration
          of time.  If neither an end nor a duration is indicated, the
          period is considered to last forever.
 

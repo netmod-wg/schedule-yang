@@ -1451,12 +1451,13 @@ in the YANG module are used in lowercase.<a href="#section-2-5.6.1" class="pilcr
             <p id="section-3.2-2.1.1">"schedule-type": Indicates the type of a schedule. The following types are defined so far:<a href="#section-3.2-2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2-2.1.2.1">
-                <p id="section-3.2-2.1.2.1.1">one-shot: The schedule will trigger an action that has either the duration specified as 0 or the end time specified the same as start time, and then the schedule will disable itself (<span><a href="https://rfc-editor.org/rfc/rfc3231#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC3231" class="cite xref">RFC3231</a>]</span>).
- (2) a start and positive duration of time. If neither an
- end nor a duration is indicated, the period is considered to last forever.<a href="#section-3.2-2.1.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-3.2-2.1.2.1.1">one-shot: The schedule will trigger an action that has either the duration specified as 0 or the end time specified the same as start time, and then the schedule will disable itself (<span><a href="https://rfc-editor.org/rfc/rfc3231#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC3231" class="cite xref">RFC3231</a>]</span>).<a href="#section-3.2-2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-3.2-2.1.2.2">
-                <p id="section-3.2-2.1.2.2.1">recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period, e.g., every five minutes) or not (i.e., repeat in a non-regular manner, e.g., every day at 8 and 9 AM).<a href="#section-3.2-2.1.2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-3.2-2.1.2.2.1">period: The schedule is a period-based schedule consisting either (1) a start and end or (2) a start and positive duration of time. If neither an end nor a duration is indicated, the period is considered to last forever.<a href="#section-3.2-2.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-3.2-2.1.2.3">
+                <p id="section-3.2-2.1.2.3.1">recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period, e.g., every five minutes) or not (i.e., repeat in a non-regular manner, e.g., every day at 8 and 9 AM).<a href="#section-3.2-2.1.2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
