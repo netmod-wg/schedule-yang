@@ -1451,15 +1451,12 @@ in the YANG module are used in lowercase.<a href="#section-2-5.6.1" class="pilcr
             <p id="section-3.2-2.1.1">"schedule-type": Indicates the type of a schedule. The following types are defined so far:<a href="#section-3.2-2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2-2.1.2.1">
-                <p id="section-3.2-2.1.2.1.1">one-shot: The schedule will trigger an action that has either the duration specified as 0 or the end time specified the same as start time, and then the schedule will disable itself (<span><a href="https://rfc-editor.org/rfc/rfc3231#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC3231" class="cite xref">RFC3231</a>]</span>).<a href="#section-3.2-2.1.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-3.2-2.1.2.1.1">one-shot: The schedule will trigger an action that has either the duration specified as 0 or the end time specified the same as start time, and then the schedule will disable itself (<span><a href="https://rfc-editor.org/rfc/rfc3231#section-3.3" class="relref">Section 3.3</a> of [<a href="#RFC3231" class="cite xref">RFC3231</a>]</span>).
+ (2) a start and positive duration of time. If neither an
+ end nor a duration is indicated, the period is considered to last forever.<a href="#section-3.2-2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-3.2-2.1.2.2">
-                <p id="section-3.2-2.1.2.2.1">period: The schedule is a period-based schedule consisting either (1) a start and end or
- (2) a start and positive duration of time. If neither an
- end nor a duration is indicated, the period is considered to last forever.<a href="#section-3.2-2.1.2.2.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-3.2-2.1.2.3">
-                <p id="section-3.2-2.1.2.3.1">recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period, e.g., every five minutes) or not (i.e., repeat in a non-regular manner, e.g., every day at 8 and 9 AM).<a href="#section-3.2-2.1.2.3.1" class="pilcrow">¶</a></p>
+                <p id="section-3.2-2.1.2.2.1">recurrence: This type is used for a recurrence-based schedule. A recurrence may be periodic (i.e., repeat over the same period, e.g., every five minutes) or not (i.e., repeat in a non-regular manner, e.g., every day at 8 and 9 AM).<a href="#section-3.2-2.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
@@ -1552,8 +1549,7 @@ a requested schedule cannot be accepted for any reason and is discarded.<a href=
    will not be considered as valid. It determines the latest time that a schedule
    can be started to execute independent of when it ends and takes precedence over
    similar attributes that are provided at the schedule instance itself. A requested
-   schedule may still be accepted but only not have its occurrences that starts
-   later than the configured value to be executed.<a href="#section-3.3.1-5" class="pilcrow">¶</a></p>
+   schedule may still be accepted but any occurences that start later than the configured value will not be executed.<a href="#section-3.3.1-5" class="pilcrow">¶</a></p>
 <p id="section-3.3.1-6">The "max/min-allowed-start" parameters specify the maximum/minimum scheduled
    start date and time. A requested schedule will be rejected if the first
    occurrence of the schedule starts later/earlier than the configured values.<a href="#section-3.3.1-6" class="pilcrow">¶</a></p>
@@ -1638,7 +1634,7 @@ a requested schedule cannot be accepted for any reason and is discarded.<a href=
   parameters because there are cases (e.g., profiling) where using these statements is problematic.
   YANG modules using this grouping <span class="bcp14">SHOULD</span> refine these two nodes with either a
   "mandatory" or a "default" statement, if they always need to be configured or have default values.
-  This <span class="bcp14">MAY</span> be ignored in cases such as when this grouping is used by another grouping.<a href="#section-3.3.3-5" class="pilcrow">¶</a></p>
+  This recommendation <span class="bcp14">MAY</span> be ignored in cases such as when this grouping is used by another grouping.<a href="#section-3.3.3-5" class="pilcrow">¶</a></p>
 <p id="section-3.3.3-6">The "recurrence-description" includes a description of the period. No constraint is imposed
   on the structure nor the use of this parameter.<a href="#section-3.3.3-6" class="pilcrow">¶</a></p>
 </section>
@@ -1680,7 +1676,9 @@ a requested schedule cannot be accepted for any reason and is discarded.<a href=
    immediate completion (e.g., execute an immediate command that is considered
    to complete quickly) or hard to compute an exact duration (e.g., run a data
    analysis script whose execution time may depend on the data volume and
-   computation resource availability).<a href="#section-3.3.4-4" class="pilcrow">¶</a></p>
+   computation resource availability). The behavior to follow when a task takes
+   more time than specified by the "duration" is out of scope. Such considerations
+   belong to task management, not schedule management.<a href="#section-3.3.4-4" class="pilcrow">¶</a></p>
 <p id="section-3.3.4-5">Note that the "interval" and "duration" cover two distinct properties of a schedule event.
 The interval specifies when a schedule will occur, combined with the frequency parameter; while the duration indicates how long
 an occurrence will last. This document allows the interval between occurrences to be shorter than the duration of each occurrence (e.g., a recurring event is scheduled to start every day for a duration of 2 days).<a href="#section-3.3.4-5" class="pilcrow">¶</a></p>
