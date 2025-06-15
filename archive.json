@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-29T01:15:04.948338+00:00",
+  "timestamp": "2025-06-15T01:24:08.389899+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -4078,6 +4078,34 @@
           ]
         }
       ]
+    },
+    {
+      "number": 71,
+      "id": "PR_kwDOLuooYM6aMv7c",
+      "title": "Mahesh-follow-up",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/71",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "frequency must be provided when interval is provided",
+      "createdAt": "2025-06-12T11:34:28Z",
+      "updatedAt": "2025-06-12T14:05:03Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "96ae2a455206cad10c8546bc67375a4d66f36c56",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "Mahesh-follow-up",
+      "headRefOid": "e28554c0c451c41ab609e86025efe6abe424bb8b",
+      "closedAt": "2025-06-12T14:05:03Z",
+      "mergedAt": "2025-06-12T14:05:03Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "fac980cd6877a0e5a032cf1f456c3eca40e4c7b5"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
