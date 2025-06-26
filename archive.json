@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-15T01:24:08.389899+00:00",
+  "timestamp": "2025-06-26T01:16:25.461764+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -4104,6 +4104,32 @@
       "mergeCommit": {
         "oid": "fac980cd6877a0e5a032cf1f456c3eca40e4c7b5"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 72,
+      "id": "PR_kwDOLuooYM6byQa-",
+      "title": "rename default-bandwidth",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/72",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-06-24T06:00:41Z",
+      "updatedAt": "2025-06-24T06:04:31Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "fac980cd6877a0e5a032cf1f456c3eca40e4c7b5",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "rename-default-bandwidth",
+      "headRefOid": "e1c251eee76c8ced23a345b78f18321e7c968c75",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
