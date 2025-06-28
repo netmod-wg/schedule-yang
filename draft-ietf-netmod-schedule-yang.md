@@ -346,7 +346,8 @@ an occurrence will last. This document allows the interval between occurrences t
 {: #rec-utc-dt-grp-tree title="recurrence-utc-with-periods Grouping Tree Structure"}
 
   The recurrence instances are specified by the union of occurrences defined
-  by both the recurrence rule and "period-timeticks" list. Duplicate instances
+  by both the recurrence rule and "period-timeticks" list. This list uses
+  "yang:timeticks" type defined in {{!RFC6991}}. Duplicate instances
   are ignored. The value of the "period-start" instance MUST NOT exceed the
   value indicated by the value of "frequency" instance, i.e., the timeticks
   value must not exceed 100 in a secondly recurrence rule, and it must not
@@ -1012,4 +1013,4 @@ after that time would not be considered as valid.
 
    Other related efforts were explored in the past, e.g., {{?I-D.liu-netmod-yang-schedule}}.
 
-   Thanks to Reshad Rahman for the great YANGDOCTORS review.
+   Thanks to Reshad Rahman for the great YANGDOCTORS review and Per Andersson for the OPSDIR review.
