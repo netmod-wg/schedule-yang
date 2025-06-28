@@ -3999,11 +3999,12 @@ module example-scheduled-link-bandwidth {
           "Indicates the source node identifier.";
       }
 
-      leaf default-bandwidth {
+      leaf other-period-bandwidth {
         type uint64;
         units "Kbps";
         description
-          "Default bandwidth values when unspecified.";
+          "Bandwidth value used for perdiods that don't match
+           a schedule.";
       }
 
       choice time-variant-type {
@@ -4032,7 +4033,7 @@ module example-scheduled-link-bandwidth {
   scheduled between 2025-12-01 0:00 UTC to the end of 2025-12-31 with a daily
   schedule. In each day, the bandwidth value is scheduled to be 500 Kbps between
   1:00 AM to 6:00 AM and 800 Kbps between 10:00 PM to 11:00 PM. The bandwidth
-  value that's not covered by the period above is 1000 Kbps by default.<a href="#appendix-B.2-3" class="pilcrow">¶</a></p>
+  value that is not covered by the period above is 1000 Kbps.<a href="#appendix-B.2-3" class="pilcrow">¶</a></p>
 <span id="name-example-of-scheduled-links-"></span><div id="ex-13">
 <figure id="figure-24">
           <div class="alignLeft art-text artwork" id="appendix-B.2-4.1">
@@ -4044,7 +4045,7 @@ module example-scheduled-link-bandwidth {
   &lt;link&gt;
     &lt;source-node&gt;ne1&lt;/source-node&gt;
     &lt;destination-node&gt;ne2&lt;/destination-node&gt;
-    &lt;default-bandwidth&gt;1000&lt;/default-bandwidth&gt;
+    &lt;other-period-bandwidth&gt;1000&lt;/other-period-bandwidth&gt;
     &lt;recurrence-first&gt;
       &lt;utc-start-time&gt;2025-12-01T01:00:00Z&lt;/utc-start-time&gt;
     &lt;/recurrence-first&gt;

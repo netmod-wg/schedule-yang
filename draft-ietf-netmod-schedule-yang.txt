@@ -2544,11 +2544,12 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
              "Indicates the source node identifier.";
          }
 
-         leaf default-bandwidth {
+         leaf other-period-bandwidth {
            type uint64;
            units "Kbps";
            description
-             "Default bandwidth values when unspecified.";
+             "Bandwidth value used for perdiods that don't match
+              a schedule.";
          }
 
          choice time-variant-type {
@@ -2576,8 +2577,8 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
    scheduled between 2025-12-01 0:00 UTC to the end of 2025-12-31 with a
    daily schedule.  In each day, the bandwidth value is scheduled to be
    500 Kbps between 1:00 AM to 6:00 AM and 800 Kbps between 10:00 PM to
-   11:00 PM.  The bandwidth value that's not covered by the period above
-   is 1000 Kbps by default.
+   11:00 PM.  The bandwidth value that is not covered by the period
+   above is 1000 Kbps.
 
    <?xml version="1.0" encoding="utf-8"?>
    <link-attributes
@@ -2586,7 +2587,7 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
      <link>
        <source-node>ne1</source-node>
        <destination-node>ne2</destination-node>
-       <default-bandwidth>1000</default-bandwidth>
+       <other-period-bandwidth>1000</other-period-bandwidth>
        <recurrence-first>
          <utc-start-time>2025-12-01T01:00:00Z</utc-start-time>
        </recurrence-first>
