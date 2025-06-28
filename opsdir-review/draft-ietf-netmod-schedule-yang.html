@@ -1427,7 +1427,7 @@ in the YANG module are used in lowercase.<a href="#section-2-5.6.1" class="pilcr
         </h3>
 <p id="section-3.1-1">The "ietf-schedule" data model defines the recurrence related groupings using
    a modular approach. To that aim, a variety of representations of recurrence
-   groupings ranging from basic to advanced (iclander like) are defined.
+   groupings ranging from basic to advanced (iCalender like) are defined.
    To allow for different options, two features are defined in the data model:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.1-2.1">
@@ -1550,7 +1550,7 @@ a requested schedule cannot be accepted for any reason and is discarded.<a href=
    will not be considered as valid. It determines the latest time that a schedule
    can be started to execute independent of when it ends and takes precedence over
    similar attributes that are provided at the schedule instance itself. A requested
-   schedule may still be accepted but any occurences that start later than the configured value will not be executed.<a href="#section-3.3.1-5" class="pilcrow">¶</a></p>
+   schedule may still be accepted but any occurrences that start later than the configured value will not be executed.<a href="#section-3.3.1-5" class="pilcrow">¶</a></p>
 <p id="section-3.3.1-6">The "max/min-allowed-start" parameters specify the maximum/minimum scheduled
    start date and time. A requested schedule will be rejected if the first
    occurrence of the schedule starts later/earlier than the configured values.<a href="#section-3.3.1-6" class="pilcrow">¶</a></p>
@@ -1972,9 +1972,9 @@ an occurrence will last. This document allows the interval between occurrences t
    given schedule. In such cases, the "version" may not be used.<a href="#section-3.3.9-5" class="pilcrow">¶</a></p>
 <p id="section-3.3.9-6">The "schedule-type" parameter identifies the type of the current schedule.
    The "counter", "last-occurrence", and "upcoming-occurrence" data nodes are
-   only avaliable when the "schedule-type" is "recurrence".<a href="#section-3.3.9-6" class="pilcrow">¶</a></p>
+   only available when the "schedule-type" is "recurrence".<a href="#section-3.3.9-6" class="pilcrow">¶</a></p>
 <p id="section-3.3.9-7">"local-time" reports the actual local time as seen by the entity that
-   host a schedule. This paramter can be used by a controller to infer the offset to UTC.<a href="#section-3.3.9-7" class="pilcrow">¶</a></p>
+   host a schedule. This parameter can be used by a controller to infer the offset to UTC.<a href="#section-3.3.9-7" class="pilcrow">¶</a></p>
 <p id="section-3.3.9-8">"last-failed-occurrence" and "failure-counter" report the last failure that occurred and
    the count of failures for this schedule. Unless new parameters/operations are defined to allow the count of failures to be reset,
    "failure-counter" is reset by default only when the schedule starts.<a href="#section-3.3.9-8" class="pilcrow">¶</a></p>
@@ -1982,7 +1982,7 @@ an occurrence will last. This document allows the interval between occurrences t
    to typical scheduling contexts known so far. Future modules can define other
    useful parameters as needed. For example, in a scheduling context with multiple
    system sources to feed the schedules, the "source" and "precedence" parameters
-   may be needed to reflect how schedules from different sources should be prioritised.<a href="#section-3.3.9-9" class="pilcrow">¶</a></p>
+   may be needed to reflect how schedules from different sources should be prioritized.<a href="#section-3.3.9-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1997,7 +1997,7 @@ an occurrence will last. This document allows the interval between occurrences t
    different features. Whether only one or both features are supported is implementation
    specific and depend on specific scheduling context.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 <p id="section-3.4-2">The common schedule groupings (<a href="#sec-grp" class="auto internal xref">Section 3.3</a>) can also be augmented to support specific needs. As an example,
-   <a href="#augments" class="auto internal xref">Appendix B.2</a> demonstrates how additional parameters can be added to comply with specifc schedule needs.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+   <a href="#augments" class="auto internal xref">Appendix B.2</a> demonstrates how additional parameters can be added to comply with specific schedule needs.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2016,7 +2016,7 @@ an occurrence will last. This document allows the interval between occurrences t
 </li>
         <li class="normal" id="section-4-2.2">
           <p id="section-4-2.2.1">The combination of the day, month, and year represented for date and time
-values <span class="bcp14">MUST</span> be valid. See <span><a href="https://rfc-editor.org/rfc/rfc3339#section-5.7" class="relref">Section 5.7</a> of [<a href="#RFC3339" class="cite xref">RFC3339</a>]</span> for the maxinum day
+values <span class="bcp14">MUST</span> be valid. See <span><a href="https://rfc-editor.org/rfc/rfc3339#section-5.7" class="relref">Section 5.7</a> of [<a href="#RFC3339" class="cite xref">RFC3339</a>]</span> for the maximum day
 number based on the month and year.<a href="#section-4-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-2.3">
@@ -3033,7 +3033,7 @@ may be drowned out by normal events, especially when they are triggered frequent
 </li>
         <li class="normal" id="section-7-6.3">
           <p id="section-7-6.3.1">The absence of detailed logs and audit records of each occurrence trigger time
-and action results, and so on, may make security incidents difficient to trace.<a href="#section-7-6.3.1" class="pilcrow">¶</a></p>
+and action results, and so on, may make security incidents difficult  to trace.<a href="#section-7-6.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-7-6.4">
           <p id="section-7-6.4.1">Care must be taken when defining recurrences occurring very often and
@@ -4172,7 +4172,7 @@ module example-sch-capacity-res {
 <p id="appendix-D-3">Many thanks to the authors of <span>[<a href="#I-D.ietf-tvr-schedule-yang" class="cite xref">I-D.ietf-tvr-schedule-yang</a>]</span>, <span>[<a href="#I-D.ietf-opsawg-scheduling-oam-tests" class="cite xref">I-D.ietf-opsawg-scheduling-oam-tests</a>]</span>, and <span>[<a href="#I-D.ietf-netmod-eca-policy" class="cite xref">I-D.ietf-netmod-eca-policy</a>]</span>
    for the constructive discussion during IETF#118.<a href="#appendix-D-3" class="pilcrow">¶</a></p>
 <p id="appendix-D-4">Other related efforts were explored in the past, e.g., <span>[<a href="#I-D.liu-netmod-yang-schedule" class="cite xref">I-D.liu-netmod-yang-schedule</a>]</span>.<a href="#appendix-D-4" class="pilcrow">¶</a></p>
-<p id="appendix-D-5">Thanks to Reshad Rahman for the great YANGDOCTORS review and Per Andersson for the OPSDIR review.<a href="#appendix-D-5" class="pilcrow">¶</a></p>
+<p id="appendix-D-5">Thanks to Reshad Rahman for the great YANG Doctors review and Per Andersson for the OPSDIR review.<a href="#appendix-D-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
