@@ -74,7 +74,7 @@ module example-scheduled-backup {
         if-feature schedule:basic-recurrence;
         description
           "Basic recurrence schedule specification, only applies when
-           schedule:basic-recurrence feaure is supported.";
+           schedule:basic-recurrence feature is supported.";
         leaf schedule-id {
           type string;
           description
@@ -94,7 +94,7 @@ module example-scheduled-backup {
         if-feature schedule:icalendar-recurrence;
         description
           "Basic recurrence schedule specification, only applies when
-           schedule:icalendar-recurrence feaure is supported.";
+           schedule:icalendar-recurrence feature is supported.";
         leaf schedule-id {
           type string;
           description
