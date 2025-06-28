@@ -889,9 +889,12 @@ Table of Contents
         Legal Provisions Relating to IETF Documents
         (https://trustee.ietf.org/license-info).
 
-        This version of this YANG module is part of RFC XXXX
-        (https://www.rfc-editor.org/info/rfcXXXX); see the RFC
-        itself for full legal notices.
+        All revisions of IETF and IANA published modules can be found
+        at the YANG Parameters registry group
+        (https://www.iana.org/assignments/yang-parameters).
+
+        This version of this YANG module is part of RFC XXXX; see
+        the RFC itself for full legal notices.
 
         The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
         NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
@@ -1693,9 +1696,9 @@ Table of Contents
    The "ietf-schedule" YANG module specified in this document defines
    schema for data that is designed to be accessed via YANG-based
    management protocols, such as NETCONF [RFC6241] or RESTCONF
-   [RFC8040].  These protocols have to use a secure transport layer
-   (e.g., SSH [RFC4252], TLS [RFC8446], and QUIC [RFC9000]) and have to
-   use mutual authentication.
+   [RFC8040].  These YANG-based management protocols (1) have to use a
+   secure transport layer (e.g., SSH [RFC4252], TLS [RFC8446], and QUIC
+   [RFC9000]) and (2) have to use mutual authentication.
 
    The Network Configuration Access Control Model (NACM) [RFC8341]
    provides the means to restrict access for particular NETCONF or
