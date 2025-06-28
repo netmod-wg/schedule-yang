@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 14 December 2025                              M. Boucadair, Ed.
+Expires: 30 December 2025                              M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                            12 June 2025
+                                                            28 June 2025
 
 
                 A Common YANG Data Model for Scheduling
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 December 2025.
+   This Internet-Draft will expire on 30 December 2025.
 
 Copyright Notice
 
@@ -2431,7 +2431,7 @@ B.1.  Example: Schedule Tasks to Execute Based on a Recurrence Rule
            if-feature schedule:basic-recurrence;
            description
              "Basic recurrence schedule specification, only applies when
-              schedule:basic-recurrence feaure is supported.";
+              schedule:basic-recurrence feature is supported.";
            leaf schedule-id {
              type string;
              description
@@ -2451,7 +2451,7 @@ B.1.  Example: Schedule Tasks to Execute Based on a Recurrence Rule
            if-feature schedule:icalendar-recurrence;
            description
              "Basic recurrence schedule specification, only applies when
-              schedule:icalendar-recurrence feaure is supported.";
+              schedule:icalendar-recurrence feature is supported.";
            leaf schedule-id {
              type string;
              description
