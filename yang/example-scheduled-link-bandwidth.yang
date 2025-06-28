@@ -60,11 +60,12 @@ module example-scheduled-link-bandwidth {
           "Indicates the source node identifier.";
       }
 
-      leaf default-bandwidth {
+      leaf other-period-bandwidth {
         type uint64;
         units "Kbps";
         description
-          "Default bandwidth values when unspecified.";
+          "Bandwidth value used for perdiods that don't match
+           a schedule.";
       }
 
       choice time-variant-type {

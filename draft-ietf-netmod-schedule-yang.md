@@ -967,7 +967,7 @@ after that time would not be considered as valid.
   scheduled between 2025-12-01 0:00 UTC to the end of 2025-12-31 with a daily
   schedule. In each day, the bandwidth value is scheduled to be 500 Kbps between
   1:00 AM to 6:00 AM and 800 Kbps between 10:00 PM to 11:00 PM. The bandwidth
-  value that's not covered by the period above is 1000 Kbps by default.
+  value that is not covered by the period above is 1000 Kbps.
 
 ~~~~
 {::include-fold ./examples/example-scheduled-link-bandwidth.xml}
