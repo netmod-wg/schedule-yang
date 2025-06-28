@@ -137,7 +137,7 @@ System:
 
    The "ietf-schedule" data model defines the recurrence related groupings using
    a modular approach. To that aim, a variety of representations of recurrence
-   groupings ranging from basic to advanced (iclander like) are defined.
+   groupings ranging from basic to advanced (iCalender like) are defined.
    To allow for different options, two features are defined in the data model:
 
    *  "basic-recurrence"
@@ -201,7 +201,7 @@ System:
    will not be considered as valid. It determines the latest time that a schedule
    can be started to execute independent of when it ends and takes precedence over
    similar attributes that are provided at the schedule instance itself. A requested
-   schedule may still be accepted but any occurences that start later than the configured value will not be executed.
+   schedule may still be accepted but any occurrences that start later than the configured value will not be executed.
 
    The "max/min-allowed-start" parameters specify the maximum/minimum scheduled
    start date and time. A requested schedule will be rejected if the first
@@ -346,7 +346,8 @@ an occurrence will last. This document allows the interval between occurrences t
 {: #rec-utc-dt-grp-tree title="recurrence-utc-with-periods Grouping Tree Structure"}
 
   The recurrence instances are specified by the union of occurrences defined
-  by both the recurrence rule and "period-timeticks" list. Duplicate instances
+  by both the recurrence rule and "period-timeticks" list. This list uses
+  "yang:timeticks" type defined in {{!RFC6991}}. Duplicate instances
   are ignored. The value of the "period-start" instance MUST NOT exceed the
   value indicated by the value of "frequency" instance, i.e., the timeticks
   value must not exceed 100 in a secondly recurrence rule, and it must not
@@ -448,10 +449,10 @@ an occurrence will last. This document allows the interval between occurrences t
 
    The "schedule-type" parameter identifies the type of the current schedule.
    The "counter", "last-occurrence", and "upcoming-occurrence" data nodes are
-   only avaliable when the "schedule-type" is "recurrence".
+   only available when the "schedule-type" is "recurrence".
 
    "local-time" reports the actual local time as seen by the entity that
-   host a schedule. This paramter can be used by a controller to infer the offset to UTC.
+   host a schedule. This parameter can be used by a controller to infer the offset to UTC.
 
    "last-failed-occurrence" and "failure-counter" report the last failure that occurred and
    the count of failures for this schedule. Unless new parameters/operations are defined to allow the count of failures to be reset,
@@ -461,7 +462,7 @@ an occurrence will last. This document allows the interval between occurrences t
    to typical scheduling contexts known so far. Future modules can define other
    useful parameters as needed. For example, in a scheduling context with multiple
    system sources to feed the schedules, the "source" and "precedence" parameters
-   may be needed to reflect how schedules from different sources should be prioritised.
+   may be needed to reflect how schedules from different sources should be prioritized.
 
 ##  Features Use and Augmentations {#sec-aug}
 
@@ -471,7 +472,7 @@ an occurrence will last. This document allows the interval between occurrences t
    specific and depend on specific scheduling context.
 
    The common schedule groupings ({{sec-grp}}) can also be augmented to support specific needs. As an example,
-   {{augments}} demonstrates how additional parameters can be added to comply with specifc schedule needs.
+   {{augments}} demonstrates how additional parameters can be added to comply with specific schedule needs.
 
 #  Some Usage Restrictions
 
@@ -481,7 +482,7 @@ an occurrence will last. This document allows the interval between occurrences t
    *  The instant in time represented by "period-start" MUST be before the
       "period-end" for "period-of-time" grouping ({{sec-period}}).
    *  The combination of the day, month, and year represented for date and time
-      values MUST be valid. See {{Section 5.7 of ?RFC3339}} for the maxinum day
+      values MUST be valid. See {{Section 5.7 of ?RFC3339}} for the maximum day
       number based on the month and year.
    *  The second for date and time values MUST have the value "60" at the end of months in which a leap
       second occurs.
@@ -566,7 +567,7 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
    * Recurring events may conceal abnormal behavior or security threats, which
      may be drowned out by normal events, especially when they are triggered frequently.
    * The absence of detailed logs and audit records of each occurrence trigger time
-     and action results, and so on, may make security incidents difficient to trace.
+     and action results, and so on, may make security incidents difficult  to trace.
    * Care must be taken when defining recurrences occurring very often and
      frequent that can be an additional source of attacks by keeping the system
      permanently busy with the management of scheduling.
@@ -1012,4 +1013,4 @@ after that time would not be considered as valid.
 
    Other related efforts were explored in the past, e.g., {{?I-D.liu-netmod-yang-schedule}}.
 
-   Thanks to Reshad Rahman for the great YANGDOCTORS review.
+   Thanks to Reshad Rahman for the great YANG Doctors review and Per Andersson for the OPSDIR review.
