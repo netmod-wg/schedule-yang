@@ -542,9 +542,9 @@ This section uses the template described in {{Section 3.7 of ?I-D.ietf-netmod-rf
 
    The "ietf-schedule" YANG module specified in this document defines schema for data
    that is designed to be accessed via YANG-based management protocols, such
-   as NETCONF {{?RFC6241}} or RESTCONF {{?RFC8040}}.  These protocols have to use
+   as NETCONF {{?RFC6241}} or RESTCONF {{?RFC8040}}.  These YANG-based management protocols (1) have to use
    a secure transport layer (e.g., SSH {{?RFC4252}}, TLS {{?RFC8446}}, and QUIC {{?RFC9000}})
-   and have to use mutual authentication.
+   and (2) have to use mutual authentication.
 
    The Network Configuration Access Control Model (NACM) {{!RFC8341}}
    provides the means to restrict access for particular NETCONF or
