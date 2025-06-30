@@ -1614,11 +1614,6 @@ Table of Contents
          description
            "Indicates the schedule type.";
        }
-       leaf time-zone-identifier {
-         type sys:timezone-name;
-         description
-           "Indicates the identifier for the time zone.";
-       }
        leaf local-time {
          type yang:date-and-time;
          config false;
