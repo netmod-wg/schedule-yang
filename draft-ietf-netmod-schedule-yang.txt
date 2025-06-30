@@ -682,6 +682,7 @@ Table of Contents
        +-- state?                    identityref
        +-- version?                  uint16
        +-- schedule-type?            identityref
+       +--ro time-zone-identifier?     sys:timezone-name
        +--ro local-time?               yang:date-and-time
        +--ro last-update?              yang:date-and-time
        +--ro counter?                  yang:counter32
@@ -694,6 +695,7 @@ Table of Contents
        +-- state?                    identityref
        +-- version?                  uint16
        +-- schedule-type?            identityref
+       +--ro time-zone-identifier?     sys:timezone-name
        +--ro local-time?               yang:date-and-time
        +--ro last-update?              yang:date-and-time
        +--ro counter?                  yang:counter32
