@@ -5,7 +5,7 @@
   <link>
     <source-node>ne1</source-node>
     <destination-node>ne2</destination-node>
-    <other-period-bandwidth>1000</other-period-bandwidth>
+    <default-bandwidth>1000</default-bandwidth>
     <recurrence-first>
       <utc-start-time>2025-12-01T01:00:00Z</utc-start-time>
     </recurrence-first>
