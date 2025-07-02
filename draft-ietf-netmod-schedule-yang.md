@@ -1005,7 +1005,7 @@ after that time would not be considered as valid.
    This work is derived from the {{?I-D.ietf-opsawg-ucl-acl}}. There is a desire
    from the OPSAWG to see this model be separately defined for wide use in scheduling context.
 
-   Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, Steve Baillargeon, Dhruv Dhody, and Robert Wilton
+   Thanks to Adrian Farrel, Wei Pan, Tianran Zhou, Joe Clarke, Steve Baillargeon, Dhruv Dhody, Robert Wilton, and Italo Busi
    for their valuable comments and inputs to this work.
 
    Many thanks to the authors of {{?I-D.ietf-tvr-schedule-yang}}, {{?I-D.ietf-opsawg-scheduling-oam-tests}}, and {{?I-D.ietf-netmod-eca-policy}}
@@ -1013,4 +1013,4 @@ after that time would not be considered as valid.
 
    Other related efforts were explored in the past, e.g., {{?I-D.liu-netmod-yang-schedule}}.
 
-   Thanks to Reshad Rahman for the great YANG Doctors review and Per Andersson for the OPSDIR review.
+   Thanks to Reshad Rahman for the great YANG Doctors review, Mahesh Jethanandani for the AD review, and Per Andersson for the OPSDIR review.
