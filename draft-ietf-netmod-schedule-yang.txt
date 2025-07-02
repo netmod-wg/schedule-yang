@@ -2548,7 +2548,7 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
              "Indicates the source node identifier.";
          }
 
-         leaf other-period-bandwidth {
+         leaf default-bandwidth {
            type uint64;
            units "Kbps";
            description
