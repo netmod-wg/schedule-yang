@@ -827,12 +827,27 @@ module ietf-schedule {
     }
   }
 
+  grouping schedule-status-with-time-zone {
+    description
+      "This grouping defines common properties of scheduling
+       status, including timezone";
+    leaf time-zone-identifier {
+      type sys:timezone-name;
+      config false;
+      description
+        "Indicates the identifier for the time zone in a time
+         zone database.";
+    } 
+    uses schedule-status;
+  }
+
   grouping schedule-status-with-name {
     description
       "This grouping defines common properties of scheduling
-       status.";
+       status, including a schedule name.";
     leaf schedule-name {
       type string;
+      config false;
       description
         "The schedule identifier that uniquely identifies a
          schedule within a device, controller, network, etc. 
