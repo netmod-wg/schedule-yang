@@ -84,8 +84,9 @@ Table of Contents
        3.3.6.  The "recurrence-utc-with-periods" Grouping
        3.3.7.  The "recurrence-time-zone-with-periods" Grouping
        3.3.8.  The "icalendar-recurrence" Grouping
-       3.3.9.  The "schedule-status" and "schedule-status-with-name"
-               Groupings
+       3.3.9.  The "schedule-status",
+               "schedule-status-with-time-zone", and
+               "schedule-status-with-name" Groupings
      3.4.  Features Use and Augmentations
    4.  Some Usage Restrictions
    5.  Relationship to the DISMAN-SCHEDULE-MIB
@@ -274,7 +275,8 @@ Table of Contents
 
    *  "icalendar-recurrence" (Section 3.3.8)
 
-   *  "schedule-status" and "schedule-status-with-name" (Section 3.3.9)
+   *  "schedule-status", "schedule-status-with-time-zone", and
+      "schedule-status-with-name" (Section 3.3.9)
 
    Examples are provided in Appendix A.
 
@@ -669,13 +671,17 @@ Table of Contents
    recurrence rule and date-times, and then excluding any start date and
    time values specified by "exception-dates" parameter.
 
-3.3.9.  The "schedule-status" and "schedule-status-with-name" Groupings
+3.3.9.  The "schedule-status", "schedule-status-with-time-zone", and
+        "schedule-status-with-name" Groupings
 
-   The "schedule-status" and "schedule-status-with-name" groupings
-   (Figure 9) define common parameters for scheduling management/status
-   exposure.  The "schedule-status-with-name" grouping has the same
+   The "schedule-status", "schedule-status-with-time-zone", and
+   "schedule-status-with-name" groupings (Figure 9) define common
+   parameters for scheduling management/status exposure.  The "schedule-
+   status-with-time-zone" grouping has the same structure as "schedule-
+   status" but with an additional parameter to identify a time zone.
+   Similarly, the "schedule-status-with-name" grouping has the same
    structure as "schedule-status" but with an additional parameter to
-   identify a schedule "schedule-name".  Both structures are defined in
+   identify a schedule "schedule-name".  These structures are defined in
    the module to allow for better modularity and flexibility.
 
      grouping schedule-status:
@@ -740,9 +746,10 @@ Table of Contents
    occurrence" data nodes are only available when the "schedule-type" is
    "recurrence".
 
-   "local-time" reports the actual local time as seen by the entity that
-   host a schedule.  This parameter can be used by a controller to infer
-   the offset to UTC.
+   When no time zone is included, "local-time" reports the actual local
+   time as seen by the entity that host a schedule.  This parameter can
+   be used by a controller to infer the offset to UTC.  This use is
+   similar to the use of "schedLocalTime" in [RFC3231].
 
    "last-failed-occurrence" and "failure-counter" report the last
    failure that occurred and the count of failures for this schedule.

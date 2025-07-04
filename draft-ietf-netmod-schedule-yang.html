@@ -1218,7 +1218,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                     <p id="section-toc.1-1.3.2.3.2.8.1"><a href="#section-3.3.8" class="auto internal xref">3.3.8</a>.  <a href="#name-the-icalendar-recurrence-gr" class="internal xref">The "icalendar-recurrence" Grouping</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.9">
-                    <p id="section-toc.1-1.3.2.3.2.9.1"><a href="#section-3.3.9" class="auto internal xref">3.3.9</a>.  <a href="#name-the-schedule-status-and-sch" class="internal xref">The "schedule-status" and "schedule-status-with-name" Groupings</a></p>
+                    <p id="section-toc.1-1.3.2.3.2.9.1"><a href="#section-3.3.9" class="auto internal xref">3.3.9</a>.  <a href="#name-the-schedule-status-schedul" class="internal xref">The "schedule-status", "schedule-status-with-time-zone", and "schedule-status-with-name" Groupings</a></p>
 </li>
                 </ul>
 </li>
@@ -1507,7 +1507,7 @@ a requested schedule cannot be accepted for any reason and is discarded.<a href=
             <p id="section-3.3-2.8.1">"icalendar-recurrence" (<a href="#sec-ical-rec" class="auto internal xref">Section 3.3.8</a>)<a href="#section-3.3-2.8.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.3-2.9">
-            <p id="section-3.3-2.9.1">"schedule-status" and "schedule-status-with-name" (<a href="#sec-schedule-status" class="auto internal xref">Section 3.3.9</a>)<a href="#section-3.3-2.9.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-2.9.1">"schedule-status", "schedule-status-with-time-zone", and "schedule-status-with-name" (<a href="#sec-schedule-status" class="auto internal xref">Section 3.3.9</a>)<a href="#section-3.3-2.9.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-3.3-3">Examples are provided in <a href="#usage" class="auto internal xref">Appendix A</a>.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
@@ -1919,12 +1919,12 @@ an occurrence will last. This document allows the interval between occurrences t
 </div>
 <div id="sec-schedule-status">
 <section id="section-3.3.9">
-          <h4 id="name-the-schedule-status-and-sch">
-<a href="#section-3.3.9" class="section-number selfRef">3.3.9. </a><a href="#name-the-schedule-status-and-sch" class="section-name selfRef">The "schedule-status" and "schedule-status-with-name" Groupings</a>
+          <h4 id="name-the-schedule-status-schedul">
+<a href="#section-3.3.9" class="section-number selfRef">3.3.9. </a><a href="#name-the-schedule-status-schedul" class="section-name selfRef">The "schedule-status", "schedule-status-with-time-zone", and "schedule-status-with-name" Groupings</a>
           </h4>
-<p id="section-3.3.9-1">The "schedule-status" and "schedule-status-with-name" groupings (<a href="#sche-status-tree" class="auto internal xref">Figure 9</a>) define common parameters
-   for scheduling management/status exposure. The "schedule-status-with-name" grouping has the same
-   structure as "schedule-status" but with an additional parameter to identify a schedule "schedule-name". Both
+<p id="section-3.3.9-1">The "schedule-status", "schedule-status-with-time-zone", and "schedule-status-with-name" groupings (<a href="#sche-status-tree" class="auto internal xref">Figure 9</a>) define common parameters
+   for scheduling management/status exposure. The "schedule-status-with-time-zone" grouping has the same
+   structure as "schedule-status" but with an additional parameter to identify a time zone. Similarly, the "schedule-status-with-name" grouping has the same structure as "schedule-status" but with an additional parameter to identify a schedule "schedule-name". These
    structures are defined in the module to allow for better modularity and flexibility.<a href="#section-3.3.9-1" class="pilcrow">¶</a></p>
 <span id="name-schedule-status-with-and-wi"></span><div id="sche-status-tree">
 <figure id="figure-9">
@@ -1986,8 +1986,9 @@ an occurrence will last. This document allows the interval between occurrences t
 <p id="section-3.3.9-6">The "schedule-type" parameter identifies the type of the current schedule.
    The "counter", "last-occurrence", and "upcoming-occurrence" data nodes are
    only available when the "schedule-type" is "recurrence".<a href="#section-3.3.9-6" class="pilcrow">¶</a></p>
-<p id="section-3.3.9-7">"local-time" reports the actual local time as seen by the entity that
-   host a schedule. This parameter can be used by a controller to infer the offset to UTC.<a href="#section-3.3.9-7" class="pilcrow">¶</a></p>
+<p id="section-3.3.9-7">When no time zone is included, "local-time" reports the actual local time as seen by the entity that
+   host a schedule. This parameter can be used by a controller to infer the offset to UTC. This use
+   is similar to the use of "schedLocalTime" in <span>[<a href="#RFC3231" class="cite xref">RFC3231</a>]</span>.<a href="#section-3.3.9-7" class="pilcrow">¶</a></p>
 <p id="section-3.3.9-8">"last-failed-occurrence" and "failure-counter" report the last failure that occurred and
    the count of failures for this schedule. Unless new parameters/operations are defined to allow the count of failures to be reset,
    "failure-counter" is reset by default only when the schedule starts.<a href="#section-3.3.9-8" class="pilcrow">¶</a></p>
