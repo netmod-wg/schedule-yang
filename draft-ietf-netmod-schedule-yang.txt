@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 3 January 2026                                M. Boucadair, Ed.
+Expires: 5 January 2026                                M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                             2 July 2025
+                                                             4 July 2025
 
 
                 A Common YANG Data Model for Scheduling
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 January 2026.
+   This Internet-Draft will expire on 5 January 2026.
 
 Copyright Notice
 
@@ -1672,12 +1672,27 @@ Table of Contents
        }
      }
 
+     grouping schedule-status-with-time-zone {
+       description
+         "This grouping defines common properties of scheduling
+          status, including timezone";
+       leaf time-zone-identifier {
+         type sys:timezone-name;
+         config false;
+         description
+           "Indicates the identifier for the time zone in a time
+            zone database.";
+       }
+       uses schedule-status;
+     }
+
      grouping schedule-status-with-name {
        description
          "This grouping defines common properties of scheduling
-          status.";
+          status, including a schedule name.";
        leaf schedule-name {
          type string;
+         config false;
          description
            "The schedule identifier that uniquely identifies a
             schedule within a device, controller, network, etc.
