@@ -1941,6 +1941,19 @@ an occurrence will last. This document allows the interval between occurrences t
     +--ro upcoming-occurrence?      yang:date-and-time
     +--ro last-failed-occurrence?   yang:date-and-time
     +--ro failure-counter?          yang:counter32
+  grouping schedule-status-with-time-zone:
+    +--ro time-zone-identifier?  sys:timezone-name
+    +-- schedule-name?            string
+    +-- state?                    identityref
+    +-- version?                  uint16
+    +-- schedule-type?            identityref
+    +--ro local-time?               yang:date-and-time
+    +--ro last-update?              yang:date-and-time
+    +--ro counter?                  yang:counter32
+    +--ro last-occurrence?          yang:date-and-time
+    +--ro upcoming-occurrence?      yang:date-and-time
+    +--ro last-failed-occurrence?   yang:date-and-time
+    +--ro failure-counter?          yang:counter32
   grouping schedule-status-with-name:
     +-- schedule-name?            string
     +-- state?                    identityref
