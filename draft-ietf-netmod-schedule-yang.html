@@ -2784,6 +2784,16 @@ module ietf-schedule {
         }
         description
           "Start time of the schedule within one recurrence.";
+
+           Given that the value is in timeticks format
+           (i.e., 1/100 of a second), the values in the must
+           statement translate to:
+
+              secondly: 100 = 1 s
+              minutely: 6000 = 60 s = 1 min
+
+              and so on for all instances in the must statement
+              invariant.";
       }
       leaf period-end {
         type yang:timeticks;
