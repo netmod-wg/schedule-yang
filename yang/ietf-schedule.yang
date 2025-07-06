@@ -73,7 +73,7 @@ module ietf-schedule {
   feature icalendar-recurrence {
     description
       "Indicates that the server supports configuring a comprehensive
-       scheduled icalendar recurrence";
+       scheduled iCalendar recurrence";
     reference
       "RFC 5545: Internet Calendaring and Scheduling Core Object
                  Specification (iCalendar),
@@ -411,10 +411,10 @@ module ietf-schedule {
                   + ':[0-5][0-9]:[0-5][0-9]))|P([0-9]+)W';
           }
           description
-            "A non-negative duration of the time. This value is
+            "A non-negative duration of time. This value is
              equivalent to the format of duration type except that
              the value cannot be negative. The period is considered
-             as a one-shot schedule if the value is 0";
+             to be a one-shot schedule if the value is 0.";
         }
       }
     }
@@ -471,7 +471,7 @@ module ietf-schedule {
         units "seconds";
         description
           "When specified, it indicates how long the first occurrence
-           last. Unless specified otherwise, it also applies to all
+           lasts. Unless specified otherwise, it also applies to all
            the other instances in the recurrence set.";
       }
     }
