@@ -634,7 +634,7 @@ Schedule requests that fail to meet the requirements are ignored by the system a
 
 To illustrate the difference between "max-allowed-end" and "validity" parameters,
 {{ex-00}} shows the example of a requested schedule that needs to start no earlier than
-08:00 AM, January 1, 2025 (Beijing time), schedule requests that fail to meet the
+08:00 AM, January 1, 2025 (Beijing time). Schedule requests that fail to meet the
 requirements are ignored by the system as indicated by "discard-action". The
 requested schedule may end after 8:00 PM, January 31, 2025, but any occurrences that are generated
 after that time would not be considered as valid.
@@ -782,7 +782,7 @@ after that time would not be considered as valid.
 ## The "recurrence-time-zone-with-periods" Grouping
 
    {{ex-8}} indicates a recurrence that occurs every
-   30 minutes and last for 15 minutes from 9:00 AM to 5:00 PM, and extra two occurrences
+   30 minutes and lasts for 15 minutes from 9:00 AM to 5:00 PM and an extra two occurrences
    at 6:00 PM and 6:30 PM with each lasting for 20 minutes on 2025-12-01 (New York):
 
 ~~~~
