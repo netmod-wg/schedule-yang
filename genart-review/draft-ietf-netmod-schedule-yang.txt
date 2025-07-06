@@ -2091,7 +2091,7 @@ A.1.  The "generic-schedule-params" Grouping
    To illustrate the difference between "max-allowed-end" and "validity"
    parameters, Figure 11 shows the example of a requested schedule that
    needs to start no earlier than 08:00 AM, January 1, 2025 (Beijing
-   time), schedule requests that fail to meet the requirements are
+   time).  Schedule requests that fail to meet the requirements are
    ignored by the system as indicated by "discard-action".  The
    requested schedule may end after 8:00 PM, January 31, 2025, but any
    occurrences that are generated after that time would not be
@@ -2235,7 +2235,7 @@ A.6.  The "recurrence-utc-with-periods" Grouping
 A.7.  The "recurrence-time-zone-with-periods" Grouping
 
    Figure 19 indicates a recurrence that occurs every 30 minutes and
-   last for 15 minutes from 9:00 AM to 5:00 PM, and extra two
+   lasts for 15 minutes from 9:00 AM to 5:00 PM and an extra two
    occurrences at 6:00 PM and 6:30 PM with each lasting for 20 minutes
    on 2025-12-01 (New York):
 
