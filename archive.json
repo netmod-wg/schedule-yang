@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-29T01:24:57.526849+00:00",
+  "timestamp": "2025-07-08T01:17:43.094563+00:00",
   "repo": "netmod-wg/schedule-yang",
   "labels": [
     {
@@ -4188,6 +4188,32 @@
       "mergeCommit": {
         "oid": "e7ccc95c8698ffae0a1173c17a3de912aaeab94e"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 75,
+      "id": "PR_kwDOLuooYM6dnnES",
+      "title": "Peter review",
+      "url": "https://github.com/netmod-wg/schedule-yang/pull/75",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-07-06T08:06:21Z",
+      "updatedAt": "2025-07-06T08:12:44Z",
+      "baseRepository": "netmod-wg/schedule-yang",
+      "baseRefName": "main",
+      "baseRefOid": "cec106976e1b75ccb4ddf56e2e21d2ff6bbfdb82",
+      "headRepository": "netmod-wg/schedule-yang",
+      "headRefName": "genart-review",
+      "headRefOid": "0651d71c694d2ce18071e6c0faefc4e546ac3b7b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
