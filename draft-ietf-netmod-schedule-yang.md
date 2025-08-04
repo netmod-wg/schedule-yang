@@ -112,8 +112,14 @@ This document uses the YANG terminology defined in {{Section 3 of !RFC7950}}.
 
 The document makes use of the following terms:
 
-Recurrence Rule:
+Recurrence rule:
 : Refers to a rule or repeating pattern for recurring events. See also {{Section 3.8.5.3 of !RFC5545}} for a comprehensive iCalendar recurrence rule specification.
+
+Recurrence instance (or Recurrence, for short):
+: Refers to an instance that matches a recurrence rule.
+
+Recurrence set:
+: Refers to an instance that set of recurrence instances.
 
 Frequency:
 : Characterizes the type of a recurrence rule. Values are taken from "FREQ" rule in {{Section 3.3.10 of !RFC5545}}.
