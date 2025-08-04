@@ -1375,41 +1375,51 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-2-3">This document uses the YANG terminology defined in <span><a href="https://rfc-editor.org/rfc/rfc7950#section-3" class="relref">Section 3</a> of [<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4">The document makes use of the following terms:<a href="#section-2-4" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-2-5">
-        <dt id="section-2-5.1">Recurrence Rule:</dt>
+        <dt id="section-2-5.1">Recurrence rule:</dt>
         <dd style="margin-left: 1.5em" id="section-2-5.2">
           <p id="section-2-5.2.1">Refers to a rule or repeating pattern for recurring events. See also <span><a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.5.3" class="relref">Section 3.8.5.3</a> of [<a href="#RFC5545" class="cite xref">RFC5545</a>]</span> for a comprehensive iCalendar recurrence rule specification.<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-5.3">Frequency:</dt>
+<dt id="section-2-5.3">Recurrence instance (or Recurrence, for short):</dt>
         <dd style="margin-left: 1.5em" id="section-2-5.4">
-          <p id="section-2-5.4.1">Characterizes the type of a recurrence rule. Values are taken from "FREQ" rule in <span><a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.10" class="relref">Section 3.3.10</a> of [<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.4.1">Refers to an instance that matches a recurrence rule.<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-5.5"></dt>
+<dt id="section-2-5.5">Recurrence set:</dt>
         <dd style="margin-left: 1.5em" id="section-2-5.6">
-          <p id="section-2-5.6.1">For example, repeating events based on an interval of a second or more are
-classified as recurrence with a frequency value of "SECONDLY". Frequency values defined as identities
-in the YANG module are used in lowercase.<a href="#section-2-5.6.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.6.1">Refers to an instance that set of recurrence instances.<a href="#section-2-5.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-5.7">iCalendar:</dt>
+<dt id="section-2-5.7">Frequency:</dt>
         <dd style="margin-left: 1.5em" id="section-2-5.8">
-          <p id="section-2-5.8.1">Refers to Internet Calendaring per <span>[<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#section-2-5.8.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.8.1">Characterizes the type of a recurrence rule. Values are taken from "FREQ" rule in <span><a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.10" class="relref">Section 3.3.10</a> of [<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#section-2-5.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-5.9">Interval:</dt>
+<dt id="section-2-5.9"></dt>
         <dd style="margin-left: 1.5em" id="section-2-5.10">
-          <p id="section-2-5.10.1">Refers to an integer that specifies interval at which a recurrence rule repeats. Values are taken from "INTERVAL" rule in <span><a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.10" class="relref">Section 3.3.10</a> of [<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#section-2-5.10.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.10.1">For example, repeating events based on an interval of a second or more are
+classified as recurrence with a frequency value of "SECONDLY". Frequency values defined as identities
+in the YANG module are used in lowercase.<a href="#section-2-5.10.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-5.11"></dt>
+<dt id="section-2-5.11">iCalendar:</dt>
         <dd style="margin-left: 1.5em" id="section-2-5.12">
-          <p id="section-2-5.12.1">For example, "1", means every second for a secondly rule, every minute for a minutely rule, every hour for an hourly rule, etc.<a href="#section-2-5.12.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.12.1">Refers to Internet Calendaring per <span>[<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#section-2-5.12.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-5.13">System:</dt>
+<dt id="section-2-5.13">Interval:</dt>
         <dd style="margin-left: 1.5em" id="section-2-5.14">
-          <p id="section-2-5.14.1">Refers to an entity that hosts a schedule that is managed using the YANG module defined in this document.<a href="#section-2-5.14.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.14.1">Refers to an integer that specifies interval at which a recurrence rule repeats. Values are taken from "INTERVAL" rule in <span><a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.10" class="relref">Section 3.3.10</a> of [<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#section-2-5.14.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-5.15"></dt>
+        <dd style="margin-left: 1.5em" id="section-2-5.16">
+          <p id="section-2-5.16.1">For example, "1", means every second for a secondly rule, every minute for a minutely rule, every hour for an hourly rule, etc.<a href="#section-2-5.16.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-5.17">System:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-5.18">
+          <p id="section-2-5.18.1">Refers to an entity that hosts a schedule that is managed using the YANG module defined in this document.<a href="#section-2-5.18.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
