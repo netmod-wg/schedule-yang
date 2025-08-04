@@ -2323,14 +2323,14 @@ module ietf-schedule {
     description
       "Indicates a one-shot schedule. That is a schedule that
        will trigger an action with the duration being specified as
-       0/end time being specified the same as start time, and then
-       the schedule will disable itself.";
+       0 or end time being specified the same as start time,
+       and then the schedule will disable itself.";
   }
 
   identity period {
     base schedule-type;
     description
-      "Indicates a period-based schedule consisting either a
+      "Indicates a period-based schedule consisting of either a
        start and end or a start and positive duration of time. If
        neither an end nor a duration is indicated, the period is
        considered to last forever.";
@@ -2435,9 +2435,9 @@ module ietf-schedule {
 
   identity discard-action-type {
     description
-      "Indicates the action for the responder to take when a
-       requested schedule cannot be accepted for any reason
-       and is discarded.";
+      "Base identity for the action for the responder to take
+       when a requested schedule cannot be accepted for any
+       reason and is discarded.";
   }
 
   identity warning {
@@ -2613,7 +2613,7 @@ module ietf-schedule {
           "Frequency must be provided.";
       }
       description
-        "A positive integer representing at which interval the
+        "A positive integer representing interval at which the
          recurrence rule repeats. For example, within a 'daily'
          recurrence rule, a value of '8' means every eight days.";
     }
@@ -2632,7 +2632,7 @@ module ietf-schedule {
       leaf start-time-utc {
         type yang:date-and-time;
         description
-          "Defines the instant date and time of the first instance
+          "Defines the date and time of the first instance
            in the recurrence set. A UTC format MUST be used.";
       }
       leaf duration {
@@ -2640,7 +2640,7 @@ module ietf-schedule {
         units "seconds";
         description
           "When specified, it indicates how long the first occurrence
-           last. Unless specified otherwise, it also applies to all
+           lasts. Unless specified otherwise, it also applies to all
            the other instances in the recurrence set.";
       }
     }
@@ -2659,21 +2659,21 @@ module ietf-schedule {
             "This parameter specifies a date and time value to
              inclusively terminate the recurrence in UTC format. If
              the value specified by this parameter is synchronized
-             with the specified recurrence, it becomes the last
-             instance of the recurrence.";
+             with the specified recurrence rule, it becomes the last
+             instance of the recurrence rule.";
         }
       }
       case count {
         description
           "This case defines the number of occurrences at which
-           to terminate the recurrence.";
+           to terminate the recurrence rule.";
         leaf count {
           type uint32 {
             range "1..max";
           }
           description
             "The positive number of occurrences at which to
-             terminate the recurrence.";
+             terminate the recurrence rule.";
         }
       }
     }
@@ -2693,7 +2693,7 @@ module ietf-schedule {
       leaf start-time {
         type yang:date-and-time;
         description
-          "Defines the instant date and time of the first instance
+          "Defines the date and time of the first instance
            in the recurrence set.";
       }
       leaf duration {
@@ -2722,7 +2722,7 @@ module ietf-schedule {
          forever.";
       case until {
         description
-          "The end of the recurrence is indicated by a specific
+          "The end of the recurrence rule is indicated by a specific
            date-and-time value.";
         leaf until {
           type yang:date-and-time;
@@ -2905,7 +2905,8 @@ module ietf-schedule {
         "Specifies a list of values that corresponds to the nth
          occurrence within the set of recurrence instances
          specified by the rule. It must only be used in conjunction
-         with another by the rule part.";
+         with another 'byxxx' (bysecond, byminute, etc.) rule
+         part .";
     }
     leaf workweek-start {
       type schedule:weekday;
