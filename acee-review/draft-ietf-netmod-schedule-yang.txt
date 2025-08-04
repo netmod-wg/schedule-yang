@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 5 January 2026                                M. Boucadair, Ed.
+Expires: 5 February 2026                               M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                             4 July 2025
+                                                           4 August 2025
 
 
                 A Common YANG Data Model for Scheduling
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 January 2026.
+   This Internet-Draft will expire on 5 February 2026.
 
 Copyright Notice
 
@@ -192,7 +192,7 @@ Table of Contents
 
    iCalendar:  Refers to Internet Calendaring per [RFC5545].
 
-   Interval:  Refers to an integer that specifies at which interval a
+   Interval:  Refers to an integer that specifies interval at which a
       recurrence rule repeats.  Values are taken from "INTERVAL" rule in
       Section 3.3.10 of [RFC5545].
 
@@ -452,9 +452,9 @@ Table of Contents
    for a duration of 2 days).
 
    The repetition can be scoped by a specified end time or by a count of
-   occurrences, indicated by the "recurrence-end" choice.  The value of
-   the "count" node MUST be greater than 1, the "start-time-utc" value
-   always counts as the first occurrence.
+   occurrences, indicated by the "recurrence-end" choice.  The "count"
+   value MUST be greater than 1, the "start-time-utc" value always
+   counts as the first occurrence.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling
    contexts where machine readability is more desirable.
@@ -498,9 +498,9 @@ Table of Contents
    offset to UTC.
 
    The repetition can be scoped by a specified end time or by a count of
-   occurrences, indicated by the "recurrence-end" choice.  The value of
-   the "count" node MUST be greater than 1, the "start-time" value
-   always counts as the first occurrence.
+   occurrences, indicated by the "recurrence-end" choice.  The "count"
+   value MUST be greater than 1, the "start-time" value always counts as
+   the first occurrence.
 
    Unlike the definition of "recurrence-utc" grouping (Section 3.3.4),
    "recurrence-with-time-zone" is intended to promote human readability
@@ -1865,9 +1865,9 @@ Table of Contents
               Contreras, L. M. and V. Lopez, "A YANG Data Model for
               Network Diagnosis using Scheduled Sequences of OAM Tests",
               Work in Progress, Internet-Draft, draft-ietf-opsawg-
-              scheduling-oam-tests-00, 29 January 2025,
+              scheduling-oam-tests-01, 7 July 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
-              scheduling-oam-tests-00>.
+              scheduling-oam-tests-01>.
 
    [I-D.ietf-opsawg-ucl-acl]
               Ma, Q., Wu, Q., Boucadair, M., and D. King, "A YANG Data
@@ -1881,14 +1881,14 @@ Table of Contents
               Qu, Y., Lindem, A., Kinzie, E., Fedyk, D., and M.
               Blanchet, "YANG Data Model for Scheduled Attributes", Work
               in Progress, Internet-Draft, draft-ietf-tvr-schedule-yang-
-              04, 22 April 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-tvr-schedule-yang-04>.
+              05, 4 July 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-tvr-schedule-yang-05>.
 
    [I-D.liu-netmod-yang-schedule]
-              Liu, X., Bryskin, I., Beeram, V. P., Saad, T., Shah, H.
-              C., and O. G. de Dios, "A YANG Data Model for
-              Configuration Scheduling", Work in Progress, Internet-
-              Draft, draft-liu-netmod-yang-schedule-05, 1 March 2018,
+              Liu, X., Bryskin, I., Beeram, V. P., Saad, T., Shah, H.,
+              and O. G. de Dios, "A YANG Data Model for Configuration
+              Scheduling", Work in Progress, Internet-Draft, draft-liu-
+              netmod-yang-schedule-05, 1 March 2018,
               <https://datatracker.ietf.org/doc/html/draft-liu-netmod-
               yang-schedule-05>.
 
