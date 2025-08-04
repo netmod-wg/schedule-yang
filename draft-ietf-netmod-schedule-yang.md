@@ -214,7 +214,7 @@ System:
    The "discard-action" parameter specifies the action if a requested schedule
    cannot be accepted for any reason and is discarded. Possible reasons include,
    but are not limited to, the requested schedule failing to satisfy the guards in this grouping,
-   conflicting with existing schedules, or being out-of-date.
+   conflicting with existing schedules, or being out-of-date (e.g., the expected start is already passed).
 
    These parameters apply to all schedules on a system and are meant
    to provide guards against stale configuration, too short schedule requests
