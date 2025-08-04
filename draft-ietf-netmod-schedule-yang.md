@@ -119,7 +119,7 @@ Recurrence instance (or Recurrence, for short):
 : Refers to an instance that matches a recurrence rule.
 
 Recurrence set:
-: Refers to an instance that set of recurrence instances.
+: Refers to a set of recurrence instances.
 
 Frequency:
 : Characterizes the type of a recurrence rule. Values are taken from "FREQ" rule in {{Section 3.3.10 of !RFC5545}}.
