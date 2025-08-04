@@ -1249,12 +1249,12 @@ Table of Contents
        leaf time-zone-identifier {
          type sys:timezone-name;
          description
-           "Indicates the identifier for the time zone in a time zone
-            database. This parameter MUST be specified if either the
-            'period-start' or 'period-end' value is reported in local
-            time format. It MUST NOT be applied to date and time
-            values which are specified in the format of UTC or time
-            zone offset to UTC.";
+           "Indicates the identifier for the time zone. This parameter
+            MUST be specified if either the 'period-start' or
+            'period-end' value is reported in local time format.
+            It MUST NOT be applied to date and time values which are
+            specified in the format of UTC or time zone offset
+            to UTC.";
        }
        choice period-type {
          description
