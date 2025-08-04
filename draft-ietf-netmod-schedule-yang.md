@@ -1021,4 +1021,4 @@ after that time would not be considered as valid.
    Other related efforts were explored in the past, e.g., {{?I-D.liu-netmod-yang-schedule}}.
 
    Thanks to Reshad Rahman for the great YANG Doctors review, Mahesh Jethanandani for the AD review, Per Andersson for the OPSDIR review,
-   and Peter Yee for genart review.
+   Peter Yee for genart review, and Acee Lindem for the rtgdir review.
