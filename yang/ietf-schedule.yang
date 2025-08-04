@@ -488,10 +488,10 @@ module ietf-schedule {
           type yang:date-and-time;
           description
             "This parameter specifies a date and time value to
-             inclusively terminate the recurrence in UTC format. If
-             the value specified by this parameter is synchronized
-             with the specified recurrence rule, it becomes the last
-             instance of the recurrence rule.";
+             inclusively terminate the recurrence in UTC format. That 
+             is, if the value specified by this parameter is
+             synchronized with the specified recurrence rule,
+             it becomes the last instance of the recurrence rule.";
         }
       }
       case count {
