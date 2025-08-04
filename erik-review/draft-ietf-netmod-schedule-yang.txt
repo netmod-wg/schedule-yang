@@ -791,7 +791,7 @@ Table of Contents
       the maximum day number based on the month and year.
 
    *  Unless deployed in contexts where time synchronization is not
-      subject to leap second djustments (e.g., Section 4.3 of
+      subject to leap second adjustments (e.g., Section 4.3 of
       [I-D.ietf-ntp-ntpv5]), the second for date and time values SHOULD
       have the value "60" at the end of months in which a leap second
       occurs.
