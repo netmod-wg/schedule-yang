@@ -2778,7 +2778,7 @@ Acknowledgments
 
    Thanks to Reshad Rahman for the great YANG Doctors review, Mahesh
    Jethanandani for the AD review, Per Andersson for the OPSDIR review,
-   and Peter Yee for genart review.
+   Peter Yee for genart review, and Acee Lindem for the rtgdir review.
 
 Authors' Addresses
 
