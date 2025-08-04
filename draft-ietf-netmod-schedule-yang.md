@@ -125,7 +125,7 @@ iCalendar:
 : Refers to Internet Calendaring per {{!RFC5545}}.
 
 Interval:
-: Refers to an integer that specifies at which interval a recurrence rule repeats. Values are taken from "INTERVAL" rule in {{Section 3.3.10 of !RFC5545}}.
+: Refers to an integer that specifies interval at which a recurrence rule repeats. Values are taken from "INTERVAL" rule in {{Section 3.3.10 of !RFC5545}}.
 : For example, "1", means every second for a secondly rule, every minute for a minutely rule, every hour for an hourly rule, etc.
 
 System:
@@ -297,7 +297,7 @@ The interval specifies when a schedule will occur, combined with the frequency p
 an occurrence will last. This document allows the interval between occurrences to be shorter than the duration of each occurrence (e.g., a recurring event is scheduled to start every day for a duration of 2 days).
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-end" choice. The value of the "count" node MUST be greater than 1, the "start-time-utc" value always counts
+  indicated by the "recurrence-end" choice. The "count" value MUST be greater than 1, the "start-time-utc" value always counts
   as the first occurrence.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling contexts
@@ -327,7 +327,7 @@ an occurrence will last. This document allows the interval between occurrences t
    values which are specified in the format of UTC or time zone offset to UTC.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-end" choice. The value of the "count" node MUST be greater than 1, the "start-time" value always counts
+  indicated by the "recurrence-end" choice. The "count" value MUST be greater than 1, the "start-time" value always counts
   as the first occurrence.
 
    Unlike the definition of "recurrence-utc" grouping ({{sec-rec-utc}}),
