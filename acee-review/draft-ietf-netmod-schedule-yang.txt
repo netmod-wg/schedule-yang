@@ -1120,7 +1120,7 @@ Table of Contents
      identity out-of-date {
        base schedule-state;
        description
-         "Indicates a schedule with an out-of-date state.";
+         "Indicates a schedule that is received out-of-date.";
      }
 
      identity conflicted {
