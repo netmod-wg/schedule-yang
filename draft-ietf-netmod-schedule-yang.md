@@ -192,7 +192,7 @@ System:
 ~~~~
 {::include ./yang/tree/sch-generic-params.txt}
 ~~~~
-{: #gsp-tree title="Generic Schedule Configuration Tree Structure"}
+{: #gsp-tree title="'generic-schedule-params' Tree Structure"}
 
    The "description" includes a description of the schedule. No constraint is imposed
    on the structure nor the use of this parameter.
@@ -248,7 +248,7 @@ System:
 ~~~~
 {::include ./yang/tree/period-grp.txt}
 ~~~~
-{: #pt-tree title="Period of Time Grouping Tree Structure"}
+{: #pt-tree title='period-of-time' Grouping Tree Structure"}
 
 ### The "recurrence-basic" Grouping {#sec-rec}
 
@@ -257,7 +257,7 @@ System:
 ~~~~
 {::include ./yang/tree/rec-grp.txt}
 ~~~~
-{: #rec-grp-tree title="recurrence Grouping Tree Structure"}
+{: #rec-grp-tree title="'recurrence-basic' Grouping Tree Structure"}
 
   The frequency parameter ("frequency") identifies the type of a recurrence rule. For example,
   a "daily" frequency value specifies repeating events based on an interval of a day or more.
@@ -283,7 +283,7 @@ System:
 ~~~~
 {::include ./yang/tree/rec-utc-grp.txt}
 ~~~~
-{: #rec-utc-grp-tree title="recurrence-utc Grouping Tree Structure"}
+{: #rec-utc-grp-tree title="'recurrence-utc' Grouping Tree Structure"}
 
    The "start-time-utc" indicates the start time in UTC format.
 
@@ -317,7 +317,7 @@ an occurrence will last. This document allows the interval between occurrences t
 ~~~~
 {::include ./yang/tree/rec-tz-grp.txt}
 ~~~~
-{: #rec-tz-grp-tree title="recurrence-with-time-zone Grouping Tree Structure"}
+{: #rec-tz-grp-tree title="'recurrence-with-time-zone' Grouping Tree Structure"}
 
    The "recurrence-first" container includes "start-time" and "duration" parameters
    to specify the start time and period of the first occurrence. Unless specified otherwise (e.g., through additional
@@ -349,7 +349,7 @@ an occurrence will last. This document allows the interval between occurrences t
 ~~~~
 {::include ./yang/tree/rec-utc-dt-grp.txt}
 ~~~~
-{: #rec-utc-dt-grp-tree title="recurrence-utc-with-periods Grouping Tree Structure"}
+{: #rec-utc-dt-grp-tree title="'recurrence-utc-with-periods' Grouping Tree Structure"}
 
   The recurrence instances are specified by the union of occurrences defined
   by both the recurrence rule and "period-timeticks" list. This list uses
@@ -368,7 +368,7 @@ an occurrence will last. This document allows the interval between occurrences t
 ~~~~
 {::include ./yang/tree/rec-tz-dt-grp.txt}
 ~~~~
-{: #rec-tz-dt-grp-tree title="recurrence-time-zone-with-periods Grouping Tree Structure"}
+{: #rec-tz-dt-grp-tree title="'recurrence-time-zone-with-periods' Grouping Tree Structure"}
 
   The recurrence instances are specified by the union of occurrences defined
   by both the recurrence rule and "period" list. Duplicate instances
@@ -385,7 +385,7 @@ an occurrence will last. This document allows the interval between occurrences t
 ~~~~
 {::include ./yang/tree/ical-grp.txt}
 ~~~~
-{: #ical-grp-tree title="icalendar-recurrence Grouping Tree Structure"}
+{: #ical-grp-tree title="'icalendar-recurrence' Grouping Tree Structure"}
 
    An array of the "bysecond" (or "byminute", "byhour") specifies a list of
    seconds within a minute (or minutes within an hour, hours of the day). For
@@ -437,7 +437,7 @@ an occurrence will last. This document allows the interval between occurrences t
 ~~~~
 {::include ./yang/tree/schedule-status.txt}
 ~~~~
-{: #sche-status-tree title="Schedule Status with and without Name Groupings Tree Structure"}
+{: #sche-status-tree title="'schedule-status-*' Groupings Tree Structure"}
 
    The "schedule-name" parameter is useful to uniquely identify a schedule in
    a network device or controller if multiple scheduling contexts exist.
