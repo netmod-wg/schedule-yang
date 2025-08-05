@@ -2803,27 +2803,10 @@ module ietf-schedule {
       }
       leaf period-end {
         type yang:timeticks;
-        must "(not(derived-from(../../frequency,"
-           + "'schedule:secondly')) or (current() &lt; 100)) and "
-           + "(not(derived-from(../../frequency,"
-           + "'schedule:minutely')) or (current() &lt; 6000)) and "
-           + "(not(derived-from(../../frequency,'schedule:hourly'))"
-           + " or (current() &lt; 360000)) and "
-           + "(not(derived-from(../../frequency,'schedule:daily'))"
-           + " or (current() &lt; 8640000)) and "
-           + "(not(derived-from(../../frequency,'schedule:weekly'))"
-           + " or (current() &lt; 60480000)) and "
-           + "(not(derived-from(../../frequency,"
-           + "'schedule:monthly')) or (current() &lt; 267840000)) and "
-           + "(not(derived-from(../../frequency,'schedule:yearly'))"
-           + " or (current() &lt; 3162240000))" {
-          error-message
-            "The period-end must not exceed the frequency
-             interval.";
-        }
         description
           "End time of the schedule within one recurrence.
-           The period start MUST be no later than the end.";
+           The period start MUST be no later than the period
+           end.";
       }
     }
   }
