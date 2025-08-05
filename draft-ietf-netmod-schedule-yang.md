@@ -248,7 +248,7 @@ System:
 ~~~~
 {::include ./yang/tree/period-grp.txt}
 ~~~~
-{: #pt-tree title='period-of-time' Grouping Tree Structure"}
+{: #pt-tree title="'period-of-time' Grouping Tree Structure"}
 
 ### The "recurrence-basic" Grouping {#sec-rec}
 
