@@ -59,7 +59,7 @@ informative:
    This document defines common types and groupings that are meant to be used
    for scheduling purposes such as event, policy, services, or resources based on
    date and time. For the sake of better modularity, the YANG module includes a
-   set of recurrence related groupings with varying levels of representation
+   set of recurrence-related groupings with varying levels of representation
    (i.e., from basic to advanced) to accommodate a variety of requirements.
    It also defines groupings for validating requested schedules and reporting scheduling status.
 
@@ -143,7 +143,7 @@ System:
 
    The "ietf-schedule" data model defines the recurrence related groupings using
    a modular approach. To that aim, a variety of representations of recurrence
-   groupings ranging from basic to advanced (iCalender like) are defined.
+   groupings ranging from basic to advanced (iCalender-like) are defined.
    To allow for different options, two features are defined in the data model:
 
    *  "basic-recurrence"
@@ -231,7 +231,7 @@ System:
    The "period-of-time" grouping ({{pt-tree}}) represents a time period using
    either a start date and time ("period-start") and end date and time ("period-end"), or a
    start date and time ("period-start") and a non-negative time duration ("duration"). For the first
-   format, the start of the period MUST be no later the end of the period. If neither an end date and time ("period-end")
+   format, the start of the period MUST be no later than the end of the period. If neither an end date and time ("period-end")
    nor a duration ("duration") is indicated, the period is considered to last forever.
    If the duration ("duration") value is 0 or the end time ("period-end") is the same as the start time ("period-start"), the period
    is considered as a one-shot schedule. If no start date and time ("period-start")
@@ -278,7 +278,7 @@ System:
 ### The "recurrence-utc" Grouping {#sec-rec-utc}
 
    The "recurrence-utc" grouping ({{rec-utc-grp-tree}}) uses the "recurrence-basic"
-   grouping and specifies a simple recurrence rule in UTC format.
+   grouping ({{sec-rec}}) and specifies a simple recurrence rule in UTC format.
 
 ~~~~
 {::include ./yang/tree/rec-utc-grp.txt}
@@ -298,7 +298,7 @@ System:
    more time than specified by the "duration" is out of scope. Such considerations
    belong to task management, not schedule management.
 
-Note that the "interval" and "duration" cover two distinct properties of a schedule event.
+   Note that the "interval" and "duration" cover two distinct properties of a schedule event.
 The interval specifies when a schedule will occur, combined with the frequency parameter; while the duration indicates how long
 an occurrence will last. This document allows the interval between occurrences to be shorter than the duration of each occurrence (e.g., a recurring event is scheduled to start every day for a duration of 2 days).
 
@@ -312,7 +312,7 @@ an occurrence will last. This document allows the interval between occurrences t
 ### The "recurrence-with-time-zone" Grouping {#sec-rec-tz}
 
    The "recurrence-with-time-zone" grouping ({{rec-tz-grp-tree}}) uses the
-   "recurrence-basic" grouping and specifies a simple recurrence rule with a time zone.
+   "recurrence-basic" grouping ({{sec-rec}}) and specifies a simple recurrence rule with a time zone.
 
 ~~~~
 {::include ./yang/tree/rec-tz-grp.txt}
@@ -335,6 +335,8 @@ an occurrence will last. This document allows the interval between occurrences t
   The repetition can be scoped by a specified end time or by a count of occurrences,
   indicated by the "recurrence-end" choice. The "count" value MUST be greater than 1, the "start-time" value always counts
   as the first occurrence.
+
+  The considerations discussed in {{sec-rec-utc}} for "interval" and "duration" are also applicable to "recurrence-with-time-zone".
 
    Unlike the definition of "recurrence-utc" grouping ({{sec-rec-utc}}),
    "recurrence-with-time-zone" is intended to promote human readability over
@@ -448,7 +450,7 @@ an occurrence will last. This document allows the interval between occurrences t
    parameter to allow extensibility in future modules.
 
    The "version" parameter is used to track the current schedule version
-   information. The version can be bumped by the entity that created the schedule.
+   information. The version can be incremented by the entity that created the schedule.
    The "last-update" parameter identifies when the schedule was last modified.
    In some contexts, this parameter can be used to track the configuration of a
    given schedule. In such cases, the "version" may not be used.
@@ -1023,5 +1025,5 @@ after that time would not be considered as valid.
    Thanks to Reshad Rahman for the great YANG Doctors review, Mahesh Jethanandani for the AD review, Per Andersson for the OPSDIR review,
    Peter Yee for genart review, and Acee Lindem for the rtgdir review.
 
-   Thanks to Éric Vyncke and Erik Kline for the IESG review.
+   Thanks to Éric Vyncke, Erik Kline, and Mike Bishop for the IESG review.
 
