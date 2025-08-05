@@ -378,7 +378,7 @@ Table of Contents
           +--:(duration)
              +-- duration?         duration
 
-                          Figure 2: period-of-time
+             Figure 2: 'period-of-time' Grouping Tree Structure
 
 3.3.3.  The "recurrence-basic" Grouping
 
