@@ -112,8 +112,14 @@ This document uses the YANG terminology defined in {{Section 3 of !RFC7950}}.
 
 The document makes use of the following terms:
 
-Recurrence Rule:
+Recurrence rule:
 : Refers to a rule or repeating pattern for recurring events. See also {{Section 3.8.5.3 of !RFC5545}} for a comprehensive iCalendar recurrence rule specification.
+
+Recurrence instance (or Recurrence, for short):
+: Refers to an instance that matches a recurrence rule.
+
+Recurrence set:
+: Refers to a set of recurrence instances.
 
 Frequency:
 : Characterizes the type of a recurrence rule. Values are taken from "FREQ" rule in {{Section 3.3.10 of !RFC5545}}.
@@ -125,7 +131,7 @@ iCalendar:
 : Refers to Internet Calendaring per {{!RFC5545}}.
 
 Interval:
-: Refers to an integer that specifies at which interval a recurrence rule repeats. Values are taken from "INTERVAL" rule in {{Section 3.3.10 of !RFC5545}}.
+: Refers to an integer that specifies interval at which a recurrence rule repeats. Values are taken from "INTERVAL" rule in {{Section 3.3.10 of !RFC5545}}.
 : For example, "1", means every second for a secondly rule, every minute for a minutely rule, every hour for an hourly rule, etc.
 
 System:
@@ -214,7 +220,7 @@ System:
    The "discard-action" parameter specifies the action if a requested schedule
    cannot be accepted for any reason and is discarded. Possible reasons include,
    but are not limited to, the requested schedule failing to satisfy the guards in this grouping,
-   conflicting with existing schedules, or being out-of-date.
+   conflicting with existing schedules, or being out-of-date (e.g., the expected start is already passed).
 
    These parameters apply to all schedules on a system and are meant
    to provide guards against stale configuration, too short schedule requests
@@ -297,7 +303,7 @@ The interval specifies when a schedule will occur, combined with the frequency p
 an occurrence will last. This document allows the interval between occurrences to be shorter than the duration of each occurrence (e.g., a recurring event is scheduled to start every day for a duration of 2 days).
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-end" choice. The value of the "count" node MUST be greater than 1, the "start-time-utc" value always counts
+  indicated by the "recurrence-end" choice. The "count" value MUST be greater than 1, the "start-time-utc" value always counts
   as the first occurrence.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling contexts
@@ -327,7 +333,7 @@ an occurrence will last. This document allows the interval between occurrences t
    values which are specified in the format of UTC or time zone offset to UTC.
 
   The repetition can be scoped by a specified end time or by a count of occurrences,
-  indicated by the "recurrence-end" choice. The value of the "count" node MUST be greater than 1, the "start-time" value always counts
+  indicated by the "recurrence-end" choice. The "count" value MUST be greater than 1, the "start-time" value always counts
   as the first occurrence.
 
    Unlike the definition of "recurrence-utc" grouping ({{sec-rec-utc}}),
@@ -1015,6 +1021,7 @@ after that time would not be considered as valid.
    Other related efforts were explored in the past, e.g., {{?I-D.liu-netmod-yang-schedule}}.
 
    Thanks to Reshad Rahman for the great YANG Doctors review, Mahesh Jethanandani for the AD review, Per Andersson for the OPSDIR review,
-   and Peter Yee for genart review.
+   Peter Yee for genart review, and Acee Lindem for the rtgdir review.
 
-   Thanks to Erik Kline for the IESG review.
+   Thanks to Éric Vyncke and Erik Kline for the IESG review.
+

@@ -154,14 +154,14 @@ module ietf-schedule {
     description
       "Indicates a one-shot schedule. That is a schedule that
        will trigger an action with the duration being specified as
-       0/end time being specified the same as start time, and then
-       the schedule will disable itself.";
+       0 or end time being specified the same as start time,
+       and then the schedule will disable itself.";
   }
 
   identity period {
     base schedule-type;
     description
-      "Indicates a period-based schedule consisting either a
+      "Indicates a period-based schedule consisting of either a
        start and end or a start and positive duration of time. If
        neither an end nor a duration is indicated, the period is
        considered to last forever.";
@@ -254,7 +254,7 @@ module ietf-schedule {
   identity out-of-date {
     base schedule-state;
     description
-      "Indicates a schedule with an out-of-date state.";
+      "Indicates a schedule that is received out-of-date.";
   }
 
   identity conflicted {
@@ -266,9 +266,9 @@ module ietf-schedule {
   
   identity discard-action-type {
     description
-      "Indicates the action for the responder to take when a
-       requested schedule cannot be accepted for any reason
-       and is discarded.";
+      "Base identity for the action for the responder to take
+       when a requested schedule cannot be accepted for any
+       reason and is discarded.";
   }
   
   identity warning {
@@ -376,12 +376,12 @@ module ietf-schedule {
     leaf time-zone-identifier {
       type sys:timezone-name;
       description
-        "Indicates the identifier for the time zone in a time zone
-         database. This parameter MUST be specified if either the
-         'period-start' or 'period-end' value is reported in local
-         time format. It MUST NOT be applied to date and time
-         values which are specified in the format of UTC or time
-         zone offset to UTC.";
+        "Indicates the identifier for the time zone. This parameter
+         MUST be specified if either the 'period-start' or
+         'period-end' value is reported in local time format.
+         It MUST NOT be applied to date and time values which are
+         specified in the format of UTC or time zone offset
+         to UTC.";
     }
     choice period-type {
       description
@@ -444,7 +444,7 @@ module ietf-schedule {
           "Frequency must be provided.";
       }
       description
-        "A positive integer representing at which interval the
+        "A positive integer representing interval at which the
          recurrence rule repeats. For example, within a 'daily'
          recurrence rule, a value of '8' means every eight days.";
     }
@@ -463,7 +463,7 @@ module ietf-schedule {
       leaf start-time-utc {
         type yang:date-and-time;
         description
-          "Defines the instant date and time of the first instance
+          "Defines the date and time of the first instance
            in the recurrence set. A UTC format MUST be used.";
       }
       leaf duration {
@@ -488,23 +488,23 @@ module ietf-schedule {
           type yang:date-and-time;
           description
             "This parameter specifies a date and time value to
-             inclusively terminate the recurrence in UTC format. If
-             the value specified by this parameter is synchronized
-             with the specified recurrence, it becomes the last
-             instance of the recurrence.";
+             inclusively terminate the recurrence in UTC format. That 
+             is, if the value specified by this parameter is
+             synchronized with the specified recurrence rule,
+             it becomes the last instance of the recurrence rule.";
         }
       }
       case count {
         description
           "This case defines the number of occurrences at which
-           to terminate the recurrence.";
+           to terminate the recurrence rule.";
         leaf count {
           type uint32 {
             range "1..max";
           }
           description
             "The positive number of occurrences at which to
-             terminate the recurrence.";
+             terminate the recurrence rule.";
         }
       }
     }
@@ -524,7 +524,7 @@ module ietf-schedule {
       leaf start-time {
         type yang:date-and-time;
         description
-          "Defines the instant date and time of the first instance 
+          "Defines the date and time of the first instance 
            in the recurrence set.";
       }
       leaf duration {
@@ -553,7 +553,7 @@ module ietf-schedule {
          forever.";
       case until {
         description
-          "The end of the recurrence is indicated by a specific
+          "The end of the recurrence rule is indicated by a specific
            date-and-time value.";
         leaf until {
           type yang:date-and-time;
@@ -624,8 +624,27 @@ module ietf-schedule {
       }
       leaf period-end {
         type yang:timeticks;
+        must "(not(derived-from(../../frequency,"
+           + "'schedule:secondly')) or (current() < 100)) and "
+           + "(not(derived-from(../../frequency,"
+           + "'schedule:minutely')) or (current() < 6000)) and "
+           + "(not(derived-from(../../frequency,'schedule:hourly'))"
+           + " or (current() < 360000)) and "
+           + "(not(derived-from(../../frequency,'schedule:daily'))"
+           + " or (current() < 8640000)) and "
+           + "(not(derived-from(../../frequency,'schedule:weekly'))"
+           + " or (current() < 60480000)) and "
+           + "(not(derived-from(../../frequency,"
+           + "'schedule:monthly')) or (current() < 267840000)) and "
+           + "(not(derived-from(../../frequency,'schedule:yearly'))"
+           + " or (current() < 3162240000))" {
+          error-message
+            "The period-end must not exceed the frequency
+             interval.";
+        } 
         description
-          "End time of the schedule within one recurrence.";
+          "End time of the schedule within one recurrence.
+           The period start MUST be no later than the end.";
       }
     }
   }
@@ -736,7 +755,8 @@ module ietf-schedule {
         "Specifies a list of values that corresponds to the nth
          occurrence within the set of recurrence instances
          specified by the rule. It must only be used in conjunction
-         with another by the rule part.";
+         with another 'byxxx' (bysecond, byminute, etc.) rule
+         part .";
     }
     leaf workweek-start {
       type schedule:weekday;
