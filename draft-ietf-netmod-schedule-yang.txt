@@ -302,7 +302,7 @@ Table of Contents
        +-- max-allowed-end?        yang:date-and-time
        +-- discard-action?         identityref
 
-          Figure 1: Generic Schedule Configuration Tree Structure
+             Figure 1: 'generic-schedule-params' Tree Structure
 
    The "description" includes a description of the schedule.  No
    constraint is imposed on the structure nor the use of this parameter.
@@ -378,7 +378,7 @@ Table of Contents
           +--:(duration)
              +-- duration?         duration
 
-              Figure 2: Period of Time Grouping Tree Structure
+                          Figure 2: period-of-time
 
 3.3.3.  The "recurrence-basic" Grouping
 
@@ -390,7 +390,7 @@ Table of Contents
        +-- frequency?                identityref
        +-- interval?                 uint32
 
-                Figure 3: recurrence Grouping Tree Structure
+            Figure 3: 'recurrence-basic' Grouping Tree Structure
 
    The frequency parameter ("frequency") identifies the type of a
    recurrence rule.  For example, a "daily" frequency value specifies
@@ -433,7 +433,7 @@ Table of Contents
        +-- frequency?                identityref
        +-- interval?                 uint32
 
-              Figure 4: recurrence-utc Grouping Tree Structure
+             Figure 4: 'recurrence-utc' Grouping Tree Structure
 
    The "start-time-utc" indicates the start time in UTC format.
 
@@ -485,7 +485,7 @@ Table of Contents
        +-- frequency?                identityref
        +-- interval?                 uint32
 
-        Figure 5: recurrence-with-time-zone Grouping Tree Structure
+       Figure 5: 'recurrence-with-time-zone' Grouping Tree Structure
 
    The "recurrence-first" container includes "start-time" and "duration"
    parameters to specify the start time and period of the first
@@ -534,7 +534,7 @@ Table of Contents
           +-- period-start    yang:timeticks
           +-- period-end?     yang:timeticks
 
-       Figure 6: recurrence-utc-with-periods Grouping Tree Structure
+      Figure 6: 'recurrence-utc-with-periods' Grouping Tree Structure
 
    The recurrence instances are specified by the union of occurrences
    defined by both the recurrence rule and "period-timeticks" list.
@@ -574,7 +574,7 @@ Table of Contents
              +--:(duration)
                 +-- duration?         duration
 
-    Figure 7: recurrence-time-zone-with-periods Grouping Tree Structure
+   Figure 7: 'recurrence-time-zone-with-periods' Grouping Tree Structure
 
    The recurrence instances are specified by the union of occurrences
    defined by both the recurrence rule and "period" list.  Duplicate
@@ -625,7 +625,7 @@ Table of Contents
        +-- workweek-start?           schedule:weekday
        +-- exception-dates*          yang:date-and-time
 
-           Figure 8: icalendar-recurrence Grouping Tree Structure
+          Figure 8: 'icalendar-recurrence' Grouping Tree Structure
 
    An array of the "bysecond" (or "byminute", "byhour") specifies a list
    of seconds within a minute (or minutes within an hour, hours of the
@@ -727,8 +727,7 @@ Table of Contents
        +--ro last-failed-occurrence?   yang:date-and-time
        +--ro failure-counter?          yang:counter32
 
-       Figure 9: Schedule Status with and without Name Groupings Tree
-                                 Structure
+           Figure 9: 'schedule-status-*' Groupings Tree Structure
 
    The "schedule-name" parameter is useful to uniquely identify a
    schedule in a network device or controller if multiple scheduling

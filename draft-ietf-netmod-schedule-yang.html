@@ -1531,7 +1531,7 @@ a requested schedule cannot be accepted for any reason and is discarded.<a href=
    based on date and time. The "generic-schedule-params" grouping (<a href="#gsp-tree" class="auto internal xref">Figure 1</a>)
    specifies a set of configuration parameters that are used by a system for
    validating requested schedules.<a href="#section-3.3.1-1" class="pilcrow">¶</a></p>
-<span id="name-generic-schedule-configurat"></span><div id="gsp-tree">
+<span id="name-generic-schedule-params-tre"></span><div id="gsp-tree">
 <figure id="figure-1">
             <div class="alignLeft art-text artwork" id="section-3.3.1-2.1">
 <pre>
@@ -1546,7 +1546,7 @@ a requested schedule cannot be accepted for any reason and is discarded.<a href=
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-generic-schedule-configurat" class="selfRef">Generic Schedule Configuration Tree Structure</a>
+<a href="#name-generic-schedule-params-tre" class="selfRef">'generic-schedule-params' Tree Structure</a>
             </figcaption></figure>
 </div>
 <p id="section-3.3.1-3">The "description" includes a description of the schedule. No constraint is imposed
@@ -1595,7 +1595,7 @@ a requested schedule cannot be accepted for any reason and is discarded.<a href=
    values which are specified in the format of UTC or time zone offset to UTC.<a href="#section-3.3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.3.2-3">The "period-description" includes a description of the period. No constraint is imposed
    on the structure nor the use of this parameter.<a href="#section-3.3.2-3" class="pilcrow">¶</a></p>
-<span id="name-period-of-time-grouping-tre"></span><div id="pt-tree">
+<span id="name-period-of-time"></span><div id="pt-tree">
 <figure id="figure-2">
             <div class="alignLeft art-text artwork" id="section-3.3.2-4.1">
 <pre>
@@ -1611,7 +1611,7 @@ a requested schedule cannot be accepted for any reason and is discarded.<a href=
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-period-of-time-grouping-tre" class="selfRef">Period of Time Grouping Tree Structure</a>
+<a href="#name-period-of-time" class="selfRef">period-of-time</a>
             </figcaption></figure>
 </div>
 </section>
@@ -1622,7 +1622,7 @@ a requested schedule cannot be accepted for any reason and is discarded.<a href=
 <a href="#section-3.3.3" class="section-number selfRef">3.3.3. </a><a href="#name-the-recurrence-basic-groupi" class="section-name selfRef">The "recurrence-basic" Grouping</a>
           </h4>
 <p id="section-3.3.3-1">The "recurrence-basic" grouping (<a href="#rec-grp-tree" class="auto internal xref">Figure 3</a>) specifies a simple recurrence rule which starts immediately and repeats forever.<a href="#section-3.3.3-1" class="pilcrow">¶</a></p>
-<span id="name-recurrence-grouping-tree-st"></span><div id="rec-grp-tree">
+<span id="name-recurrence-basic-grouping-t"></span><div id="rec-grp-tree">
 <figure id="figure-3">
             <div class="alignLeft art-text artwork" id="section-3.3.3-2.1">
 <pre>
@@ -1633,7 +1633,7 @@ a requested schedule cannot be accepted for any reason and is discarded.<a href=
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-recurrence-grouping-tree-st" class="selfRef">recurrence Grouping Tree Structure</a>
+<a href="#name-recurrence-basic-grouping-t" class="selfRef">'recurrence-basic' Grouping Tree Structure</a>
             </figcaption></figure>
 </div>
 <p id="section-3.3.3-3">The frequency parameter ("frequency") identifies the type of a recurrence rule. For example,
@@ -1676,7 +1676,7 @@ a requested schedule cannot be accepted for any reason and is discarded.<a href=
 </pre>
 </div>
 <figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-recurrence-utc-grouping-tre" class="selfRef">recurrence-utc Grouping Tree Structure</a>
+<a href="#name-recurrence-utc-grouping-tre" class="selfRef">'recurrence-utc' Grouping Tree Structure</a>
             </figcaption></figure>
 </div>
 <p id="section-3.3.4-3">The "start-time-utc" indicates the start time in UTC format.<a href="#section-3.3.4-3" class="pilcrow">¶</a></p>
@@ -1727,7 +1727,7 @@ an occurrence will last. This document allows the interval between occurrences t
 </pre>
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
-<a href="#name-recurrence-with-time-zone-g" class="selfRef">recurrence-with-time-zone Grouping Tree Structure</a>
+<a href="#name-recurrence-with-time-zone-g" class="selfRef">'recurrence-with-time-zone' Grouping Tree Structure</a>
             </figcaption></figure>
 </div>
 <p id="section-3.3.5-3">The "recurrence-first" container includes "start-time" and "duration" parameters
@@ -1779,7 +1779,7 @@ an occurrence will last. This document allows the interval between occurrences t
 </pre>
 </div>
 <figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
-<a href="#name-recurrence-utc-with-periods" class="selfRef">recurrence-utc-with-periods Grouping Tree Structure</a>
+<a href="#name-recurrence-utc-with-periods" class="selfRef">'recurrence-utc-with-periods' Grouping Tree Structure</a>
             </figcaption></figure>
 </div>
 <p id="section-3.3.6-3">The recurrence instances are specified by the union of occurrences defined
@@ -1828,7 +1828,7 @@ an occurrence will last. This document allows the interval between occurrences t
 </pre>
 </div>
 <figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
-<a href="#name-recurrence-time-zone-with-p" class="selfRef">recurrence-time-zone-with-periods Grouping Tree Structure</a>
+<a href="#name-recurrence-time-zone-with-p" class="selfRef">'recurrence-time-zone-with-periods' Grouping Tree Structure</a>
             </figcaption></figure>
 </div>
 <p id="section-3.3.7-3">The recurrence instances are specified by the union of occurrences defined
@@ -1888,7 +1888,7 @@ an occurrence will last. This document allows the interval between occurrences t
 </pre>
 </div>
 <figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
-<a href="#name-icalendar-recurrence-groupi" class="selfRef">icalendar-recurrence Grouping Tree Structure</a>
+<a href="#name-icalendar-recurrence-groupi" class="selfRef">'icalendar-recurrence' Grouping Tree Structure</a>
             </figcaption></figure>
 </div>
 <p id="section-3.3.8-3">An array of the "bysecond" (or "byminute", "byhour") specifies a list of
@@ -1936,7 +1936,7 @@ an occurrence will last. This document allows the interval between occurrences t
    for scheduling management/status exposure. The "schedule-status-with-time-zone" grouping has the same
    structure as "schedule-status" but with an additional parameter to identify a time zone. Similarly, the "schedule-status-with-name" grouping has the same structure as "schedule-status" but with an additional parameter to identify a schedule "schedule-name". These
    structures are defined in the module to allow for better modularity and flexibility.<a href="#section-3.3.9-1" class="pilcrow">¶</a></p>
-<span id="name-schedule-status-with-and-wi"></span><div id="sche-status-tree">
+<span id="name-schedule-status-groupings-t"></span><div id="sche-status-tree">
 <figure id="figure-9">
             <div class="alignLeft art-text artwork" id="section-3.3.9-2.1">
 <pre>
@@ -1979,7 +1979,7 @@ an occurrence will last. This document allows the interval between occurrences t
 </pre>
 </div>
 <figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
-<a href="#name-schedule-status-with-and-wi" class="selfRef">Schedule Status with and without Name Groupings Tree Structure</a>
+<a href="#name-schedule-status-groupings-t" class="selfRef">'schedule-status-*' Groupings Tree Structure</a>
             </figcaption></figure>
 </div>
 <p id="section-3.3.9-3">The "schedule-name" parameter is useful to uniquely identify a schedule in
