@@ -491,7 +491,7 @@ an occurrence will last. This document allows the interval between occurrences t
    *  The combination of the day, month, and year represented for date and time
       values MUST be valid. See {{Section 5.7 of ?RFC3339}} for the maximum day
       number based on the month and year.
-   *  The second for date and time values MUST have the value "60" at the end of months in which a leap
+   *  Unless deployed in contexts where time synchronization is not subject to leap second adjustments (e.g., {{Section 4.3 of ?I-D.ietf-ntp-ntpv5}}), the second for date and time values SHOULD have the value "60" at the end of months in which a leap
       second occurs.
    *  Schedules received with a starting time in the past with respect to
       current time SHOULD be ignored. When a local policy is provided, an implementation MAY omit the past occurrences and
@@ -1022,3 +1022,6 @@ after that time would not be considered as valid.
 
    Thanks to Reshad Rahman for the great YANG Doctors review, Mahesh Jethanandani for the AD review, Per Andersson for the OPSDIR review,
    Peter Yee for genart review, and Acee Lindem for the rtgdir review.
+
+   Thanks to Éric Vyncke and Erik Kline for the IESG review.
+
