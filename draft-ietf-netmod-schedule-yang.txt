@@ -5,11 +5,11 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 6 February 2026                               M. Boucadair, Ed.
+Expires: 7 February 2026                               M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                           5 August 2025
+                                                           6 August 2025
 
 
                 A Common YANG Data Model for Scheduling
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 February 2026.
+   This Internet-Draft will expire on 7 February 2026.
 
 Copyright Notice
 
@@ -1356,16 +1356,16 @@ Table of Contents
             to repeat forever.";
          case until {
            description
-             "This case defines a way that limits the end of a
-              recurrence rule in an inclusive manner.";
+             "This case defines a way that limits the end of
+              a recurrence rule.";
            leaf utc-until {
              type yang:date-and-time;
              description
                "This parameter specifies a date and time value to
-                inclusively terminate the recurrence in UTC format.
-                that is, if the value specified by this parameter is
-                synchronized with the specified recurrence rule,
-                it becomes the last instance of the recurrence rule.";
+                terminate the recurrence in UTC format. If the value
+                specified by this parameter is synchronized with the
+                specified recurrence rule, it becomes the last instance
+                of the recurrence rule.";
            }
          }
          case count {
