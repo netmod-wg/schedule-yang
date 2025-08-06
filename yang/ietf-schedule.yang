@@ -559,10 +559,9 @@ module ietf-schedule {
           type yang:date-and-time;
           description
             "Specifies a date and time value to inclusively terminate
-             the recurrence in an inclusive manner. Thats is, if
-             the value specified by this parameter is synchronized
-             with the specified recurrence, it becomes the last
-             instance of the recurrence.";
+             the recurrence. Thats is, if the value specified by this
+             parameter is synchronized with the specified recurrence,
+             it becomes the last instance of the recurrence.";
         }
       }
       case count {
