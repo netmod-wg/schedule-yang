@@ -13,7 +13,7 @@
        This document defines common types and groupings that are meant to be used
    for scheduling purposes such as event, policy, services, or resources based on
    date and time. For the sake of better modularity, the YANG module includes a
-   set of recurrence related groupings with varying levels of representation
+   set of recurrence-related groupings with varying levels of representation
    (i.e., from basic to advanced) to accommodate a variety of requirements.
    It also defines groupings for validating requested schedules and reporting scheduling status. 
     " name="description">
@@ -1107,7 +1107,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-abstract-1">This document defines common types and groupings that are meant to be used
    for scheduling purposes such as event, policy, services, or resources based on
    date and time. For the sake of better modularity, the YANG module includes a
-   set of recurrence related groupings with varying levels of representation
+   set of recurrence-related groupings with varying levels of representation
    (i.e., from basic to advanced) to accommodate a variety of requirements.
    It also defines groupings for validating requested schedules and reporting scheduling status.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
@@ -1437,7 +1437,7 @@ in the YANG module are used in lowercase.<a href="#section-2-5.10.1" class="pilc
         </h3>
 <p id="section-3.1-1">The "ietf-schedule" data model defines the recurrence related groupings using
    a modular approach. To that aim, a variety of representations of recurrence
-   groupings ranging from basic to advanced (iCalender like) are defined.
+   groupings ranging from basic to advanced (iCalender-like) are defined.
    To allow for different options, two features are defined in the data model:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.1-2.1">
@@ -1584,7 +1584,7 @@ a requested schedule cannot be accepted for any reason and is discarded.<a href=
 <p id="section-3.3.2-1">The "period-of-time" grouping (<a href="#pt-tree" class="auto internal xref">Figure 2</a>) represents a time period using
    either a start date and time ("period-start") and end date and time ("period-end"), or a
    start date and time ("period-start") and a non-negative time duration ("duration"). For the first
-   format, the start of the period <span class="bcp14">MUST</span> be no later the end of the period. If neither an end date and time ("period-end")
+   format, the start of the period <span class="bcp14">MUST</span> be no later than the end of the period. If neither an end date and time ("period-end")
    nor a duration ("duration") is indicated, the period is considered to last forever.
    If the duration ("duration") value is 0 or the end time ("period-end") is the same as the start time ("period-start"), the period
    is considered as a one-shot schedule. If no start date and time ("period-start")
@@ -1656,7 +1656,7 @@ a requested schedule cannot be accepted for any reason and is discarded.<a href=
 <a href="#section-3.3.4" class="section-number selfRef">3.3.4. </a><a href="#name-the-recurrence-utc-grouping" class="section-name selfRef">The "recurrence-utc" Grouping</a>
           </h4>
 <p id="section-3.3.4-1">The "recurrence-utc" grouping (<a href="#rec-utc-grp-tree" class="auto internal xref">Figure 4</a>) uses the "recurrence-basic"
-   grouping and specifies a simple recurrence rule in UTC format.<a href="#section-3.3.4-1" class="pilcrow">¶</a></p>
+   grouping (<a href="#sec-rec" class="auto internal xref">Section 3.3.3</a>) and specifies a simple recurrence rule in UTC format.<a href="#section-3.3.4-1" class="pilcrow">¶</a></p>
 <span id="name-recurrence-utc-grouping-tre"></span><div id="rec-utc-grp-tree">
 <figure id="figure-4">
             <div class="alignLeft art-text artwork" id="section-3.3.4-2.1">
@@ -1706,7 +1706,7 @@ an occurrence will last. This document allows the interval between occurrences t
 <a href="#section-3.3.5" class="section-number selfRef">3.3.5. </a><a href="#name-the-recurrence-with-time-zo" class="section-name selfRef">The "recurrence-with-time-zone" Grouping</a>
           </h4>
 <p id="section-3.3.5-1">The "recurrence-with-time-zone" grouping (<a href="#rec-tz-grp-tree" class="auto internal xref">Figure 5</a>) uses the
-   "recurrence-basic" grouping and specifies a simple recurrence rule with a time zone.<a href="#section-3.3.5-1" class="pilcrow">¶</a></p>
+   "recurrence-basic" grouping (<a href="#sec-rec" class="auto internal xref">Section 3.3.3</a>) and specifies a simple recurrence rule with a time zone.<a href="#section-3.3.5-1" class="pilcrow">¶</a></p>
 <span id="name-recurrence-with-time-zone-g"></span><div id="rec-tz-grp-tree">
 <figure id="figure-5">
             <div class="alignLeft art-text artwork" id="section-3.3.5-2.1">
@@ -1744,9 +1744,10 @@ an occurrence will last. This document allows the interval between occurrences t
 <p id="section-3.3.5-5">The repetition can be scoped by a specified end time or by a count of occurrences,
   indicated by the "recurrence-end" choice. The "count" value <span class="bcp14">MUST</span> be greater than 1, the "start-time" value always counts
   as the first occurrence.<a href="#section-3.3.5-5" class="pilcrow">¶</a></p>
-<p id="section-3.3.5-6">Unlike the definition of "recurrence-utc" grouping (<a href="#sec-rec-utc" class="auto internal xref">Section 3.3.4</a>),
+<p id="section-3.3.5-6">The considerations discussed in <a href="#sec-rec-utc" class="auto internal xref">Section 3.3.4</a> for "interval" and "duration" are also applicable to "recurrence-with-time-zone".<a href="#section-3.3.5-6" class="pilcrow">¶</a></p>
+<p id="section-3.3.5-7">Unlike the definition of "recurrence-utc" grouping (<a href="#sec-rec-utc" class="auto internal xref">Section 3.3.4</a>),
    "recurrence-with-time-zone" is intended to promote human readability over
-   machine readability.<a href="#section-3.3.5-6" class="pilcrow">¶</a></p>
+   machine readability.<a href="#section-3.3.5-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-rec-utc-dt">
@@ -1989,7 +1990,7 @@ an occurrence will last. This document allows the interval between occurrences t
    represents the state of the overall recurrence. The "identityref" type is used for this
    parameter to allow extensibility in future modules.<a href="#section-3.3.9-4" class="pilcrow">¶</a></p>
 <p id="section-3.3.9-5">The "version" parameter is used to track the current schedule version
-   information. The version can be bumped by the entity that created the schedule.
+   information. The version can be incremented by the entity that created the schedule.
    The "last-update" parameter identifies when the schedule was last modified.
    In some contexts, this parameter can be used to track the configuration of a
    given schedule. In such cases, the "version" may not be used.<a href="#section-3.3.9-5" class="pilcrow">¶</a></p>
@@ -4229,7 +4230,7 @@ module example-sch-capacity-res {
 <p id="appendix-D-4">Other related efforts were explored in the past, e.g., <span>[<a href="#I-D.liu-netmod-yang-schedule" class="cite xref">I-D.liu-netmod-yang-schedule</a>]</span>.<a href="#appendix-D-4" class="pilcrow">¶</a></p>
 <p id="appendix-D-5">Thanks to Reshad Rahman for the great YANG Doctors review, Mahesh Jethanandani for the AD review, Per Andersson for the OPSDIR review,
    Peter Yee for genart review, and Acee Lindem for the rtgdir review.<a href="#appendix-D-5" class="pilcrow">¶</a></p>
-<p id="appendix-D-6">Thanks to Éric Vyncke and Erik Kline for the IESG review.<a href="#appendix-D-6" class="pilcrow">¶</a></p>
+<p id="appendix-D-6">Thanks to Éric Vyncke, Erik Kline, and Mike Bishop for the IESG review.<a href="#appendix-D-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">

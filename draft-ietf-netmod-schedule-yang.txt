@@ -20,7 +20,7 @@ Abstract
    This document defines common types and groupings that are meant to be
    used for scheduling purposes such as event, policy, services, or
    resources based on date and time.  For the sake of better modularity,
-   the YANG module includes a set of recurrence related groupings with
+   the YANG module includes a set of recurrence-related groupings with
    varying levels of representation (i.e., from basic to advanced) to
    accommodate a variety of requirements.  It also defines groupings for
    validating requested schedules and reporting scheduling status.
@@ -214,7 +214,7 @@ Table of Contents
    The "ietf-schedule" data model defines the recurrence related
    groupings using a modular approach.  To that aim, a variety of
    representations of recurrence groupings ranging from basic to
-   advanced (iCalender like) are defined.  To allow for different
+   advanced (iCalender-like) are defined.  To allow for different
    options, two features are defined in the data model:
 
    *  "basic-recurrence"
@@ -350,7 +350,7 @@ Table of Contents
    using either a start date and time ("period-start") and end date and
    time ("period-end"), or a start date and time ("period-start") and a
    non-negative time duration ("duration").  For the first format, the
-   start of the period MUST be no later the end of the period.  If
+   start of the period MUST be no later than the end of the period.  If
    neither an end date and time ("period-end") nor a duration
    ("duration") is indicated, the period is considered to last forever.
    If the duration ("duration") value is 0 or the end time ("period-
@@ -418,7 +418,8 @@ Table of Contents
 3.3.4.  The "recurrence-utc" Grouping
 
    The "recurrence-utc" grouping (Figure 4) uses the "recurrence-basic"
-   grouping and specifies a simple recurrence rule in UTC format.
+   grouping (Section 3.3.3) and specifies a simple recurrence rule in
+   UTC format.
 
      grouping recurrence-utc:
        +-- recurrence-first
@@ -468,8 +469,8 @@ Table of Contents
 3.3.5.  The "recurrence-with-time-zone" Grouping
 
    The "recurrence-with-time-zone" grouping (Figure 5) uses the
-   "recurrence-basic" grouping and specifies a simple recurrence rule
-   with a time zone.
+   "recurrence-basic" grouping (Section 3.3.3) and specifies a simple
+   recurrence rule with a time zone.
 
      grouping recurrence-with-time-zone:
        +-- recurrence-first
@@ -507,6 +508,9 @@ Table of Contents
    occurrences, indicated by the "recurrence-end" choice.  The "count"
    value MUST be greater than 1, the "start-time" value always counts as
    the first occurrence.
+
+   The considerations discussed in Section 3.3.4 for "interval" and
+   "duration" are also applicable to "recurrence-with-time-zone".
 
    Unlike the definition of "recurrence-utc" grouping (Section 3.3.4),
    "recurrence-with-time-zone" is intended to promote human readability
@@ -740,11 +744,11 @@ Table of Contents
    in future modules.
 
    The "version" parameter is used to track the current schedule version
-   information.  The version can be bumped by the entity that created
-   the schedule.  The "last-update" parameter identifies when the
-   schedule was last modified.  In some contexts, this parameter can be
-   used to track the configuration of a given schedule.  In such cases,
-   the "version" may not be used.
+   information.  The version can be incremented by the entity that
+   created the schedule.  The "last-update" parameter identifies when
+   the schedule was last modified.  In some contexts, this parameter can
+   be used to track the configuration of a given schedule.  In such
+   cases, the "version" may not be used.
 
    The "schedule-type" parameter identifies the type of the current
    schedule.  The "counter", "last-occurrence", and "upcoming-
@@ -2771,7 +2775,8 @@ Acknowledgments
    Jethanandani for the AD review, Per Andersson for the OPSDIR review,
    Peter Yee for genart review, and Acee Lindem for the rtgdir review.
 
-   Thanks to Éric Vyncke and Erik Kline for the IESG review.
+   Thanks to Éric Vyncke, Erik Kline, and Mike Bishop for the IESG
+   review.
 
 Authors' Addresses
 
