@@ -876,8 +876,6 @@ Table of Contents
    This module imports types defined in [RFC6991] and [RFC7317].
 
    <CODE BEGINS> file "ietf-schedule@2025-05-30.yang"
-   =============== NOTE: '\' line wrapping per RFC 8792 ================
-
    module ietf-schedule {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-schedule";
@@ -1363,12 +1361,12 @@ Table of Contents
          case until {
            description
              "This case defines a way that limits the end of
-              a recurrence rule.";
+              a recurrence rule in an inclusive manner.";
            leaf utc-until {
              type yang:date-and-time;
              description
                "This parameter specifies a date and time value to
-                terminate inclusively the recurrence in UTC format.
+                inclusively terminate the recurrence in UTC format.
                 That is, if the value specified by this parameter is
                 synchronized with the specified recurrence rule, it
                 becomes the last instance of the recurrence rule.";
@@ -1434,16 +1432,15 @@ Table of Contents
          case until {
            description
              "The end of the recurrence rule is indicated by a specific
-              date-and-time value.";
+              date-and-time value in an inclusive manner.";
            leaf until {
              type yang:date-and-time;
              description
-               "Specifies a date and time value to terminate the
-                recurrence in an inclusive manner. Thats is, if the \
-                                                                   value
-                specified by this parameter is synchronized with
-                the specified recurrence, it becomes the last instance
-                of the recurrence.";
+               "Specifies a date and time value to inclusively terminate
+                the recurrence in an inclusive manner. Thats is, if
+                the value specified by this parameter is synchronized
+                with the specified recurrence, it becomes the last
+                instance of the recurrence.";
            }
          }
          case count {
