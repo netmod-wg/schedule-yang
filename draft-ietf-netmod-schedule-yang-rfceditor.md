@@ -958,7 +958,7 @@ module ietf-schedule {
        when a requested schedule cannot be accepted for any
        reason and is discarded.";
   }
-  
+
   identity warning {
     base discard-action-type;
     description
@@ -1144,7 +1144,7 @@ module ietf-schedule {
        UTC format.";
     container recurrence-first {
       description
-        "Specifies the first instance of the recurrence. If 
+        "Specifies the first instance of the recurrence. If
          unspecified, the recurrence is considered to start from
          the date and time when the recurrence pattern is first
          satisfied.";
@@ -1205,7 +1205,7 @@ module ietf-schedule {
        rule with a time zone.";
     container recurrence-first {
       description
-        "Specifies the first instance of the recurrence. If 
+        "Specifies the first instance of the recurrence. If
          unspecified, the recurrence is considered to start from
          the date and time when the recurrence pattern is first
          satisfied.";
@@ -1511,7 +1511,7 @@ module ietf-schedule {
       config false;
       description
         "Indicates the timestamp of last failed action triggered by
-         the schedule.";    
+         the schedule.";
     }
     leaf failure-counter {
       when "derived-from-or-self(../schedule-type, "
@@ -1716,7 +1716,7 @@ module example-sch-usage-6 {
 
   container recurrence-utc-with-date-times {
     uses schedule:recurrence-utc-with-periods;
-  }  
+  }
 }
 
 module example-sch-usage-7 {
@@ -1729,7 +1729,7 @@ module example-sch-usage-7 {
 
   container recurrence-time-zone-with-date-times {
     uses schedule:recurrence-time-zone-with-periods;
-  }  
+  }
 }
 
 module example-sch-usage-8 {
@@ -2168,7 +2168,7 @@ module example-scheduled-backup {
           type string;
           description
             "The schedule identifier for this recurrence rule.";
-        }            
+        }
         uses schedule:recurrence-basic {
           refine frequency {
             mandatory true;
@@ -2188,13 +2188,13 @@ module example-scheduled-backup {
           type string;
           description
             "The schedule identifier for this recurrence rule.";
-        }           
+        }
         uses schedule:icalendar-recurrence {
           refine workweek-start {
             default monday;
           }
         }
-      }      
+      }
     }
 
     list schedule-set {
