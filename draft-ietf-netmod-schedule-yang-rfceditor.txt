@@ -5,22 +5,22 @@
 netmod                                                        Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Standards Track                                  Huawei
-Expires: 5 February 2026                               M. Boucadair, Ed.
+Expires: 8 March 2026                                  M. Boucadair, Ed.
                                                                   Orange
                                                                  D. King
                                                     Lancaster University
-                                                           4 August 2025
+                                                        4 September 2025
 
 
                 A Common YANG Data Model for Scheduling
-                 draft-ietf-netmod-schedule-yang-latest
+            draft-ietf-netmod-schedule-yang-rfceditor-latest
 
 Abstract
 
    This document defines common types and groupings that are meant to be
    used for scheduling purposes such as event, policy, services, or
    resources based on date and time.  For the sake of better modularity,
-   the YANG module includes a set of recurrence related groupings with
+   the YANG module includes a set of recurrence-related groupings with
    varying levels of representation (i.e., from basic to advanced) to
    accommodate a variety of requirements.  It also defines groupings for
    validating requested schedules and reporting scheduling status.
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 February 2026.
+   This Internet-Draft will expire on 8 March 2026.
 
 Copyright Notice
 
@@ -178,9 +178,14 @@ Table of Contents
 
    The document makes use of the following terms:
 
-   Recurrence Rule:  Refers to a rule or repeating pattern for recurring
+   Recurrence rule:  Refers to a rule or repeating pattern for recurring
       events.  See also Section 3.8.5.3 of [RFC5545] for a comprehensive
       iCalendar recurrence rule specification.
+
+   Recurrence instance (or Recurrence, for short):  Refers to an
+      instance that matches a recurrence rule.
+
+   Recurrence set:  Refers to a set of recurrence instances.
 
    Frequency:  Characterizes the type of a recurrence rule.  Values are
       taken from "FREQ" rule in Section 3.3.10 of [RFC5545].
@@ -192,7 +197,7 @@ Table of Contents
 
    iCalendar:  Refers to Internet Calendaring per [RFC5545].
 
-   Interval:  Refers to an integer that specifies at which interval a
+   Interval:  Refers to an integer that specifies interval at which a
       recurrence rule repeats.  Values are taken from "INTERVAL" rule in
       Section 3.3.10 of [RFC5545].
 
@@ -209,7 +214,7 @@ Table of Contents
    The "ietf-schedule" data model defines the recurrence related
    groupings using a modular approach.  To that aim, a variety of
    representations of recurrence groupings ranging from basic to
-   advanced (iCalender like) are defined.  To allow for different
+   advanced (iCalender-like) are defined.  To allow for different
    options, two features are defined in the data model:
 
    *  "basic-recurrence"
@@ -297,7 +302,7 @@ Table of Contents
        +-- max-allowed-end?        yang:date-and-time
        +-- discard-action?         identityref
 
-          Figure 1: Generic Schedule Configuration Tree Structure
+             Figure 1: 'generic-schedule-params' Tree Structure
 
    The "description" includes a description of the schedule.  No
    constraint is imposed on the structure nor the use of this parameter.
@@ -331,7 +336,8 @@ Table of Contents
    schedule cannot be accepted for any reason and is discarded.
    Possible reasons include, but are not limited to, the requested
    schedule failing to satisfy the guards in this grouping, conflicting
-   with existing schedules, or being out-of-date.
+   with existing schedules, or being out-of-date (e.g., the expected
+   start is already passed).
 
    These parameters apply to all schedules on a system and are meant to
    provide guards against stale configuration, too short schedule
@@ -344,7 +350,7 @@ Table of Contents
    using either a start date and time ("period-start") and end date and
    time ("period-end"), or a start date and time ("period-start") and a
    non-negative time duration ("duration").  For the first format, the
-   start of the period MUST be no later the end of the period.  If
+   start of the period MUST be no later than the end of the period.  If
    neither an end date and time ("period-end") nor a duration
    ("duration") is indicated, the period is considered to last forever.
    If the duration ("duration") value is 0 or the end time ("period-
@@ -372,7 +378,7 @@ Table of Contents
           +--:(duration)
              +-- duration?         duration
 
-              Figure 2: Period of Time Grouping Tree Structure
+             Figure 2: 'period-of-time' Grouping Tree Structure
 
 3.3.3.  The "recurrence-basic" Grouping
 
@@ -384,7 +390,7 @@ Table of Contents
        +-- frequency?                identityref
        +-- interval?                 uint32
 
-                Figure 3: recurrence Grouping Tree Structure
+            Figure 3: 'recurrence-basic' Grouping Tree Structure
 
    The frequency parameter ("frequency") identifies the type of a
    recurrence rule.  For example, a "daily" frequency value specifies
@@ -412,7 +418,8 @@ Table of Contents
 3.3.4.  The "recurrence-utc" Grouping
 
    The "recurrence-utc" grouping (Figure 4) uses the "recurrence-basic"
-   grouping and specifies a simple recurrence rule in UTC format.
+   grouping (Section 3.3.3) and specifies a simple recurrence rule in
+   UTC format.
 
      grouping recurrence-utc:
        +-- recurrence-first
@@ -427,7 +434,7 @@ Table of Contents
        +-- frequency?                identityref
        +-- interval?                 uint32
 
-              Figure 4: recurrence-utc Grouping Tree Structure
+             Figure 4: 'recurrence-utc' Grouping Tree Structure
 
    The "start-time-utc" indicates the start time in UTC format.
 
@@ -452,9 +459,9 @@ Table of Contents
    for a duration of 2 days).
 
    The repetition can be scoped by a specified end time or by a count of
-   occurrences, indicated by the "recurrence-end" choice.  The value of
-   the "count" node MUST be greater than 1, the "start-time-utc" value
-   always counts as the first occurrence.
+   occurrences, indicated by the "recurrence-end" choice.  The "count"
+   value MUST be greater than 1, the "start-time-utc" value always
+   counts as the first occurrence.
 
    The "recurrence-utc" grouping is designed to be reused in scheduling
    contexts where machine readability is more desirable.
@@ -462,8 +469,8 @@ Table of Contents
 3.3.5.  The "recurrence-with-time-zone" Grouping
 
    The "recurrence-with-time-zone" grouping (Figure 5) uses the
-   "recurrence-basic" grouping and specifies a simple recurrence rule
-   with a time zone.
+   "recurrence-basic" grouping (Section 3.3.3) and specifies a simple
+   recurrence rule with a time zone.
 
      grouping recurrence-with-time-zone:
        +-- recurrence-first
@@ -479,7 +486,7 @@ Table of Contents
        +-- frequency?                identityref
        +-- interval?                 uint32
 
-        Figure 5: recurrence-with-time-zone Grouping Tree Structure
+       Figure 5: 'recurrence-with-time-zone' Grouping Tree Structure
 
    The "recurrence-first" container includes "start-time" and "duration"
    parameters to specify the start time and period of the first
@@ -498,9 +505,12 @@ Table of Contents
    offset to UTC.
 
    The repetition can be scoped by a specified end time or by a count of
-   occurrences, indicated by the "recurrence-end" choice.  The value of
-   the "count" node MUST be greater than 1, the "start-time" value
-   always counts as the first occurrence.
+   occurrences, indicated by the "recurrence-end" choice.  The "count"
+   value MUST be greater than 1, the "start-time" value always counts as
+   the first occurrence.
+
+   The considerations discussed in Section 3.3.4 for "interval" and
+   "duration" are also applicable to "recurrence-with-time-zone".
 
    Unlike the definition of "recurrence-utc" grouping (Section 3.3.4),
    "recurrence-with-time-zone" is intended to promote human readability
@@ -528,7 +538,7 @@ Table of Contents
           +-- period-start    yang:timeticks
           +-- period-end?     yang:timeticks
 
-       Figure 6: recurrence-utc-with-periods Grouping Tree Structure
+      Figure 6: 'recurrence-utc-with-periods' Grouping Tree Structure
 
    The recurrence instances are specified by the union of occurrences
    defined by both the recurrence rule and "period-timeticks" list.
@@ -568,7 +578,7 @@ Table of Contents
              +--:(duration)
                 +-- duration?         duration
 
-    Figure 7: recurrence-time-zone-with-periods Grouping Tree Structure
+   Figure 7: 'recurrence-time-zone-with-periods' Grouping Tree Structure
 
    The recurrence instances are specified by the union of occurrences
    defined by both the recurrence rule and "period" list.  Duplicate
@@ -619,7 +629,7 @@ Table of Contents
        +-- workweek-start?           schedule:weekday
        +-- exception-dates*          yang:date-and-time
 
-           Figure 8: icalendar-recurrence Grouping Tree Structure
+          Figure 8: 'icalendar-recurrence' Grouping Tree Structure
 
    An array of the "bysecond" (or "byminute", "byhour") specifies a list
    of seconds within a minute (or minutes within an hour, hours of the
@@ -721,8 +731,7 @@ Table of Contents
        +--ro last-failed-occurrence?   yang:date-and-time
        +--ro failure-counter?          yang:counter32
 
-       Figure 9: Schedule Status with and without Name Groupings Tree
-                                 Structure
+           Figure 9: 'schedule-status-*' Groupings Tree Structure
 
    The "schedule-name" parameter is useful to uniquely identify a
    schedule in a network device or controller if multiple scheduling
@@ -735,11 +744,11 @@ Table of Contents
    in future modules.
 
    The "version" parameter is used to track the current schedule version
-   information.  The version can be bumped by the entity that created
-   the schedule.  The "last-update" parameter identifies when the
-   schedule was last modified.  In some contexts, this parameter can be
-   used to track the configuration of a given schedule.  In such cases,
-   the "version" may not be used.
+   information.  The version can be incremented by the entity that
+   created the schedule.  The "last-update" parameter identifies when
+   the schedule was last modified.  In some contexts, this parameter can
+   be used to track the configuration of a given schedule.  In such
+   cases, the "version" may not be used.
 
    The "schedule-type" parameter identifies the type of the current
    schedule.  The "counter", "last-occurrence", and "upcoming-
@@ -866,7 +875,8 @@ Table of Contents
 
    This module imports types defined in [RFC6991] and [RFC7317].
 
-   <CODE BEGINS> file "ietf-schedule@2025-05-30.yang"
+   <CODE BEGINS>
+    file ietf-schedule@2025-05-30.yang
    module ietf-schedule {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-schedule";
@@ -1023,14 +1033,14 @@ Table of Contents
        description
          "Indicates a one-shot schedule. That is a schedule that
           will trigger an action with the duration being specified as
-          0/end time being specified the same as start time, and then
-          the schedule will disable itself.";
+          0 or end time being specified the same as start time,
+          and then the schedule will disable itself.";
      }
 
      identity period {
        base schedule-type;
        description
-         "Indicates a period-based schedule consisting either a
+         "Indicates a period-based schedule consisting of either a
           start and end or a start and positive duration of time. If
           neither an end nor a duration is indicated, the period is
           considered to last forever.";
@@ -1123,7 +1133,7 @@ Table of Contents
      identity out-of-date {
        base schedule-state;
        description
-         "Indicates a schedule with an out-of-date state.";
+         "Indicates a schedule that is received out-of-date.";
      }
 
      identity conflicted {
@@ -1135,9 +1145,9 @@ Table of Contents
 
      identity discard-action-type {
        description
-         "Indicates the action for the responder to take when a
-          requested schedule cannot be accepted for any reason
-          and is discarded.";
+         "Base identity for the action for the responder to take
+          when a requested schedule cannot be accepted for any
+          reason and is discarded.";
      }
 
      identity warning {
@@ -1245,12 +1255,12 @@ Table of Contents
        leaf time-zone-identifier {
          type sys:timezone-name;
          description
-           "Indicates the identifier for the time zone in a time zone
-            database. This parameter MUST be specified if either the
-            'period-start' or 'period-end' value is reported in local
-            time format. It MUST NOT be applied to date and time
-            values which are specified in the format of UTC or time
-            zone offset to UTC.";
+           "Indicates the identifier for the time zone. This parameter
+            MUST be specified if either the 'period-start' or
+            'period-end' value is reported in local time format.
+            It MUST NOT be applied to date and time values which are
+            specified in the format of UTC or time zone offset
+            to UTC.";
        }
        choice period-type {
          description
@@ -1313,7 +1323,7 @@ Table of Contents
              "Frequency must be provided.";
          }
          description
-           "A positive integer representing at which interval the
+           "A positive integer representing interval at which the
             recurrence rule repeats. For example, within a 'daily'
             recurrence rule, a value of '8' means every eight days.";
        }
@@ -1332,7 +1342,7 @@ Table of Contents
          leaf start-time-utc {
            type yang:date-and-time;
            description
-             "Defines the instant date and time of the first instance
+             "Defines the date and time of the first instance
               in the recurrence set. A UTC format MUST be used.";
          }
          leaf duration {
@@ -1351,29 +1361,29 @@ Table of Contents
             to repeat forever.";
          case until {
            description
-             "This case defines a way that limits the end of a
-              recurrence rule in an inclusive manner.";
+             "This case defines a way that limits the end of
+              a recurrence rule in an inclusive manner.";
            leaf utc-until {
              type yang:date-and-time;
              description
                "This parameter specifies a date and time value to
-                inclusively terminate the recurrence in UTC format. If
-                the value specified by this parameter is synchronized
-                with the specified recurrence, it becomes the last
-                instance of the recurrence.";
+                inclusively terminate the recurrence in UTC format.
+                That is, if the value specified by this parameter is
+                synchronized with the specified recurrence rule, it
+                becomes the last instance of the recurrence rule.";
            }
          }
          case count {
            description
              "This case defines the number of occurrences at which
-              to terminate the recurrence.";
+              to terminate the recurrence rule.";
            leaf count {
              type uint32 {
                range "1..max";
              }
              description
                "The positive number of occurrences at which to
-                terminate the recurrence.";
+                terminate the recurrence rule.";
            }
          }
        }
@@ -1393,7 +1403,7 @@ Table of Contents
          leaf start-time {
            type yang:date-and-time;
            description
-             "Defines the instant date and time of the first instance
+             "Defines the date and time of the first instance
               in the recurrence set.";
          }
          leaf duration {
@@ -1422,15 +1432,15 @@ Table of Contents
             forever.";
          case until {
            description
-             "The end of the recurrence is indicated by a specific
-              date-and-time value.";
+             "The end of the recurrence rule is indicated by a specific
+              date-and-time value in an inclusive manner.";
            leaf until {
              type yang:date-and-time;
              description
-               "Specifies a date and time value to terminate the
-                recurrence. If the value specified by this parameter
-                is synchronized with the specified recurrence, it
-                becomes the last instance of the recurrence.";
+               "Specifies a date and time value to inclusively terminate
+                the recurrence. Thats is, if the value specified by this
+                parameter is synchronized with the specified recurrence,
+                it becomes the last instance of the recurrence.";
            }
          }
          case count {
@@ -1494,7 +1504,9 @@ Table of Contents
          leaf period-end {
            type yang:timeticks;
            description
-             "End time of the schedule within one recurrence.";
+             "End time of the schedule within one recurrence.
+              The period start MUST be no later than the period
+              end.";
          }
        }
      }
@@ -1605,7 +1617,8 @@ Table of Contents
            "Specifies a list of values that corresponds to the nth
             occurrence within the set of recurrence instances
             specified by the rule. It must only be used in conjunction
-            with another by the rule part.";
+            with another 'byxxx' (bysecond, byminute, etc.) rule
+            part .";
        }
        leaf workweek-start {
          type schedule:weekday;
@@ -2637,7 +2650,7 @@ B.2.  Example: Schedule Network Properties to Change Based on Date and
 
    <?xml version="1.0" encoding="utf-8"?>
    <link-attributes
-     xmlns="http://example.com/example-scheduled-link-bandwidth"
+     xmlns=http://example.com/example-scheduled-link-bandwidth
      xmlns:schedule="urn:ietf:params:xml:ns:yang:ietf-schedule">
      <link>
        <source-node>ne1</source-node>
@@ -2676,7 +2689,7 @@ Appendix C.  Examples of Using "ietf-schedule" Module for Scheduled Use
 
    module example-sch-capacity-res {
      yang-version 1.1;
-     namespace "http://example.com/example-sch-capacity-res";
+     namespace http://example.com/example-sch-capacity-res;
      prefix "ex-schecaparev";
 
      import ietf-network-topology {
@@ -2714,7 +2727,7 @@ Appendix C.  Examples of Using "ietf-schedule" Module for Scheduled Use
 
    <?xml version="1.0" encoding="utf-8"?>
    <link-capability-reservations
-     xmlns="http://example.com/example-sch-capacity-res"
+     xmlns=http://example.com/example-sch-capacity-res
      xmlns:schedule="urn:ietf:params:xml:ns:yang:ietf-schedule">
       <scheduled-link-capacity>
          <schedule-id>1</schedule-id>
@@ -2761,9 +2774,10 @@ Acknowledgments
 
    Thanks to Reshad Rahman for the great YANG Doctors review, Mahesh
    Jethanandani for the AD review, Per Andersson for the OPSDIR review,
-   and Peter Yee for genart review.
+   Peter Yee for genart review, and Acee Lindem for the rtgdir review.
 
-   Thanks to Erik Kline for the IESG review.
+   Thanks to Éric Vyncke, Erik Kline, and Mike Bishop for the IESG
+   review.
 
 Authors' Addresses
 
