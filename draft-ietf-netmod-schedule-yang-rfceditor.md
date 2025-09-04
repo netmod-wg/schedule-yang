@@ -751,7 +751,7 @@ module ietf-schedule {
     reference
       "RFC XXXX: A Common YANG Data Model for Scheduling";
   }
-  
+
   feature basic-recurrence {
     description
       "Indicates that the server supports configuring a basic
@@ -854,7 +854,7 @@ module ietf-schedule {
        neither an end nor a duration is indicated, the period is
        considered to last forever.";
   }
-  
+
   identity recurrence {
     base schedule-type;
     description
@@ -948,10 +948,10 @@ module ietf-schedule {
   identity conflicted {
     base schedule-state;
     description
-      "Indicates a schedule with a conflicted state with other 
+      "Indicates a schedule with a conflicted state with other
        schedules.";
   }
-  
+
   identity discard-action-type {
     description
       "Base identity for the action for the responder to take
@@ -976,7 +976,7 @@ module ietf-schedule {
   identity silently-discard {
     base discard-action-type;
     description
-      "Indicates that a schedule that is not valid is silently 
+      "Indicates that a schedule that is not valid is silently
        discarded.";
   }
 
@@ -1012,26 +1012,26 @@ module ietf-schedule {
     leaf max-allowed-start {
       type yang:date-and-time;
       description
-        "Specifies the maximum scheduled start date and time. 
-         A requested schedule whose first instance occurs after 
-         this value cannot be accepted by the entity. Specifically, 
-         a requested schedule will be rejected if the first 
+        "Specifies the maximum scheduled start date and time.
+         A requested schedule whose first instance occurs after
+         this value cannot be accepted by the entity. Specifically,
+         a requested schedule will be rejected if the first
          occurrence of that schedule exceeds 'max-allowed-start'.";
     }
     leaf min-allowed-start {
       type yang:date-and-time;
       description
-        "Specifies the minimum scheduled start date and time. 
-         A requested schedule whose first instance occurs before 
-         this value cannot be accepted by the entity. Specifically, 
-         a requested schedule will be rejected if the first  
-         occurrence of that schedule is scheduled before 
+        "Specifies the minimum scheduled start date and time.
+         A requested schedule whose first instance occurs before
+         this value cannot be accepted by the entity. Specifically,
+         a requested schedule will be rejected if the first
+         occurrence of that schedule is scheduled before
          'min-allowed-start'.";
     }
     leaf max-allowed-end {
       type yang:date-and-time;
       description
-        "A requested schedule will be rejected if the end time of 
+        "A requested schedule will be rejected if the end time of
          the last occurrence exceeds 'max-allowed-end'.";
     }
     leaf discard-action {
@@ -1041,7 +1041,7 @@ module ietf-schedule {
       description
         "Specifies the behavior when a schedule is discarded for
          any reason, e.g., failing to satisfy the guards in this
-         grouping or it is received out-of-date.";    
+         grouping or it is received out-of-date.";
     }
   }
 
@@ -1074,7 +1074,7 @@ module ietf-schedule {
     choice period-type {
       description
         "Indicates the type of the time period. Two types are
-         supported. If no choice is indicated, the period is 
+         supported. If no choice is indicated, the period is
          considered to last forever.";
       case explicit {
         description
@@ -1146,7 +1146,7 @@ module ietf-schedule {
       description
         "Specifies the first instance of the recurrence. If 
          unspecified, the recurrence is considered to start from
-         the date and time when the recurrence pattern is first 
+         the date and time when the recurrence pattern is first
          satisfied.";
       leaf start-time-utc {
         type yang:date-and-time;
@@ -1198,7 +1198,7 @@ module ietf-schedule {
     }
     uses recurrence-basic;
   }
-  
+
   grouping recurrence-with-time-zone {
     description
       "A simple definition of recurrence to specify a recurrence
@@ -1207,12 +1207,12 @@ module ietf-schedule {
       description
         "Specifies the first instance of the recurrence. If 
          unspecified, the recurrence is considered to start from
-         the date and time when the recurrence pattern is first 
+         the date and time when the recurrence pattern is first
          satisfied.";
       leaf start-time {
         type yang:date-and-time;
         description
-          "Defines the date and time of the first instance 
+          "Defines the date and time of the first instance
            in the recurrence set.";
       }
       leaf duration {
@@ -1233,7 +1233,7 @@ module ietf-schedule {
          time format. It MUST NOT be applied to date and time
          values which are specified in the format of UTC or time
          zone offset to UTC.";
-    }    
+    }
     choice recurrence-end {
       description
         "Modes to terminate the recurrence rule. If no choice is
@@ -1258,7 +1258,7 @@ module ietf-schedule {
            of occurrences.";
         leaf count {
           type uint32 {
-            range "1..max";        
+            range "1..max";
           }
           description
             "The positive number of occurrences at which to
@@ -1271,16 +1271,16 @@ module ietf-schedule {
 
   grouping recurrence-utc-with-periods {
     description
-      "This grouping defines an aggregate set of repeating 
-       occurrences with UTC time format. The recurrence instances 
+      "This grouping defines an aggregate set of repeating
+       occurrences with UTC time format. The recurrence instances
        are specified by the occurrences defined by both the
-       recurrence rule and 'period-timeticks' list. Duplicate 
+       recurrence rule and 'period-timeticks' list. Duplicate
        instances are ignored.";
     uses recurrence-utc;
     list period-timeticks {
       key "period-start";
       description
-        "A list of periods with timeticks formats.";      
+        "A list of periods with timeticks formats.";
       leaf period-start {
         type yang:timeticks;
         must "(not(derived-from(../../frequency,"
@@ -1300,13 +1300,13 @@ module ietf-schedule {
           error-message
             "The period-start must not exceed the frequency
              interval.";
-        }        
+        }
         description
           "Start time of the schedule within one recurrence.
-           
+
            Given that the value is in timeticks format
            (i.e., 1/100 of a second), the values in the must
-           statement translate to: 100 = 1s (secondly), 
+           statement translate to: 100 = 1s (secondly),
            6000 = 60 s = 1 min (minutely), and so on for all
            instances in the must statement invariant.";
       }
@@ -1319,14 +1319,14 @@ module ietf-schedule {
       }
     }
   }
-  
+
   grouping recurrence-time-zone-with-periods {
     description
-      "This grouping defines an aggregate set of repeating 
-       occurrences with local time format and time zone specified. 
+      "This grouping defines an aggregate set of repeating
+       occurrences with local time format and time zone specified.
        The recurrence instances are specified by the occurrences
-       defined by both the recurrence rule and 'period' list. 
-       Duplicate instances are ignored.";  
+       defined by both the recurrence rule and 'period' list.
+       Duplicate instances are ignored.";
     uses recurrence-with-time-zone;
     list period {
       key "period-start";
@@ -1379,8 +1379,8 @@ module ietf-schedule {
         description
           "When specified, it indicates the nth occurrence of a
            specific day within the monthly or yearly recurrence
-           rule. For example, within a monthly rule, +1 monday 
-           represents the first monday within the month, whereas 
+           rule. For example, within a monthly rule, +1 monday
+           represents the first monday within the month, whereas
            -1 monday represents the last monday of the month.";
       }
       leaf weekday {
@@ -1483,7 +1483,7 @@ module ietf-schedule {
       type yang:counter32;
       config false;
       description
-        "The number of occurrences while invoking the scheduled 
+        "The number of occurrences while invoking the scheduled
          action successfully. The count wraps around when it reaches
          the maximum value.";
     }
@@ -1493,7 +1493,7 @@ module ietf-schedule {
       type yang:date-and-time;
       config false;
       description
-        "Indicates the timestamp of last occurrence.";    
+        "Indicates the timestamp of last occurrence.";
     }
     leaf upcoming-occurrence {
       when "derived-from-or-self(../schedule-type, "
@@ -1534,7 +1534,7 @@ module ietf-schedule {
       description
         "Indicates the identifier for the time zone in a time
          zone database.";
-    } 
+    }
     uses schedule-status;
   }
 
@@ -1546,13 +1546,12 @@ module ietf-schedule {
       type string;
       description
         "The schedule identifier that uniquely identifies a
-         schedule within a device, controller, network, etc. 
+         schedule within a device, controller, network, etc.
          The unicity scope depends on the implementation.";
     }
     uses schedule-status;
   }
 }
-
 <CODE ENDS>
 ~~~~
 
@@ -2129,7 +2128,7 @@ module example-scheduled-backup {
       leaf task-id {
         type string;
         description
-          "The task identifier that uniquely identifies a scheduled 
+          "The task identifier that uniquely identifies a scheduled
            backup task.";
       }
       choice local-or-remote {
@@ -2197,7 +2196,7 @@ module example-scheduled-backup {
         }
       }      
     }
-  
+
     list schedule-set {
       key "schedule-name";
       description
@@ -2297,7 +2296,7 @@ module example-scheduled-link-bandwidth {
           uses schedule:recurrence-utc-with-periods {
             augment "period-timeticks" {
               description
-                "Specifies the attributes inside each 
+                "Specifies the attributes inside each
                  period-timeticks entry.";
               uses link-bandwidth-grouping;
             }
