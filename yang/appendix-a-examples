@@ -1,0 +1,216 @@
+module example-sch-usage-1 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-1";
+  prefix "ex-schu-1";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  organization "Example, Inc.";
+  contact "Support at example.com";
+  description "An example.";
+
+  revision "2026-02-20" {
+    description "Initial version.";
+    reference
+      "RFC 9922: A YANG Data Model for Scheduling.";
+  }
+
+  container generic-schedule-params {
+    description "A description.";
+    uses schedule:generic-schedule-params;
+  }
+  container schedule-status {
+    description "A description.";
+    uses schedule:schedule-status;
+  }
+}
+
+module example-sch-usage-2 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-2";
+  prefix "ex-schu2";
+
+  organization "Example, Inc.";
+  contact "Support at example.com";
+  description "An example.";
+
+  revision "2026-02-20" {
+    description "Initial version.";
+    reference
+      "RFC 9922: A YANG Data Model for Scheduling.";
+  }
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  container period-of-time {
+    description "A description.";
+    uses schedule:period-of-time;
+  }
+}
+
+module example-sch-usage-3 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-3";
+  prefix "ex-schu-3";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  organization "Example, Inc.";
+  contact "Support at example.com";
+  description "An example.";
+
+  revision "2026-02-20" {
+    description "Initial version.";
+    reference
+      "RFC 9922: A YANG Data Model for Scheduling.";
+  }
+
+  container recurrence-basic {
+    description "A description.";
+    uses schedule:recurrence-basic {
+      description "A description.";
+      refine frequency {
+        mandatory true;
+      }
+      refine interval {
+        default 1;
+      }
+    }
+  }
+}
+
+module example-sch-usage-4 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-4";
+  prefix "ex-schu-4";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  organization "Example, Inc.";
+  contact "Support at example.com";
+  description "An example.";
+
+  revision "2026-02-20" {
+    description "Initial version.";
+    reference
+      "RFC 9922: A YANG Data Model for Scheduling.";
+  }
+
+  container recurrence-utc {
+    description "A description.";
+    uses schedule:recurrence-utc;
+  }
+}
+
+module example-sch-usage-5 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-5";
+  prefix "ex-schu-5";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  organization "Example, Inc.";
+  contact "Support at example.com";
+  description "An example.";
+
+  revision "2026-02-20" {
+    description "Initial version.";
+    reference
+      "RFC 9922: A YANG Data Model for Scheduling.";
+  }
+
+  container recurrence-with-time-zone {
+    description "A description.";
+    uses schedule:recurrence-with-time-zone;
+  }
+}
+
+module example-sch-usage-6 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-6";
+  prefix "ex-schu-6";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  organization "Example, Inc.";
+  contact "Support at example.com";
+  description "An example.";
+
+  revision "2026-02-20" {
+    description "Initial version.";
+    reference
+      "RFC 9922: A YANG Data Model for Scheduling.";
+  }
+
+  container recurrence-utc-with-date-times {
+    description "A description.";
+    uses schedule:recurrence-utc-with-periods;
+  }
+}
+
+module example-sch-usage-7 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-7";
+  prefix "ex-schu-8";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  organization "Example, Inc.";
+  contact "Support at example.com";
+  description "An example.";
+
+  revision "2026-02-20" {
+    description "Initial version.";
+    reference
+      "RFC 9922: A YANG Data Model for Scheduling.";
+  }
+
+  container recurrence-time-zone-with-date-times {
+    description "A description.";
+    uses schedule:recurrence-time-zone-with-periods;
+  }
+}
+
+module example-sch-usage-8 {
+  yang-version 1.1;
+  namespace "http://example.com/example-sch-usage-8";
+  prefix "ex-schu-8";
+
+  import ietf-schedule {
+    prefix "schedule";
+  }
+
+  organization "Example, Inc.";
+  contact "Support at example.com";
+  description "An example.";
+
+  revision "2026-02-20" {
+    description "Initial version.";
+    reference
+      "RFC 9922: A YANG Data Model for Scheduling.";
+  }
+
+  container icalendar-recurrence {
+    description "A description.";
+    uses schedule:icalendar-recurrence {
+      description "A description.";
+      refine workweek-start {
+        default monday;
+      }
+    }
+  }
+}
